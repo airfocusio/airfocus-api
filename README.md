@@ -4,7 +4,7 @@ This repository contains sources of the [https://airfocusio.github.io/dev-docs](
 
 ## Structure
 
-This project uses [GitHub Pages and Jekyll](https://docs.github.com/en/pages/setting-up-a-github-pages-site-with-jekyll/about-github-pages-and-jekyll) 
+This project uses [GitHub Pages and Jekyll](https://docs.github.com/en/pages/setting-up-a-github-pages-site-with-jekyll/about-github-pages-and-jekyll)
 with a customized [Just The Docs](https://just-the-docs.github.io/just-the-docs/) theme.<br>
 All the sources are located in the `./docs` folder:
 - every `docs/*.md` or `docs/*.html` file represents a page on the website

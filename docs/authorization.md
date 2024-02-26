@@ -7,7 +7,7 @@ nav_order: 20
 
 # Authorization Levels
 
-The API operates with 4 different levels of authorization: scopes, features, roles and permissions. 
+The API operates with 4 different levels of authorization: scopes, features, roles and permissions.
 Missing any of them (when being required) will result in an Unauthorized error response.
 
 {: .note }
@@ -25,11 +25,11 @@ Using scopes you can grant either read or write access to the next 3 main domain
 
 ## Features
 
-Some core features of the airfocus app are available to all the teams and users, while some other features are available only to the teams with a specific pricing plan. 
+Some core features of the airfocus app are available to all the teams and users, while some other features are available only to the teams with a specific pricing plan.
 Hence, some API endpoints may require a specific team-feature to be enabled in order to fulfill the request.<br>
 If the current team does not have access to the required feature - the API server will return a 403 Forbidden error response in this case.
 
-How do I know if my team has a specific feature?:<br> 
+How do I know if my team has a specific feature?:<br>
 there is a general rule - all the features which are accessible for the team in the airfocus web-app, should be also accessible via API.
 
 ## Roles
@@ -58,7 +58,7 @@ Permission to a single workspace for a single user can be defined on 4 different
 Server always chooses the highest level of permission from the above list.
 
 Example:
-- there is a workspace `Tasks` which belongs to a workspace group `Product` 
+- there is a workspace `Tasks` which belongs to a workspace group `Product`
 - the workspace `Tasks` has no explicit user permissions
 - the workspace `Tasks` has a default team permission `write`
 - the workspace group `Product` has an explicit user permission `full` for the current user

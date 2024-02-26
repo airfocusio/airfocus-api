@@ -15,7 +15,7 @@ If you're looking for general information about airfocus and its features, pleas
 {: .important }
 > The current API in version v0.* is a subject to change. We plan two major changes for 2024/2025:
 > - changed/simplified path names for the endpoints
-> - new format of the returned embedded data: better structure of the embedded data, and clients will be able to control which embedded data 
+> - new format of the returned embedded data: better structure of the embedded data, and clients will be able to control which embedded data
 >   should be returned
 
 ### Basic principles
@@ -27,10 +27,10 @@ If you're looking for general information about airfocus and its features, pleas
   clients can not control which embedded data is returned. This will be changed/improved in the future (see the notes above).
 4. at the moment API shares the same schema-type for both read and write operations in most of the resources.
   However, server reserves the right to ignore some read-only fields in the request (e.g. `id`, `createdAt`, `updatedAt`, etc.).
-  We will gradually improve it in the future by defining separated schemas for read and write operations. 
+  We will gradually improve it in the future by defining separated schemas for read and write operations.
 5. HTTP 404 is returned when client tries to access a non-existing endpoint (invalid path)
 6. HTTP 400 is returned when client tries to access a non-existing resource (valid path, but invalid ID)
-7. each response includes an `X-Request-Id` header, which can be included as an additional info when reporting bugs to airfocus team - 
+7. each response includes an `X-Request-Id` header, which can be included as an additional info when reporting bugs to airfocus team -
    this will help us investigate the issue faster
 
 ### Rate limits
