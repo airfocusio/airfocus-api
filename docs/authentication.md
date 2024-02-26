@@ -27,7 +27,7 @@ Creating personal access tokens:
 ## Impersonated access tokens
 
 {: .important }
-> At the moment this feature is not supported, but plan to add it in the nearest future.
+> At the moment this feature is not supported, but we plan to add it in the nearest future.
 
 When implementing an integration with API, it's often useful to not authenticate as a specific user, but rather as some kind of application or bot,
 which allows to identify actions performed by the integration.
@@ -39,16 +39,17 @@ And so we plan to add a feature which will allow to create impersonated access t
 At airfocus one of our primary goals is to keep your data safe and secure.
 However, with the personal access tokens part of this safety is in your hands.
 
-**So please keep in mind the next points when working with access tokens:**
-- treat access tokens like passwords and keep them secure. Don't share them with anyone and don't store them in public places
-- when creating a token, enable only those access scopes which are required for your application to work properly.
-  Over-granting scopes increases security risks if the token gets compromised
-- for security reasons it's not possible to access the token after leaving the creation dialog, so make sure to copy it and store it in a safe place
-  before leaving the dialog
-- if you suspect that your token has been compromised - delete it immediately and create a new one.
-  In order to do this, go to your "Account settings" > "API keys" and click on the "Delete" button next to the token
-- give your access tokens meaningful names, so you can easily identify them later and decide which ones to delete
-- do not use the same token for different applications or services.
-  Instead, create a separate token for each application or service, so you can easily revoke access to one of them if needed
+So please keep in mind the next points when working with access tokens:
+
+{: .highlight }
+>- treat access tokens like passwords and keep them secure. Don't share them with anyone and don't store them in public places
+>- when creating a token, enable only those access scopes which are required for your application to work properly.
+>  Over-granting scopes increases security risks if the token gets compromised
+>- for security reasons it's not possible to access the token after leaving the creation dialog, so make sure to copy it and store it in a safe place
+>  before leaving the dialog
+>- if you suspect that your token has been compromised - delete it immediately (go to your "Account settings" > "API keys" and click on the "Delete" button)
+>- give your access tokens meaningful names, so you can easily identify them later and decide which ones to delete
+>- do not use the same token for different applications or services.
+>  Instead, create a separate token for each use case, so you can easily revoke access to one of them if needed without affecting the other services
 
 [Next: Authorization](/authorization){: .btn }
