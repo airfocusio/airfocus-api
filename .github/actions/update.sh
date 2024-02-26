@@ -6,8 +6,8 @@ cd "$DIR/../.."
 OPENAPI_URL="https://app.airfocus.com/api/docs/openapi.json"
 OPENAPI_JSON=$(curl -fsSL "$OPENAPI_URL" | jq --sort-keys -r)
 OPENAPI_VERSION=$(echo "$OPENAPI_JSON" | jq -r '.info.version')
-echo "$OPENAPI_JSON" > openapi.json
-git add openapi.json
+echo "$OPENAPI_JSON" > docs/openapi.json
+git add docs/openapi.json
 
 git commit -m 'Update openapi.json' && GIT_COMMIT_EXIT_CODE=$? || GIT_COMMIT_EXIT_CODE=$?
 if [ $GIT_COMMIT_EXIT_CODE == "0" ]; then
