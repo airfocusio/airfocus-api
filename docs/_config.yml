@@ -6,11 +6,10 @@ remote_theme: "just-the-docs/just-the-docs@v0.8.0"
 plugins: ["jekyll-remote-theme"]
 
 # just-the-docs settings
-logo: "/assets/airfocus-dev-docs-logo.png"
+logo: "/assets/logo.svg"
 favicon_ico: "/assets/icon.svg"
 color_scheme: "af"
-
-callouts_level: quiet # quiet or loud - changes intensity of callout colors
+callouts_level: quiet # quiet or loud (changes intensity of callout colors)
 callouts:
   highlight:
     color: yellow

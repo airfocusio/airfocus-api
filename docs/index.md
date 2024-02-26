@@ -4,7 +4,7 @@ title: Home
 nav_order: 0
 ---
 
-# airfocus dev docs
+# airfocus API
 
 Welcome to the airfocus developer docs, where you'll find technical information about our API.<br>
 If you have any questions or feedback about the API, please hollow guides in the [Help](/help) section.<br>
@@ -18,20 +18,36 @@ If you're looking for general information about airfocus and its features, pleas
 > - new format of the returned embedded data: better structure of the embedded data, and clients will be able to control which embedded data
 >   should be returned
 
-### Basic principles
+### General conventions
 
-1. airfocus server provides the actual up-to-date OpenAPI 3.1 schema at [https://app.airfocus.com/api/docs/openapi.json](https://app.airfocus.com/api/docs/openapi.json).
-   Open it in your favourite OpenAPI viewer (e.g. Swagger UI or Postman) or go to [API Endpoints](/endpoints) to explore the API.
-2. all the endpoints always accept and return JSON (including error responses)
-3. most of the retrieve/search endpoints return resources with additional embedded data, injected into the resource as `_embedded` field, and that the moment
+1. all the endpoints always accept and return JSON (including error responses)
+2. most of the retrieve/search endpoints return resources with additional embedded data, injected into the resource as `_embedded` field, and that the moment
   clients can not control which embedded data is returned. This will be changed/improved in the future (see the notes above).
-4. at the moment API shares the same schema-type for both read and write operations in most of the resources.
+3. at the moment API shares the same schema-type for both read and write operations in most of the resources.
   However, server reserves the right to ignore some read-only fields in the request (e.g. `id`, `createdAt`, `updatedAt`, etc.).
   We will gradually improve it in the future by defining separated schemas for read and write operations.
-5. HTTP 404 is returned when client tries to access a non-existing endpoint (invalid path)
-6. HTTP 400 is returned when client tries to access a non-existing resource (valid path, but invalid ID)
-7. each response includes an `X-Request-Id` header, which can be included as an additional info when reporting bugs to airfocus team -
+4. HTTP 404 is returned when client tries to access a non-existing endpoint (invalid path)
+5. HTTP 400 is returned when client tries to access a non-existing resource (valid path, but invalid ID)
+6. each response includes an `X-Request-Id` header, which can be included as an additional info when reporting bugs to airfocus team -
    this will help us investigate the issue faster
+
+### API Schema
+
+Our API schema is defined using the OpenAPI 3.1 standard.<br>
+This website provides a Swagger UI interface (see [Endpoints](/endpoints)) where you can explore the API and try out the requests.
+Also, you can use another OpenAPI viewer (e.g. Postman or Intellij IDEA) to explore the API, by providing a URL to the JSON schema.
+
+There are 2 sources of the schema:
+1. our server provides an up-to-date schema which always matches its current API: [https://app.airfocus.com/api/docs/openapi.json](https://app.airfocus.com/api/docs/openapi.json)
+2. this website serves a static file, which is a snapshot of the schema at the time of the latest deployment: [https://developer.airfocus.com/openapi.json](https://developer.airfocus.com/openapi.json)
+
+Use the 1st source if you want to be sure that the schema matches the current server capabilities.<br>
+Use the 2nd source if you want to have more stable source of schema, for example for code generation.
+
+{: .note }
+> The 2nd source has additional benefits:
+> - you can use the [source code of the JSON schema](https://github.com/airfocusio/airfocus-api/blob/main/docs/openapi.json) when you need to reference to its specific parts (e.g. when reporting bugs)
+> - as this schema is under VCS, you can see the history of its changes and switch between different versions
 
 ### Rate limits
 

@@ -1,6 +1,14 @@
 $link-color: $blue-000;
 
-.side-bar {
+@media (min-width: 50rem) {
+  .side-bar {
+    width: 10.5rem !important;
+  }
+}
+
+@media (min-width: 66.5rem) {
+  .side-bar {
     min-width: 16.5rem !important;
     width: auto !important;
+  }
 }

@@ -1,6 +1,6 @@
-# airfocus dev docs
+# airfocus API
 
-This repository contains sources of the [https://airfocusio.github.io/dev-docs](https://airfocusio.github.io/dev-docs) website.
+This repository contains sources of the airfocus API documentation, served at the [https://developer.airfocus.com](https://developer.airfocus.com)
 
 ## Structure
 
@@ -14,8 +14,14 @@ All the sources are located in the `./docs` folder:
 
 ## Development
 
-To serve the website locally:
-- install [Ruby and Jekyll](https://jekyllrb.com/docs/installation/)
+### Serving the website locally
+
+- install Docker if you don't have it yet
 - open terminal in the root of this project
-- run `bundle` and `bundle exec jekyll serve -s docs`
-- open the printed URL in your browser
+- run `docker-compose up -d`
+- watch the logs (`docker-compose logs -f`) until you see the message ` Server running... press ctrl-c to stop`.
+  This can take a few minutes, as it needs to install all the ruby dependencies.
+- open http://127.0.0.1:4000 in your browser (the printed URL in the logs may not work)
+
+Any changes in the `./docs` folder (except  the `_config.yml` file) will be automatically recompiled.<br>
+If you change the `_config.yml` file, then you need to restart the server `docker-compose restart`.
