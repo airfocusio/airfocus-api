@@ -1,0 +1,36 @@
+title: "airfocus dev docs"
+baseurl: "" # the subpath of your site, e.g. /blog
+url: "" # the base hostname & protocol for your site, e.g. http://example.com
+
+remote_theme: "just-the-docs/just-the-docs@v0.8.0"
+plugins: ["jekyll-remote-theme"]
+
+# just-the-docs settings
+logo: "/assets/airfocus-dev-docs-logo.png"
+favicon_ico: "/assets/icon.svg"
+color_scheme: "af"
+
+callouts_level: quiet # quiet or loud - changes intensity of callout colors
+callouts:
+  highlight:
+    color: yellow
+
+  # callouts to provide additional minor notes
+  note:
+    title: Note
+    color: grey-dk
+
+  # callouts to provide important information
+  important:
+    title: Important
+    color: purple
+
+  # callouts for the highest priority information
+  warning:
+    title: Warning
+    color: red
+
+  # callouts to announce new features or changes
+  new:
+    title: New
+    color: green

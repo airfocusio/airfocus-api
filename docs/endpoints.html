@@ -1,0 +1,51 @@
+---
+layout: default
+title: API Endpoints
+nav_order: 30
+search_exclude: true
+---
+
+<style>
+    .main-header {
+        display: none !important;
+    }
+    .main {
+        max-width: none !important;
+    }
+    .main-content-wrap {
+        padding-top: 0;
+        padding-bottom: 0;
+        padding-right: 0;
+    }
+    #swagger-embed {
+        display: block;
+        overflow: scroll;
+        width: 100%;
+        height: 100dvh; /* % of viewport height */
+    }
+
+    @media (min-width: 50rem) {
+        .site-nav, .site-footer {
+            display: none !important;
+        }
+        .main {
+            margin-left: 0 !important;
+        }
+    }
+
+    @media (min-width: 66.5rem) {
+        .site-nav, .site-footer {
+            display: block !important;
+        }
+        .main {
+            margin-left: 16.5rem !important;
+        }
+    }
+</style>
+
+<!--
+  Ideally, we could just inline the Swagger UI (its div-container with CSS and JS) into this page.
+  However, in that case the CSS of "Just The Docs" theme overrides some styles of Swagger UI and makes them look broken.
+  So, in order to isolate the Swagger UI styles from the rest of the page, we embed it as a nested document.
+-->
+<object data="./swagger/index.html" type="text/html" id="swagger-embed"></object>
