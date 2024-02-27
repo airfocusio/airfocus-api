@@ -1,7 +1,4 @@
-title: "airfocus dev docs"
-baseurl: "" # the subpath of your site, e.g. /blog
-url: "" # the base hostname & protocol for your site, e.g. http://example.com
-
+title: "airfocus API"
 remote_theme: "just-the-docs/just-the-docs@v0.8.0"
 plugins: ["jekyll-remote-theme"]
 
