@@ -77,4 +77,4 @@ Resources which include `RichText` (e.g. `Item` with its `description` field) ca
 > For all the other endpoints using this media-type will result in `HTTP 406 Not Acceptable` response.
 
 ---
-[Next: Authentication](/auth){: .btn }
+[Next: Authentication](/authentication){: .btn }
