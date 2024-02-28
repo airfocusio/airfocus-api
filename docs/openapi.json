@@ -5241,7 +5241,7 @@
     },
     "/api/workspaces/groups/{workspaceGroupId}": {
       "delete": {
-        "description": "Returns empty result if the workspace group was successfully deleted.<br/>Requirements:<br/>  - auth-client scopes: \"workspace\"<br/>  - user permission: \"write\" or higher<br/>Returns:<br/>404 if the resource is not found<br/>401 if user does not have the required permission",
+        "description": "Returns empty result if the workspace group was successfully deleted.<br/>Requirements:<br/>  - auth-client scopes: \"workspace\"<br/>  - user permission: \"write\" or higher<br/>Returns:<br/>400 if the resource is not found<br/>401 if user does not have the required permission",
         "operationId": "deleteWorkspaceGroup",
         "parameters": [
           {
@@ -5282,7 +5282,7 @@
         ]
       },
       "get": {
-        "description": "Returns found workspace group.<br/>Requirements:<br/>  - auth-client scopes: \"workspace:read\"<br/>  - user permission: \"read\" or higher<br/>Returns:<br/>404 if the resource is not found<br/>401 if user does not have the required permission",
+        "description": "Returns found workspace group.<br/>Requirements:<br/>  - auth-client scopes: \"workspace:read\"<br/>  - user permission: \"read\" or higher<br/>Returns:<br/>400 if the resource is not found<br/>401 if user does not have the required permission",
         "operationId": "retrieveWorkspaceGroup",
         "parameters": [
           {
@@ -5330,7 +5330,7 @@
         ]
       },
       "patch": {
-        "description": "Returns the whole updated workspace group with its sanitised data.<br/>Requirements:<br/>  - auth-client scopes: \"workspace\"<br/>  - user permission: \"write\" or higher<br/>Returns:<br/>404 if the resource is not found<br/>401 if user does not have the required permission",
+        "description": "Returns the whole updated workspace group with its sanitised data.<br/>Requirements:<br/>  - auth-client scopes: \"workspace\"<br/>  - user permission: \"write\" or higher<br/>Returns:<br/>400 if the resource is not found<br/>401 if user does not have the required permission",
         "operationId": "patchWorkspaceGroup",
         "parameters": [
           {
@@ -5388,7 +5388,7 @@
         ]
       },
       "put": {
-        "description": "Returns updated workspace group with its sanitised data.<br/>Requirements:<br/>  - auth-client scopes: \"workspace\"<br/>  - user permission: \"write\" or higher<br/>Returns:<br/>404 if the resource is not found<br/>401 if user does not have the required permission",
+        "description": "Returns updated workspace group with its sanitised data.<br/>Requirements:<br/>  - auth-client scopes: \"workspace\"<br/>  - user permission: \"write\" or higher<br/>Returns:<br/>400 if the resource is not found<br/>401 if user does not have the required permission",
         "operationId": "updateWorkspaceGroup",
         "parameters": [
           {
@@ -5730,7 +5730,7 @@
     },
     "/api/workspaces/item-relations/{itemRelationId}": {
       "delete": {
-        "description": "Returns empty result if the item relation was successfully deleted.<br/>Requirements:<br/>  - auth-client scopes: \"workspace\"<br/>  - user permission: \"write\" or higher<br/>Returns:<br/>404 if the resource is not found<br/>401 if user does not have the required permission",
+        "description": "Returns empty result if the item relation was successfully deleted.<br/>Requirements:<br/>  - auth-client scopes: \"workspace\"<br/>  - user permission: \"write\" or higher<br/>Returns:<br/>400 if the resource is not found<br/>401 if user does not have the required permission",
         "operationId": "deleteItemRelation",
         "parameters": [
           {
@@ -5771,7 +5771,7 @@
         ]
       },
       "get": {
-        "description": "Returns found item relation.<br/>Requirements:<br/>  - auth-client scopes: \"workspace:read\"<br/>  - user permission: \"read\" or higher<br/>Returns:<br/>404 if the resource is not found<br/>401 if user does not have the required permission",
+        "description": "Returns found item relation.<br/>Requirements:<br/>  - auth-client scopes: \"workspace:read\"<br/>  - user permission: \"read\" or higher<br/>Returns:<br/>400 if the resource is not found<br/>401 if user does not have the required permission",
         "operationId": "retrieveItemRelation",
         "parameters": [
           {
@@ -5819,7 +5819,7 @@
         ]
       },
       "patch": {
-        "description": "Returns the whole updated item relation with its sanitised data.<br/>Requirements:<br/>  - auth-client scopes: \"workspace\"<br/>  - user permission: \"write\" or higher<br/>Returns:<br/>404 if the resource is not found<br/>401 if user does not have the required permission",
+        "description": "Returns the whole updated item relation with its sanitised data.<br/>Requirements:<br/>  - auth-client scopes: \"workspace\"<br/>  - user permission: \"write\" or higher<br/>Returns:<br/>400 if the resource is not found<br/>401 if user does not have the required permission",
         "operationId": "patchItemRelation",
         "parameters": [
           {
@@ -5877,7 +5877,7 @@
         ]
       },
       "put": {
-        "description": "Returns updated item relation with its sanitised data.<br/>Requirements:<br/>  - auth-client scopes: \"workspace\"<br/>  - user permission: \"write\" or higher<br/>Returns:<br/>404 if the resource is not found<br/>401 if user does not have the required permission",
+        "description": "Returns updated item relation with its sanitised data.<br/>Requirements:<br/>  - auth-client scopes: \"workspace\"<br/>  - user permission: \"write\" or higher<br/>Returns:<br/>400 if the resource is not found<br/>401 if user does not have the required permission",
         "operationId": "updateItemRelation",
         "parameters": [
           {
@@ -5937,7 +5937,7 @@
     },
     "/api/workspaces/items/alias/{aliasValue}": {
       "get": {
-        "description": "Returns found item.<br/>Requirements:<br/>  - auth-client scopes: \"workspace\"<br/>  - user permission: \"write\" or higher<br/>Returns:<br/>404 if the resource is not found<br/>401 if user does not have the required permission",
+        "description": "Returns found item.<br/>Requirements:<br/>  - auth-client scopes: \"workspace\"<br/>  - user permission: \"write\" or higher<br/>Returns:<br/>400 if the resource is not found<br/>401 if user does not have the required permission",
         "operationId": "retrieveItemByAlias",
         "parameters": [
           {
@@ -5990,7 +5990,7 @@
     },
     "/api/workspaces/items/copy": {
       "post": {
-        "description": "Returns ids of newly copied items, with order of the returned ids matching the order of requested source items. Returns Not Found if either of the specified source items does not exist.<br/>Requirements:<br/>  - auth-client scopes: \"workspace\"<br/>  - user permission: \"write\" or higher<br/>Returns:<br/>404 if the resource is not found<br/>401 if user does not have the required permission",
+        "description": "Returns ids of newly copied items, with order of the returned ids matching the order of requested source items. Returns Not Found if either of the specified source items does not exist.<br/>Requirements:<br/>  - auth-client scopes: \"workspace\"<br/>  - user permission: \"write\" or higher<br/>Returns:<br/>400 if the resource is not found<br/>401 if user does not have the required permission",
         "operationId": "copyItems",
         "parameters": [
           {
@@ -6127,7 +6127,7 @@
     },
     "/api/workspaces/items/move": {
       "post": {
-        "description": "Returns ids of newly created items in the target workspace, with order of the returned ids matching the order of requested source items. Returns Not Found if either of the specified source items does not exist.<br/>Requirements:<br/>  - auth-client scopes: \"workspace\"<br/>  - user permission: \"write\" or higher<br/>Returns:<br/>404 if the resource is not found<br/>401 if user does not have the required permission",
+        "description": "Returns ids of newly created items in the target workspace, with order of the returned ids matching the order of requested source items. Returns Not Found if either of the specified source items does not exist.<br/>Requirements:<br/>  - auth-client scopes: \"workspace\"<br/>  - user permission: \"write\" or higher<br/>Returns:<br/>400 if the resource is not found<br/>401 if user does not have the required permission",
         "operationId": "moveItems",
         "parameters": [
           {
@@ -6611,7 +6611,7 @@
     },
     "/api/workspaces/workspace-relations/{workspaceRelationId}": {
       "delete": {
-        "description": "Returns empty result if the workspace relation was successfully deleted.<br/>Requirements:<br/>  - auth-client scopes: \"workspace\"<br/>  - user permission: \"write\" or higher<br/>Returns:<br/>404 if the resource is not found<br/>401 if user does not have the required permission",
+        "description": "Returns empty result if the workspace relation was successfully deleted.<br/>Requirements:<br/>  - auth-client scopes: \"workspace\"<br/>  - user permission: \"write\" or higher<br/>Returns:<br/>400 if the resource is not found<br/>401 if user does not have the required permission",
         "operationId": "deleteWorkspaceRelation",
         "parameters": [
           {
@@ -6652,7 +6652,7 @@
         ]
       },
       "get": {
-        "description": "Returns found workspace relation.<br/>Requirements:<br/>  - auth-client scopes: \"workspace:read\"<br/>  - user permission: \"read\" or higher<br/>Returns:<br/>404 if the resource is not found<br/>401 if user does not have the required permission",
+        "description": "Returns found workspace relation.<br/>Requirements:<br/>  - auth-client scopes: \"workspace:read\"<br/>  - user permission: \"read\" or higher<br/>Returns:<br/>400 if the resource is not found<br/>401 if user does not have the required permission",
         "operationId": "retrieveWorkspaceRelation",
         "parameters": [
           {
@@ -6700,7 +6700,7 @@
         ]
       },
       "patch": {
-        "description": "Returns the whole updated workspace relation with its sanitised data.<br/>Requirements:<br/>  - auth-client scopes: \"workspace\"<br/>  - user permission: \"write\" or higher<br/>Returns:<br/>404 if the resource is not found<br/>401 if user does not have the required permission",
+        "description": "Returns the whole updated workspace relation with its sanitised data.<br/>Requirements:<br/>  - auth-client scopes: \"workspace\"<br/>  - user permission: \"write\" or higher<br/>Returns:<br/>400 if the resource is not found<br/>401 if user does not have the required permission",
         "operationId": "patchWorkspaceRelation",
         "parameters": [
           {
@@ -6758,7 +6758,7 @@
         ]
       },
       "put": {
-        "description": "Returns updated workspace relation with its sanitised data.<br/>Requirements:<br/>  - auth-client scopes: \"workspace\"<br/>  - user permission: \"write\" or higher<br/>Returns:<br/>404 if the resource is not found<br/>401 if user does not have the required permission",
+        "description": "Returns updated workspace relation with its sanitised data.<br/>Requirements:<br/>  - auth-client scopes: \"workspace\"<br/>  - user permission: \"write\" or higher<br/>Returns:<br/>400 if the resource is not found<br/>401 if user does not have the required permission",
         "operationId": "updateWorkspaceRelation",
         "parameters": [
           {
@@ -6818,7 +6818,7 @@
     },
     "/api/workspaces/{workspaceId}": {
       "delete": {
-        "description": "Returns empty result if the workspace was successfully deleted.<br/>Requirements:<br/>  - auth-client scopes: \"workspace\"<br/>  - user permission: \"write\" or higher<br/>Returns:<br/>404 if the resource is not found<br/>401 if user does not have the required permission",
+        "description": "Returns empty result if the workspace was successfully deleted.<br/>Requirements:<br/>  - auth-client scopes: \"workspace\"<br/>  - user permission: \"write\" or higher<br/>Returns:<br/>400 if the resource is not found<br/>401 if user does not have the required permission",
         "operationId": "deleteWorkspace",
         "parameters": [
           {
@@ -6859,7 +6859,7 @@
         ]
       },
       "get": {
-        "description": "Returns found workspace.<br/>Requirements:<br/>  - auth-client scopes: \"workspace:read\"<br/>  - user permission: \"read\" or higher<br/>Returns:<br/>404 if the resource is not found<br/>401 if user does not have the required permission",
+        "description": "Returns found workspace.<br/>Requirements:<br/>  - auth-client scopes: \"workspace:read\"<br/>  - user permission: \"read\" or higher<br/>Returns:<br/>400 if the resource is not found<br/>401 if user does not have the required permission",
         "operationId": "retrieveWorkspace",
         "parameters": [
           {
@@ -6907,7 +6907,7 @@
         ]
       },
       "patch": {
-        "description": "Returns the whole updated workspace with its sanitised data.<br/>Requirements:<br/>  - auth-client scopes: \"workspace\"<br/>  - user permission: \"write\" or higher<br/>Returns:<br/>404 if the resource is not found<br/>401 if user does not have the required permission",
+        "description": "Returns the whole updated workspace with its sanitised data.<br/>Requirements:<br/>  - auth-client scopes: \"workspace\"<br/>  - user permission: \"write\" or higher<br/>Returns:<br/>400 if the resource is not found<br/>401 if user does not have the required permission",
         "operationId": "patchWorkspace",
         "parameters": [
           {
@@ -6965,7 +6965,7 @@
         ]
       },
       "put": {
-        "description": "Returns updated workspace with its sanitised data.<br/>Requirements:<br/>  - auth-client scopes: \"workspace\"<br/>  - user permission: \"write\" or higher<br/>Returns:<br/>404 if the resource is not found<br/>401 if user does not have the required permission",
+        "description": "Returns updated workspace with its sanitised data.<br/>Requirements:<br/>  - auth-client scopes: \"workspace\"<br/>  - user permission: \"write\" or higher<br/>Returns:<br/>400 if the resource is not found<br/>401 if user does not have the required permission",
         "operationId": "updateWorkspace",
         "parameters": [
           {
@@ -7301,7 +7301,7 @@
     },
     "/api/workspaces/{workspaceId}/attachments/{itemAttachmentId}": {
       "delete": {
-        "description": "Returns empty result if the attachment was successfully deleted.<br/>Requirements:<br/>  - auth-client scopes: \"workspace\"<br/>  - user permission: \"write\" or higher<br/>Returns:<br/>404 if the resource is not found<br/>401 if user does not have the required permission",
+        "description": "Returns empty result if the attachment was successfully deleted.<br/>Requirements:<br/>  - auth-client scopes: \"workspace\"<br/>  - user permission: \"write\" or higher<br/>Returns:<br/>400 if the resource is not found<br/>401 if user does not have the required permission",
         "operationId": "deleteItemAttachment",
         "parameters": [
           {
@@ -7352,7 +7352,7 @@
         ]
       },
       "get": {
-        "description": "Returns found attachment.<br/>Requirements:<br/>  - auth-client scopes: \"workspace:read\"<br/>  - user permission: \"read\" or higher<br/>Returns:<br/>404 if the resource is not found<br/>401 if user does not have the required permission",
+        "description": "Returns found attachment.<br/>Requirements:<br/>  - auth-client scopes: \"workspace:read\"<br/>  - user permission: \"read\" or higher<br/>Returns:<br/>400 if the resource is not found<br/>401 if user does not have the required permission",
         "operationId": "retrieveItemAttachment",
         "parameters": [
           {
@@ -7410,7 +7410,7 @@
         ]
       },
       "patch": {
-        "description": "Returns the whole updated attachment with its sanitised data.<br/>Requirements:<br/>  - auth-client scopes: \"workspace\"<br/>  - user permission: \"write\" or higher<br/>Returns:<br/>404 if the resource is not found<br/>401 if user does not have the required permission",
+        "description": "Returns the whole updated attachment with its sanitised data.<br/>Requirements:<br/>  - auth-client scopes: \"workspace\"<br/>  - user permission: \"write\" or higher<br/>Returns:<br/>400 if the resource is not found<br/>401 if user does not have the required permission",
         "operationId": "patchItemAttachment",
         "parameters": [
           {
@@ -7478,7 +7478,7 @@
         ]
       },
       "put": {
-        "description": "Returns updated attachment with its sanitised data.<br/>Requirements:<br/>  - auth-client scopes: \"workspace\"<br/>  - user permission: \"write\" or higher<br/>Returns:<br/>404 if the resource is not found<br/>401 if user does not have the required permission",
+        "description": "Returns updated attachment with its sanitised data.<br/>Requirements:<br/>  - auth-client scopes: \"workspace\"<br/>  - user permission: \"write\" or higher<br/>Returns:<br/>400 if the resource is not found<br/>401 if user does not have the required permission",
         "operationId": "updateItemAttachment",
         "parameters": [
           {
@@ -8117,7 +8117,7 @@
     },
     "/api/workspaces/{workspaceId}/items/{itemId}": {
       "delete": {
-        "description": "Returns empty result if the item was successfully deleted.<br/>Requirements:<br/>  - auth-client scopes: \"workspace\"<br/>  - user permission: \"write\" or higher<br/>Returns:<br/>404 if the resource is not found<br/>401 if user does not have the required permission",
+        "description": "Returns empty result if the item was successfully deleted.<br/>Requirements:<br/>  - auth-client scopes: \"workspace\"<br/>  - user permission: \"write\" or higher<br/>Returns:<br/>400 if the resource is not found<br/>401 if user does not have the required permission",
         "operationId": "deleteItem",
         "parameters": [
           {
@@ -8167,7 +8167,7 @@
         ]
       },
       "get": {
-        "description": "Returns found item.<br/>Requirements:<br/>  - auth-client scopes: \"workspace:read\"<br/>  - user permission: \"read\" or higher<br/>Returns:<br/>404 if the resource is not found<br/>401 if user does not have the required permission",
+        "description": "Returns found item.<br/>Requirements:<br/>  - auth-client scopes: \"workspace:read\"<br/>  - user permission: \"read\" or higher<br/>Returns:<br/>400 if the resource is not found<br/>401 if user does not have the required permission",
         "operationId": "retrieveItem",
         "parameters": [
           {
@@ -8229,7 +8229,7 @@
         ]
       },
       "patch": {
-        "description": "Returns the whole updated item with its sanitised data.<br/>Requirements:<br/>  - auth-client scopes: \"workspace\"<br/>  - user permission: \"write\" or higher<br/>Returns:<br/>404 if the resource is not found<br/>401 if user does not have the required permission",
+        "description": "Returns the whole updated item with its sanitised data.<br/>Requirements:<br/>  - auth-client scopes: \"workspace\"<br/>  - user permission: \"write\" or higher<br/>Returns:<br/>400 if the resource is not found<br/>401 if user does not have the required permission",
         "operationId": "patchItem",
         "parameters": [
           {
@@ -8301,7 +8301,7 @@
         ]
       },
       "put": {
-        "description": "Returns updated item with its sanitised data.<br/>Requirements:<br/>  - auth-client scopes: \"workspace\"<br/>  - user permission: \"write\" or higher<br/>Returns:<br/>404 if the resource is not found<br/>401 if user does not have the required permission",
+        "description": "Returns updated item with its sanitised data.<br/>Requirements:<br/>  - auth-client scopes: \"workspace\"<br/>  - user permission: \"write\" or higher<br/>Returns:<br/>400 if the resource is not found<br/>401 if user does not have the required permission",
         "operationId": "updateItem",
         "parameters": [
           {
@@ -8656,7 +8656,7 @@
     },
     "/api/workspaces/{workspaceId}/links/{itemLinkId}": {
       "delete": {
-        "description": "Returns empty result if the item link was successfully deleted.<br/>Requirements:<br/>  - auth-client scopes: \"workspace\"<br/>  - user permission: \"write\" or higher<br/>Returns:<br/>404 if the resource is not found<br/>401 if user does not have the required permission",
+        "description": "Returns empty result if the item link was successfully deleted.<br/>Requirements:<br/>  - auth-client scopes: \"workspace\"<br/>  - user permission: \"write\" or higher<br/>Returns:<br/>400 if the resource is not found<br/>401 if user does not have the required permission",
         "operationId": "deleteItemLink",
         "parameters": [
           {
@@ -8707,7 +8707,7 @@
         ]
       },
       "get": {
-        "description": "Returns found item link.<br/>Requirements:<br/>  - auth-client scopes: \"workspace:read\"<br/>  - user permission: \"read\" or higher<br/>Returns:<br/>404 if the resource is not found<br/>401 if user does not have the required permission",
+        "description": "Returns found item link.<br/>Requirements:<br/>  - auth-client scopes: \"workspace:read\"<br/>  - user permission: \"read\" or higher<br/>Returns:<br/>400 if the resource is not found<br/>401 if user does not have the required permission",
         "operationId": "retrieveItemLink",
         "parameters": [
           {
@@ -8765,7 +8765,7 @@
         ]
       },
       "patch": {
-        "description": "Returns the whole updated item link with its sanitised data.<br/>Requirements:<br/>  - auth-client scopes: \"workspace\"<br/>  - user permission: \"write\" or higher<br/>Returns:<br/>404 if the resource is not found<br/>401 if user does not have the required permission",
+        "description": "Returns the whole updated item link with its sanitised data.<br/>Requirements:<br/>  - auth-client scopes: \"workspace\"<br/>  - user permission: \"write\" or higher<br/>Returns:<br/>400 if the resource is not found<br/>401 if user does not have the required permission",
         "operationId": "patchItemLink",
         "parameters": [
           {
@@ -8833,7 +8833,7 @@
         ]
       },
       "put": {
-        "description": "Returns updated item link with its sanitised data.<br/>Requirements:<br/>  - auth-client scopes: \"workspace\"<br/>  - user permission: \"write\" or higher<br/>Returns:<br/>404 if the resource is not found<br/>401 if user does not have the required permission",
+        "description": "Returns updated item link with its sanitised data.<br/>Requirements:<br/>  - auth-client scopes: \"workspace\"<br/>  - user permission: \"write\" or higher<br/>Returns:<br/>400 if the resource is not found<br/>401 if user does not have the required permission",
         "operationId": "updateItemLink",
         "parameters": [
           {
