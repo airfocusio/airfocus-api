@@ -13,10 +13,17 @@ If you're looking for general information about airfocus and its features, pleas
 ## API overview
 
 {: .important }
-> The current API in version v0.* is a subject to change. We plan two major changes for 2024/2025:
+> The current API in version v0.* is a subject to change until it reaches stable v1.0.<br>
+> We plan the next two major changes for 2024/2025:
 > - changed/simplified path names for the endpoints
 > - new format of the returned embedded data: better structure of the embedded data, and clients will be able to control which embedded data
 >   should be returned
+>
+> ### How breaking changes will be communicated
+> Before we introduce a breaking change, we will analyze the usage of the affected part of API for the last month:
+> - if there will be zero usages - then we can decide to deploy the breaking change without any notice
+> - if there will be small amount of usages - then we can consider contacting the affected clients and asking if they're willing to migrate to the new version
+> - otherwise we will introduce the breaking change in a new version of the API, and the old version will be still available for some time (marked as deprecated)
 
 ### General conventions
 
