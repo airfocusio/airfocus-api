@@ -6,7 +6,7 @@ on:
 
 jobs:
   update:
-    if: false # disable until further notice
+    # if: false # disable until further notice
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
