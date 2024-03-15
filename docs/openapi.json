@@ -5935,6 +5935,59 @@
         ]
       }
     },
+    "/api/workspaces/items/alias/{aliasValue}": {
+      "get": {
+        "description": "Returns found item.<br/>Requirements:<br/>  - auth-client scopes: \"workspace\"<br/>  - user permission: \"write\" or higher<br/>Returns:<br/>400 if the resource is not found<br/>401 if user does not have the required permission",
+        "operationId": "retrieveItemByAlias",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "aliasValue",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ItemWithItemEmbed"
+                }
+              },
+              "application/json+markdown": {
+                "schema": {
+                  "$ref": "#/components/schemas/ItemWithItemEmbed"
+                }
+              }
+            },
+            "description": ""
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "security": [
+          {},
+          {
+            "httpAuth": []
+          }
+        ],
+        "summary": "Retrieve a single item by its alias (e.g. 'DEV-123').",
+        "tags": [
+          "Items"
+        ]
+      }
+    },
     "/api/workspaces/items/copy": {
       "post": {
         "description": "Returns ids of newly copied items, with order of the returned ids matching the order of requested source items. Returns Not Found if either of the specified source items does not exist.<br/>Requirements:<br/>  - auth-client scopes: \"workspace\"<br/>  - user permission: \"write\" or higher<br/>Returns:<br/>400 if the resource is not found<br/>401 if user does not have the required permission",
