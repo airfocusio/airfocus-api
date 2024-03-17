@@ -3385,6 +3385,9 @@
               }
             ]
           },
+          "description": {
+            "$ref": "#/components/schemas/RichText"
+          },
           "id": {
             "format": "uuid",
             "type": "string"
@@ -3447,6 +3450,7 @@
           "id",
           "teamId",
           "name",
+          "description",
           "progressMode",
           "archived",
           "createdAt",
@@ -4545,6 +4549,9 @@
               }
             ]
           },
+          "description": {
+            "$ref": "#/components/schemas/RichText"
+          },
           "id": {
             "format": "uuid",
             "type": "string"
@@ -4607,6 +4614,7 @@
           "id",
           "teamId",
           "name",
+          "description",
           "progressMode",
           "archived",
           "createdAt",
@@ -4657,6 +4665,9 @@
               }
             ]
           },
+          "description": {
+            "$ref": "#/components/schemas/RichText"
+          },
           "id": {
             "format": "uuid",
             "type": "string"
@@ -4719,6 +4730,7 @@
           "id",
           "teamId",
           "name",
+          "description",
           "progressMode",
           "archived",
           "createdAt",
