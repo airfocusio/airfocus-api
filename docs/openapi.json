@@ -97,7 +97,8 @@
           {
             "$ref": "#/components/schemas/VotingAppVotesFieldTypeSettings"
           }
-        ]
+        ],
+        "title": "AnyFieldSettings"
       },
       "App": {
         "properties": {
@@ -120,6 +121,7 @@
           "typeId",
           "settings"
         ],
+        "title": "App",
         "type": "object"
       },
       "AttachmentSearchQuery": {
@@ -132,15 +134,19 @@
             ]
           }
         },
+        "title": "AttachmentSearchQuery",
         "type": "object"
       },
       "BooleanFieldTypeSettings": {
+        "title": "BooleanFieldTypeSettings",
         "type": "object"
       },
       "DateFieldTypeSettings": {
+        "title": "DateFieldTypeSettings",
         "type": "object"
       },
       "DateRangeFieldTypeSettings": {
+        "title": "DateRangeFieldTypeSettings",
         "type": "object"
       },
       "ErrorResponse": {
@@ -166,6 +172,7 @@
           "message",
           "data"
         ],
+        "title": "ErrorResponse",
         "type": "object"
       },
       "FieldEmbed": {
@@ -175,7 +182,8 @@
               "format": "uuid",
               "type": "string"
             },
-            "type": "array"
+            "type": "array",
+            "uniqueItems": true
           },
           "order": {
             "format": "int32",
@@ -185,6 +193,7 @@
         "required": [
           "order"
         ],
+        "title": "FieldEmbed",
         "type": "object"
       },
       "FieldWithFieldEmbed": {
@@ -243,6 +252,7 @@
           "createdAt",
           "_embedded"
         ],
+        "title": "FieldWithFieldEmbed",
         "type": "object"
       },
       "FormSourceFieldTypeSettings": {
@@ -255,9 +265,11 @@
             ]
           }
         },
+        "title": "FormSourceFieldTypeSettings",
         "type": "object"
       },
       "FormTargetFieldTypeSettings": {
+        "title": "FormTargetFieldTypeSettings",
         "type": "object"
       },
       "InsightsFieldTypeSettings": {
@@ -270,6 +282,7 @@
             ]
           }
         },
+        "title": "InsightsFieldTypeSettings",
         "type": "object"
       },
       "IntegrationCapabilities": {
@@ -293,6 +306,7 @@
           "hierarchy",
           "debug"
         ],
+        "title": "IntegrationCapabilities",
         "type": "object"
       },
       "IntegrationSummary": {
@@ -327,6 +341,7 @@
           "createdAt",
           "capabilities"
         ],
+        "title": "IntegrationSummary",
         "type": "object"
       },
       "Item": {
@@ -448,6 +463,7 @@
           "lastUpdatedAt",
           "order"
         ],
+        "title": "Item",
         "type": "object"
       },
       "ItemAttachment": {
@@ -495,6 +511,7 @@
           "createdAt",
           "lastUpdatedAt"
         ],
+        "title": "ItemAttachment",
         "type": "object"
       },
       "ItemAttachmentBulkAction": {
@@ -520,7 +537,8 @@
           {
             "$ref": "#/components/schemas/ItemAttachmentBulkUpdate"
           }
-        ]
+        ],
+        "title": "ItemAttachmentBulkAction"
       },
       "ItemAttachmentBulkCreate": {
         "properties": {
@@ -538,6 +556,7 @@
           "resource",
           "type"
         ],
+        "title": "ItemAttachmentBulkCreate",
         "type": "object"
       },
       "ItemAttachmentBulkDelete": {
@@ -557,6 +576,7 @@
           "id",
           "type"
         ],
+        "title": "ItemAttachmentBulkDelete",
         "type": "object"
       },
       "ItemAttachmentBulkPatch": {
@@ -580,6 +600,7 @@
           "transform",
           "type"
         ],
+        "title": "ItemAttachmentBulkPatch",
         "type": "object"
       },
       "ItemAttachmentBulkUpdate": {
@@ -603,6 +624,7 @@
           "resource",
           "type"
         ],
+        "title": "ItemAttachmentBulkUpdate",
         "type": "object"
       },
       "ItemAttachmentWithEmbed": {
@@ -654,6 +676,7 @@
           "lastUpdatedAt",
           "_embedded"
         ],
+        "title": "ItemAttachmentWithEmbed",
         "type": "object"
       },
       "ItemAttachmentWithEmbedOrNullList": {
@@ -667,6 +690,7 @@
             }
           ]
         },
+        "title": "ItemAttachmentWithEmbedOrNullList",
         "type": "array"
       },
       "ItemAttachmentWithEmbedPage": {
@@ -685,6 +709,7 @@
         "required": [
           "totalItems"
         ],
+        "title": "ItemAttachmentWithEmbedPage",
         "type": "object"
       },
       "ItemBulkAction": {
@@ -710,7 +735,8 @@
           {
             "$ref": "#/components/schemas/ItemBulkUpdate"
           }
-        ]
+        ],
+        "title": "ItemBulkAction"
       },
       "ItemBulkCreate": {
         "properties": {
@@ -728,6 +754,7 @@
           "resource",
           "type"
         ],
+        "title": "ItemBulkCreate",
         "type": "object"
       },
       "ItemBulkDelete": {
@@ -747,6 +774,7 @@
           "id",
           "type"
         ],
+        "title": "ItemBulkDelete",
         "type": "object"
       },
       "ItemBulkPatch": {
@@ -770,6 +798,7 @@
           "transform",
           "type"
         ],
+        "title": "ItemBulkPatch",
         "type": "object"
       },
       "ItemBulkUpdate": {
@@ -793,6 +822,7 @@
           "resource",
           "type"
         ],
+        "title": "ItemBulkUpdate",
         "type": "object"
       },
       "ItemColor": {
@@ -818,6 +848,7 @@
           "violet",
           "yellow"
         ],
+        "title": "ItemColor",
         "type": "string"
       },
       "ItemConstraint": {
@@ -835,7 +866,8 @@
           {},
           {},
           {}
-        ]
+        ],
+        "title": "ItemConstraint"
       },
       "ItemEmbed": {
         "properties": {
@@ -916,6 +948,7 @@
           "commentCount",
           "attachmentCount"
         ],
+        "title": "ItemEmbed",
         "type": "object"
       },
       "ItemEmbedApp": {
@@ -934,6 +967,7 @@
           "typeId",
           "data"
         ],
+        "title": "ItemEmbedApp",
         "type": "object"
       },
       "ItemEmbedIntegration": {
@@ -952,6 +986,7 @@
           "typeId",
           "data"
         ],
+        "title": "ItemEmbedIntegration",
         "type": "object"
       },
       "ItemEmbedProgress": {
@@ -969,6 +1004,7 @@
           "closed",
           "total"
         ],
+        "title": "ItemEmbedProgress",
         "type": "object"
       },
       "ItemEmbedRelativeItem": {
@@ -1027,6 +1063,7 @@
           "parentOrder",
           "childOrder"
         ],
+        "title": "ItemEmbedRelativeItem",
         "type": "object"
       },
       "ItemLink": {
@@ -1065,6 +1102,7 @@
           "fromOrder",
           "toOrder"
         ],
+        "title": "ItemLink",
         "type": "object"
       },
       "ItemLinkBulkAction": {
@@ -1090,7 +1128,8 @@
           {
             "$ref": "#/components/schemas/ItemLinkBulkUpdate"
           }
-        ]
+        ],
+        "title": "ItemLinkBulkAction"
       },
       "ItemLinkBulkCreate": {
         "properties": {
@@ -1108,6 +1147,7 @@
           "resource",
           "type"
         ],
+        "title": "ItemLinkBulkCreate",
         "type": "object"
       },
       "ItemLinkBulkDelete": {
@@ -1127,6 +1167,7 @@
           "id",
           "type"
         ],
+        "title": "ItemLinkBulkDelete",
         "type": "object"
       },
       "ItemLinkBulkPatch": {
@@ -1150,6 +1191,7 @@
           "transform",
           "type"
         ],
+        "title": "ItemLinkBulkPatch",
         "type": "object"
       },
       "ItemLinkBulkUpdate": {
@@ -1173,6 +1215,7 @@
           "resource",
           "type"
         ],
+        "title": "ItemLinkBulkUpdate",
         "type": "object"
       },
       "ItemLinkConstraintUndeletable": {
@@ -1192,6 +1235,7 @@
           "extensionId",
           "type"
         ],
+        "title": "ItemLinkConstraintUndeletable",
         "type": "object"
       },
       "ItemLinkEmbed": {
@@ -1222,6 +1266,7 @@
         "required": [
           "apps"
         ],
+        "title": "ItemLinkEmbed",
         "type": "object"
       },
       "ItemLinkEmbedApp": {
@@ -1240,6 +1285,7 @@
           "typeId",
           "data"
         ],
+        "title": "ItemLinkEmbedApp",
         "type": "object"
       },
       "ItemLinkSearchQuery": {
@@ -1256,7 +1302,8 @@
               "format": "uuid",
               "type": "string"
             },
-            "type": "array"
+            "type": "array",
+            "uniqueItems": true
           },
           "workspaceIds": {
             "description": "Return only those links which connect items in the specified workspaces.",
@@ -1264,9 +1311,11 @@
               "format": "uuid",
               "type": "string"
             },
-            "type": "array"
+            "type": "array",
+            "uniqueItems": true
           }
         },
+        "title": "ItemLinkSearchQuery",
         "type": "object"
       },
       "ItemLinkType": {
@@ -1274,6 +1323,7 @@
         "enum": [
           "dependency"
         ],
+        "title": "ItemLinkType",
         "type": "string"
       },
       "ItemLinkWithItemLinkEmbed": {
@@ -1316,6 +1366,7 @@
           "toOrder",
           "_embedded"
         ],
+        "title": "ItemLinkWithItemLinkEmbed",
         "type": "object"
       },
       "ItemLinkWithItemLinkEmbedOrNullList": {
@@ -1329,6 +1380,7 @@
             }
           ]
         },
+        "title": "ItemLinkWithItemLinkEmbedOrNullList",
         "type": "array"
       },
       "ItemLinkWithItemLinkEmbedPage": {
@@ -1347,6 +1399,7 @@
         "required": [
           "totalItems"
         ],
+        "title": "ItemLinkWithItemLinkEmbedPage",
         "type": "object"
       },
       "ItemRelation": {
@@ -1379,6 +1432,7 @@
           "parentOrder",
           "childOrder"
         ],
+        "title": "ItemRelation",
         "type": "object"
       },
       "ItemRelationBulkAction": {
@@ -1404,7 +1458,8 @@
           {
             "$ref": "#/components/schemas/ItemRelationBulkUpdate"
           }
-        ]
+        ],
+        "title": "ItemRelationBulkAction"
       },
       "ItemRelationBulkCreate": {
         "properties": {
@@ -1422,6 +1477,7 @@
           "resource",
           "type"
         ],
+        "title": "ItemRelationBulkCreate",
         "type": "object"
       },
       "ItemRelationBulkDelete": {
@@ -1441,6 +1497,7 @@
           "id",
           "type"
         ],
+        "title": "ItemRelationBulkDelete",
         "type": "object"
       },
       "ItemRelationBulkPatch": {
@@ -1464,6 +1521,7 @@
           "transform",
           "type"
         ],
+        "title": "ItemRelationBulkPatch",
         "type": "object"
       },
       "ItemRelationBulkUpdate": {
@@ -1487,6 +1545,7 @@
           "resource",
           "type"
         ],
+        "title": "ItemRelationBulkUpdate",
         "type": "object"
       },
       "ItemRelationSearchQuery": {
@@ -1502,6 +1561,7 @@
             ]
           }
         },
+        "title": "ItemRelationSearchQuery",
         "type": "object"
       },
       "ItemRelationSearchQueryFilter": {
@@ -1517,7 +1577,8 @@
           {},
           {},
           {}
-        ]
+        ],
+        "title": "ItemRelationSearchQueryFilter"
       },
       "ItemRelationWithEmbed": {
         "properties": {
@@ -1553,6 +1614,7 @@
           "childOrder",
           "_embedded"
         ],
+        "title": "ItemRelationWithEmbed",
         "type": "object"
       },
       "ItemRelationWithEmbedOrNullList": {
@@ -1566,6 +1628,7 @@
             }
           ]
         },
+        "title": "ItemRelationWithEmbedOrNullList",
         "type": "array"
       },
       "ItemRelationWithEmbedPage": {
@@ -1584,6 +1647,7 @@
         "required": [
           "totalItems"
         ],
+        "title": "ItemRelationWithEmbedPage",
         "type": "object"
       },
       "ItemSearchQuery": {
@@ -1609,6 +1673,7 @@
           "sort",
           "archived"
         ],
+        "title": "ItemSearchQuery",
         "type": "object"
       },
       "ItemSearchQueryDateTimeFilterValue": {
@@ -1631,6 +1696,7 @@
           "date",
           "zoneId"
         ],
+        "title": "ItemSearchQueryDateTimeFilterValue",
         "type": "object"
       },
       "ItemSearchQueryFilter": {
@@ -1692,7 +1758,8 @@
           {
             "$ref": "#/components/schemas/ItemSearchQueryFilterUpdated"
           }
-        ]
+        ],
+        "title": "ItemSearchQueryFilter"
       },
       "ItemSearchQueryFilterAnd": {
         "properties": {
@@ -1703,6 +1770,7 @@
         "required": [
           "inner"
         ],
+        "title": "ItemSearchQueryFilterAnd",
         "type": "object"
       },
       "ItemSearchQueryFilterAssignees": {
@@ -1728,7 +1796,8 @@
           {
             "type": "object"
           }
-        ]
+        ],
+        "title": "ItemSearchQueryFilterAssignees"
       },
       "ItemSearchQueryFilterAssigneesContain": {
         "properties": {
@@ -1740,6 +1809,7 @@
         "required": [
           "id"
         ],
+        "title": "ItemSearchQueryFilterAssigneesContain",
         "type": "object"
       },
       "ItemSearchQueryFilterAssigneesContainsAll": {
@@ -1752,6 +1822,7 @@
             "type": "array"
           }
         },
+        "title": "ItemSearchQueryFilterAssigneesContainsAll",
         "type": "object"
       },
       "ItemSearchQueryFilterAssigneesContainsAny": {
@@ -1764,6 +1835,7 @@
             "type": "array"
           }
         },
+        "title": "ItemSearchQueryFilterAssigneesContainsAny",
         "type": "object"
       },
       "ItemSearchQueryFilterCreatedAt": {
@@ -1779,6 +1851,7 @@
           "mode",
           "value"
         ],
+        "title": "ItemSearchQueryFilterCreatedAt",
         "type": "object"
       },
       "ItemSearchQueryFilterField": {
@@ -1792,7 +1865,8 @@
           {
             "$ref": "#/components/schemas/ItemSearchQueryFilterFieldValue"
           }
-        ]
+        ],
+        "title": "ItemSearchQueryFilterField"
       },
       "ItemSearchQueryFilterFieldValue": {
         "properties": {
@@ -1808,6 +1882,7 @@
           "fieldId",
           "filter"
         ],
+        "title": "ItemSearchQueryFilterFieldValue",
         "type": "object"
       },
       "ItemSearchQueryFilterIntegration": {
@@ -1825,7 +1900,8 @@
           {
             "type": "object"
           }
-        ]
+        ],
+        "title": "ItemSearchQueryFilterIntegration"
       },
       "ItemSearchQueryFilterIntegrationValue": {
         "properties": {
@@ -1837,6 +1913,7 @@
         "required": [
           "integrationId"
         ],
+        "title": "ItemSearchQueryFilterIntegrationValue",
         "type": "object"
       },
       "ItemSearchQueryFilterLastUpdatedAt": {
@@ -1862,6 +1939,7 @@
           "mode",
           "value"
         ],
+        "title": "ItemSearchQueryFilterLastUpdatedAt",
         "type": "object"
       },
       "ItemSearchQueryFilterName": {
@@ -1879,7 +1957,8 @@
           {
             "$ref": "#/components/schemas/ItemSearchQueryFilterNameEqual"
           }
-        ]
+        ],
+        "title": "ItemSearchQueryFilterName"
       },
       "ItemSearchQueryFilterNameContain": {
         "properties": {
@@ -1894,6 +1973,7 @@
           "text",
           "caseSensitive"
         ],
+        "title": "ItemSearchQueryFilterNameContain",
         "type": "object"
       },
       "ItemSearchQueryFilterNameEqual": {
@@ -1909,6 +1989,7 @@
           "text",
           "caseSensitive"
         ],
+        "title": "ItemSearchQueryFilterNameEqual",
         "type": "object"
       },
       "ItemSearchQueryFilterNot": {
@@ -1920,6 +2001,7 @@
         "required": [
           "inner"
         ],
+        "title": "ItemSearchQueryFilterNot",
         "type": "object"
       },
       "ItemSearchQueryFilterOr": {
@@ -1931,6 +2013,7 @@
         "required": [
           "inner"
         ],
+        "title": "ItemSearchQueryFilterOr",
         "type": "object"
       },
       "ItemSearchQueryFilterParent": {
@@ -1948,7 +2031,8 @@
           {
             "type": "object"
           }
-        ]
+        ],
+        "title": "ItemSearchQueryFilterParent"
       },
       "ItemSearchQueryFilterParentValue": {
         "properties": {
@@ -1965,6 +2049,7 @@
           "workspaceId",
           "itemId"
         ],
+        "title": "ItemSearchQueryFilterParentValue",
         "type": "object"
       },
       "ItemSearchQueryFilterStatus": {
@@ -1982,7 +2067,8 @@
           {
             "$ref": "#/components/schemas/ItemSearchQueryFilterStatusUpdatedSince"
           }
-        ]
+        ],
+        "title": "ItemSearchQueryFilterStatus"
       },
       "ItemSearchQueryFilterStatusCategory": {
         "discriminator": {
@@ -1999,7 +2085,8 @@
           {
             "$ref": "#/components/schemas/ItemSearchQueryFilterStatusCategoryUpdatedSince"
           }
-        ]
+        ],
+        "title": "ItemSearchQueryFilterStatusCategory"
       },
       "ItemSearchQueryFilterStatusCategoryContainsAny": {
         "properties": {
@@ -2007,9 +2094,11 @@
             "items": {
               "$ref": "#/components/schemas/StatusCategory"
             },
-            "type": "array"
+            "type": "array",
+            "uniqueItems": true
           }
         },
+        "title": "ItemSearchQueryFilterStatusCategoryContainsAny",
         "type": "object"
       },
       "ItemSearchQueryFilterStatusCategoryUpdatedSince": {
@@ -2021,6 +2110,7 @@
         "required": [
           "value"
         ],
+        "title": "ItemSearchQueryFilterStatusCategoryUpdatedSince",
         "type": "object"
       },
       "ItemSearchQueryFilterStatusContainsAny": {
@@ -2030,9 +2120,11 @@
               "format": "uuid",
               "type": "string"
             },
-            "type": "array"
+            "type": "array",
+            "uniqueItems": true
           }
         },
+        "title": "ItemSearchQueryFilterStatusContainsAny",
         "type": "object"
       },
       "ItemSearchQueryFilterStatusUpdatedSince": {
@@ -2044,6 +2136,7 @@
         "required": [
           "value"
         ],
+        "title": "ItemSearchQueryFilterStatusUpdatedSince",
         "type": "object"
       },
       "ItemSearchQueryFilterUpdated": {
@@ -2057,7 +2150,8 @@
           {
             "$ref": "#/components/schemas/ItemSearchQueryFilterUpdatedSince"
           }
-        ]
+        ],
+        "title": "ItemSearchQueryFilterUpdated"
       },
       "ItemSearchQueryFilterUpdatedSince": {
         "properties": {
@@ -2079,6 +2173,7 @@
         "required": [
           "timestamp"
         ],
+        "title": "ItemSearchQueryFilterUpdatedSince",
         "type": "object"
       },
       "ItemSearchQuerySort": {
@@ -2100,7 +2195,8 @@
           {},
           {},
           {}
-        ]
+        ],
+        "title": "ItemSearchQuerySort"
       },
       "ItemSearchQueryTimeAnchor": {
         "discriminator": {
@@ -2121,7 +2217,8 @@
           {
             "$ref": "#/components/schemas/ItemSearchQueryTimeAnchorWeeks"
           }
-        ]
+        ],
+        "title": "ItemSearchQueryTimeAnchor"
       },
       "ItemSearchQueryTimeAnchorDays": {
         "properties": {
@@ -2133,6 +2230,7 @@
         "required": [
           "count"
         ],
+        "title": "ItemSearchQueryTimeAnchorDays",
         "type": "object"
       },
       "ItemSearchQueryTimeAnchorMonths": {
@@ -2145,6 +2243,7 @@
         "required": [
           "count"
         ],
+        "title": "ItemSearchQueryTimeAnchorMonths",
         "type": "object"
       },
       "ItemSearchQueryTimeAnchorWeeks": {
@@ -2157,6 +2256,7 @@
         "required": [
           "count"
         ],
+        "title": "ItemSearchQueryTimeAnchorWeeks",
         "type": "object"
       },
       "ItemSearchQueryTimeMode": {
@@ -2166,6 +2266,7 @@
           "before",
           "beforeOrOn"
         ],
+        "title": "ItemSearchQueryTimeMode",
         "type": "string"
       },
       "ItemType": {
@@ -2184,6 +2285,7 @@
           "story",
           "task"
         ],
+        "title": "ItemType",
         "type": "string"
       },
       "ItemWithItemEmbed": {
@@ -2309,6 +2411,7 @@
           "order",
           "_embedded"
         ],
+        "title": "ItemWithItemEmbed",
         "type": "object"
       },
       "ItemWithItemEmbedOrNullList": {
@@ -2322,6 +2425,7 @@
             }
           ]
         },
+        "title": "ItemWithItemEmbedOrNullList",
         "type": "array"
       },
       "ItemWithItemEmbedPage": {
@@ -2340,6 +2444,7 @@
         "required": [
           "totalItems"
         ],
+        "title": "ItemWithItemEmbedPage",
         "type": "object"
       },
       "JsonPatch": {
@@ -2352,6 +2457,7 @@
             "type": "array"
           }
         },
+        "title": "JsonPatch",
         "type": "object"
       },
       "JsonPatchAdd": {
@@ -2372,6 +2478,7 @@
           "value",
           "op"
         ],
+        "title": "JsonPatchAdd",
         "type": "object"
       },
       "JsonPatchCopy": {
@@ -2394,6 +2501,7 @@
           "path",
           "op"
         ],
+        "title": "JsonPatchCopy",
         "type": "object"
       },
       "JsonPatchMove": {
@@ -2416,6 +2524,7 @@
           "path",
           "op"
         ],
+        "title": "JsonPatchMove",
         "type": "object"
       },
       "JsonPatchOperation": {
@@ -2449,7 +2558,8 @@
           {
             "$ref": "#/components/schemas/JsonPatchTest"
           }
-        ]
+        ],
+        "title": "JsonPatchOperation"
       },
       "JsonPatchRemove": {
         "properties": {
@@ -2468,6 +2578,7 @@
           "path",
           "op"
         ],
+        "title": "JsonPatchRemove",
         "type": "object"
       },
       "JsonPatchReplace": {
@@ -2489,6 +2600,7 @@
           "value",
           "op"
         ],
+        "title": "JsonPatchReplace",
         "type": "object"
       },
       "JsonPatchTest": {
@@ -2509,12 +2621,15 @@
           "value",
           "op"
         ],
+        "title": "JsonPatchTest",
         "type": "object"
       },
       "MirrorSourceFieldTypeSettings": {
+        "title": "MirrorSourceFieldTypeSettings",
         "type": "object"
       },
       "MirrorTargetFieldTypeSettings": {
+        "title": "MirrorTargetFieldTypeSettings",
         "type": "object"
       },
       "NumberFieldTypeSettings": {
@@ -2558,6 +2673,7 @@
         "required": [
           "overflow"
         ],
+        "title": "NumberFieldTypeSettings",
         "type": "object"
       },
       "NumberFieldTypeSettingsStepping": {
@@ -2579,7 +2695,8 @@
           {
             "type": "object"
           }
-        ]
+        ],
+        "title": "NumberFieldTypeSettingsStepping"
       },
       "NumberFieldTypeSettingsSteppingEqual": {
         "properties": {
@@ -2590,6 +2707,7 @@
         "required": [
           "delta"
         ],
+        "title": "NumberFieldTypeSettingsSteppingEqual",
         "type": "object"
       },
       "NumberFieldTypeSettingsSteppingExponential": {
@@ -2601,6 +2719,7 @@
         "required": [
           "factor"
         ],
+        "title": "NumberFieldTypeSettingsSteppingExponential",
         "type": "object"
       },
       "NumberFieldTypeSettingsUnit": {
@@ -2618,9 +2737,11 @@
           {},
           {},
           {}
-        ]
+        ],
+        "title": "NumberFieldTypeSettingsUnit"
       },
       "OkrCheckinsFieldTypeSettings": {
+        "title": "OkrCheckinsFieldTypeSettings",
         "type": "object"
       },
       "OkrConfidenceFieldSettings": {
@@ -2638,15 +2759,19 @@
           "low",
           "medium"
         ],
+        "title": "OkrConfidenceFieldSettings",
         "type": "object"
       },
       "OkrKeyResultReferenceFieldTypeSettings": {
+        "title": "OkrKeyResultReferenceFieldTypeSettings",
         "type": "object"
       },
       "OkrKeyResultsFieldTypeSettings": {
+        "title": "OkrKeyResultsFieldTypeSettings",
         "type": "object"
       },
       "OkrProgressFieldTypeSettings": {
+        "title": "OkrProgressFieldTypeSettings",
         "type": "object"
       },
       "OkrTimePeriodFieldSettings": {
@@ -2658,6 +2783,7 @@
             "type": "array"
           }
         },
+        "title": "OkrTimePeriodFieldSettings",
         "type": "object"
       },
       "PeopleFieldTypeSettings": {
@@ -2669,6 +2795,7 @@
         "required": [
           "autoAssign"
         ],
+        "title": "PeopleFieldTypeSettings",
         "type": "object"
       },
       "Permission": {
@@ -2678,12 +2805,15 @@
           "read",
           "write"
         ],
+        "title": "Permission",
         "type": "string"
       },
       "PortalFieldTypeSettings": {
+        "title": "PortalFieldTypeSettings",
         "type": "object"
       },
       "PrioritizationFieldTypeSettings": {
+        "title": "PrioritizationFieldTypeSettings",
         "type": "object"
       },
       "Property": {
@@ -2704,7 +2834,8 @@
             "pattern": "^fieldid:[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
             "type": "string"
           }
-        ]
+        ],
+        "title": "Property"
       },
       "RichText": {
         "example": {
@@ -2741,6 +2872,7 @@
             "type": "array"
           }
         },
+        "title": "RichText",
         "type": "object"
       },
       "RichTextBlock": {
@@ -2750,6 +2882,7 @@
             "blockquote": "#/components/schemas/RichTextBlockBlockquote",
             "code": "#/components/schemas/RichTextBlockCode",
             "custom": "#/components/schemas/RichTextBlockCustom",
+            "embed": "#/components/schemas/RichTextBlockEmbed",
             "headline": "#/components/schemas/RichTextBlockHeadline",
             "indentation": "#/components/schemas/RichTextBlockIndentation",
             "list": "#/components/schemas/RichTextBlockList",
@@ -2772,6 +2905,9 @@
             "$ref": "#/components/schemas/RichTextBlockCustom"
           },
           {
+            "$ref": "#/components/schemas/RichTextBlockEmbed"
+          },
+          {
             "$ref": "#/components/schemas/RichTextBlockHeadline"
           },
           {
@@ -2786,7 +2922,8 @@
           {
             "$ref": "#/components/schemas/RichTextBlockParagraph"
           }
-        ]
+        ],
+        "title": "RichTextBlock"
       },
       "RichTextBlockAttachment": {
         "properties": {
@@ -2815,6 +2952,7 @@
           "attachmentId",
           "contentType"
         ],
+        "title": "RichTextBlockAttachment",
         "type": "object"
       },
       "RichTextBlockBlockquote": {
@@ -2826,6 +2964,7 @@
             "type": "array"
           }
         },
+        "title": "RichTextBlockBlockquote",
         "type": "object"
       },
       "RichTextBlockCode": {
@@ -2843,6 +2982,7 @@
         "required": [
           "content"
         ],
+        "title": "RichTextBlockCode",
         "type": "object"
       },
       "RichTextBlockCustom": {
@@ -2858,6 +2998,32 @@
           "id",
           "raw"
         ],
+        "title": "RichTextBlockCustom",
+        "type": "object"
+      },
+      "RichTextBlockEmbed": {
+        "properties": {
+          "caption": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "height": {
+            "format": "int32",
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "url": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "url"
+        ],
+        "title": "RichTextBlockEmbed",
         "type": "object"
       },
       "RichTextBlockHeadline": {
@@ -2876,6 +3042,7 @@
         "required": [
           "level"
         ],
+        "title": "RichTextBlockHeadline",
         "type": "object"
       },
       "RichTextBlockIndentation": {
@@ -2887,6 +3054,7 @@
         "required": [
           "content"
         ],
+        "title": "RichTextBlockIndentation",
         "type": "object"
       },
       "RichTextBlockList": {
@@ -2904,6 +3072,7 @@
         "required": [
           "ordered"
         ],
+        "title": "RichTextBlockList",
         "type": "object"
       },
       "RichTextBlockPanel": {
@@ -2919,6 +3088,7 @@
           "content",
           "colorHex"
         ],
+        "title": "RichTextBlockPanel",
         "type": "object"
       },
       "RichTextBlockParagraph": {
@@ -2930,6 +3100,7 @@
             "type": "array"
           }
         },
+        "title": "RichTextBlockParagraph",
         "type": "object"
       },
       "RichTextInline": {
@@ -2979,7 +3150,8 @@
           {
             "$ref": "#/components/schemas/RichTextInlineUnderline"
           }
-        ]
+        ],
+        "title": "RichTextInline"
       },
       "RichTextInlineBold": {
         "properties": {
@@ -2990,6 +3162,7 @@
         "required": [
           "content"
         ],
+        "title": "RichTextInlineBold",
         "type": "object"
       },
       "RichTextInlineCode": {
@@ -3001,6 +3174,7 @@
         "required": [
           "content"
         ],
+        "title": "RichTextInlineCode",
         "type": "object"
       },
       "RichTextInlineCustom": {
@@ -3016,6 +3190,7 @@
           "id",
           "raw"
         ],
+        "title": "RichTextInlineCustom",
         "type": "object"
       },
       "RichTextInlineImage": {
@@ -3031,6 +3206,7 @@
           "content",
           "url"
         ],
+        "title": "RichTextInlineImage",
         "type": "object"
       },
       "RichTextInlineItalic": {
@@ -3042,6 +3218,7 @@
         "required": [
           "content"
         ],
+        "title": "RichTextInlineItalic",
         "type": "object"
       },
       "RichTextInlineLink": {
@@ -3057,6 +3234,7 @@
           "content",
           "url"
         ],
+        "title": "RichTextInlineLink",
         "type": "object"
       },
       "RichTextInlineMention": {
@@ -3069,6 +3247,7 @@
         "required": [
           "userId"
         ],
+        "title": "RichTextInlineMention",
         "type": "object"
       },
       "RichTextInlineStrikeThrough": {
@@ -3080,6 +3259,7 @@
         "required": [
           "content"
         ],
+        "title": "RichTextInlineStrikeThrough",
         "type": "object"
       },
       "RichTextInlineText": {
@@ -3091,6 +3271,7 @@
         "required": [
           "content"
         ],
+        "title": "RichTextInlineText",
         "type": "object"
       },
       "RichTextInlineUnderline": {
@@ -3102,6 +3283,7 @@
         "required": [
           "content"
         ],
+        "title": "RichTextInlineUnderline",
         "type": "object"
       },
       "RichTextListItem": {
@@ -3113,6 +3295,7 @@
         "required": [
           "content"
         ],
+        "title": "RichTextListItem",
         "type": "object"
       },
       "SelectFieldOptionColor": {
@@ -3127,6 +3310,7 @@
           "violet",
           "yellow"
         ],
+        "title": "SelectFieldOptionColor",
         "type": "string"
       },
       "SelectFieldTypeOption": {
@@ -3166,6 +3350,7 @@
           "description",
           "default"
         ],
+        "title": "SelectFieldTypeOption",
         "type": "object"
       },
       "SelectFieldTypeSettings": {
@@ -3183,6 +3368,7 @@
         "required": [
           "multi"
         ],
+        "title": "SelectFieldTypeSettings",
         "type": "object"
       },
       "Status": {
@@ -3227,6 +3413,7 @@
           "default",
           "order"
         ],
+        "title": "Status",
         "type": "object"
       },
       "StatusCategory": {
@@ -3235,6 +3422,7 @@
           "closed",
           "draft"
         ],
+        "title": "StatusCategory",
         "type": "string"
       },
       "StatusColor": {
@@ -3249,9 +3437,11 @@
           "violet",
           "yellow"
         ],
+        "title": "StatusColor",
         "type": "string"
       },
       "TextFieldTypeSettings": {
+        "title": "TextFieldTypeSettings",
         "type": "object"
       },
       "TimePeriod": {
@@ -3278,6 +3468,7 @@
           "startDate",
           "endDate"
         ],
+        "title": "TimePeriod",
         "type": "object"
       },
       "View": {
@@ -3338,6 +3529,7 @@
           "description",
           "order"
         ],
+        "title": "View",
         "type": "object"
       },
       "VotingAppScoreFieldTypeSettings": {
@@ -3355,9 +3547,11 @@
             ]
           }
         },
+        "title": "VotingAppScoreFieldTypeSettings",
         "type": "object"
       },
       "VotingAppVotesFieldTypeSettings": {
+        "title": "VotingAppVotesFieldTypeSettings",
         "type": "object"
       },
       "Workspace": {
@@ -3457,6 +3651,7 @@
           "lastUpdatedAt",
           "namespace"
         ],
+        "title": "Workspace",
         "type": "object"
       },
       "WorkspaceBulkAction": {
@@ -3482,7 +3677,8 @@
           {
             "$ref": "#/components/schemas/WorkspaceBulkUpdate"
           }
-        ]
+        ],
+        "title": "WorkspaceBulkAction"
       },
       "WorkspaceBulkCreate": {
         "properties": {
@@ -3500,6 +3696,7 @@
           "resource",
           "type"
         ],
+        "title": "WorkspaceBulkCreate",
         "type": "object"
       },
       "WorkspaceBulkDelete": {
@@ -3519,6 +3716,7 @@
           "id",
           "type"
         ],
+        "title": "WorkspaceBulkDelete",
         "type": "object"
       },
       "WorkspaceBulkPatch": {
@@ -3542,6 +3740,7 @@
           "transform",
           "type"
         ],
+        "title": "WorkspaceBulkPatch",
         "type": "object"
       },
       "WorkspaceBulkUpdate": {
@@ -3565,6 +3764,7 @@
           "resource",
           "type"
         ],
+        "title": "WorkspaceBulkUpdate",
         "type": "object"
       },
       "WorkspaceDuplicateRequest": {
@@ -3577,6 +3777,7 @@
         "required": [
           "duplicatePermissions"
         ],
+        "title": "WorkspaceDuplicateRequest",
         "type": "object"
       },
       "WorkspaceEmbed": {
@@ -3669,6 +3870,7 @@
           "integrations",
           "apps"
         ],
+        "title": "WorkspaceEmbed",
         "type": "object"
       },
       "WorkspaceEmbedRelation": {
@@ -3696,6 +3898,7 @@
           "relationId",
           "workspaceId"
         ],
+        "title": "WorkspaceEmbedRelation",
         "type": "object"
       },
       "WorkspaceGroup": {
@@ -3737,6 +3940,7 @@
           "createdAt",
           "lastUpdatedAt"
         ],
+        "title": "WorkspaceGroup",
         "type": "object"
       },
       "WorkspaceGroupAssignWorkspaceRequest": {
@@ -3756,6 +3960,7 @@
         "required": [
           "workspaceId"
         ],
+        "title": "WorkspaceGroupAssignWorkspaceRequest",
         "type": "object"
       },
       "WorkspaceGroupBulkAction": {
@@ -3781,7 +3986,8 @@
           {
             "$ref": "#/components/schemas/WorkspaceGroupBulkUpdate"
           }
-        ]
+        ],
+        "title": "WorkspaceGroupBulkAction"
       },
       "WorkspaceGroupBulkCreate": {
         "properties": {
@@ -3799,6 +4005,7 @@
           "resource",
           "type"
         ],
+        "title": "WorkspaceGroupBulkCreate",
         "type": "object"
       },
       "WorkspaceGroupBulkDelete": {
@@ -3818,6 +4025,7 @@
           "id",
           "type"
         ],
+        "title": "WorkspaceGroupBulkDelete",
         "type": "object"
       },
       "WorkspaceGroupBulkPatch": {
@@ -3841,6 +4049,7 @@
           "transform",
           "type"
         ],
+        "title": "WorkspaceGroupBulkPatch",
         "type": "object"
       },
       "WorkspaceGroupBulkUpdate": {
@@ -3864,6 +4073,7 @@
           "resource",
           "type"
         ],
+        "title": "WorkspaceGroupBulkUpdate",
         "type": "object"
       },
       "WorkspaceGroupEmbed": {
@@ -3894,6 +4104,7 @@
         "required": [
           "permissions"
         ],
+        "title": "WorkspaceGroupEmbed",
         "type": "object"
       },
       "WorkspaceGroupPermissionsUpdateRequest": {
@@ -3908,6 +4119,7 @@
         "required": [
           "permissions"
         ],
+        "title": "WorkspaceGroupPermissionsUpdateRequest",
         "type": "object"
       },
       "WorkspaceGroupWithWorkspaceGroupEmbed": {
@@ -3953,6 +4165,7 @@
           "lastUpdatedAt",
           "_embedded"
         ],
+        "title": "WorkspaceGroupWithWorkspaceGroupEmbed",
         "type": "object"
       },
       "WorkspaceGroupWithWorkspaceGroupEmbedOrNullList": {
@@ -3966,6 +4179,7 @@
             }
           ]
         },
+        "title": "WorkspaceGroupWithWorkspaceGroupEmbedOrNullList",
         "type": "array"
       },
       "WorkspaceGroupWithWorkspaceGroupEmbedPage": {
@@ -3984,6 +4198,7 @@
         "required": [
           "totalItems"
         ],
+        "title": "WorkspaceGroupWithWorkspaceGroupEmbedPage",
         "type": "object"
       },
       "WorkspaceNamespace": {
@@ -3991,6 +4206,7 @@
           "main",
           "app:okr"
         ],
+        "title": "WorkspaceNamespace",
         "type": "string"
       },
       "WorkspacePermissionsUpdateRequest": {
@@ -4016,6 +4232,7 @@
         "required": [
           "permissions"
         ],
+        "title": "WorkspacePermissionsUpdateRequest",
         "type": "object"
       },
       "WorkspaceProgressMode": {
@@ -4024,6 +4241,7 @@
           "none",
           "percentage"
         ],
+        "title": "WorkspaceProgressMode",
         "type": "string"
       },
       "WorkspaceRelation": {
@@ -4046,6 +4264,7 @@
           "parentId",
           "childId"
         ],
+        "title": "WorkspaceRelation",
         "type": "object"
       },
       "WorkspaceRelationBulkAction": {
@@ -4071,7 +4290,8 @@
           {
             "$ref": "#/components/schemas/WorkspaceRelationBulkUpdate"
           }
-        ]
+        ],
+        "title": "WorkspaceRelationBulkAction"
       },
       "WorkspaceRelationBulkCreate": {
         "properties": {
@@ -4089,6 +4309,7 @@
           "resource",
           "type"
         ],
+        "title": "WorkspaceRelationBulkCreate",
         "type": "object"
       },
       "WorkspaceRelationBulkDelete": {
@@ -4108,6 +4329,7 @@
           "id",
           "type"
         ],
+        "title": "WorkspaceRelationBulkDelete",
         "type": "object"
       },
       "WorkspaceRelationBulkPatch": {
@@ -4131,6 +4353,7 @@
           "transform",
           "type"
         ],
+        "title": "WorkspaceRelationBulkPatch",
         "type": "object"
       },
       "WorkspaceRelationBulkUpdate": {
@@ -4154,6 +4377,7 @@
           "resource",
           "type"
         ],
+        "title": "WorkspaceRelationBulkUpdate",
         "type": "object"
       },
       "WorkspaceRelationSearchQuery": {
@@ -4169,6 +4393,7 @@
             ]
           }
         },
+        "title": "WorkspaceRelationSearchQuery",
         "type": "object"
       },
       "WorkspaceRelationSearchQueryFilter": {
@@ -4190,7 +4415,8 @@
           {},
           {},
           {}
-        ]
+        ],
+        "title": "WorkspaceRelationSearchQueryFilter"
       },
       "WorkspaceRelationSearchQueryFilterParent": {
         "discriminator": {
@@ -4203,7 +4429,8 @@
         "oneOf": [
           {},
           {}
-        ]
+        ],
+        "title": "WorkspaceRelationSearchQueryFilterParent"
       },
       "WorkspaceRelationWithEmbed": {
         "properties": {
@@ -4229,6 +4456,7 @@
           "childId",
           "_embedded"
         ],
+        "title": "WorkspaceRelationWithEmbed",
         "type": "object"
       },
       "WorkspaceRelationWithEmbedOrNullList": {
@@ -4242,6 +4470,7 @@
             }
           ]
         },
+        "title": "WorkspaceRelationWithEmbedOrNullList",
         "type": "array"
       },
       "WorkspaceRelationWithEmbedPage": {
@@ -4260,6 +4489,7 @@
         "required": [
           "totalItems"
         ],
+        "title": "WorkspaceRelationWithEmbedPage",
         "type": "object"
       },
       "WorkspaceRelationsSetRequest": {
@@ -4269,14 +4499,16 @@
               "format": "uuid",
               "type": "string"
             },
-            "type": "array"
+            "type": "array",
+            "uniqueItems": true
           },
           "parentIds": {
             "items": {
               "format": "uuid",
               "type": "string"
             },
-            "type": "array"
+            "type": "array",
+            "uniqueItems": true
           },
           "workspaceId": {
             "format": "uuid",
@@ -4286,6 +4518,7 @@
         "required": [
           "workspaceId"
         ],
+        "title": "WorkspaceRelationsSetRequest",
         "type": "object"
       },
       "WorkspaceSearchEmbed": {
@@ -4322,6 +4555,7 @@
           "statuses",
           "itemCount"
         ],
+        "title": "WorkspaceSearchEmbed",
         "type": "object"
       },
       "WorkspaceSearchQuery": {
@@ -4347,6 +4581,7 @@
           "sort",
           "archived"
         ],
+        "title": "WorkspaceSearchQuery",
         "type": "object"
       },
       "WorkspaceSearchQueryFilter": {
@@ -4372,7 +4607,8 @@
           {
             "$ref": "#/components/schemas/WorkspaceSearchQueryFilterOr"
           }
-        ]
+        ],
+        "title": "WorkspaceSearchQueryFilter"
       },
       "WorkspaceSearchQueryFilterAnd": {
         "properties": {
@@ -4383,6 +4619,7 @@
             "type": "array"
           }
         },
+        "title": "WorkspaceSearchQueryFilterAnd",
         "type": "object"
       },
       "WorkspaceSearchQueryFilterMembersContainAny": {
@@ -4392,9 +4629,11 @@
               "format": "uuid",
               "type": "string"
             },
-            "type": "array"
+            "type": "array",
+            "uniqueItems": true
           }
         },
+        "title": "WorkspaceSearchQueryFilterMembersContainAny",
         "type": "object"
       },
       "WorkspaceSearchQueryFilterNameContain": {
@@ -4410,6 +4649,7 @@
           "text",
           "caseSensitive"
         ],
+        "title": "WorkspaceSearchQueryFilterNameContain",
         "type": "object"
       },
       "WorkspaceSearchQueryFilterNameEqual": {
@@ -4425,6 +4665,7 @@
           "text",
           "caseSensitive"
         ],
+        "title": "WorkspaceSearchQueryFilterNameEqual",
         "type": "object"
       },
       "WorkspaceSearchQueryFilterNamespaceContainAny": {
@@ -4436,6 +4677,7 @@
             "type": "array"
           }
         },
+        "title": "WorkspaceSearchQueryFilterNamespaceContainAny",
         "type": "object"
       },
       "WorkspaceSearchQueryFilterNot": {
@@ -4447,6 +4689,7 @@
         "required": [
           "inner"
         ],
+        "title": "WorkspaceSearchQueryFilterNot",
         "type": "object"
       },
       "WorkspaceSearchQueryFilterOr": {
@@ -4458,6 +4701,7 @@
             "type": "array"
           }
         },
+        "title": "WorkspaceSearchQueryFilterOr",
         "type": "object"
       },
       "WorkspaceSearchQuerySort": {
@@ -4479,7 +4723,8 @@
           {
             "$ref": "#/components/schemas/WorkspaceSearchQuerySortName"
           }
-        ]
+        ],
+        "title": "WorkspaceSearchQuerySort"
       },
       "WorkspaceSearchQuerySortCreatedAt": {
         "properties": {
@@ -4490,6 +4735,7 @@
         "required": [
           "direction"
         ],
+        "title": "WorkspaceSearchQuerySortCreatedAt",
         "type": "object"
       },
       "WorkspaceSearchQuerySortDirection": {
@@ -4497,6 +4743,7 @@
           "asc",
           "desc"
         ],
+        "title": "WorkspaceSearchQuerySortDirection",
         "type": "string"
       },
       "WorkspaceSearchQuerySortLastUpdatedAt": {
@@ -4508,6 +4755,7 @@
         "required": [
           "direction"
         ],
+        "title": "WorkspaceSearchQuerySortLastUpdatedAt",
         "type": "object"
       },
       "WorkspaceSearchQuerySortName": {
@@ -4519,6 +4767,7 @@
         "required": [
           "direction"
         ],
+        "title": "WorkspaceSearchQuerySortName",
         "type": "object"
       },
       "WorkspaceWithWorkspaceEmbed": {
@@ -4622,6 +4871,7 @@
           "namespace",
           "_embedded"
         ],
+        "title": "WorkspaceWithWorkspaceEmbed",
         "type": "object"
       },
       "WorkspaceWithWorkspaceEmbedOrNullList": {
@@ -4635,6 +4885,7 @@
             }
           ]
         },
+        "title": "WorkspaceWithWorkspaceEmbedOrNullList",
         "type": "array"
       },
       "WorkspaceWithWorkspaceSearchEmbed": {
@@ -4738,6 +4989,7 @@
           "namespace",
           "_embedded"
         ],
+        "title": "WorkspaceWithWorkspaceSearchEmbed",
         "type": "object"
       },
       "WorkspaceWithWorkspaceSearchEmbedPage": {
@@ -4756,6 +5008,7 @@
         "required": [
           "totalItems"
         ],
+        "title": "WorkspaceWithWorkspaceSearchEmbedPage",
         "type": "object"
       },
       "WorkspaceWorkspaceMetadata": {
@@ -4785,6 +5038,7 @@
         "required": [
           "duplicated"
         ],
+        "title": "WorkspaceWorkspaceMetadata",
         "type": "object"
       }
     },
@@ -5210,7 +5464,10 @@
           "content": {
             "application/json": {
               "schema": {
-                "type": "object"
+                "type": [
+                  "object",
+                  "null"
+                ]
               }
             }
           },
@@ -5699,7 +5956,14 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/ItemRelationSearchQuery"
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/ItemRelationSearchQuery"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
               }
             }
           },
@@ -6251,7 +6515,14 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/WorkspaceSearchQuery"
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/WorkspaceSearchQuery"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
               }
             }
           },
@@ -6481,7 +6752,14 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/WorkspaceRelationSearchQuery"
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/WorkspaceRelationSearchQuery"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
               }
             }
           },
@@ -7217,7 +7495,14 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/AttachmentSearchQuery"
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/AttachmentSearchQuery"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
               }
             }
           },
@@ -7914,7 +8199,14 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/ItemSearchQuery"
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/ItemSearchQuery"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
               }
             }
           },
@@ -7983,7 +8275,8 @@
                   "format": "uuid",
                   "type": "string"
                 },
-                "type": "array"
+                "type": "array",
+                "uniqueItems": true
               }
             }
           },
@@ -8040,7 +8333,8 @@
                   "format": "uuid",
                   "type": "string"
                 },
-                "type": "array"
+                "type": "array",
+                "uniqueItems": true
               }
             }
           },
@@ -8572,7 +8866,14 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/ItemLinkSearchQuery"
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/ItemLinkSearchQuery"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
               }
             }
           },
@@ -8890,7 +9191,14 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Permission"
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/Permission"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
                 }
               }
             },
