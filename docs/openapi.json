@@ -329,6 +329,16 @@
               "null"
             ]
           },
+          "lastSyncState": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/IntegrationSyncState"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
           "settings": {},
           "typeId": {
             "type": "string"
@@ -342,6 +352,24 @@
           "capabilities"
         ],
         "title": "IntegrationSummary",
+        "type": "object"
+      },
+      "IntegrationSyncState": {
+        "properties": {
+          "errorCount": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "successCount": {
+            "format": "int32",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "successCount",
+          "errorCount"
+        ],
+        "title": "IntegrationSyncState",
         "type": "object"
       },
       "Item": {
@@ -3059,6 +3087,12 @@
       },
       "RichTextBlockList": {
         "properties": {
+          "bulletListMarker": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
           "items": {
             "items": {
               "$ref": "#/components/schemas/RichTextListItem"
@@ -3067,6 +3101,19 @@
           },
           "ordered": {
             "type": "boolean"
+          },
+          "orderedListDelimiter": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "orderedListStartsAt": {
+            "format": "int32",
+            "type": [
+              "integer",
+              "null"
+            ]
           }
         },
         "required": [
@@ -7787,6 +7834,55 @@
         "tags": [
           "CRUD",
           "ItemAttachments"
+        ]
+      }
+    },
+    "/api/workspaces/{workspaceId}/background-activity/sse": {
+      "get": {
+        "description": "Creates an SSE connection which sends an event every time something changes in the background activity of this workspace.<br/>Requirements:<br/>  - auth-client scopes: \"workspace:read\"<br/>  - user permission: \"read\" or higher<br/>Returns:<br/>401 if user does not have the required permission",
+        "operationId": "workspaceBackgroundActivitySse",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "workspaceId",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "text/event-stream": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "description": ""
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "security": [
+          {},
+          {
+            "httpAuth": []
+          }
+        ],
+        "summary": "Server-sent-events for background activity in workspace.",
+        "tags": [
+          "Workspaces"
         ]
       }
     },
