@@ -154,7 +154,9 @@
         "properties": {
           "code": {
             "description": "Machine readable code",
-            "example": "not_found",
+            "examples": [
+              "not_found"
+            ],
             "type": "string"
           },
           "data": {
@@ -163,7 +165,9 @@
           },
           "message": {
             "description": "Error messages",
-            "example": "Entity not found",
+            "examples": [
+              "Entity not found"
+            ],
             "type": "string"
           }
         },
@@ -330,7 +334,7 @@
             ]
           },
           "lastSyncState": {
-            "oneOf": [
+            "anyOf": [
               {
                 "$ref": "#/components/schemas/IntegrationSyncState"
               },
@@ -397,40 +401,42 @@
           "fields": {
             "additionalProperties": {},
             "description": "Values of custom fields, where each key is a custom-field ID and each value is a JSON-formatted value of the corresponding field.",
-            "example": {
-              "0fc3cfbc-27e9-3ea6-8a78-7de13dae3e3c": {
-                "number": 42
-              },
-              "34f05b62-dd43-3e1e-82bc-b0acabd0d004": {
-                "boolean": true
-              },
-              "5396681e-ea50-3d63-9ae3-c9f8ca17b7d8": {
-                "userIds": [
-                  "24c9e15e-52af-347c-a25b-757e7bee1f9d"
-                ]
-              },
-              "75fe57ec-4a04-3a30-8cac-5f27223df81a": {
-                "dateRange": {
-                  "endDate": "2024-02-14",
-                  "startDate": "2024-01-14",
-                  "timezone": "UTC"
-                }
-              },
-              "8be74552-df93-331b-bdd6-b36ed74bdb6a": {
-                "selection": [
-                  "2bb225ce-b5ee-3493-967c-fde0d72da242"
-                ]
-              },
-              "c7824f3d-4d5f-3b2f-a2d0-34758c1e9454": {
-                "text": "A platform built for the new way of doing product management"
-              },
-              "e34d514f-7db5-38aa-872a-7c8191a09617": {
-                "date": {
-                  "date": "2024-01-01",
-                  "timezone": "UTC"
+            "examples": [
+              {
+                "0fc3cfbc-27e9-3ea6-8a78-7de13dae3e3c": {
+                  "number": 42
+                },
+                "34f05b62-dd43-3e1e-82bc-b0acabd0d004": {
+                  "boolean": true
+                },
+                "5396681e-ea50-3d63-9ae3-c9f8ca17b7d8": {
+                  "userIds": [
+                    "24c9e15e-52af-347c-a25b-757e7bee1f9d"
+                  ]
+                },
+                "75fe57ec-4a04-3a30-8cac-5f27223df81a": {
+                  "dateRange": {
+                    "endDate": "2024-02-14",
+                    "startDate": "2024-01-14",
+                    "timezone": "UTC"
+                  }
+                },
+                "8be74552-df93-331b-bdd6-b36ed74bdb6a": {
+                  "selection": [
+                    "2bb225ce-b5ee-3493-967c-fde0d72da242"
+                  ]
+                },
+                "c7824f3d-4d5f-3b2f-a2d0-34758c1e9454": {
+                  "text": "A platform built for the new way of doing product management"
+                },
+                "e34d514f-7db5-38aa-872a-7c8191a09617": {
+                  "date": {
+                    "date": "2024-01-01",
+                    "timezone": "UTC"
+                  }
                 }
               }
-            },
+            ],
             "type": "object"
           },
           "id": {
@@ -709,7 +715,7 @@
       },
       "ItemAttachmentWithEmbedOrNullList": {
         "items": {
-          "oneOf": [
+          "anyOf": [
             {
               "$ref": "#/components/schemas/ItemAttachmentWithEmbed"
             },
@@ -932,7 +938,7 @@
             "type": "array"
           },
           "integration": {
-            "oneOf": [
+            "anyOf": [
               {
                 "$ref": "#/components/schemas/ItemEmbedIntegration"
               },
@@ -958,7 +964,7 @@
             "type": "boolean"
           },
           "workspaceItemType": {
-            "oneOf": [
+            "anyOf": [
               {
                 "$ref": "#/components/schemas/ItemType"
               },
@@ -1048,7 +1054,7 @@
             "type": "integer"
           },
           "item": {
-            "oneOf": [
+            "anyOf": [
               {
                 "$ref": "#/components/schemas/Item"
               },
@@ -1062,7 +1068,7 @@
             "type": "string"
           },
           "itemType": {
-            "oneOf": [
+            "anyOf": [
               {
                 "$ref": "#/components/schemas/ItemType"
               },
@@ -1399,7 +1405,7 @@
       },
       "ItemLinkWithItemLinkEmbedOrNullList": {
         "items": {
-          "oneOf": [
+          "anyOf": [
             {
               "$ref": "#/components/schemas/ItemLinkWithItemLinkEmbed"
             },
@@ -1579,7 +1585,7 @@
       "ItemRelationSearchQuery": {
         "properties": {
           "filter": {
-            "oneOf": [
+            "anyOf": [
               {
                 "$ref": "#/components/schemas/ItemRelationSearchQueryFilter"
               },
@@ -1647,7 +1653,7 @@
       },
       "ItemRelationWithEmbedOrNullList": {
         "items": {
-          "oneOf": [
+          "anyOf": [
             {
               "$ref": "#/components/schemas/ItemRelationWithEmbed"
             },
@@ -1684,7 +1690,7 @@
             "type": "boolean"
           },
           "filter": {
-            "oneOf": [
+            "anyOf": [
               {
                 "$ref": "#/components/schemas/ItemSearchQueryFilter"
               },
@@ -1950,7 +1956,7 @@
             "$ref": "#/components/schemas/ItemSearchQueryTimeMode"
           },
           "property": {
-            "oneOf": [
+            "anyOf": [
               {
                 "$ref": "#/components/schemas/Property"
               },
@@ -2184,7 +2190,7 @@
       "ItemSearchQueryFilterUpdatedSince": {
         "properties": {
           "property": {
-            "oneOf": [
+            "anyOf": [
               {
                 "$ref": "#/components/schemas/Property"
               },
@@ -2344,40 +2350,42 @@
           "fields": {
             "additionalProperties": {},
             "description": "Values of custom fields, where each key is a custom-field ID and each value is a JSON-formatted value of the corresponding field.",
-            "example": {
-              "0fc3cfbc-27e9-3ea6-8a78-7de13dae3e3c": {
-                "number": 42
-              },
-              "34f05b62-dd43-3e1e-82bc-b0acabd0d004": {
-                "boolean": true
-              },
-              "5396681e-ea50-3d63-9ae3-c9f8ca17b7d8": {
-                "userIds": [
-                  "24c9e15e-52af-347c-a25b-757e7bee1f9d"
-                ]
-              },
-              "75fe57ec-4a04-3a30-8cac-5f27223df81a": {
-                "dateRange": {
-                  "endDate": "2024-02-14",
-                  "startDate": "2024-01-14",
-                  "timezone": "UTC"
-                }
-              },
-              "8be74552-df93-331b-bdd6-b36ed74bdb6a": {
-                "selection": [
-                  "2bb225ce-b5ee-3493-967c-fde0d72da242"
-                ]
-              },
-              "c7824f3d-4d5f-3b2f-a2d0-34758c1e9454": {
-                "text": "A platform built for the new way of doing product management"
-              },
-              "e34d514f-7db5-38aa-872a-7c8191a09617": {
-                "date": {
-                  "date": "2024-01-01",
-                  "timezone": "UTC"
+            "examples": [
+              {
+                "0fc3cfbc-27e9-3ea6-8a78-7de13dae3e3c": {
+                  "number": 42
+                },
+                "34f05b62-dd43-3e1e-82bc-b0acabd0d004": {
+                  "boolean": true
+                },
+                "5396681e-ea50-3d63-9ae3-c9f8ca17b7d8": {
+                  "userIds": [
+                    "24c9e15e-52af-347c-a25b-757e7bee1f9d"
+                  ]
+                },
+                "75fe57ec-4a04-3a30-8cac-5f27223df81a": {
+                  "dateRange": {
+                    "endDate": "2024-02-14",
+                    "startDate": "2024-01-14",
+                    "timezone": "UTC"
+                  }
+                },
+                "8be74552-df93-331b-bdd6-b36ed74bdb6a": {
+                  "selection": [
+                    "2bb225ce-b5ee-3493-967c-fde0d72da242"
+                  ]
+                },
+                "c7824f3d-4d5f-3b2f-a2d0-34758c1e9454": {
+                  "text": "A platform built for the new way of doing product management"
+                },
+                "e34d514f-7db5-38aa-872a-7c8191a09617": {
+                  "date": {
+                    "date": "2024-01-01",
+                    "timezone": "UTC"
+                  }
                 }
               }
-            },
+            ],
             "type": "object"
           },
           "id": {
@@ -2444,7 +2452,7 @@
       },
       "ItemWithItemEmbedOrNullList": {
         "items": {
-          "oneOf": [
+          "anyOf": [
             {
               "$ref": "#/components/schemas/ItemWithItemEmbed"
             },
@@ -2591,7 +2599,14 @@
       },
       "JsonPatchRemove": {
         "properties": {
-          "old": {},
+          "old": {
+            "anyOf": [
+              {},
+              {
+                "type": "null"
+              }
+            ]
+          },
           "op": {
             "enum": [
               "remove"
@@ -2611,7 +2626,14 @@
       },
       "JsonPatchReplace": {
         "properties": {
-          "old": {},
+          "old": {
+            "anyOf": [
+              {},
+              {
+                "type": "null"
+              }
+            ]
+          },
           "op": {
             "enum": [
               "replace"
@@ -2678,7 +2700,7 @@
             "type": "boolean"
           },
           "stepping": {
-            "oneOf": [
+            "anyOf": [
               {
                 "$ref": "#/components/schemas/NumberFieldTypeSettingsStepping"
               },
@@ -2688,7 +2710,7 @@
             ]
           },
           "unit": {
-            "oneOf": [
+            "anyOf": [
               {
                 "$ref": "#/components/schemas/NumberFieldTypeSettingsUnit"
               },
@@ -2866,32 +2888,34 @@
         "title": "Property"
       },
       "RichText": {
-        "example": {
-          "blocks": [
-            {
-              "content": [
-                {
-                  "content": "Hello ",
-                  "type": "text"
-                },
-                {
-                  "content": [
-                    {
-                      "content": "world",
-                      "type": "text"
-                    }
-                  ],
-                  "type": "bold"
-                },
-                {
-                  "content": "!",
-                  "type": "text"
-                }
-              ],
-              "type": "paragraph"
-            }
-          ]
-        },
+        "examples": [
+          {
+            "blocks": [
+              {
+                "content": [
+                  {
+                    "content": "Hello ",
+                    "type": "text"
+                  },
+                  {
+                    "content": [
+                      {
+                        "content": "world",
+                        "type": "text"
+                      }
+                    ],
+                    "type": "bold"
+                  },
+                  {
+                    "content": "!",
+                    "type": "text"
+                  }
+                ],
+                "type": "paragraph"
+              }
+            ]
+          }
+        ],
         "properties": {
           "blocks": {
             "items": {
@@ -3363,7 +3387,7 @@
       "SelectFieldTypeOption": {
         "properties": {
           "color": {
-            "oneOf": [
+            "anyOf": [
               {
                 "$ref": "#/components/schemas/SelectFieldOptionColor"
               },
@@ -3424,7 +3448,7 @@
             "$ref": "#/components/schemas/StatusCategory"
           },
           "color": {
-            "oneOf": [
+            "anyOf": [
               {
                 "$ref": "#/components/schemas/StatusColor"
               },
@@ -3528,7 +3552,7 @@
             "type": "string"
           },
           "itemFilter": {
-            "oneOf": [
+            "anyOf": [
               {
                 "$ref": "#/components/schemas/ItemSearchQueryFilter"
               },
@@ -3617,7 +3641,7 @@
             "type": "string"
           },
           "defaultPermission": {
-            "oneOf": [
+            "anyOf": [
               {
                 "$ref": "#/components/schemas/Permission"
               },
@@ -3634,7 +3658,7 @@
             "type": "string"
           },
           "itemColor": {
-            "oneOf": [
+            "anyOf": [
               {
                 "$ref": "#/components/schemas/ItemColor"
               },
@@ -3644,7 +3668,7 @@
             ]
           },
           "itemType": {
-            "oneOf": [
+            "anyOf": [
               {
                 "$ref": "#/components/schemas/ItemType"
               },
@@ -3664,7 +3688,7 @@
             ]
           },
           "metadata": {
-            "oneOf": [
+            "anyOf": [
               {
                 "$ref": "#/components/schemas/WorkspaceWorkspaceMetadata"
               },
@@ -3842,7 +3866,7 @@
             "type": "array"
           },
           "currentPermission": {
-            "oneOf": [
+            "anyOf": [
               {
                 "$ref": "#/components/schemas/Permission"
               },
@@ -3927,7 +3951,7 @@
             "type": "string"
           },
           "workspace": {
-            "oneOf": [
+            "anyOf": [
               {
                 "$ref": "#/components/schemas/Workspace"
               },
@@ -3955,7 +3979,7 @@
             "type": "string"
           },
           "defaultPermission": {
-            "oneOf": [
+            "anyOf": [
               {
                 "$ref": "#/components/schemas/Permission"
               },
@@ -4126,7 +4150,7 @@
       "WorkspaceGroupEmbed": {
         "properties": {
           "currentPermission": {
-            "oneOf": [
+            "anyOf": [
               {
                 "$ref": "#/components/schemas/Permission"
               },
@@ -4179,7 +4203,7 @@
             "type": "string"
           },
           "defaultPermission": {
-            "oneOf": [
+            "anyOf": [
               {
                 "$ref": "#/components/schemas/Permission"
               },
@@ -4217,7 +4241,7 @@
       },
       "WorkspaceGroupWithWorkspaceGroupEmbedOrNullList": {
         "items": {
-          "oneOf": [
+          "anyOf": [
             {
               "$ref": "#/components/schemas/WorkspaceGroupWithWorkspaceGroupEmbed"
             },
@@ -4259,14 +4283,15 @@
       "WorkspacePermissionsUpdateRequest": {
         "properties": {
           "defaultPermission": {
-            "oneOf": [
+            "anyOf": [
               {
                 "$ref": "#/components/schemas/Permission"
               },
               {
                 "type": "null"
               }
-            ]
+            ],
+            "description": "Default permission for all users in the team who are not explicitly listed in the `permissions` map."
           },
           "permissions": {
             "additionalProperties": {
@@ -4430,7 +4455,7 @@
       "WorkspaceRelationSearchQuery": {
         "properties": {
           "filter": {
-            "oneOf": [
+            "anyOf": [
               {
                 "$ref": "#/components/schemas/WorkspaceRelationSearchQueryFilter"
               },
@@ -4508,7 +4533,7 @@
       },
       "WorkspaceRelationWithEmbedOrNullList": {
         "items": {
-          "oneOf": [
+          "anyOf": [
             {
               "$ref": "#/components/schemas/WorkspaceRelationWithEmbed"
             },
@@ -4571,7 +4596,7 @@
       "WorkspaceSearchEmbed": {
         "properties": {
           "currentPermission": {
-            "oneOf": [
+            "anyOf": [
               {
                 "$ref": "#/components/schemas/Permission"
               },
@@ -4611,7 +4636,7 @@
             "type": "boolean"
           },
           "filter": {
-            "oneOf": [
+            "anyOf": [
               {
                 "$ref": "#/components/schemas/WorkspaceSearchQueryFilter"
               },
@@ -4836,7 +4861,7 @@
             "type": "string"
           },
           "defaultPermission": {
-            "oneOf": [
+            "anyOf": [
               {
                 "$ref": "#/components/schemas/Permission"
               },
@@ -4853,7 +4878,7 @@
             "type": "string"
           },
           "itemColor": {
-            "oneOf": [
+            "anyOf": [
               {
                 "$ref": "#/components/schemas/ItemColor"
               },
@@ -4863,7 +4888,7 @@
             ]
           },
           "itemType": {
-            "oneOf": [
+            "anyOf": [
               {
                 "$ref": "#/components/schemas/ItemType"
               },
@@ -4883,7 +4908,7 @@
             ]
           },
           "metadata": {
-            "oneOf": [
+            "anyOf": [
               {
                 "$ref": "#/components/schemas/WorkspaceWorkspaceMetadata"
               },
@@ -4923,7 +4948,7 @@
       },
       "WorkspaceWithWorkspaceEmbedOrNullList": {
         "items": {
-          "oneOf": [
+          "anyOf": [
             {
               "$ref": "#/components/schemas/WorkspaceWithWorkspaceEmbed"
             },
@@ -4954,7 +4979,7 @@
             "type": "string"
           },
           "defaultPermission": {
-            "oneOf": [
+            "anyOf": [
               {
                 "$ref": "#/components/schemas/Permission"
               },
@@ -4971,7 +4996,7 @@
             "type": "string"
           },
           "itemColor": {
-            "oneOf": [
+            "anyOf": [
               {
                 "$ref": "#/components/schemas/ItemColor"
               },
@@ -4981,7 +5006,7 @@
             ]
           },
           "itemType": {
-            "oneOf": [
+            "anyOf": [
               {
                 "$ref": "#/components/schemas/ItemType"
               },
@@ -5001,7 +5026,7 @@
             ]
           },
           "metadata": {
-            "oneOf": [
+            "anyOf": [
               {
                 "$ref": "#/components/schemas/WorkspaceWorkspaceMetadata"
               },
@@ -6003,7 +6028,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "oneOf": [
+                "anyOf": [
                   {
                     "$ref": "#/components/schemas/ItemRelationSearchQuery"
                   },
@@ -6562,7 +6587,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "oneOf": [
+                "anyOf": [
                   {
                     "$ref": "#/components/schemas/WorkspaceSearchQuery"
                   },
@@ -6799,7 +6824,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "oneOf": [
+                "anyOf": [
                   {
                     "$ref": "#/components/schemas/WorkspaceRelationSearchQuery"
                   },
@@ -7542,7 +7567,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "oneOf": [
+                "anyOf": [
                   {
                     "$ref": "#/components/schemas/AttachmentSearchQuery"
                   },
@@ -8295,7 +8320,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "oneOf": [
+                "anyOf": [
                   {
                     "$ref": "#/components/schemas/ItemSearchQuery"
                   },
@@ -8962,7 +8987,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "oneOf": [
+                "anyOf": [
                   {
                     "$ref": "#/components/schemas/ItemLinkSearchQuery"
                   },
@@ -9287,7 +9312,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "oneOf": [
+                  "anyOf": [
                     {
                       "$ref": "#/components/schemas/Permission"
                     },
