@@ -888,20 +888,88 @@
       "ItemConstraint": {
         "discriminator": {
           "mapping": {
-            "integrationPushForbidden": "io.airfocus.workspaceservice.api.ItemConstraint.IntegrationPushForbidden",
-            "integrationToInternal": "io.airfocus.workspaceservice.api.ItemConstraint.IntegrationToInternal",
-            "propertyReadOnly": "io.airfocus.workspaceservice.api.ItemConstraint.PropertyReadOnly",
-            "undeletable": "io.airfocus.workspaceservice.api.ItemConstraint.Undeletable"
+            "integrationPushForbidden": "#/components/schemas/ItemConstraintIntegrationPushForbidden",
+            "integrationToInternal": "#/components/schemas/ItemConstraintIntegrationToInternal",
+            "propertyReadOnly": "#/components/schemas/ItemConstraintPropertyReadOnly",
+            "undeletable": "#/components/schemas/ItemConstraintUndeletable"
           },
           "propertyName": "type"
         },
         "oneOf": [
-          {},
-          {},
-          {},
-          {}
+          {
+            "$ref": "#/components/schemas/ItemConstraintIntegrationPushForbidden"
+          },
+          {
+            "$ref": "#/components/schemas/ItemConstraintIntegrationToInternal"
+          },
+          {
+            "$ref": "#/components/schemas/ItemConstraintPropertyReadOnly"
+          },
+          {
+            "$ref": "#/components/schemas/ItemConstraintUndeletable"
+          }
         ],
         "title": "ItemConstraint"
+      },
+      "ItemConstraintIntegrationPushForbidden": {
+        "properties": {
+          "extensionId": {
+            "format": "uuid",
+            "type": "string"
+          }
+        },
+        "required": [
+          "extensionId"
+        ],
+        "title": "ItemConstraintIntegrationPushForbidden",
+        "type": "object"
+      },
+      "ItemConstraintIntegrationToInternal": {
+        "properties": {
+          "extensionId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "property": {
+            "$ref": "#/components/schemas/Property"
+          }
+        },
+        "required": [
+          "extensionId",
+          "property"
+        ],
+        "title": "ItemConstraintIntegrationToInternal",
+        "type": "object"
+      },
+      "ItemConstraintPropertyReadOnly": {
+        "properties": {
+          "extensionId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "property": {
+            "$ref": "#/components/schemas/Property"
+          }
+        },
+        "required": [
+          "extensionId",
+          "property"
+        ],
+        "title": "ItemConstraintPropertyReadOnly",
+        "type": "object"
+      },
+      "ItemConstraintUndeletable": {
+        "properties": {
+          "extensionId": {
+            "format": "uuid",
+            "type": "string"
+          }
+        },
+        "required": [
+          "extensionId"
+        ],
+        "title": "ItemConstraintUndeletable",
+        "type": "object"
       },
       "ItemEmbed": {
         "properties": {
@@ -1601,18 +1669,63 @@
       "ItemRelationSearchQueryFilter": {
         "discriminator": {
           "mapping": {
-            "child": "io.airfocus.workspaceservice.api.ItemRelationSearchQuery.Filter.Child",
-            "parent": "io.airfocus.workspaceservice.api.ItemRelationSearchQuery.Filter.Parent",
-            "parentOrChild": "io.airfocus.workspaceservice.api.ItemRelationSearchQuery.Filter.ParentOrChild"
+            "child": "#/components/schemas/ItemRelationSearchQueryFilterChild",
+            "parent": "#/components/schemas/ItemRelationSearchQueryFilterParent",
+            "parentOrChild": "#/components/schemas/ItemRelationSearchQueryFilterParentOrChild"
           },
           "propertyName": "type"
         },
         "oneOf": [
-          {},
-          {},
-          {}
+          {
+            "$ref": "#/components/schemas/ItemRelationSearchQueryFilterChild"
+          },
+          {
+            "$ref": "#/components/schemas/ItemRelationSearchQueryFilterParent"
+          },
+          {
+            "$ref": "#/components/schemas/ItemRelationSearchQueryFilterParentOrChild"
+          }
         ],
         "title": "ItemRelationSearchQueryFilter"
+      },
+      "ItemRelationSearchQueryFilterChild": {
+        "properties": {
+          "itemId": {
+            "format": "uuid",
+            "type": "string"
+          }
+        },
+        "required": [
+          "itemId"
+        ],
+        "title": "ItemRelationSearchQueryFilterChild",
+        "type": "object"
+      },
+      "ItemRelationSearchQueryFilterParent": {
+        "properties": {
+          "itemId": {
+            "format": "uuid",
+            "type": "string"
+          }
+        },
+        "required": [
+          "itemId"
+        ],
+        "title": "ItemRelationSearchQueryFilterParent",
+        "type": "object"
+      },
+      "ItemRelationSearchQueryFilterParentOrChild": {
+        "properties": {
+          "itemId": {
+            "format": "uuid",
+            "type": "string"
+          }
+        },
+        "required": [
+          "itemId"
+        ],
+        "title": "ItemRelationSearchQueryFilterParentOrChild",
+        "type": "object"
       },
       "ItemRelationWithEmbed": {
         "properties": {
@@ -4471,38 +4584,158 @@
       "WorkspaceRelationSearchQueryFilter": {
         "discriminator": {
           "mapping": {
-            "and": "io.airfocus.workspaceservice.api.WorkspaceRelationSearchQuery.Filter.And",
-            "child": "io.airfocus.workspaceservice.api.WorkspaceRelationSearchQuery.Filter.Child",
-            "not": "io.airfocus.workspaceservice.api.WorkspaceRelationSearchQuery.Filter.Not",
-            "or": "io.airfocus.workspaceservice.api.WorkspaceRelationSearchQuery.Filter.Or",
+            "and": "#/components/schemas/WorkspaceRelationSearchQueryFilterAnd",
+            "child": "#/components/schemas/WorkspaceRelationSearchQueryFilterChild",
+            "not": "#/components/schemas/WorkspaceRelationSearchQueryFilterNot",
+            "or": "#/components/schemas/WorkspaceRelationSearchQueryFilterOr",
             "parent": "#/components/schemas/WorkspaceRelationSearchQueryFilterParent"
           },
           "propertyName": "type"
         },
         "oneOf": [
           {
-            "$ref": "#/components/schemas/WorkspaceRelationSearchQueryFilterParent"
+            "$ref": "#/components/schemas/WorkspaceRelationSearchQueryFilterAnd"
           },
-          {},
-          {},
-          {},
-          {}
+          {
+            "$ref": "#/components/schemas/WorkspaceRelationSearchQueryFilterChild"
+          },
+          {
+            "$ref": "#/components/schemas/WorkspaceRelationSearchQueryFilterNot"
+          },
+          {
+            "$ref": "#/components/schemas/WorkspaceRelationSearchQueryFilterOr"
+          },
+          {
+            "$ref": "#/components/schemas/WorkspaceRelationSearchQueryFilterParent"
+          }
         ],
         "title": "WorkspaceRelationSearchQueryFilter"
       },
-      "WorkspaceRelationSearchQueryFilterParent": {
+      "WorkspaceRelationSearchQueryFilterAnd": {
+        "properties": {
+          "inner": {
+            "$ref": "#/components/schemas/WorkspaceRelationSearchQueryFilter"
+          }
+        },
+        "required": [
+          "inner"
+        ],
+        "title": "WorkspaceRelationSearchQueryFilterAnd",
+        "type": "object"
+      },
+      "WorkspaceRelationSearchQueryFilterChild": {
         "discriminator": {
           "mapping": {
-            "containAny": "io.airfocus.workspaceservice.api.WorkspaceRelationSearchQuery.Filter.Parent.ContainAny",
-            "equal": "io.airfocus.workspaceservice.api.WorkspaceRelationSearchQuery.Filter.Parent.Equal"
+            "containAny": "#/components/schemas/WorkspaceRelationSearchQueryFilterChildContainAny",
+            "equal": "#/components/schemas/WorkspaceRelationSearchQueryFilterChildEqual"
           },
           "propertyName": "mode"
         },
         "oneOf": [
-          {},
-          {}
+          {
+            "$ref": "#/components/schemas/WorkspaceRelationSearchQueryFilterChildContainAny"
+          },
+          {
+            "$ref": "#/components/schemas/WorkspaceRelationSearchQueryFilterChildEqual"
+          }
+        ],
+        "title": "WorkspaceRelationSearchQueryFilterChild"
+      },
+      "WorkspaceRelationSearchQueryFilterChildContainAny": {
+        "properties": {
+          "workspaceIds": {
+            "items": {
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": "array",
+            "uniqueItems": true
+          }
+        },
+        "title": "WorkspaceRelationSearchQueryFilterChildContainAny",
+        "type": "object"
+      },
+      "WorkspaceRelationSearchQueryFilterChildEqual": {
+        "properties": {
+          "workspaceId": {
+            "format": "uuid",
+            "type": "string"
+          }
+        },
+        "required": [
+          "workspaceId"
+        ],
+        "title": "WorkspaceRelationSearchQueryFilterChildEqual",
+        "type": "object"
+      },
+      "WorkspaceRelationSearchQueryFilterNot": {
+        "properties": {
+          "inner": {
+            "$ref": "#/components/schemas/WorkspaceRelationSearchQueryFilter"
+          }
+        },
+        "required": [
+          "inner"
+        ],
+        "title": "WorkspaceRelationSearchQueryFilterNot",
+        "type": "object"
+      },
+      "WorkspaceRelationSearchQueryFilterOr": {
+        "properties": {
+          "inner": {
+            "$ref": "#/components/schemas/WorkspaceRelationSearchQueryFilter"
+          }
+        },
+        "required": [
+          "inner"
+        ],
+        "title": "WorkspaceRelationSearchQueryFilterOr",
+        "type": "object"
+      },
+      "WorkspaceRelationSearchQueryFilterParent": {
+        "discriminator": {
+          "mapping": {
+            "containAny": "#/components/schemas/WorkspaceRelationSearchQueryFilterParentContainAny",
+            "equal": "#/components/schemas/WorkspaceRelationSearchQueryFilterParentEqual"
+          },
+          "propertyName": "mode"
+        },
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/WorkspaceRelationSearchQueryFilterParentContainAny"
+          },
+          {
+            "$ref": "#/components/schemas/WorkspaceRelationSearchQueryFilterParentEqual"
+          }
         ],
         "title": "WorkspaceRelationSearchQueryFilterParent"
+      },
+      "WorkspaceRelationSearchQueryFilterParentContainAny": {
+        "properties": {
+          "workspaceIds": {
+            "items": {
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": "array",
+            "uniqueItems": true
+          }
+        },
+        "title": "WorkspaceRelationSearchQueryFilterParentContainAny",
+        "type": "object"
+      },
+      "WorkspaceRelationSearchQueryFilterParentEqual": {
+        "properties": {
+          "workspaceId": {
+            "format": "uuid",
+            "type": "string"
+          }
+        },
+        "required": [
+          "workspaceId"
+        ],
+        "title": "WorkspaceRelationSearchQueryFilterParentEqual",
+        "type": "object"
       },
       "WorkspaceRelationWithEmbed": {
         "properties": {
@@ -5494,7 +5727,7 @@
             "httpAuth": []
           }
         ],
-        "summary": "Retrieve multiple workspace groups",
+        "summary": "Retrieve multiple workspace groups by their IDs",
         "tags": [
           "CRUD",
           "WorkspaceGroups"
@@ -5503,7 +5736,7 @@
     },
     "/api/workspaces/groups/search": {
       "post": {
-        "description": "Returns workspace groups which matched the provided query, and which are accessible by the current user.<br/>Requirements:<br/>  - auth-client scopes: \"workspace:read\"<br/>  - user permission: \"read\" or higher<br/>Returns:<br/>401 if user does not have the required permission",
+        "description": "Returns all workspace groups or searches workspace groups by query. Always returns only workspace groups which are accessible by the current user.<br/>Requirements:<br/>  - auth-client scopes: \"workspace:read\"<br/>  - user permission: \"read\" or higher<br/>Returns:<br/>401 if user does not have the required permission",
         "operationId": "searchWorkspaceGroups",
         "parameters": [
           {
@@ -5573,7 +5806,7 @@
             "httpAuth": []
           }
         ],
-        "summary": "Search workspace groups",
+        "summary": "Retrieve or search workspace groups",
         "tags": [
           "CRUD",
           "WorkspaceGroups"
@@ -5664,7 +5897,7 @@
             "httpAuth": []
           }
         ],
-        "summary": "Retrieve a single workspace group",
+        "summary": "Retrieve a single workspace group by its ID",
         "tags": [
           "CRUD",
           "WorkspaceGroups"
@@ -5986,7 +6219,7 @@
             "httpAuth": []
           }
         ],
-        "summary": "Retrieve multiple item relations",
+        "summary": "Retrieve multiple item relations by their IDs",
         "tags": [
           "CRUD",
           "ItemRelations"
@@ -5995,7 +6228,7 @@
     },
     "/api/workspaces/item-relations/search": {
       "post": {
-        "description": "Returns item relations which matched the provided query, and which are accessible by the current user.<br/>Requirements:<br/>  - auth-client scopes: \"workspace:read\"<br/>  - user permission: \"read\" or higher<br/>Returns:<br/>401 if user does not have the required permission",
+        "description": "Returns all item relations or searches item relations by query. Always returns only item relations which are accessible by the current user.<br/>Requirements:<br/>  - auth-client scopes: \"workspace:read\"<br/>  - user permission: \"read\" or higher<br/>Returns:<br/>401 if user does not have the required permission",
         "operationId": "searchItemRelations",
         "parameters": [
           {
@@ -6069,7 +6302,7 @@
             "httpAuth": []
           }
         ],
-        "summary": "Search item relations",
+        "summary": "Retrieve or search item relations",
         "tags": [
           "CRUD",
           "ItemRelations"
@@ -6160,7 +6393,7 @@
             "httpAuth": []
           }
         ],
-        "summary": "Retrieve a single item relation",
+        "summary": "Retrieve a single item relation by its ID",
         "tags": [
           "CRUD",
           "ItemRelations"
@@ -6545,7 +6778,7 @@
             "httpAuth": []
           }
         ],
-        "summary": "Retrieve multiple workspaces",
+        "summary": "Retrieve multiple workspaces by their IDs",
         "tags": [
           "CRUD",
           "Workspaces"
@@ -6554,7 +6787,7 @@
     },
     "/api/workspaces/search": {
       "post": {
-        "description": "Returns workspaces which matched the provided query, and which are accessible by the current user.<br/>Requirements:<br/>  - auth-client scopes: \"workspace:read\"<br/>  - user permission: \"read\" or higher<br/>Returns:<br/>401 if user does not have the required permission",
+        "description": "Returns all workspaces or searches workspaces by query. Always returns only workspaces which are accessible by the current user.<br/>Requirements:<br/>  - auth-client scopes: \"workspace:read\"<br/>  - user permission: \"read\" or higher<br/>Returns:<br/>401 if user does not have the required permission",
         "operationId": "searchWorkspaces",
         "parameters": [
           {
@@ -6628,7 +6861,7 @@
             "httpAuth": []
           }
         ],
-        "summary": "Search workspaces",
+        "summary": "Retrieve or search workspaces",
         "tags": [
           "CRUD",
           "Workspaces"
@@ -6782,7 +7015,7 @@
             "httpAuth": []
           }
         ],
-        "summary": "Retrieve multiple workspace relations",
+        "summary": "Retrieve multiple workspace relations by their IDs",
         "tags": [
           "CRUD",
           "WorkspaceRelations"
@@ -6791,7 +7024,7 @@
     },
     "/api/workspaces/workspace-relations/search": {
       "post": {
-        "description": "Returns workspace relations which matched the provided query, and which are accessible by the current user.<br/>Requirements:<br/>  - auth-client scopes: \"workspace:read\"<br/>  - user permission: \"read\" or higher<br/>Returns:<br/>401 if user does not have the required permission",
+        "description": "Returns all workspace relations or searches workspace relations by query. Always returns only workspace relations which are accessible by the current user.<br/>Requirements:<br/>  - auth-client scopes: \"workspace:read\"<br/>  - user permission: \"read\" or higher<br/>Returns:<br/>401 if user does not have the required permission",
         "operationId": "searchWorkspaceRelations",
         "parameters": [
           {
@@ -6865,7 +7098,7 @@
             "httpAuth": []
           }
         ],
-        "summary": "Search workspace relations",
+        "summary": "Retrieve or search workspace relations",
         "tags": [
           "CRUD",
           "WorkspaceRelations"
@@ -7002,7 +7235,7 @@
             "httpAuth": []
           }
         ],
-        "summary": "Retrieve a single workspace relation",
+        "summary": "Retrieve a single workspace relation by its ID",
         "tags": [
           "CRUD",
           "WorkspaceRelations"
@@ -7209,7 +7442,7 @@
             "httpAuth": []
           }
         ],
-        "summary": "Retrieve a single workspace",
+        "summary": "Retrieve a single workspace by its ID",
         "tags": [
           "CRUD",
           "Workspaces"
@@ -7515,7 +7748,7 @@
             "httpAuth": []
           }
         ],
-        "summary": "Retrieve multiple attachments",
+        "summary": "Retrieve multiple attachments by their IDs",
         "tags": [
           "CRUD",
           "ItemAttachments"
@@ -7524,7 +7757,7 @@
     },
     "/api/workspaces/{workspaceId}/attachments/search": {
       "post": {
-        "description": "Returns attachments which matched the provided query, and which are accessible by the current user.<br/>Requirements:<br/>  - auth-client scopes: \"workspace:read\"<br/>  - user permission: \"read\" or higher<br/>Returns:<br/>401 if user does not have the required permission",
+        "description": "Returns all attachments or searches attachments by query. Always returns only attachments which are accessible by the current user.<br/>Requirements:<br/>  - auth-client scopes: \"workspace:read\"<br/>  - user permission: \"read\" or higher<br/>Returns:<br/>401 if user does not have the required permission",
         "operationId": "searchItemAttachments",
         "parameters": [
           {
@@ -7608,7 +7841,7 @@
             "httpAuth": []
           }
         ],
-        "summary": "Search attachments",
+        "summary": "Retrieve or search attachments",
         "tags": [
           "CRUD",
           "ItemAttachments"
@@ -7719,7 +7952,7 @@
             "httpAuth": []
           }
         ],
-        "summary": "Retrieve a single attachment",
+        "summary": "Retrieve a single attachment by its ID",
         "tags": [
           "CRUD",
           "ItemAttachments"
@@ -8227,7 +8460,7 @@
             "httpAuth": []
           }
         ],
-        "summary": "Retrieve multiple items",
+        "summary": "Retrieve multiple items by their IDs",
         "tags": [
           "CRUD",
           "Items"
@@ -8278,7 +8511,7 @@
     },
     "/api/workspaces/{workspaceId}/items/search": {
       "post": {
-        "description": "Returns items which matched the provided query, and which are accessible by the current user.<br/>Requirements:<br/>  - auth-client scopes: \"workspace:read\"<br/>  - user permission: \"read\" or higher<br/>Returns:<br/>401 if user does not have the required permission",
+        "description": "Returns all items or searches items by query. Always returns only items which are accessible by the current user.<br/>Requirements:<br/>  - auth-client scopes: \"workspace:read\"<br/>  - user permission: \"read\" or higher<br/>Returns:<br/>401 if user does not have the required permission",
         "operationId": "searchItems",
         "parameters": [
           {
@@ -8366,7 +8599,7 @@
             "httpAuth": []
           }
         ],
-        "summary": "Search items",
+        "summary": "Retrieve or search items",
         "tags": [
           "CRUD",
           "Items"
@@ -8596,7 +8829,7 @@
             "httpAuth": []
           }
         ],
-        "summary": "Retrieve a single item",
+        "summary": "Retrieve a single item by its ID",
         "tags": [
           "CRUD",
           "Items"
@@ -8935,7 +9168,7 @@
             "httpAuth": []
           }
         ],
-        "summary": "Retrieve multiple item links",
+        "summary": "Retrieve multiple item links by their IDs",
         "tags": [
           "CRUD",
           "ItemLinks"
@@ -8944,7 +9177,7 @@
     },
     "/api/workspaces/{workspaceId}/links/search": {
       "post": {
-        "description": "Returns item links which matched the provided query, and which are accessible by the current user.<br/>Requirements:<br/>  - auth-client scopes: \"workspace:read\"<br/>  - user permission: \"read\" or higher<br/>Returns:<br/>401 if user does not have the required permission",
+        "description": "Returns all item links or searches item links by query. Always returns only item links which are accessible by the current user.<br/>Requirements:<br/>  - auth-client scopes: \"workspace:read\"<br/>  - user permission: \"read\" or higher<br/>Returns:<br/>401 if user does not have the required permission",
         "operationId": "searchItemLinks",
         "parameters": [
           {
@@ -9028,7 +9261,7 @@
             "httpAuth": []
           }
         ],
-        "summary": "Search item links",
+        "summary": "Retrieve or search item links",
         "tags": [
           "CRUD",
           "ItemLinks"
@@ -9139,7 +9372,7 @@
             "httpAuth": []
           }
         ],
-        "summary": "Retrieve a single item link",
+        "summary": "Retrieve a single item link by its ID",
         "tags": [
           "CRUD",
           "ItemLinks"
