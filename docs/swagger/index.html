@@ -46,8 +46,8 @@
          *   - or by URL path alphabetically
          */
         function operationsSorter(a, b) {
-            const aTags = a.get('operation').get('tags')
-            const bTags = b.get('operation').get('tags')
+            const aTags = a.get('operation').get('tags') || []
+            const bTags = b.get('operation').get('tags') || []
             const aMethod = a.get('method')
             const bMethod = b.get('method')
             const aPath = a.get('path')
