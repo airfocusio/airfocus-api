@@ -1,105 +1,6 @@
 {
   "components": {
     "schemas": {
-      "AnyFieldSettings": {
-        "description": "Any of the supported field settings. Note that the discriminator of this type is only informational and does not need to be specified in requests, while the actual evaluated discriminator is Field.typeId",
-        "discriminator": {
-          "mapping": {
-            "boolean": "#/components/schemas/BooleanFieldTypeSettings",
-            "date": "#/components/schemas/DateFieldTypeSettings",
-            "date-range": "#/components/schemas/DateRangeFieldTypeSettings",
-            "form-source": "#/components/schemas/FormSourceFieldTypeSettings",
-            "form-target": "#/components/schemas/FormTargetFieldTypeSettings",
-            "insights": "#/components/schemas/InsightsFieldTypeSettings",
-            "mirror-source": "#/components/schemas/MirrorSourceFieldTypeSettings",
-            "mirror-target": "#/components/schemas/MirrorTargetFieldTypeSettings",
-            "number": "#/components/schemas/NumberFieldTypeSettings",
-            "okr-checkins": "#/components/schemas/OkrCheckinsFieldTypeSettings",
-            "okr-confidence": "#/components/schemas/OkrConfidenceFieldSettings",
-            "okr-key-result-reference": "#/components/schemas/OkrKeyResultReferenceFieldTypeSettings",
-            "okr-key-results": "#/components/schemas/OkrKeyResultsFieldTypeSettings",
-            "okr-progress": "#/components/schemas/OkrProgressFieldTypeSettings",
-            "okr-time-period": "#/components/schemas/OkrTimePeriodFieldSettings",
-            "people": "#/components/schemas/PeopleFieldTypeSettings",
-            "portal": "#/components/schemas/PortalFieldTypeSettings",
-            "prioritization": "#/components/schemas/PrioritizationFieldTypeSettings",
-            "select": "#/components/schemas/SelectFieldTypeSettings",
-            "text": "#/components/schemas/TextFieldTypeSettings",
-            "votes": "#/components/schemas/VotingAppVotesFieldTypeSettings",
-            "votingScore": "#/components/schemas/VotingAppScoreFieldTypeSettings"
-          },
-          "propertyName": "typeId"
-        },
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/BooleanFieldTypeSettings"
-          },
-          {
-            "$ref": "#/components/schemas/DateFieldTypeSettings"
-          },
-          {
-            "$ref": "#/components/schemas/DateRangeFieldTypeSettings"
-          },
-          {
-            "$ref": "#/components/schemas/FormSourceFieldTypeSettings"
-          },
-          {
-            "$ref": "#/components/schemas/FormTargetFieldTypeSettings"
-          },
-          {
-            "$ref": "#/components/schemas/InsightsFieldTypeSettings"
-          },
-          {
-            "$ref": "#/components/schemas/MirrorSourceFieldTypeSettings"
-          },
-          {
-            "$ref": "#/components/schemas/MirrorTargetFieldTypeSettings"
-          },
-          {
-            "$ref": "#/components/schemas/NumberFieldTypeSettings"
-          },
-          {
-            "$ref": "#/components/schemas/OkrCheckinsFieldTypeSettings"
-          },
-          {
-            "$ref": "#/components/schemas/OkrConfidenceFieldSettings"
-          },
-          {
-            "$ref": "#/components/schemas/OkrKeyResultReferenceFieldTypeSettings"
-          },
-          {
-            "$ref": "#/components/schemas/OkrKeyResultsFieldTypeSettings"
-          },
-          {
-            "$ref": "#/components/schemas/OkrProgressFieldTypeSettings"
-          },
-          {
-            "$ref": "#/components/schemas/OkrTimePeriodFieldSettings"
-          },
-          {
-            "$ref": "#/components/schemas/PeopleFieldTypeSettings"
-          },
-          {
-            "$ref": "#/components/schemas/PortalFieldTypeSettings"
-          },
-          {
-            "$ref": "#/components/schemas/PrioritizationFieldTypeSettings"
-          },
-          {
-            "$ref": "#/components/schemas/SelectFieldTypeSettings"
-          },
-          {
-            "$ref": "#/components/schemas/TextFieldTypeSettings"
-          },
-          {
-            "$ref": "#/components/schemas/VotingAppScoreFieldTypeSettings"
-          },
-          {
-            "$ref": "#/components/schemas/VotingAppVotesFieldTypeSettings"
-          }
-        ],
-        "title": "AnyFieldSettings"
-      },
       "App": {
         "properties": {
           "id": {
@@ -137,70 +38,7 @@
         "title": "AttachmentSearchQuery",
         "type": "object"
       },
-      "BooleanFieldTypeSettings": {
-        "title": "BooleanFieldTypeSettings",
-        "type": "object"
-      },
-      "DateFieldTypeSettings": {
-        "title": "DateFieldTypeSettings",
-        "type": "object"
-      },
-      "DateRangeFieldTypeSettings": {
-        "title": "DateRangeFieldTypeSettings",
-        "type": "object"
-      },
-      "ErrorResponse": {
-        "description": "A general error response which is returned by the server for all handled errors.",
-        "properties": {
-          "code": {
-            "description": "Machine readable code",
-            "examples": [
-              "not_found"
-            ],
-            "type": "string"
-          },
-          "data": {
-            "description": "Additional informational data about the error",
-            "type": "object"
-          },
-          "message": {
-            "description": "Error messages",
-            "examples": [
-              "Entity not found"
-            ],
-            "type": "string"
-          }
-        },
-        "required": [
-          "code",
-          "message",
-          "data"
-        ],
-        "title": "ErrorResponse",
-        "type": "object"
-      },
-      "FieldEmbed": {
-        "properties": {
-          "allWorkspaceIds": {
-            "items": {
-              "format": "uuid",
-              "type": "string"
-            },
-            "type": "array",
-            "uniqueItems": true
-          },
-          "order": {
-            "format": "int32",
-            "type": "integer"
-          }
-        },
-        "required": [
-          "order"
-        ],
-        "title": "FieldEmbed",
-        "type": "object"
-      },
-      "FieldWithFieldEmbed": {
+      "BooleanFieldWithFieldEmbed": {
         "properties": {
           "_embedded": {
             "$ref": "#/components/schemas/FieldEmbed"
@@ -222,12 +60,48 @@
           "name": {
             "type": "string"
           },
-          "order": {
-            "format": "int32",
-            "type": "integer"
+          "teamId": {
+            "format": "uuid",
+            "type": "string"
           },
-          "settings": {
-            "$ref": "#/components/schemas/AnyFieldSettings"
+          "typeId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "typeId",
+          "name",
+          "description",
+          "isTeamField",
+          "teamId",
+          "createdAt",
+          "_embedded"
+        ],
+        "title": "BooleanFieldWithFieldEmbed",
+        "type": "object"
+      },
+      "BooleanFieldWithWorkspaceEmbedFieldEmbed": {
+        "properties": {
+          "_embedded": {
+            "$ref": "#/components/schemas/WorkspaceEmbedFieldEmbed"
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "isTeamField": {
+            "type": "boolean"
+          },
+          "name": {
+            "type": "string"
           },
           "teamId": {
             "format": "uuid",
@@ -235,8 +109,213 @@
           },
           "typeId": {
             "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "typeId",
+          "name",
+          "description",
+          "isTeamField",
+          "teamId",
+          "createdAt",
+          "_embedded"
+        ],
+        "title": "BooleanFieldWithWorkspaceEmbedFieldEmbed",
+        "type": "object"
+      },
+      "Comment": {
+        "properties": {
+          "content": {
+            "$ref": "#/components/schemas/RichText"
           },
-          "workspaceId": {
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "itemId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "lastUpdatedAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "reactions": {
+            "items": {
+              "$ref": "#/components/schemas/CommentReaction"
+            },
+            "type": "array"
+          },
+          "userId": {
+            "format": "uuid",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "itemId",
+          "userId",
+          "content",
+          "createdAt",
+          "lastUpdatedAt"
+        ],
+        "title": "Comment",
+        "type": "object"
+      },
+      "CommentBulkAction": {
+        "discriminator": {
+          "mapping": {
+            "create": "#/components/schemas/CommentBulkCreate",
+            "delete": "#/components/schemas/CommentBulkDelete",
+            "patch": "#/components/schemas/CommentBulkPatch",
+            "update": "#/components/schemas/CommentBulkUpdate"
+          },
+          "propertyName": "type"
+        },
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/CommentBulkCreate"
+          },
+          {
+            "$ref": "#/components/schemas/CommentBulkDelete"
+          },
+          {
+            "$ref": "#/components/schemas/CommentBulkPatch"
+          },
+          {
+            "$ref": "#/components/schemas/CommentBulkUpdate"
+          }
+        ],
+        "title": "CommentBulkAction"
+      },
+      "CommentBulkCreate": {
+        "properties": {
+          "resource": {
+            "$ref": "#/components/schemas/Comment"
+          },
+          "type": {
+            "enum": [
+              "create"
+            ],
+            "type": "string"
+          }
+        },
+        "required": [
+          "resource",
+          "type"
+        ],
+        "title": "CommentBulkCreate",
+        "type": "object"
+      },
+      "CommentBulkDelete": {
+        "properties": {
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "type": {
+            "enum": [
+              "delete"
+            ],
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "type"
+        ],
+        "title": "CommentBulkDelete",
+        "type": "object"
+      },
+      "CommentBulkPatch": {
+        "properties": {
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "transform": {
+            "$ref": "#/components/schemas/JsonPatch"
+          },
+          "type": {
+            "enum": [
+              "patch"
+            ],
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "transform",
+          "type"
+        ],
+        "title": "CommentBulkPatch",
+        "type": "object"
+      },
+      "CommentBulkUpdate": {
+        "properties": {
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "resource": {
+            "$ref": "#/components/schemas/Comment"
+          },
+          "type": {
+            "enum": [
+              "update"
+            ],
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "resource",
+          "type"
+        ],
+        "title": "CommentBulkUpdate",
+        "type": "object"
+      },
+      "CommentReaction": {
+        "properties": {
+          "emoji": {
+            "$ref": "#/components/schemas/CommentReactionEmoji"
+          },
+          "userIds": {
+            "items": {
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": "array"
+          }
+        },
+        "required": [
+          "emoji"
+        ],
+        "title": "CommentReaction",
+        "type": "object"
+      },
+      "CommentReactionEmoji": {
+        "enum": [
+          "blue_heart",
+          "clap",
+          "confused",
+          "eyes",
+          "+1",
+          "rocket",
+          "thinking_face",
+          "white_check_mark"
+        ],
+        "title": "CommentReactionEmoji",
+        "type": "string"
+      },
+      "CommentSearchQuery": {
+        "properties": {
+          "itemId": {
             "format": "uuid",
             "type": [
               "string",
@@ -244,20 +323,742 @@
             ]
           }
         },
+        "title": "CommentSearchQuery",
+        "type": "object"
+      },
+      "CommentWithEmbed": {
+        "properties": {
+          "_embedded": {
+            "type": "object"
+          },
+          "content": {
+            "$ref": "#/components/schemas/RichText"
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "itemId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "lastUpdatedAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "reactions": {
+            "items": {
+              "$ref": "#/components/schemas/CommentReaction"
+            },
+            "type": "array"
+          },
+          "userId": {
+            "format": "uuid",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "itemId",
+          "userId",
+          "content",
+          "createdAt",
+          "lastUpdatedAt",
+          "_embedded"
+        ],
+        "title": "CommentWithEmbed",
+        "type": "object"
+      },
+      "CommentWithEmbedOrNullList": {
+        "items": {
+          "anyOf": [
+            {
+              "$ref": "#/components/schemas/CommentWithEmbed"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "title": "CommentWithEmbedOrNullList",
+        "type": "array"
+      },
+      "CommentWithEmbedPage": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/CommentWithEmbed"
+            },
+            "type": "array"
+          },
+          "totalItems": {
+            "format": "int32",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "totalItems"
+        ],
+        "title": "CommentWithEmbedPage",
+        "type": "object"
+      },
+      "CreateStatus": {
+        "properties": {
+          "category": {
+            "$ref": "#/components/schemas/StatusCategory"
+          },
+          "color": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/StatusColor"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "default": {
+            "description": "Whether this status should be applied by default to newly created items. There can be only one default status in each workspace.",
+            "type": "boolean"
+          },
+          "name": {
+            "description": "Name of this status in UI.",
+            "type": "string"
+          },
+          "order": {
+            "description": "Order of this status comparing to other statuses in the same workspace.",
+            "format": "int32",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "id",
+          "workspaceId",
+          "category",
+          "name",
+          "default",
+          "order"
+        ],
+        "title": "CreateStatus",
+        "type": "object"
+      },
+      "DateFieldWithFieldEmbed": {
+        "properties": {
+          "_embedded": {
+            "$ref": "#/components/schemas/FieldEmbed"
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "isTeamField": {
+            "type": "boolean"
+          },
+          "name": {
+            "type": "string"
+          },
+          "teamId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "typeId": {
+            "type": "string"
+          }
+        },
         "required": [
           "id",
           "typeId",
-          "settings",
           "name",
           "description",
-          "order",
           "isTeamField",
           "teamId",
           "createdAt",
           "_embedded"
         ],
-        "title": "FieldWithFieldEmbed",
+        "title": "DateFieldWithFieldEmbed",
         "type": "object"
+      },
+      "DateFieldWithWorkspaceEmbedFieldEmbed": {
+        "properties": {
+          "_embedded": {
+            "$ref": "#/components/schemas/WorkspaceEmbedFieldEmbed"
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "isTeamField": {
+            "type": "boolean"
+          },
+          "name": {
+            "type": "string"
+          },
+          "teamId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "typeId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "typeId",
+          "name",
+          "description",
+          "isTeamField",
+          "teamId",
+          "createdAt",
+          "_embedded"
+        ],
+        "title": "DateFieldWithWorkspaceEmbedFieldEmbed",
+        "type": "object"
+      },
+      "DateRangeFieldWithFieldEmbed": {
+        "properties": {
+          "_embedded": {
+            "$ref": "#/components/schemas/FieldEmbed"
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "isTeamField": {
+            "type": "boolean"
+          },
+          "name": {
+            "type": "string"
+          },
+          "teamId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "typeId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "typeId",
+          "name",
+          "description",
+          "isTeamField",
+          "teamId",
+          "createdAt",
+          "_embedded"
+        ],
+        "title": "DateRangeFieldWithFieldEmbed",
+        "type": "object"
+      },
+      "DateRangeFieldWithWorkspaceEmbedFieldEmbed": {
+        "properties": {
+          "_embedded": {
+            "$ref": "#/components/schemas/WorkspaceEmbedFieldEmbed"
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "isTeamField": {
+            "type": "boolean"
+          },
+          "name": {
+            "type": "string"
+          },
+          "teamId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "typeId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "typeId",
+          "name",
+          "description",
+          "isTeamField",
+          "teamId",
+          "createdAt",
+          "_embedded"
+        ],
+        "title": "DateRangeFieldWithWorkspaceEmbedFieldEmbed",
+        "type": "object"
+      },
+      "ErrorResponse": {
+        "description": "A general error response which is returned by the server for all handled errors.",
+        "properties": {
+          "code": {
+            "description": "Machine readable code",
+            "examples": [
+              "not_found"
+            ],
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/JsObject",
+            "description": "Additional informational data about the error"
+          },
+          "message": {
+            "description": "Error messages",
+            "examples": [
+              "Entity not found"
+            ],
+            "type": "string"
+          }
+        },
+        "required": [
+          "code",
+          "message",
+          "data"
+        ],
+        "title": "ErrorResponse",
+        "type": "object"
+      },
+      "FieldEmbed": {
+        "properties": {
+          "workspaces": {
+            "description": "List of all workspaces where this field is used.",
+            "items": {
+              "$ref": "#/components/schemas/FieldFieldWorkspaceEmbed"
+            },
+            "type": "array"
+          }
+        },
+        "title": "FieldEmbed",
+        "type": "object"
+      },
+      "FieldEndpointsFieldToWorkspaceLink": {
+        "properties": {
+          "fieldId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "workspaceId": {
+            "format": "uuid",
+            "type": "string"
+          }
+        },
+        "required": [
+          "fieldId",
+          "workspaceId"
+        ],
+        "title": "FieldEndpointsFieldToWorkspaceLink",
+        "type": "object"
+      },
+      "FieldEndpointsFieldTypeInfo": {
+        "properties": {
+          "typeId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "typeId"
+        ],
+        "title": "FieldEndpointsFieldTypeInfo",
+        "type": "object"
+      },
+      "FieldEndpointsInstallFieldRequest": {
+        "discriminator": {
+          "mapping": {
+            "boolean": "#/components/schemas/InstallBooleanFieldRequest",
+            "date": "#/components/schemas/InstallDateFieldRequest",
+            "date-range": "#/components/schemas/InstallDateRangeFieldRequest",
+            "number": "#/components/schemas/InstallNumberFieldRequest",
+            "people": "#/components/schemas/InstallPeopleFieldRequest",
+            "select": "#/components/schemas/InstallSelectFieldRequest",
+            "text": "#/components/schemas/InstallTextFieldRequest"
+          },
+          "propertyName": "typeId"
+        },
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/InstallBooleanFieldRequest"
+          },
+          {
+            "$ref": "#/components/schemas/InstallDateFieldRequest"
+          },
+          {
+            "$ref": "#/components/schemas/InstallDateRangeFieldRequest"
+          },
+          {
+            "$ref": "#/components/schemas/InstallNumberFieldRequest"
+          },
+          {
+            "$ref": "#/components/schemas/InstallPeopleFieldRequest"
+          },
+          {
+            "$ref": "#/components/schemas/InstallSelectFieldRequest"
+          },
+          {
+            "$ref": "#/components/schemas/InstallTextFieldRequest"
+          }
+        ],
+        "title": "FieldEndpointsInstallFieldRequest"
+      },
+      "FieldEndpointsReconfigureFieldRequest": {
+        "properties": {
+          "description": {
+            "type": "string"
+          },
+          "isTeamField": {
+            "type": "boolean"
+          },
+          "name": {
+            "type": "string"
+          },
+          "settings": {
+            "description": "The settings object which corresponds to the type of the requested field, or it can be skipped if the requested field does not have any settings.\nThis schema shows all the available field-settings. See also the Field schema to learn about settings of each specific field type.",
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/FormSourceFieldTypeSettings"
+              },
+              {
+                "$ref": "#/components/schemas/InsightsFieldTypeSettings"
+              },
+              {
+                "$ref": "#/components/schemas/NumberFieldTypeSettings"
+              },
+              {
+                "$ref": "#/components/schemas/OkrConfidenceFieldSettings"
+              },
+              {
+                "$ref": "#/components/schemas/OkrTimePeriodFieldSettings"
+              },
+              {
+                "$ref": "#/components/schemas/PeopleFieldTypeSettings"
+              },
+              {
+                "$ref": "#/components/schemas/SelectFieldTypeSettings"
+              },
+              {
+                "$ref": "#/components/schemas/VotingAppScoreFieldTypeSettings"
+              }
+            ]
+          }
+        },
+        "required": [
+          "name",
+          "description",
+          "isTeamField"
+        ],
+        "title": "FieldEndpointsReconfigureFieldRequest",
+        "type": "object"
+      },
+      "FieldEndpointsReorderFieldsRequest": {
+        "properties": {
+          "fieldIds": {
+            "items": {
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "workspaceId": {
+            "format": "uuid",
+            "type": "string"
+          }
+        },
+        "required": [
+          "workspaceId"
+        ],
+        "title": "FieldEndpointsReorderFieldsRequest",
+        "type": "object"
+      },
+      "FieldFieldWorkspaceEmbed": {
+        "properties": {
+          "order": {
+            "description": "Order of the field in this specific workspace.",
+            "examples": [
+              42
+            ],
+            "format": "int32",
+            "type": "integer"
+          },
+          "workspaceId": {
+            "format": "uuid",
+            "type": "string"
+          }
+        },
+        "required": [
+          "workspaceId",
+          "order"
+        ],
+        "title": "FieldFieldWorkspaceEmbed",
+        "type": "object"
+      },
+      "FieldSearchQuery": {
+        "properties": {
+          "isTeamField": {
+            "description": "Return only fields with the specified isTeamField value.",
+            "type": [
+              "boolean",
+              "null"
+            ]
+          },
+          "workspaceIds": {
+            "description": "Return only fields which are installed in the specified workspaces.",
+            "items": {
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": [
+              "array",
+              "null"
+            ],
+            "uniqueItems": true
+          }
+        },
+        "title": "FieldSearchQuery",
+        "type": "object"
+      },
+      "FieldWithFieldEmbed": {
+        "discriminator": {
+          "mapping": {
+            "boolean": "#/components/schemas/BooleanFieldWithFieldEmbed",
+            "date": "#/components/schemas/DateFieldWithFieldEmbed",
+            "date-range": "#/components/schemas/DateRangeFieldWithFieldEmbed",
+            "form-source": "#/components/schemas/FormSourceFieldWithFieldEmbed",
+            "form-target": "#/components/schemas/FormTargetFieldWithFieldEmbed",
+            "insights": "#/components/schemas/InsightsFieldWithFieldEmbed",
+            "mirror-source": "#/components/schemas/MirrorSourceFieldWithFieldEmbed",
+            "mirror-target": "#/components/schemas/MirrorTargetFieldWithFieldEmbed",
+            "number": "#/components/schemas/NumberFieldWithFieldEmbed",
+            "okr-checkins": "#/components/schemas/OkrCheckinsFieldWithFieldEmbed",
+            "okr-confidence": "#/components/schemas/OkrConfidenceFieldWithFieldEmbed",
+            "okr-key-result-reference": "#/components/schemas/OkrKeyResultReferenceFieldWithFieldEmbed",
+            "okr-key-results": "#/components/schemas/OkrKeyResultsFieldWithFieldEmbed",
+            "okr-progress": "#/components/schemas/OkrProgressFieldWithFieldEmbed",
+            "okr-time-period": "#/components/schemas/OkrTimePeriodFieldWithFieldEmbed",
+            "people": "#/components/schemas/PeopleFieldWithFieldEmbed",
+            "portal": "#/components/schemas/PortalFieldWithFieldEmbed",
+            "prioritization": "#/components/schemas/PrioritizationFieldWithFieldEmbed",
+            "select": "#/components/schemas/SelectFieldWithFieldEmbed",
+            "text": "#/components/schemas/TextFieldWithFieldEmbed",
+            "votes": "#/components/schemas/VotesFieldWithFieldEmbed",
+            "votingScore": "#/components/schemas/VotingScoreFieldWithFieldEmbed"
+          },
+          "propertyName": "typeId"
+        },
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/BooleanFieldWithFieldEmbed"
+          },
+          {
+            "$ref": "#/components/schemas/DateFieldWithFieldEmbed"
+          },
+          {
+            "$ref": "#/components/schemas/DateRangeFieldWithFieldEmbed"
+          },
+          {
+            "$ref": "#/components/schemas/FormSourceFieldWithFieldEmbed"
+          },
+          {
+            "$ref": "#/components/schemas/FormTargetFieldWithFieldEmbed"
+          },
+          {
+            "$ref": "#/components/schemas/InsightsFieldWithFieldEmbed"
+          },
+          {
+            "$ref": "#/components/schemas/MirrorSourceFieldWithFieldEmbed"
+          },
+          {
+            "$ref": "#/components/schemas/MirrorTargetFieldWithFieldEmbed"
+          },
+          {
+            "$ref": "#/components/schemas/NumberFieldWithFieldEmbed"
+          },
+          {
+            "$ref": "#/components/schemas/OkrCheckinsFieldWithFieldEmbed"
+          },
+          {
+            "$ref": "#/components/schemas/OkrConfidenceFieldWithFieldEmbed"
+          },
+          {
+            "$ref": "#/components/schemas/OkrKeyResultReferenceFieldWithFieldEmbed"
+          },
+          {
+            "$ref": "#/components/schemas/OkrKeyResultsFieldWithFieldEmbed"
+          },
+          {
+            "$ref": "#/components/schemas/OkrProgressFieldWithFieldEmbed"
+          },
+          {
+            "$ref": "#/components/schemas/OkrTimePeriodFieldWithFieldEmbed"
+          },
+          {
+            "$ref": "#/components/schemas/PeopleFieldWithFieldEmbed"
+          },
+          {
+            "$ref": "#/components/schemas/PortalFieldWithFieldEmbed"
+          },
+          {
+            "$ref": "#/components/schemas/PrioritizationFieldWithFieldEmbed"
+          },
+          {
+            "$ref": "#/components/schemas/SelectFieldWithFieldEmbed"
+          },
+          {
+            "$ref": "#/components/schemas/TextFieldWithFieldEmbed"
+          },
+          {
+            "$ref": "#/components/schemas/VotesFieldWithFieldEmbed"
+          },
+          {
+            "$ref": "#/components/schemas/VotingScoreFieldWithFieldEmbed"
+          }
+        ],
+        "title": "FieldWithFieldEmbed"
+      },
+      "FieldWithFieldEmbedPage": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/FieldWithFieldEmbed"
+            },
+            "type": "array"
+          },
+          "totalItems": {
+            "format": "int32",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "totalItems"
+        ],
+        "title": "FieldWithFieldEmbedPage",
+        "type": "object"
+      },
+      "FieldWithWorkspaceEmbedFieldEmbed": {
+        "discriminator": {
+          "mapping": {
+            "boolean": "#/components/schemas/BooleanFieldWithWorkspaceEmbedFieldEmbed",
+            "date": "#/components/schemas/DateFieldWithWorkspaceEmbedFieldEmbed",
+            "date-range": "#/components/schemas/DateRangeFieldWithWorkspaceEmbedFieldEmbed",
+            "form-source": "#/components/schemas/FormSourceFieldWithWorkspaceEmbedFieldEmbed",
+            "form-target": "#/components/schemas/FormTargetFieldWithWorkspaceEmbedFieldEmbed",
+            "insights": "#/components/schemas/InsightsFieldWithWorkspaceEmbedFieldEmbed",
+            "mirror-source": "#/components/schemas/MirrorSourceFieldWithWorkspaceEmbedFieldEmbed",
+            "mirror-target": "#/components/schemas/MirrorTargetFieldWithWorkspaceEmbedFieldEmbed",
+            "number": "#/components/schemas/NumberFieldWithWorkspaceEmbedFieldEmbed",
+            "okr-checkins": "#/components/schemas/OkrCheckinsFieldWithWorkspaceEmbedFieldEmbed",
+            "okr-confidence": "#/components/schemas/OkrConfidenceFieldWithWorkspaceEmbedFieldEmbed",
+            "okr-key-result-reference": "#/components/schemas/OkrKeyResultReferenceFieldWithWorkspaceEmbedFieldEmbed",
+            "okr-key-results": "#/components/schemas/OkrKeyResultsFieldWithWorkspaceEmbedFieldEmbed",
+            "okr-progress": "#/components/schemas/OkrProgressFieldWithWorkspaceEmbedFieldEmbed",
+            "okr-time-period": "#/components/schemas/OkrTimePeriodFieldWithWorkspaceEmbedFieldEmbed",
+            "people": "#/components/schemas/PeopleFieldWithWorkspaceEmbedFieldEmbed",
+            "portal": "#/components/schemas/PortalFieldWithWorkspaceEmbedFieldEmbed",
+            "prioritization": "#/components/schemas/PrioritizationFieldWithWorkspaceEmbedFieldEmbed",
+            "select": "#/components/schemas/SelectFieldWithWorkspaceEmbedFieldEmbed",
+            "text": "#/components/schemas/TextFieldWithWorkspaceEmbedFieldEmbed",
+            "votes": "#/components/schemas/VotesFieldWithWorkspaceEmbedFieldEmbed",
+            "votingScore": "#/components/schemas/VotingScoreFieldWithWorkspaceEmbedFieldEmbed"
+          },
+          "propertyName": "typeId"
+        },
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/BooleanFieldWithWorkspaceEmbedFieldEmbed"
+          },
+          {
+            "$ref": "#/components/schemas/DateFieldWithWorkspaceEmbedFieldEmbed"
+          },
+          {
+            "$ref": "#/components/schemas/DateRangeFieldWithWorkspaceEmbedFieldEmbed"
+          },
+          {
+            "$ref": "#/components/schemas/FormSourceFieldWithWorkspaceEmbedFieldEmbed"
+          },
+          {
+            "$ref": "#/components/schemas/FormTargetFieldWithWorkspaceEmbedFieldEmbed"
+          },
+          {
+            "$ref": "#/components/schemas/InsightsFieldWithWorkspaceEmbedFieldEmbed"
+          },
+          {
+            "$ref": "#/components/schemas/MirrorSourceFieldWithWorkspaceEmbedFieldEmbed"
+          },
+          {
+            "$ref": "#/components/schemas/MirrorTargetFieldWithWorkspaceEmbedFieldEmbed"
+          },
+          {
+            "$ref": "#/components/schemas/NumberFieldWithWorkspaceEmbedFieldEmbed"
+          },
+          {
+            "$ref": "#/components/schemas/OkrCheckinsFieldWithWorkspaceEmbedFieldEmbed"
+          },
+          {
+            "$ref": "#/components/schemas/OkrConfidenceFieldWithWorkspaceEmbedFieldEmbed"
+          },
+          {
+            "$ref": "#/components/schemas/OkrKeyResultReferenceFieldWithWorkspaceEmbedFieldEmbed"
+          },
+          {
+            "$ref": "#/components/schemas/OkrKeyResultsFieldWithWorkspaceEmbedFieldEmbed"
+          },
+          {
+            "$ref": "#/components/schemas/OkrProgressFieldWithWorkspaceEmbedFieldEmbed"
+          },
+          {
+            "$ref": "#/components/schemas/OkrTimePeriodFieldWithWorkspaceEmbedFieldEmbed"
+          },
+          {
+            "$ref": "#/components/schemas/PeopleFieldWithWorkspaceEmbedFieldEmbed"
+          },
+          {
+            "$ref": "#/components/schemas/PortalFieldWithWorkspaceEmbedFieldEmbed"
+          },
+          {
+            "$ref": "#/components/schemas/PrioritizationFieldWithWorkspaceEmbedFieldEmbed"
+          },
+          {
+            "$ref": "#/components/schemas/SelectFieldWithWorkspaceEmbedFieldEmbed"
+          },
+          {
+            "$ref": "#/components/schemas/TextFieldWithWorkspaceEmbedFieldEmbed"
+          },
+          {
+            "$ref": "#/components/schemas/VotesFieldWithWorkspaceEmbedFieldEmbed"
+          },
+          {
+            "$ref": "#/components/schemas/VotingScoreFieldWithWorkspaceEmbedFieldEmbed"
+          }
+        ],
+        "title": "FieldWithWorkspaceEmbedFieldEmbed"
       },
       "FormSourceFieldTypeSettings": {
         "properties": {
@@ -272,8 +1073,184 @@
         "title": "FormSourceFieldTypeSettings",
         "type": "object"
       },
-      "FormTargetFieldTypeSettings": {
-        "title": "FormTargetFieldTypeSettings",
+      "FormSourceFieldWithFieldEmbed": {
+        "properties": {
+          "_embedded": {
+            "$ref": "#/components/schemas/FieldEmbed"
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "isTeamField": {
+            "type": "boolean"
+          },
+          "name": {
+            "type": "string"
+          },
+          "settings": {
+            "$ref": "#/components/schemas/FormSourceFieldTypeSettings"
+          },
+          "teamId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "typeId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "typeId",
+          "settings",
+          "name",
+          "description",
+          "isTeamField",
+          "teamId",
+          "createdAt",
+          "_embedded"
+        ],
+        "title": "FormSourceFieldWithFieldEmbed",
+        "type": "object"
+      },
+      "FormSourceFieldWithWorkspaceEmbedFieldEmbed": {
+        "properties": {
+          "_embedded": {
+            "$ref": "#/components/schemas/WorkspaceEmbedFieldEmbed"
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "isTeamField": {
+            "type": "boolean"
+          },
+          "name": {
+            "type": "string"
+          },
+          "settings": {
+            "$ref": "#/components/schemas/FormSourceFieldTypeSettings"
+          },
+          "teamId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "typeId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "typeId",
+          "settings",
+          "name",
+          "description",
+          "isTeamField",
+          "teamId",
+          "createdAt",
+          "_embedded"
+        ],
+        "title": "FormSourceFieldWithWorkspaceEmbedFieldEmbed",
+        "type": "object"
+      },
+      "FormTargetFieldWithFieldEmbed": {
+        "properties": {
+          "_embedded": {
+            "$ref": "#/components/schemas/FieldEmbed"
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "isTeamField": {
+            "type": "boolean"
+          },
+          "name": {
+            "type": "string"
+          },
+          "teamId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "typeId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "typeId",
+          "name",
+          "description",
+          "isTeamField",
+          "teamId",
+          "createdAt",
+          "_embedded"
+        ],
+        "title": "FormTargetFieldWithFieldEmbed",
+        "type": "object"
+      },
+      "FormTargetFieldWithWorkspaceEmbedFieldEmbed": {
+        "properties": {
+          "_embedded": {
+            "$ref": "#/components/schemas/WorkspaceEmbedFieldEmbed"
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "isTeamField": {
+            "type": "boolean"
+          },
+          "name": {
+            "type": "string"
+          },
+          "teamId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "typeId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "typeId",
+          "name",
+          "description",
+          "isTeamField",
+          "teamId",
+          "createdAt",
+          "_embedded"
+        ],
+        "title": "FormTargetFieldWithWorkspaceEmbedFieldEmbed",
         "type": "object"
       },
       "InsightsFieldTypeSettings": {
@@ -287,6 +1264,360 @@
           }
         },
         "title": "InsightsFieldTypeSettings",
+        "type": "object"
+      },
+      "InsightsFieldWithFieldEmbed": {
+        "properties": {
+          "_embedded": {
+            "$ref": "#/components/schemas/FieldEmbed"
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "isTeamField": {
+            "type": "boolean"
+          },
+          "name": {
+            "type": "string"
+          },
+          "settings": {
+            "$ref": "#/components/schemas/InsightsFieldTypeSettings"
+          },
+          "teamId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "typeId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "typeId",
+          "settings",
+          "name",
+          "description",
+          "isTeamField",
+          "teamId",
+          "createdAt",
+          "_embedded"
+        ],
+        "title": "InsightsFieldWithFieldEmbed",
+        "type": "object"
+      },
+      "InsightsFieldWithWorkspaceEmbedFieldEmbed": {
+        "properties": {
+          "_embedded": {
+            "$ref": "#/components/schemas/WorkspaceEmbedFieldEmbed"
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "isTeamField": {
+            "type": "boolean"
+          },
+          "name": {
+            "type": "string"
+          },
+          "settings": {
+            "$ref": "#/components/schemas/InsightsFieldTypeSettings"
+          },
+          "teamId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "typeId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "typeId",
+          "settings",
+          "name",
+          "description",
+          "isTeamField",
+          "teamId",
+          "createdAt",
+          "_embedded"
+        ],
+        "title": "InsightsFieldWithWorkspaceEmbedFieldEmbed",
+        "type": "object"
+      },
+      "InstallBooleanFieldRequest": {
+        "properties": {
+          "description": {
+            "default": "",
+            "description": "User-readable field description.",
+            "type": "string"
+          },
+          "isTeamField": {
+            "default": false,
+            "description": "Whether the field should be installed as a team-field or a workspace-specific field.",
+            "type": "boolean"
+          },
+          "name": {
+            "description": "User-readable field name.",
+            "type": "string"
+          },
+          "typeId": {
+            "type": "string"
+          },
+          "workspaceIds": {
+            "description": "If isTeamField=false then exactly one workspace ID should be provided.\nIf isTeamField=true then any amount of workspace IDs can be provided to be linked to the newly installed field.",
+            "items": {
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": "array"
+          }
+        },
+        "required": [
+          "typeId",
+          "name"
+        ],
+        "title": "InstallBooleanFieldRequest",
+        "type": "object"
+      },
+      "InstallDateFieldRequest": {
+        "properties": {
+          "description": {
+            "default": "",
+            "description": "User-readable field description.",
+            "type": "string"
+          },
+          "isTeamField": {
+            "default": false,
+            "description": "Whether the field should be installed as a team-field or a workspace-specific field.",
+            "type": "boolean"
+          },
+          "name": {
+            "description": "User-readable field name.",
+            "type": "string"
+          },
+          "typeId": {
+            "type": "string"
+          },
+          "workspaceIds": {
+            "description": "If isTeamField=false then exactly one workspace ID should be provided.\nIf isTeamField=true then any amount of workspace IDs can be provided to be linked to the newly installed field.",
+            "items": {
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": "array"
+          }
+        },
+        "required": [
+          "typeId",
+          "name"
+        ],
+        "title": "InstallDateFieldRequest",
+        "type": "object"
+      },
+      "InstallDateRangeFieldRequest": {
+        "properties": {
+          "description": {
+            "default": "",
+            "description": "User-readable field description.",
+            "type": "string"
+          },
+          "isTeamField": {
+            "default": false,
+            "description": "Whether the field should be installed as a team-field or a workspace-specific field.",
+            "type": "boolean"
+          },
+          "name": {
+            "description": "User-readable field name.",
+            "type": "string"
+          },
+          "typeId": {
+            "type": "string"
+          },
+          "workspaceIds": {
+            "description": "If isTeamField=false then exactly one workspace ID should be provided.\nIf isTeamField=true then any amount of workspace IDs can be provided to be linked to the newly installed field.",
+            "items": {
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": "array"
+          }
+        },
+        "required": [
+          "typeId",
+          "name"
+        ],
+        "title": "InstallDateRangeFieldRequest",
+        "type": "object"
+      },
+      "InstallNumberFieldRequest": {
+        "properties": {
+          "description": {
+            "default": "",
+            "description": "User-readable field description.",
+            "type": "string"
+          },
+          "isTeamField": {
+            "default": false,
+            "description": "Whether the field should be installed as a team-field or a workspace-specific field.",
+            "type": "boolean"
+          },
+          "name": {
+            "description": "User-readable field name.",
+            "type": "string"
+          },
+          "settings": {
+            "$ref": "#/components/schemas/NumberFieldTypeSettings",
+            "description": "Field settings."
+          },
+          "typeId": {
+            "type": "string"
+          },
+          "workspaceIds": {
+            "description": "If isTeamField=false then exactly one workspace ID should be provided.\nIf isTeamField=true then any amount of workspace IDs can be provided to be linked to the newly installed field.",
+            "items": {
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": "array"
+          }
+        },
+        "required": [
+          "typeId",
+          "name",
+          "settings"
+        ],
+        "title": "InstallNumberFieldRequest",
+        "type": "object"
+      },
+      "InstallPeopleFieldRequest": {
+        "properties": {
+          "description": {
+            "default": "",
+            "description": "User-readable field description.",
+            "type": "string"
+          },
+          "isTeamField": {
+            "default": false,
+            "description": "Whether the field should be installed as a team-field or a workspace-specific field.",
+            "type": "boolean"
+          },
+          "name": {
+            "description": "User-readable field name.",
+            "type": "string"
+          },
+          "settings": {
+            "$ref": "#/components/schemas/PeopleFieldTypeSettings",
+            "description": "Field settings."
+          },
+          "typeId": {
+            "type": "string"
+          },
+          "workspaceIds": {
+            "description": "If isTeamField=false then exactly one workspace ID should be provided.\nIf isTeamField=true then any amount of workspace IDs can be provided to be linked to the newly installed field.",
+            "items": {
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": "array"
+          }
+        },
+        "required": [
+          "typeId",
+          "name",
+          "settings"
+        ],
+        "title": "InstallPeopleFieldRequest",
+        "type": "object"
+      },
+      "InstallSelectFieldRequest": {
+        "properties": {
+          "description": {
+            "default": "",
+            "description": "User-readable field description.",
+            "type": "string"
+          },
+          "isTeamField": {
+            "default": false,
+            "description": "Whether the field should be installed as a team-field or a workspace-specific field.",
+            "type": "boolean"
+          },
+          "name": {
+            "description": "User-readable field name.",
+            "type": "string"
+          },
+          "settings": {
+            "$ref": "#/components/schemas/SelectFieldTypeSettings",
+            "description": "Field settings."
+          },
+          "typeId": {
+            "type": "string"
+          },
+          "workspaceIds": {
+            "description": "If isTeamField=false then exactly one workspace ID should be provided.\nIf isTeamField=true then any amount of workspace IDs can be provided to be linked to the newly installed field.",
+            "items": {
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": "array"
+          }
+        },
+        "required": [
+          "typeId",
+          "name",
+          "settings"
+        ],
+        "title": "InstallSelectFieldRequest",
+        "type": "object"
+      },
+      "InstallTextFieldRequest": {
+        "properties": {
+          "description": {
+            "default": "",
+            "description": "User-readable field description.",
+            "type": "string"
+          },
+          "isTeamField": {
+            "default": false,
+            "description": "Whether the field should be installed as a team-field or a workspace-specific field.",
+            "type": "boolean"
+          },
+          "name": {
+            "description": "User-readable field name.",
+            "type": "string"
+          },
+          "typeId": {
+            "type": "string"
+          },
+          "workspaceIds": {
+            "description": "If isTeamField=false then exactly one workspace ID should be provided.\nIf isTeamField=true then any amount of workspace IDs can be provided to be linked to the newly installed field.",
+            "items": {
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": "array"
+          }
+        },
+        "required": [
+          "typeId",
+          "name"
+        ],
+        "title": "InstallTextFieldRequest",
         "type": "object"
       },
       "IntegrationCapabilities": {
@@ -1236,7 +2567,7 @@
       "ItemLinkBulkCreate": {
         "properties": {
           "resource": {
-            "$ref": "#/components/schemas/ItemLink"
+            "$ref": "#/components/schemas/Milestone"
           },
           "type": {
             "enum": [
@@ -2022,7 +3353,7 @@
             "type": "string"
           },
           "filter": {
-            "type": "object"
+            "$ref": "#/components/schemas/JsObject"
           }
         },
         "required": [
@@ -2596,6 +3927,10 @@
         "title": "ItemWithItemEmbedPage",
         "type": "object"
       },
+      "JsObject": {
+        "title": "JsObject",
+        "type": "object"
+      },
       "JsonPatch": {
         "description": "A JSON Patch document. See https://jsonpatch.com/ for more information.",
         "properties": {
@@ -2787,12 +4122,307 @@
         "title": "JsonPatchTest",
         "type": "object"
       },
-      "MirrorSourceFieldTypeSettings": {
-        "title": "MirrorSourceFieldTypeSettings",
+      "Milestone": {
+        "properties": {
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "date": {
+            "format": "date",
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "lastUpdatedAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "timezone": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "workspaceId": {
+            "format": "uuid",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "workspaceId",
+          "name",
+          "description",
+          "date",
+          "createdAt",
+          "lastUpdatedAt"
+        ],
+        "title": "Milestone",
         "type": "object"
       },
-      "MirrorTargetFieldTypeSettings": {
-        "title": "MirrorTargetFieldTypeSettings",
+      "MilestoneWithEmbed": {
+        "properties": {
+          "_embedded": {
+            "type": "object"
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "date": {
+            "format": "date",
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "lastUpdatedAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "timezone": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "workspaceId": {
+            "format": "uuid",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "workspaceId",
+          "name",
+          "description",
+          "date",
+          "createdAt",
+          "lastUpdatedAt",
+          "_embedded"
+        ],
+        "title": "MilestoneWithEmbed",
+        "type": "object"
+      },
+      "MilestoneWithEmbedOrNullList": {
+        "items": {
+          "anyOf": [
+            {
+              "$ref": "#/components/schemas/MilestoneWithEmbed"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "title": "MilestoneWithEmbedOrNullList",
+        "type": "array"
+      },
+      "MilestoneWithEmbedPage": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/MilestoneWithEmbed"
+            },
+            "type": "array"
+          },
+          "totalItems": {
+            "format": "int32",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "totalItems"
+        ],
+        "title": "MilestoneWithEmbedPage",
+        "type": "object"
+      },
+      "MirrorSourceFieldWithFieldEmbed": {
+        "properties": {
+          "_embedded": {
+            "$ref": "#/components/schemas/FieldEmbed"
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "isTeamField": {
+            "type": "boolean"
+          },
+          "name": {
+            "type": "string"
+          },
+          "teamId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "typeId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "typeId",
+          "name",
+          "description",
+          "isTeamField",
+          "teamId",
+          "createdAt",
+          "_embedded"
+        ],
+        "title": "MirrorSourceFieldWithFieldEmbed",
+        "type": "object"
+      },
+      "MirrorSourceFieldWithWorkspaceEmbedFieldEmbed": {
+        "properties": {
+          "_embedded": {
+            "$ref": "#/components/schemas/WorkspaceEmbedFieldEmbed"
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "isTeamField": {
+            "type": "boolean"
+          },
+          "name": {
+            "type": "string"
+          },
+          "teamId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "typeId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "typeId",
+          "name",
+          "description",
+          "isTeamField",
+          "teamId",
+          "createdAt",
+          "_embedded"
+        ],
+        "title": "MirrorSourceFieldWithWorkspaceEmbedFieldEmbed",
+        "type": "object"
+      },
+      "MirrorTargetFieldWithFieldEmbed": {
+        "properties": {
+          "_embedded": {
+            "$ref": "#/components/schemas/FieldEmbed"
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "isTeamField": {
+            "type": "boolean"
+          },
+          "name": {
+            "type": "string"
+          },
+          "teamId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "typeId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "typeId",
+          "name",
+          "description",
+          "isTeamField",
+          "teamId",
+          "createdAt",
+          "_embedded"
+        ],
+        "title": "MirrorTargetFieldWithFieldEmbed",
+        "type": "object"
+      },
+      "MirrorTargetFieldWithWorkspaceEmbedFieldEmbed": {
+        "properties": {
+          "_embedded": {
+            "$ref": "#/components/schemas/WorkspaceEmbedFieldEmbed"
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "isTeamField": {
+            "type": "boolean"
+          },
+          "name": {
+            "type": "string"
+          },
+          "teamId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "typeId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "typeId",
+          "name",
+          "description",
+          "isTeamField",
+          "teamId",
+          "createdAt",
+          "_embedded"
+        ],
+        "title": "MirrorTargetFieldWithWorkspaceEmbedFieldEmbed",
         "type": "object"
       },
       "NumberFieldTypeSettings": {
@@ -2903,8 +4533,184 @@
         ],
         "title": "NumberFieldTypeSettingsUnit"
       },
-      "OkrCheckinsFieldTypeSettings": {
-        "title": "OkrCheckinsFieldTypeSettings",
+      "NumberFieldWithFieldEmbed": {
+        "properties": {
+          "_embedded": {
+            "$ref": "#/components/schemas/FieldEmbed"
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "isTeamField": {
+            "type": "boolean"
+          },
+          "name": {
+            "type": "string"
+          },
+          "settings": {
+            "$ref": "#/components/schemas/NumberFieldTypeSettings"
+          },
+          "teamId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "typeId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "typeId",
+          "settings",
+          "name",
+          "description",
+          "isTeamField",
+          "teamId",
+          "createdAt",
+          "_embedded"
+        ],
+        "title": "NumberFieldWithFieldEmbed",
+        "type": "object"
+      },
+      "NumberFieldWithWorkspaceEmbedFieldEmbed": {
+        "properties": {
+          "_embedded": {
+            "$ref": "#/components/schemas/WorkspaceEmbedFieldEmbed"
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "isTeamField": {
+            "type": "boolean"
+          },
+          "name": {
+            "type": "string"
+          },
+          "settings": {
+            "$ref": "#/components/schemas/NumberFieldTypeSettings"
+          },
+          "teamId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "typeId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "typeId",
+          "settings",
+          "name",
+          "description",
+          "isTeamField",
+          "teamId",
+          "createdAt",
+          "_embedded"
+        ],
+        "title": "NumberFieldWithWorkspaceEmbedFieldEmbed",
+        "type": "object"
+      },
+      "OkrCheckinsFieldWithFieldEmbed": {
+        "properties": {
+          "_embedded": {
+            "$ref": "#/components/schemas/FieldEmbed"
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "isTeamField": {
+            "type": "boolean"
+          },
+          "name": {
+            "type": "string"
+          },
+          "teamId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "typeId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "typeId",
+          "name",
+          "description",
+          "isTeamField",
+          "teamId",
+          "createdAt",
+          "_embedded"
+        ],
+        "title": "OkrCheckinsFieldWithFieldEmbed",
+        "type": "object"
+      },
+      "OkrCheckinsFieldWithWorkspaceEmbedFieldEmbed": {
+        "properties": {
+          "_embedded": {
+            "$ref": "#/components/schemas/WorkspaceEmbedFieldEmbed"
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "isTeamField": {
+            "type": "boolean"
+          },
+          "name": {
+            "type": "string"
+          },
+          "teamId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "typeId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "typeId",
+          "name",
+          "description",
+          "isTeamField",
+          "teamId",
+          "createdAt",
+          "_embedded"
+        ],
+        "title": "OkrCheckinsFieldWithWorkspaceEmbedFieldEmbed",
         "type": "object"
       },
       "OkrConfidenceFieldSettings": {
@@ -2925,16 +4731,356 @@
         "title": "OkrConfidenceFieldSettings",
         "type": "object"
       },
-      "OkrKeyResultReferenceFieldTypeSettings": {
-        "title": "OkrKeyResultReferenceFieldTypeSettings",
+      "OkrConfidenceFieldWithFieldEmbed": {
+        "properties": {
+          "_embedded": {
+            "$ref": "#/components/schemas/FieldEmbed"
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "isTeamField": {
+            "type": "boolean"
+          },
+          "name": {
+            "type": "string"
+          },
+          "settings": {
+            "$ref": "#/components/schemas/OkrConfidenceFieldSettings"
+          },
+          "teamId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "typeId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "typeId",
+          "settings",
+          "name",
+          "description",
+          "isTeamField",
+          "teamId",
+          "createdAt",
+          "_embedded"
+        ],
+        "title": "OkrConfidenceFieldWithFieldEmbed",
         "type": "object"
       },
-      "OkrKeyResultsFieldTypeSettings": {
-        "title": "OkrKeyResultsFieldTypeSettings",
+      "OkrConfidenceFieldWithWorkspaceEmbedFieldEmbed": {
+        "properties": {
+          "_embedded": {
+            "$ref": "#/components/schemas/WorkspaceEmbedFieldEmbed"
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "isTeamField": {
+            "type": "boolean"
+          },
+          "name": {
+            "type": "string"
+          },
+          "settings": {
+            "$ref": "#/components/schemas/OkrConfidenceFieldSettings"
+          },
+          "teamId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "typeId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "typeId",
+          "settings",
+          "name",
+          "description",
+          "isTeamField",
+          "teamId",
+          "createdAt",
+          "_embedded"
+        ],
+        "title": "OkrConfidenceFieldWithWorkspaceEmbedFieldEmbed",
         "type": "object"
       },
-      "OkrProgressFieldTypeSettings": {
-        "title": "OkrProgressFieldTypeSettings",
+      "OkrKeyResultReferenceFieldWithFieldEmbed": {
+        "properties": {
+          "_embedded": {
+            "$ref": "#/components/schemas/FieldEmbed"
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "isTeamField": {
+            "type": "boolean"
+          },
+          "name": {
+            "type": "string"
+          },
+          "teamId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "typeId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "typeId",
+          "name",
+          "description",
+          "isTeamField",
+          "teamId",
+          "createdAt",
+          "_embedded"
+        ],
+        "title": "OkrKeyResultReferenceFieldWithFieldEmbed",
+        "type": "object"
+      },
+      "OkrKeyResultReferenceFieldWithWorkspaceEmbedFieldEmbed": {
+        "properties": {
+          "_embedded": {
+            "$ref": "#/components/schemas/WorkspaceEmbedFieldEmbed"
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "isTeamField": {
+            "type": "boolean"
+          },
+          "name": {
+            "type": "string"
+          },
+          "teamId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "typeId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "typeId",
+          "name",
+          "description",
+          "isTeamField",
+          "teamId",
+          "createdAt",
+          "_embedded"
+        ],
+        "title": "OkrKeyResultReferenceFieldWithWorkspaceEmbedFieldEmbed",
+        "type": "object"
+      },
+      "OkrKeyResultsFieldWithFieldEmbed": {
+        "properties": {
+          "_embedded": {
+            "$ref": "#/components/schemas/FieldEmbed"
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "isTeamField": {
+            "type": "boolean"
+          },
+          "name": {
+            "type": "string"
+          },
+          "teamId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "typeId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "typeId",
+          "name",
+          "description",
+          "isTeamField",
+          "teamId",
+          "createdAt",
+          "_embedded"
+        ],
+        "title": "OkrKeyResultsFieldWithFieldEmbed",
+        "type": "object"
+      },
+      "OkrKeyResultsFieldWithWorkspaceEmbedFieldEmbed": {
+        "properties": {
+          "_embedded": {
+            "$ref": "#/components/schemas/WorkspaceEmbedFieldEmbed"
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "isTeamField": {
+            "type": "boolean"
+          },
+          "name": {
+            "type": "string"
+          },
+          "teamId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "typeId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "typeId",
+          "name",
+          "description",
+          "isTeamField",
+          "teamId",
+          "createdAt",
+          "_embedded"
+        ],
+        "title": "OkrKeyResultsFieldWithWorkspaceEmbedFieldEmbed",
+        "type": "object"
+      },
+      "OkrProgressFieldWithFieldEmbed": {
+        "properties": {
+          "_embedded": {
+            "$ref": "#/components/schemas/FieldEmbed"
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "isTeamField": {
+            "type": "boolean"
+          },
+          "name": {
+            "type": "string"
+          },
+          "teamId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "typeId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "typeId",
+          "name",
+          "description",
+          "isTeamField",
+          "teamId",
+          "createdAt",
+          "_embedded"
+        ],
+        "title": "OkrProgressFieldWithFieldEmbed",
+        "type": "object"
+      },
+      "OkrProgressFieldWithWorkspaceEmbedFieldEmbed": {
+        "properties": {
+          "_embedded": {
+            "$ref": "#/components/schemas/WorkspaceEmbedFieldEmbed"
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "isTeamField": {
+            "type": "boolean"
+          },
+          "name": {
+            "type": "string"
+          },
+          "teamId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "typeId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "typeId",
+          "name",
+          "description",
+          "isTeamField",
+          "teamId",
+          "createdAt",
+          "_embedded"
+        ],
+        "title": "OkrProgressFieldWithWorkspaceEmbedFieldEmbed",
         "type": "object"
       },
       "OkrTimePeriodFieldSettings": {
@@ -2949,6 +5095,100 @@
         "title": "OkrTimePeriodFieldSettings",
         "type": "object"
       },
+      "OkrTimePeriodFieldWithFieldEmbed": {
+        "properties": {
+          "_embedded": {
+            "$ref": "#/components/schemas/FieldEmbed"
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "isTeamField": {
+            "type": "boolean"
+          },
+          "name": {
+            "type": "string"
+          },
+          "settings": {
+            "$ref": "#/components/schemas/OkrTimePeriodFieldSettings"
+          },
+          "teamId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "typeId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "typeId",
+          "settings",
+          "name",
+          "description",
+          "isTeamField",
+          "teamId",
+          "createdAt",
+          "_embedded"
+        ],
+        "title": "OkrTimePeriodFieldWithFieldEmbed",
+        "type": "object"
+      },
+      "OkrTimePeriodFieldWithWorkspaceEmbedFieldEmbed": {
+        "properties": {
+          "_embedded": {
+            "$ref": "#/components/schemas/WorkspaceEmbedFieldEmbed"
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "isTeamField": {
+            "type": "boolean"
+          },
+          "name": {
+            "type": "string"
+          },
+          "settings": {
+            "$ref": "#/components/schemas/OkrTimePeriodFieldSettings"
+          },
+          "teamId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "typeId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "typeId",
+          "settings",
+          "name",
+          "description",
+          "isTeamField",
+          "teamId",
+          "createdAt",
+          "_embedded"
+        ],
+        "title": "OkrTimePeriodFieldWithWorkspaceEmbedFieldEmbed",
+        "type": "object"
+      },
       "PeopleFieldTypeSettings": {
         "properties": {
           "autoAssign": {
@@ -2961,6 +5201,100 @@
         "title": "PeopleFieldTypeSettings",
         "type": "object"
       },
+      "PeopleFieldWithFieldEmbed": {
+        "properties": {
+          "_embedded": {
+            "$ref": "#/components/schemas/FieldEmbed"
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "isTeamField": {
+            "type": "boolean"
+          },
+          "name": {
+            "type": "string"
+          },
+          "settings": {
+            "$ref": "#/components/schemas/PeopleFieldTypeSettings"
+          },
+          "teamId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "typeId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "typeId",
+          "settings",
+          "name",
+          "description",
+          "isTeamField",
+          "teamId",
+          "createdAt",
+          "_embedded"
+        ],
+        "title": "PeopleFieldWithFieldEmbed",
+        "type": "object"
+      },
+      "PeopleFieldWithWorkspaceEmbedFieldEmbed": {
+        "properties": {
+          "_embedded": {
+            "$ref": "#/components/schemas/WorkspaceEmbedFieldEmbed"
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "isTeamField": {
+            "type": "boolean"
+          },
+          "name": {
+            "type": "string"
+          },
+          "settings": {
+            "$ref": "#/components/schemas/PeopleFieldTypeSettings"
+          },
+          "teamId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "typeId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "typeId",
+          "settings",
+          "name",
+          "description",
+          "isTeamField",
+          "teamId",
+          "createdAt",
+          "_embedded"
+        ],
+        "title": "PeopleFieldWithWorkspaceEmbedFieldEmbed",
+        "type": "object"
+      },
       "Permission": {
         "enum": [
           "comment",
@@ -2971,12 +5305,176 @@
         "title": "Permission",
         "type": "string"
       },
-      "PortalFieldTypeSettings": {
-        "title": "PortalFieldTypeSettings",
+      "PortalFieldWithFieldEmbed": {
+        "properties": {
+          "_embedded": {
+            "$ref": "#/components/schemas/FieldEmbed"
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "isTeamField": {
+            "type": "boolean"
+          },
+          "name": {
+            "type": "string"
+          },
+          "teamId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "typeId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "typeId",
+          "name",
+          "description",
+          "isTeamField",
+          "teamId",
+          "createdAt",
+          "_embedded"
+        ],
+        "title": "PortalFieldWithFieldEmbed",
         "type": "object"
       },
-      "PrioritizationFieldTypeSettings": {
-        "title": "PrioritizationFieldTypeSettings",
+      "PortalFieldWithWorkspaceEmbedFieldEmbed": {
+        "properties": {
+          "_embedded": {
+            "$ref": "#/components/schemas/WorkspaceEmbedFieldEmbed"
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "isTeamField": {
+            "type": "boolean"
+          },
+          "name": {
+            "type": "string"
+          },
+          "teamId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "typeId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "typeId",
+          "name",
+          "description",
+          "isTeamField",
+          "teamId",
+          "createdAt",
+          "_embedded"
+        ],
+        "title": "PortalFieldWithWorkspaceEmbedFieldEmbed",
+        "type": "object"
+      },
+      "PrioritizationFieldWithFieldEmbed": {
+        "properties": {
+          "_embedded": {
+            "$ref": "#/components/schemas/FieldEmbed"
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "isTeamField": {
+            "type": "boolean"
+          },
+          "name": {
+            "type": "string"
+          },
+          "teamId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "typeId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "typeId",
+          "name",
+          "description",
+          "isTeamField",
+          "teamId",
+          "createdAt",
+          "_embedded"
+        ],
+        "title": "PrioritizationFieldWithFieldEmbed",
+        "type": "object"
+      },
+      "PrioritizationFieldWithWorkspaceEmbedFieldEmbed": {
+        "properties": {
+          "_embedded": {
+            "$ref": "#/components/schemas/WorkspaceEmbedFieldEmbed"
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "isTeamField": {
+            "type": "boolean"
+          },
+          "name": {
+            "type": "string"
+          },
+          "teamId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "typeId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "typeId",
+          "name",
+          "description",
+          "isTeamField",
+          "teamId",
+          "createdAt",
+          "_embedded"
+        ],
+        "title": "PrioritizationFieldWithWorkspaceEmbedFieldEmbed",
         "type": "object"
       },
       "Property": {
@@ -3555,6 +6053,100 @@
         "title": "SelectFieldTypeSettings",
         "type": "object"
       },
+      "SelectFieldWithFieldEmbed": {
+        "properties": {
+          "_embedded": {
+            "$ref": "#/components/schemas/FieldEmbed"
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "isTeamField": {
+            "type": "boolean"
+          },
+          "name": {
+            "type": "string"
+          },
+          "settings": {
+            "$ref": "#/components/schemas/SelectFieldTypeSettings"
+          },
+          "teamId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "typeId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "typeId",
+          "settings",
+          "name",
+          "description",
+          "isTeamField",
+          "teamId",
+          "createdAt",
+          "_embedded"
+        ],
+        "title": "SelectFieldWithFieldEmbed",
+        "type": "object"
+      },
+      "SelectFieldWithWorkspaceEmbedFieldEmbed": {
+        "properties": {
+          "_embedded": {
+            "$ref": "#/components/schemas/WorkspaceEmbedFieldEmbed"
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "isTeamField": {
+            "type": "boolean"
+          },
+          "name": {
+            "type": "string"
+          },
+          "settings": {
+            "$ref": "#/components/schemas/SelectFieldTypeSettings"
+          },
+          "teamId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "typeId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "typeId",
+          "settings",
+          "name",
+          "description",
+          "isTeamField",
+          "teamId",
+          "createdAt",
+          "_embedded"
+        ],
+        "title": "SelectFieldWithWorkspaceEmbedFieldEmbed",
+        "type": "object"
+      },
       "Status": {
         "properties": {
           "category": {
@@ -3571,6 +6163,7 @@
             ]
           },
           "default": {
+            "description": "Whether this status should be applied by default to newly created items. There can be only one default status in each workspace.",
             "type": "boolean"
           },
           "id": {
@@ -3578,9 +6171,11 @@
             "type": "string"
           },
           "name": {
+            "description": "Name of this status in UI.",
             "type": "string"
           },
           "order": {
+            "description": "Order of this status comparing to other statuses in the same workspace.",
             "format": "int32",
             "type": "integer"
           },
@@ -3601,6 +6196,7 @@
         "type": "object"
       },
       "StatusCategory": {
+        "description": "Status category adds some additional meaning to each status:\n- 'draft': only semantic meaning\n- 'active': only semantic meaning\n- 'closed': items with a status in this category will be considered as completed, which contributes to progress calculation (e.g. \"1/3 items completed\").",
         "enum": [
           "active",
           "closed",
@@ -3610,6 +6206,7 @@
         "type": "string"
       },
       "StatusColor": {
+        "description": "Color of a status-chip in UI.",
         "enum": [
           "blue",
           "coco",
@@ -3624,8 +6221,307 @@
         "title": "StatusColor",
         "type": "string"
       },
-      "TextFieldTypeSettings": {
-        "title": "TextFieldTypeSettings",
+      "Template": {
+        "properties": {
+          "abstract": {
+            "type": "string"
+          },
+          "apps": {
+            "items": {
+              "$ref": "#/components/schemas/TemplateApp"
+            },
+            "type": "array"
+          },
+          "description": {
+            "type": "string"
+          },
+          "featured": {
+            "type": "boolean"
+          },
+          "id": {
+            "type": "string"
+          },
+          "imageUrl": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "name": {
+            "type": "string"
+          },
+          "views": {
+            "items": {
+              "$ref": "#/components/schemas/TemplateView"
+            },
+            "type": "array"
+          },
+          "viewsSectionTitle": {
+            "type": "string"
+          },
+          "workspacesCount": {
+            "format": "int32",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "featured",
+          "abstract",
+          "description",
+          "viewsSectionTitle",
+          "workspacesCount"
+        ],
+        "title": "Template",
+        "type": "object"
+      },
+      "TemplateApp": {
+        "properties": {
+          "description": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "name": {
+            "type": "string"
+          },
+          "typeId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "typeId",
+          "name"
+        ],
+        "title": "TemplateApp",
+        "type": "object"
+      },
+      "TemplateCategory": {
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "slug": {
+            "type": "string"
+          },
+          "templateIds": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          }
+        },
+        "required": [
+          "slug",
+          "name"
+        ],
+        "title": "TemplateCategory",
+        "type": "object"
+      },
+      "TemplateEndpointsApplyTemplateRequest": {
+        "properties": {
+          "defaultPermission": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Permission"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "groupId": {
+            "format": "uuid",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "name": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "parameters": {
+            "$ref": "#/components/schemas/TemplatesTemplateParameters"
+          },
+          "permissions": {
+            "additionalProperties": {
+              "$ref": "#/components/schemas/Permission"
+            },
+            "type": "object"
+          }
+        },
+        "required": [
+          "parameters",
+          "permissions"
+        ],
+        "title": "TemplateEndpointsApplyTemplateRequest",
+        "type": "object"
+      },
+      "TemplatePageWithEmbed": {
+        "properties": {
+          "_embedded": {
+            "$ref": "#/components/schemas/TemplateSearchEmbed"
+          },
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/Template"
+            },
+            "type": "array"
+          },
+          "totalItems": {
+            "format": "int32",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "_embedded",
+          "totalItems"
+        ],
+        "title": "TemplatePageWithEmbed",
+        "type": "object"
+      },
+      "TemplateSearchEmbed": {
+        "properties": {
+          "categories": {
+            "items": {
+              "$ref": "#/components/schemas/TemplateCategory"
+            },
+            "type": "array"
+          }
+        },
+        "title": "TemplateSearchEmbed",
+        "type": "object"
+      },
+      "TemplateView": {
+        "properties": {
+          "description": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "iconName": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "imageUrl": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "imageUrl"
+        ],
+        "title": "TemplateView",
+        "type": "object"
+      },
+      "TemplatesTemplateParameters": {
+        "properties": {
+          "insightsTargetWorkspaceId": {
+            "format": "uuid",
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "title": "TemplatesTemplateParameters",
+        "type": "object"
+      },
+      "TextFieldWithFieldEmbed": {
+        "properties": {
+          "_embedded": {
+            "$ref": "#/components/schemas/FieldEmbed"
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "isTeamField": {
+            "type": "boolean"
+          },
+          "name": {
+            "type": "string"
+          },
+          "teamId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "typeId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "typeId",
+          "name",
+          "description",
+          "isTeamField",
+          "teamId",
+          "createdAt",
+          "_embedded"
+        ],
+        "title": "TextFieldWithFieldEmbed",
+        "type": "object"
+      },
+      "TextFieldWithWorkspaceEmbedFieldEmbed": {
+        "properties": {
+          "_embedded": {
+            "$ref": "#/components/schemas/WorkspaceEmbedFieldEmbed"
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "isTeamField": {
+            "type": "boolean"
+          },
+          "name": {
+            "type": "string"
+          },
+          "teamId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "typeId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "typeId",
+          "name",
+          "description",
+          "isTeamField",
+          "teamId",
+          "createdAt",
+          "_embedded"
+        ],
+        "title": "TextFieldWithWorkspaceEmbedFieldEmbed",
         "type": "object"
       },
       "TimePeriod": {
@@ -3653,6 +6549,50 @@
           "endDate"
         ],
         "title": "TimePeriod",
+        "type": "object"
+      },
+      "UpdateStatus": {
+        "properties": {
+          "category": {
+            "$ref": "#/components/schemas/StatusCategory"
+          },
+          "color": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/StatusColor"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "default": {
+            "description": "Whether this status should be applied by default to newly created items. There can be only one default status in each workspace.",
+            "type": "boolean"
+          },
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "name": {
+            "description": "Name of this status in UI.",
+            "type": "string"
+          },
+          "order": {
+            "description": "Order of this status comparing to other statuses in the same workspace.",
+            "format": "int32",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "id",
+          "workspaceId",
+          "category",
+          "name",
+          "default",
+          "order"
+        ],
+        "title": "UpdateStatus",
         "type": "object"
       },
       "View": {
@@ -3716,6 +6656,92 @@
         "title": "View",
         "type": "object"
       },
+      "VotesFieldWithFieldEmbed": {
+        "properties": {
+          "_embedded": {
+            "$ref": "#/components/schemas/FieldEmbed"
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "isTeamField": {
+            "type": "boolean"
+          },
+          "name": {
+            "type": "string"
+          },
+          "teamId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "typeId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "typeId",
+          "name",
+          "description",
+          "isTeamField",
+          "teamId",
+          "createdAt",
+          "_embedded"
+        ],
+        "title": "VotesFieldWithFieldEmbed",
+        "type": "object"
+      },
+      "VotesFieldWithWorkspaceEmbedFieldEmbed": {
+        "properties": {
+          "_embedded": {
+            "$ref": "#/components/schemas/WorkspaceEmbedFieldEmbed"
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "isTeamField": {
+            "type": "boolean"
+          },
+          "name": {
+            "type": "string"
+          },
+          "teamId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "typeId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "typeId",
+          "name",
+          "description",
+          "isTeamField",
+          "teamId",
+          "createdAt",
+          "_embedded"
+        ],
+        "title": "VotesFieldWithWorkspaceEmbedFieldEmbed",
+        "type": "object"
+      },
       "VotingAppScoreFieldTypeSettings": {
         "properties": {
           "maximum": {
@@ -3734,8 +6760,98 @@
         "title": "VotingAppScoreFieldTypeSettings",
         "type": "object"
       },
-      "VotingAppVotesFieldTypeSettings": {
-        "title": "VotingAppVotesFieldTypeSettings",
+      "VotingScoreFieldWithFieldEmbed": {
+        "properties": {
+          "_embedded": {
+            "$ref": "#/components/schemas/FieldEmbed"
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "isTeamField": {
+            "type": "boolean"
+          },
+          "name": {
+            "type": "string"
+          },
+          "settings": {
+            "$ref": "#/components/schemas/VotingAppScoreFieldTypeSettings"
+          },
+          "teamId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "typeId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "typeId",
+          "settings",
+          "name",
+          "description",
+          "isTeamField",
+          "teamId",
+          "createdAt",
+          "_embedded"
+        ],
+        "title": "VotingScoreFieldWithFieldEmbed",
+        "type": "object"
+      },
+      "VotingScoreFieldWithWorkspaceEmbedFieldEmbed": {
+        "properties": {
+          "_embedded": {
+            "$ref": "#/components/schemas/WorkspaceEmbedFieldEmbed"
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "isTeamField": {
+            "type": "boolean"
+          },
+          "name": {
+            "type": "string"
+          },
+          "settings": {
+            "$ref": "#/components/schemas/VotingAppScoreFieldTypeSettings"
+          },
+          "teamId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "typeId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "typeId",
+          "settings",
+          "name",
+          "description",
+          "isTeamField",
+          "teamId",
+          "createdAt",
+          "_embedded"
+        ],
+        "title": "VotingScoreFieldWithWorkspaceEmbedFieldEmbed",
         "type": "object"
       },
       "Workspace": {
@@ -3951,19 +7067,6 @@
         "title": "WorkspaceBulkUpdate",
         "type": "object"
       },
-      "WorkspaceDuplicateRequest": {
-        "properties": {
-          "duplicatePermissions": {
-            "description": "Whether to also duplicate all user-permissions to the new workspace.",
-            "type": "boolean"
-          }
-        },
-        "required": [
-          "duplicatePermissions"
-        ],
-        "title": "WorkspaceDuplicateRequest",
-        "type": "object"
-      },
       "WorkspaceEmbed": {
         "properties": {
           "apps": {
@@ -3990,7 +7093,7 @@
           },
           "fields": {
             "additionalProperties": {
-              "$ref": "#/components/schemas/FieldWithFieldEmbed"
+              "$ref": "#/components/schemas/FieldWithWorkspaceEmbedFieldEmbed"
             },
             "type": "object"
           },
@@ -4057,6 +7160,29 @@
         "title": "WorkspaceEmbed",
         "type": "object"
       },
+      "WorkspaceEmbedFieldEmbed": {
+        "properties": {
+          "allWorkspaceIds": {
+            "description": "List of all workspace-ids where this field is used",
+            "items": {
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": "array",
+            "uniqueItems": true
+          },
+          "order": {
+            "description": "Order of this field in the current workspace",
+            "format": "int32",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "order"
+        ],
+        "title": "WorkspaceEmbedFieldEmbed",
+        "type": "object"
+      },
       "WorkspaceEmbedRelation": {
         "properties": {
           "relationId": {
@@ -4083,6 +7209,76 @@
           "workspaceId"
         ],
         "title": "WorkspaceEmbedRelation",
+        "type": "object"
+      },
+      "WorkspaceEndpointsSetStatusesRequest": {
+        "properties": {
+          "replacements": {
+            "additionalProperties": {
+              "format": "uuid",
+              "type": "string"
+            },
+            "description": "A map of status replacements, where key is and OLD status-id and value is a NEW status-id. Replacements must be specified for each status being deleted from the workspace.This mapping will be used to migrate all items in the workspace to new statuses before deleting the old ones.",
+            "type": "object"
+          },
+          "statuses": {
+            "items": {
+              "oneOf": [
+                {
+                  "$ref": "#/components/schemas/CreateStatus"
+                },
+                {
+                  "$ref": "#/components/schemas/UpdateStatus"
+                }
+              ]
+            },
+            "type": "array"
+          }
+        },
+        "required": [
+          "replacements"
+        ],
+        "title": "WorkspaceEndpointsSetStatusesRequest",
+        "type": "object"
+      },
+      "WorkspaceEndpointsWorkspaceDuplicateRequest": {
+        "properties": {
+          "duplicatePermissions": {
+            "description": "Whether to also duplicate all user-permissions to the new workspace.",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "duplicatePermissions"
+        ],
+        "title": "WorkspaceEndpointsWorkspaceDuplicateRequest",
+        "type": "object"
+      },
+      "WorkspaceEndpointsWorkspacePermissionsUpdateRequest": {
+        "properties": {
+          "defaultPermission": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Permission"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Default permission for all users in the team who are not explicitly listed in the `permissions` map."
+          },
+          "permissions": {
+            "additionalProperties": {
+              "$ref": "#/components/schemas/Permission"
+            },
+            "description": "Explicit permissions for specific users in the team.",
+            "type": "object"
+          }
+        },
+        "required": [
+          "permissions"
+        ],
+        "title": "WorkspaceEndpointsWorkspacePermissionsUpdateRequest",
         "type": "object"
       },
       "WorkspaceGroup": {
@@ -4392,33 +7588,6 @@
         ],
         "title": "WorkspaceNamespace",
         "type": "string"
-      },
-      "WorkspacePermissionsUpdateRequest": {
-        "properties": {
-          "defaultPermission": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/Permission"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "description": "Default permission for all users in the team who are not explicitly listed in the `permissions` map."
-          },
-          "permissions": {
-            "additionalProperties": {
-              "$ref": "#/components/schemas/Permission"
-            },
-            "description": "Explicit permissions for specific users in the team.",
-            "type": "object"
-          }
-        },
-        "required": [
-          "permissions"
-        ],
-        "title": "WorkspacePermissionsUpdateRequest",
-        "type": "object"
       },
       "WorkspaceProgressMode": {
         "enum": [
@@ -5361,6 +8530,446 @@
   },
   "openapi": "3.1.0",
   "paths": {
+    "/api/fields": {
+      "post": {
+        "description": "Installs a new field.\nIf it's a team-field, then it's possible to install it with empty or any non-empty amount of linked workspaces.\nOtherwise, if it's not a team-field, then exactly one linked workspace should be specified.<br/>Requirements:<br/>  - auth-client scopes: \"workspace\"<br/>  - user permission: \"full\"<br/>  - team features: \"team-fields\" when operating with team-fields<br/>  - user role: \"admin\" when operating with team-fields<br/>Returns:<br/>401 if user does not have the required permission",
+        "operationId": "installField",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FieldEndpointsInstallFieldRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FieldWithFieldEmbed"
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "security": [
+          {},
+          {
+            "httpAuth": []
+          }
+        ],
+        "summary": "Install a new field",
+        "tags": [
+          "Fields"
+        ]
+      }
+    },
+    "/api/fields/reorder": {
+      "post": {
+        "description": "Updates the order of fields in the specified workspace.<br/>Requirements:<br/>  - auth-client scopes: \"workspace\"<br/>  - user permission: \"full\"<br/>  - team features: \"team-fields\" when operating with team-fields<br/>  - user role: \"admin\" when operating with team-fields<br/>Returns:<br/>401 if user does not have the required permission",
+        "operationId": "reorderFields",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FieldEndpointsReorderFieldsRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "204": {
+            "description": ""
+          }
+        },
+        "security": [
+          {},
+          {
+            "httpAuth": []
+          }
+        ],
+        "summary": "Reorder fields",
+        "tags": [
+          "Fields"
+        ]
+      }
+    },
+    "/api/fields/search": {
+      "post": {
+        "description": "Searches fields in the current team based on the specified filters.<br/>Requirements:<br/>  - auth-client scopes: \"workspace:read\"<br/>  - user permission: \"read\" or higher<br/>  - team features: \"team-fields\" when operating with team-fields<br/>Returns:<br/>401 if user does not have the required permission",
+        "operationId": "searchFields",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FieldSearchQuery"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FieldWithFieldEmbedPage"
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "security": [
+          {},
+          {
+            "httpAuth": []
+          }
+        ],
+        "summary": "Search fields",
+        "tags": [
+          "Fields"
+        ]
+      }
+    },
+    "/api/fields/types": {
+      "get": {
+        "description": "Returns all field-types available in the system.<br/>Requirements:<br/>  - auth-client scopes: \"workspace:read\"<br/>  - user permission: \"read\" or higher<br/>  - team features: \"team-fields\" when operating with team-fields<br/>Returns:<br/>401 if user does not have the required permission",
+        "operationId": "listFieldTypes",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/FieldEndpointsFieldTypeInfo"
+                  },
+                  "type": "array"
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "security": [
+          {},
+          {
+            "httpAuth": []
+          }
+        ],
+        "summary": "List all available field types",
+        "tags": [
+          "Fields"
+        ]
+      }
+    },
+    "/api/fields/workspaces": {
+      "delete": {
+        "description": "Removes existing links between team-fields and workspaces.\nReturns updated fields with their linked workspaces embedded.\nReturns an error if either of the requested fields is not a team-field.\nIgnores when trying to delete non-existing links.\n<br/>Requirements:<br/>  - auth-client scopes: \"workspace\"<br/>  - user permission: \"full\"<br/>  - team features: \"team-fields\" when operating with team-fields<br/>  - user role: \"admin\" when operating with team-fields<br/>Returns:<br/>401 if user does not have the required permission",
+        "operationId": "unlinkTeamFieldsFromWorkspaces",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "items": {
+                  "$ref": "#/components/schemas/FieldEndpointsFieldToWorkspaceLink"
+                },
+                "type": "array"
+              }
+            }
+          },
+          "required": false
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/FieldWithFieldEmbed"
+                  },
+                  "type": "array"
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "security": [
+          {},
+          {
+            "httpAuth": []
+          }
+        ],
+        "summary": "Unlink team-fields from workspaces",
+        "tags": [
+          "Fields"
+        ]
+      },
+      "post": {
+        "description": "Links existing team-fields to existing workspaces.\nReturns updated fields with their linked workspaces embedded.\nReturns an error if either of the requested fields is not a team-field.\nIgnores existing links.\n<br/>Requirements:<br/>  - auth-client scopes: \"workspace\"<br/>  - user permission: \"full\"<br/>  - team features: \"team-fields\" when operating with team-fields<br/>  - user role: \"admin\" when operating with team-fields<br/>Returns:<br/>401 if user does not have the required permission",
+        "operationId": "linkTeamFieldsToWorkspaces",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "items": {
+                  "$ref": "#/components/schemas/FieldEndpointsFieldToWorkspaceLink"
+                },
+                "type": "array"
+              }
+            }
+          },
+          "required": false
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/FieldWithFieldEmbed"
+                  },
+                  "type": "array"
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "security": [
+          {},
+          {
+            "httpAuth": []
+          }
+        ],
+        "summary": "Link team-fields to workspaces",
+        "tags": [
+          "Fields"
+        ]
+      }
+    },
+    "/api/fields/{fieldId}": {
+      "delete": {
+        "description": "Deletes the requested field together with all its connections to workspaces and its values in the corresponding workspaces<br/>Requirements:<br/>  - auth-client scopes: \"workspace\"<br/>  - user permission: \"full\"<br/>  - team features: \"team-fields\" when operating with team-fields<br/>  - user role: \"admin\" when operating with team-fields<br/>Returns:<br/>401 if user does not have the required permission",
+        "operationId": "deleteField",
+        "parameters": [
+          {
+            "description": "ID of the target field.",
+            "in": "path",
+            "name": "fieldId",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": ""
+          }
+        },
+        "security": [
+          {},
+          {
+            "httpAuth": []
+          }
+        ],
+        "summary": "Delete field",
+        "tags": [
+          "Fields"
+        ]
+      },
+      "get": {
+        "description": "Returns a found field with its embedded data.\nThe field is accessible by the current user only if it's a team-field, or if it belongs to an accessible workspace.<br/>Requirements:<br/>  - auth-client scopes: \"workspace:read\"<br/>  - user permission: \"read\" or higher<br/>  - team features: \"team-fields\" when operating with team-fields<br/>Returns:<br/>401 if user does not have the required permission",
+        "operationId": "retrieveField",
+        "parameters": [
+          {
+            "description": "ID of the target field.",
+            "in": "path",
+            "name": "fieldId",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FieldWithFieldEmbed"
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "security": [
+          {},
+          {
+            "httpAuth": []
+          }
+        ],
+        "summary": "Retrieve a single field",
+        "tags": [
+          "Fields"
+        ]
+      },
+      "put": {
+        "description": "Updates configuration properties of an existing field.<br/>Requirements:<br/>  - auth-client scopes: \"workspace\"<br/>  - user permission: \"full\"<br/>  - team features: \"team-fields\" when operating with team-fields<br/>  - user role: \"admin\" when operating with team-fields<br/>Returns:<br/>401 if user does not have the required permission",
+        "operationId": "reconfigureField",
+        "parameters": [
+          {
+            "description": "ID of the target field.",
+            "in": "path",
+            "name": "fieldId",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FieldEndpointsReconfigureFieldRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FieldWithFieldEmbed"
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "security": [
+          {},
+          {
+            "httpAuth": []
+          }
+        ],
+        "summary": "Reconfigure field",
+        "tags": [
+          "Fields"
+        ]
+      }
+    },
+    "/api/templates": {
+      "get": {
+        "description": "Returns all workspace-templates available to the current team.",
+        "operationId": "listTemplates",
+        "parameters": [
+          {
+            "description": "How many elements to skip.",
+            "in": "query",
+            "name": "offset",
+            "required": false,
+            "schema": {
+              "default": 0,
+              "format": "int32",
+              "minimum": 0,
+              "type": "integer"
+            }
+          },
+          {
+            "description": "How many elements to return.",
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "schema": {
+              "default": 100,
+              "format": "int32",
+              "maximum": 100,
+              "minimum": 0,
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TemplatePageWithEmbed"
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "security": [
+          {},
+          {
+            "httpAuth": []
+          }
+        ],
+        "summary": "List templates"
+      }
+    },
+    "/api/templates/{templateId}": {
+      "post": {
+        "description": "Installs the requested template with the given parameters.\nReturns a newly created workspace.\nIf the template creates multiple workspaces - then it still returns a single workspace which is considered by the template as \"main\".",
+        "operationId": "installTemplate",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "templateId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TemplateEndpointsApplyTemplateRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WorkspaceWithWorkspaceEmbed"
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "security": [
+          {},
+          {
+            "httpAuth": []
+          }
+        ],
+        "summary": "Install template"
+      }
+    },
     "/api/workspaces": {
       "post": {
         "description": "Returns newly created workspace with its sanitised data.<br/>Requirements:<br/>  - auth-client scopes: \"workspace\"<br/>  - user permission: \"write\" or higher<br/>Returns:<br/>401 if user does not have the required permission",
@@ -8144,6 +11753,587 @@
         ]
       }
     },
+    "/api/workspaces/{workspaceId}/comments": {
+      "post": {
+        "description": "Returns newly created comment with its sanitised data.<br/>Requirements:<br/>  - auth-client scopes: \"workspace\"<br/>  - user permission: \"write\" or higher<br/>Returns:<br/>401 if user does not have the required permission",
+        "operationId": "createComment",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "workspaceId",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Comment"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommentWithEmbed"
+                }
+              }
+            },
+            "description": ""
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "security": [
+          {},
+          {
+            "httpAuth": []
+          }
+        ],
+        "summary": "Create a new comment",
+        "tags": [
+          "CRUD",
+          "Comments"
+        ]
+      }
+    },
+    "/api/workspaces/{workspaceId}/comments/bulk": {
+      "post": {
+        "description": "Accepts a list of create/update/patch/delete operations (see the request model for more details).<br/>\nEach operations can target a single or multiple comments.<br/>\nReturns a list of results for each input operation including errors.<br/>\nGuarantees that the size and order of the returned results matches the input list of operations.<br/>Requirements:<br/>  - auth-client scopes: \"workspace\"<br/>  - user permission: \"write\" or higher<br/>Returns:<br/>401 if user does not have the required permission",
+        "operationId": "bulkComments",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "workspaceId",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "items": {
+                  "$ref": "#/components/schemas/CommentBulkAction"
+                },
+                "type": "array"
+              }
+            }
+          },
+          "required": false
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommentWithEmbedOrNullList"
+                }
+              }
+            },
+            "description": ""
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "security": [
+          {},
+          {
+            "httpAuth": []
+          }
+        ],
+        "summary": "Perform multiple operations with comments",
+        "tags": [
+          "CRUD",
+          "Comments"
+        ]
+      }
+    },
+    "/api/workspaces/{workspaceId}/comments/list": {
+      "post": {
+        "description": "Returns a list of comments.<br/>\nReturns null for those comments which are not found or not accessible.<br/>\nGuarantees that the size and order of the returned list matches the requested IDs.<br/>Requirements:<br/>  - auth-client scopes: \"workspace:read\"<br/>  - user permission: \"read\" or higher<br/>Returns:<br/>401 if user does not have the required permission",
+        "operationId": "listComments",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "workspaceId",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "items": {
+                  "format": "uuid",
+                  "type": "string"
+                },
+                "type": "array"
+              }
+            }
+          },
+          "required": false
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommentWithEmbedOrNullList"
+                }
+              }
+            },
+            "description": ""
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "security": [
+          {},
+          {
+            "httpAuth": []
+          }
+        ],
+        "summary": "Retrieve multiple comments by their IDs",
+        "tags": [
+          "CRUD",
+          "Comments"
+        ]
+      }
+    },
+    "/api/workspaces/{workspaceId}/comments/search": {
+      "post": {
+        "description": "Returns all comments or searches comments by query. Always returns only comments which are accessible by the current user.<br/>Requirements:<br/>  - auth-client scopes: \"workspace:read\"<br/>  - user permission: \"read\" or higher<br/>Returns:<br/>401 if user does not have the required permission",
+        "operationId": "searchComments",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "workspaceId",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "description": "How many elements to skip.",
+            "in": "query",
+            "name": "offset",
+            "required": false,
+            "schema": {
+              "default": 0,
+              "format": "int32",
+              "minimum": 0,
+              "type": "integer"
+            }
+          },
+          {
+            "description": "How many elements to return.",
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "schema": {
+              "default": 10,
+              "format": "int32",
+              "maximum": 1000,
+              "minimum": 0,
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "anyOf": [
+                  {
+                    "$ref": "#/components/schemas/CommentSearchQuery"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              }
+            }
+          },
+          "required": false
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommentWithEmbedPage"
+                }
+              }
+            },
+            "description": ""
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "security": [
+          {},
+          {
+            "httpAuth": []
+          }
+        ],
+        "summary": "Retrieve or search comments",
+        "tags": [
+          "CRUD",
+          "Comments"
+        ]
+      }
+    },
+    "/api/workspaces/{workspaceId}/comments/{commentId}": {
+      "delete": {
+        "description": "Returns empty result if the comment was successfully deleted.<br/>Requirements:<br/>  - auth-client scopes: \"workspace\"<br/>  - user permission: \"write\" or higher<br/>Returns:<br/>400 if the resource is not found<br/>401 if user does not have the required permission",
+        "operationId": "deleteComment",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "workspaceId",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "commentId",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": ""
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "security": [
+          {},
+          {
+            "httpAuth": []
+          }
+        ],
+        "summary": "Delete an existing comment",
+        "tags": [
+          "CRUD",
+          "Comments"
+        ]
+      },
+      "get": {
+        "description": "Returns found comment.<br/>Requirements:<br/>  - auth-client scopes: \"workspace:read\"<br/>  - user permission: \"read\" or higher<br/>Returns:<br/>400 if the resource is not found<br/>401 if user does not have the required permission",
+        "operationId": "retrieveComment",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "workspaceId",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "commentId",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommentWithEmbed"
+                }
+              }
+            },
+            "description": ""
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "security": [
+          {},
+          {
+            "httpAuth": []
+          }
+        ],
+        "summary": "Retrieve a single comment by its ID",
+        "tags": [
+          "CRUD",
+          "Comments"
+        ]
+      },
+      "patch": {
+        "description": "Returns the whole updated comment with its sanitised data.<br/>Requirements:<br/>  - auth-client scopes: \"workspace\"<br/>  - user permission: \"write\" or higher<br/>Returns:<br/>400 if the resource is not found<br/>401 if user does not have the required permission",
+        "operationId": "patchComment",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "workspaceId",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "commentId",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/JsonPatch"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommentWithEmbed"
+                }
+              }
+            },
+            "description": ""
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "security": [
+          {},
+          {
+            "httpAuth": []
+          }
+        ],
+        "summary": "Patch an existing comment",
+        "tags": [
+          "CRUD",
+          "Comments"
+        ]
+      },
+      "put": {
+        "description": "Returns updated comment with its sanitised data.<br/>Requirements:<br/>  - auth-client scopes: \"workspace\"<br/>  - user permission: \"write\" or higher<br/>Returns:<br/>400 if the resource is not found<br/>401 if user does not have the required permission",
+        "operationId": "updateComment",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "workspaceId",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "commentId",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Comment"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommentWithEmbed"
+                }
+              }
+            },
+            "description": ""
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "security": [
+          {},
+          {
+            "httpAuth": []
+          }
+        ],
+        "summary": "Update an existing comment",
+        "tags": [
+          "CRUD",
+          "Comments"
+        ]
+      }
+    },
+    "/api/workspaces/{workspaceId}/comments/{commentId}/reactions/{emojiCode}": {
+      "post": {
+        "description": "This action can be performed only as a real authenticated user<br/>Requirements:<br/>  - auth-client scopes: \"workspace\"<br/>  - user permission: \"write\" or higher<br/>Returns:<br/>401 if user does not have the required permission",
+        "operationId": "removeCommentReaction",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "workspaceId",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "commentId",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "emojiCode",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/CommentReactionEmoji"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": ""
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "security": [
+          {},
+          {
+            "httpAuth": []
+          }
+        ],
+        "summary": "Remove a reaction from the specified comment.",
+        "tags": [
+          "Comments"
+        ]
+      }
+    },
     "/api/workspaces/{workspaceId}/duplicate": {
       "post": {
         "description": "Returns the newly created workspace with embedded data.<br/>Requirements:<br/>  - auth-client scopes: \"workspace\"<br/>  - user permission: \"write\" or higher<br/>Returns:<br/>401 if user does not have the required permission",
@@ -8163,7 +12353,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/WorkspaceDuplicateRequest"
+                "$ref": "#/components/schemas/WorkspaceEndpointsWorkspaceDuplicateRequest"
               }
             }
           },
@@ -9515,6 +13705,532 @@
         ]
       }
     },
+    "/api/workspaces/{workspaceId}/milestones": {
+      "post": {
+        "description": "Returns newly created milestone with its sanitised data.<br/>Requirements:<br/>  - auth-client scopes: \"workspace\"<br/>  - user permission: \"write\" or higher<br/>Returns:<br/>401 if user does not have the required permission",
+        "operationId": "createItemLink",
+        "parameters": [
+          {
+            "description": "ID of the workspace which contains the managed links.",
+            "in": "path",
+            "name": "workspaceId",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Milestone"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MilestoneWithEmbed"
+                }
+              }
+            },
+            "description": ""
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "security": [
+          {},
+          {
+            "httpAuth": []
+          }
+        ],
+        "summary": "Create a new milestone",
+        "tags": [
+          "CRUD",
+          "ItemLinks"
+        ]
+      }
+    },
+    "/api/workspaces/{workspaceId}/milestones/bulk": {
+      "post": {
+        "description": "Accepts a list of create/update/patch/delete operations (see the request model for more details).<br/>\nEach operations can target a single or multiple milestones.<br/>\nReturns a list of results for each input operation including errors.<br/>\nGuarantees that the size and order of the returned results matches the input list of operations.<br/>Requirements:<br/>  - auth-client scopes: \"workspace\"<br/>  - user permission: \"write\" or higher<br/>Returns:<br/>401 if user does not have the required permission",
+        "operationId": "bulkItemLinks",
+        "parameters": [
+          {
+            "description": "ID of the workspace which contains the managed links.",
+            "in": "path",
+            "name": "workspaceId",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "items": {
+                  "$ref": "#/components/schemas/ItemLinkBulkAction"
+                },
+                "type": "array"
+              }
+            }
+          },
+          "required": false
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MilestoneWithEmbedOrNullList"
+                }
+              }
+            },
+            "description": ""
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "security": [
+          {},
+          {
+            "httpAuth": []
+          }
+        ],
+        "summary": "Perform multiple operations with milestones",
+        "tags": [
+          "CRUD",
+          "ItemLinks"
+        ]
+      }
+    },
+    "/api/workspaces/{workspaceId}/milestones/list": {
+      "post": {
+        "description": "Returns a list of milestones.<br/>\nReturns null for those milestones which are not found or not accessible.<br/>\nGuarantees that the size and order of the returned list matches the requested IDs.<br/>Requirements:<br/>  - auth-client scopes: \"workspace:read\"<br/>  - user permission: \"read\" or higher<br/>Returns:<br/>401 if user does not have the required permission",
+        "operationId": "listItemLinks",
+        "parameters": [
+          {
+            "description": "ID of the workspace which contains the managed links.",
+            "in": "path",
+            "name": "workspaceId",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "items": {
+                  "format": "uuid",
+                  "type": "string"
+                },
+                "type": "array"
+              }
+            }
+          },
+          "required": false
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MilestoneWithEmbedOrNullList"
+                }
+              }
+            },
+            "description": ""
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "security": [
+          {},
+          {
+            "httpAuth": []
+          }
+        ],
+        "summary": "Retrieve multiple milestones by their IDs",
+        "tags": [
+          "CRUD",
+          "ItemLinks"
+        ]
+      }
+    },
+    "/api/workspaces/{workspaceId}/milestones/search": {
+      "post": {
+        "description": "Returns all milestones or searches milestones by query. Always returns only milestones which are accessible by the current user.<br/>Requirements:<br/>  - auth-client scopes: \"workspace:read\"<br/>  - user permission: \"read\" or higher<br/>Returns:<br/>401 if user does not have the required permission",
+        "operationId": "searchItemLinks",
+        "parameters": [
+          {
+            "description": "ID of the workspace which contains the managed links.",
+            "in": "path",
+            "name": "workspaceId",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "description": "How many elements to skip.",
+            "in": "query",
+            "name": "offset",
+            "required": false,
+            "schema": {
+              "default": 0,
+              "format": "int32",
+              "minimum": 0,
+              "type": "integer"
+            }
+          },
+          {
+            "description": "How many elements to return.",
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "schema": {
+              "default": 10,
+              "format": "int32",
+              "maximum": 1000,
+              "minimum": 0,
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": [
+                  "object",
+                  "null"
+                ]
+              }
+            }
+          },
+          "required": false
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MilestoneWithEmbedPage"
+                }
+              }
+            },
+            "description": ""
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "security": [
+          {},
+          {
+            "httpAuth": []
+          }
+        ],
+        "summary": "Retrieve or search milestones",
+        "tags": [
+          "CRUD",
+          "ItemLinks"
+        ]
+      }
+    },
+    "/api/workspaces/{workspaceId}/milestones/{itemLinkId}": {
+      "delete": {
+        "description": "Returns empty result if the milestone was successfully deleted.<br/>Requirements:<br/>  - auth-client scopes: \"workspace\"<br/>  - user permission: \"write\" or higher<br/>Returns:<br/>400 if the resource is not found<br/>401 if user does not have the required permission",
+        "operationId": "deleteItemLink",
+        "parameters": [
+          {
+            "description": "ID of the workspace which contains the managed links.",
+            "in": "path",
+            "name": "workspaceId",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "itemLinkId",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": ""
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "security": [
+          {},
+          {
+            "httpAuth": []
+          }
+        ],
+        "summary": "Delete an existing milestone",
+        "tags": [
+          "CRUD",
+          "ItemLinks"
+        ]
+      },
+      "get": {
+        "description": "Returns found milestone.<br/>Requirements:<br/>  - auth-client scopes: \"workspace:read\"<br/>  - user permission: \"read\" or higher<br/>Returns:<br/>400 if the resource is not found<br/>401 if user does not have the required permission",
+        "operationId": "retrieveItemLink",
+        "parameters": [
+          {
+            "description": "ID of the workspace which contains the managed links.",
+            "in": "path",
+            "name": "workspaceId",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "itemLinkId",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MilestoneWithEmbed"
+                }
+              }
+            },
+            "description": ""
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "security": [
+          {},
+          {
+            "httpAuth": []
+          }
+        ],
+        "summary": "Retrieve a single milestone by its ID",
+        "tags": [
+          "CRUD",
+          "ItemLinks"
+        ]
+      },
+      "patch": {
+        "description": "Returns the whole updated milestone with its sanitised data.<br/>Requirements:<br/>  - auth-client scopes: \"workspace\"<br/>  - user permission: \"write\" or higher<br/>Returns:<br/>400 if the resource is not found<br/>401 if user does not have the required permission",
+        "operationId": "patchItemLink",
+        "parameters": [
+          {
+            "description": "ID of the workspace which contains the managed links.",
+            "in": "path",
+            "name": "workspaceId",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "itemLinkId",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/JsonPatch"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MilestoneWithEmbed"
+                }
+              }
+            },
+            "description": ""
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "security": [
+          {},
+          {
+            "httpAuth": []
+          }
+        ],
+        "summary": "Patch an existing milestone",
+        "tags": [
+          "CRUD",
+          "ItemLinks"
+        ]
+      },
+      "put": {
+        "description": "Returns updated milestone with its sanitised data.<br/>Requirements:<br/>  - auth-client scopes: \"workspace\"<br/>  - user permission: \"write\" or higher<br/>Returns:<br/>400 if the resource is not found<br/>401 if user does not have the required permission",
+        "operationId": "updateItemLink",
+        "parameters": [
+          {
+            "description": "ID of the workspace which contains the managed links.",
+            "in": "path",
+            "name": "workspaceId",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "itemLinkId",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Milestone"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MilestoneWithEmbed"
+                }
+              }
+            },
+            "description": ""
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "security": [
+          {},
+          {
+            "httpAuth": []
+          }
+        ],
+        "summary": "Update an existing milestone",
+        "tags": [
+          "CRUD",
+          "ItemLinks"
+        ]
+      }
+    },
     "/api/workspaces/{workspaceId}/permissions": {
       "post": {
         "description": "Returns effective permission for the current user.<br/>Requirements:<br/>  - auth-client scopes: \"workspace\"<br/>  - user permission: \"write\" or higher<br/>Returns:<br/>401 if user does not have the required permission",
@@ -9534,7 +14250,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/WorkspacePermissionsUpdateRequest"
+                "$ref": "#/components/schemas/WorkspaceEndpointsWorkspacePermissionsUpdateRequest"
               }
             }
           },
@@ -9580,6 +14296,57 @@
           "Workspaces"
         ]
       }
+    },
+    "/api/workspaces/{workspaceId}/statuses": {
+      "post": {
+        "description": "Set statuses all at once for the specified workspace.\nNew statuses in the list will be added to the database, missing statuses will be removed from the database, all other statuses will be updated.\nEach workspace must have at least one status in each category: 'draft', 'active', 'closed'<br/>Requirements:<br/>  - auth-client scopes: \"workspace\"<br/>  - user permission: \"full\"<br/>Returns:<br/>401 if user does not have the required permission",
+        "operationId": "setWorkspaceStatuses",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "workspaceId",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WorkspaceEndpointsSetStatusesRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "204": {
+            "description": ""
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "security": [
+          {},
+          {
+            "httpAuth": []
+          }
+        ],
+        "tags": [
+          "Workspaces"
+        ]
+      }
     }
   },
   "servers": [
@@ -9589,8 +14356,20 @@
   ],
   "tags": [
     {
+      "description": "Manage comments on items.",
+      "name": "Comments"
+    },
+    {
       "description": "Manage items.",
       "name": "Items"
+    },
+    {
+      "description": "Manage milestones in a single workspace.",
+      "name": "ItemLinks"
+    },
+    {
+      "description": "Manage fields.",
+      "name": "Fields"
     },
     {
       "description": "Dependency links between items.",
