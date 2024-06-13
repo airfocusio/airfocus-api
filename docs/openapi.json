@@ -2567,7 +2567,7 @@
       "ItemLinkBulkCreate": {
         "properties": {
           "resource": {
-            "$ref": "#/components/schemas/Milestone"
+            "$ref": "#/components/schemas/ItemLink"
           },
           "type": {
             "enum": [
@@ -2634,7 +2634,7 @@
             "type": "string"
           },
           "resource": {
-            "$ref": "#/components/schemas/ItemLink"
+            "$ref": "#/components/schemas/Milestone"
           },
           "type": {
             "enum": [
@@ -8922,7 +8922,10 @@
             "httpAuth": []
           }
         ],
-        "summary": "List templates"
+        "summary": "List templates",
+        "tags": [
+          "Templates"
+        ]
       }
     },
     "/api/templates/{templateId}": {
@@ -8967,7 +8970,10 @@
             "httpAuth": []
           }
         ],
-        "summary": "Install template"
+        "summary": "Install template",
+        "tags": [
+          "Templates"
+        ]
       }
     },
     "/api/workspaces": {
@@ -12278,7 +12284,7 @@
     "/api/workspaces/{workspaceId}/comments/{commentId}/reactions/{emojiCode}": {
       "post": {
         "description": "This action can be performed only as a real authenticated user<br/>Requirements:<br/>  - auth-client scopes: \"workspace\"<br/>  - user permission: \"write\" or higher<br/>Returns:<br/>401 if user does not have the required permission",
-        "operationId": "removeCommentReaction",
+        "operationId": "addCommentReaction",
         "parameters": [
           {
             "in": "path",
@@ -12328,7 +12334,7 @@
             "httpAuth": []
           }
         ],
-        "summary": "Remove a reaction from the specified comment.",
+        "summary": "Add a reaction to the specified comment.",
         "tags": [
           "Comments"
         ]
@@ -14368,16 +14374,12 @@
       "name": "ItemLinks"
     },
     {
-      "description": "Manage fields.",
+      "description": "Endpoints for managing workspace fields.",
       "name": "Fields"
     },
     {
       "description": "Dependency links between items.",
       "name": "ItemLinks"
-    },
-    {
-      "description": "Manage workspace relations (hierarchy).",
-      "name": "WorkspaceRelations"
     },
     {
       "description": "Connect items with uploaded attachment-files. Note: this module is not responsible for uploading files, it only manages the links between items and files.",
@@ -14386,6 +14388,14 @@
     {
       "description": "Manage item relations (hierarchy).",
       "name": "ItemRelations"
+    },
+    {
+      "description": "Manage workspace relations (hierarchy).",
+      "name": "WorkspaceRelations"
+    },
+    {
+      "description": "Endpoints for creating workspaces via templates.",
+      "name": "Templates"
     },
     {
       "description": "Manage workspace groups.",
