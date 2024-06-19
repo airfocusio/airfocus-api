@@ -81,49 +81,6 @@
         "title": "BooleanFieldWithFieldEmbed",
         "type": "object"
       },
-      "BooleanFieldWithWorkspaceEmbedFieldEmbed": {
-        "properties": {
-          "_embedded": {
-            "$ref": "#/components/schemas/WorkspaceEmbedFieldEmbed"
-          },
-          "createdAt": {
-            "format": "date-time",
-            "type": "string"
-          },
-          "description": {
-            "type": "string"
-          },
-          "id": {
-            "format": "uuid",
-            "type": "string"
-          },
-          "isTeamField": {
-            "type": "boolean"
-          },
-          "name": {
-            "type": "string"
-          },
-          "teamId": {
-            "format": "uuid",
-            "type": "string"
-          },
-          "typeId": {
-            "type": "string"
-          }
-        },
-        "required": [
-          "id",
-          "typeId",
-          "name",
-          "description",
-          "isTeamField",
-          "teamId",
-          "createdAt",
-          "_embedded"
-        ],
-        "title": "BooleanFieldWithWorkspaceEmbedFieldEmbed",
-        "type": "object"
-      },
       "Comment": {
         "properties": {
           "content": {
@@ -489,49 +446,6 @@
         "title": "DateFieldWithFieldEmbed",
         "type": "object"
       },
-      "DateFieldWithWorkspaceEmbedFieldEmbed": {
-        "properties": {
-          "_embedded": {
-            "$ref": "#/components/schemas/WorkspaceEmbedFieldEmbed"
-          },
-          "createdAt": {
-            "format": "date-time",
-            "type": "string"
-          },
-          "description": {
-            "type": "string"
-          },
-          "id": {
-            "format": "uuid",
-            "type": "string"
-          },
-          "isTeamField": {
-            "type": "boolean"
-          },
-          "name": {
-            "type": "string"
-          },
-          "teamId": {
-            "format": "uuid",
-            "type": "string"
-          },
-          "typeId": {
-            "type": "string"
-          }
-        },
-        "required": [
-          "id",
-          "typeId",
-          "name",
-          "description",
-          "isTeamField",
-          "teamId",
-          "createdAt",
-          "_embedded"
-        ],
-        "title": "DateFieldWithWorkspaceEmbedFieldEmbed",
-        "type": "object"
-      },
       "DateRangeFieldWithFieldEmbed": {
         "properties": {
           "_embedded": {
@@ -573,49 +487,6 @@
           "_embedded"
         ],
         "title": "DateRangeFieldWithFieldEmbed",
-        "type": "object"
-      },
-      "DateRangeFieldWithWorkspaceEmbedFieldEmbed": {
-        "properties": {
-          "_embedded": {
-            "$ref": "#/components/schemas/WorkspaceEmbedFieldEmbed"
-          },
-          "createdAt": {
-            "format": "date-time",
-            "type": "string"
-          },
-          "description": {
-            "type": "string"
-          },
-          "id": {
-            "format": "uuid",
-            "type": "string"
-          },
-          "isTeamField": {
-            "type": "boolean"
-          },
-          "name": {
-            "type": "string"
-          },
-          "teamId": {
-            "format": "uuid",
-            "type": "string"
-          },
-          "typeId": {
-            "type": "string"
-          }
-        },
-        "required": [
-          "id",
-          "typeId",
-          "name",
-          "description",
-          "isTeamField",
-          "teamId",
-          "createdAt",
-          "_embedded"
-        ],
-        "title": "DateRangeFieldWithWorkspaceEmbedFieldEmbed",
         "type": "object"
       },
       "ErrorResponse": {
@@ -962,104 +833,6 @@
         "title": "FieldWithFieldEmbedPage",
         "type": "object"
       },
-      "FieldWithWorkspaceEmbedFieldEmbed": {
-        "discriminator": {
-          "mapping": {
-            "boolean": "#/components/schemas/BooleanFieldWithWorkspaceEmbedFieldEmbed",
-            "date": "#/components/schemas/DateFieldWithWorkspaceEmbedFieldEmbed",
-            "date-range": "#/components/schemas/DateRangeFieldWithWorkspaceEmbedFieldEmbed",
-            "form-source": "#/components/schemas/FormSourceFieldWithWorkspaceEmbedFieldEmbed",
-            "form-target": "#/components/schemas/FormTargetFieldWithWorkspaceEmbedFieldEmbed",
-            "insights": "#/components/schemas/InsightsFieldWithWorkspaceEmbedFieldEmbed",
-            "mirror-source": "#/components/schemas/MirrorSourceFieldWithWorkspaceEmbedFieldEmbed",
-            "mirror-target": "#/components/schemas/MirrorTargetFieldWithWorkspaceEmbedFieldEmbed",
-            "number": "#/components/schemas/NumberFieldWithWorkspaceEmbedFieldEmbed",
-            "okr-checkins": "#/components/schemas/OkrCheckinsFieldWithWorkspaceEmbedFieldEmbed",
-            "okr-confidence": "#/components/schemas/OkrConfidenceFieldWithWorkspaceEmbedFieldEmbed",
-            "okr-key-result-reference": "#/components/schemas/OkrKeyResultReferenceFieldWithWorkspaceEmbedFieldEmbed",
-            "okr-key-results": "#/components/schemas/OkrKeyResultsFieldWithWorkspaceEmbedFieldEmbed",
-            "okr-progress": "#/components/schemas/OkrProgressFieldWithWorkspaceEmbedFieldEmbed",
-            "okr-time-period": "#/components/schemas/OkrTimePeriodFieldWithWorkspaceEmbedFieldEmbed",
-            "people": "#/components/schemas/PeopleFieldWithWorkspaceEmbedFieldEmbed",
-            "portal": "#/components/schemas/PortalFieldWithWorkspaceEmbedFieldEmbed",
-            "prioritization": "#/components/schemas/PrioritizationFieldWithWorkspaceEmbedFieldEmbed",
-            "select": "#/components/schemas/SelectFieldWithWorkspaceEmbedFieldEmbed",
-            "text": "#/components/schemas/TextFieldWithWorkspaceEmbedFieldEmbed",
-            "votes": "#/components/schemas/VotesFieldWithWorkspaceEmbedFieldEmbed",
-            "votingScore": "#/components/schemas/VotingScoreFieldWithWorkspaceEmbedFieldEmbed"
-          },
-          "propertyName": "typeId"
-        },
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/BooleanFieldWithWorkspaceEmbedFieldEmbed"
-          },
-          {
-            "$ref": "#/components/schemas/DateFieldWithWorkspaceEmbedFieldEmbed"
-          },
-          {
-            "$ref": "#/components/schemas/DateRangeFieldWithWorkspaceEmbedFieldEmbed"
-          },
-          {
-            "$ref": "#/components/schemas/FormSourceFieldWithWorkspaceEmbedFieldEmbed"
-          },
-          {
-            "$ref": "#/components/schemas/FormTargetFieldWithWorkspaceEmbedFieldEmbed"
-          },
-          {
-            "$ref": "#/components/schemas/InsightsFieldWithWorkspaceEmbedFieldEmbed"
-          },
-          {
-            "$ref": "#/components/schemas/MirrorSourceFieldWithWorkspaceEmbedFieldEmbed"
-          },
-          {
-            "$ref": "#/components/schemas/MirrorTargetFieldWithWorkspaceEmbedFieldEmbed"
-          },
-          {
-            "$ref": "#/components/schemas/NumberFieldWithWorkspaceEmbedFieldEmbed"
-          },
-          {
-            "$ref": "#/components/schemas/OkrCheckinsFieldWithWorkspaceEmbedFieldEmbed"
-          },
-          {
-            "$ref": "#/components/schemas/OkrConfidenceFieldWithWorkspaceEmbedFieldEmbed"
-          },
-          {
-            "$ref": "#/components/schemas/OkrKeyResultReferenceFieldWithWorkspaceEmbedFieldEmbed"
-          },
-          {
-            "$ref": "#/components/schemas/OkrKeyResultsFieldWithWorkspaceEmbedFieldEmbed"
-          },
-          {
-            "$ref": "#/components/schemas/OkrProgressFieldWithWorkspaceEmbedFieldEmbed"
-          },
-          {
-            "$ref": "#/components/schemas/OkrTimePeriodFieldWithWorkspaceEmbedFieldEmbed"
-          },
-          {
-            "$ref": "#/components/schemas/PeopleFieldWithWorkspaceEmbedFieldEmbed"
-          },
-          {
-            "$ref": "#/components/schemas/PortalFieldWithWorkspaceEmbedFieldEmbed"
-          },
-          {
-            "$ref": "#/components/schemas/PrioritizationFieldWithWorkspaceEmbedFieldEmbed"
-          },
-          {
-            "$ref": "#/components/schemas/SelectFieldWithWorkspaceEmbedFieldEmbed"
-          },
-          {
-            "$ref": "#/components/schemas/TextFieldWithWorkspaceEmbedFieldEmbed"
-          },
-          {
-            "$ref": "#/components/schemas/VotesFieldWithWorkspaceEmbedFieldEmbed"
-          },
-          {
-            "$ref": "#/components/schemas/VotingScoreFieldWithWorkspaceEmbedFieldEmbed"
-          }
-        ],
-        "title": "FieldWithWorkspaceEmbedFieldEmbed"
-      },
       "FormSourceFieldTypeSettings": {
         "properties": {
           "maximum": {
@@ -1120,53 +893,6 @@
         "title": "FormSourceFieldWithFieldEmbed",
         "type": "object"
       },
-      "FormSourceFieldWithWorkspaceEmbedFieldEmbed": {
-        "properties": {
-          "_embedded": {
-            "$ref": "#/components/schemas/WorkspaceEmbedFieldEmbed"
-          },
-          "createdAt": {
-            "format": "date-time",
-            "type": "string"
-          },
-          "description": {
-            "type": "string"
-          },
-          "id": {
-            "format": "uuid",
-            "type": "string"
-          },
-          "isTeamField": {
-            "type": "boolean"
-          },
-          "name": {
-            "type": "string"
-          },
-          "settings": {
-            "$ref": "#/components/schemas/FormSourceFieldTypeSettings"
-          },
-          "teamId": {
-            "format": "uuid",
-            "type": "string"
-          },
-          "typeId": {
-            "type": "string"
-          }
-        },
-        "required": [
-          "id",
-          "typeId",
-          "settings",
-          "name",
-          "description",
-          "isTeamField",
-          "teamId",
-          "createdAt",
-          "_embedded"
-        ],
-        "title": "FormSourceFieldWithWorkspaceEmbedFieldEmbed",
-        "type": "object"
-      },
       "FormTargetFieldWithFieldEmbed": {
         "properties": {
           "_embedded": {
@@ -1208,49 +934,6 @@
           "_embedded"
         ],
         "title": "FormTargetFieldWithFieldEmbed",
-        "type": "object"
-      },
-      "FormTargetFieldWithWorkspaceEmbedFieldEmbed": {
-        "properties": {
-          "_embedded": {
-            "$ref": "#/components/schemas/WorkspaceEmbedFieldEmbed"
-          },
-          "createdAt": {
-            "format": "date-time",
-            "type": "string"
-          },
-          "description": {
-            "type": "string"
-          },
-          "id": {
-            "format": "uuid",
-            "type": "string"
-          },
-          "isTeamField": {
-            "type": "boolean"
-          },
-          "name": {
-            "type": "string"
-          },
-          "teamId": {
-            "format": "uuid",
-            "type": "string"
-          },
-          "typeId": {
-            "type": "string"
-          }
-        },
-        "required": [
-          "id",
-          "typeId",
-          "name",
-          "description",
-          "isTeamField",
-          "teamId",
-          "createdAt",
-          "_embedded"
-        ],
-        "title": "FormTargetFieldWithWorkspaceEmbedFieldEmbed",
         "type": "object"
       },
       "InsightsFieldTypeSettings": {
@@ -1311,53 +994,6 @@
           "_embedded"
         ],
         "title": "InsightsFieldWithFieldEmbed",
-        "type": "object"
-      },
-      "InsightsFieldWithWorkspaceEmbedFieldEmbed": {
-        "properties": {
-          "_embedded": {
-            "$ref": "#/components/schemas/WorkspaceEmbedFieldEmbed"
-          },
-          "createdAt": {
-            "format": "date-time",
-            "type": "string"
-          },
-          "description": {
-            "type": "string"
-          },
-          "id": {
-            "format": "uuid",
-            "type": "string"
-          },
-          "isTeamField": {
-            "type": "boolean"
-          },
-          "name": {
-            "type": "string"
-          },
-          "settings": {
-            "$ref": "#/components/schemas/InsightsFieldTypeSettings"
-          },
-          "teamId": {
-            "format": "uuid",
-            "type": "string"
-          },
-          "typeId": {
-            "type": "string"
-          }
-        },
-        "required": [
-          "id",
-          "typeId",
-          "settings",
-          "name",
-          "description",
-          "isTeamField",
-          "teamId",
-          "createdAt",
-          "_embedded"
-        ],
-        "title": "InsightsFieldWithWorkspaceEmbedFieldEmbed",
         "type": "object"
       },
       "InstallBooleanFieldRequest": {
@@ -2567,7 +2203,7 @@
       "ItemLinkBulkCreate": {
         "properties": {
           "resource": {
-            "$ref": "#/components/schemas/ItemLink"
+            "$ref": "#/components/schemas/Milestone"
           },
           "type": {
             "enum": [
@@ -2634,7 +2270,7 @@
             "type": "string"
           },
           "resource": {
-            "$ref": "#/components/schemas/Milestone"
+            "$ref": "#/components/schemas/ItemLink"
           },
           "type": {
             "enum": [
@@ -4296,49 +3932,6 @@
         "title": "MirrorSourceFieldWithFieldEmbed",
         "type": "object"
       },
-      "MirrorSourceFieldWithWorkspaceEmbedFieldEmbed": {
-        "properties": {
-          "_embedded": {
-            "$ref": "#/components/schemas/WorkspaceEmbedFieldEmbed"
-          },
-          "createdAt": {
-            "format": "date-time",
-            "type": "string"
-          },
-          "description": {
-            "type": "string"
-          },
-          "id": {
-            "format": "uuid",
-            "type": "string"
-          },
-          "isTeamField": {
-            "type": "boolean"
-          },
-          "name": {
-            "type": "string"
-          },
-          "teamId": {
-            "format": "uuid",
-            "type": "string"
-          },
-          "typeId": {
-            "type": "string"
-          }
-        },
-        "required": [
-          "id",
-          "typeId",
-          "name",
-          "description",
-          "isTeamField",
-          "teamId",
-          "createdAt",
-          "_embedded"
-        ],
-        "title": "MirrorSourceFieldWithWorkspaceEmbedFieldEmbed",
-        "type": "object"
-      },
       "MirrorTargetFieldWithFieldEmbed": {
         "properties": {
           "_embedded": {
@@ -4380,49 +3973,6 @@
           "_embedded"
         ],
         "title": "MirrorTargetFieldWithFieldEmbed",
-        "type": "object"
-      },
-      "MirrorTargetFieldWithWorkspaceEmbedFieldEmbed": {
-        "properties": {
-          "_embedded": {
-            "$ref": "#/components/schemas/WorkspaceEmbedFieldEmbed"
-          },
-          "createdAt": {
-            "format": "date-time",
-            "type": "string"
-          },
-          "description": {
-            "type": "string"
-          },
-          "id": {
-            "format": "uuid",
-            "type": "string"
-          },
-          "isTeamField": {
-            "type": "boolean"
-          },
-          "name": {
-            "type": "string"
-          },
-          "teamId": {
-            "format": "uuid",
-            "type": "string"
-          },
-          "typeId": {
-            "type": "string"
-          }
-        },
-        "required": [
-          "id",
-          "typeId",
-          "name",
-          "description",
-          "isTeamField",
-          "teamId",
-          "createdAt",
-          "_embedded"
-        ],
-        "title": "MirrorTargetFieldWithWorkspaceEmbedFieldEmbed",
         "type": "object"
       },
       "NumberFieldTypeSettings": {
@@ -4580,53 +4130,6 @@
         "title": "NumberFieldWithFieldEmbed",
         "type": "object"
       },
-      "NumberFieldWithWorkspaceEmbedFieldEmbed": {
-        "properties": {
-          "_embedded": {
-            "$ref": "#/components/schemas/WorkspaceEmbedFieldEmbed"
-          },
-          "createdAt": {
-            "format": "date-time",
-            "type": "string"
-          },
-          "description": {
-            "type": "string"
-          },
-          "id": {
-            "format": "uuid",
-            "type": "string"
-          },
-          "isTeamField": {
-            "type": "boolean"
-          },
-          "name": {
-            "type": "string"
-          },
-          "settings": {
-            "$ref": "#/components/schemas/NumberFieldTypeSettings"
-          },
-          "teamId": {
-            "format": "uuid",
-            "type": "string"
-          },
-          "typeId": {
-            "type": "string"
-          }
-        },
-        "required": [
-          "id",
-          "typeId",
-          "settings",
-          "name",
-          "description",
-          "isTeamField",
-          "teamId",
-          "createdAt",
-          "_embedded"
-        ],
-        "title": "NumberFieldWithWorkspaceEmbedFieldEmbed",
-        "type": "object"
-      },
       "OkrCheckinsFieldWithFieldEmbed": {
         "properties": {
           "_embedded": {
@@ -4668,49 +4171,6 @@
           "_embedded"
         ],
         "title": "OkrCheckinsFieldWithFieldEmbed",
-        "type": "object"
-      },
-      "OkrCheckinsFieldWithWorkspaceEmbedFieldEmbed": {
-        "properties": {
-          "_embedded": {
-            "$ref": "#/components/schemas/WorkspaceEmbedFieldEmbed"
-          },
-          "createdAt": {
-            "format": "date-time",
-            "type": "string"
-          },
-          "description": {
-            "type": "string"
-          },
-          "id": {
-            "format": "uuid",
-            "type": "string"
-          },
-          "isTeamField": {
-            "type": "boolean"
-          },
-          "name": {
-            "type": "string"
-          },
-          "teamId": {
-            "format": "uuid",
-            "type": "string"
-          },
-          "typeId": {
-            "type": "string"
-          }
-        },
-        "required": [
-          "id",
-          "typeId",
-          "name",
-          "description",
-          "isTeamField",
-          "teamId",
-          "createdAt",
-          "_embedded"
-        ],
-        "title": "OkrCheckinsFieldWithWorkspaceEmbedFieldEmbed",
         "type": "object"
       },
       "OkrConfidenceFieldSettings": {
@@ -4778,53 +4238,6 @@
         "title": "OkrConfidenceFieldWithFieldEmbed",
         "type": "object"
       },
-      "OkrConfidenceFieldWithWorkspaceEmbedFieldEmbed": {
-        "properties": {
-          "_embedded": {
-            "$ref": "#/components/schemas/WorkspaceEmbedFieldEmbed"
-          },
-          "createdAt": {
-            "format": "date-time",
-            "type": "string"
-          },
-          "description": {
-            "type": "string"
-          },
-          "id": {
-            "format": "uuid",
-            "type": "string"
-          },
-          "isTeamField": {
-            "type": "boolean"
-          },
-          "name": {
-            "type": "string"
-          },
-          "settings": {
-            "$ref": "#/components/schemas/OkrConfidenceFieldSettings"
-          },
-          "teamId": {
-            "format": "uuid",
-            "type": "string"
-          },
-          "typeId": {
-            "type": "string"
-          }
-        },
-        "required": [
-          "id",
-          "typeId",
-          "settings",
-          "name",
-          "description",
-          "isTeamField",
-          "teamId",
-          "createdAt",
-          "_embedded"
-        ],
-        "title": "OkrConfidenceFieldWithWorkspaceEmbedFieldEmbed",
-        "type": "object"
-      },
       "OkrKeyResultReferenceFieldWithFieldEmbed": {
         "properties": {
           "_embedded": {
@@ -4866,49 +4279,6 @@
           "_embedded"
         ],
         "title": "OkrKeyResultReferenceFieldWithFieldEmbed",
-        "type": "object"
-      },
-      "OkrKeyResultReferenceFieldWithWorkspaceEmbedFieldEmbed": {
-        "properties": {
-          "_embedded": {
-            "$ref": "#/components/schemas/WorkspaceEmbedFieldEmbed"
-          },
-          "createdAt": {
-            "format": "date-time",
-            "type": "string"
-          },
-          "description": {
-            "type": "string"
-          },
-          "id": {
-            "format": "uuid",
-            "type": "string"
-          },
-          "isTeamField": {
-            "type": "boolean"
-          },
-          "name": {
-            "type": "string"
-          },
-          "teamId": {
-            "format": "uuid",
-            "type": "string"
-          },
-          "typeId": {
-            "type": "string"
-          }
-        },
-        "required": [
-          "id",
-          "typeId",
-          "name",
-          "description",
-          "isTeamField",
-          "teamId",
-          "createdAt",
-          "_embedded"
-        ],
-        "title": "OkrKeyResultReferenceFieldWithWorkspaceEmbedFieldEmbed",
         "type": "object"
       },
       "OkrKeyResultsFieldWithFieldEmbed": {
@@ -4954,49 +4324,6 @@
         "title": "OkrKeyResultsFieldWithFieldEmbed",
         "type": "object"
       },
-      "OkrKeyResultsFieldWithWorkspaceEmbedFieldEmbed": {
-        "properties": {
-          "_embedded": {
-            "$ref": "#/components/schemas/WorkspaceEmbedFieldEmbed"
-          },
-          "createdAt": {
-            "format": "date-time",
-            "type": "string"
-          },
-          "description": {
-            "type": "string"
-          },
-          "id": {
-            "format": "uuid",
-            "type": "string"
-          },
-          "isTeamField": {
-            "type": "boolean"
-          },
-          "name": {
-            "type": "string"
-          },
-          "teamId": {
-            "format": "uuid",
-            "type": "string"
-          },
-          "typeId": {
-            "type": "string"
-          }
-        },
-        "required": [
-          "id",
-          "typeId",
-          "name",
-          "description",
-          "isTeamField",
-          "teamId",
-          "createdAt",
-          "_embedded"
-        ],
-        "title": "OkrKeyResultsFieldWithWorkspaceEmbedFieldEmbed",
-        "type": "object"
-      },
       "OkrProgressFieldWithFieldEmbed": {
         "properties": {
           "_embedded": {
@@ -5038,49 +4365,6 @@
           "_embedded"
         ],
         "title": "OkrProgressFieldWithFieldEmbed",
-        "type": "object"
-      },
-      "OkrProgressFieldWithWorkspaceEmbedFieldEmbed": {
-        "properties": {
-          "_embedded": {
-            "$ref": "#/components/schemas/WorkspaceEmbedFieldEmbed"
-          },
-          "createdAt": {
-            "format": "date-time",
-            "type": "string"
-          },
-          "description": {
-            "type": "string"
-          },
-          "id": {
-            "format": "uuid",
-            "type": "string"
-          },
-          "isTeamField": {
-            "type": "boolean"
-          },
-          "name": {
-            "type": "string"
-          },
-          "teamId": {
-            "format": "uuid",
-            "type": "string"
-          },
-          "typeId": {
-            "type": "string"
-          }
-        },
-        "required": [
-          "id",
-          "typeId",
-          "name",
-          "description",
-          "isTeamField",
-          "teamId",
-          "createdAt",
-          "_embedded"
-        ],
-        "title": "OkrProgressFieldWithWorkspaceEmbedFieldEmbed",
         "type": "object"
       },
       "OkrTimePeriodFieldSettings": {
@@ -5142,53 +4426,6 @@
         "title": "OkrTimePeriodFieldWithFieldEmbed",
         "type": "object"
       },
-      "OkrTimePeriodFieldWithWorkspaceEmbedFieldEmbed": {
-        "properties": {
-          "_embedded": {
-            "$ref": "#/components/schemas/WorkspaceEmbedFieldEmbed"
-          },
-          "createdAt": {
-            "format": "date-time",
-            "type": "string"
-          },
-          "description": {
-            "type": "string"
-          },
-          "id": {
-            "format": "uuid",
-            "type": "string"
-          },
-          "isTeamField": {
-            "type": "boolean"
-          },
-          "name": {
-            "type": "string"
-          },
-          "settings": {
-            "$ref": "#/components/schemas/OkrTimePeriodFieldSettings"
-          },
-          "teamId": {
-            "format": "uuid",
-            "type": "string"
-          },
-          "typeId": {
-            "type": "string"
-          }
-        },
-        "required": [
-          "id",
-          "typeId",
-          "settings",
-          "name",
-          "description",
-          "isTeamField",
-          "teamId",
-          "createdAt",
-          "_embedded"
-        ],
-        "title": "OkrTimePeriodFieldWithWorkspaceEmbedFieldEmbed",
-        "type": "object"
-      },
       "PeopleFieldTypeSettings": {
         "properties": {
           "autoAssign": {
@@ -5248,53 +4485,6 @@
         "title": "PeopleFieldWithFieldEmbed",
         "type": "object"
       },
-      "PeopleFieldWithWorkspaceEmbedFieldEmbed": {
-        "properties": {
-          "_embedded": {
-            "$ref": "#/components/schemas/WorkspaceEmbedFieldEmbed"
-          },
-          "createdAt": {
-            "format": "date-time",
-            "type": "string"
-          },
-          "description": {
-            "type": "string"
-          },
-          "id": {
-            "format": "uuid",
-            "type": "string"
-          },
-          "isTeamField": {
-            "type": "boolean"
-          },
-          "name": {
-            "type": "string"
-          },
-          "settings": {
-            "$ref": "#/components/schemas/PeopleFieldTypeSettings"
-          },
-          "teamId": {
-            "format": "uuid",
-            "type": "string"
-          },
-          "typeId": {
-            "type": "string"
-          }
-        },
-        "required": [
-          "id",
-          "typeId",
-          "settings",
-          "name",
-          "description",
-          "isTeamField",
-          "teamId",
-          "createdAt",
-          "_embedded"
-        ],
-        "title": "PeopleFieldWithWorkspaceEmbedFieldEmbed",
-        "type": "object"
-      },
       "Permission": {
         "enum": [
           "comment",
@@ -5348,49 +4538,6 @@
         "title": "PortalFieldWithFieldEmbed",
         "type": "object"
       },
-      "PortalFieldWithWorkspaceEmbedFieldEmbed": {
-        "properties": {
-          "_embedded": {
-            "$ref": "#/components/schemas/WorkspaceEmbedFieldEmbed"
-          },
-          "createdAt": {
-            "format": "date-time",
-            "type": "string"
-          },
-          "description": {
-            "type": "string"
-          },
-          "id": {
-            "format": "uuid",
-            "type": "string"
-          },
-          "isTeamField": {
-            "type": "boolean"
-          },
-          "name": {
-            "type": "string"
-          },
-          "teamId": {
-            "format": "uuid",
-            "type": "string"
-          },
-          "typeId": {
-            "type": "string"
-          }
-        },
-        "required": [
-          "id",
-          "typeId",
-          "name",
-          "description",
-          "isTeamField",
-          "teamId",
-          "createdAt",
-          "_embedded"
-        ],
-        "title": "PortalFieldWithWorkspaceEmbedFieldEmbed",
-        "type": "object"
-      },
       "PrioritizationFieldWithFieldEmbed": {
         "properties": {
           "_embedded": {
@@ -5432,49 +4579,6 @@
           "_embedded"
         ],
         "title": "PrioritizationFieldWithFieldEmbed",
-        "type": "object"
-      },
-      "PrioritizationFieldWithWorkspaceEmbedFieldEmbed": {
-        "properties": {
-          "_embedded": {
-            "$ref": "#/components/schemas/WorkspaceEmbedFieldEmbed"
-          },
-          "createdAt": {
-            "format": "date-time",
-            "type": "string"
-          },
-          "description": {
-            "type": "string"
-          },
-          "id": {
-            "format": "uuid",
-            "type": "string"
-          },
-          "isTeamField": {
-            "type": "boolean"
-          },
-          "name": {
-            "type": "string"
-          },
-          "teamId": {
-            "format": "uuid",
-            "type": "string"
-          },
-          "typeId": {
-            "type": "string"
-          }
-        },
-        "required": [
-          "id",
-          "typeId",
-          "name",
-          "description",
-          "isTeamField",
-          "teamId",
-          "createdAt",
-          "_embedded"
-        ],
-        "title": "PrioritizationFieldWithWorkspaceEmbedFieldEmbed",
         "type": "object"
       },
       "Property": {
@@ -6100,53 +5204,6 @@
         "title": "SelectFieldWithFieldEmbed",
         "type": "object"
       },
-      "SelectFieldWithWorkspaceEmbedFieldEmbed": {
-        "properties": {
-          "_embedded": {
-            "$ref": "#/components/schemas/WorkspaceEmbedFieldEmbed"
-          },
-          "createdAt": {
-            "format": "date-time",
-            "type": "string"
-          },
-          "description": {
-            "type": "string"
-          },
-          "id": {
-            "format": "uuid",
-            "type": "string"
-          },
-          "isTeamField": {
-            "type": "boolean"
-          },
-          "name": {
-            "type": "string"
-          },
-          "settings": {
-            "$ref": "#/components/schemas/SelectFieldTypeSettings"
-          },
-          "teamId": {
-            "format": "uuid",
-            "type": "string"
-          },
-          "typeId": {
-            "type": "string"
-          }
-        },
-        "required": [
-          "id",
-          "typeId",
-          "settings",
-          "name",
-          "description",
-          "isTeamField",
-          "teamId",
-          "createdAt",
-          "_embedded"
-        ],
-        "title": "SelectFieldWithWorkspaceEmbedFieldEmbed",
-        "type": "object"
-      },
       "Status": {
         "properties": {
           "category": {
@@ -6481,49 +5538,6 @@
         "title": "TextFieldWithFieldEmbed",
         "type": "object"
       },
-      "TextFieldWithWorkspaceEmbedFieldEmbed": {
-        "properties": {
-          "_embedded": {
-            "$ref": "#/components/schemas/WorkspaceEmbedFieldEmbed"
-          },
-          "createdAt": {
-            "format": "date-time",
-            "type": "string"
-          },
-          "description": {
-            "type": "string"
-          },
-          "id": {
-            "format": "uuid",
-            "type": "string"
-          },
-          "isTeamField": {
-            "type": "boolean"
-          },
-          "name": {
-            "type": "string"
-          },
-          "teamId": {
-            "format": "uuid",
-            "type": "string"
-          },
-          "typeId": {
-            "type": "string"
-          }
-        },
-        "required": [
-          "id",
-          "typeId",
-          "name",
-          "description",
-          "isTeamField",
-          "teamId",
-          "createdAt",
-          "_embedded"
-        ],
-        "title": "TextFieldWithWorkspaceEmbedFieldEmbed",
-        "type": "object"
-      },
       "TimePeriod": {
         "properties": {
           "endDate": {
@@ -6699,49 +5713,6 @@
         "title": "VotesFieldWithFieldEmbed",
         "type": "object"
       },
-      "VotesFieldWithWorkspaceEmbedFieldEmbed": {
-        "properties": {
-          "_embedded": {
-            "$ref": "#/components/schemas/WorkspaceEmbedFieldEmbed"
-          },
-          "createdAt": {
-            "format": "date-time",
-            "type": "string"
-          },
-          "description": {
-            "type": "string"
-          },
-          "id": {
-            "format": "uuid",
-            "type": "string"
-          },
-          "isTeamField": {
-            "type": "boolean"
-          },
-          "name": {
-            "type": "string"
-          },
-          "teamId": {
-            "format": "uuid",
-            "type": "string"
-          },
-          "typeId": {
-            "type": "string"
-          }
-        },
-        "required": [
-          "id",
-          "typeId",
-          "name",
-          "description",
-          "isTeamField",
-          "teamId",
-          "createdAt",
-          "_embedded"
-        ],
-        "title": "VotesFieldWithWorkspaceEmbedFieldEmbed",
-        "type": "object"
-      },
       "VotingAppScoreFieldTypeSettings": {
         "properties": {
           "maximum": {
@@ -6805,53 +5776,6 @@
           "_embedded"
         ],
         "title": "VotingScoreFieldWithFieldEmbed",
-        "type": "object"
-      },
-      "VotingScoreFieldWithWorkspaceEmbedFieldEmbed": {
-        "properties": {
-          "_embedded": {
-            "$ref": "#/components/schemas/WorkspaceEmbedFieldEmbed"
-          },
-          "createdAt": {
-            "format": "date-time",
-            "type": "string"
-          },
-          "description": {
-            "type": "string"
-          },
-          "id": {
-            "format": "uuid",
-            "type": "string"
-          },
-          "isTeamField": {
-            "type": "boolean"
-          },
-          "name": {
-            "type": "string"
-          },
-          "settings": {
-            "$ref": "#/components/schemas/VotingAppScoreFieldTypeSettings"
-          },
-          "teamId": {
-            "format": "uuid",
-            "type": "string"
-          },
-          "typeId": {
-            "type": "string"
-          }
-        },
-        "required": [
-          "id",
-          "typeId",
-          "settings",
-          "name",
-          "description",
-          "isTeamField",
-          "teamId",
-          "createdAt",
-          "_embedded"
-        ],
-        "title": "VotingScoreFieldWithWorkspaceEmbedFieldEmbed",
         "type": "object"
       },
       "Workspace": {
@@ -7093,7 +6017,7 @@
           },
           "fields": {
             "additionalProperties": {
-              "$ref": "#/components/schemas/FieldWithWorkspaceEmbedFieldEmbed"
+              "$ref": "#/components/schemas/FieldWithFieldEmbed"
             },
             "type": "object"
           },
@@ -7158,29 +6082,6 @@
           "apps"
         ],
         "title": "WorkspaceEmbed",
-        "type": "object"
-      },
-      "WorkspaceEmbedFieldEmbed": {
-        "properties": {
-          "allWorkspaceIds": {
-            "description": "List of all workspace-ids where this field is used",
-            "items": {
-              "format": "uuid",
-              "type": "string"
-            },
-            "type": "array",
-            "uniqueItems": true
-          },
-          "order": {
-            "description": "Order of this field in the current workspace",
-            "format": "int32",
-            "type": "integer"
-          }
-        },
-        "required": [
-          "order"
-        ],
-        "title": "WorkspaceEmbedFieldEmbed",
         "type": "object"
       },
       "WorkspaceEmbedRelation": {
