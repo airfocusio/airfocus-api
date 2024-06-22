@@ -2270,7 +2270,7 @@
             "type": "string"
           },
           "resource": {
-            "$ref": "#/components/schemas/ItemLink"
+            "$ref": "#/components/schemas/Milestone"
           },
           "type": {
             "enum": [
@@ -10768,6 +10768,57 @@
       }
     },
     "/api/workspaces/{workspaceId}/comments/{commentId}/reactions/{emojiCode}": {
+      "delete": {
+        "description": "This action can be performed only as a real authenticated user<br/>Requirements:<br/>  - auth-client scopes: \"workspace\"<br/>  - user permission: \"write\" or higher<br/>Returns:<br/>401 if user does not have the required permission",
+        "operationId": "removeCommentReaction",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "workspaceId",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "commentId",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "emojiCode",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/CommentReactionEmoji"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": ""
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "summary": "Remove a reaction from the specified comment.",
+        "tags": [
+          "Comments"
+        ]
+      },
       "post": {
         "description": "This action can be performed only as a real authenticated user<br/>Requirements:<br/>  - auth-client scopes: \"workspace\"<br/>  - user permission: \"write\" or higher<br/>Returns:<br/>401 if user does not have the required permission",
         "operationId": "addCommentReaction",
