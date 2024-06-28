@@ -5649,6 +5649,16 @@
               "null"
             ]
           },
+          "requiredPermission": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Permission"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
           "settings": {},
           "typeId": {
             "type": "string"
