@@ -2270,7 +2270,7 @@
             "type": "string"
           },
           "resource": {
-            "$ref": "#/components/schemas/ItemLink"
+            "$ref": "#/components/schemas/Milestone"
           },
           "type": {
             "enum": [
