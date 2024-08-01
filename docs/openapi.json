@@ -2203,7 +2203,7 @@
       "ItemLinkBulkCreate": {
         "properties": {
           "resource": {
-            "$ref": "#/components/schemas/Milestone"
+            "$ref": "#/components/schemas/ItemLink"
           },
           "type": {
             "enum": [
@@ -4024,7 +4024,7 @@
           "mapping": {
             "equal": "#/components/schemas/NumberFieldTypeSettingsSteppingEqual",
             "exponential": "#/components/schemas/NumberFieldTypeSettingsSteppingExponential",
-            "fibonacci": "io.airfocus.workspaceservice.extensions.fields.NumberFieldTypeSettings.Stepping.Fibonacci"
+            "fibonacci": "io.airfocus.workspaceservice.extensions.fields.number.NumberFieldTypeSettings.Stepping.Fibonacci"
           },
           "propertyName": "type"
         },
@@ -4068,10 +4068,10 @@
       "NumberFieldTypeSettingsUnit": {
         "discriminator": {
           "mapping": {
-            "custom": "io.airfocus.workspaceservice.extensions.fields.NumberFieldTypeSettings.Unit.Custom",
-            "money": "io.airfocus.workspaceservice.extensions.fields.NumberFieldTypeSettings.Unit.Money",
-            "percent": "io.airfocus.workspaceservice.extensions.fields.NumberFieldTypeSettings.Unit.Percent",
-            "storyPoints": "io.airfocus.workspaceservice.extensions.fields.NumberFieldTypeSettings.Unit.StoryPoints"
+            "custom": "io.airfocus.workspaceservice.extensions.fields.number.NumberFieldTypeSettings.Unit.Custom",
+            "money": "io.airfocus.workspaceservice.extensions.fields.number.NumberFieldTypeSettings.Unit.Money",
+            "percent": "io.airfocus.workspaceservice.extensions.fields.number.NumberFieldTypeSettings.Unit.Percent",
+            "storyPoints": "io.airfocus.workspaceservice.extensions.fields.number.NumberFieldTypeSettings.Unit.StoryPoints"
           },
           "propertyName": "type"
         },
