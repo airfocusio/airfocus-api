@@ -2203,7 +2203,7 @@
       "ItemLinkBulkCreate": {
         "properties": {
           "resource": {
-            "$ref": "#/components/schemas/Milestone"
+            "$ref": "#/components/schemas/ItemLink"
           },
           "type": {
             "enum": [
