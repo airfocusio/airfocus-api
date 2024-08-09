@@ -58,7 +58,7 @@ Use the 2nd source if you want to have more stable source of schema, for example
 
 ### Rate limits
 
-Server reserves the right to limit the number of requests per minute for each authenticated client.
+Server reserves the right to limit the number of requests per minute for each authenticated client (with default 600 requests/minute).
 To identify whether there is a rate limit applied to the current client and what's the limit - look for the next headers in the response:
 - `X-RateLimit-Limit` - the maximum number of requests that the client is permitted to make in a minute
 - `X-RateLimit-Remaining` - the number of requests remaining in the current rate limit window
