@@ -2203,7 +2203,7 @@
       "ItemLinkBulkCreate": {
         "properties": {
           "resource": {
-            "$ref": "#/components/schemas/ItemLink"
+            "$ref": "#/components/schemas/Milestone"
           },
           "type": {
             "enum": [
@@ -2388,9 +2388,11 @@
         "type": "object"
       },
       "ItemLinkType": {
-        "description": "Type of a link. At the moment only one type \"dependency\" is supported.",
+        "description": "Type of a link",
         "enum": [
-          "dependency"
+          "dependency",
+          "duplicate",
+          "relation"
         ],
         "title": "ItemLinkType",
         "type": "string"
@@ -12721,6 +12723,10 @@
       "name": "Comments"
     },
     {
+      "description": "Links between items.",
+      "name": "ItemLinks"
+    },
+    {
       "description": "Manage items.",
       "name": "Items"
     },
@@ -12731,10 +12737,6 @@
     {
       "description": "Endpoints for managing workspace fields.",
       "name": "Fields"
-    },
-    {
-      "description": "Dependency links between items.",
-      "name": "ItemLinks"
     },
     {
       "description": "Connect items with uploaded attachment-files. Note: this module is not responsible for uploading files, it only manages the links between items and files.",
