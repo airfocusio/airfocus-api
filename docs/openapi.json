@@ -2203,7 +2203,7 @@
       "ItemLinkBulkCreate": {
         "properties": {
           "resource": {
-            "$ref": "#/components/schemas/ItemLink"
+            "$ref": "#/components/schemas/Milestone"
           },
           "type": {
             "enum": [
@@ -10326,6 +10326,11 @@
               "schema": {
                 "$ref": "#/components/schemas/Comment"
               }
+            },
+            "application/json+markdown": {
+              "schema": {
+                "$ref": "#/components/schemas/Comment"
+              }
             }
           },
           "required": true
@@ -10334,6 +10339,11 @@
           "200": {
             "content": {
               "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommentWithEmbed"
+                }
+              },
+              "application/json+markdown": {
                 "schema": {
                   "$ref": "#/components/schemas/CommentWithEmbed"
                 }
@@ -10383,6 +10393,14 @@
                 },
                 "type": "array"
               }
+            },
+            "application/json+markdown": {
+              "schema": {
+                "items": {
+                  "$ref": "#/components/schemas/CommentBulkAction"
+                },
+                "type": "array"
+              }
             }
           },
           "required": false
@@ -10391,6 +10409,11 @@
           "200": {
             "content": {
               "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommentWithEmbedOrNullList"
+                }
+              },
+              "application/json+markdown": {
                 "schema": {
                   "$ref": "#/components/schemas/CommentWithEmbedOrNullList"
                 }
@@ -10449,6 +10472,11 @@
           "200": {
             "content": {
               "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommentWithEmbedOrNullList"
+                }
+              },
+              "application/json+markdown": {
                 "schema": {
                   "$ref": "#/components/schemas/CommentWithEmbedOrNullList"
                 }
@@ -10535,6 +10563,11 @@
           "200": {
             "content": {
               "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommentWithEmbedPage"
+                }
+              },
+              "application/json+markdown": {
                 "schema": {
                   "$ref": "#/components/schemas/CommentWithEmbedPage"
                 }
@@ -10635,6 +10668,11 @@
                 "schema": {
                   "$ref": "#/components/schemas/CommentWithEmbed"
                 }
+              },
+              "application/json+markdown": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommentWithEmbed"
+                }
               }
             },
             "description": ""
@@ -10696,6 +10734,11 @@
                 "schema": {
                   "$ref": "#/components/schemas/CommentWithEmbed"
                 }
+              },
+              "application/json+markdown": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommentWithEmbed"
+                }
               }
             },
             "description": ""
@@ -10746,6 +10789,11 @@
               "schema": {
                 "$ref": "#/components/schemas/Comment"
               }
+            },
+            "application/json+markdown": {
+              "schema": {
+                "$ref": "#/components/schemas/Comment"
+              }
             }
           },
           "required": true
@@ -10754,6 +10802,11 @@
           "200": {
             "content": {
               "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommentWithEmbed"
+                }
+              },
+              "application/json+markdown": {
                 "schema": {
                   "$ref": "#/components/schemas/CommentWithEmbed"
                 }
