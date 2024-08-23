@@ -2823,6 +2823,7 @@
             "createdAt": "#/components/schemas/ItemSearchQueryFilterCreatedAt",
             "field": "#/components/schemas/ItemSearchQueryFilterField",
             "integration": "#/components/schemas/ItemSearchQueryFilterIntegration",
+            "item": "#/components/schemas/ItemSearchQueryFilterItem",
             "lastUpdatedAt": "#/components/schemas/ItemSearchQueryFilterLastUpdatedAt",
             "name": "#/components/schemas/ItemSearchQueryFilterName",
             "not": "#/components/schemas/ItemSearchQueryFilterNot",
@@ -2849,6 +2850,9 @@
           },
           {
             "$ref": "#/components/schemas/ItemSearchQueryFilterIntegration"
+          },
+          {
+            "$ref": "#/components/schemas/ItemSearchQueryFilterItem"
           },
           {
             "$ref": "#/components/schemas/ItemSearchQueryFilterLastUpdatedAt"
@@ -2917,23 +2921,21 @@
       },
       "ItemSearchQueryFilterAssigneesContain": {
         "properties": {
-          "id": {
-            "format": "uuid",
-            "type": "string"
+          "user": {
+            "$ref": "#/components/schemas/UserRef"
           }
         },
         "required": [
-          "id"
+          "user"
         ],
         "title": "ItemSearchQueryFilterAssigneesContain",
         "type": "object"
       },
       "ItemSearchQueryFilterAssigneesContainsAll": {
         "properties": {
-          "ids": {
+          "users": {
             "items": {
-              "format": "uuid",
-              "type": "string"
+              "$ref": "#/components/schemas/UserRef"
             },
             "type": "array"
           }
@@ -2943,10 +2945,9 @@
       },
       "ItemSearchQueryFilterAssigneesContainsAny": {
         "properties": {
-          "ids": {
+          "users": {
             "items": {
-              "format": "uuid",
-              "type": "string"
+              "$ref": "#/components/schemas/UserRef"
             },
             "type": "array"
           }
@@ -3031,6 +3032,20 @@
         ],
         "title": "ItemSearchQueryFilterIntegrationValue",
         "type": "object"
+      },
+      "ItemSearchQueryFilterItem": {
+        "discriminator": {
+          "mapping": {
+            "watchSelf": "io.airfocus.workspaceservice.api.ItemSearchQuery.Filter.Item.WatchSelf"
+          },
+          "propertyName": "mode"
+        },
+        "oneOf": [
+          {
+            "type": "object"
+          }
+        ],
+        "title": "ItemSearchQueryFilterItem"
       },
       "ItemSearchQueryFilterLastUpdatedAt": {
         "properties": {
@@ -5609,6 +5624,34 @@
           "order"
         ],
         "title": "UpdateStatus",
+        "type": "object"
+      },
+      "UserRef": {
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/UserRefUserRefCurrent"
+          },
+          {
+            "$ref": "#/components/schemas/UserRefUserRefId"
+          }
+        ],
+        "title": "UserRef"
+      },
+      "UserRefUserRefCurrent": {
+        "title": "UserRefUserRefCurrent",
+        "type": "object"
+      },
+      "UserRefUserRefId": {
+        "properties": {
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id"
+        ],
+        "title": "UserRefUserRefId",
         "type": "object"
       },
       "View": {
