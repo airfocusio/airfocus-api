@@ -3939,6 +3939,119 @@
         "title": "Milestone",
         "type": "object"
       },
+      "MilestoneBulkAction": {
+        "discriminator": {
+          "mapping": {
+            "create": "#/components/schemas/MilestoneBulkCreate",
+            "delete": "#/components/schemas/MilestoneBulkDelete",
+            "patch": "#/components/schemas/MilestoneBulkPatch",
+            "update": "#/components/schemas/MilestoneBulkUpdate"
+          },
+          "propertyName": "type"
+        },
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/MilestoneBulkCreate"
+          },
+          {
+            "$ref": "#/components/schemas/MilestoneBulkDelete"
+          },
+          {
+            "$ref": "#/components/schemas/MilestoneBulkPatch"
+          },
+          {
+            "$ref": "#/components/schemas/MilestoneBulkUpdate"
+          }
+        ],
+        "title": "MilestoneBulkAction"
+      },
+      "MilestoneBulkCreate": {
+        "properties": {
+          "resource": {
+            "$ref": "#/components/schemas/Milestone"
+          },
+          "type": {
+            "enum": [
+              "create"
+            ],
+            "type": "string"
+          }
+        },
+        "required": [
+          "resource",
+          "type"
+        ],
+        "title": "MilestoneBulkCreate",
+        "type": "object"
+      },
+      "MilestoneBulkDelete": {
+        "properties": {
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "type": {
+            "enum": [
+              "delete"
+            ],
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "type"
+        ],
+        "title": "MilestoneBulkDelete",
+        "type": "object"
+      },
+      "MilestoneBulkPatch": {
+        "properties": {
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "transform": {
+            "$ref": "#/components/schemas/JsonPatch"
+          },
+          "type": {
+            "enum": [
+              "patch"
+            ],
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "transform",
+          "type"
+        ],
+        "title": "MilestoneBulkPatch",
+        "type": "object"
+      },
+      "MilestoneBulkUpdate": {
+        "properties": {
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "resource": {
+            "$ref": "#/components/schemas/Milestone"
+          },
+          "type": {
+            "enum": [
+              "update"
+            ],
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "resource",
+          "type"
+        ],
+        "title": "MilestoneBulkUpdate",
+        "type": "object"
+      },
       "MilestoneWithEmbed": {
         "properties": {
           "_embedded": {
@@ -7646,7 +7759,7 @@
   },
   "info": {
     "title": "airfocus API",
-    "version": "1.0.0-beta.33.31.6"
+    "version": "1.0.0-beta.33.31.7"
   },
   "openapi": "3.1.0",
   "paths": {
@@ -14951,7 +15064,7 @@
     "/api/workspaces/{workspaceId}/milestones": {
       "post": {
         "description": "Returns newly created milestone with its sanitised data.<br/>Requirements:<br/>  - auth-client scopes: \"workspace\"<br/>  - user permission: \"write\" or higher<br/>Returns:<br/>401 if user does not have the required permission",
-        "operationId": "createItemLink",
+        "operationId": "createMilestone",
         "parameters": [
           {
             "description": "OAuth2 token as query parameter (alternative to Authorization header).",
@@ -15024,14 +15137,14 @@
         "summary": "Create a new milestone",
         "tags": [
           "CRUD",
-          "ItemLinks"
+          "Milestones"
         ]
       }
     },
     "/api/workspaces/{workspaceId}/milestones/bulk": {
       "post": {
         "description": "Accepts a list of create/update/patch/delete operations (see the request model for more details).<br/>\nEach operations can target a single or multiple milestones.<br/>\nReturns a list of results for each input operation including errors.<br/>\nGuarantees that the size and order of the returned results matches the input list of operations.<br/>Requirements:<br/>  - auth-client scopes: \"workspace\"<br/>  - user permission: \"write\" or higher<br/>Returns:<br/>401 if user does not have the required permission",
-        "operationId": "bulkItemLinks",
+        "operationId": "bulkMilestones",
         "parameters": [
           {
             "description": "OAuth2 token as query parameter (alternative to Authorization header).",
@@ -15074,7 +15187,7 @@
             "application/json": {
               "schema": {
                 "items": {
-                  "$ref": "#/components/schemas/ItemLinkBulkAction"
+                  "$ref": "#/components/schemas/MilestoneBulkAction"
                 },
                 "type": "array"
               }
@@ -15107,14 +15220,14 @@
         "summary": "Perform multiple operations with milestones",
         "tags": [
           "CRUD",
-          "ItemLinks"
+          "Milestones"
         ]
       }
     },
     "/api/workspaces/{workspaceId}/milestones/list": {
       "post": {
         "description": "Returns a list of milestones.<br/>\nReturns null for those milestones which are not found or not accessible.<br/>\nGuarantees that the size and order of the returned list matches the requested IDs.<br/>Requirements:<br/>  - auth-client scopes: \"workspace:read\"<br/>  - user permission: \"read\" or higher<br/>Returns:<br/>401 if user does not have the required permission",
-        "operationId": "listItemLinks",
+        "operationId": "listMilestones",
         "parameters": [
           {
             "description": "OAuth2 token as query parameter (alternative to Authorization header).",
@@ -15191,14 +15304,14 @@
         "summary": "Retrieve multiple milestones by their IDs",
         "tags": [
           "CRUD",
-          "ItemLinks"
+          "Milestones"
         ]
       }
     },
     "/api/workspaces/{workspaceId}/milestones/search": {
       "post": {
         "description": "Returns all milestones or searches milestones by query. Always returns only milestones which are accessible by the current user.<br/>Requirements:<br/>  - auth-client scopes: \"workspace:read\"<br/>  - user permission: \"read\" or higher<br/>Returns:<br/>401 if user does not have the required permission",
-        "operationId": "searchItemLinks",
+        "operationId": "searchMilestones",
         "parameters": [
           {
             "description": "OAuth2 token as query parameter (alternative to Authorization header).",
@@ -15328,14 +15441,14 @@
         "summary": "Retrieve or search milestones",
         "tags": [
           "CRUD",
-          "ItemLinks"
+          "Milestones"
         ]
       }
     },
-    "/api/workspaces/{workspaceId}/milestones/{itemLinkId}": {
+    "/api/workspaces/{workspaceId}/milestones/{milestoneId}": {
       "delete": {
         "description": "Returns empty result if the milestone was successfully deleted.<br/>Requirements:<br/>  - auth-client scopes: \"workspace\"<br/>  - user permission: \"write\" or higher<br/>Returns:<br/>400 if the resource is not found<br/>401 if user does not have the required permission",
-        "operationId": "deleteItemLink",
+        "operationId": "deleteMilestone",
         "parameters": [
           {
             "description": "OAuth2 token as query parameter (alternative to Authorization header).",
@@ -15374,7 +15487,7 @@
           },
           {
             "in": "path",
-            "name": "itemLinkId",
+            "name": "milestoneId",
             "required": true,
             "schema": {
               "format": "uuid",
@@ -15400,12 +15513,12 @@
         "summary": "Delete an existing milestone",
         "tags": [
           "CRUD",
-          "ItemLinks"
+          "Milestones"
         ]
       },
       "get": {
         "description": "Returns found milestone.<br/>Requirements:<br/>  - auth-client scopes: \"workspace:read\"<br/>  - user permission: \"read\" or higher<br/>Returns:<br/>400 if the resource is not found<br/>401 if user does not have the required permission",
-        "operationId": "retrieveItemLink",
+        "operationId": "retrieveMilestone",
         "parameters": [
           {
             "description": "OAuth2 token as query parameter (alternative to Authorization header).",
@@ -15444,7 +15557,7 @@
           },
           {
             "in": "path",
-            "name": "itemLinkId",
+            "name": "milestoneId",
             "required": true,
             "schema": {
               "format": "uuid",
@@ -15477,12 +15590,12 @@
         "summary": "Retrieve a single milestone by its ID",
         "tags": [
           "CRUD",
-          "ItemLinks"
+          "Milestones"
         ]
       },
       "patch": {
         "description": "Returns the whole updated milestone with its sanitised data.<br/>Requirements:<br/>  - auth-client scopes: \"workspace\"<br/>  - user permission: \"write\" or higher<br/>Returns:<br/>400 if the resource is not found<br/>401 if user does not have the required permission",
-        "operationId": "patchItemLink",
+        "operationId": "patchMilestone",
         "parameters": [
           {
             "description": "OAuth2 token as query parameter (alternative to Authorization header).",
@@ -15521,7 +15634,7 @@
           },
           {
             "in": "path",
-            "name": "itemLinkId",
+            "name": "milestoneId",
             "required": true,
             "schema": {
               "format": "uuid",
@@ -15564,12 +15677,12 @@
         "summary": "Patch an existing milestone",
         "tags": [
           "CRUD",
-          "ItemLinks"
+          "Milestones"
         ]
       },
       "put": {
         "description": "Returns updated milestone with its sanitised data.<br/>Requirements:<br/>  - auth-client scopes: \"workspace\"<br/>  - user permission: \"write\" or higher<br/>Returns:<br/>400 if the resource is not found<br/>401 if user does not have the required permission",
-        "operationId": "updateItemLink",
+        "operationId": "updateMilestone",
         "parameters": [
           {
             "description": "OAuth2 token as query parameter (alternative to Authorization header).",
@@ -15608,7 +15721,7 @@
           },
           {
             "in": "path",
-            "name": "itemLinkId",
+            "name": "milestoneId",
             "required": true,
             "schema": {
               "format": "uuid",
@@ -15651,7 +15764,7 @@
         "summary": "Update an existing milestone",
         "tags": [
           "CRUD",
-          "ItemLinks"
+          "Milestones"
         ]
       }
     },
@@ -15830,10 +15943,6 @@
       "name": "Items"
     },
     {
-      "description": "Manage milestones in a single workspace.",
-      "name": "ItemLinks"
-    },
-    {
       "description": "Endpoints for managing workspace fields.",
       "name": "Fields"
     },
@@ -15852,6 +15961,10 @@
     {
       "description": "Endpoints for creating workspaces via templates.",
       "name": "Templates"
+    },
+    {
+      "description": "Manage milestones in a single workspace.",
+      "name": "Milestones"
     },
     {
       "description": "Manage workspace groups.",
