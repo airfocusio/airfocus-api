@@ -237,6 +237,10 @@
         "title": "CommentBulkUpdate",
         "type": "object"
       },
+      "CommentEmbed": {
+        "title": "CommentEmbed",
+        "type": "object"
+      },
       "CommentReaction": {
         "properties": {
           "emoji": {
@@ -283,10 +287,10 @@
         "title": "CommentSearchQuery",
         "type": "object"
       },
-      "CommentWithEmbed": {
+      "CommentWithCommentEmbed": {
         "properties": {
           "_embedded": {
-            "type": "object"
+            "$ref": "#/components/schemas/CommentEmbed"
           },
           "content": {
             "$ref": "#/components/schemas/RichText"
@@ -327,28 +331,28 @@
           "lastUpdatedAt",
           "_embedded"
         ],
-        "title": "CommentWithEmbed",
+        "title": "CommentWithCommentEmbed",
         "type": "object"
       },
-      "CommentWithEmbedOrNullList": {
+      "CommentWithCommentEmbedOrNullList": {
         "items": {
           "anyOf": [
             {
-              "$ref": "#/components/schemas/CommentWithEmbed"
+              "$ref": "#/components/schemas/CommentWithCommentEmbed"
             },
             {
               "type": "null"
             }
           ]
         },
-        "title": "CommentWithEmbedOrNullList",
+        "title": "CommentWithCommentEmbedOrNullList",
         "type": "array"
       },
-      "CommentWithEmbedPage": {
+      "CommentWithCommentEmbedPage": {
         "properties": {
           "items": {
             "items": {
-              "$ref": "#/components/schemas/CommentWithEmbed"
+              "$ref": "#/components/schemas/CommentWithCommentEmbed"
             },
             "type": "array"
           },
@@ -360,7 +364,7 @@
         "required": [
           "totalItems"
         ],
-        "title": "CommentWithEmbedPage",
+        "title": "CommentWithCommentEmbedPage",
         "type": "object"
       },
       "CreateStatus": {
@@ -2203,7 +2207,7 @@
       "ItemLinkBulkCreate": {
         "properties": {
           "resource": {
-            "$ref": "#/components/schemas/Milestone"
+            "$ref": "#/components/schemas/ItemLink"
           },
           "type": {
             "enum": [
@@ -2899,7 +2903,7 @@
             "contain": "#/components/schemas/ItemSearchQueryFilterAssigneesContain",
             "containsAll": "#/components/schemas/ItemSearchQueryFilterAssigneesContainsAll",
             "containsAny": "#/components/schemas/ItemSearchQueryFilterAssigneesContainsAny",
-            "defined": "io.airfocus.workspaceservice.api.ItemSearchQuery.Filter.Assignees.Defined"
+            "defined": "#/components/schemas/ItemSearchQueryFilterAssigneesDefined"
           },
           "propertyName": "mode"
         },
@@ -2914,7 +2918,7 @@
             "$ref": "#/components/schemas/ItemSearchQueryFilterAssigneesContainsAny"
           },
           {
-            "type": "object"
+            "$ref": "#/components/schemas/ItemSearchQueryFilterAssigneesDefined"
           }
         ],
         "title": "ItemSearchQueryFilterAssignees"
@@ -2953,6 +2957,10 @@
           }
         },
         "title": "ItemSearchQueryFilterAssigneesContainsAny",
+        "type": "object"
+      },
+      "ItemSearchQueryFilterAssigneesDefined": {
+        "title": "ItemSearchQueryFilterAssigneesDefined",
         "type": "object"
       },
       "ItemSearchQueryFilterCreatedAt": {
@@ -3005,20 +3013,24 @@
       "ItemSearchQueryFilterIntegration": {
         "discriminator": {
           "mapping": {
-            "defined": "io.airfocus.workspaceservice.api.ItemSearchQuery.Filter.Integration.Defined",
+            "defined": "#/components/schemas/ItemSearchQueryFilterIntegrationDefined",
             "value": "#/components/schemas/ItemSearchQueryFilterIntegrationValue"
           },
           "propertyName": "mode"
         },
         "oneOf": [
           {
-            "$ref": "#/components/schemas/ItemSearchQueryFilterIntegrationValue"
+            "$ref": "#/components/schemas/ItemSearchQueryFilterIntegrationDefined"
           },
           {
-            "type": "object"
+            "$ref": "#/components/schemas/ItemSearchQueryFilterIntegrationValue"
           }
         ],
         "title": "ItemSearchQueryFilterIntegration"
+      },
+      "ItemSearchQueryFilterIntegrationDefined": {
+        "title": "ItemSearchQueryFilterIntegrationDefined",
+        "type": "object"
       },
       "ItemSearchQueryFilterIntegrationValue": {
         "properties": {
@@ -3036,16 +3048,20 @@
       "ItemSearchQueryFilterItem": {
         "discriminator": {
           "mapping": {
-            "watchSelf": "io.airfocus.workspaceservice.api.ItemSearchQuery.Filter.Item.WatchSelf"
+            "watchSelf": "#/components/schemas/ItemSearchQueryFilterItemWatchSelf"
           },
           "propertyName": "mode"
         },
         "oneOf": [
           {
-            "type": "object"
+            "$ref": "#/components/schemas/ItemSearchQueryFilterItemWatchSelf"
           }
         ],
         "title": "ItemSearchQueryFilterItem"
+      },
+      "ItemSearchQueryFilterItemWatchSelf": {
+        "title": "ItemSearchQueryFilterItemWatchSelf",
+        "type": "object"
       },
       "ItemSearchQueryFilterLastUpdatedAt": {
         "properties": {
@@ -3150,20 +3166,24 @@
       "ItemSearchQueryFilterParent": {
         "discriminator": {
           "mapping": {
-            "defined": "io.airfocus.workspaceservice.api.ItemSearchQuery.Filter.Parent.Defined",
+            "defined": "#/components/schemas/ItemSearchQueryFilterParentDefined",
             "value": "#/components/schemas/ItemSearchQueryFilterParentValue"
           },
           "propertyName": "mode"
         },
         "oneOf": [
           {
-            "$ref": "#/components/schemas/ItemSearchQueryFilterParentValue"
+            "$ref": "#/components/schemas/ItemSearchQueryFilterParentDefined"
           },
           {
-            "type": "object"
+            "$ref": "#/components/schemas/ItemSearchQueryFilterParentValue"
           }
         ],
         "title": "ItemSearchQueryFilterParent"
+      },
+      "ItemSearchQueryFilterParentDefined": {
+        "title": "ItemSearchQueryFilterParentDefined",
+        "type": "object"
       },
       "ItemSearchQueryFilterParentValue": {
         "properties": {
@@ -3310,24 +3330,121 @@
       "ItemSearchQuerySort": {
         "discriminator": {
           "mapping": {
-            "createdAt": "io.airfocus.workspaceservice.api.ItemSearchQuery.Sort.CreatedAt",
-            "field": "io.airfocus.workspaceservice.api.ItemSearchQuery.Sort.Field",
-            "lastUpdatedAt": "io.airfocus.workspaceservice.api.ItemSearchQuery.Sort.LastUpdatedAt",
-            "name": "io.airfocus.workspaceservice.api.ItemSearchQuery.Sort.Name",
-            "order": "io.airfocus.workspaceservice.api.ItemSearchQuery.Sort.Order",
-            "status": "io.airfocus.workspaceservice.api.ItemSearchQuery.Sort.Status"
+            "createdAt": "#/components/schemas/ItemSearchQuerySortCreatedAt",
+            "field": "#/components/schemas/ItemSearchQuerySortField",
+            "lastUpdatedAt": "#/components/schemas/ItemSearchQuerySortLastUpdatedAt",
+            "name": "#/components/schemas/ItemSearchQuerySortName",
+            "order": "#/components/schemas/ItemSearchQuerySortOrder",
+            "status": "#/components/schemas/ItemSearchQuerySortStatus"
           },
           "propertyName": "type"
         },
         "oneOf": [
-          {},
-          {},
-          {},
-          {},
-          {},
-          {}
+          {
+            "$ref": "#/components/schemas/ItemSearchQuerySortCreatedAt"
+          },
+          {
+            "$ref": "#/components/schemas/ItemSearchQuerySortField"
+          },
+          {
+            "$ref": "#/components/schemas/ItemSearchQuerySortLastUpdatedAt"
+          },
+          {
+            "$ref": "#/components/schemas/ItemSearchQuerySortName"
+          },
+          {
+            "$ref": "#/components/schemas/ItemSearchQuerySortOrder"
+          },
+          {
+            "$ref": "#/components/schemas/ItemSearchQuerySortStatus"
+          }
         ],
         "title": "ItemSearchQuerySort"
+      },
+      "ItemSearchQuerySortCreatedAt": {
+        "properties": {
+          "direction": {
+            "$ref": "#/components/schemas/ItemSearchQuerySortDirection"
+          }
+        },
+        "required": [
+          "direction"
+        ],
+        "title": "ItemSearchQuerySortCreatedAt",
+        "type": "object"
+      },
+      "ItemSearchQuerySortDirection": {
+        "enum": [
+          "asc",
+          "desc"
+        ],
+        "title": "ItemSearchQuerySortDirection",
+        "type": "string"
+      },
+      "ItemSearchQuerySortField": {
+        "properties": {
+          "direction": {
+            "$ref": "#/components/schemas/ItemSearchQuerySortDirection"
+          },
+          "fieldId": {
+            "format": "uuid",
+            "type": "string"
+          }
+        },
+        "required": [
+          "fieldId",
+          "direction"
+        ],
+        "title": "ItemSearchQuerySortField",
+        "type": "object"
+      },
+      "ItemSearchQuerySortLastUpdatedAt": {
+        "properties": {
+          "direction": {
+            "$ref": "#/components/schemas/ItemSearchQuerySortDirection"
+          }
+        },
+        "required": [
+          "direction"
+        ],
+        "title": "ItemSearchQuerySortLastUpdatedAt",
+        "type": "object"
+      },
+      "ItemSearchQuerySortName": {
+        "properties": {
+          "direction": {
+            "$ref": "#/components/schemas/ItemSearchQuerySortDirection"
+          }
+        },
+        "required": [
+          "direction"
+        ],
+        "title": "ItemSearchQuerySortName",
+        "type": "object"
+      },
+      "ItemSearchQuerySortOrder": {
+        "properties": {
+          "direction": {
+            "$ref": "#/components/schemas/ItemSearchQuerySortDirection"
+          }
+        },
+        "required": [
+          "direction"
+        ],
+        "title": "ItemSearchQuerySortOrder",
+        "type": "object"
+      },
+      "ItemSearchQuerySortStatus": {
+        "properties": {
+          "direction": {
+            "$ref": "#/components/schemas/ItemSearchQuerySortDirection"
+          }
+        },
+        "required": [
+          "direction"
+        ],
+        "title": "ItemSearchQuerySortStatus",
+        "type": "object"
       },
       "ItemSearchQueryTimeAnchor": {
         "discriminator": {
@@ -4041,7 +4158,7 @@
           "mapping": {
             "equal": "#/components/schemas/NumberFieldTypeSettingsSteppingEqual",
             "exponential": "#/components/schemas/NumberFieldTypeSettingsSteppingExponential",
-            "fibonacci": "io.airfocus.workspaceservice.extensions.fields.number.NumberFieldTypeSettings.Stepping.Fibonacci"
+            "fibonacci": "#/components/schemas/NumberFieldTypeSettingsSteppingFibonacci"
           },
           "propertyName": "type"
         },
@@ -4053,7 +4170,7 @@
             "$ref": "#/components/schemas/NumberFieldTypeSettingsSteppingExponential"
           },
           {
-            "type": "object"
+            "$ref": "#/components/schemas/NumberFieldTypeSettingsSteppingFibonacci"
           }
         ],
         "title": "NumberFieldTypeSettingsStepping"
@@ -4082,23 +4199,71 @@
         "title": "NumberFieldTypeSettingsSteppingExponential",
         "type": "object"
       },
+      "NumberFieldTypeSettingsSteppingFibonacci": {
+        "title": "NumberFieldTypeSettingsSteppingFibonacci",
+        "type": "object"
+      },
       "NumberFieldTypeSettingsUnit": {
         "discriminator": {
           "mapping": {
-            "custom": "io.airfocus.workspaceservice.extensions.fields.number.NumberFieldTypeSettings.Unit.Custom",
-            "money": "io.airfocus.workspaceservice.extensions.fields.number.NumberFieldTypeSettings.Unit.Money",
-            "percent": "io.airfocus.workspaceservice.extensions.fields.number.NumberFieldTypeSettings.Unit.Percent",
-            "storyPoints": "io.airfocus.workspaceservice.extensions.fields.number.NumberFieldTypeSettings.Unit.StoryPoints"
+            "custom": "#/components/schemas/NumberFieldTypeSettingsUnitCustom",
+            "money": "#/components/schemas/NumberFieldTypeSettingsUnitMoney",
+            "percent": "#/components/schemas/NumberFieldTypeSettingsUnitPercent",
+            "storyPoints": "#/components/schemas/NumberFieldTypeSettingsUnitStoryPoints"
           },
           "propertyName": "type"
         },
         "oneOf": [
-          {},
-          {},
-          {},
-          {}
+          {
+            "$ref": "#/components/schemas/NumberFieldTypeSettingsUnitCustom"
+          },
+          {
+            "$ref": "#/components/schemas/NumberFieldTypeSettingsUnitMoney"
+          },
+          {
+            "$ref": "#/components/schemas/NumberFieldTypeSettingsUnitPercent"
+          },
+          {
+            "$ref": "#/components/schemas/NumberFieldTypeSettingsUnitStoryPoints"
+          }
         ],
         "title": "NumberFieldTypeSettingsUnit"
+      },
+      "NumberFieldTypeSettingsUnitCustom": {
+        "properties": {
+          "prefix": {
+            "type": "string"
+          },
+          "suffix": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "prefix",
+          "suffix"
+        ],
+        "title": "NumberFieldTypeSettingsUnitCustom",
+        "type": "object"
+      },
+      "NumberFieldTypeSettingsUnitMoney": {
+        "properties": {
+          "currency": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "currency"
+        ],
+        "title": "NumberFieldTypeSettingsUnitMoney",
+        "type": "object"
+      },
+      "NumberFieldTypeSettingsUnitPercent": {
+        "title": "NumberFieldTypeSettingsUnitPercent",
+        "type": "object"
+      },
+      "NumberFieldTypeSettingsUnitStoryPoints": {
+        "title": "NumberFieldTypeSettingsUnitStoryPoints",
+        "type": "object"
       },
       "NumberFieldWithFieldEmbed": {
         "properties": {
@@ -7481,7 +7646,7 @@
   },
   "info": {
     "title": "airfocus API",
-    "version": "0.1"
+    "version": "1.0.0-beta.33.31.6"
   },
   "openapi": "3.1.0",
   "paths": {
@@ -7489,6 +7654,33 @@
       "post": {
         "description": "Installs a new field.\nIf it's a team-field, then it's possible to install it with empty or any non-empty amount of linked workspaces.\nOtherwise, if it's not a team-field, then exactly one linked workspace should be specified.<br/>Requirements:<br/>  - auth-client scopes: \"workspace\"<br/>  - user permission: \"full\"<br/>  - team features: \"team-fields\" when operating with team-fields<br/>  - user role: \"admin\" when operating with team-fields<br/>Returns:<br/>401 if user does not have the required permission",
         "operationId": "installField",
+        "parameters": [
+          {
+            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "in": "query",
+            "name": "token",
+            "required": false,
+            "schema": {
+              "deprecated": true,
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          {
+            "description": "Enable sudo-mode for admins for a single request, which gives full permission to all workspaces in the team.",
+            "in": "query",
+            "name": "actAsAdmin",
+            "required": false,
+            "schema": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            }
+          }
+        ],
         "requestBody": {
           "content": {
             "application/json": {
@@ -7521,6 +7713,33 @@
       "post": {
         "description": "Updates the order of fields in the specified workspace.<br/>Requirements:<br/>  - auth-client scopes: \"workspace\"<br/>  - user permission: \"full\"<br/>  - team features: \"team-fields\" when operating with team-fields<br/>  - user role: \"admin\" when operating with team-fields<br/>Returns:<br/>401 if user does not have the required permission",
         "operationId": "reorderFields",
+        "parameters": [
+          {
+            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "in": "query",
+            "name": "token",
+            "required": false,
+            "schema": {
+              "deprecated": true,
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          {
+            "description": "Enable sudo-mode for admins for a single request, which gives full permission to all workspaces in the team.",
+            "in": "query",
+            "name": "actAsAdmin",
+            "required": false,
+            "schema": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            }
+          }
+        ],
         "requestBody": {
           "content": {
             "application/json": {
@@ -7546,6 +7765,33 @@
       "post": {
         "description": "Searches fields in the current team based on the specified filters.<br/>Requirements:<br/>  - auth-client scopes: \"workspace:read\"<br/>  - user permission: \"read\" or higher<br/>  - team features: \"team-fields\" when operating with team-fields<br/>Returns:<br/>401 if user does not have the required permission",
         "operationId": "searchFields",
+        "parameters": [
+          {
+            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "in": "query",
+            "name": "token",
+            "required": false,
+            "schema": {
+              "deprecated": true,
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          {
+            "description": "Enable sudo-mode for admins for a single request, which gives full permission to all workspaces in the team.",
+            "in": "query",
+            "name": "actAsAdmin",
+            "required": false,
+            "schema": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            }
+          }
+        ],
         "requestBody": {
           "content": {
             "application/json": {
@@ -7578,6 +7824,33 @@
       "get": {
         "description": "Returns all field-types available in the system.<br/>Requirements:<br/>  - auth-client scopes: \"workspace:read\"<br/>  - user permission: \"read\" or higher<br/>  - team features: \"team-fields\" when operating with team-fields<br/>Returns:<br/>401 if user does not have the required permission",
         "operationId": "listFieldTypes",
+        "parameters": [
+          {
+            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "in": "query",
+            "name": "token",
+            "required": false,
+            "schema": {
+              "deprecated": true,
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          {
+            "description": "Enable sudo-mode for admins for a single request, which gives full permission to all workspaces in the team.",
+            "in": "query",
+            "name": "actAsAdmin",
+            "required": false,
+            "schema": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            }
+          }
+        ],
         "responses": {
           "200": {
             "content": {
@@ -7603,6 +7876,33 @@
       "delete": {
         "description": "Removes existing links between team-fields and workspaces.\nReturns updated fields with their linked workspaces embedded.\nReturns an error if either of the requested fields is not a team-field.\nIgnores when trying to delete non-existing links.\n<br/>Requirements:<br/>  - auth-client scopes: \"workspace\"<br/>  - user permission: \"full\"<br/>  - team features: \"team-fields\" when operating with team-fields<br/>  - user role: \"admin\" when operating with team-fields<br/>Returns:<br/>401 if user does not have the required permission",
         "operationId": "unlinkTeamFieldsFromWorkspaces",
+        "parameters": [
+          {
+            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "in": "query",
+            "name": "token",
+            "required": false,
+            "schema": {
+              "deprecated": true,
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          {
+            "description": "Enable sudo-mode for admins for a single request, which gives full permission to all workspaces in the team.",
+            "in": "query",
+            "name": "actAsAdmin",
+            "required": false,
+            "schema": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            }
+          }
+        ],
         "requestBody": {
           "content": {
             "application/json": {
@@ -7639,6 +7939,33 @@
       "post": {
         "description": "Links existing team-fields to existing workspaces.\nReturns updated fields with their linked workspaces embedded.\nReturns an error if either of the requested fields is not a team-field.\nIgnores existing links.\n<br/>Requirements:<br/>  - auth-client scopes: \"workspace\"<br/>  - user permission: \"full\"<br/>  - team features: \"team-fields\" when operating with team-fields<br/>  - user role: \"admin\" when operating with team-fields<br/>Returns:<br/>401 if user does not have the required permission",
         "operationId": "linkTeamFieldsToWorkspaces",
+        "parameters": [
+          {
+            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "in": "query",
+            "name": "token",
+            "required": false,
+            "schema": {
+              "deprecated": true,
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          {
+            "description": "Enable sudo-mode for admins for a single request, which gives full permission to all workspaces in the team.",
+            "in": "query",
+            "name": "actAsAdmin",
+            "required": false,
+            "schema": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            }
+          }
+        ],
         "requestBody": {
           "content": {
             "application/json": {
@@ -7679,6 +8006,31 @@
         "operationId": "deleteField",
         "parameters": [
           {
+            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "in": "query",
+            "name": "token",
+            "required": false,
+            "schema": {
+              "deprecated": true,
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          {
+            "description": "Enable sudo-mode for admins for a single request, which gives full permission to all workspaces in the team.",
+            "in": "query",
+            "name": "actAsAdmin",
+            "required": false,
+            "schema": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            }
+          },
+          {
             "description": "ID of the target field.",
             "in": "path",
             "name": "fieldId",
@@ -7703,6 +8055,31 @@
         "description": "Returns a found field with its embedded data.\nThe field is accessible by the current user only if it's a team-field, or if it belongs to an accessible workspace.<br/>Requirements:<br/>  - auth-client scopes: \"workspace:read\"<br/>  - user permission: \"read\" or higher<br/>  - team features: \"team-fields\" when operating with team-fields<br/>Returns:<br/>401 if user does not have the required permission",
         "operationId": "retrieveField",
         "parameters": [
+          {
+            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "in": "query",
+            "name": "token",
+            "required": false,
+            "schema": {
+              "deprecated": true,
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          {
+            "description": "Enable sudo-mode for admins for a single request, which gives full permission to all workspaces in the team.",
+            "in": "query",
+            "name": "actAsAdmin",
+            "required": false,
+            "schema": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            }
+          },
           {
             "description": "ID of the target field.",
             "in": "path",
@@ -7735,6 +8112,31 @@
         "description": "Updates configuration properties of an existing field.<br/>Requirements:<br/>  - auth-client scopes: \"workspace\"<br/>  - user permission: \"full\"<br/>  - team features: \"team-fields\" when operating with team-fields<br/>  - user role: \"admin\" when operating with team-fields<br/>Returns:<br/>401 if user does not have the required permission",
         "operationId": "reconfigureField",
         "parameters": [
+          {
+            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "in": "query",
+            "name": "token",
+            "required": false,
+            "schema": {
+              "deprecated": true,
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          {
+            "description": "Enable sudo-mode for admins for a single request, which gives full permission to all workspaces in the team.",
+            "in": "query",
+            "name": "actAsAdmin",
+            "required": false,
+            "schema": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            }
+          },
           {
             "description": "ID of the target field.",
             "in": "path",
@@ -7779,6 +8181,31 @@
         "description": "Returns all workspace-templates available to the current team.",
         "operationId": "listTemplates",
         "parameters": [
+          {
+            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "in": "query",
+            "name": "token",
+            "required": false,
+            "schema": {
+              "deprecated": true,
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          {
+            "description": "Enable sudo-mode for admins for a single request, which gives full permission to all workspaces in the team.",
+            "in": "query",
+            "name": "actAsAdmin",
+            "required": false,
+            "schema": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            }
+          },
           {
             "description": "How many elements to skip.",
             "in": "query",
@@ -7829,6 +8256,31 @@
         "operationId": "installTemplate",
         "parameters": [
           {
+            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "in": "query",
+            "name": "token",
+            "required": false,
+            "schema": {
+              "deprecated": true,
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          {
+            "description": "Enable sudo-mode for admins for a single request, which gives full permission to all workspaces in the team.",
+            "in": "query",
+            "name": "actAsAdmin",
+            "required": false,
+            "schema": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            }
+          },
+          {
             "in": "path",
             "name": "templateId",
             "required": true,
@@ -7869,6 +8321,33 @@
       "post": {
         "description": "Returns newly created workspace with its sanitised data.<br/>Requirements:<br/>  - auth-client scopes: \"workspace\"<br/>  - user permission: \"write\" or higher<br/>Returns:<br/>401 if user does not have the required permission",
         "operationId": "createWorkspace",
+        "parameters": [
+          {
+            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "in": "query",
+            "name": "token",
+            "required": false,
+            "schema": {
+              "deprecated": true,
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          {
+            "description": "Enable sudo-mode for admins for a single request, which gives full permission to all workspaces in the team.",
+            "in": "query",
+            "name": "actAsAdmin",
+            "required": false,
+            "schema": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            }
+          }
+        ],
         "requestBody": {
           "content": {
             "application/json": {
@@ -7912,6 +8391,33 @@
       "post": {
         "description": "Accepts a list of create/update/patch/delete operations (see the request model for more details).<br/>\nEach operations can target a single or multiple workspaces.<br/>\nReturns a list of results for each input operation including errors.<br/>\nGuarantees that the size and order of the returned results matches the input list of operations.<br/>Requirements:<br/>  - auth-client scopes: \"workspace\"<br/>  - user permission: \"write\" or higher<br/>Returns:<br/>401 if user does not have the required permission",
         "operationId": "bulkWorkspaces",
+        "parameters": [
+          {
+            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "in": "query",
+            "name": "token",
+            "required": false,
+            "schema": {
+              "deprecated": true,
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          {
+            "description": "Enable sudo-mode for admins for a single request, which gives full permission to all workspaces in the team.",
+            "in": "query",
+            "name": "actAsAdmin",
+            "required": false,
+            "schema": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            }
+          }
+        ],
         "requestBody": {
           "content": {
             "application/json": {
@@ -7958,6 +8464,33 @@
       "get": {
         "description": "Returns the total counter number.<br/>Requirements:<br/>  - auth-client scopes: \"workspace:read\"<br/>  - user permission: \"read\" or higher<br/>Returns:<br/>401 if user does not have the required permission",
         "operationId": "countWorkspaces",
+        "parameters": [
+          {
+            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "in": "query",
+            "name": "token",
+            "required": false,
+            "schema": {
+              "deprecated": true,
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          {
+            "description": "Enable sudo-mode for admins for a single request, which gives full permission to all workspaces in the team.",
+            "in": "query",
+            "name": "actAsAdmin",
+            "required": false,
+            "schema": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            }
+          }
+        ],
         "responses": {
           "200": {
             "content": {
@@ -7991,6 +8524,33 @@
       "get": {
         "description": "Creates an SSE connection which sends a events every time when something has happened in any workspace.<br/>Requirements:<br/>  - auth-client scopes: \"workspace:read\"<br/>  - user permission: \"read\" or higher<br/>Returns:<br/>401 if user does not have the required permission",
         "operationId": "workspaceEventsSse",
+        "parameters": [
+          {
+            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "in": "query",
+            "name": "token",
+            "required": false,
+            "schema": {
+              "deprecated": true,
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          {
+            "description": "Enable sudo-mode for admins for a single request, which gives full permission to all workspaces in the team.",
+            "in": "query",
+            "name": "actAsAdmin",
+            "required": false,
+            "schema": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            }
+          }
+        ],
         "responses": {
           "200": {
             "content": {
@@ -8023,6 +8583,33 @@
       "post": {
         "description": "Returns newly created workspace group with its sanitised data.<br/>Requirements:<br/>  - auth-client scopes: \"workspace\"<br/>  - user permission: \"write\" or higher<br/>Returns:<br/>401 if user does not have the required permission",
         "operationId": "createWorkspaceGroup",
+        "parameters": [
+          {
+            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "in": "query",
+            "name": "token",
+            "required": false,
+            "schema": {
+              "deprecated": true,
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          {
+            "description": "Enable sudo-mode for admins for a single request, which gives full permission to all workspaces in the team.",
+            "in": "query",
+            "name": "actAsAdmin",
+            "required": false,
+            "schema": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            }
+          }
+        ],
         "requestBody": {
           "content": {
             "application/json": {
@@ -8066,6 +8653,33 @@
       "post": {
         "description": "<br/>Requirements:<br/>  - auth-client scopes: \"workspace\"<br/>  - user permission: \"write\" or higher<br/>Returns:<br/>401 if user does not have the required permission",
         "operationId": "assignWorkspaceToGroup",
+        "parameters": [
+          {
+            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "in": "query",
+            "name": "token",
+            "required": false,
+            "schema": {
+              "deprecated": true,
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          {
+            "description": "Enable sudo-mode for admins for a single request, which gives full permission to all workspaces in the team.",
+            "in": "query",
+            "name": "actAsAdmin",
+            "required": false,
+            "schema": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            }
+          }
+        ],
         "requestBody": {
           "content": {
             "application/json": {
@@ -8101,6 +8715,33 @@
       "post": {
         "description": "Accepts a list of create/update/patch/delete operations (see the request model for more details).<br/>\nEach operations can target a single or multiple workspace groups.<br/>\nReturns a list of results for each input operation including errors.<br/>\nGuarantees that the size and order of the returned results matches the input list of operations.<br/>Requirements:<br/>  - auth-client scopes: \"workspace\"<br/>  - user permission: \"write\" or higher<br/>Returns:<br/>401 if user does not have the required permission",
         "operationId": "bulkWorkspaceGroups",
+        "parameters": [
+          {
+            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "in": "query",
+            "name": "token",
+            "required": false,
+            "schema": {
+              "deprecated": true,
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          {
+            "description": "Enable sudo-mode for admins for a single request, which gives full permission to all workspaces in the team.",
+            "in": "query",
+            "name": "actAsAdmin",
+            "required": false,
+            "schema": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            }
+          }
+        ],
         "requestBody": {
           "content": {
             "application/json": {
@@ -8147,6 +8788,33 @@
       "post": {
         "description": "Returns a list of workspace groups.<br/>\nReturns null for those workspace groups which are not found or not accessible.<br/>\nGuarantees that the size and order of the returned list matches the requested IDs.<br/>Requirements:<br/>  - auth-client scopes: \"workspace:read\"<br/>  - user permission: \"read\" or higher<br/>Returns:<br/>401 if user does not have the required permission",
         "operationId": "listWorkspaceGroups",
+        "parameters": [
+          {
+            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "in": "query",
+            "name": "token",
+            "required": false,
+            "schema": {
+              "deprecated": true,
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          {
+            "description": "Enable sudo-mode for admins for a single request, which gives full permission to all workspaces in the team.",
+            "in": "query",
+            "name": "actAsAdmin",
+            "required": false,
+            "schema": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            }
+          }
+        ],
         "requestBody": {
           "content": {
             "application/json": {
@@ -8196,6 +8864,31 @@
         "operationId": "searchWorkspaceGroups",
         "parameters": [
           {
+            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "in": "query",
+            "name": "token",
+            "required": false,
+            "schema": {
+              "deprecated": true,
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          {
+            "description": "Enable sudo-mode for admins for a single request, which gives full permission to all workspaces in the team.",
+            "in": "query",
+            "name": "actAsAdmin",
+            "required": false,
+            "schema": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            }
+          },
+          {
             "description": "How many elements to skip.",
             "in": "query",
             "name": "offset",
@@ -8218,6 +8911,35 @@
               "maximum": 1000,
               "minimum": 0,
               "type": "integer"
+            }
+          },
+          {
+            "deprecated": true,
+            "description": "From which element the page should start.",
+            "in": "query",
+            "name": "from",
+            "required": false,
+            "schema": {
+              "default": 0,
+              "deprecated": true,
+              "format": "int32",
+              "minimum": 0,
+              "type": "integer"
+            }
+          },
+          {
+            "deprecated": true,
+            "description": "At which element the page should end (excluding it).",
+            "in": "query",
+            "name": "to",
+            "required": false,
+            "schema": {
+              "deprecated": true,
+              "format": "int32",
+              "type": [
+                "integer",
+                "null"
+              ]
             }
           }
         ],
@@ -8269,6 +8991,31 @@
         "operationId": "deleteWorkspaceGroup",
         "parameters": [
           {
+            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "in": "query",
+            "name": "token",
+            "required": false,
+            "schema": {
+              "deprecated": true,
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          {
+            "description": "Enable sudo-mode for admins for a single request, which gives full permission to all workspaces in the team.",
+            "in": "query",
+            "name": "actAsAdmin",
+            "required": false,
+            "schema": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            }
+          },
+          {
             "in": "path",
             "name": "workspaceGroupId",
             "required": true,
@@ -8303,6 +9050,31 @@
         "description": "Returns found workspace group.<br/>Requirements:<br/>  - auth-client scopes: \"workspace:read\"<br/>  - user permission: \"read\" or higher<br/>Returns:<br/>400 if the resource is not found<br/>401 if user does not have the required permission",
         "operationId": "retrieveWorkspaceGroup",
         "parameters": [
+          {
+            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "in": "query",
+            "name": "token",
+            "required": false,
+            "schema": {
+              "deprecated": true,
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          {
+            "description": "Enable sudo-mode for admins for a single request, which gives full permission to all workspaces in the team.",
+            "in": "query",
+            "name": "actAsAdmin",
+            "required": false,
+            "schema": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            }
+          },
           {
             "in": "path",
             "name": "workspaceGroupId",
@@ -8345,6 +9117,31 @@
         "description": "Returns the whole updated workspace group with its sanitised data.<br/>Requirements:<br/>  - auth-client scopes: \"workspace\"<br/>  - user permission: \"write\" or higher<br/>Returns:<br/>400 if the resource is not found<br/>401 if user does not have the required permission",
         "operationId": "patchWorkspaceGroup",
         "parameters": [
+          {
+            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "in": "query",
+            "name": "token",
+            "required": false,
+            "schema": {
+              "deprecated": true,
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          {
+            "description": "Enable sudo-mode for admins for a single request, which gives full permission to all workspaces in the team.",
+            "in": "query",
+            "name": "actAsAdmin",
+            "required": false,
+            "schema": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            }
+          },
           {
             "in": "path",
             "name": "workspaceGroupId",
@@ -8397,6 +9194,31 @@
         "description": "Returns updated workspace group with its sanitised data.<br/>Requirements:<br/>  - auth-client scopes: \"workspace\"<br/>  - user permission: \"write\" or higher<br/>Returns:<br/>400 if the resource is not found<br/>401 if user does not have the required permission",
         "operationId": "updateWorkspaceGroup",
         "parameters": [
+          {
+            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "in": "query",
+            "name": "token",
+            "required": false,
+            "schema": {
+              "deprecated": true,
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          {
+            "description": "Enable sudo-mode for admins for a single request, which gives full permission to all workspaces in the team.",
+            "in": "query",
+            "name": "actAsAdmin",
+            "required": false,
+            "schema": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            }
+          },
           {
             "in": "path",
             "name": "workspaceGroupId",
@@ -8452,6 +9274,31 @@
         "operationId": "updateWorkspaceGroupPermissions",
         "parameters": [
           {
+            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "in": "query",
+            "name": "token",
+            "required": false,
+            "schema": {
+              "deprecated": true,
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          {
+            "description": "Enable sudo-mode for admins for a single request, which gives full permission to all workspaces in the team.",
+            "in": "query",
+            "name": "actAsAdmin",
+            "required": false,
+            "schema": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            }
+          },
+          {
             "in": "path",
             "name": "workspaceGroupId",
             "required": true,
@@ -8496,6 +9343,33 @@
       "post": {
         "description": "Returns newly created item relation with its sanitised data.<br/>Requirements:<br/>  - auth-client scopes: \"workspace\"<br/>  - user permission: \"write\" or higher<br/>Returns:<br/>401 if user does not have the required permission",
         "operationId": "createItemRelation",
+        "parameters": [
+          {
+            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "in": "query",
+            "name": "token",
+            "required": false,
+            "schema": {
+              "deprecated": true,
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          {
+            "description": "Enable sudo-mode for admins for a single request, which gives full permission to all workspaces in the team.",
+            "in": "query",
+            "name": "actAsAdmin",
+            "required": false,
+            "schema": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            }
+          }
+        ],
         "requestBody": {
           "content": {
             "application/json": {
@@ -8539,6 +9413,33 @@
       "post": {
         "description": "Accepts a list of create/update/patch/delete operations (see the request model for more details).<br/>\nEach operations can target a single or multiple item relations.<br/>\nReturns a list of results for each input operation including errors.<br/>\nGuarantees that the size and order of the returned results matches the input list of operations.<br/>Requirements:<br/>  - auth-client scopes: \"workspace\"<br/>  - user permission: \"write\" or higher<br/>Returns:<br/>401 if user does not have the required permission",
         "operationId": "bulkItemRelations",
+        "parameters": [
+          {
+            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "in": "query",
+            "name": "token",
+            "required": false,
+            "schema": {
+              "deprecated": true,
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          {
+            "description": "Enable sudo-mode for admins for a single request, which gives full permission to all workspaces in the team.",
+            "in": "query",
+            "name": "actAsAdmin",
+            "required": false,
+            "schema": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            }
+          }
+        ],
         "requestBody": {
           "content": {
             "application/json": {
@@ -8585,6 +9486,33 @@
       "post": {
         "description": "Returns a list of item relations.<br/>\nReturns null for those item relations which are not found or not accessible.<br/>\nGuarantees that the size and order of the returned list matches the requested IDs.<br/>Requirements:<br/>  - auth-client scopes: \"workspace:read\"<br/>  - user permission: \"read\" or higher<br/>Returns:<br/>401 if user does not have the required permission",
         "operationId": "listItemRelations",
+        "parameters": [
+          {
+            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "in": "query",
+            "name": "token",
+            "required": false,
+            "schema": {
+              "deprecated": true,
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          {
+            "description": "Enable sudo-mode for admins for a single request, which gives full permission to all workspaces in the team.",
+            "in": "query",
+            "name": "actAsAdmin",
+            "required": false,
+            "schema": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            }
+          }
+        ],
         "requestBody": {
           "content": {
             "application/json": {
@@ -8634,6 +9562,31 @@
         "operationId": "searchItemRelations",
         "parameters": [
           {
+            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "in": "query",
+            "name": "token",
+            "required": false,
+            "schema": {
+              "deprecated": true,
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          {
+            "description": "Enable sudo-mode for admins for a single request, which gives full permission to all workspaces in the team.",
+            "in": "query",
+            "name": "actAsAdmin",
+            "required": false,
+            "schema": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            }
+          },
+          {
             "description": "How many elements to skip.",
             "in": "query",
             "name": "offset",
@@ -8656,6 +9609,35 @@
               "maximum": 1000,
               "minimum": 0,
               "type": "integer"
+            }
+          },
+          {
+            "deprecated": true,
+            "description": "From which element the page should start.",
+            "in": "query",
+            "name": "from",
+            "required": false,
+            "schema": {
+              "default": 0,
+              "deprecated": true,
+              "format": "int32",
+              "minimum": 0,
+              "type": "integer"
+            }
+          },
+          {
+            "deprecated": true,
+            "description": "At which element the page should end (excluding it).",
+            "in": "query",
+            "name": "to",
+            "required": false,
+            "schema": {
+              "deprecated": true,
+              "format": "int32",
+              "type": [
+                "integer",
+                "null"
+              ]
             }
           }
         ],
@@ -8711,6 +9693,31 @@
         "operationId": "deleteItemRelation",
         "parameters": [
           {
+            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "in": "query",
+            "name": "token",
+            "required": false,
+            "schema": {
+              "deprecated": true,
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          {
+            "description": "Enable sudo-mode for admins for a single request, which gives full permission to all workspaces in the team.",
+            "in": "query",
+            "name": "actAsAdmin",
+            "required": false,
+            "schema": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            }
+          },
+          {
             "in": "path",
             "name": "itemRelationId",
             "required": true,
@@ -8745,6 +9752,31 @@
         "description": "Returns found item relation.<br/>Requirements:<br/>  - auth-client scopes: \"workspace:read\"<br/>  - user permission: \"read\" or higher<br/>Returns:<br/>400 if the resource is not found<br/>401 if user does not have the required permission",
         "operationId": "retrieveItemRelation",
         "parameters": [
+          {
+            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "in": "query",
+            "name": "token",
+            "required": false,
+            "schema": {
+              "deprecated": true,
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          {
+            "description": "Enable sudo-mode for admins for a single request, which gives full permission to all workspaces in the team.",
+            "in": "query",
+            "name": "actAsAdmin",
+            "required": false,
+            "schema": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            }
+          },
           {
             "in": "path",
             "name": "itemRelationId",
@@ -8787,6 +9819,31 @@
         "description": "Returns the whole updated item relation with its sanitised data.<br/>Requirements:<br/>  - auth-client scopes: \"workspace\"<br/>  - user permission: \"write\" or higher<br/>Returns:<br/>400 if the resource is not found<br/>401 if user does not have the required permission",
         "operationId": "patchItemRelation",
         "parameters": [
+          {
+            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "in": "query",
+            "name": "token",
+            "required": false,
+            "schema": {
+              "deprecated": true,
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          {
+            "description": "Enable sudo-mode for admins for a single request, which gives full permission to all workspaces in the team.",
+            "in": "query",
+            "name": "actAsAdmin",
+            "required": false,
+            "schema": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            }
+          },
           {
             "in": "path",
             "name": "itemRelationId",
@@ -8839,6 +9896,31 @@
         "description": "Returns updated item relation with its sanitised data.<br/>Requirements:<br/>  - auth-client scopes: \"workspace\"<br/>  - user permission: \"write\" or higher<br/>Returns:<br/>400 if the resource is not found<br/>401 if user does not have the required permission",
         "operationId": "updateItemRelation",
         "parameters": [
+          {
+            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "in": "query",
+            "name": "token",
+            "required": false,
+            "schema": {
+              "deprecated": true,
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          {
+            "description": "Enable sudo-mode for admins for a single request, which gives full permission to all workspaces in the team.",
+            "in": "query",
+            "name": "actAsAdmin",
+            "required": false,
+            "schema": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            }
+          },
           {
             "in": "path",
             "name": "itemRelationId",
@@ -8893,6 +9975,31 @@
         "description": "Returns ids of newly copied items, with order of the returned ids matching the order of requested source items. Returns Not Found if either of the specified source items does not exist.<br/>Requirements:<br/>  - auth-client scopes: \"workspace\"<br/>  - user permission: \"write\" or higher<br/>Returns:<br/>400 if the resource is not found<br/>401 if user does not have the required permission",
         "operationId": "copyItems",
         "parameters": [
+          {
+            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "in": "query",
+            "name": "token",
+            "required": false,
+            "schema": {
+              "deprecated": true,
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          {
+            "description": "Enable sudo-mode for admins for a single request, which gives full permission to all workspaces in the team.",
+            "in": "query",
+            "name": "actAsAdmin",
+            "required": false,
+            "schema": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            }
+          },
           {
             "description": "Workspace of the source items to be copied.",
             "in": "query",
@@ -8965,6 +10072,33 @@
       "post": {
         "description": "Returns an array of results, where each element is either a found item with its embeddings, or null if there no item with such ID.<br/>Requirements:<br/>  - auth-client scopes: \"workspace\"<br/>  - user permission: \"write\" or higher<br/>Returns:<br/>401 if user does not have the required permission",
         "operationId": "retrieveItemsGlobally",
+        "parameters": [
+          {
+            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "in": "query",
+            "name": "token",
+            "required": false,
+            "schema": {
+              "deprecated": true,
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          {
+            "description": "Enable sudo-mode for admins for a single request, which gives full permission to all workspaces in the team.",
+            "in": "query",
+            "name": "actAsAdmin",
+            "required": false,
+            "schema": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            }
+          }
+        ],
         "requestBody": {
           "content": {
             "application/json": {
@@ -9018,6 +10152,31 @@
         "description": "Returns ids of newly created items in the target workspace, with order of the returned ids matching the order of requested source items. Returns Not Found if either of the specified source items does not exist.<br/>Requirements:<br/>  - auth-client scopes: \"workspace\"<br/>  - user permission: \"write\" or higher<br/>Returns:<br/>400 if the resource is not found<br/>401 if user does not have the required permission",
         "operationId": "moveItems",
         "parameters": [
+          {
+            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "in": "query",
+            "name": "token",
+            "required": false,
+            "schema": {
+              "deprecated": true,
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          {
+            "description": "Enable sudo-mode for admins for a single request, which gives full permission to all workspaces in the team.",
+            "in": "query",
+            "name": "actAsAdmin",
+            "required": false,
+            "schema": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            }
+          },
           {
             "description": "Workspace of the source items to be moved.",
             "in": "query",
@@ -9090,6 +10249,33 @@
       "post": {
         "description": "Returns a list of workspaces.<br/>\nReturns null for those workspaces which are not found or not accessible.<br/>\nGuarantees that the size and order of the returned list matches the requested IDs.<br/>Requirements:<br/>  - auth-client scopes: \"workspace:read\"<br/>  - user permission: \"read\" or higher<br/>Returns:<br/>401 if user does not have the required permission",
         "operationId": "listWorkspaces",
+        "parameters": [
+          {
+            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "in": "query",
+            "name": "token",
+            "required": false,
+            "schema": {
+              "deprecated": true,
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          {
+            "description": "Enable sudo-mode for admins for a single request, which gives full permission to all workspaces in the team.",
+            "in": "query",
+            "name": "actAsAdmin",
+            "required": false,
+            "schema": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            }
+          }
+        ],
         "requestBody": {
           "content": {
             "application/json": {
@@ -9139,6 +10325,31 @@
         "operationId": "searchWorkspaces",
         "parameters": [
           {
+            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "in": "query",
+            "name": "token",
+            "required": false,
+            "schema": {
+              "deprecated": true,
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          {
+            "description": "Enable sudo-mode for admins for a single request, which gives full permission to all workspaces in the team.",
+            "in": "query",
+            "name": "actAsAdmin",
+            "required": false,
+            "schema": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            }
+          },
+          {
             "description": "How many elements to skip.",
             "in": "query",
             "name": "offset",
@@ -9161,6 +10372,35 @@
               "maximum": 1000,
               "minimum": 0,
               "type": "integer"
+            }
+          },
+          {
+            "deprecated": true,
+            "description": "From which element the page should start.",
+            "in": "query",
+            "name": "from",
+            "required": false,
+            "schema": {
+              "default": 0,
+              "deprecated": true,
+              "format": "int32",
+              "minimum": 0,
+              "type": "integer"
+            }
+          },
+          {
+            "deprecated": true,
+            "description": "At which element the page should end (excluding it).",
+            "in": "query",
+            "name": "to",
+            "required": false,
+            "schema": {
+              "deprecated": true,
+              "format": "int32",
+              "type": [
+                "integer",
+                "null"
+              ]
             }
           }
         ],
@@ -9214,6 +10454,33 @@
       "post": {
         "description": "Returns newly created workspace relation with its sanitised data.<br/>Requirements:<br/>  - auth-client scopes: \"workspace\"<br/>  - user permission: \"write\" or higher<br/>Returns:<br/>401 if user does not have the required permission",
         "operationId": "createWorkspaceRelation",
+        "parameters": [
+          {
+            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "in": "query",
+            "name": "token",
+            "required": false,
+            "schema": {
+              "deprecated": true,
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          {
+            "description": "Enable sudo-mode for admins for a single request, which gives full permission to all workspaces in the team.",
+            "in": "query",
+            "name": "actAsAdmin",
+            "required": false,
+            "schema": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            }
+          }
+        ],
         "requestBody": {
           "content": {
             "application/json": {
@@ -9257,6 +10524,33 @@
       "post": {
         "description": "Accepts a list of create/update/patch/delete operations (see the request model for more details).<br/>\nEach operations can target a single or multiple workspace relations.<br/>\nReturns a list of results for each input operation including errors.<br/>\nGuarantees that the size and order of the returned results matches the input list of operations.<br/>Requirements:<br/>  - auth-client scopes: \"workspace\"<br/>  - user permission: \"write\" or higher<br/>Returns:<br/>401 if user does not have the required permission",
         "operationId": "bulkWorkspaceRelations",
+        "parameters": [
+          {
+            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "in": "query",
+            "name": "token",
+            "required": false,
+            "schema": {
+              "deprecated": true,
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          {
+            "description": "Enable sudo-mode for admins for a single request, which gives full permission to all workspaces in the team.",
+            "in": "query",
+            "name": "actAsAdmin",
+            "required": false,
+            "schema": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            }
+          }
+        ],
         "requestBody": {
           "content": {
             "application/json": {
@@ -9303,6 +10597,33 @@
       "post": {
         "description": "Returns a list of workspace relations.<br/>\nReturns null for those workspace relations which are not found or not accessible.<br/>\nGuarantees that the size and order of the returned list matches the requested IDs.<br/>Requirements:<br/>  - auth-client scopes: \"workspace:read\"<br/>  - user permission: \"read\" or higher<br/>Returns:<br/>401 if user does not have the required permission",
         "operationId": "listWorkspaceRelations",
+        "parameters": [
+          {
+            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "in": "query",
+            "name": "token",
+            "required": false,
+            "schema": {
+              "deprecated": true,
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          {
+            "description": "Enable sudo-mode for admins for a single request, which gives full permission to all workspaces in the team.",
+            "in": "query",
+            "name": "actAsAdmin",
+            "required": false,
+            "schema": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            }
+          }
+        ],
         "requestBody": {
           "content": {
             "application/json": {
@@ -9352,6 +10673,31 @@
         "operationId": "searchWorkspaceRelations",
         "parameters": [
           {
+            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "in": "query",
+            "name": "token",
+            "required": false,
+            "schema": {
+              "deprecated": true,
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          {
+            "description": "Enable sudo-mode for admins for a single request, which gives full permission to all workspaces in the team.",
+            "in": "query",
+            "name": "actAsAdmin",
+            "required": false,
+            "schema": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            }
+          },
+          {
             "description": "How many elements to skip.",
             "in": "query",
             "name": "offset",
@@ -9374,6 +10720,35 @@
               "maximum": 1000,
               "minimum": 0,
               "type": "integer"
+            }
+          },
+          {
+            "deprecated": true,
+            "description": "From which element the page should start.",
+            "in": "query",
+            "name": "from",
+            "required": false,
+            "schema": {
+              "default": 0,
+              "deprecated": true,
+              "format": "int32",
+              "minimum": 0,
+              "type": "integer"
+            }
+          },
+          {
+            "deprecated": true,
+            "description": "At which element the page should end (excluding it).",
+            "in": "query",
+            "name": "to",
+            "required": false,
+            "schema": {
+              "deprecated": true,
+              "format": "int32",
+              "type": [
+                "integer",
+                "null"
+              ]
             }
           }
         ],
@@ -9426,6 +10801,33 @@
     "/api/workspaces/workspace-relations/set": {
       "put": {
         "operationId": "putApiWorkspacesWorkspace-relationsSet",
+        "parameters": [
+          {
+            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "in": "query",
+            "name": "token",
+            "required": false,
+            "schema": {
+              "deprecated": true,
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          {
+            "description": "Enable sudo-mode for admins for a single request, which gives full permission to all workspaces in the team.",
+            "in": "query",
+            "name": "actAsAdmin",
+            "required": false,
+            "schema": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            }
+          }
+        ],
         "requestBody": {
           "content": {
             "application/json": {
@@ -9469,6 +10871,31 @@
         "operationId": "deleteWorkspaceRelation",
         "parameters": [
           {
+            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "in": "query",
+            "name": "token",
+            "required": false,
+            "schema": {
+              "deprecated": true,
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          {
+            "description": "Enable sudo-mode for admins for a single request, which gives full permission to all workspaces in the team.",
+            "in": "query",
+            "name": "actAsAdmin",
+            "required": false,
+            "schema": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            }
+          },
+          {
             "in": "path",
             "name": "workspaceRelationId",
             "required": true,
@@ -9503,6 +10930,31 @@
         "description": "Returns found workspace relation.<br/>Requirements:<br/>  - auth-client scopes: \"workspace:read\"<br/>  - user permission: \"read\" or higher<br/>Returns:<br/>400 if the resource is not found<br/>401 if user does not have the required permission",
         "operationId": "retrieveWorkspaceRelation",
         "parameters": [
+          {
+            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "in": "query",
+            "name": "token",
+            "required": false,
+            "schema": {
+              "deprecated": true,
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          {
+            "description": "Enable sudo-mode for admins for a single request, which gives full permission to all workspaces in the team.",
+            "in": "query",
+            "name": "actAsAdmin",
+            "required": false,
+            "schema": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            }
+          },
           {
             "in": "path",
             "name": "workspaceRelationId",
@@ -9545,6 +10997,31 @@
         "description": "Returns the whole updated workspace relation with its sanitised data.<br/>Requirements:<br/>  - auth-client scopes: \"workspace\"<br/>  - user permission: \"write\" or higher<br/>Returns:<br/>400 if the resource is not found<br/>401 if user does not have the required permission",
         "operationId": "patchWorkspaceRelation",
         "parameters": [
+          {
+            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "in": "query",
+            "name": "token",
+            "required": false,
+            "schema": {
+              "deprecated": true,
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          {
+            "description": "Enable sudo-mode for admins for a single request, which gives full permission to all workspaces in the team.",
+            "in": "query",
+            "name": "actAsAdmin",
+            "required": false,
+            "schema": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            }
+          },
           {
             "in": "path",
             "name": "workspaceRelationId",
@@ -9597,6 +11074,31 @@
         "description": "Returns updated workspace relation with its sanitised data.<br/>Requirements:<br/>  - auth-client scopes: \"workspace\"<br/>  - user permission: \"write\" or higher<br/>Returns:<br/>400 if the resource is not found<br/>401 if user does not have the required permission",
         "operationId": "updateWorkspaceRelation",
         "parameters": [
+          {
+            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "in": "query",
+            "name": "token",
+            "required": false,
+            "schema": {
+              "deprecated": true,
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          {
+            "description": "Enable sudo-mode for admins for a single request, which gives full permission to all workspaces in the team.",
+            "in": "query",
+            "name": "actAsAdmin",
+            "required": false,
+            "schema": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            }
+          },
           {
             "in": "path",
             "name": "workspaceRelationId",
@@ -9652,6 +11154,31 @@
         "operationId": "deleteWorkspace",
         "parameters": [
           {
+            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "in": "query",
+            "name": "token",
+            "required": false,
+            "schema": {
+              "deprecated": true,
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          {
+            "description": "Enable sudo-mode for admins for a single request, which gives full permission to all workspaces in the team.",
+            "in": "query",
+            "name": "actAsAdmin",
+            "required": false,
+            "schema": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            }
+          },
+          {
             "in": "path",
             "name": "workspaceId",
             "required": true,
@@ -9686,6 +11213,31 @@
         "description": "Returns found workspace.<br/>Requirements:<br/>  - auth-client scopes: \"workspace:read\"<br/>  - user permission: \"read\" or higher<br/>Returns:<br/>400 if the resource is not found<br/>401 if user does not have the required permission",
         "operationId": "retrieveWorkspace",
         "parameters": [
+          {
+            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "in": "query",
+            "name": "token",
+            "required": false,
+            "schema": {
+              "deprecated": true,
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          {
+            "description": "Enable sudo-mode for admins for a single request, which gives full permission to all workspaces in the team.",
+            "in": "query",
+            "name": "actAsAdmin",
+            "required": false,
+            "schema": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            }
+          },
           {
             "in": "path",
             "name": "workspaceId",
@@ -9728,6 +11280,31 @@
         "description": "Returns the whole updated workspace with its sanitised data.<br/>Requirements:<br/>  - auth-client scopes: \"workspace\"<br/>  - user permission: \"write\" or higher<br/>Returns:<br/>400 if the resource is not found<br/>401 if user does not have the required permission",
         "operationId": "patchWorkspace",
         "parameters": [
+          {
+            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "in": "query",
+            "name": "token",
+            "required": false,
+            "schema": {
+              "deprecated": true,
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          {
+            "description": "Enable sudo-mode for admins for a single request, which gives full permission to all workspaces in the team.",
+            "in": "query",
+            "name": "actAsAdmin",
+            "required": false,
+            "schema": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            }
+          },
           {
             "in": "path",
             "name": "workspaceId",
@@ -9780,6 +11357,31 @@
         "description": "Returns updated workspace with its sanitised data.<br/>Requirements:<br/>  - auth-client scopes: \"workspace\"<br/>  - user permission: \"write\" or higher<br/>Returns:<br/>400 if the resource is not found<br/>401 if user does not have the required permission",
         "operationId": "updateWorkspace",
         "parameters": [
+          {
+            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "in": "query",
+            "name": "token",
+            "required": false,
+            "schema": {
+              "deprecated": true,
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          {
+            "description": "Enable sudo-mode for admins for a single request, which gives full permission to all workspaces in the team.",
+            "in": "query",
+            "name": "actAsAdmin",
+            "required": false,
+            "schema": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            }
+          },
           {
             "in": "path",
             "name": "workspaceId",
@@ -9835,6 +11437,31 @@
         "operationId": "createItemAttachment",
         "parameters": [
           {
+            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "in": "query",
+            "name": "token",
+            "required": false,
+            "schema": {
+              "deprecated": true,
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          {
+            "description": "Enable sudo-mode for admins for a single request, which gives full permission to all workspaces in the team.",
+            "in": "query",
+            "name": "actAsAdmin",
+            "required": false,
+            "schema": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            }
+          },
+          {
             "description": "ID of the workspace which contains the managed links.",
             "in": "path",
             "name": "workspaceId",
@@ -9889,6 +11516,31 @@
         "description": "Accepts a list of create/update/patch/delete operations (see the request model for more details).<br/>\nEach operations can target a single or multiple attachments.<br/>\nReturns a list of results for each input operation including errors.<br/>\nGuarantees that the size and order of the returned results matches the input list of operations.<br/>Requirements:<br/>  - auth-client scopes: \"workspace\"<br/>  - user permission: \"write\" or higher<br/>Returns:<br/>401 if user does not have the required permission",
         "operationId": "bulkItemAttachments",
         "parameters": [
+          {
+            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "in": "query",
+            "name": "token",
+            "required": false,
+            "schema": {
+              "deprecated": true,
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          {
+            "description": "Enable sudo-mode for admins for a single request, which gives full permission to all workspaces in the team.",
+            "in": "query",
+            "name": "actAsAdmin",
+            "required": false,
+            "schema": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            }
+          },
           {
             "description": "ID of the workspace which contains the managed links.",
             "in": "path",
@@ -9947,6 +11599,31 @@
         "description": "Returns a list of attachments.<br/>\nReturns null for those attachments which are not found or not accessible.<br/>\nGuarantees that the size and order of the returned list matches the requested IDs.<br/>Requirements:<br/>  - auth-client scopes: \"workspace:read\"<br/>  - user permission: \"read\" or higher<br/>Returns:<br/>401 if user does not have the required permission",
         "operationId": "listItemAttachments",
         "parameters": [
+          {
+            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "in": "query",
+            "name": "token",
+            "required": false,
+            "schema": {
+              "deprecated": true,
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          {
+            "description": "Enable sudo-mode for admins for a single request, which gives full permission to all workspaces in the team.",
+            "in": "query",
+            "name": "actAsAdmin",
+            "required": false,
+            "schema": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            }
+          },
           {
             "description": "ID of the workspace which contains the managed links.",
             "in": "path",
@@ -10007,6 +11684,31 @@
         "operationId": "searchItemAttachments",
         "parameters": [
           {
+            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "in": "query",
+            "name": "token",
+            "required": false,
+            "schema": {
+              "deprecated": true,
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          {
+            "description": "Enable sudo-mode for admins for a single request, which gives full permission to all workspaces in the team.",
+            "in": "query",
+            "name": "actAsAdmin",
+            "required": false,
+            "schema": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            }
+          },
+          {
             "description": "ID of the workspace which contains the managed links.",
             "in": "path",
             "name": "workspaceId",
@@ -10039,6 +11741,35 @@
               "maximum": 1000,
               "minimum": 0,
               "type": "integer"
+            }
+          },
+          {
+            "deprecated": true,
+            "description": "From which element the page should start.",
+            "in": "query",
+            "name": "from",
+            "required": false,
+            "schema": {
+              "default": 0,
+              "deprecated": true,
+              "format": "int32",
+              "minimum": 0,
+              "type": "integer"
+            }
+          },
+          {
+            "deprecated": true,
+            "description": "At which element the page should end (excluding it).",
+            "in": "query",
+            "name": "to",
+            "required": false,
+            "schema": {
+              "deprecated": true,
+              "format": "int32",
+              "type": [
+                "integer",
+                "null"
+              ]
             }
           }
         ],
@@ -10094,6 +11825,31 @@
         "operationId": "deleteItemAttachment",
         "parameters": [
           {
+            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "in": "query",
+            "name": "token",
+            "required": false,
+            "schema": {
+              "deprecated": true,
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          {
+            "description": "Enable sudo-mode for admins for a single request, which gives full permission to all workspaces in the team.",
+            "in": "query",
+            "name": "actAsAdmin",
+            "required": false,
+            "schema": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            }
+          },
+          {
             "description": "ID of the workspace which contains the managed links.",
             "in": "path",
             "name": "workspaceId",
@@ -10138,6 +11894,31 @@
         "description": "Returns found attachment.<br/>Requirements:<br/>  - auth-client scopes: \"workspace:read\"<br/>  - user permission: \"read\" or higher<br/>Returns:<br/>400 if the resource is not found<br/>401 if user does not have the required permission",
         "operationId": "retrieveItemAttachment",
         "parameters": [
+          {
+            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "in": "query",
+            "name": "token",
+            "required": false,
+            "schema": {
+              "deprecated": true,
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          {
+            "description": "Enable sudo-mode for admins for a single request, which gives full permission to all workspaces in the team.",
+            "in": "query",
+            "name": "actAsAdmin",
+            "required": false,
+            "schema": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            }
+          },
           {
             "description": "ID of the workspace which contains the managed links.",
             "in": "path",
@@ -10190,6 +11971,31 @@
         "description": "Returns the whole updated attachment with its sanitised data.<br/>Requirements:<br/>  - auth-client scopes: \"workspace\"<br/>  - user permission: \"write\" or higher<br/>Returns:<br/>400 if the resource is not found<br/>401 if user does not have the required permission",
         "operationId": "patchItemAttachment",
         "parameters": [
+          {
+            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "in": "query",
+            "name": "token",
+            "required": false,
+            "schema": {
+              "deprecated": true,
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          {
+            "description": "Enable sudo-mode for admins for a single request, which gives full permission to all workspaces in the team.",
+            "in": "query",
+            "name": "actAsAdmin",
+            "required": false,
+            "schema": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            }
+          },
           {
             "description": "ID of the workspace which contains the managed links.",
             "in": "path",
@@ -10252,6 +12058,31 @@
         "description": "Returns updated attachment with its sanitised data.<br/>Requirements:<br/>  - auth-client scopes: \"workspace\"<br/>  - user permission: \"write\" or higher<br/>Returns:<br/>400 if the resource is not found<br/>401 if user does not have the required permission",
         "operationId": "updateItemAttachment",
         "parameters": [
+          {
+            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "in": "query",
+            "name": "token",
+            "required": false,
+            "schema": {
+              "deprecated": true,
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          {
+            "description": "Enable sudo-mode for admins for a single request, which gives full permission to all workspaces in the team.",
+            "in": "query",
+            "name": "actAsAdmin",
+            "required": false,
+            "schema": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            }
+          },
           {
             "description": "ID of the workspace which contains the managed links.",
             "in": "path",
@@ -10317,6 +12148,31 @@
         "operationId": "workspaceBackgroundActivitySse",
         "parameters": [
           {
+            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "in": "query",
+            "name": "token",
+            "required": false,
+            "schema": {
+              "deprecated": true,
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          {
+            "description": "Enable sudo-mode for admins for a single request, which gives full permission to all workspaces in the team.",
+            "in": "query",
+            "name": "actAsAdmin",
+            "required": false,
+            "schema": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            }
+          },
+          {
             "in": "path",
             "name": "workspaceId",
             "required": true,
@@ -10360,6 +12216,31 @@
         "operationId": "createComment",
         "parameters": [
           {
+            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "in": "query",
+            "name": "token",
+            "required": false,
+            "schema": {
+              "deprecated": true,
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          {
+            "description": "Enable sudo-mode for admins for a single request, which gives full permission to all workspaces in the team.",
+            "in": "query",
+            "name": "actAsAdmin",
+            "required": false,
+            "schema": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            }
+          },
+          {
             "in": "path",
             "name": "workspaceId",
             "required": true,
@@ -10389,12 +12270,12 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/CommentWithEmbed"
+                  "$ref": "#/components/schemas/CommentWithCommentEmbed"
                 }
               },
               "application/json+markdown": {
                 "schema": {
-                  "$ref": "#/components/schemas/CommentWithEmbed"
+                  "$ref": "#/components/schemas/CommentWithCommentEmbed"
                 }
               }
             },
@@ -10423,6 +12304,31 @@
         "description": "Accepts a list of create/update/patch/delete operations (see the request model for more details).<br/>\nEach operations can target a single or multiple comments.<br/>\nReturns a list of results for each input operation including errors.<br/>\nGuarantees that the size and order of the returned results matches the input list of operations.<br/>Requirements:<br/>  - auth-client scopes: \"workspace\"<br/>  - user permission: \"write\" or higher<br/>Returns:<br/>401 if user does not have the required permission",
         "operationId": "bulkComments",
         "parameters": [
+          {
+            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "in": "query",
+            "name": "token",
+            "required": false,
+            "schema": {
+              "deprecated": true,
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          {
+            "description": "Enable sudo-mode for admins for a single request, which gives full permission to all workspaces in the team.",
+            "in": "query",
+            "name": "actAsAdmin",
+            "required": false,
+            "schema": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            }
+          },
           {
             "in": "path",
             "name": "workspaceId",
@@ -10459,12 +12365,12 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/CommentWithEmbedOrNullList"
+                  "$ref": "#/components/schemas/CommentWithCommentEmbedOrNullList"
                 }
               },
               "application/json+markdown": {
                 "schema": {
-                  "$ref": "#/components/schemas/CommentWithEmbedOrNullList"
+                  "$ref": "#/components/schemas/CommentWithCommentEmbedOrNullList"
                 }
               }
             },
@@ -10494,6 +12400,31 @@
         "operationId": "listComments",
         "parameters": [
           {
+            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "in": "query",
+            "name": "token",
+            "required": false,
+            "schema": {
+              "deprecated": true,
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          {
+            "description": "Enable sudo-mode for admins for a single request, which gives full permission to all workspaces in the team.",
+            "in": "query",
+            "name": "actAsAdmin",
+            "required": false,
+            "schema": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            }
+          },
+          {
             "in": "path",
             "name": "workspaceId",
             "required": true,
@@ -10522,12 +12453,12 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/CommentWithEmbedOrNullList"
+                  "$ref": "#/components/schemas/CommentWithCommentEmbedOrNullList"
                 }
               },
               "application/json+markdown": {
                 "schema": {
-                  "$ref": "#/components/schemas/CommentWithEmbedOrNullList"
+                  "$ref": "#/components/schemas/CommentWithCommentEmbedOrNullList"
                 }
               }
             },
@@ -10556,6 +12487,31 @@
         "description": "Returns all comments or searches comments by query. Always returns only comments which are accessible by the current user.<br/>Requirements:<br/>  - auth-client scopes: \"workspace:read\"<br/>  - user permission: \"read\" or higher<br/>Returns:<br/>401 if user does not have the required permission",
         "operationId": "searchComments",
         "parameters": [
+          {
+            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "in": "query",
+            "name": "token",
+            "required": false,
+            "schema": {
+              "deprecated": true,
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          {
+            "description": "Enable sudo-mode for admins for a single request, which gives full permission to all workspaces in the team.",
+            "in": "query",
+            "name": "actAsAdmin",
+            "required": false,
+            "schema": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            }
+          },
           {
             "in": "path",
             "name": "workspaceId",
@@ -10589,6 +12545,35 @@
               "minimum": 0,
               "type": "integer"
             }
+          },
+          {
+            "deprecated": true,
+            "description": "From which element the page should start.",
+            "in": "query",
+            "name": "from",
+            "required": false,
+            "schema": {
+              "default": 0,
+              "deprecated": true,
+              "format": "int32",
+              "minimum": 0,
+              "type": "integer"
+            }
+          },
+          {
+            "deprecated": true,
+            "description": "At which element the page should end (excluding it).",
+            "in": "query",
+            "name": "to",
+            "required": false,
+            "schema": {
+              "deprecated": true,
+              "format": "int32",
+              "type": [
+                "integer",
+                "null"
+              ]
+            }
           }
         ],
         "requestBody": {
@@ -10613,12 +12598,12 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/CommentWithEmbedPage"
+                  "$ref": "#/components/schemas/CommentWithCommentEmbedPage"
                 }
               },
               "application/json+markdown": {
                 "schema": {
-                  "$ref": "#/components/schemas/CommentWithEmbedPage"
+                  "$ref": "#/components/schemas/CommentWithCommentEmbedPage"
                 }
               }
             },
@@ -10647,6 +12632,31 @@
         "description": "Returns empty result if the comment was successfully deleted.<br/>Requirements:<br/>  - auth-client scopes: \"workspace\"<br/>  - user permission: \"write\" or higher<br/>Returns:<br/>400 if the resource is not found<br/>401 if user does not have the required permission",
         "operationId": "deleteComment",
         "parameters": [
+          {
+            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "in": "query",
+            "name": "token",
+            "required": false,
+            "schema": {
+              "deprecated": true,
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          {
+            "description": "Enable sudo-mode for admins for a single request, which gives full permission to all workspaces in the team.",
+            "in": "query",
+            "name": "actAsAdmin",
+            "required": false,
+            "schema": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            }
+          },
           {
             "in": "path",
             "name": "workspaceId",
@@ -10692,6 +12702,31 @@
         "operationId": "retrieveComment",
         "parameters": [
           {
+            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "in": "query",
+            "name": "token",
+            "required": false,
+            "schema": {
+              "deprecated": true,
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          {
+            "description": "Enable sudo-mode for admins for a single request, which gives full permission to all workspaces in the team.",
+            "in": "query",
+            "name": "actAsAdmin",
+            "required": false,
+            "schema": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            }
+          },
+          {
             "in": "path",
             "name": "workspaceId",
             "required": true,
@@ -10715,12 +12750,12 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/CommentWithEmbed"
+                  "$ref": "#/components/schemas/CommentWithCommentEmbed"
                 }
               },
               "application/json+markdown": {
                 "schema": {
-                  "$ref": "#/components/schemas/CommentWithEmbed"
+                  "$ref": "#/components/schemas/CommentWithCommentEmbed"
                 }
               }
             },
@@ -10747,6 +12782,31 @@
         "description": "Returns the whole updated comment with its sanitised data.<br/>Requirements:<br/>  - auth-client scopes: \"workspace\"<br/>  - user permission: \"write\" or higher<br/>Returns:<br/>400 if the resource is not found<br/>401 if user does not have the required permission",
         "operationId": "patchComment",
         "parameters": [
+          {
+            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "in": "query",
+            "name": "token",
+            "required": false,
+            "schema": {
+              "deprecated": true,
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          {
+            "description": "Enable sudo-mode for admins for a single request, which gives full permission to all workspaces in the team.",
+            "in": "query",
+            "name": "actAsAdmin",
+            "required": false,
+            "schema": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            }
+          },
           {
             "in": "path",
             "name": "workspaceId",
@@ -10781,12 +12841,12 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/CommentWithEmbed"
+                  "$ref": "#/components/schemas/CommentWithCommentEmbed"
                 }
               },
               "application/json+markdown": {
                 "schema": {
-                  "$ref": "#/components/schemas/CommentWithEmbed"
+                  "$ref": "#/components/schemas/CommentWithCommentEmbed"
                 }
               }
             },
@@ -10813,6 +12873,31 @@
         "description": "Returns updated comment with its sanitised data.<br/>Requirements:<br/>  - auth-client scopes: \"workspace\"<br/>  - user permission: \"write\" or higher<br/>Returns:<br/>400 if the resource is not found<br/>401 if user does not have the required permission",
         "operationId": "updateComment",
         "parameters": [
+          {
+            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "in": "query",
+            "name": "token",
+            "required": false,
+            "schema": {
+              "deprecated": true,
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          {
+            "description": "Enable sudo-mode for admins for a single request, which gives full permission to all workspaces in the team.",
+            "in": "query",
+            "name": "actAsAdmin",
+            "required": false,
+            "schema": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            }
+          },
           {
             "in": "path",
             "name": "workspaceId",
@@ -10852,12 +12937,12 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/CommentWithEmbed"
+                  "$ref": "#/components/schemas/CommentWithCommentEmbed"
                 }
               },
               "application/json+markdown": {
                 "schema": {
-                  "$ref": "#/components/schemas/CommentWithEmbed"
+                  "$ref": "#/components/schemas/CommentWithCommentEmbed"
                 }
               }
             },
@@ -10886,6 +12971,31 @@
         "description": "This action can be performed only as a real authenticated user<br/>Requirements:<br/>  - auth-client scopes: \"workspace\"<br/>  - user permission: \"write\" or higher<br/>Returns:<br/>401 if user does not have the required permission",
         "operationId": "removeCommentReaction",
         "parameters": [
+          {
+            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "in": "query",
+            "name": "token",
+            "required": false,
+            "schema": {
+              "deprecated": true,
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          {
+            "description": "Enable sudo-mode for admins for a single request, which gives full permission to all workspaces in the team.",
+            "in": "query",
+            "name": "actAsAdmin",
+            "required": false,
+            "schema": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            }
+          },
           {
             "in": "path",
             "name": "workspaceId",
@@ -10937,6 +13047,31 @@
         "description": "This action can be performed only as a real authenticated user<br/>Requirements:<br/>  - auth-client scopes: \"workspace\"<br/>  - user permission: \"write\" or higher<br/>Returns:<br/>401 if user does not have the required permission",
         "operationId": "addCommentReaction",
         "parameters": [
+          {
+            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "in": "query",
+            "name": "token",
+            "required": false,
+            "schema": {
+              "deprecated": true,
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          {
+            "description": "Enable sudo-mode for admins for a single request, which gives full permission to all workspaces in the team.",
+            "in": "query",
+            "name": "actAsAdmin",
+            "required": false,
+            "schema": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            }
+          },
           {
             "in": "path",
             "name": "workspaceId",
@@ -10991,6 +13126,31 @@
         "operationId": "duplicateWorkspace",
         "parameters": [
           {
+            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "in": "query",
+            "name": "token",
+            "required": false,
+            "schema": {
+              "deprecated": true,
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          {
+            "description": "Enable sudo-mode for admins for a single request, which gives full permission to all workspaces in the team.",
+            "in": "query",
+            "name": "actAsAdmin",
+            "required": false,
+            "schema": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            }
+          },
+          {
             "in": "path",
             "name": "workspaceId",
             "required": true,
@@ -11044,6 +13204,31 @@
         "operationId": "workspaceEventsByWorkspaceIdSse",
         "parameters": [
           {
+            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "in": "query",
+            "name": "token",
+            "required": false,
+            "schema": {
+              "deprecated": true,
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          {
+            "description": "Enable sudo-mode for admins for a single request, which gives full permission to all workspaces in the team.",
+            "in": "query",
+            "name": "actAsAdmin",
+            "required": false,
+            "schema": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            }
+          },
+          {
             "in": "path",
             "name": "workspaceId",
             "required": true,
@@ -11086,6 +13271,31 @@
         "description": "Returns newly created item with its sanitised data.<br/>Requirements:<br/>  - auth-client scopes: \"workspace\"<br/>  - user permission: \"write\" or higher<br/>Returns:<br/>401 if user does not have the required permission",
         "operationId": "createItem",
         "parameters": [
+          {
+            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "in": "query",
+            "name": "token",
+            "required": false,
+            "schema": {
+              "deprecated": true,
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          {
+            "description": "Enable sudo-mode for admins for a single request, which gives full permission to all workspaces in the team.",
+            "in": "query",
+            "name": "actAsAdmin",
+            "required": false,
+            "schema": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            }
+          },
           {
             "in": "path",
             "name": "workspaceId",
@@ -11150,6 +13360,31 @@
         "description": "Accepts a list of create/update/patch/delete operations (see the request model for more details).<br/>\nEach operations can target a single or multiple items.<br/>\nReturns a list of results for each input operation including errors.<br/>\nGuarantees that the size and order of the returned results matches the input list of operations.<br/>Requirements:<br/>  - auth-client scopes: \"workspace\"<br/>  - user permission: \"write\" or higher<br/>Returns:<br/>401 if user does not have the required permission",
         "operationId": "bulkItems",
         "parameters": [
+          {
+            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "in": "query",
+            "name": "token",
+            "required": false,
+            "schema": {
+              "deprecated": true,
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          {
+            "description": "Enable sudo-mode for admins for a single request, which gives full permission to all workspaces in the team.",
+            "in": "query",
+            "name": "actAsAdmin",
+            "required": false,
+            "schema": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            }
+          },
           {
             "in": "path",
             "name": "workspaceId",
@@ -11221,6 +13456,31 @@
         "operationId": "listItems",
         "parameters": [
           {
+            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "in": "query",
+            "name": "token",
+            "required": false,
+            "schema": {
+              "deprecated": true,
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          {
+            "description": "Enable sudo-mode for admins for a single request, which gives full permission to all workspaces in the team.",
+            "in": "query",
+            "name": "actAsAdmin",
+            "required": false,
+            "schema": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            }
+          },
+          {
             "in": "path",
             "name": "workspaceId",
             "required": true,
@@ -11284,6 +13544,31 @@
         "operationId": "resetItemColors",
         "parameters": [
           {
+            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "in": "query",
+            "name": "token",
+            "required": false,
+            "schema": {
+              "deprecated": true,
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          {
+            "description": "Enable sudo-mode for admins for a single request, which gives full permission to all workspaces in the team.",
+            "in": "query",
+            "name": "actAsAdmin",
+            "required": false,
+            "schema": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            }
+          },
+          {
             "in": "path",
             "name": "workspaceId",
             "required": true,
@@ -11320,6 +13605,31 @@
         "operationId": "searchItems",
         "parameters": [
           {
+            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "in": "query",
+            "name": "token",
+            "required": false,
+            "schema": {
+              "deprecated": true,
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          {
+            "description": "Enable sudo-mode for admins for a single request, which gives full permission to all workspaces in the team.",
+            "in": "query",
+            "name": "actAsAdmin",
+            "required": false,
+            "schema": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            }
+          },
+          {
             "in": "path",
             "name": "workspaceId",
             "required": true,
@@ -11351,6 +13661,35 @@
               "maximum": 1000,
               "minimum": 0,
               "type": "integer"
+            }
+          },
+          {
+            "deprecated": true,
+            "description": "From which element the page should start.",
+            "in": "query",
+            "name": "from",
+            "required": false,
+            "schema": {
+              "default": 0,
+              "deprecated": true,
+              "format": "int32",
+              "minimum": 0,
+              "type": "integer"
+            }
+          },
+          {
+            "deprecated": true,
+            "description": "At which element the page should end (excluding it).",
+            "in": "query",
+            "name": "to",
+            "required": false,
+            "schema": {
+              "deprecated": true,
+              "format": "int32",
+              "type": [
+                "integer",
+                "null"
+              ]
             }
           }
         ],
@@ -11411,6 +13750,31 @@
         "operationId": "unwatchItems",
         "parameters": [
           {
+            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "in": "query",
+            "name": "token",
+            "required": false,
+            "schema": {
+              "deprecated": true,
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          {
+            "description": "Enable sudo-mode for admins for a single request, which gives full permission to all workspaces in the team.",
+            "in": "query",
+            "name": "actAsAdmin",
+            "required": false,
+            "schema": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            }
+          },
+          {
             "in": "path",
             "name": "workspaceId",
             "required": true,
@@ -11462,6 +13826,31 @@
         "description": "<br/>Requirements:<br/>  - auth-client scopes: \"workspace\"<br/>  - user permission: \"write\" or higher<br/>Returns:<br/>401 if user does not have the required permission",
         "operationId": "watchItems",
         "parameters": [
+          {
+            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "in": "query",
+            "name": "token",
+            "required": false,
+            "schema": {
+              "deprecated": true,
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          {
+            "description": "Enable sudo-mode for admins for a single request, which gives full permission to all workspaces in the team.",
+            "in": "query",
+            "name": "actAsAdmin",
+            "required": false,
+            "schema": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            }
+          },
           {
             "in": "path",
             "name": "workspaceId",
@@ -11515,6 +13904,31 @@
         "operationId": "deleteItem",
         "parameters": [
           {
+            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "in": "query",
+            "name": "token",
+            "required": false,
+            "schema": {
+              "deprecated": true,
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          {
+            "description": "Enable sudo-mode for admins for a single request, which gives full permission to all workspaces in the team.",
+            "in": "query",
+            "name": "actAsAdmin",
+            "required": false,
+            "schema": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            }
+          },
+          {
             "in": "path",
             "name": "workspaceId",
             "required": true,
@@ -11558,6 +13972,31 @@
         "description": "Returns found item.<br/>Requirements:<br/>  - auth-client scopes: \"workspace:read\"<br/>  - user permission: \"read\" or higher<br/>Returns:<br/>400 if the resource is not found<br/>401 if user does not have the required permission",
         "operationId": "retrieveItem",
         "parameters": [
+          {
+            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "in": "query",
+            "name": "token",
+            "required": false,
+            "schema": {
+              "deprecated": true,
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          {
+            "description": "Enable sudo-mode for admins for a single request, which gives full permission to all workspaces in the team.",
+            "in": "query",
+            "name": "actAsAdmin",
+            "required": false,
+            "schema": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            }
+          },
           {
             "in": "path",
             "name": "workspaceId",
@@ -11614,6 +14053,31 @@
         "description": "Returns the whole updated item with its sanitised data.<br/>Requirements:<br/>  - auth-client scopes: \"workspace\"<br/>  - user permission: \"write\" or higher<br/>Returns:<br/>400 if the resource is not found<br/>401 if user does not have the required permission",
         "operationId": "patchItem",
         "parameters": [
+          {
+            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "in": "query",
+            "name": "token",
+            "required": false,
+            "schema": {
+              "deprecated": true,
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          {
+            "description": "Enable sudo-mode for admins for a single request, which gives full permission to all workspaces in the team.",
+            "in": "query",
+            "name": "actAsAdmin",
+            "required": false,
+            "schema": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            }
+          },
           {
             "in": "path",
             "name": "workspaceId",
@@ -11680,6 +14144,31 @@
         "description": "Returns updated item with its sanitised data.<br/>Requirements:<br/>  - auth-client scopes: \"workspace\"<br/>  - user permission: \"write\" or higher<br/>Returns:<br/>400 if the resource is not found<br/>401 if user does not have the required permission",
         "operationId": "updateItem",
         "parameters": [
+          {
+            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "in": "query",
+            "name": "token",
+            "required": false,
+            "schema": {
+              "deprecated": true,
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          {
+            "description": "Enable sudo-mode for admins for a single request, which gives full permission to all workspaces in the team.",
+            "in": "query",
+            "name": "actAsAdmin",
+            "required": false,
+            "schema": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            }
+          },
           {
             "in": "path",
             "name": "workspaceId",
@@ -11754,6 +14243,31 @@
         "operationId": "createItemLink",
         "parameters": [
           {
+            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "in": "query",
+            "name": "token",
+            "required": false,
+            "schema": {
+              "deprecated": true,
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          {
+            "description": "Enable sudo-mode for admins for a single request, which gives full permission to all workspaces in the team.",
+            "in": "query",
+            "name": "actAsAdmin",
+            "required": false,
+            "schema": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            }
+          },
+          {
             "description": "ID of the workspace which contains the managed links.",
             "in": "path",
             "name": "workspaceId",
@@ -11808,6 +14322,31 @@
         "description": "Accepts a list of create/update/patch/delete operations (see the request model for more details).<br/>\nEach operations can target a single or multiple item links.<br/>\nReturns a list of results for each input operation including errors.<br/>\nGuarantees that the size and order of the returned results matches the input list of operations.<br/>Requirements:<br/>  - auth-client scopes: \"workspace\"<br/>  - user permission: \"write\" or higher<br/>Returns:<br/>401 if user does not have the required permission",
         "operationId": "bulkItemLinks",
         "parameters": [
+          {
+            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "in": "query",
+            "name": "token",
+            "required": false,
+            "schema": {
+              "deprecated": true,
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          {
+            "description": "Enable sudo-mode for admins for a single request, which gives full permission to all workspaces in the team.",
+            "in": "query",
+            "name": "actAsAdmin",
+            "required": false,
+            "schema": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            }
+          },
           {
             "description": "ID of the workspace which contains the managed links.",
             "in": "path",
@@ -11866,6 +14405,31 @@
         "description": "Returns a list of item links.<br/>\nReturns null for those item links which are not found or not accessible.<br/>\nGuarantees that the size and order of the returned list matches the requested IDs.<br/>Requirements:<br/>  - auth-client scopes: \"workspace:read\"<br/>  - user permission: \"read\" or higher<br/>Returns:<br/>401 if user does not have the required permission",
         "operationId": "listItemLinks",
         "parameters": [
+          {
+            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "in": "query",
+            "name": "token",
+            "required": false,
+            "schema": {
+              "deprecated": true,
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          {
+            "description": "Enable sudo-mode for admins for a single request, which gives full permission to all workspaces in the team.",
+            "in": "query",
+            "name": "actAsAdmin",
+            "required": false,
+            "schema": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            }
+          },
           {
             "description": "ID of the workspace which contains the managed links.",
             "in": "path",
@@ -11926,6 +14490,31 @@
         "operationId": "searchItemLinks",
         "parameters": [
           {
+            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "in": "query",
+            "name": "token",
+            "required": false,
+            "schema": {
+              "deprecated": true,
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          {
+            "description": "Enable sudo-mode for admins for a single request, which gives full permission to all workspaces in the team.",
+            "in": "query",
+            "name": "actAsAdmin",
+            "required": false,
+            "schema": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            }
+          },
+          {
             "description": "ID of the workspace which contains the managed links.",
             "in": "path",
             "name": "workspaceId",
@@ -11958,6 +14547,35 @@
               "maximum": 1000,
               "minimum": 0,
               "type": "integer"
+            }
+          },
+          {
+            "deprecated": true,
+            "description": "From which element the page should start.",
+            "in": "query",
+            "name": "from",
+            "required": false,
+            "schema": {
+              "default": 0,
+              "deprecated": true,
+              "format": "int32",
+              "minimum": 0,
+              "type": "integer"
+            }
+          },
+          {
+            "deprecated": true,
+            "description": "At which element the page should end (excluding it).",
+            "in": "query",
+            "name": "to",
+            "required": false,
+            "schema": {
+              "deprecated": true,
+              "format": "int32",
+              "type": [
+                "integer",
+                "null"
+              ]
             }
           }
         ],
@@ -12013,6 +14631,31 @@
         "operationId": "deleteItemLink",
         "parameters": [
           {
+            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "in": "query",
+            "name": "token",
+            "required": false,
+            "schema": {
+              "deprecated": true,
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          {
+            "description": "Enable sudo-mode for admins for a single request, which gives full permission to all workspaces in the team.",
+            "in": "query",
+            "name": "actAsAdmin",
+            "required": false,
+            "schema": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            }
+          },
+          {
             "description": "ID of the workspace which contains the managed links.",
             "in": "path",
             "name": "workspaceId",
@@ -12057,6 +14700,31 @@
         "description": "Returns found item link.<br/>Requirements:<br/>  - auth-client scopes: \"workspace:read\"<br/>  - user permission: \"read\" or higher<br/>Returns:<br/>400 if the resource is not found<br/>401 if user does not have the required permission",
         "operationId": "retrieveItemLink",
         "parameters": [
+          {
+            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "in": "query",
+            "name": "token",
+            "required": false,
+            "schema": {
+              "deprecated": true,
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          {
+            "description": "Enable sudo-mode for admins for a single request, which gives full permission to all workspaces in the team.",
+            "in": "query",
+            "name": "actAsAdmin",
+            "required": false,
+            "schema": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            }
+          },
           {
             "description": "ID of the workspace which contains the managed links.",
             "in": "path",
@@ -12109,6 +14777,31 @@
         "description": "Returns the whole updated item link with its sanitised data.<br/>Requirements:<br/>  - auth-client scopes: \"workspace\"<br/>  - user permission: \"write\" or higher<br/>Returns:<br/>400 if the resource is not found<br/>401 if user does not have the required permission",
         "operationId": "patchItemLink",
         "parameters": [
+          {
+            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "in": "query",
+            "name": "token",
+            "required": false,
+            "schema": {
+              "deprecated": true,
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          {
+            "description": "Enable sudo-mode for admins for a single request, which gives full permission to all workspaces in the team.",
+            "in": "query",
+            "name": "actAsAdmin",
+            "required": false,
+            "schema": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            }
+          },
           {
             "description": "ID of the workspace which contains the managed links.",
             "in": "path",
@@ -12171,6 +14864,31 @@
         "description": "Returns updated item link with its sanitised data.<br/>Requirements:<br/>  - auth-client scopes: \"workspace\"<br/>  - user permission: \"write\" or higher<br/>Returns:<br/>400 if the resource is not found<br/>401 if user does not have the required permission",
         "operationId": "updateItemLink",
         "parameters": [
+          {
+            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "in": "query",
+            "name": "token",
+            "required": false,
+            "schema": {
+              "deprecated": true,
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          {
+            "description": "Enable sudo-mode for admins for a single request, which gives full permission to all workspaces in the team.",
+            "in": "query",
+            "name": "actAsAdmin",
+            "required": false,
+            "schema": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            }
+          },
           {
             "description": "ID of the workspace which contains the managed links.",
             "in": "path",
@@ -12236,6 +14954,31 @@
         "operationId": "createItemLink",
         "parameters": [
           {
+            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "in": "query",
+            "name": "token",
+            "required": false,
+            "schema": {
+              "deprecated": true,
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          {
+            "description": "Enable sudo-mode for admins for a single request, which gives full permission to all workspaces in the team.",
+            "in": "query",
+            "name": "actAsAdmin",
+            "required": false,
+            "schema": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            }
+          },
+          {
             "description": "ID of the workspace which contains the managed links.",
             "in": "path",
             "name": "workspaceId",
@@ -12290,6 +15033,31 @@
         "description": "Accepts a list of create/update/patch/delete operations (see the request model for more details).<br/>\nEach operations can target a single or multiple milestones.<br/>\nReturns a list of results for each input operation including errors.<br/>\nGuarantees that the size and order of the returned results matches the input list of operations.<br/>Requirements:<br/>  - auth-client scopes: \"workspace\"<br/>  - user permission: \"write\" or higher<br/>Returns:<br/>401 if user does not have the required permission",
         "operationId": "bulkItemLinks",
         "parameters": [
+          {
+            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "in": "query",
+            "name": "token",
+            "required": false,
+            "schema": {
+              "deprecated": true,
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          {
+            "description": "Enable sudo-mode for admins for a single request, which gives full permission to all workspaces in the team.",
+            "in": "query",
+            "name": "actAsAdmin",
+            "required": false,
+            "schema": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            }
+          },
           {
             "description": "ID of the workspace which contains the managed links.",
             "in": "path",
@@ -12348,6 +15116,31 @@
         "description": "Returns a list of milestones.<br/>\nReturns null for those milestones which are not found or not accessible.<br/>\nGuarantees that the size and order of the returned list matches the requested IDs.<br/>Requirements:<br/>  - auth-client scopes: \"workspace:read\"<br/>  - user permission: \"read\" or higher<br/>Returns:<br/>401 if user does not have the required permission",
         "operationId": "listItemLinks",
         "parameters": [
+          {
+            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "in": "query",
+            "name": "token",
+            "required": false,
+            "schema": {
+              "deprecated": true,
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          {
+            "description": "Enable sudo-mode for admins for a single request, which gives full permission to all workspaces in the team.",
+            "in": "query",
+            "name": "actAsAdmin",
+            "required": false,
+            "schema": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            }
+          },
           {
             "description": "ID of the workspace which contains the managed links.",
             "in": "path",
@@ -12408,6 +15201,31 @@
         "operationId": "searchItemLinks",
         "parameters": [
           {
+            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "in": "query",
+            "name": "token",
+            "required": false,
+            "schema": {
+              "deprecated": true,
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          {
+            "description": "Enable sudo-mode for admins for a single request, which gives full permission to all workspaces in the team.",
+            "in": "query",
+            "name": "actAsAdmin",
+            "required": false,
+            "schema": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            }
+          },
+          {
             "description": "ID of the workspace which contains the managed links.",
             "in": "path",
             "name": "workspaceId",
@@ -12440,6 +15258,35 @@
               "maximum": 1000,
               "minimum": 0,
               "type": "integer"
+            }
+          },
+          {
+            "deprecated": true,
+            "description": "From which element the page should start.",
+            "in": "query",
+            "name": "from",
+            "required": false,
+            "schema": {
+              "default": 0,
+              "deprecated": true,
+              "format": "int32",
+              "minimum": 0,
+              "type": "integer"
+            }
+          },
+          {
+            "deprecated": true,
+            "description": "At which element the page should end (excluding it).",
+            "in": "query",
+            "name": "to",
+            "required": false,
+            "schema": {
+              "deprecated": true,
+              "format": "int32",
+              "type": [
+                "integer",
+                "null"
+              ]
             }
           }
         ],
@@ -12491,6 +15338,31 @@
         "operationId": "deleteItemLink",
         "parameters": [
           {
+            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "in": "query",
+            "name": "token",
+            "required": false,
+            "schema": {
+              "deprecated": true,
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          {
+            "description": "Enable sudo-mode for admins for a single request, which gives full permission to all workspaces in the team.",
+            "in": "query",
+            "name": "actAsAdmin",
+            "required": false,
+            "schema": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            }
+          },
+          {
             "description": "ID of the workspace which contains the managed links.",
             "in": "path",
             "name": "workspaceId",
@@ -12535,6 +15407,31 @@
         "description": "Returns found milestone.<br/>Requirements:<br/>  - auth-client scopes: \"workspace:read\"<br/>  - user permission: \"read\" or higher<br/>Returns:<br/>400 if the resource is not found<br/>401 if user does not have the required permission",
         "operationId": "retrieveItemLink",
         "parameters": [
+          {
+            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "in": "query",
+            "name": "token",
+            "required": false,
+            "schema": {
+              "deprecated": true,
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          {
+            "description": "Enable sudo-mode for admins for a single request, which gives full permission to all workspaces in the team.",
+            "in": "query",
+            "name": "actAsAdmin",
+            "required": false,
+            "schema": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            }
+          },
           {
             "description": "ID of the workspace which contains the managed links.",
             "in": "path",
@@ -12587,6 +15484,31 @@
         "description": "Returns the whole updated milestone with its sanitised data.<br/>Requirements:<br/>  - auth-client scopes: \"workspace\"<br/>  - user permission: \"write\" or higher<br/>Returns:<br/>400 if the resource is not found<br/>401 if user does not have the required permission",
         "operationId": "patchItemLink",
         "parameters": [
+          {
+            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "in": "query",
+            "name": "token",
+            "required": false,
+            "schema": {
+              "deprecated": true,
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          {
+            "description": "Enable sudo-mode for admins for a single request, which gives full permission to all workspaces in the team.",
+            "in": "query",
+            "name": "actAsAdmin",
+            "required": false,
+            "schema": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            }
+          },
           {
             "description": "ID of the workspace which contains the managed links.",
             "in": "path",
@@ -12649,6 +15571,31 @@
         "description": "Returns updated milestone with its sanitised data.<br/>Requirements:<br/>  - auth-client scopes: \"workspace\"<br/>  - user permission: \"write\" or higher<br/>Returns:<br/>400 if the resource is not found<br/>401 if user does not have the required permission",
         "operationId": "updateItemLink",
         "parameters": [
+          {
+            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "in": "query",
+            "name": "token",
+            "required": false,
+            "schema": {
+              "deprecated": true,
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          {
+            "description": "Enable sudo-mode for admins for a single request, which gives full permission to all workspaces in the team.",
+            "in": "query",
+            "name": "actAsAdmin",
+            "required": false,
+            "schema": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            }
+          },
           {
             "description": "ID of the workspace which contains the managed links.",
             "in": "path",
@@ -12714,6 +15661,31 @@
         "operationId": "updateWorkspacePermissions",
         "parameters": [
           {
+            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "in": "query",
+            "name": "token",
+            "required": false,
+            "schema": {
+              "deprecated": true,
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          {
+            "description": "Enable sudo-mode for admins for a single request, which gives full permission to all workspaces in the team.",
+            "in": "query",
+            "name": "actAsAdmin",
+            "required": false,
+            "schema": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            }
+          },
+          {
             "in": "path",
             "name": "workspaceId",
             "required": true,
@@ -12773,6 +15745,31 @@
         "description": "Set statuses all at once for the specified workspace.\nNew statuses in the list will be added to the database, missing statuses will be removed from the database, all other statuses will be updated.\nEach workspace must have at least one status in each category: 'draft', 'active', 'closed'<br/>Requirements:<br/>  - auth-client scopes: \"workspace\"<br/>  - user permission: \"full\"<br/>Returns:<br/>401 if user does not have the required permission",
         "operationId": "setWorkspaceStatuses",
         "parameters": [
+          {
+            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "in": "query",
+            "name": "token",
+            "required": false,
+            "schema": {
+              "deprecated": true,
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          {
+            "description": "Enable sudo-mode for admins for a single request, which gives full permission to all workspaces in the team.",
+            "in": "query",
+            "name": "actAsAdmin",
+            "required": false,
+            "schema": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            }
+          },
           {
             "in": "path",
             "name": "workspaceId",
