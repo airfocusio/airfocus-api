@@ -536,143 +536,6 @@
         "title": "FieldEmbed",
         "type": "object"
       },
-      "FieldEndpointsFieldToWorkspaceLink": {
-        "properties": {
-          "fieldId": {
-            "format": "uuid",
-            "type": "string"
-          },
-          "workspaceId": {
-            "format": "uuid",
-            "type": "string"
-          }
-        },
-        "required": [
-          "fieldId",
-          "workspaceId"
-        ],
-        "title": "FieldEndpointsFieldToWorkspaceLink",
-        "type": "object"
-      },
-      "FieldEndpointsFieldTypeInfo": {
-        "properties": {
-          "typeId": {
-            "type": "string"
-          }
-        },
-        "required": [
-          "typeId"
-        ],
-        "title": "FieldEndpointsFieldTypeInfo",
-        "type": "object"
-      },
-      "FieldEndpointsInstallFieldRequest": {
-        "discriminator": {
-          "mapping": {
-            "boolean": "#/components/schemas/InstallBooleanFieldRequest",
-            "date": "#/components/schemas/InstallDateFieldRequest",
-            "date-range": "#/components/schemas/InstallDateRangeFieldRequest",
-            "number": "#/components/schemas/InstallNumberFieldRequest",
-            "people": "#/components/schemas/InstallPeopleFieldRequest",
-            "select": "#/components/schemas/InstallSelectFieldRequest",
-            "text": "#/components/schemas/InstallTextFieldRequest"
-          },
-          "propertyName": "typeId"
-        },
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/InstallBooleanFieldRequest"
-          },
-          {
-            "$ref": "#/components/schemas/InstallDateFieldRequest"
-          },
-          {
-            "$ref": "#/components/schemas/InstallDateRangeFieldRequest"
-          },
-          {
-            "$ref": "#/components/schemas/InstallNumberFieldRequest"
-          },
-          {
-            "$ref": "#/components/schemas/InstallPeopleFieldRequest"
-          },
-          {
-            "$ref": "#/components/schemas/InstallSelectFieldRequest"
-          },
-          {
-            "$ref": "#/components/schemas/InstallTextFieldRequest"
-          }
-        ],
-        "title": "FieldEndpointsInstallFieldRequest"
-      },
-      "FieldEndpointsReconfigureFieldRequest": {
-        "properties": {
-          "description": {
-            "type": "string"
-          },
-          "isTeamField": {
-            "type": "boolean"
-          },
-          "name": {
-            "type": "string"
-          },
-          "settings": {
-            "description": "The settings object which corresponds to the type of the requested field, or it can be skipped if the requested field does not have any settings.\nThis schema shows all the available field-settings. See also the Field schema to learn about settings of each specific field type.",
-            "oneOf": [
-              {
-                "$ref": "#/components/schemas/FormSourceFieldTypeSettings"
-              },
-              {
-                "$ref": "#/components/schemas/InsightsFieldTypeSettings"
-              },
-              {
-                "$ref": "#/components/schemas/NumberFieldTypeSettings"
-              },
-              {
-                "$ref": "#/components/schemas/OkrConfidenceFieldSettings"
-              },
-              {
-                "$ref": "#/components/schemas/OkrTimePeriodFieldSettings"
-              },
-              {
-                "$ref": "#/components/schemas/PeopleFieldTypeSettings"
-              },
-              {
-                "$ref": "#/components/schemas/SelectFieldTypeSettings"
-              },
-              {
-                "$ref": "#/components/schemas/VotingAppScoreFieldTypeSettings"
-              }
-            ]
-          }
-        },
-        "required": [
-          "name",
-          "description",
-          "isTeamField"
-        ],
-        "title": "FieldEndpointsReconfigureFieldRequest",
-        "type": "object"
-      },
-      "FieldEndpointsReorderFieldsRequest": {
-        "properties": {
-          "fieldIds": {
-            "items": {
-              "format": "uuid",
-              "type": "string"
-            },
-            "type": "array"
-          },
-          "workspaceId": {
-            "format": "uuid",
-            "type": "string"
-          }
-        },
-        "required": [
-          "workspaceId"
-        ],
-        "title": "FieldEndpointsReorderFieldsRequest",
-        "type": "object"
-      },
       "FieldFieldWorkspaceEmbed": {
         "properties": {
           "order": {
@@ -718,6 +581,143 @@
           }
         },
         "title": "FieldSearchQuery",
+        "type": "object"
+      },
+      "FieldServerEndpointsFieldToWorkspaceLink": {
+        "properties": {
+          "fieldId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "workspaceId": {
+            "format": "uuid",
+            "type": "string"
+          }
+        },
+        "required": [
+          "fieldId",
+          "workspaceId"
+        ],
+        "title": "FieldServerEndpointsFieldToWorkspaceLink",
+        "type": "object"
+      },
+      "FieldServerEndpointsFieldTypeInfo": {
+        "properties": {
+          "typeId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "typeId"
+        ],
+        "title": "FieldServerEndpointsFieldTypeInfo",
+        "type": "object"
+      },
+      "FieldServerEndpointsInstallFieldRequest": {
+        "discriminator": {
+          "mapping": {
+            "boolean": "#/components/schemas/InstallBooleanFieldRequest",
+            "date": "#/components/schemas/InstallDateFieldRequest",
+            "date-range": "#/components/schemas/InstallDateRangeFieldRequest",
+            "number": "#/components/schemas/InstallNumberFieldRequest",
+            "people": "#/components/schemas/InstallPeopleFieldRequest",
+            "select": "#/components/schemas/InstallSelectFieldRequest",
+            "text": "#/components/schemas/InstallTextFieldRequest"
+          },
+          "propertyName": "typeId"
+        },
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/InstallBooleanFieldRequest"
+          },
+          {
+            "$ref": "#/components/schemas/InstallDateFieldRequest"
+          },
+          {
+            "$ref": "#/components/schemas/InstallDateRangeFieldRequest"
+          },
+          {
+            "$ref": "#/components/schemas/InstallNumberFieldRequest"
+          },
+          {
+            "$ref": "#/components/schemas/InstallPeopleFieldRequest"
+          },
+          {
+            "$ref": "#/components/schemas/InstallSelectFieldRequest"
+          },
+          {
+            "$ref": "#/components/schemas/InstallTextFieldRequest"
+          }
+        ],
+        "title": "FieldServerEndpointsInstallFieldRequest"
+      },
+      "FieldServerEndpointsReconfigureFieldRequest": {
+        "properties": {
+          "description": {
+            "type": "string"
+          },
+          "isTeamField": {
+            "type": "boolean"
+          },
+          "name": {
+            "type": "string"
+          },
+          "settings": {
+            "description": "The settings object which corresponds to the type of the requested field, or it can be skipped if the requested field does not have any settings.\nThis schema shows all the available field-settings. See also the Field schema to learn about settings of each specific field type.",
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/FormSourceFieldTypeSettings"
+              },
+              {
+                "$ref": "#/components/schemas/InsightsFieldTypeSettings"
+              },
+              {
+                "$ref": "#/components/schemas/NumberFieldTypeSettings"
+              },
+              {
+                "$ref": "#/components/schemas/OkrConfidenceFieldSettings"
+              },
+              {
+                "$ref": "#/components/schemas/OkrTimePeriodFieldSettings"
+              },
+              {
+                "$ref": "#/components/schemas/PeopleFieldTypeSettings"
+              },
+              {
+                "$ref": "#/components/schemas/SelectFieldTypeSettings"
+              },
+              {
+                "$ref": "#/components/schemas/VotingAppScoreFieldTypeSettings"
+              }
+            ]
+          }
+        },
+        "required": [
+          "name",
+          "description",
+          "isTeamField"
+        ],
+        "title": "FieldServerEndpointsReconfigureFieldRequest",
+        "type": "object"
+      },
+      "FieldServerEndpointsReorderFieldsRequest": {
+        "properties": {
+          "fieldIds": {
+            "items": {
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "workspaceId": {
+            "format": "uuid",
+            "type": "string"
+          }
+        },
+        "required": [
+          "workspaceId"
+        ],
+        "title": "FieldServerEndpointsReorderFieldsRequest",
         "type": "object"
       },
       "FieldWithFieldEmbed": {
@@ -5672,7 +5672,42 @@
         "title": "TemplateCategory",
         "type": "object"
       },
-      "TemplateEndpointsApplyTemplateRequest": {
+      "TemplatePageWithEmbed": {
+        "properties": {
+          "_embedded": {
+            "$ref": "#/components/schemas/TemplateSearchEmbed"
+          },
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/Template"
+            },
+            "type": "array"
+          },
+          "totalItems": {
+            "format": "int32",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "_embedded",
+          "totalItems"
+        ],
+        "title": "TemplatePageWithEmbed",
+        "type": "object"
+      },
+      "TemplateSearchEmbed": {
+        "properties": {
+          "categories": {
+            "items": {
+              "$ref": "#/components/schemas/TemplateCategory"
+            },
+            "type": "array"
+          }
+        },
+        "title": "TemplateSearchEmbed",
+        "type": "object"
+      },
+      "TemplateServerEndpointsApplyTemplateRequest": {
         "properties": {
           "defaultPermission": {
             "anyOf": [
@@ -5711,42 +5746,7 @@
           "parameters",
           "permissions"
         ],
-        "title": "TemplateEndpointsApplyTemplateRequest",
-        "type": "object"
-      },
-      "TemplatePageWithEmbed": {
-        "properties": {
-          "_embedded": {
-            "$ref": "#/components/schemas/TemplateSearchEmbed"
-          },
-          "items": {
-            "items": {
-              "$ref": "#/components/schemas/Template"
-            },
-            "type": "array"
-          },
-          "totalItems": {
-            "format": "int32",
-            "type": "integer"
-          }
-        },
-        "required": [
-          "_embedded",
-          "totalItems"
-        ],
-        "title": "TemplatePageWithEmbed",
-        "type": "object"
-      },
-      "TemplateSearchEmbed": {
-        "properties": {
-          "categories": {
-            "items": {
-              "$ref": "#/components/schemas/TemplateCategory"
-            },
-            "type": "array"
-          }
-        },
-        "title": "TemplateSearchEmbed",
+        "title": "TemplateServerEndpointsApplyTemplateRequest",
         "type": "object"
       },
       "TemplateView": {
@@ -6449,76 +6449,6 @@
           "workspaceId"
         ],
         "title": "WorkspaceEmbedRelation",
-        "type": "object"
-      },
-      "WorkspaceEndpointsSetStatusesRequest": {
-        "properties": {
-          "replacements": {
-            "additionalProperties": {
-              "format": "uuid",
-              "type": "string"
-            },
-            "description": "A map of status replacements, where key is and OLD status-id and value is a NEW status-id. Replacements must be specified for each status being deleted from the workspace.This mapping will be used to migrate all items in the workspace to new statuses before deleting the old ones.",
-            "type": "object"
-          },
-          "statuses": {
-            "items": {
-              "oneOf": [
-                {
-                  "$ref": "#/components/schemas/CreateStatus"
-                },
-                {
-                  "$ref": "#/components/schemas/UpdateStatus"
-                }
-              ]
-            },
-            "type": "array"
-          }
-        },
-        "required": [
-          "replacements"
-        ],
-        "title": "WorkspaceEndpointsSetStatusesRequest",
-        "type": "object"
-      },
-      "WorkspaceEndpointsWorkspaceDuplicateRequest": {
-        "properties": {
-          "duplicatePermissions": {
-            "description": "Whether to also duplicate all user-permissions to the new workspace.",
-            "type": "boolean"
-          }
-        },
-        "required": [
-          "duplicatePermissions"
-        ],
-        "title": "WorkspaceEndpointsWorkspaceDuplicateRequest",
-        "type": "object"
-      },
-      "WorkspaceEndpointsWorkspacePermissionsUpdateRequest": {
-        "properties": {
-          "defaultPermission": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/Permission"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "description": "Default permission for all users in the team who are not explicitly listed in the `permissions` map."
-          },
-          "permissions": {
-            "additionalProperties": {
-              "$ref": "#/components/schemas/Permission"
-            },
-            "description": "Explicit permissions for specific users in the team.",
-            "type": "object"
-          }
-        },
-        "required": [
-          "permissions"
-        ],
-        "title": "WorkspaceEndpointsWorkspacePermissionsUpdateRequest",
         "type": "object"
       },
       "WorkspaceGroup": {
@@ -7484,6 +7414,76 @@
         "title": "WorkspaceSearchQuerySortName",
         "type": "object"
       },
+      "WorkspaceServerEndpointsSetStatusesRequest": {
+        "properties": {
+          "replacements": {
+            "additionalProperties": {
+              "format": "uuid",
+              "type": "string"
+            },
+            "description": "A map of status replacements, where key is and OLD status-id and value is a NEW status-id. Replacements must be specified for each status being deleted from the workspace.This mapping will be used to migrate all items in the workspace to new statuses before deleting the old ones.",
+            "type": "object"
+          },
+          "statuses": {
+            "items": {
+              "oneOf": [
+                {
+                  "$ref": "#/components/schemas/CreateStatus"
+                },
+                {
+                  "$ref": "#/components/schemas/UpdateStatus"
+                }
+              ]
+            },
+            "type": "array"
+          }
+        },
+        "required": [
+          "replacements"
+        ],
+        "title": "WorkspaceServerEndpointsSetStatusesRequest",
+        "type": "object"
+      },
+      "WorkspaceServerEndpointsWorkspaceDuplicateRequest": {
+        "properties": {
+          "duplicatePermissions": {
+            "description": "Whether to also duplicate all user-permissions to the new workspace.",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "duplicatePermissions"
+        ],
+        "title": "WorkspaceServerEndpointsWorkspaceDuplicateRequest",
+        "type": "object"
+      },
+      "WorkspaceServerEndpointsWorkspacePermissionsUpdateRequest": {
+        "properties": {
+          "defaultPermission": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Permission"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Default permission for all users in the team who are not explicitly listed in the `permissions` map."
+          },
+          "permissions": {
+            "additionalProperties": {
+              "$ref": "#/components/schemas/Permission"
+            },
+            "description": "Explicit permissions for specific users in the team.",
+            "type": "object"
+          }
+        },
+        "required": [
+          "permissions"
+        ],
+        "title": "WorkspaceServerEndpointsWorkspacePermissionsUpdateRequest",
+        "type": "object"
+      },
       "WorkspaceWithWorkspaceEmbed": {
         "properties": {
           "_embedded": {
@@ -7759,7 +7759,7 @@
   },
   "info": {
     "title": "airfocus API",
-    "version": "1.0.0-beta.33.34.3"
+    "version": "1.0.0-beta.33.37.2"
   },
   "openapi": "3.1.0",
   "paths": {
@@ -7798,7 +7798,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/FieldEndpointsInstallFieldRequest"
+                "$ref": "#/components/schemas/FieldServerEndpointsInstallFieldRequest"
               }
             }
           },
@@ -7857,7 +7857,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/FieldEndpointsReorderFieldsRequest"
+                "$ref": "#/components/schemas/FieldServerEndpointsReorderFieldsRequest"
               }
             }
           },
@@ -7970,7 +7970,7 @@
               "application/json": {
                 "schema": {
                   "items": {
-                    "$ref": "#/components/schemas/FieldEndpointsFieldTypeInfo"
+                    "$ref": "#/components/schemas/FieldServerEndpointsFieldTypeInfo"
                   },
                   "type": "array"
                 }
@@ -8021,7 +8021,7 @@
             "application/json": {
               "schema": {
                 "items": {
-                  "$ref": "#/components/schemas/FieldEndpointsFieldToWorkspaceLink"
+                  "$ref": "#/components/schemas/FieldServerEndpointsFieldToWorkspaceLink"
                 },
                 "type": "array"
               }
@@ -8084,7 +8084,7 @@
             "application/json": {
               "schema": {
                 "items": {
-                  "$ref": "#/components/schemas/FieldEndpointsFieldToWorkspaceLink"
+                  "$ref": "#/components/schemas/FieldServerEndpointsFieldToWorkspaceLink"
                 },
                 "type": "array"
               }
@@ -8265,7 +8265,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/FieldEndpointsReconfigureFieldRequest"
+                "$ref": "#/components/schemas/FieldServerEndpointsReconfigureFieldRequest"
               }
             }
           },
@@ -8406,7 +8406,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/TemplateEndpointsApplyTemplateRequest"
+                "$ref": "#/components/schemas/TemplateServerEndpointsApplyTemplateRequest"
               }
             }
           },
@@ -13277,7 +13277,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/WorkspaceEndpointsWorkspaceDuplicateRequest"
+                "$ref": "#/components/schemas/WorkspaceServerEndpointsWorkspaceDuplicateRequest"
               }
             }
           },
@@ -15812,7 +15812,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/WorkspaceEndpointsWorkspacePermissionsUpdateRequest"
+                "$ref": "#/components/schemas/WorkspaceServerEndpointsWorkspacePermissionsUpdateRequest"
               }
             }
           },
@@ -15897,7 +15897,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/WorkspaceEndpointsSetStatusesRequest"
+                "$ref": "#/components/schemas/WorkspaceServerEndpointsSetStatusesRequest"
               }
             }
           },
