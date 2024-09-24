@@ -622,7 +622,8 @@
             "number": "#/components/schemas/InstallNumberFieldRequest",
             "people": "#/components/schemas/InstallPeopleFieldRequest",
             "select": "#/components/schemas/InstallSelectFieldRequest",
-            "text": "#/components/schemas/InstallTextFieldRequest"
+            "text": "#/components/schemas/InstallTextFieldRequest",
+            "time-period": "#/components/schemas/InstallTimePeriodFieldRequest"
           },
           "propertyName": "typeId"
         },
@@ -647,6 +648,9 @@
           },
           {
             "$ref": "#/components/schemas/InstallTextFieldRequest"
+          },
+          {
+            "$ref": "#/components/schemas/InstallTimePeriodFieldRequest"
           }
         ],
         "title": "FieldServerEndpointsInstallFieldRequest"
@@ -685,6 +689,9 @@
               },
               {
                 "$ref": "#/components/schemas/SelectFieldTypeSettings"
+              },
+              {
+                "$ref": "#/components/schemas/TimePeriodFieldSettings"
               },
               {
                 "$ref": "#/components/schemas/VotingAppScoreFieldTypeSettings"
@@ -743,6 +750,7 @@
             "prioritization": "#/components/schemas/PrioritizationFieldWithFieldEmbed",
             "select": "#/components/schemas/SelectFieldWithFieldEmbed",
             "text": "#/components/schemas/TextFieldWithFieldEmbed",
+            "time-period": "#/components/schemas/TimePeriodFieldWithFieldEmbed",
             "votes": "#/components/schemas/VotesFieldWithFieldEmbed",
             "votingScore": "#/components/schemas/VotingScoreFieldWithFieldEmbed"
           },
@@ -808,6 +816,9 @@
           },
           {
             "$ref": "#/components/schemas/TextFieldWithFieldEmbed"
+          },
+          {
+            "$ref": "#/components/schemas/TimePeriodFieldWithFieldEmbed"
           },
           {
             "$ref": "#/components/schemas/VotesFieldWithFieldEmbed"
@@ -1258,6 +1269,46 @@
           "name"
         ],
         "title": "InstallTextFieldRequest",
+        "type": "object"
+      },
+      "InstallTimePeriodFieldRequest": {
+        "properties": {
+          "description": {
+            "default": "",
+            "description": "User-readable field description.",
+            "type": "string"
+          },
+          "isTeamField": {
+            "default": false,
+            "description": "Whether the field should be installed as a team-field or a workspace-specific field.",
+            "type": "boolean"
+          },
+          "name": {
+            "description": "User-readable field name.",
+            "type": "string"
+          },
+          "settings": {
+            "$ref": "#/components/schemas/TimePeriodFieldSettings",
+            "description": "Field settings."
+          },
+          "typeId": {
+            "type": "string"
+          },
+          "workspaceIds": {
+            "description": "If isTeamField=false then exactly one workspace ID should be provided.\nIf isTeamField=true then any amount of workspace IDs can be provided to be linked to the newly installed field.",
+            "items": {
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": "array"
+          }
+        },
+        "required": [
+          "typeId",
+          "name",
+          "settings"
+        ],
+        "title": "InstallTimePeriodFieldRequest",
         "type": "object"
       },
       "IntegrationCapabilities": {
@@ -5870,6 +5921,112 @@
         "title": "TimePeriod",
         "type": "object"
       },
+      "TimePeriodFieldSettings": {
+        "discriminator": {
+          "mapping": {
+            "iterations": "#/components/schemas/TimePeriodFieldSettingsIterations",
+            "simple": "#/components/schemas/TimePeriodFieldSettingsSimple"
+          },
+          "propertyName": "type"
+        },
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/TimePeriodFieldSettingsIterations"
+          },
+          {
+            "$ref": "#/components/schemas/TimePeriodFieldSettingsSimple"
+          }
+        ],
+        "title": "TimePeriodFieldSettings"
+      },
+      "TimePeriodFieldSettingsIterations": {
+        "properties": {
+          "currentId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "multi": {
+            "type": "boolean"
+          },
+          "timePeriods": {
+            "items": {
+              "$ref": "#/components/schemas/TimePeriod"
+            },
+            "type": "array"
+          }
+        },
+        "required": [
+          "currentId",
+          "multi"
+        ],
+        "title": "TimePeriodFieldSettingsIterations",
+        "type": "object"
+      },
+      "TimePeriodFieldSettingsSimple": {
+        "properties": {
+          "multi": {
+            "type": "boolean"
+          },
+          "timePeriods": {
+            "items": {
+              "$ref": "#/components/schemas/TimePeriod"
+            },
+            "type": "array"
+          }
+        },
+        "required": [
+          "multi"
+        ],
+        "title": "TimePeriodFieldSettingsSimple",
+        "type": "object"
+      },
+      "TimePeriodFieldWithFieldEmbed": {
+        "properties": {
+          "_embedded": {
+            "$ref": "#/components/schemas/FieldEmbed"
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "isTeamField": {
+            "type": "boolean"
+          },
+          "name": {
+            "type": "string"
+          },
+          "settings": {
+            "$ref": "#/components/schemas/TimePeriodFieldSettings"
+          },
+          "teamId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "typeId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "typeId",
+          "settings",
+          "name",
+          "description",
+          "isTeamField",
+          "teamId",
+          "createdAt",
+          "_embedded"
+        ],
+        "title": "TimePeriodFieldWithFieldEmbed",
+        "type": "object"
+      },
       "UpdateStatus": {
         "properties": {
           "category": {
@@ -7765,11 +7922,17 @@
         "title": "WorkspaceWorkspaceMetadata",
         "type": "object"
       }
+    },
+    "securitySchemes": {
+      "httpAuth": {
+        "scheme": "bearer",
+        "type": "http"
+      }
     }
   },
   "info": {
     "title": "airfocus API",
-    "version": "1.0.0-beta.33.39.1"
+    "version": "1.0.0-beta.33.43.0"
   },
   "openapi": "3.1.0",
   "paths": {
@@ -7779,12 +7942,11 @@
         "operationId": "installField",
         "parameters": [
           {
-            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
             "required": false,
             "schema": {
-              "deprecated": true,
               "type": [
                 "string",
                 "null"
@@ -7826,6 +7988,11 @@
             "description": ""
           }
         },
+        "security": [
+          {
+            "httpAuth": []
+          }
+        ],
         "summary": "Install a new field",
         "tags": [
           "Fields"
@@ -7838,12 +8005,11 @@
         "operationId": "reorderFields",
         "parameters": [
           {
-            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
             "required": false,
             "schema": {
-              "deprecated": true,
               "type": [
                 "string",
                 "null"
@@ -7878,6 +8044,11 @@
             "description": ""
           }
         },
+        "security": [
+          {
+            "httpAuth": []
+          }
+        ],
         "summary": "Reorder fields",
         "tags": [
           "Fields"
@@ -7890,12 +8061,11 @@
         "operationId": "searchFields",
         "parameters": [
           {
-            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
             "required": false,
             "schema": {
-              "deprecated": true,
               "type": [
                 "string",
                 "null"
@@ -7937,6 +8107,11 @@
             "description": ""
           }
         },
+        "security": [
+          {
+            "httpAuth": []
+          }
+        ],
         "summary": "Search fields",
         "tags": [
           "Fields"
@@ -7949,12 +8124,11 @@
         "operationId": "listFieldTypes",
         "parameters": [
           {
-            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
             "required": false,
             "schema": {
-              "deprecated": true,
               "type": [
                 "string",
                 "null"
@@ -7989,6 +8163,11 @@
             "description": ""
           }
         },
+        "security": [
+          {
+            "httpAuth": []
+          }
+        ],
         "summary": "List all available field types",
         "tags": [
           "Fields"
@@ -8001,12 +8180,11 @@
         "operationId": "unlinkTeamFieldsFromWorkspaces",
         "parameters": [
           {
-            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
             "required": false,
             "schema": {
-              "deprecated": true,
               "type": [
                 "string",
                 "null"
@@ -8054,6 +8232,11 @@
             "description": ""
           }
         },
+        "security": [
+          {
+            "httpAuth": []
+          }
+        ],
         "summary": "Unlink team-fields from workspaces",
         "tags": [
           "Fields"
@@ -8064,12 +8247,11 @@
         "operationId": "linkTeamFieldsToWorkspaces",
         "parameters": [
           {
-            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
             "required": false,
             "schema": {
-              "deprecated": true,
               "type": [
                 "string",
                 "null"
@@ -8117,6 +8299,11 @@
             "description": ""
           }
         },
+        "security": [
+          {
+            "httpAuth": []
+          }
+        ],
         "summary": "Link team-fields to workspaces",
         "tags": [
           "Fields"
@@ -8129,12 +8316,11 @@
         "operationId": "deleteField",
         "parameters": [
           {
-            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
             "required": false,
             "schema": {
-              "deprecated": true,
               "type": [
                 "string",
                 "null"
@@ -8169,6 +8355,11 @@
             "description": ""
           }
         },
+        "security": [
+          {
+            "httpAuth": []
+          }
+        ],
         "summary": "Delete field",
         "tags": [
           "Fields"
@@ -8179,12 +8370,11 @@
         "operationId": "retrieveField",
         "parameters": [
           {
-            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
             "required": false,
             "schema": {
-              "deprecated": true,
               "type": [
                 "string",
                 "null"
@@ -8226,6 +8416,11 @@
             "description": ""
           }
         },
+        "security": [
+          {
+            "httpAuth": []
+          }
+        ],
         "summary": "Retrieve a single field",
         "tags": [
           "Fields"
@@ -8236,12 +8431,11 @@
         "operationId": "reconfigureField",
         "parameters": [
           {
-            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
             "required": false,
             "schema": {
-              "deprecated": true,
               "type": [
                 "string",
                 "null"
@@ -8293,6 +8487,11 @@
             "description": ""
           }
         },
+        "security": [
+          {
+            "httpAuth": []
+          }
+        ],
         "summary": "Reconfigure field",
         "tags": [
           "Fields"
@@ -8305,12 +8504,11 @@
         "operationId": "listTemplates",
         "parameters": [
           {
-            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
             "required": false,
             "schema": {
-              "deprecated": true,
               "type": [
                 "string",
                 "null"
@@ -8367,6 +8565,11 @@
             "description": ""
           }
         },
+        "security": [
+          {
+            "httpAuth": []
+          }
+        ],
         "summary": "List templates",
         "tags": [
           "Templates"
@@ -8379,12 +8582,11 @@
         "operationId": "installTemplate",
         "parameters": [
           {
-            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
             "required": false,
             "schema": {
-              "deprecated": true,
               "type": [
                 "string",
                 "null"
@@ -8434,6 +8636,11 @@
             "description": ""
           }
         },
+        "security": [
+          {
+            "httpAuth": []
+          }
+        ],
         "summary": "Install template",
         "tags": [
           "Templates"
@@ -8446,12 +8653,11 @@
         "operationId": "createWorkspace",
         "parameters": [
           {
-            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
             "required": false,
             "schema": {
-              "deprecated": true,
               "type": [
                 "string",
                 "null"
@@ -8503,6 +8709,11 @@
             "description": ""
           }
         },
+        "security": [
+          {
+            "httpAuth": []
+          }
+        ],
         "summary": "Create a new workspace",
         "tags": [
           "CRUD",
@@ -8516,12 +8727,11 @@
         "operationId": "bulkWorkspaces",
         "parameters": [
           {
-            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
             "required": false,
             "schema": {
-              "deprecated": true,
               "type": [
                 "string",
                 "null"
@@ -8576,6 +8786,11 @@
             "description": ""
           }
         },
+        "security": [
+          {
+            "httpAuth": []
+          }
+        ],
         "summary": "Perform multiple operations with workspaces",
         "tags": [
           "CRUD",
@@ -8589,12 +8804,11 @@
         "operationId": "countWorkspaces",
         "parameters": [
           {
-            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
             "required": false,
             "schema": {
-              "deprecated": true,
               "type": [
                 "string",
                 "null"
@@ -8637,6 +8851,11 @@
             "description": ""
           }
         },
+        "security": [
+          {
+            "httpAuth": []
+          }
+        ],
         "summary": "Count workspaces in the current team.",
         "tags": [
           "Workspaces"
@@ -8649,12 +8868,11 @@
         "operationId": "workspaceEventsSse",
         "parameters": [
           {
-            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
             "required": false,
             "schema": {
-              "deprecated": true,
               "type": [
                 "string",
                 "null"
@@ -8696,6 +8914,11 @@
             "description": ""
           }
         },
+        "security": [
+          {
+            "httpAuth": []
+          }
+        ],
         "summary": "Server-side-events for updates in all workspaces.",
         "tags": [
           "Workspaces"
@@ -8708,12 +8931,11 @@
         "operationId": "createWorkspaceGroup",
         "parameters": [
           {
-            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
             "required": false,
             "schema": {
-              "deprecated": true,
               "type": [
                 "string",
                 "null"
@@ -8765,6 +8987,11 @@
             "description": ""
           }
         },
+        "security": [
+          {
+            "httpAuth": []
+          }
+        ],
         "summary": "Create a new workspace group",
         "tags": [
           "CRUD",
@@ -8778,12 +9005,11 @@
         "operationId": "assignWorkspaceToGroup",
         "parameters": [
           {
-            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
             "required": false,
             "schema": {
-              "deprecated": true,
               "type": [
                 "string",
                 "null"
@@ -8828,6 +9054,11 @@
             "description": ""
           }
         },
+        "security": [
+          {
+            "httpAuth": []
+          }
+        ],
         "summary": "Update workspace-group permissions.",
         "tags": [
           "WorkspaceGroups"
@@ -8840,12 +9071,11 @@
         "operationId": "bulkWorkspaceGroups",
         "parameters": [
           {
-            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
             "required": false,
             "schema": {
-              "deprecated": true,
               "type": [
                 "string",
                 "null"
@@ -8900,6 +9130,11 @@
             "description": ""
           }
         },
+        "security": [
+          {
+            "httpAuth": []
+          }
+        ],
         "summary": "Perform multiple operations with workspace groups",
         "tags": [
           "CRUD",
@@ -8913,12 +9148,11 @@
         "operationId": "listWorkspaceGroups",
         "parameters": [
           {
-            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
             "required": false,
             "schema": {
-              "deprecated": true,
               "type": [
                 "string",
                 "null"
@@ -8974,6 +9208,11 @@
             "description": ""
           }
         },
+        "security": [
+          {
+            "httpAuth": []
+          }
+        ],
         "summary": "Retrieve multiple workspace groups by their IDs",
         "tags": [
           "CRUD",
@@ -8987,12 +9226,11 @@
         "operationId": "searchWorkspaceGroups",
         "parameters": [
           {
-            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
             "required": false,
             "schema": {
-              "deprecated": true,
               "type": [
                 "string",
                 "null"
@@ -9101,6 +9339,11 @@
             "description": ""
           }
         },
+        "security": [
+          {
+            "httpAuth": []
+          }
+        ],
         "summary": "Retrieve or search workspace groups",
         "tags": [
           "CRUD",
@@ -9114,12 +9357,11 @@
         "operationId": "deleteWorkspaceGroup",
         "parameters": [
           {
-            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
             "required": false,
             "schema": {
-              "deprecated": true,
               "type": [
                 "string",
                 "null"
@@ -9163,6 +9405,11 @@
             "description": ""
           }
         },
+        "security": [
+          {
+            "httpAuth": []
+          }
+        ],
         "summary": "Delete an existing workspace group",
         "tags": [
           "CRUD",
@@ -9174,12 +9421,11 @@
         "operationId": "retrieveWorkspaceGroup",
         "parameters": [
           {
-            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
             "required": false,
             "schema": {
-              "deprecated": true,
               "type": [
                 "string",
                 "null"
@@ -9230,6 +9476,11 @@
             "description": ""
           }
         },
+        "security": [
+          {
+            "httpAuth": []
+          }
+        ],
         "summary": "Retrieve a single workspace group by its ID",
         "tags": [
           "CRUD",
@@ -9241,12 +9492,11 @@
         "operationId": "patchWorkspaceGroup",
         "parameters": [
           {
-            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
             "required": false,
             "schema": {
-              "deprecated": true,
               "type": [
                 "string",
                 "null"
@@ -9307,6 +9557,11 @@
             "description": ""
           }
         },
+        "security": [
+          {
+            "httpAuth": []
+          }
+        ],
         "summary": "Patch an existing workspace group",
         "tags": [
           "CRUD",
@@ -9318,12 +9573,11 @@
         "operationId": "updateWorkspaceGroup",
         "parameters": [
           {
-            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
             "required": false,
             "schema": {
-              "deprecated": true,
               "type": [
                 "string",
                 "null"
@@ -9384,6 +9638,11 @@
             "description": ""
           }
         },
+        "security": [
+          {
+            "httpAuth": []
+          }
+        ],
         "summary": "Update an existing workspace group",
         "tags": [
           "CRUD",
@@ -9397,12 +9656,11 @@
         "operationId": "updateWorkspaceGroupPermissions",
         "parameters": [
           {
-            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
             "required": false,
             "schema": {
-              "deprecated": true,
               "type": [
                 "string",
                 "null"
@@ -9456,6 +9714,11 @@
             "description": ""
           }
         },
+        "security": [
+          {
+            "httpAuth": []
+          }
+        ],
         "summary": "Update workspace-group permissions.",
         "tags": [
           "WorkspaceGroups"
@@ -9468,12 +9731,11 @@
         "operationId": "createItemRelation",
         "parameters": [
           {
-            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
             "required": false,
             "schema": {
-              "deprecated": true,
               "type": [
                 "string",
                 "null"
@@ -9525,6 +9787,11 @@
             "description": ""
           }
         },
+        "security": [
+          {
+            "httpAuth": []
+          }
+        ],
         "summary": "Create a new item relation",
         "tags": [
           "CRUD",
@@ -9538,12 +9805,11 @@
         "operationId": "bulkItemRelations",
         "parameters": [
           {
-            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
             "required": false,
             "schema": {
-              "deprecated": true,
               "type": [
                 "string",
                 "null"
@@ -9598,6 +9864,11 @@
             "description": ""
           }
         },
+        "security": [
+          {
+            "httpAuth": []
+          }
+        ],
         "summary": "Perform multiple operations with item relations",
         "tags": [
           "CRUD",
@@ -9611,12 +9882,11 @@
         "operationId": "listItemRelations",
         "parameters": [
           {
-            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
             "required": false,
             "schema": {
-              "deprecated": true,
               "type": [
                 "string",
                 "null"
@@ -9672,6 +9942,11 @@
             "description": ""
           }
         },
+        "security": [
+          {
+            "httpAuth": []
+          }
+        ],
         "summary": "Retrieve multiple item relations by their IDs",
         "tags": [
           "CRUD",
@@ -9685,12 +9960,11 @@
         "operationId": "searchItemRelations",
         "parameters": [
           {
-            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
             "required": false,
             "schema": {
-              "deprecated": true,
               "type": [
                 "string",
                 "null"
@@ -9803,6 +10077,11 @@
             "description": ""
           }
         },
+        "security": [
+          {
+            "httpAuth": []
+          }
+        ],
         "summary": "Retrieve or search item relations",
         "tags": [
           "CRUD",
@@ -9816,12 +10095,11 @@
         "operationId": "deleteItemRelation",
         "parameters": [
           {
-            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
             "required": false,
             "schema": {
-              "deprecated": true,
               "type": [
                 "string",
                 "null"
@@ -9865,6 +10143,11 @@
             "description": ""
           }
         },
+        "security": [
+          {
+            "httpAuth": []
+          }
+        ],
         "summary": "Delete an existing item relation",
         "tags": [
           "CRUD",
@@ -9876,12 +10159,11 @@
         "operationId": "retrieveItemRelation",
         "parameters": [
           {
-            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
             "required": false,
             "schema": {
-              "deprecated": true,
               "type": [
                 "string",
                 "null"
@@ -9932,6 +10214,11 @@
             "description": ""
           }
         },
+        "security": [
+          {
+            "httpAuth": []
+          }
+        ],
         "summary": "Retrieve a single item relation by its ID",
         "tags": [
           "CRUD",
@@ -9943,12 +10230,11 @@
         "operationId": "patchItemRelation",
         "parameters": [
           {
-            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
             "required": false,
             "schema": {
-              "deprecated": true,
               "type": [
                 "string",
                 "null"
@@ -10009,6 +10295,11 @@
             "description": ""
           }
         },
+        "security": [
+          {
+            "httpAuth": []
+          }
+        ],
         "summary": "Patch an existing item relation",
         "tags": [
           "CRUD",
@@ -10020,12 +10311,11 @@
         "operationId": "updateItemRelation",
         "parameters": [
           {
-            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
             "required": false,
             "schema": {
-              "deprecated": true,
               "type": [
                 "string",
                 "null"
@@ -10086,6 +10376,11 @@
             "description": ""
           }
         },
+        "security": [
+          {
+            "httpAuth": []
+          }
+        ],
         "summary": "Update an existing item relation",
         "tags": [
           "CRUD",
@@ -10099,12 +10394,11 @@
         "operationId": "copyItems",
         "parameters": [
           {
-            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
             "required": false,
             "schema": {
-              "deprecated": true,
               "type": [
                 "string",
                 "null"
@@ -10185,6 +10479,11 @@
             "description": ""
           }
         },
+        "security": [
+          {
+            "httpAuth": []
+          }
+        ],
         "summary": "Copy specified items.",
         "tags": [
           "Items"
@@ -10197,12 +10496,11 @@
         "operationId": "retrieveItemsGlobally",
         "parameters": [
           {
-            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
             "required": false,
             "schema": {
-              "deprecated": true,
               "type": [
                 "string",
                 "null"
@@ -10264,6 +10562,11 @@
             "description": ""
           }
         },
+        "security": [
+          {
+            "httpAuth": []
+          }
+        ],
         "summary": "Retrieve items from any workspace by specified IDs.",
         "tags": [
           "Items"
@@ -10276,12 +10579,11 @@
         "operationId": "moveItems",
         "parameters": [
           {
-            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
             "required": false,
             "schema": {
-              "deprecated": true,
               "type": [
                 "string",
                 "null"
@@ -10362,6 +10664,11 @@
             "description": ""
           }
         },
+        "security": [
+          {
+            "httpAuth": []
+          }
+        ],
         "summary": "Move specified items from one workspace to another.",
         "tags": [
           "Items"
@@ -10374,12 +10681,11 @@
         "operationId": "listWorkspaces",
         "parameters": [
           {
-            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
             "required": false,
             "schema": {
-              "deprecated": true,
               "type": [
                 "string",
                 "null"
@@ -10435,6 +10741,11 @@
             "description": ""
           }
         },
+        "security": [
+          {
+            "httpAuth": []
+          }
+        ],
         "summary": "Retrieve multiple workspaces by their IDs",
         "tags": [
           "CRUD",
@@ -10448,12 +10759,11 @@
         "operationId": "searchWorkspaces",
         "parameters": [
           {
-            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
             "required": false,
             "schema": {
-              "deprecated": true,
               "type": [
                 "string",
                 "null"
@@ -10566,6 +10876,11 @@
             "description": ""
           }
         },
+        "security": [
+          {
+            "httpAuth": []
+          }
+        ],
         "summary": "Retrieve or search workspaces",
         "tags": [
           "CRUD",
@@ -10579,12 +10894,11 @@
         "operationId": "createWorkspaceRelation",
         "parameters": [
           {
-            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
             "required": false,
             "schema": {
-              "deprecated": true,
               "type": [
                 "string",
                 "null"
@@ -10636,6 +10950,11 @@
             "description": ""
           }
         },
+        "security": [
+          {
+            "httpAuth": []
+          }
+        ],
         "summary": "Create a new workspace relation",
         "tags": [
           "CRUD",
@@ -10649,12 +10968,11 @@
         "operationId": "bulkWorkspaceRelations",
         "parameters": [
           {
-            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
             "required": false,
             "schema": {
-              "deprecated": true,
               "type": [
                 "string",
                 "null"
@@ -10709,6 +11027,11 @@
             "description": ""
           }
         },
+        "security": [
+          {
+            "httpAuth": []
+          }
+        ],
         "summary": "Perform multiple operations with workspace relations",
         "tags": [
           "CRUD",
@@ -10722,12 +11045,11 @@
         "operationId": "listWorkspaceRelations",
         "parameters": [
           {
-            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
             "required": false,
             "schema": {
-              "deprecated": true,
               "type": [
                 "string",
                 "null"
@@ -10783,6 +11105,11 @@
             "description": ""
           }
         },
+        "security": [
+          {
+            "httpAuth": []
+          }
+        ],
         "summary": "Retrieve multiple workspace relations by their IDs",
         "tags": [
           "CRUD",
@@ -10796,12 +11123,11 @@
         "operationId": "searchWorkspaceRelations",
         "parameters": [
           {
-            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
             "required": false,
             "schema": {
-              "deprecated": true,
               "type": [
                 "string",
                 "null"
@@ -10914,6 +11240,11 @@
             "description": ""
           }
         },
+        "security": [
+          {
+            "httpAuth": []
+          }
+        ],
         "summary": "Retrieve or search workspace relations",
         "tags": [
           "CRUD",
@@ -10926,12 +11257,11 @@
         "operationId": "putApiWorkspacesWorkspace-relationsSet",
         "parameters": [
           {
-            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
             "required": false,
             "schema": {
-              "deprecated": true,
               "type": [
                 "string",
                 "null"
@@ -10983,6 +11313,11 @@
             "description": ""
           }
         },
+        "security": [
+          {
+            "httpAuth": []
+          }
+        ],
         "tags": [
           "WorkspaceRelations"
         ]
@@ -10994,12 +11329,11 @@
         "operationId": "deleteWorkspaceRelation",
         "parameters": [
           {
-            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
             "required": false,
             "schema": {
-              "deprecated": true,
               "type": [
                 "string",
                 "null"
@@ -11043,6 +11377,11 @@
             "description": ""
           }
         },
+        "security": [
+          {
+            "httpAuth": []
+          }
+        ],
         "summary": "Delete an existing workspace relation",
         "tags": [
           "CRUD",
@@ -11054,12 +11393,11 @@
         "operationId": "retrieveWorkspaceRelation",
         "parameters": [
           {
-            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
             "required": false,
             "schema": {
-              "deprecated": true,
               "type": [
                 "string",
                 "null"
@@ -11110,6 +11448,11 @@
             "description": ""
           }
         },
+        "security": [
+          {
+            "httpAuth": []
+          }
+        ],
         "summary": "Retrieve a single workspace relation by its ID",
         "tags": [
           "CRUD",
@@ -11121,12 +11464,11 @@
         "operationId": "patchWorkspaceRelation",
         "parameters": [
           {
-            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
             "required": false,
             "schema": {
-              "deprecated": true,
               "type": [
                 "string",
                 "null"
@@ -11187,6 +11529,11 @@
             "description": ""
           }
         },
+        "security": [
+          {
+            "httpAuth": []
+          }
+        ],
         "summary": "Patch an existing workspace relation",
         "tags": [
           "CRUD",
@@ -11198,12 +11545,11 @@
         "operationId": "updateWorkspaceRelation",
         "parameters": [
           {
-            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
             "required": false,
             "schema": {
-              "deprecated": true,
               "type": [
                 "string",
                 "null"
@@ -11264,6 +11610,11 @@
             "description": ""
           }
         },
+        "security": [
+          {
+            "httpAuth": []
+          }
+        ],
         "summary": "Update an existing workspace relation",
         "tags": [
           "CRUD",
@@ -11277,12 +11628,11 @@
         "operationId": "deleteWorkspace",
         "parameters": [
           {
-            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
             "required": false,
             "schema": {
-              "deprecated": true,
               "type": [
                 "string",
                 "null"
@@ -11326,6 +11676,11 @@
             "description": ""
           }
         },
+        "security": [
+          {
+            "httpAuth": []
+          }
+        ],
         "summary": "Delete an existing workspace",
         "tags": [
           "CRUD",
@@ -11337,12 +11692,11 @@
         "operationId": "retrieveWorkspace",
         "parameters": [
           {
-            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
             "required": false,
             "schema": {
-              "deprecated": true,
               "type": [
                 "string",
                 "null"
@@ -11393,6 +11747,11 @@
             "description": ""
           }
         },
+        "security": [
+          {
+            "httpAuth": []
+          }
+        ],
         "summary": "Retrieve a single workspace by its ID",
         "tags": [
           "CRUD",
@@ -11404,12 +11763,11 @@
         "operationId": "patchWorkspace",
         "parameters": [
           {
-            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
             "required": false,
             "schema": {
-              "deprecated": true,
               "type": [
                 "string",
                 "null"
@@ -11470,6 +11828,11 @@
             "description": ""
           }
         },
+        "security": [
+          {
+            "httpAuth": []
+          }
+        ],
         "summary": "Patch an existing workspace",
         "tags": [
           "CRUD",
@@ -11481,12 +11844,11 @@
         "operationId": "updateWorkspace",
         "parameters": [
           {
-            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
             "required": false,
             "schema": {
-              "deprecated": true,
               "type": [
                 "string",
                 "null"
@@ -11547,6 +11909,11 @@
             "description": ""
           }
         },
+        "security": [
+          {
+            "httpAuth": []
+          }
+        ],
         "summary": "Update an existing workspace",
         "tags": [
           "CRUD",
@@ -11560,12 +11927,11 @@
         "operationId": "createItemAttachment",
         "parameters": [
           {
-            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
             "required": false,
             "schema": {
-              "deprecated": true,
               "type": [
                 "string",
                 "null"
@@ -11627,6 +11993,11 @@
             "description": ""
           }
         },
+        "security": [
+          {
+            "httpAuth": []
+          }
+        ],
         "summary": "Create a new attachment",
         "tags": [
           "CRUD",
@@ -11640,12 +12011,11 @@
         "operationId": "bulkItemAttachments",
         "parameters": [
           {
-            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
             "required": false,
             "schema": {
-              "deprecated": true,
               "type": [
                 "string",
                 "null"
@@ -11710,6 +12080,11 @@
             "description": ""
           }
         },
+        "security": [
+          {
+            "httpAuth": []
+          }
+        ],
         "summary": "Perform multiple operations with attachments",
         "tags": [
           "CRUD",
@@ -11723,12 +12098,11 @@
         "operationId": "listItemAttachments",
         "parameters": [
           {
-            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
             "required": false,
             "schema": {
-              "deprecated": true,
               "type": [
                 "string",
                 "null"
@@ -11794,6 +12168,11 @@
             "description": ""
           }
         },
+        "security": [
+          {
+            "httpAuth": []
+          }
+        ],
         "summary": "Retrieve multiple attachments by their IDs",
         "tags": [
           "CRUD",
@@ -11807,12 +12186,11 @@
         "operationId": "searchItemAttachments",
         "parameters": [
           {
-            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
             "required": false,
             "schema": {
-              "deprecated": true,
               "type": [
                 "string",
                 "null"
@@ -11935,6 +12313,11 @@
             "description": ""
           }
         },
+        "security": [
+          {
+            "httpAuth": []
+          }
+        ],
         "summary": "Retrieve or search attachments",
         "tags": [
           "CRUD",
@@ -11948,12 +12331,11 @@
         "operationId": "deleteItemAttachment",
         "parameters": [
           {
-            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
             "required": false,
             "schema": {
-              "deprecated": true,
               "type": [
                 "string",
                 "null"
@@ -12007,6 +12389,11 @@
             "description": ""
           }
         },
+        "security": [
+          {
+            "httpAuth": []
+          }
+        ],
         "summary": "Delete an existing attachment",
         "tags": [
           "CRUD",
@@ -12018,12 +12405,11 @@
         "operationId": "retrieveItemAttachment",
         "parameters": [
           {
-            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
             "required": false,
             "schema": {
-              "deprecated": true,
               "type": [
                 "string",
                 "null"
@@ -12084,6 +12470,11 @@
             "description": ""
           }
         },
+        "security": [
+          {
+            "httpAuth": []
+          }
+        ],
         "summary": "Retrieve a single attachment by its ID",
         "tags": [
           "CRUD",
@@ -12095,12 +12486,11 @@
         "operationId": "patchItemAttachment",
         "parameters": [
           {
-            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
             "required": false,
             "schema": {
-              "deprecated": true,
               "type": [
                 "string",
                 "null"
@@ -12171,6 +12561,11 @@
             "description": ""
           }
         },
+        "security": [
+          {
+            "httpAuth": []
+          }
+        ],
         "summary": "Patch an existing attachment",
         "tags": [
           "CRUD",
@@ -12182,12 +12577,11 @@
         "operationId": "updateItemAttachment",
         "parameters": [
           {
-            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
             "required": false,
             "schema": {
-              "deprecated": true,
               "type": [
                 "string",
                 "null"
@@ -12258,6 +12652,11 @@
             "description": ""
           }
         },
+        "security": [
+          {
+            "httpAuth": []
+          }
+        ],
         "summary": "Update an existing attachment",
         "tags": [
           "CRUD",
@@ -12271,12 +12670,11 @@
         "operationId": "workspaceBackgroundActivitySse",
         "parameters": [
           {
-            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
             "required": false,
             "schema": {
-              "deprecated": true,
               "type": [
                 "string",
                 "null"
@@ -12327,6 +12725,11 @@
             "description": ""
           }
         },
+        "security": [
+          {
+            "httpAuth": []
+          }
+        ],
         "summary": "Server-sent-events for background activity in workspace.",
         "tags": [
           "Workspaces"
@@ -12339,12 +12742,11 @@
         "operationId": "createComment",
         "parameters": [
           {
-            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
             "required": false,
             "schema": {
-              "deprecated": true,
               "type": [
                 "string",
                 "null"
@@ -12415,6 +12817,11 @@
             "description": ""
           }
         },
+        "security": [
+          {
+            "httpAuth": []
+          }
+        ],
         "summary": "Create a new comment",
         "tags": [
           "CRUD",
@@ -12428,12 +12835,11 @@
         "operationId": "bulkComments",
         "parameters": [
           {
-            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
             "required": false,
             "schema": {
-              "deprecated": true,
               "type": [
                 "string",
                 "null"
@@ -12510,6 +12916,11 @@
             "description": ""
           }
         },
+        "security": [
+          {
+            "httpAuth": []
+          }
+        ],
         "summary": "Perform multiple operations with comments",
         "tags": [
           "CRUD",
@@ -12523,12 +12934,11 @@
         "operationId": "listComments",
         "parameters": [
           {
-            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
             "required": false,
             "schema": {
-              "deprecated": true,
               "type": [
                 "string",
                 "null"
@@ -12598,6 +13008,11 @@
             "description": ""
           }
         },
+        "security": [
+          {
+            "httpAuth": []
+          }
+        ],
         "summary": "Retrieve multiple comments by their IDs",
         "tags": [
           "CRUD",
@@ -12611,12 +13026,11 @@
         "operationId": "searchComments",
         "parameters": [
           {
-            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
             "required": false,
             "schema": {
-              "deprecated": true,
               "type": [
                 "string",
                 "null"
@@ -12743,6 +13157,11 @@
             "description": ""
           }
         },
+        "security": [
+          {
+            "httpAuth": []
+          }
+        ],
         "summary": "Retrieve or search comments",
         "tags": [
           "CRUD",
@@ -12756,12 +13175,11 @@
         "operationId": "deleteComment",
         "parameters": [
           {
-            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
             "required": false,
             "schema": {
-              "deprecated": true,
               "type": [
                 "string",
                 "null"
@@ -12814,6 +13232,11 @@
             "description": ""
           }
         },
+        "security": [
+          {
+            "httpAuth": []
+          }
+        ],
         "summary": "Delete an existing comment",
         "tags": [
           "CRUD",
@@ -12825,12 +13248,11 @@
         "operationId": "retrieveComment",
         "parameters": [
           {
-            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
             "required": false,
             "schema": {
-              "deprecated": true,
               "type": [
                 "string",
                 "null"
@@ -12895,6 +13317,11 @@
             "description": ""
           }
         },
+        "security": [
+          {
+            "httpAuth": []
+          }
+        ],
         "summary": "Retrieve a single comment by its ID",
         "tags": [
           "CRUD",
@@ -12906,12 +13333,11 @@
         "operationId": "patchComment",
         "parameters": [
           {
-            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
             "required": false,
             "schema": {
-              "deprecated": true,
               "type": [
                 "string",
                 "null"
@@ -12986,6 +13412,11 @@
             "description": ""
           }
         },
+        "security": [
+          {
+            "httpAuth": []
+          }
+        ],
         "summary": "Patch an existing comment",
         "tags": [
           "CRUD",
@@ -12997,12 +13428,11 @@
         "operationId": "updateComment",
         "parameters": [
           {
-            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
             "required": false,
             "schema": {
-              "deprecated": true,
               "type": [
                 "string",
                 "null"
@@ -13082,6 +13512,11 @@
             "description": ""
           }
         },
+        "security": [
+          {
+            "httpAuth": []
+          }
+        ],
         "summary": "Update an existing comment",
         "tags": [
           "CRUD",
@@ -13095,12 +13530,11 @@
         "operationId": "removeCommentReaction",
         "parameters": [
           {
-            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
             "required": false,
             "schema": {
-              "deprecated": true,
               "type": [
                 "string",
                 "null"
@@ -13161,6 +13595,11 @@
             "description": ""
           }
         },
+        "security": [
+          {
+            "httpAuth": []
+          }
+        ],
         "summary": "Remove a reaction from the specified comment.",
         "tags": [
           "Comments"
@@ -13171,12 +13610,11 @@
         "operationId": "addCommentReaction",
         "parameters": [
           {
-            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
             "required": false,
             "schema": {
-              "deprecated": true,
               "type": [
                 "string",
                 "null"
@@ -13237,6 +13675,11 @@
             "description": ""
           }
         },
+        "security": [
+          {
+            "httpAuth": []
+          }
+        ],
         "summary": "Add a reaction to the specified comment.",
         "tags": [
           "Comments"
@@ -13249,12 +13692,11 @@
         "operationId": "duplicateWorkspace",
         "parameters": [
           {
-            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
             "required": false,
             "schema": {
-              "deprecated": true,
               "type": [
                 "string",
                 "null"
@@ -13315,6 +13757,11 @@
             "description": ""
           }
         },
+        "security": [
+          {
+            "httpAuth": []
+          }
+        ],
         "summary": "Duplicate workspace with all its items and apps.",
         "tags": [
           "Workspaces"
@@ -13327,12 +13774,11 @@
         "operationId": "workspaceEventsByWorkspaceIdSse",
         "parameters": [
           {
-            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
             "required": false,
             "schema": {
-              "deprecated": true,
               "type": [
                 "string",
                 "null"
@@ -13383,6 +13829,11 @@
             "description": ""
           }
         },
+        "security": [
+          {
+            "httpAuth": []
+          }
+        ],
         "summary": "Server-side-events for updates in a single workspace.",
         "tags": [
           "Workspaces"
@@ -13395,12 +13846,11 @@
         "operationId": "createItem",
         "parameters": [
           {
-            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
             "required": false,
             "schema": {
-              "deprecated": true,
               "type": [
                 "string",
                 "null"
@@ -13471,6 +13921,11 @@
             "description": ""
           }
         },
+        "security": [
+          {
+            "httpAuth": []
+          }
+        ],
         "summary": "Create a new item",
         "tags": [
           "CRUD",
@@ -13484,12 +13939,11 @@
         "operationId": "bulkItems",
         "parameters": [
           {
-            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
             "required": false,
             "schema": {
-              "deprecated": true,
               "type": [
                 "string",
                 "null"
@@ -13566,6 +14020,11 @@
             "description": ""
           }
         },
+        "security": [
+          {
+            "httpAuth": []
+          }
+        ],
         "summary": "Perform multiple operations with items",
         "tags": [
           "CRUD",
@@ -13579,12 +14038,11 @@
         "operationId": "listItems",
         "parameters": [
           {
-            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
             "required": false,
             "schema": {
-              "deprecated": true,
               "type": [
                 "string",
                 "null"
@@ -13654,6 +14112,11 @@
             "description": ""
           }
         },
+        "security": [
+          {
+            "httpAuth": []
+          }
+        ],
         "summary": "Retrieve multiple items by their IDs",
         "tags": [
           "CRUD",
@@ -13667,12 +14130,11 @@
         "operationId": "resetItemColors",
         "parameters": [
           {
-            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
             "required": false,
             "schema": {
-              "deprecated": true,
               "type": [
                 "string",
                 "null"
@@ -13716,6 +14178,11 @@
             "description": ""
           }
         },
+        "security": [
+          {
+            "httpAuth": []
+          }
+        ],
         "summary": "Reset colors of all items in the specified workspace.",
         "tags": [
           "Items"
@@ -13728,12 +14195,11 @@
         "operationId": "searchItems",
         "parameters": [
           {
-            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
             "required": false,
             "schema": {
-              "deprecated": true,
               "type": [
                 "string",
                 "null"
@@ -13860,6 +14326,11 @@
             "description": ""
           }
         },
+        "security": [
+          {
+            "httpAuth": []
+          }
+        ],
         "summary": "Retrieve or search items",
         "tags": [
           "CRUD",
@@ -13873,12 +14344,11 @@
         "operationId": "unwatchItems",
         "parameters": [
           {
-            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
             "required": false,
             "schema": {
-              "deprecated": true,
               "type": [
                 "string",
                 "null"
@@ -13938,6 +14408,11 @@
             "description": ""
           }
         },
+        "security": [
+          {
+            "httpAuth": []
+          }
+        ],
         "summary": "Remove watching status of the current user for the specified items.",
         "tags": [
           "Items"
@@ -13950,12 +14425,11 @@
         "operationId": "watchItems",
         "parameters": [
           {
-            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
             "required": false,
             "schema": {
-              "deprecated": true,
               "type": [
                 "string",
                 "null"
@@ -14015,6 +14489,11 @@
             "description": ""
           }
         },
+        "security": [
+          {
+            "httpAuth": []
+          }
+        ],
         "summary": "Set current user as a watcher of the specified items.",
         "tags": [
           "Items"
@@ -14027,12 +14506,11 @@
         "operationId": "deleteItem",
         "parameters": [
           {
-            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
             "required": false,
             "schema": {
-              "deprecated": true,
               "type": [
                 "string",
                 "null"
@@ -14085,6 +14563,11 @@
             "description": ""
           }
         },
+        "security": [
+          {
+            "httpAuth": []
+          }
+        ],
         "summary": "Delete an existing item",
         "tags": [
           "CRUD",
@@ -14096,12 +14579,11 @@
         "operationId": "retrieveItem",
         "parameters": [
           {
-            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
             "required": false,
             "schema": {
-              "deprecated": true,
               "type": [
                 "string",
                 "null"
@@ -14166,6 +14648,11 @@
             "description": ""
           }
         },
+        "security": [
+          {
+            "httpAuth": []
+          }
+        ],
         "summary": "Retrieve a single item by its ID",
         "tags": [
           "CRUD",
@@ -14177,12 +14664,11 @@
         "operationId": "patchItem",
         "parameters": [
           {
-            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
             "required": false,
             "schema": {
-              "deprecated": true,
               "type": [
                 "string",
                 "null"
@@ -14257,6 +14743,11 @@
             "description": ""
           }
         },
+        "security": [
+          {
+            "httpAuth": []
+          }
+        ],
         "summary": "Patch an existing item",
         "tags": [
           "CRUD",
@@ -14268,12 +14759,11 @@
         "operationId": "updateItem",
         "parameters": [
           {
-            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
             "required": false,
             "schema": {
-              "deprecated": true,
               "type": [
                 "string",
                 "null"
@@ -14353,6 +14843,11 @@
             "description": ""
           }
         },
+        "security": [
+          {
+            "httpAuth": []
+          }
+        ],
         "summary": "Update an existing item",
         "tags": [
           "CRUD",
@@ -14366,12 +14861,11 @@
         "operationId": "createItemLink",
         "parameters": [
           {
-            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
             "required": false,
             "schema": {
-              "deprecated": true,
               "type": [
                 "string",
                 "null"
@@ -14433,6 +14927,11 @@
             "description": ""
           }
         },
+        "security": [
+          {
+            "httpAuth": []
+          }
+        ],
         "summary": "Create a new item link",
         "tags": [
           "CRUD",
@@ -14446,12 +14945,11 @@
         "operationId": "bulkItemLinks",
         "parameters": [
           {
-            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
             "required": false,
             "schema": {
-              "deprecated": true,
               "type": [
                 "string",
                 "null"
@@ -14516,6 +15014,11 @@
             "description": ""
           }
         },
+        "security": [
+          {
+            "httpAuth": []
+          }
+        ],
         "summary": "Perform multiple operations with item links",
         "tags": [
           "CRUD",
@@ -14529,12 +15032,11 @@
         "operationId": "listItemLinks",
         "parameters": [
           {
-            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
             "required": false,
             "schema": {
-              "deprecated": true,
               "type": [
                 "string",
                 "null"
@@ -14600,6 +15102,11 @@
             "description": ""
           }
         },
+        "security": [
+          {
+            "httpAuth": []
+          }
+        ],
         "summary": "Retrieve multiple item links by their IDs",
         "tags": [
           "CRUD",
@@ -14613,12 +15120,11 @@
         "operationId": "searchItemLinks",
         "parameters": [
           {
-            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
             "required": false,
             "schema": {
-              "deprecated": true,
               "type": [
                 "string",
                 "null"
@@ -14741,6 +15247,11 @@
             "description": ""
           }
         },
+        "security": [
+          {
+            "httpAuth": []
+          }
+        ],
         "summary": "Retrieve or search item links",
         "tags": [
           "CRUD",
@@ -14754,12 +15265,11 @@
         "operationId": "deleteItemLink",
         "parameters": [
           {
-            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
             "required": false,
             "schema": {
-              "deprecated": true,
               "type": [
                 "string",
                 "null"
@@ -14813,6 +15323,11 @@
             "description": ""
           }
         },
+        "security": [
+          {
+            "httpAuth": []
+          }
+        ],
         "summary": "Delete an existing item link",
         "tags": [
           "CRUD",
@@ -14824,12 +15339,11 @@
         "operationId": "retrieveItemLink",
         "parameters": [
           {
-            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
             "required": false,
             "schema": {
-              "deprecated": true,
               "type": [
                 "string",
                 "null"
@@ -14890,6 +15404,11 @@
             "description": ""
           }
         },
+        "security": [
+          {
+            "httpAuth": []
+          }
+        ],
         "summary": "Retrieve a single item link by its ID",
         "tags": [
           "CRUD",
@@ -14901,12 +15420,11 @@
         "operationId": "patchItemLink",
         "parameters": [
           {
-            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
             "required": false,
             "schema": {
-              "deprecated": true,
               "type": [
                 "string",
                 "null"
@@ -14977,6 +15495,11 @@
             "description": ""
           }
         },
+        "security": [
+          {
+            "httpAuth": []
+          }
+        ],
         "summary": "Patch an existing item link",
         "tags": [
           "CRUD",
@@ -14988,12 +15511,11 @@
         "operationId": "updateItemLink",
         "parameters": [
           {
-            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
             "required": false,
             "schema": {
-              "deprecated": true,
               "type": [
                 "string",
                 "null"
@@ -15064,6 +15586,11 @@
             "description": ""
           }
         },
+        "security": [
+          {
+            "httpAuth": []
+          }
+        ],
         "summary": "Update an existing item link",
         "tags": [
           "CRUD",
@@ -15077,12 +15604,11 @@
         "operationId": "createMilestone",
         "parameters": [
           {
-            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
             "required": false,
             "schema": {
-              "deprecated": true,
               "type": [
                 "string",
                 "null"
@@ -15144,6 +15670,11 @@
             "description": ""
           }
         },
+        "security": [
+          {
+            "httpAuth": []
+          }
+        ],
         "summary": "Create a new milestone",
         "tags": [
           "CRUD",
@@ -15157,12 +15688,11 @@
         "operationId": "bulkMilestones",
         "parameters": [
           {
-            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
             "required": false,
             "schema": {
-              "deprecated": true,
               "type": [
                 "string",
                 "null"
@@ -15227,6 +15757,11 @@
             "description": ""
           }
         },
+        "security": [
+          {
+            "httpAuth": []
+          }
+        ],
         "summary": "Perform multiple operations with milestones",
         "tags": [
           "CRUD",
@@ -15240,12 +15775,11 @@
         "operationId": "listMilestones",
         "parameters": [
           {
-            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
             "required": false,
             "schema": {
-              "deprecated": true,
               "type": [
                 "string",
                 "null"
@@ -15311,6 +15845,11 @@
             "description": ""
           }
         },
+        "security": [
+          {
+            "httpAuth": []
+          }
+        ],
         "summary": "Retrieve multiple milestones by their IDs",
         "tags": [
           "CRUD",
@@ -15324,12 +15863,11 @@
         "operationId": "searchMilestones",
         "parameters": [
           {
-            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
             "required": false,
             "schema": {
-              "deprecated": true,
               "type": [
                 "string",
                 "null"
@@ -15448,6 +15986,11 @@
             "description": ""
           }
         },
+        "security": [
+          {
+            "httpAuth": []
+          }
+        ],
         "summary": "Retrieve or search milestones",
         "tags": [
           "CRUD",
@@ -15461,12 +16004,11 @@
         "operationId": "deleteMilestone",
         "parameters": [
           {
-            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
             "required": false,
             "schema": {
-              "deprecated": true,
               "type": [
                 "string",
                 "null"
@@ -15520,6 +16062,11 @@
             "description": ""
           }
         },
+        "security": [
+          {
+            "httpAuth": []
+          }
+        ],
         "summary": "Delete an existing milestone",
         "tags": [
           "CRUD",
@@ -15531,12 +16078,11 @@
         "operationId": "retrieveMilestone",
         "parameters": [
           {
-            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
             "required": false,
             "schema": {
-              "deprecated": true,
               "type": [
                 "string",
                 "null"
@@ -15597,6 +16143,11 @@
             "description": ""
           }
         },
+        "security": [
+          {
+            "httpAuth": []
+          }
+        ],
         "summary": "Retrieve a single milestone by its ID",
         "tags": [
           "CRUD",
@@ -15608,12 +16159,11 @@
         "operationId": "patchMilestone",
         "parameters": [
           {
-            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
             "required": false,
             "schema": {
-              "deprecated": true,
               "type": [
                 "string",
                 "null"
@@ -15684,6 +16234,11 @@
             "description": ""
           }
         },
+        "security": [
+          {
+            "httpAuth": []
+          }
+        ],
         "summary": "Patch an existing milestone",
         "tags": [
           "CRUD",
@@ -15695,12 +16250,11 @@
         "operationId": "updateMilestone",
         "parameters": [
           {
-            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
             "required": false,
             "schema": {
-              "deprecated": true,
               "type": [
                 "string",
                 "null"
@@ -15771,6 +16325,11 @@
             "description": ""
           }
         },
+        "security": [
+          {
+            "httpAuth": []
+          }
+        ],
         "summary": "Update an existing milestone",
         "tags": [
           "CRUD",
@@ -15784,12 +16343,11 @@
         "operationId": "updateWorkspacePermissions",
         "parameters": [
           {
-            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
             "required": false,
             "schema": {
-              "deprecated": true,
               "type": [
                 "string",
                 "null"
@@ -15857,6 +16415,11 @@
             "description": ""
           }
         },
+        "security": [
+          {
+            "httpAuth": []
+          }
+        ],
         "summary": "Update workspace permissions.",
         "tags": [
           "Workspaces"
@@ -15869,12 +16432,11 @@
         "operationId": "setWorkspaceStatuses",
         "parameters": [
           {
-            "description": "OAuth2 token as query parameter (alternative to Authorization header).",
+            "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
             "required": false,
             "schema": {
-              "deprecated": true,
               "type": [
                 "string",
                 "null"
@@ -15928,6 +16490,11 @@
             "description": ""
           }
         },
+        "security": [
+          {
+            "httpAuth": []
+          }
+        ],
         "tags": [
           "Workspaces"
         ]
