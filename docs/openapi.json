@@ -951,6 +951,53 @@
         "title": "FormTargetFieldWithFieldEmbed",
         "type": "object"
       },
+      "InboxCounter": {
+        "properties": {
+          "count": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "count"
+        ],
+        "title": "InboxCounter",
+        "type": "object"
+      },
+      "InboxViewEndpointsInboxCountersRequest": {
+        "properties": {
+          "archived": {
+            "type": "boolean"
+          },
+          "countAssigned": {
+            "type": "boolean"
+          },
+          "filter": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ItemSearchQueryFilter"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "countAssigned",
+          "archived"
+        ],
+        "title": "InboxViewEndpointsInboxCountersRequest",
+        "type": "object"
+      },
       "InsightsFieldTypeSettings": {
         "properties": {
           "maximum": {
@@ -7932,7 +7979,7 @@
   },
   "info": {
     "title": "airfocus API",
-    "version": "1.0.0-beta.33.43.2"
+    "version": "1.0.0-beta.33.44.0"
   },
   "openapi": "3.1.0",
   "paths": {
@@ -8922,6 +8969,77 @@
         "summary": "Server-side-events for updates in all workspaces.",
         "tags": [
           "Workspaces"
+        ]
+      }
+    },
+    "/api/workspaces/extensions/views/inbox/{viewId}/counters": {
+      "post": {
+        "description": "Returns counters for each.",
+        "operationId": "retrieveInboxCounters",
+        "parameters": [
+          {
+            "description": "Auth token as query parameter (alternative to Authorization header).",
+            "in": "query",
+            "name": "token",
+            "required": false,
+            "schema": {
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          {
+            "description": "Enable sudo-mode for admins for a single request, which gives full permission to all workspaces in the team.",
+            "in": "query",
+            "name": "actAsAdmin",
+            "required": false,
+            "schema": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            }
+          },
+          {
+            "in": "path",
+            "name": "viewId",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/InboxViewEndpointsInboxCountersRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/InboxCounter"
+                  },
+                  "type": "array"
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "httpAuth": []
+          }
         ]
       }
     },
