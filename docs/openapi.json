@@ -5815,48 +5815,6 @@
         "title": "TemplateSearchEmbed",
         "type": "object"
       },
-      "TemplateServerEndpointsApplyTemplateRequest": {
-        "properties": {
-          "defaultPermission": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/Permission"
-              },
-              {
-                "type": "null"
-              }
-            ]
-          },
-          "groupId": {
-            "format": "uuid",
-            "type": [
-              "string",
-              "null"
-            ]
-          },
-          "name": {
-            "type": [
-              "string",
-              "null"
-            ]
-          },
-          "parameters": {
-            "$ref": "#/components/schemas/TemplatesTemplateParameters"
-          },
-          "permissions": {
-            "additionalProperties": {
-              "$ref": "#/components/schemas/Permission"
-            },
-            "type": "object"
-          }
-        },
-        "required": [
-          "parameters",
-          "permissions"
-        ],
-        "title": "TemplateServerEndpointsApplyTemplateRequest",
-        "type": "object"
-      },
       "TemplateView": {
         "properties": {
           "description": {
@@ -5883,19 +5841,6 @@
           "imageUrl"
         ],
         "title": "TemplateView",
-        "type": "object"
-      },
-      "TemplatesTemplateParameters": {
-        "properties": {
-          "insightsTargetWorkspaceId": {
-            "format": "uuid",
-            "type": [
-              "string",
-              "null"
-            ]
-          }
-        },
-        "title": "TemplatesTemplateParameters",
         "type": "object"
       },
       "TextFieldWithFieldEmbed": {
@@ -7979,7 +7924,7 @@
   },
   "info": {
     "title": "airfocus API",
-    "version": "1.0.0-beta.33.47.0"
+    "version": "1.0.0-beta.33.47.3"
   },
   "openapi": "3.1.0",
   "paths": {
@@ -8547,7 +8492,7 @@
     },
     "/api/templates": {
       "get": {
-        "description": "Returns all workspace-templates available to the current team.",
+        "description": "Returns all workspace-templates available to the current team.<br/>Requirements:<br/>- auth-client scopes: \"workspace:read\"",
         "operationId": "listTemplates",
         "parameters": [
           {
@@ -8618,77 +8563,6 @@
           }
         ],
         "summary": "List templates",
-        "tags": [
-          "Templates"
-        ]
-      }
-    },
-    "/api/templates/{templateId}": {
-      "post": {
-        "description": "Installs the requested template with the given parameters.\nReturns a newly created workspace.\nIf the template creates multiple workspaces - then it still returns a single workspace which is considered by the template as \"main\".",
-        "operationId": "installTemplate",
-        "parameters": [
-          {
-            "description": "Auth token as query parameter (alternative to Authorization header).",
-            "in": "query",
-            "name": "token",
-            "required": false,
-            "schema": {
-              "type": [
-                "string",
-                "null"
-              ]
-            }
-          },
-          {
-            "description": "Enable sudo-mode for admins for a single request, which gives full permission to all workspaces in the team.",
-            "in": "query",
-            "name": "actAsAdmin",
-            "required": false,
-            "schema": {
-              "type": [
-                "boolean",
-                "null"
-              ]
-            }
-          },
-          {
-            "in": "path",
-            "name": "templateId",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/TemplateServerEndpointsApplyTemplateRequest"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/WorkspaceWithWorkspaceEmbed"
-                }
-              }
-            },
-            "description": ""
-          }
-        },
-        "security": [
-          {
-            "httpAuth": []
-          }
-        ],
-        "summary": "Install template",
         "tags": [
           "Templates"
         ]
@@ -11372,6 +11246,7 @@
     },
     "/api/workspaces/workspace-relations/set": {
       "put": {
+        "description": "",
         "operationId": "putApiWorkspacesWorkspace-relationsSet",
         "parameters": [
           {
