@@ -5012,20 +5012,7 @@
               {
                 "content": [
                   {
-                    "content": "Hello ",
-                    "type": "text"
-                  },
-                  {
-                    "content": [
-                      {
-                        "content": "world",
-                        "type": "text"
-                      }
-                    ],
-                    "type": "bold"
-                  },
-                  {
-                    "content": "!",
+                    "content": "hello world",
                     "type": "text"
                   }
                 ],
@@ -7924,7 +7911,7 @@
   },
   "info": {
     "title": "airfocus API",
-    "version": "1.0.0-beta.33.47.4"
+    "version": "1.0.0-beta.33.47.7"
   },
   "openapi": "3.1.0",
   "paths": {
