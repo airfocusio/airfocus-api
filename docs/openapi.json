@@ -3872,16 +3872,11 @@
       },
       "JsonPatch": {
         "description": "A JSON Patch document. See https://jsonpatch.com/ for more information.",
-        "properties": {
-          "ops": {
-            "items": {
-              "$ref": "#/components/schemas/JsonPatchOperation"
-            },
-            "type": "array"
-          }
+        "items": {
+          "$ref": "#/components/schemas/JsonPatchOperation"
         },
         "title": "JsonPatch",
-        "type": "object"
+        "type": "array"
       },
       "JsonPatchAdd": {
         "properties": {
@@ -8100,7 +8095,7 @@
   },
   "info": {
     "title": "airfocus API",
-    "version": "1.0.0-beta.33.52.2"
+    "version": "1.0.0-beta.33.53.1"
   },
   "openapi": "3.1.0",
   "paths": {
