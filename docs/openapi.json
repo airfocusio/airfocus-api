@@ -74,39 +74,6 @@
         "title": "AttachmentSearchQuery",
         "type": "object"
       },
-      "AuditLogEntry": {
-        "properties": {
-          "details": {
-            "additionalProperties": {
-              "type": "string"
-            },
-            "type": "object"
-          },
-          "teamId": {
-            "format": "uuid",
-            "type": "string"
-          },
-          "timestamp": {
-            "format": "date-time",
-            "type": "string"
-          },
-          "typeId": {
-            "type": "string"
-          },
-          "userId": {
-            "format": "uuid",
-            "type": "string"
-          }
-        },
-        "required": [
-          "teamId",
-          "typeId",
-          "details",
-          "timestamp"
-        ],
-        "title": "AuditLogEntry",
-        "type": "object"
-      },
       "BooleanFieldWithFieldEmbed": {
         "properties": {
           "_embedded": {
@@ -830,6 +797,36 @@
         ],
         "title": "FieldServerEndpointsInstallFieldRequest"
       },
+      "FieldServerEndpointsInstallFieldRequestLegacy": {
+        "properties": {
+          "description": {
+            "type": "string"
+          },
+          "isTeamField": {
+            "type": "boolean"
+          },
+          "name": {
+            "type": "string"
+          },
+          "settings": {},
+          "typeId": {
+            "type": "string"
+          },
+          "workspaceId": {
+            "format": "uuid",
+            "type": "string"
+          }
+        },
+        "required": [
+          "typeId",
+          "name",
+          "settings",
+          "isTeamField",
+          "description"
+        ],
+        "title": "FieldServerEndpointsInstallFieldRequestLegacy",
+        "type": "object"
+      },
       "FieldServerEndpointsReconfigureFieldRequest": {
         "properties": {
           "description": {
@@ -882,6 +879,33 @@
         "title": "FieldServerEndpointsReconfigureFieldRequest",
         "type": "object"
       },
+      "FieldServerEndpointsReconfigureFieldRequestLegacy": {
+        "properties": {
+          "description": {
+            "type": "string"
+          },
+          "fieldId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "isTeamField": {
+            "type": "boolean"
+          },
+          "name": {
+            "type": "string"
+          },
+          "settings": {}
+        },
+        "required": [
+          "fieldId",
+          "settings",
+          "name",
+          "description",
+          "isTeamField"
+        ],
+        "title": "FieldServerEndpointsReconfigureFieldRequestLegacy",
+        "type": "object"
+      },
       "FieldServerEndpointsReorderFieldsRequest": {
         "properties": {
           "fieldIds": {
@@ -900,6 +924,19 @@
           "workspaceId"
         ],
         "title": "FieldServerEndpointsReorderFieldsRequest",
+        "type": "object"
+      },
+      "FieldServerEndpointsUninstallFieldRequest": {
+        "properties": {
+          "fieldId": {
+            "format": "uuid",
+            "type": "string"
+          }
+        },
+        "required": [
+          "fieldId"
+        ],
+        "title": "FieldServerEndpointsUninstallFieldRequest",
         "type": "object"
       },
       "FieldWithFieldEmbed": {
@@ -8095,7 +8132,7 @@
   },
   "info": {
     "title": "airfocus API",
-    "version": "1.0.0-beta.33.53.2"
+    "version": "1.0.0-beta.33.53.5"
   },
   "openapi": "3.1.0",
   "paths": {
@@ -8971,72 +9008,6 @@
         ]
       }
     },
-    "/api/team/audit-log": {
-      "get": {
-        "description": "Requirements:<br/>- auth-client scopes: \"team\"<br/>- user role: \"admin\"<br/>Returns:<br/>- 403 if user does not match the required role",
-        "operationId": "auditLog",
-        "parameters": [
-          {
-            "description": "Auth token as query parameter (alternative to Authorization header).",
-            "in": "query",
-            "name": "token",
-            "required": false,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "deprecated": true,
-            "description": "From which element the page should start.",
-            "in": "query",
-            "name": "from",
-            "required": false,
-            "schema": {
-              "default": 0,
-              "deprecated": true,
-              "format": "int32",
-              "minimum": 0,
-              "type": "integer"
-            }
-          },
-          {
-            "deprecated": true,
-            "description": "At which element the page should end (excluding it).",
-            "in": "query",
-            "name": "to",
-            "required": false,
-            "schema": {
-              "deprecated": true,
-              "format": "int32",
-              "type": "integer"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "items": {
-                    "$ref": "#/components/schemas/AuditLogEntry"
-                  },
-                  "type": "array"
-                }
-              }
-            },
-            "description": ""
-          }
-        },
-        "security": [
-          {
-            "httpAuth": []
-          }
-        ],
-        "tags": [
-          "Team"
-        ]
-      }
-    },
     "/api/team/flags": {
       "patch": {
         "description": "Requirements:<br/>- auth-client scopes: \"team\"<br/>- user role: \"admin\"<br/>Returns:<br/>- 403 if user does not match the required role",
@@ -9802,6 +9773,57 @@
         ]
       }
     },
+    "/api/workspaces/extensions/fields": {
+      "get": {
+        "deprecated": true,
+        "description": "Returns all field-types available in the system.<br/>Requirements:<br/>  - auth-client scopes: \"workspace:read\"<br/>  - user permission: \"read\" or higher<br/>  - team features: \"team-fields\" when operating with team-fields<br/>Returns:<br/>403 if user does not have the required permission",
+        "operationId": "listFieldTypesLegacy",
+        "parameters": [
+          {
+            "description": "Auth token as query parameter (alternative to Authorization header).",
+            "in": "query",
+            "name": "token",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Enable sudo-mode for admins for a single request, which gives full permission to all workspaces in the team.",
+            "in": "query",
+            "name": "actAsAdmin",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/FieldServerEndpointsFieldTypeInfo"
+                  },
+                  "type": "array"
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "httpAuth": []
+          }
+        ],
+        "summary": "List all available field types",
+        "tags": [
+          "Fields"
+        ]
+      }
+    },
     "/api/workspaces/extensions/views/inbox/{viewId}/counters": {
       "post": {
         "description": "Returns counters for each.",
@@ -9864,6 +9886,228 @@
           {
             "httpAuth": []
           }
+        ]
+      }
+    },
+    "/api/workspaces/fields/add-team-field": {
+      "post": {
+        "deprecated": true,
+        "description": "Links existing team-fields to existing workspaces.\nReturns updated fields with their linked workspaces embedded.\nReturns an error if either of the requested fields is not a team-field.\nIgnores existing links.\n<br/>Requirements:<br/>  - auth-client scopes: \"workspace\"<br/>  - user permission: \"full\"<br/>  - team features: \"team-fields\" when operating with team-fields<br/>  - user role: \"admin\" when operating with team-fields<br/>Returns:<br/>403 if user does not have the required permission",
+        "operationId": "linkTeamFieldsToWorkspacesLegacy",
+        "parameters": [
+          {
+            "description": "Auth token as query parameter (alternative to Authorization header).",
+            "in": "query",
+            "name": "token",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Enable sudo-mode for admins for a single request, which gives full permission to all workspaces in the team.",
+            "in": "query",
+            "name": "actAsAdmin",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FieldServerEndpointsFieldToWorkspaceLink"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FieldWithFieldEmbed"
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "httpAuth": []
+          }
+        ],
+        "summary": "Add team-field to workspace",
+        "tags": [
+          "Fields"
+        ]
+      }
+    },
+    "/api/workspaces/fields/install-field": {
+      "post": {
+        "deprecated": true,
+        "description": "Installs a new field.\nIf it's a team-field, then it's possible to install it with empty or any non-empty amount of linked workspaces.\nOtherwise, if it's not a team-field, then exactly one linked workspace should be specified.<br/>Requirements:<br/>  - auth-client scopes: \"workspace\"<br/>  - user permission: \"full\"<br/>  - team features: \"team-fields\" when operating with team-fields<br/>  - user role: \"admin\" when operating with team-fields<br/>Returns:<br/>403 if user does not have the required permission",
+        "operationId": "installFieldLegacy",
+        "parameters": [
+          {
+            "description": "Auth token as query parameter (alternative to Authorization header).",
+            "in": "query",
+            "name": "token",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Enable sudo-mode for admins for a single request, which gives full permission to all workspaces in the team.",
+            "in": "query",
+            "name": "actAsAdmin",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FieldServerEndpointsInstallFieldRequestLegacy"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FieldWithFieldEmbed"
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "httpAuth": []
+          }
+        ],
+        "summary": "Install a new field",
+        "tags": [
+          "Fields"
+        ]
+      }
+    },
+    "/api/workspaces/fields/reconfigure-field": {
+      "post": {
+        "deprecated": true,
+        "description": "Updates configuration properties of an existing field.<br/>Requirements:<br/>  - auth-client scopes: \"workspace\"<br/>  - user permission: \"full\"<br/>  - team features: \"team-fields\" when operating with team-fields<br/>  - user role: \"admin\" when operating with team-fields<br/>Returns:<br/>403 if user does not have the required permission",
+        "operationId": "reconfigureFieldLegacy",
+        "parameters": [
+          {
+            "description": "Auth token as query parameter (alternative to Authorization header).",
+            "in": "query",
+            "name": "token",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Enable sudo-mode for admins for a single request, which gives full permission to all workspaces in the team.",
+            "in": "query",
+            "name": "actAsAdmin",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FieldServerEndpointsReconfigureFieldRequestLegacy"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FieldWithFieldEmbed"
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "httpAuth": []
+          }
+        ],
+        "summary": "Reconfigure field",
+        "tags": [
+          "Fields"
+        ]
+      }
+    },
+    "/api/workspaces/fields/team-fields": {
+      "get": {
+        "deprecated": true,
+        "description": "Returns all team-fields installed for the current team.<br/>Requirements:<br/>  - auth-client scopes: \"workspace:read\"<br/>  - user permission: \"read\" or higher<br/>  - team features: \"team-fields\" when operating with team-fields<br/>Returns:<br/>403 if user does not have the required permission",
+        "operationId": "getAllTeamFieldsLegacy",
+        "parameters": [
+          {
+            "description": "Auth token as query parameter (alternative to Authorization header).",
+            "in": "query",
+            "name": "token",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Enable sudo-mode for admins for a single request, which gives full permission to all workspaces in the team.",
+            "in": "query",
+            "name": "actAsAdmin",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FieldWithFieldEmbedPage"
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "httpAuth": []
+          }
+        ],
+        "summary": "List team-fields",
+        "tags": [
+          "Fields"
         ]
       }
     },
@@ -11206,6 +11450,76 @@
         ]
       }
     },
+    "/api/workspaces/items/alias/{aliasValue}": {
+      "get": {
+        "description": "Returns found item.<br/>Requirements:<br/>  - auth-client scopes: \"workspace\"<br/>  - user permission: \"write\" or higher<br/>Returns:<br/>400 if the resource is not found<br/>403 if user does not have the required permission",
+        "operationId": "retrieveItemByAlias",
+        "parameters": [
+          {
+            "description": "Auth token as query parameter (alternative to Authorization header).",
+            "in": "query",
+            "name": "token",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Enable sudo-mode for admins for a single request, which gives full permission to all workspaces in the team.",
+            "in": "query",
+            "name": "actAsAdmin",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "in": "path",
+            "name": "aliasValue",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ItemWithItemEmbed"
+                }
+              },
+              "application/json+markdown": {
+                "schema": {
+                  "$ref": "#/components/schemas/ItemWithItemEmbed"
+                }
+              }
+            },
+            "description": ""
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "httpAuth": []
+          }
+        ],
+        "summary": "Retrieve a single item by its alias (e.g. 'DEV-123').",
+        "tags": [
+          "Items"
+        ]
+      }
+    },
     "/api/workspaces/items/copy": {
       "post": {
         "description": "Returns ids of newly copied items, with order of the returned ids matching the order of requested source items. Returns Not Found if either of the specified source items does not exist.<br/>Requirements:<br/>  - auth-client scopes: \"workspace\"<br/>  - user permission: \"write\" or higher<br/>Returns:<br/>400 if the resource is not found<br/>403 if user does not have the required permission",
@@ -11663,6 +11977,130 @@
         "tags": [
           "CRUD",
           "Workspaces"
+        ]
+      }
+    },
+    "/api/workspaces/templates": {
+      "get": {
+        "deprecated": true,
+        "description": "Returns all workspace-templates available to the current team.<br/>Requirements:<br/>- auth-client scopes: \"workspace:read\"",
+        "operationId": "listTemplatesLegacy",
+        "parameters": [
+          {
+            "description": "Auth token as query parameter (alternative to Authorization header).",
+            "in": "query",
+            "name": "token",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Enable sudo-mode for admins for a single request, which gives full permission to all workspaces in the team.",
+            "in": "query",
+            "name": "actAsAdmin",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "description": "How many elements to skip.",
+            "in": "query",
+            "name": "offset",
+            "required": false,
+            "schema": {
+              "default": 0,
+              "format": "int32",
+              "minimum": 0,
+              "type": "integer"
+            }
+          },
+          {
+            "description": "How many elements to return.",
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "schema": {
+              "default": 100,
+              "format": "int32",
+              "maximum": 100,
+              "minimum": 0,
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TemplatePageWithEmbed"
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "httpAuth": []
+          }
+        ],
+        "summary": "List templates",
+        "tags": [
+          "Templates"
+        ]
+      }
+    },
+    "/api/workspaces/uninstall-field": {
+      "post": {
+        "deprecated": true,
+        "description": "Removes the field and all its connections to workspaces, regardless whether it's a team-field or not.<br/>Requirements:<br/>  - auth-client scopes: \"workspace\"<br/>  - user permission: \"full\"<br/>  - team features: \"team-fields\" when operating with team-fields<br/>  - user role: \"admin\" when operating with team-fields<br/>Returns:<br/>403 if user does not have the required permission",
+        "operationId": "uninstallFieldCompletelyLegacy",
+        "parameters": [
+          {
+            "description": "Auth token as query parameter (alternative to Authorization header).",
+            "in": "query",
+            "name": "token",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Enable sudo-mode for admins for a single request, which gives full permission to all workspaces in the team.",
+            "in": "query",
+            "name": "actAsAdmin",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FieldServerEndpointsUninstallFieldRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "204": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "httpAuth": []
+          }
+        ],
+        "summary": "Completely delete field",
+        "tags": [
+          "Fields"
         ]
       }
     },
@@ -14385,6 +14823,74 @@
         ]
       }
     },
+    "/api/workspaces/{workspaceId}/install-field": {
+      "post": {
+        "deprecated": true,
+        "description": "Installs a new field.\nIf it's a team-field, then it's possible to install it with empty or any non-empty amount of linked workspaces.\nOtherwise, if it's not a team-field, then exactly one linked workspace should be specified.<br/>Requirements:<br/>  - auth-client scopes: \"workspace\"<br/>  - user permission: \"full\"<br/>  - team features: \"team-fields\" when operating with team-fields<br/>  - user role: \"admin\" when operating with team-fields<br/>Returns:<br/>403 if user does not have the required permission",
+        "operationId": "installFieldLegacyWithWorkspaceId",
+        "parameters": [
+          {
+            "description": "Auth token as query parameter (alternative to Authorization header).",
+            "in": "query",
+            "name": "token",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Enable sudo-mode for admins for a single request, which gives full permission to all workspaces in the team.",
+            "in": "query",
+            "name": "actAsAdmin",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "description": "ID of the workspace which contains the managed fields.",
+            "in": "path",
+            "name": "workspaceId",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FieldServerEndpointsInstallFieldRequestLegacy"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FieldWithFieldEmbed"
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "httpAuth": []
+          }
+        ],
+        "summary": "Install a new field",
+        "tags": [
+          "Fields"
+        ]
+      }
+    },
     "/api/workspaces/{workspaceId}/items": {
       "post": {
         "description": "Returns newly created item with its sanitised data.<br/>Requirements:<br/>  - auth-client scopes: \"workspace\"<br/>  - user permission: \"write\" or higher<br/>Returns:<br/>403 if user does not have the required permission",
@@ -16770,6 +17276,139 @@
         ]
       }
     },
+    "/api/workspaces/{workspaceId}/reconfigure-field": {
+      "post": {
+        "deprecated": true,
+        "description": "Updates configuration properties of an existing field.<br/>Requirements:<br/>  - auth-client scopes: \"workspace\"<br/>  - user permission: \"full\"<br/>  - team features: \"team-fields\" when operating with team-fields<br/>  - user role: \"admin\" when operating with team-fields<br/>Returns:<br/>403 if user does not have the required permission",
+        "operationId": "reconfigureFieldLegacyWithWorkspaceId",
+        "parameters": [
+          {
+            "description": "Auth token as query parameter (alternative to Authorization header).",
+            "in": "query",
+            "name": "token",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Enable sudo-mode for admins for a single request, which gives full permission to all workspaces in the team.",
+            "in": "query",
+            "name": "actAsAdmin",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "description": "ID of the workspace which contains the managed fields.",
+            "in": "path",
+            "name": "workspaceId",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FieldServerEndpointsReconfigureFieldRequestLegacy"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FieldWithFieldEmbed"
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "httpAuth": []
+          }
+        ],
+        "summary": "Reconfigure field",
+        "tags": [
+          "Fields"
+        ]
+      }
+    },
+    "/api/workspaces/{workspaceId}/reorder-fields": {
+      "post": {
+        "deprecated": true,
+        "description": "Updates the order of fields in the specified workspace.<br/>Requirements:<br/>  - auth-client scopes: \"workspace\"<br/>  - user permission: \"full\"<br/>  - team features: \"team-fields\" when operating with team-fields<br/>  - user role: \"admin\" when operating with team-fields<br/>Returns:<br/>403 if user does not have the required permission",
+        "operationId": "reorderFieldsLegacy",
+        "parameters": [
+          {
+            "description": "Auth token as query parameter (alternative to Authorization header).",
+            "in": "query",
+            "name": "token",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Enable sudo-mode for admins for a single request, which gives full permission to all workspaces in the team.",
+            "in": "query",
+            "name": "actAsAdmin",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "description": "ID of the workspace which contains the managed fields.",
+            "in": "path",
+            "name": "workspaceId",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "items": {
+                  "format": "uuid",
+                  "type": "string"
+                },
+                "type": "array"
+              }
+            }
+          },
+          "required": false
+        },
+        "responses": {
+          "204": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "httpAuth": []
+          }
+        ],
+        "summary": "Reorder fields",
+        "tags": [
+          "Fields"
+        ]
+      }
+    },
     "/api/workspaces/{workspaceId}/statuses": {
       "post": {
         "description": "Set statuses all at once for the specified workspace.\nNew statuses in the list will be added to the database, missing statuses will be removed from the database, all other statuses will be updated.\nEach workspace must have at least one status in each category: 'draft', 'active', 'closed'<br/>Requirements:<br/>  - auth-client scopes: \"workspace\"<br/>  - user permission: \"full\"<br/>Returns:<br/>403 if user does not have the required permission",
@@ -16837,6 +17476,67 @@
           "Workspaces"
         ]
       }
+    },
+    "/api/workspaces/{workspaceId}/uninstall-field": {
+      "post": {
+        "deprecated": true,
+        "description": "Uninstalls a field from the specified workspace.\nFor team-fields it results in just removing the field<>workspace connection, but the field itself won't be removed.\nFor non-team-fields it additionally results in removing the field.<br/>Requirements:<br/>  - auth-client scopes: \"workspace\"<br/>  - user permission: \"full\"<br/>  - team features: \"team-fields\" when operating with team-fields<br/>  - user role: \"admin\" when operating with team-fields<br/>Returns:<br/>403 if user does not have the required permission",
+        "operationId": "uninstallFieldLegacy",
+        "parameters": [
+          {
+            "description": "Auth token as query parameter (alternative to Authorization header).",
+            "in": "query",
+            "name": "token",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Enable sudo-mode for admins for a single request, which gives full permission to all workspaces in the team.",
+            "in": "query",
+            "name": "actAsAdmin",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "description": "ID of the workspace which contains the managed fields.",
+            "in": "path",
+            "name": "workspaceId",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FieldServerEndpointsUninstallFieldRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "204": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "httpAuth": []
+          }
+        ],
+        "summary": "Delete field",
+        "tags": [
+          "Fields"
+        ]
+      }
     }
   },
   "servers": [
@@ -16850,22 +17550,6 @@
       "name": "Comments"
     },
     {
-      "description": "Endpoints for managing the team and users",
-      "name": "Team"
-    },
-    {
-      "description": "Links between items.",
-      "name": "ItemLinks"
-    },
-    {
-      "description": "Endpoints for managing the user profile",
-      "name": "Profile"
-    },
-    {
-      "description": "Manage items.",
-      "name": "Items"
-    },
-    {
       "description": "Endpoints for managing workspace fields.",
       "name": "Fields"
     },
@@ -16874,24 +17558,40 @@
       "name": "ItemAttachments"
     },
     {
+      "description": "Links between items.",
+      "name": "ItemLinks"
+    },
+    {
       "description": "Manage item relations (hierarchy).",
       "name": "ItemRelations"
     },
     {
-      "description": "Manage workspace relations (hierarchy).",
-      "name": "WorkspaceRelations"
-    },
-    {
-      "description": "Endpoints for creating workspaces via templates.",
-      "name": "Templates"
+      "description": "Manage items.",
+      "name": "Items"
     },
     {
       "description": "Manage milestones in a single workspace.",
       "name": "Milestones"
     },
     {
+      "description": "Endpoints for managing the user profile",
+      "name": "Profile"
+    },
+    {
+      "description": "Endpoints for managing the team and users",
+      "name": "Team"
+    },
+    {
+      "description": "Endpoints for creating workspaces via templates.",
+      "name": "Templates"
+    },
+    {
       "description": "Manage workspace groups.",
       "name": "WorkspaceGroups"
+    },
+    {
+      "description": "Manage workspace relations (hierarchy).",
+      "name": "WorkspaceRelations"
     },
     {
       "description": "Manage workspaces.",
