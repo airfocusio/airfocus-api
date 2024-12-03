@@ -64,6 +64,35 @@
         "title": "App",
         "type": "object"
       },
+      "ApplyTemplateRequest": {
+        "properties": {
+          "defaultPermission": {
+            "$ref": "#/components/schemas/Permission"
+          },
+          "groupId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "parameters": {
+            "$ref": "#/components/schemas/TemplateParameters"
+          },
+          "permissions": {
+            "additionalProperties": {
+              "$ref": "#/components/schemas/Permission"
+            },
+            "type": "object"
+          }
+        },
+        "required": [
+          "parameters",
+          "permissions"
+        ],
+        "title": "ApplyTemplateRequest",
+        "type": "object"
+      },
       "AttachmentSearchQuery": {
         "properties": {
           "itemId": {
@@ -2553,17 +2582,10 @@
           "extensionId": {
             "format": "uuid",
             "type": "string"
-          },
-          "type": {
-            "enum": [
-              "undeletable"
-            ],
-            "type": "string"
           }
         },
         "required": [
-          "extensionId",
-          "type"
+          "extensionId"
         ],
         "title": "ItemLinkConstraintUndeletable",
         "type": "object"
@@ -2578,17 +2600,7 @@
           },
           "constraints": {
             "items": {
-              "discriminator": {
-                "mapping": {
-                  "undeletable": "#/components/schemas/ItemLinkConstraintUndeletable"
-                },
-                "propertyName": "type"
-              },
-              "oneOf": [
-                {
-                  "$ref": "#/components/schemas/ItemLinkConstraintUndeletable"
-                }
-              ]
+              "$ref": "#/components/schemas/LinkConstraint"
             },
             "type": "array"
           },
@@ -4091,6 +4103,20 @@
         ],
         "title": "KickUserRequest",
         "type": "object"
+      },
+      "LinkConstraint": {
+        "discriminator": {
+          "mapping": {
+            "undeletable": "#/components/schemas/ItemLinkConstraintUndeletable"
+          },
+          "propertyName": "type"
+        },
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/ItemLinkConstraintUndeletable"
+          }
+        ],
+        "title": "LinkConstraint"
       },
       "Milestone": {
         "properties": {
@@ -6125,6 +6151,16 @@
         "title": "TemplatePageWithEmbed",
         "type": "object"
       },
+      "TemplateParameters": {
+        "properties": {
+          "insightsTargetWorkspaceId": {
+            "format": "uuid",
+            "type": "string"
+          }
+        },
+        "title": "TemplateParameters",
+        "type": "object"
+      },
       "TemplateSearchEmbed": {
         "properties": {
           "categories": {
@@ -6481,6 +6517,13 @@
         "type": "object"
       },
       "UserRef": {
+        "discriminator": {
+          "mapping": {
+            "current": "#/components/schemas/UserRefUserRefCurrent",
+            "id": "#/components/schemas/UserRefUserRefId"
+          },
+          "propertyName": "type"
+        },
         "oneOf": [
           {
             "$ref": "#/components/schemas/UserRefUserRefCurrent"
@@ -7171,6 +7214,10 @@
           "permissions"
         ],
         "title": "WorkspaceGroupPermissionsUpdateRequest",
+        "type": "object"
+      },
+      "WorkspaceGroupSearchQuery": {
+        "title": "WorkspaceGroupSearchQuery",
         "type": "object"
       },
       "WorkspaceGroupWithWorkspaceGroupEmbed": {
@@ -8132,7 +8179,7 @@
   },
   "info": {
     "title": "airfocus API",
-    "version": "1.0.0-beta.33.53.6"
+    "version": "1.0.0-beta.33.54.3"
   },
   "openapi": "3.1.0",
   "paths": {
@@ -9519,6 +9566,71 @@
         ]
       }
     },
+    "/api/templates/{templateId}": {
+      "post": {
+        "description": "Installs the requested template with the given parameters.\nReturns a newly created workspace.\nIf the template creates multiple workspaces - then it still returns a single workspace which is considered by the template as \"main\".<br/>Requirements:<br/>- auth-client scopes: \"workspace\"",
+        "operationId": "installTemplate",
+        "parameters": [
+          {
+            "description": "Auth token as query parameter (alternative to Authorization header).",
+            "in": "query",
+            "name": "token",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Enable sudo-mode for admins for a single request, which gives full permission to all workspaces in the team.",
+            "in": "query",
+            "name": "actAsAdmin",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "in": "path",
+            "name": "templateId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ApplyTemplateRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WorkspaceWithWorkspaceEmbed"
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "httpAuth": []
+          }
+        ],
+        "summary": "Install template",
+        "tags": [
+          "Templates"
+        ]
+      }
+    },
     "/api/workspaces": {
       "post": {
         "description": "Returns newly created workspace with its sanitised data.<br/>Requirements:<br/>  - auth-client scopes: \"workspace\"<br/>  - user permission: \"write\" or higher<br/>Returns:<br/>403 if user does not have the required permission",
@@ -10461,7 +10573,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "type": "object"
+                "$ref": "#/components/schemas/WorkspaceGroupSearchQuery"
               }
             }
           },
@@ -12048,6 +12160,72 @@
           }
         ],
         "summary": "List templates",
+        "tags": [
+          "Templates"
+        ]
+      }
+    },
+    "/api/workspaces/templates/{templateId}": {
+      "post": {
+        "deprecated": true,
+        "description": "Installs the requested template with the given parameters.\nReturns a newly created workspace.\nIf the template creates multiple workspaces - then it still returns a single workspace which is considered by the template as \"main\".<br/>Requirements:<br/>- auth-client scopes: \"workspace\"",
+        "operationId": "installTemplateLegacy",
+        "parameters": [
+          {
+            "description": "Auth token as query parameter (alternative to Authorization header).",
+            "in": "query",
+            "name": "token",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Enable sudo-mode for admins for a single request, which gives full permission to all workspaces in the team.",
+            "in": "query",
+            "name": "actAsAdmin",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "in": "path",
+            "name": "templateId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ApplyTemplateRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WorkspaceWithWorkspaceEmbed"
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "httpAuth": []
+          }
+        ],
+        "summary": "Install template",
         "tags": [
           "Templates"
         ]
