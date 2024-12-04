@@ -8179,7 +8179,7 @@
   },
   "info": {
     "title": "airfocus API",
-    "version": "1.0.0-beta.33.54.5"
+    "version": "1.0.0-beta.33.54.7"
   },
   "openapi": "3.1.0",
   "paths": {
@@ -8189,6 +8189,7 @@
         "operationId": "installField",
         "parameters": [
           {
+            "deprecated": true,
             "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
@@ -8246,6 +8247,7 @@
         "operationId": "reorderFields",
         "parameters": [
           {
+            "deprecated": true,
             "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
@@ -8296,6 +8298,7 @@
         "operationId": "searchFields",
         "parameters": [
           {
+            "deprecated": true,
             "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
@@ -8353,6 +8356,7 @@
         "operationId": "listFieldTypes",
         "parameters": [
           {
+            "deprecated": true,
             "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
@@ -8403,6 +8407,7 @@
         "operationId": "unlinkTeamFieldsFromWorkspaces",
         "parameters": [
           {
+            "deprecated": true,
             "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
@@ -8464,6 +8469,7 @@
         "operationId": "linkTeamFieldsToWorkspaces",
         "parameters": [
           {
+            "deprecated": true,
             "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
@@ -8527,6 +8533,7 @@
         "operationId": "deleteField",
         "parameters": [
           {
+            "deprecated": true,
             "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
@@ -8575,6 +8582,7 @@
         "operationId": "retrieveField",
         "parameters": [
           {
+            "deprecated": true,
             "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
@@ -8630,6 +8638,7 @@
         "operationId": "reconfigureField",
         "parameters": [
           {
+            "deprecated": true,
             "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
@@ -8697,6 +8706,7 @@
         "operationId": "retrieveProfile",
         "parameters": [
           {
+            "deprecated": true,
             "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
@@ -8732,6 +8742,7 @@
         "operationId": "updateProfile",
         "parameters": [
           {
+            "deprecated": true,
             "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
@@ -8779,6 +8790,7 @@
         "operationId": "listApiKeys",
         "parameters": [
           {
+            "deprecated": true,
             "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
@@ -8817,6 +8829,7 @@
         "operationId": "createApiKey",
         "parameters": [
           {
+            "deprecated": true,
             "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
@@ -8864,6 +8877,7 @@
         "operationId": "deleteApiKey",
         "parameters": [
           {
+            "deprecated": true,
             "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
@@ -8903,6 +8917,7 @@
         "operationId": "changePassword",
         "parameters": [
           {
+            "deprecated": true,
             "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
@@ -8943,6 +8958,7 @@
         "operationId": "getClientSettings",
         "parameters": [
           {
+            "deprecated": true,
             "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
@@ -8984,6 +9000,7 @@
         "operationId": "setClientSettings",
         "parameters": [
           {
+            "deprecated": true,
             "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
@@ -9024,6 +9041,7 @@
         "operationId": "retrieveTeam",
         "parameters": [
           {
+            "deprecated": true,
             "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
@@ -9061,6 +9079,7 @@
         "operationId": "updateTeamFlags",
         "parameters": [
           {
+            "deprecated": true,
             "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
@@ -9108,6 +9127,7 @@
         "operationId": "acceptTermsOfService",
         "parameters": [
           {
+            "deprecated": true,
             "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
@@ -9148,6 +9168,7 @@
         "operationId": "listUsers",
         "parameters": [
           {
+            "deprecated": true,
             "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
@@ -9196,6 +9217,7 @@
         "operationId": "changeUserDisabled",
         "parameters": [
           {
+            "deprecated": true,
             "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
@@ -9236,6 +9258,7 @@
         "operationId": "sendUserInvite",
         "parameters": [
           {
+            "deprecated": true,
             "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
@@ -9283,6 +9306,7 @@
         "operationId": "sendBulkUserInvites",
         "parameters": [
           {
+            "deprecated": true,
             "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
@@ -9333,6 +9357,7 @@
         "operationId": "createUserInvite",
         "parameters": [
           {
+            "deprecated": true,
             "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
@@ -9380,6 +9405,7 @@
         "operationId": "resendUserInvite",
         "parameters": [
           {
+            "deprecated": true,
             "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
@@ -9420,6 +9446,7 @@
         "operationId": "kickUser",
         "parameters": [
           {
+            "deprecated": true,
             "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
@@ -9460,6 +9487,7 @@
         "operationId": "changeUserRole",
         "parameters": [
           {
+            "deprecated": true,
             "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
@@ -9500,6 +9528,7 @@
         "operationId": "listTemplates",
         "parameters": [
           {
+            "deprecated": true,
             "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
@@ -9572,6 +9601,7 @@
         "operationId": "installTemplate",
         "parameters": [
           {
+            "deprecated": true,
             "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
@@ -9637,6 +9667,7 @@
         "operationId": "createWorkspace",
         "parameters": [
           {
+            "deprecated": true,
             "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
@@ -9705,6 +9736,7 @@
         "operationId": "bulkWorkspaces",
         "parameters": [
           {
+            "deprecated": true,
             "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
@@ -9776,6 +9808,7 @@
         "operationId": "countWorkspaces",
         "parameters": [
           {
+            "deprecated": true,
             "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
@@ -9834,6 +9867,7 @@
         "operationId": "workspaceEventsSse",
         "parameters": [
           {
+            "deprecated": true,
             "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
@@ -9892,6 +9926,7 @@
         "operationId": "listFieldTypesLegacy",
         "parameters": [
           {
+            "deprecated": true,
             "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
@@ -9942,6 +9977,7 @@
         "operationId": "retrieveInboxCounters",
         "parameters": [
           {
+            "deprecated": true,
             "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
@@ -10008,6 +10044,7 @@
         "operationId": "linkTeamFieldsToWorkspacesLegacy",
         "parameters": [
           {
+            "deprecated": true,
             "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
@@ -10066,6 +10103,7 @@
         "operationId": "installFieldLegacy",
         "parameters": [
           {
+            "deprecated": true,
             "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
@@ -10124,6 +10162,7 @@
         "operationId": "reconfigureFieldLegacy",
         "parameters": [
           {
+            "deprecated": true,
             "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
@@ -10182,6 +10221,7 @@
         "operationId": "getAllTeamFieldsLegacy",
         "parameters": [
           {
+            "deprecated": true,
             "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
@@ -10229,6 +10269,7 @@
         "operationId": "createWorkspaceGroup",
         "parameters": [
           {
+            "deprecated": true,
             "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
@@ -10297,6 +10338,7 @@
         "operationId": "assignWorkspaceToGroup",
         "parameters": [
           {
+            "deprecated": true,
             "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
@@ -10357,6 +10399,7 @@
         "operationId": "bulkWorkspaceGroups",
         "parameters": [
           {
+            "deprecated": true,
             "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
@@ -10428,6 +10471,7 @@
         "operationId": "listWorkspaceGroups",
         "parameters": [
           {
+            "deprecated": true,
             "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
@@ -10500,6 +10544,7 @@
         "operationId": "searchWorkspaceGroups",
         "parameters": [
           {
+            "deprecated": true,
             "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
@@ -10619,6 +10664,7 @@
         "operationId": "deleteWorkspaceGroup",
         "parameters": [
           {
+            "deprecated": true,
             "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
@@ -10677,6 +10723,7 @@
         "operationId": "retrieveWorkspaceGroup",
         "parameters": [
           {
+            "deprecated": true,
             "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
@@ -10742,6 +10789,7 @@
         "operationId": "patchWorkspaceGroup",
         "parameters": [
           {
+            "deprecated": true,
             "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
@@ -10817,6 +10865,7 @@
         "operationId": "updateWorkspaceGroup",
         "parameters": [
           {
+            "deprecated": true,
             "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
@@ -10894,6 +10943,7 @@
         "operationId": "updateWorkspaceGroupPermissions",
         "parameters": [
           {
+            "deprecated": true,
             "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
@@ -10963,6 +11013,7 @@
         "operationId": "createItemRelation",
         "parameters": [
           {
+            "deprecated": true,
             "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
@@ -11031,6 +11082,7 @@
         "operationId": "bulkItemRelations",
         "parameters": [
           {
+            "deprecated": true,
             "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
@@ -11102,6 +11154,7 @@
         "operationId": "listItemRelations",
         "parameters": [
           {
+            "deprecated": true,
             "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
@@ -11174,6 +11227,7 @@
         "operationId": "searchItemRelations",
         "parameters": [
           {
+            "deprecated": true,
             "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
@@ -11293,6 +11347,7 @@
         "operationId": "deleteItemRelation",
         "parameters": [
           {
+            "deprecated": true,
             "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
@@ -11351,6 +11406,7 @@
         "operationId": "retrieveItemRelation",
         "parameters": [
           {
+            "deprecated": true,
             "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
@@ -11416,6 +11472,7 @@
         "operationId": "patchItemRelation",
         "parameters": [
           {
+            "deprecated": true,
             "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
@@ -11491,6 +11548,7 @@
         "operationId": "updateItemRelation",
         "parameters": [
           {
+            "deprecated": true,
             "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
@@ -11568,6 +11626,7 @@
         "operationId": "retrieveItemByAlias",
         "parameters": [
           {
+            "deprecated": true,
             "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
@@ -11638,6 +11697,7 @@
         "operationId": "copyItems",
         "parameters": [
           {
+            "deprecated": true,
             "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
@@ -11734,6 +11794,7 @@
         "operationId": "retrieveItemsGlobally",
         "parameters": [
           {
+            "deprecated": true,
             "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
@@ -11811,6 +11872,7 @@
         "operationId": "moveItems",
         "parameters": [
           {
+            "deprecated": true,
             "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
@@ -11907,6 +11969,7 @@
         "operationId": "listWorkspaces",
         "parameters": [
           {
+            "deprecated": true,
             "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
@@ -11979,6 +12042,7 @@
         "operationId": "searchWorkspaces",
         "parameters": [
           {
+            "deprecated": true,
             "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
@@ -12099,6 +12163,7 @@
         "operationId": "listTemplatesLegacy",
         "parameters": [
           {
+            "deprecated": true,
             "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
@@ -12172,6 +12237,7 @@
         "operationId": "installTemplateLegacy",
         "parameters": [
           {
+            "deprecated": true,
             "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
@@ -12238,6 +12304,7 @@
         "operationId": "uninstallFieldCompletelyLegacy",
         "parameters": [
           {
+            "deprecated": true,
             "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
@@ -12288,6 +12355,7 @@
         "operationId": "createWorkspaceRelation",
         "parameters": [
           {
+            "deprecated": true,
             "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
@@ -12356,6 +12424,7 @@
         "operationId": "bulkWorkspaceRelations",
         "parameters": [
           {
+            "deprecated": true,
             "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
@@ -12427,6 +12496,7 @@
         "operationId": "listWorkspaceRelations",
         "parameters": [
           {
+            "deprecated": true,
             "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
@@ -12499,6 +12569,7 @@
         "operationId": "searchWorkspaceRelations",
         "parameters": [
           {
+            "deprecated": true,
             "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
@@ -12618,6 +12689,7 @@
         "operationId": "putApiWorkspacesWorkspace-relationsSet",
         "parameters": [
           {
+            "deprecated": true,
             "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
@@ -12684,6 +12756,7 @@
         "operationId": "deleteWorkspaceRelation",
         "parameters": [
           {
+            "deprecated": true,
             "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
@@ -12742,6 +12815,7 @@
         "operationId": "retrieveWorkspaceRelation",
         "parameters": [
           {
+            "deprecated": true,
             "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
@@ -12807,6 +12881,7 @@
         "operationId": "patchWorkspaceRelation",
         "parameters": [
           {
+            "deprecated": true,
             "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
@@ -12882,6 +12957,7 @@
         "operationId": "updateWorkspaceRelation",
         "parameters": [
           {
+            "deprecated": true,
             "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
@@ -12959,6 +13035,7 @@
         "operationId": "deleteWorkspace",
         "parameters": [
           {
+            "deprecated": true,
             "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
@@ -13017,6 +13094,7 @@
         "operationId": "retrieveWorkspace",
         "parameters": [
           {
+            "deprecated": true,
             "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
@@ -13082,6 +13160,7 @@
         "operationId": "patchWorkspace",
         "parameters": [
           {
+            "deprecated": true,
             "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
@@ -13157,6 +13236,7 @@
         "operationId": "updateWorkspace",
         "parameters": [
           {
+            "deprecated": true,
             "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
@@ -13234,6 +13314,7 @@
         "operationId": "createItemAttachment",
         "parameters": [
           {
+            "deprecated": true,
             "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
@@ -13312,6 +13393,7 @@
         "operationId": "bulkItemAttachments",
         "parameters": [
           {
+            "deprecated": true,
             "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
@@ -13393,6 +13475,7 @@
         "operationId": "listItemAttachments",
         "parameters": [
           {
+            "deprecated": true,
             "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
@@ -13475,6 +13558,7 @@
         "operationId": "searchItemAttachments",
         "parameters": [
           {
+            "deprecated": true,
             "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
@@ -13604,6 +13688,7 @@
         "operationId": "deleteItemAttachment",
         "parameters": [
           {
+            "deprecated": true,
             "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
@@ -13672,6 +13757,7 @@
         "operationId": "retrieveItemAttachment",
         "parameters": [
           {
+            "deprecated": true,
             "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
@@ -13747,6 +13833,7 @@
         "operationId": "patchItemAttachment",
         "parameters": [
           {
+            "deprecated": true,
             "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
@@ -13832,6 +13919,7 @@
         "operationId": "updateItemAttachment",
         "parameters": [
           {
+            "deprecated": true,
             "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
@@ -13919,6 +14007,7 @@
         "operationId": "workspaceBackgroundActivitySse",
         "parameters": [
           {
+            "deprecated": true,
             "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
@@ -13985,6 +14074,7 @@
         "operationId": "createComment",
         "parameters": [
           {
+            "deprecated": true,
             "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
@@ -14072,6 +14162,7 @@
         "operationId": "bulkComments",
         "parameters": [
           {
+            "deprecated": true,
             "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
@@ -14165,6 +14256,7 @@
         "operationId": "listComments",
         "parameters": [
           {
+            "deprecated": true,
             "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
@@ -14251,6 +14343,7 @@
         "operationId": "searchComments",
         "parameters": [
           {
+            "deprecated": true,
             "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
@@ -14384,6 +14477,7 @@
         "operationId": "deleteComment",
         "parameters": [
           {
+            "deprecated": true,
             "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
@@ -14451,6 +14545,7 @@
         "operationId": "retrieveComment",
         "parameters": [
           {
+            "deprecated": true,
             "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
@@ -14530,6 +14625,7 @@
         "operationId": "patchComment",
         "parameters": [
           {
+            "deprecated": true,
             "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
@@ -14619,6 +14715,7 @@
         "operationId": "updateComment",
         "parameters": [
           {
+            "deprecated": true,
             "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
@@ -14715,6 +14812,7 @@
         "operationId": "removeCommentReaction",
         "parameters": [
           {
+            "deprecated": true,
             "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
@@ -14789,6 +14887,7 @@
         "operationId": "addCommentReaction",
         "parameters": [
           {
+            "deprecated": true,
             "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
@@ -14865,6 +14964,7 @@
         "operationId": "duplicateWorkspace",
         "parameters": [
           {
+            "deprecated": true,
             "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
@@ -14941,6 +15041,7 @@
         "operationId": "workspaceEventsByWorkspaceIdSse",
         "parameters": [
           {
+            "deprecated": true,
             "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
@@ -15008,6 +15109,7 @@
         "operationId": "installFieldLegacyWithWorkspaceId",
         "parameters": [
           {
+            "deprecated": true,
             "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
@@ -15075,6 +15177,7 @@
         "operationId": "createItem",
         "parameters": [
           {
+            "deprecated": true,
             "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
@@ -15162,6 +15265,7 @@
         "operationId": "bulkItems",
         "parameters": [
           {
+            "deprecated": true,
             "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
@@ -15255,6 +15359,7 @@
         "operationId": "listItems",
         "parameters": [
           {
+            "deprecated": true,
             "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
@@ -15341,6 +15446,7 @@
         "operationId": "resetItemColors",
         "parameters": [
           {
+            "deprecated": true,
             "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
@@ -15400,6 +15506,7 @@
         "operationId": "searchItems",
         "parameters": [
           {
+            "deprecated": true,
             "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
@@ -15533,6 +15640,7 @@
         "operationId": "unwatchItems",
         "parameters": [
           {
+            "deprecated": true,
             "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
@@ -15608,6 +15716,7 @@
         "operationId": "watchItems",
         "parameters": [
           {
+            "deprecated": true,
             "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
@@ -15683,6 +15792,7 @@
         "operationId": "deleteItem",
         "parameters": [
           {
+            "deprecated": true,
             "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
@@ -15750,6 +15860,7 @@
         "operationId": "retrieveItem",
         "parameters": [
           {
+            "deprecated": true,
             "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
@@ -15829,6 +15940,7 @@
         "operationId": "patchItem",
         "parameters": [
           {
+            "deprecated": true,
             "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
@@ -15918,6 +16030,7 @@
         "operationId": "updateItem",
         "parameters": [
           {
+            "deprecated": true,
             "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
@@ -16014,6 +16127,7 @@
         "operationId": "createItemLink",
         "parameters": [
           {
+            "deprecated": true,
             "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
@@ -16092,6 +16206,7 @@
         "operationId": "bulkItemLinks",
         "parameters": [
           {
+            "deprecated": true,
             "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
@@ -16173,6 +16288,7 @@
         "operationId": "listItemLinks",
         "parameters": [
           {
+            "deprecated": true,
             "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
@@ -16255,6 +16371,7 @@
         "operationId": "searchItemLinks",
         "parameters": [
           {
+            "deprecated": true,
             "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
@@ -16384,6 +16501,7 @@
         "operationId": "deleteItemLink",
         "parameters": [
           {
+            "deprecated": true,
             "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
@@ -16452,6 +16570,7 @@
         "operationId": "retrieveItemLink",
         "parameters": [
           {
+            "deprecated": true,
             "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
@@ -16527,6 +16646,7 @@
         "operationId": "patchItemLink",
         "parameters": [
           {
+            "deprecated": true,
             "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
@@ -16612,6 +16732,7 @@
         "operationId": "updateItemLink",
         "parameters": [
           {
+            "deprecated": true,
             "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
@@ -16699,6 +16820,7 @@
         "operationId": "createMilestone",
         "parameters": [
           {
+            "deprecated": true,
             "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
@@ -16777,6 +16899,7 @@
         "operationId": "bulkMilestones",
         "parameters": [
           {
+            "deprecated": true,
             "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
@@ -16858,6 +16981,7 @@
         "operationId": "listMilestones",
         "parameters": [
           {
+            "deprecated": true,
             "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
@@ -16940,6 +17064,7 @@
         "operationId": "searchMilestones",
         "parameters": [
           {
+            "deprecated": true,
             "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
@@ -17069,6 +17194,7 @@
         "operationId": "deleteMilestone",
         "parameters": [
           {
+            "deprecated": true,
             "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
@@ -17137,6 +17263,7 @@
         "operationId": "retrieveMilestone",
         "parameters": [
           {
+            "deprecated": true,
             "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
@@ -17212,6 +17339,7 @@
         "operationId": "patchMilestone",
         "parameters": [
           {
+            "deprecated": true,
             "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
@@ -17297,6 +17425,7 @@
         "operationId": "updateMilestone",
         "parameters": [
           {
+            "deprecated": true,
             "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
@@ -17384,6 +17513,7 @@
         "operationId": "updateWorkspacePermissions",
         "parameters": [
           {
+            "deprecated": true,
             "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
@@ -17461,6 +17591,7 @@
         "operationId": "reconfigureFieldLegacyWithWorkspaceId",
         "parameters": [
           {
+            "deprecated": true,
             "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
@@ -17529,6 +17660,7 @@
         "operationId": "reorderFieldsLegacy",
         "parameters": [
           {
+            "deprecated": true,
             "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
@@ -17593,6 +17725,7 @@
         "operationId": "setWorkspaceStatuses",
         "parameters": [
           {
+            "deprecated": true,
             "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
@@ -17662,6 +17795,7 @@
         "operationId": "uninstallFieldLegacy",
         "parameters": [
           {
+            "deprecated": true,
             "description": "Auth token as query parameter (alternative to Authorization header).",
             "in": "query",
             "name": "token",
