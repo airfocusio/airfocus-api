@@ -8179,7 +8179,7 @@
   },
   "info": {
     "title": "airfocus API",
-    "version": "1.0.0-beta.33.55.1"
+    "version": "1.0.0-beta.33.57.1"
   },
   "openapi": "3.1.0",
   "paths": {
@@ -10606,7 +10606,7 @@
             "name": "limit",
             "required": false,
             "schema": {
-              "default": 10,
+              "default": 1000,
               "format": "int32",
               "maximum": 1000,
               "minimum": 0,
@@ -11298,7 +11298,7 @@
             "name": "limit",
             "required": false,
             "schema": {
-              "default": 10,
+              "default": 1000,
               "format": "int32",
               "maximum": 1000,
               "minimum": 0,
@@ -12123,7 +12123,7 @@
             "name": "limit",
             "required": false,
             "schema": {
-              "default": 10,
+              "default": 1000,
               "format": "int32",
               "maximum": 1000,
               "minimum": 0,
@@ -12657,7 +12657,7 @@
             "name": "limit",
             "required": false,
             "schema": {
-              "default": 10,
+              "default": 1000,
               "format": "int32",
               "maximum": 1000,
               "minimum": 0,
@@ -13669,7 +13669,7 @@
             "name": "limit",
             "required": false,
             "schema": {
-              "default": 10,
+              "default": 1000,
               "format": "int32",
               "maximum": 1000,
               "minimum": 0,
@@ -14462,7 +14462,7 @@
             "name": "limit",
             "required": false,
             "schema": {
-              "default": 10,
+              "default": 1000,
               "format": "int32",
               "maximum": 1000,
               "minimum": 0,
@@ -15639,7 +15639,7 @@
             "name": "limit",
             "required": false,
             "schema": {
-              "default": 10,
+              "default": 1000,
               "format": "int32",
               "maximum": 1000,
               "minimum": 0,
@@ -16515,7 +16515,7 @@
             "name": "limit",
             "required": false,
             "schema": {
-              "default": 10,
+              "default": 1000,
               "format": "int32",
               "maximum": 1000,
               "minimum": 0,
@@ -17216,7 +17216,7 @@
             "name": "limit",
             "required": false,
             "schema": {
-              "default": 10,
+              "default": 1000,
               "format": "int32",
               "maximum": 1000,
               "minimum": 0,
