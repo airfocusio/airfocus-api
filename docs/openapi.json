@@ -1189,6 +1189,104 @@
         "title": "FormTargetFieldWithFieldEmbed",
         "type": "object"
       },
+      "GlobalSearchQuery": {
+        "default": {
+          "archived": false,
+          "assigneeUserIds": [],
+          "statusCategories": [],
+          "workspaceIds": []
+        },
+        "properties": {
+          "archived": {
+            "description": "Search only archived or only non-archived items (only non-archived by default)",
+            "type": "boolean"
+          },
+          "assigneeUserIds": {
+            "description": "Narrow down the search to items which are assigned to the specified users",
+            "items": {
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "contextQuery": {
+            "description": "Context-string for AI to match items by similarity",
+            "type": "string"
+          },
+          "searchQuery": {
+            "description": "Text to search in contents of items",
+            "type": "string"
+          },
+          "statusCategories": {
+            "description": "Narrow down the search to items with status in the specified status-categories",
+            "items": {
+              "$ref": "#/components/schemas/StatusCategory"
+            },
+            "type": "array"
+          },
+          "workspaceIds": {
+            "description": "Narrow down the search to specific workspaces",
+            "items": {
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": "array"
+          }
+        },
+        "required": [
+          "archived"
+        ],
+        "title": "GlobalSearchQuery",
+        "type": "object"
+      },
+      "GlobalSearchResult": {
+        "discriminator": {
+          "mapping": {
+            "item": "#/components/schemas/GlobalSearchResultItem"
+          },
+          "propertyName": "type"
+        },
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/GlobalSearchResultItem"
+          }
+        ],
+        "title": "GlobalSearchResult"
+      },
+      "GlobalSearchResultItem": {
+        "properties": {
+          "alias": {
+            "type": "string"
+          },
+          "value": {
+            "$ref": "#/components/schemas/Item"
+          }
+        },
+        "required": [
+          "value"
+        ],
+        "title": "GlobalSearchResultItem",
+        "type": "object"
+      },
+      "GlobalSearchResultPage": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/GlobalSearchResult"
+            },
+            "type": "array"
+          },
+          "totalItems": {
+            "format": "int32",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "totalItems"
+        ],
+        "title": "GlobalSearchResultPage",
+        "type": "object"
+      },
       "InboxCounter": {
         "properties": {
           "count": {
@@ -8179,7 +8277,7 @@
   },
   "info": {
     "title": "airfocus API",
-    "version": "1.0.0-beta.33.59.2"
+    "version": "1.0.0-beta.33.59.5"
   },
   "openapi": "3.1.0",
   "paths": {
@@ -10281,6 +10379,115 @@
         "summary": "List team-fields",
         "tags": [
           "Fields"
+        ]
+      }
+    },
+    "/api/workspaces/global-search": {
+      "post": {
+        "description": "Requirements:<br/>- auth-client scopes: \"workspace:read\"",
+        "operationId": "searchGlobal",
+        "parameters": [
+          {
+            "deprecated": true,
+            "description": "Auth token as query parameter (alternative to Authorization header).",
+            "in": "query",
+            "name": "token",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "deprecated": true,
+            "description": "Enable sudo-mode for admins for a single request, which gives full permission to all workspaces in the team.",
+            "in": "query",
+            "name": "actAsAdmin",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "description": "How many elements to skip.",
+            "in": "query",
+            "name": "offset",
+            "required": false,
+            "schema": {
+              "default": 0,
+              "format": "int32",
+              "minimum": 0,
+              "type": "integer"
+            }
+          },
+          {
+            "description": "How many elements to return.",
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "schema": {
+              "default": 25,
+              "format": "int32",
+              "maximum": 1000,
+              "minimum": 0,
+              "type": "integer"
+            }
+          },
+          {
+            "deprecated": true,
+            "description": "From which element the page should start.",
+            "in": "query",
+            "name": "from",
+            "required": false,
+            "schema": {
+              "default": 0,
+              "deprecated": true,
+              "format": "int32",
+              "minimum": 0,
+              "type": "integer"
+            }
+          },
+          {
+            "deprecated": true,
+            "description": "At which element the page should end (excluding it).",
+            "in": "query",
+            "name": "to",
+            "required": false,
+            "schema": {
+              "deprecated": true,
+              "format": "int32",
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GlobalSearchQuery"
+              }
+            }
+          },
+          "required": false
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GlobalSearchResultPage"
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "httpAuth": []
+          }
+        ],
+        "tags": [
+          "Global search"
         ]
       }
     },
@@ -17979,6 +18186,10 @@
     {
       "description": "Endpoints for managing workspace fields.",
       "name": "Fields"
+    },
+    {
+      "description": "Endpoints for global searching",
+      "name": "Global search"
     },
     {
       "description": "Connect items with uploaded attachment-files. Note: this module is not responsible for uploading files, it only manages the links between items and files.",
