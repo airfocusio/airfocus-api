@@ -1233,9 +1233,6 @@
             "type": "array"
           }
         },
-        "required": [
-          "archived"
-        ],
         "title": "GlobalSearchQuery",
         "type": "object"
       },
@@ -8277,7 +8274,7 @@
   },
   "info": {
     "title": "airfocus API",
-    "version": "1.0.0-beta.33.59.5"
+    "version": "1.0.0-beta.33.61.4"
   },
   "openapi": "3.1.0",
   "paths": {
@@ -8893,7 +8890,7 @@
     },
     "/api/profile/api-keys": {
       "get": {
-        "description": "Requirements:<br/>- auth-client scopes: \"profile\"",
+        "description": "Requirements:<br/>- auth-client scopes: \"profile\"<br/>- team features: \"api-keys\"",
         "operationId": "listApiKeys",
         "parameters": [
           {
@@ -8932,7 +8929,7 @@
         ]
       },
       "post": {
-        "description": "Requirements:<br/>- auth-client scopes: \"profile\"",
+        "description": "Requirements:<br/>- auth-client scopes: \"profile\"<br/>- team features: \"api-keys\"",
         "operationId": "createApiKey",
         "parameters": [
           {
@@ -8980,7 +8977,7 @@
     },
     "/api/profile/api-keys/{apiKeyId}": {
       "delete": {
-        "description": "Requirements:<br/>- auth-client scopes: \"profile\"",
+        "description": "Requirements:<br/>- auth-client scopes: \"profile\"<br/>- team features: \"api-keys\"",
         "operationId": "deleteApiKey",
         "parameters": [
           {
