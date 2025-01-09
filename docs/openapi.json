@@ -2317,7 +2317,7 @@
             "type": "string"
           },
           "property": {
-            "$ref": "#/components/schemas/Property"
+            "$ref": "#/components/schemas/RefItemProperty"
           }
         },
         "required": [
@@ -2334,7 +2334,7 @@
             "type": "string"
           },
           "property": {
-            "$ref": "#/components/schemas/Property"
+            "$ref": "#/components/schemas/RefItemProperty"
           }
         },
         "required": [
@@ -3412,7 +3412,7 @@
             "$ref": "#/components/schemas/ItemSearchQueryTimeMode"
           },
           "property": {
-            "$ref": "#/components/schemas/Property"
+            "$ref": "#/components/schemas/RefItemProperty"
           },
           "value": {
             "$ref": "#/components/schemas/ItemSearchQueryDateTimeFilterValue"
@@ -3643,7 +3643,7 @@
       "ItemSearchQueryFilterUpdatedSince": {
         "properties": {
           "property": {
-            "$ref": "#/components/schemas/Property"
+            "$ref": "#/components/schemas/RefItemProperty"
           },
           "timestamp": {
             "format": "date-time",
@@ -5164,7 +5164,7 @@
         "title": "PrioritizationFieldWithFieldEmbed",
         "type": "object"
       },
-      "Property": {
+      "RefItemProperty": {
         "oneOf": [
           {
             "enum": [
@@ -5183,7 +5183,7 @@
             "type": "string"
           }
         ],
-        "title": "Property"
+        "title": "RefItemProperty"
       },
       "ResendUserInviteRequest": {
         "properties": {
@@ -7830,21 +7830,29 @@
         "type": "object"
       },
       "WorkspaceSearchQueryFilter": {
+        "discriminator": {
+          "mapping": {
+            "and": "#/components/schemas/WorkspaceSearchQueryFilterAnd",
+            "members": "#/components/schemas/WorkspaceSearchQueryFilterMembers",
+            "name": "#/components/schemas/WorkspaceSearchQueryFilterName",
+            "namespace": "#/components/schemas/WorkspaceSearchQueryFilterNamespace",
+            "not": "#/components/schemas/WorkspaceSearchQueryFilterNot",
+            "or": "#/components/schemas/WorkspaceSearchQueryFilterOr"
+          },
+          "propertyName": "type"
+        },
         "oneOf": [
           {
             "$ref": "#/components/schemas/WorkspaceSearchQueryFilterAnd"
           },
           {
-            "$ref": "#/components/schemas/WorkspaceSearchQueryFilterMembersContainAny"
+            "$ref": "#/components/schemas/WorkspaceSearchQueryFilterMembers"
           },
           {
-            "$ref": "#/components/schemas/WorkspaceSearchQueryFilterNameContain"
+            "$ref": "#/components/schemas/WorkspaceSearchQueryFilterName"
           },
           {
-            "$ref": "#/components/schemas/WorkspaceSearchQueryFilterNameEqual"
-          },
-          {
-            "$ref": "#/components/schemas/WorkspaceSearchQueryFilterNamespaceContainAny"
+            "$ref": "#/components/schemas/WorkspaceSearchQueryFilterNamespace"
           },
           {
             "$ref": "#/components/schemas/WorkspaceSearchQueryFilterNot"
@@ -7858,14 +7866,28 @@
       "WorkspaceSearchQueryFilterAnd": {
         "properties": {
           "inner": {
-            "items": {
-              "$ref": "#/components/schemas/WorkspaceSearchQueryFilter"
-            },
-            "type": "array"
+            "$ref": "#/components/schemas/WorkspaceSearchQueryFilter"
           }
         },
+        "required": [
+          "inner"
+        ],
         "title": "WorkspaceSearchQueryFilterAnd",
         "type": "object"
+      },
+      "WorkspaceSearchQueryFilterMembers": {
+        "discriminator": {
+          "mapping": {
+            "containAny": "#/components/schemas/WorkspaceSearchQueryFilterMembersContainAny"
+          },
+          "propertyName": "mode"
+        },
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/WorkspaceSearchQueryFilterMembersContainAny"
+          }
+        ],
+        "title": "WorkspaceSearchQueryFilterMembers"
       },
       "WorkspaceSearchQueryFilterMembersContainAny": {
         "properties": {
@@ -7880,6 +7902,24 @@
         },
         "title": "WorkspaceSearchQueryFilterMembersContainAny",
         "type": "object"
+      },
+      "WorkspaceSearchQueryFilterName": {
+        "discriminator": {
+          "mapping": {
+            "contain": "#/components/schemas/WorkspaceSearchQueryFilterNameContain",
+            "equal": "#/components/schemas/WorkspaceSearchQueryFilterNameEqual"
+          },
+          "propertyName": "mode"
+        },
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/WorkspaceSearchQueryFilterNameContain"
+          },
+          {
+            "$ref": "#/components/schemas/WorkspaceSearchQueryFilterNameEqual"
+          }
+        ],
+        "title": "WorkspaceSearchQueryFilterName"
       },
       "WorkspaceSearchQueryFilterNameContain": {
         "properties": {
@@ -7913,6 +7953,20 @@
         "title": "WorkspaceSearchQueryFilterNameEqual",
         "type": "object"
       },
+      "WorkspaceSearchQueryFilterNamespace": {
+        "discriminator": {
+          "mapping": {
+            "containAny": "#/components/schemas/WorkspaceSearchQueryFilterNamespaceContainAny"
+          },
+          "propertyName": "mode"
+        },
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/WorkspaceSearchQueryFilterNamespaceContainAny"
+          }
+        ],
+        "title": "WorkspaceSearchQueryFilterNamespace"
+      },
       "WorkspaceSearchQueryFilterNamespaceContainAny": {
         "properties": {
           "values": {
@@ -7940,12 +7994,12 @@
       "WorkspaceSearchQueryFilterOr": {
         "properties": {
           "inner": {
-            "items": {
-              "$ref": "#/components/schemas/WorkspaceSearchQueryFilter"
-            },
-            "type": "array"
+            "$ref": "#/components/schemas/WorkspaceSearchQueryFilter"
           }
         },
+        "required": [
+          "inner"
+        ],
         "title": "WorkspaceSearchQueryFilterOr",
         "type": "object"
       },
@@ -8274,7 +8328,7 @@
   },
   "info": {
     "title": "airfocus API",
-    "version": "1.0.0-beta.33.61.4"
+    "version": "1.0.0-beta.33.62.1"
   },
   "openapi": "3.1.0",
   "paths": {
