@@ -5969,7 +5969,13 @@
           "enableOkrApp": {
             "$ref": "#/components/schemas/TeamFlag"
           },
+          "forbidShareLinkCreation": {
+            "$ref": "#/components/schemas/TeamFlag"
+          },
           "removeBranding": {
+            "$ref": "#/components/schemas/TeamFlag"
+          },
+          "requirePortalLogin": {
             "$ref": "#/components/schemas/TeamFlag"
           },
           "requirePortalPassword": {
@@ -5986,8 +5992,10 @@
           "enableAi",
           "enableOkrApp",
           "removeBranding",
+          "forbidShareLinkCreation",
           "restrictShareLinkCreation",
           "requireShareLinkPassword",
+          "requirePortalLogin",
           "requirePortalPassword"
         ],
         "title": "TeamFlags",
@@ -6511,7 +6519,13 @@
           "enableOkrApp": {
             "type": "boolean"
           },
+          "forbidShareLinkCreation": {
+            "type": "boolean"
+          },
           "removeBranding": {
+            "type": "boolean"
+          },
+          "requirePortalLogin": {
             "type": "boolean"
           },
           "requirePortalPassword": {
@@ -8328,7 +8342,7 @@
   },
   "info": {
     "title": "airfocus API",
-    "version": "1.0.0-beta.33.62.6"
+    "version": "1.0.0-beta.33.63.0"
   },
   "openapi": "3.1.0",
   "paths": {
