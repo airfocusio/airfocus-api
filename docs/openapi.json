@@ -7,10 +7,6 @@
             "format": "uuid",
             "type": "string"
           },
-          "userId": {
-            "format": "uuid",
-            "type": "string"
-          },
           "name": {
             "type": "string"
           },
@@ -20,6 +16,10 @@
             },
             "type": "array",
             "uniqueItems": true
+          },
+          "userId": {
+            "format": "uuid",
+            "type": "string"
           },
           "createdAt": {
             "format": "date-time",
@@ -46,14 +46,14 @@
             "format": "uuid",
             "type": "string"
           },
+          "settings": {},
           "teamId": {
             "format": "uuid",
             "type": "string"
           },
           "typeId": {
             "type": "string"
-          },
-          "settings": {}
+          }
         },
         "required": [
           "id",
@@ -66,12 +66,12 @@
       },
       "ApplyTemplateRequest": {
         "properties": {
+          "defaultPermission": {
+            "$ref": "#/components/schemas/Permission"
+          },
           "groupId": {
             "format": "uuid",
             "type": "string"
-          },
-          "defaultPermission": {
-            "$ref": "#/components/schemas/Permission"
           },
           "name": {
             "type": "string"
@@ -109,13 +109,6 @@
             "format": "uuid",
             "type": "string"
           },
-          "teamId": {
-            "format": "uuid",
-            "type": "string"
-          },
-          "typeId": {
-            "type": "string"
-          },
           "description": {
             "type": "string"
           },
@@ -123,6 +116,13 @@
             "type": "boolean"
           },
           "name": {
+            "type": "string"
+          },
+          "teamId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "typeId": {
             "type": "string"
           },
           "createdAt": {
@@ -195,12 +195,12 @@
       },
       "ChangeUserDisabledRequest": {
         "properties": {
+          "disabled": {
+            "type": "boolean"
+          },
           "userId": {
             "format": "uuid",
             "type": "string"
-          },
-          "disabled": {
-            "type": "boolean"
           }
         },
         "required": [
@@ -212,12 +212,12 @@
       },
       "ChangeUserRoleRequest": {
         "properties": {
+          "role": {
+            "$ref": "#/components/schemas/Role"
+          },
           "userId": {
             "format": "uuid",
             "type": "string"
-          },
-          "role": {
-            "$ref": "#/components/schemas/Role"
           }
         },
         "required": [
@@ -233,22 +233,22 @@
             "format": "uuid",
             "type": "string"
           },
+          "content": {
+            "$ref": "#/components/schemas/RichText"
+          },
           "itemId": {
             "format": "uuid",
             "type": "string"
-          },
-          "userId": {
-            "format": "uuid",
-            "type": "string"
-          },
-          "content": {
-            "$ref": "#/components/schemas/RichText"
           },
           "reactions": {
             "items": {
               "$ref": "#/components/schemas/CommentReaction"
             },
             "type": "array"
+          },
+          "userId": {
+            "format": "uuid",
+            "type": "string"
           },
           "createdAt": {
             "format": "date-time",
@@ -298,14 +298,14 @@
       },
       "CommentBulkCreate": {
         "properties": {
+          "resource": {
+            "$ref": "#/components/schemas/Comment"
+          },
           "type": {
             "enum": [
               "create"
             ],
             "type": "string"
-          },
-          "resource": {
-            "$ref": "#/components/schemas/Comment"
           }
         },
         "required": [
@@ -341,14 +341,14 @@
             "format": "uuid",
             "type": "string"
           },
+          "transform": {
+            "$ref": "#/components/schemas/JsonPatch"
+          },
           "type": {
             "enum": [
               "patch"
             ],
             "type": "string"
-          },
-          "transform": {
-            "$ref": "#/components/schemas/JsonPatch"
           }
         },
         "required": [
@@ -365,14 +365,14 @@
             "format": "uuid",
             "type": "string"
           },
+          "resource": {
+            "$ref": "#/components/schemas/Comment"
+          },
           "type": {
             "enum": [
               "update"
             ],
             "type": "string"
-          },
-          "resource": {
-            "$ref": "#/components/schemas/Comment"
           }
         },
         "required": [
@@ -436,22 +436,22 @@
             "format": "uuid",
             "type": "string"
           },
+          "content": {
+            "$ref": "#/components/schemas/RichText"
+          },
           "itemId": {
             "format": "uuid",
             "type": "string"
-          },
-          "userId": {
-            "format": "uuid",
-            "type": "string"
-          },
-          "content": {
-            "$ref": "#/components/schemas/RichText"
           },
           "reactions": {
             "items": {
               "$ref": "#/components/schemas/CommentReaction"
             },
             "type": "array"
+          },
+          "userId": {
+            "format": "uuid",
+            "type": "string"
           },
           "createdAt": {
             "format": "date-time",
@@ -544,22 +544,22 @@
             "format": "uuid",
             "type": "string"
           },
-          "toItemId": {
-            "format": "uuid",
-            "type": "string"
-          },
-          "type": {
-            "$ref": "#/components/schemas/ItemLinkType"
-          },
           "fromOrder": {
             "description": "How this link is ordered in the list of links of the \"fromItem\".",
             "format": "int32",
             "type": "integer"
           },
+          "toItemId": {
+            "format": "uuid",
+            "type": "string"
+          },
           "toOrder": {
             "description": "How this link is ordered in the list of links of the \"toItem\".",
             "format": "int32",
             "type": "integer"
+          },
+          "type": {
+            "$ref": "#/components/schemas/ItemLinkType"
           }
         },
         "required": [
@@ -574,11 +574,6 @@
       },
       "CreateItemRequest": {
         "properties": {
-          "statusId": {
-            "description": "Id of the status of this item.",
-            "format": "uuid",
-            "type": "string"
-          },
           "archived": {
             "default": false,
             "description": "Whether this item is archived.",
@@ -648,6 +643,11 @@
             "description": "A order number of this item for sorting.",
             "format": "int32",
             "type": "integer"
+          },
+          "statusId": {
+            "description": "Id of the status of this item.",
+            "format": "uuid",
+            "type": "string"
           }
         },
         "required": [
@@ -664,11 +664,6 @@
       "CreateItemRequestWithMD": {
         "description": "Item with Markdown string description.",
         "properties": {
-          "statusId": {
-            "description": "Id of the status of this item.",
-            "format": "uuid",
-            "type": "string"
-          },
           "archived": {
             "default": false,
             "description": "Whether this item is archived.",
@@ -742,6 +737,11 @@
             "description": "A order number of this item for sorting.",
             "format": "int32",
             "type": "integer"
+          },
+          "statusId": {
+            "description": "Id of the status of this item.",
+            "format": "uuid",
+            "type": "string"
           }
         },
         "required": [
@@ -812,13 +812,6 @@
             "format": "uuid",
             "type": "string"
           },
-          "teamId": {
-            "format": "uuid",
-            "type": "string"
-          },
-          "typeId": {
-            "type": "string"
-          },
           "description": {
             "type": "string"
           },
@@ -826,6 +819,13 @@
             "type": "boolean"
           },
           "name": {
+            "type": "string"
+          },
+          "teamId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "typeId": {
             "type": "string"
           },
           "createdAt": {
@@ -855,13 +855,6 @@
             "format": "uuid",
             "type": "string"
           },
-          "teamId": {
-            "format": "uuid",
-            "type": "string"
-          },
-          "typeId": {
-            "type": "string"
-          },
           "description": {
             "type": "string"
           },
@@ -869,6 +862,13 @@
             "type": "boolean"
           },
           "name": {
+            "type": "string"
+          },
+          "teamId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "typeId": {
             "type": "string"
           },
           "createdAt": {
@@ -937,10 +937,6 @@
       },
       "FieldFieldWorkspaceEmbed": {
         "properties": {
-          "workspaceId": {
-            "format": "uuid",
-            "type": "string"
-          },
           "order": {
             "description": "Order of the field in this specific workspace.",
             "examples": [
@@ -948,6 +944,10 @@
             ],
             "format": "int32",
             "type": "integer"
+          },
+          "workspaceId": {
+            "format": "uuid",
+            "type": "string"
           }
         },
         "required": [
@@ -1050,13 +1050,6 @@
       },
       "FieldServerEndpointsInstallFieldRequestLegacy": {
         "properties": {
-          "typeId": {
-            "type": "string"
-          },
-          "workspaceId": {
-            "format": "uuid",
-            "type": "string"
-          },
           "description": {
             "type": "string"
           },
@@ -1066,7 +1059,14 @@
           "name": {
             "type": "string"
           },
-          "settings": {}
+          "settings": {},
+          "typeId": {
+            "type": "string"
+          },
+          "workspaceId": {
+            "format": "uuid",
+            "type": "string"
+          }
         },
         "required": [
           "typeId",
@@ -1132,11 +1132,11 @@
       },
       "FieldServerEndpointsReconfigureFieldRequestLegacy": {
         "properties": {
-          "fieldId": {
-            "format": "uuid",
+          "description": {
             "type": "string"
           },
-          "description": {
+          "fieldId": {
+            "format": "uuid",
             "type": "string"
           },
           "isTeamField": {
@@ -1159,16 +1159,16 @@
       },
       "FieldServerEndpointsReorderFieldsRequest": {
         "properties": {
-          "workspaceId": {
-            "format": "uuid",
-            "type": "string"
-          },
           "fieldIds": {
             "items": {
               "format": "uuid",
               "type": "string"
             },
             "type": "array"
+          },
+          "workspaceId": {
+            "format": "uuid",
+            "type": "string"
           }
         },
         "required": [
@@ -1327,13 +1327,6 @@
             "format": "uuid",
             "type": "string"
           },
-          "teamId": {
-            "format": "uuid",
-            "type": "string"
-          },
-          "typeId": {
-            "type": "string"
-          },
           "description": {
             "type": "string"
           },
@@ -1345,6 +1338,13 @@
           },
           "settings": {
             "$ref": "#/components/schemas/FormSourceFieldTypeSettings"
+          },
+          "teamId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "typeId": {
+            "type": "string"
           },
           "createdAt": {
             "format": "date-time",
@@ -1374,13 +1374,6 @@
             "format": "uuid",
             "type": "string"
           },
-          "teamId": {
-            "format": "uuid",
-            "type": "string"
-          },
-          "typeId": {
-            "type": "string"
-          },
           "description": {
             "type": "string"
           },
@@ -1388,6 +1381,13 @@
             "type": "boolean"
           },
           "name": {
+            "type": "string"
+          },
+          "teamId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "typeId": {
             "type": "string"
           },
           "createdAt": {
@@ -1562,13 +1562,6 @@
             "format": "uuid",
             "type": "string"
           },
-          "teamId": {
-            "format": "uuid",
-            "type": "string"
-          },
-          "typeId": {
-            "type": "string"
-          },
           "description": {
             "type": "string"
           },
@@ -1580,6 +1573,13 @@
           },
           "settings": {
             "$ref": "#/components/schemas/InsightsFieldTypeSettings"
+          },
+          "teamId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "typeId": {
+            "type": "string"
           },
           "createdAt": {
             "format": "date-time",
@@ -1605,9 +1605,6 @@
       },
       "InstallBooleanFieldRequest": {
         "properties": {
-          "typeId": {
-            "type": "string"
-          },
           "description": {
             "default": "",
             "description": "User-readable field description.",
@@ -1620,6 +1617,9 @@
           },
           "name": {
             "description": "User-readable field name.",
+            "type": "string"
+          },
+          "typeId": {
             "type": "string"
           },
           "workspaceIds": {
@@ -1640,9 +1640,6 @@
       },
       "InstallDateFieldRequest": {
         "properties": {
-          "typeId": {
-            "type": "string"
-          },
           "description": {
             "default": "",
             "description": "User-readable field description.",
@@ -1655,6 +1652,9 @@
           },
           "name": {
             "description": "User-readable field name.",
+            "type": "string"
+          },
+          "typeId": {
             "type": "string"
           },
           "workspaceIds": {
@@ -1675,9 +1675,6 @@
       },
       "InstallDateRangeFieldRequest": {
         "properties": {
-          "typeId": {
-            "type": "string"
-          },
           "description": {
             "default": "",
             "description": "User-readable field description.",
@@ -1690,6 +1687,9 @@
           },
           "name": {
             "description": "User-readable field name.",
+            "type": "string"
+          },
+          "typeId": {
             "type": "string"
           },
           "workspaceIds": {
@@ -1710,9 +1710,6 @@
       },
       "InstallNumberFieldRequest": {
         "properties": {
-          "typeId": {
-            "type": "string"
-          },
           "description": {
             "default": "",
             "description": "User-readable field description.",
@@ -1730,6 +1727,9 @@
           "settings": {
             "$ref": "#/components/schemas/NumberFieldTypeSettings",
             "description": "Field settings."
+          },
+          "typeId": {
+            "type": "string"
           },
           "workspaceIds": {
             "description": "If isTeamField=false then exactly one workspace ID should be provided.\nIf isTeamField=true then any amount of workspace IDs can be provided to be linked to the newly installed field.",
@@ -1750,9 +1750,6 @@
       },
       "InstallPeopleFieldRequest": {
         "properties": {
-          "typeId": {
-            "type": "string"
-          },
           "description": {
             "default": "",
             "description": "User-readable field description.",
@@ -1770,6 +1767,9 @@
           "settings": {
             "$ref": "#/components/schemas/PeopleFieldTypeSettings",
             "description": "Field settings."
+          },
+          "typeId": {
+            "type": "string"
           },
           "workspaceIds": {
             "description": "If isTeamField=false then exactly one workspace ID should be provided.\nIf isTeamField=true then any amount of workspace IDs can be provided to be linked to the newly installed field.",
@@ -1790,9 +1790,6 @@
       },
       "InstallSelectFieldRequest": {
         "properties": {
-          "typeId": {
-            "type": "string"
-          },
           "description": {
             "default": "",
             "description": "User-readable field description.",
@@ -1810,6 +1807,9 @@
           "settings": {
             "$ref": "#/components/schemas/SelectFieldTypeSettings",
             "description": "Field settings."
+          },
+          "typeId": {
+            "type": "string"
           },
           "workspaceIds": {
             "description": "If isTeamField=false then exactly one workspace ID should be provided.\nIf isTeamField=true then any amount of workspace IDs can be provided to be linked to the newly installed field.",
@@ -1830,9 +1830,6 @@
       },
       "InstallTextFieldRequest": {
         "properties": {
-          "typeId": {
-            "type": "string"
-          },
           "description": {
             "default": "",
             "description": "User-readable field description.",
@@ -1845,6 +1842,9 @@
           },
           "name": {
             "description": "User-readable field name.",
+            "type": "string"
+          },
+          "typeId": {
             "type": "string"
           },
           "workspaceIds": {
@@ -1865,9 +1865,6 @@
       },
       "InstallTimePeriodFieldRequest": {
         "properties": {
-          "typeId": {
-            "type": "string"
-          },
           "description": {
             "default": "",
             "description": "User-readable field description.",
@@ -1885,6 +1882,9 @@
           "settings": {
             "$ref": "#/components/schemas/TimePeriodFieldSettings",
             "description": "Field settings."
+          },
+          "typeId": {
+            "type": "string"
           },
           "workspaceIds": {
             "description": "If isTeamField=false then exactly one workspace ID should be provided.\nIf isTeamField=true then any amount of workspace IDs can be provided to be linked to the newly installed field.",
@@ -1933,9 +1933,6 @@
             "format": "uuid",
             "type": "string"
           },
-          "typeId": {
-            "type": "string"
-          },
           "capabilities": {
             "$ref": "#/components/schemas/IntegrationCapabilities"
           },
@@ -1943,6 +1940,9 @@
             "$ref": "#/components/schemas/IntegrationSyncState"
           },
           "settings": {},
+          "typeId": {
+            "type": "string"
+          },
           "createdAt": {
             "format": "date-time",
             "type": "string"
@@ -2004,16 +2004,6 @@
         "properties": {
           "id": {
             "description": "Unique identifier of this item.",
-            "format": "uuid",
-            "type": "string"
-          },
-          "statusId": {
-            "description": "Id of the status of this item.",
-            "format": "uuid",
-            "type": "string"
-          },
-          "workspaceId": {
-            "description": "Id of the workspace this workspace belongs to.",
             "format": "uuid",
             "type": "string"
           },
@@ -2091,6 +2081,16 @@
             "format": "int32",
             "type": "integer"
           },
+          "statusId": {
+            "description": "Id of the status of this item.",
+            "format": "uuid",
+            "type": "string"
+          },
+          "workspaceId": {
+            "description": "Id of the workspace this workspace belongs to.",
+            "format": "uuid",
+            "type": "string"
+          },
           "createdAt": {
             "description": "Timestamp of when this item was created.",
             "format": "date-time",
@@ -2136,13 +2136,13 @@
             "format": "uuid",
             "type": "string"
           },
+          "contentType": {
+            "description": "Type of updated content.",
+            "type": "string"
+          },
           "itemId": {
             "description": "ID of the item to which the attachment is linked.",
             "format": "uuid",
-            "type": "string"
-          },
-          "contentType": {
-            "description": "Type of updated content.",
             "type": "string"
           },
           "name": {
@@ -2204,14 +2204,14 @@
       },
       "ItemAttachmentBulkCreate": {
         "properties": {
+          "resource": {
+            "$ref": "#/components/schemas/ItemAttachment"
+          },
           "type": {
             "enum": [
               "create"
             ],
             "type": "string"
-          },
-          "resource": {
-            "$ref": "#/components/schemas/ItemAttachment"
           }
         },
         "required": [
@@ -2247,14 +2247,14 @@
             "format": "uuid",
             "type": "string"
           },
+          "transform": {
+            "$ref": "#/components/schemas/JsonPatch"
+          },
           "type": {
             "enum": [
               "patch"
             ],
             "type": "string"
-          },
-          "transform": {
-            "$ref": "#/components/schemas/JsonPatch"
           }
         },
         "required": [
@@ -2271,14 +2271,14 @@
             "format": "uuid",
             "type": "string"
           },
+          "resource": {
+            "$ref": "#/components/schemas/ItemAttachment"
+          },
           "type": {
             "enum": [
               "update"
             ],
             "type": "string"
-          },
-          "resource": {
-            "$ref": "#/components/schemas/ItemAttachment"
           }
         },
         "required": [
@@ -2297,13 +2297,13 @@
             "format": "uuid",
             "type": "string"
           },
+          "contentType": {
+            "description": "Type of updated content.",
+            "type": "string"
+          },
           "itemId": {
             "description": "ID of the item to which the attachment is linked.",
             "format": "uuid",
-            "type": "string"
-          },
-          "contentType": {
-            "description": "Type of updated content.",
             "type": "string"
           },
           "name": {
@@ -2395,14 +2395,14 @@
       },
       "ItemBulkCreate": {
         "properties": {
+          "resource": {
+            "$ref": "#/components/schemas/Item"
+          },
           "type": {
             "enum": [
               "create"
             ],
             "type": "string"
-          },
-          "resource": {
-            "$ref": "#/components/schemas/Item"
           }
         },
         "required": [
@@ -2438,14 +2438,14 @@
             "format": "uuid",
             "type": "string"
           },
+          "transform": {
+            "$ref": "#/components/schemas/JsonPatch"
+          },
           "type": {
             "enum": [
               "patch"
             ],
             "type": "string"
-          },
-          "transform": {
-            "$ref": "#/components/schemas/JsonPatch"
           }
         },
         "required": [
@@ -2462,14 +2462,14 @@
             "format": "uuid",
             "type": "string"
           },
+          "resource": {
+            "$ref": "#/components/schemas/Item"
+          },
           "type": {
             "enum": [
               "update"
             ],
             "type": "string"
-          },
-          "resource": {
-            "$ref": "#/components/schemas/Item"
           }
         },
         "required": [
@@ -2594,18 +2594,6 @@
       },
       "ItemEmbed": {
         "properties": {
-          "children": {
-            "items": {
-              "$ref": "#/components/schemas/ItemEmbedRelativeItem"
-            },
-            "type": "array"
-          },
-          "parents": {
-            "items": {
-              "$ref": "#/components/schemas/ItemEmbedRelativeItem"
-            },
-            "type": "array"
-          },
           "alias": {
             "type": "string"
           },
@@ -2618,6 +2606,12 @@
           "attachmentCount": {
             "format": "int32",
             "type": "integer"
+          },
+          "children": {
+            "items": {
+              "$ref": "#/components/schemas/ItemEmbedRelativeItem"
+            },
+            "type": "array"
           },
           "commentCount": {
             "format": "int32",
@@ -2635,6 +2629,12 @@
           "linkCount": {
             "format": "int32",
             "type": "integer"
+          },
+          "parents": {
+            "items": {
+              "$ref": "#/components/schemas/ItemEmbedRelativeItem"
+            },
+            "type": "array"
           },
           "progress": {
             "$ref": "#/components/schemas/ItemEmbedProgress"
@@ -2663,10 +2663,10 @@
             "format": "uuid",
             "type": "string"
           },
+          "data": {},
           "typeId": {
             "type": "string"
-          },
-          "data": {}
+          }
         },
         "required": [
           "id",
@@ -2682,10 +2682,10 @@
             "format": "uuid",
             "type": "string"
           },
+          "data": {},
           "typeId": {
             "type": "string"
-          },
-          "data": {}
+          }
         },
         "required": [
           "id",
@@ -2715,18 +2715,6 @@
       },
       "ItemEmbedRelativeItem": {
         "properties": {
-          "itemId": {
-            "format": "uuid",
-            "type": "string"
-          },
-          "relationId": {
-            "format": "uuid",
-            "type": "string"
-          },
-          "workspaceId": {
-            "format": "uuid",
-            "type": "string"
-          },
           "alias": {
             "type": "string"
           },
@@ -2737,12 +2725,24 @@
           "item": {
             "$ref": "#/components/schemas/Item"
           },
+          "itemId": {
+            "format": "uuid",
+            "type": "string"
+          },
           "itemType": {
             "$ref": "#/components/schemas/ItemType"
           },
           "parentOrder": {
             "format": "int32",
             "type": "integer"
+          },
+          "relationId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "workspaceId": {
+            "format": "uuid",
+            "type": "string"
           }
         },
         "required": [
@@ -2783,14 +2783,14 @@
       },
       "ItemLinkBulkCreate": {
         "properties": {
+          "resource": {
+            "$ref": "#/components/schemas/CreateItemLinkRequest"
+          },
           "type": {
             "enum": [
               "create"
             ],
             "type": "string"
-          },
-          "resource": {
-            "$ref": "#/components/schemas/CreateItemLinkRequest"
           }
         },
         "required": [
@@ -2826,14 +2826,14 @@
             "format": "uuid",
             "type": "string"
           },
+          "transform": {
+            "$ref": "#/components/schemas/JsonPatch"
+          },
           "type": {
             "enum": [
               "patch"
             ],
             "type": "string"
-          },
-          "transform": {
-            "$ref": "#/components/schemas/JsonPatch"
           }
         },
         "required": [
@@ -2850,14 +2850,14 @@
             "format": "uuid",
             "type": "string"
           },
+          "resource": {
+            "$ref": "#/components/schemas/UpdateItemLinkRequest"
+          },
           "type": {
             "enum": [
               "update"
             ],
             "type": "string"
-          },
-          "resource": {
-            "$ref": "#/components/schemas/UpdateItemLinkRequest"
           }
         },
         "required": [
@@ -2883,14 +2883,6 @@
       },
       "ItemLinkEmbed": {
         "properties": {
-          "fromWorkspaceId": {
-            "format": "uuid",
-            "type": "string"
-          },
-          "toWorkspaceId": {
-            "format": "uuid",
-            "type": "string"
-          },
           "apps": {
             "additionalProperties": {
               "$ref": "#/components/schemas/ItemLinkEmbedApp"
@@ -2902,6 +2894,14 @@
               "$ref": "#/components/schemas/LinkConstraint"
             },
             "type": "array"
+          },
+          "fromWorkspaceId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "toWorkspaceId": {
+            "format": "uuid",
+            "type": "string"
           }
         },
         "required": [
@@ -2918,10 +2918,10 @@
             "format": "uuid",
             "type": "string"
           },
+          "data": {},
           "typeId": {
             "type": "string"
-          },
-          "data": {}
+          }
         },
         "required": [
           "id",
@@ -2981,22 +2981,22 @@
             "format": "uuid",
             "type": "string"
           },
-          "toItemId": {
-            "format": "uuid",
-            "type": "string"
-          },
-          "type": {
-            "$ref": "#/components/schemas/ItemLinkType"
-          },
           "fromOrder": {
             "description": "How this link is ordered in the list of links of the \"fromItem\".",
             "format": "int32",
             "type": "integer"
           },
+          "toItemId": {
+            "format": "uuid",
+            "type": "string"
+          },
           "toOrder": {
             "description": "How this link is ordered in the list of links of the \"toItem\".",
             "format": "int32",
             "type": "integer"
+          },
+          "type": {
+            "$ref": "#/components/schemas/ItemLinkType"
           },
           "_embedded": {
             "$ref": "#/components/schemas/ItemLinkEmbed"
@@ -3050,13 +3050,13 @@
             "format": "uuid",
             "type": "string"
           },
-          "parentId": {
-            "format": "uuid",
-            "type": "string"
-          },
           "childOrder": {
             "format": "int32",
             "type": "integer"
+          },
+          "parentId": {
+            "format": "uuid",
+            "type": "string"
           },
           "parentOrder": {
             "format": "int32",
@@ -3101,14 +3101,14 @@
       },
       "ItemRelationBulkCreate": {
         "properties": {
+          "resource": {
+            "$ref": "#/components/schemas/ItemRelation"
+          },
           "type": {
             "enum": [
               "create"
             ],
             "type": "string"
-          },
-          "resource": {
-            "$ref": "#/components/schemas/ItemRelation"
           }
         },
         "required": [
@@ -3144,14 +3144,14 @@
             "format": "uuid",
             "type": "string"
           },
+          "transform": {
+            "$ref": "#/components/schemas/JsonPatch"
+          },
           "type": {
             "enum": [
               "patch"
             ],
             "type": "string"
-          },
-          "transform": {
-            "$ref": "#/components/schemas/JsonPatch"
           }
         },
         "required": [
@@ -3168,14 +3168,14 @@
             "format": "uuid",
             "type": "string"
           },
+          "resource": {
+            "$ref": "#/components/schemas/ItemRelation"
+          },
           "type": {
             "enum": [
               "update"
             ],
             "type": "string"
-          },
-          "resource": {
-            "$ref": "#/components/schemas/ItemRelation"
           }
         },
         "required": [
@@ -3266,13 +3266,13 @@
             "format": "uuid",
             "type": "string"
           },
-          "parentId": {
-            "format": "uuid",
-            "type": "string"
-          },
           "childOrder": {
             "format": "int32",
             "type": "integer"
+          },
+          "parentId": {
+            "format": "uuid",
+            "type": "string"
           },
           "parentOrder": {
             "format": "int32",
@@ -3340,14 +3340,14 @@
       },
       "ItemSearchQueryDateTimeFilterValue": {
         "properties": {
-          "zoneId": {
-            "type": "string"
-          },
           "date": {
             "format": "date",
             "type": "string"
           },
           "time": {
+            "type": "string"
+          },
+          "zoneId": {
             "type": "string"
           }
         },
@@ -3908,12 +3908,12 @@
       },
       "ItemSearchQuerySortField": {
         "properties": {
+          "direction": {
+            "$ref": "#/components/schemas/ItemSearchQuerySortDirection"
+          },
           "fieldId": {
             "format": "uuid",
             "type": "string"
-          },
-          "direction": {
-            "$ref": "#/components/schemas/ItemSearchQuerySortDirection"
           }
         },
         "required": [
@@ -4068,16 +4068,6 @@
             "format": "uuid",
             "type": "string"
           },
-          "statusId": {
-            "description": "Id of the status of this item.",
-            "format": "uuid",
-            "type": "string"
-          },
-          "workspaceId": {
-            "description": "Id of the workspace this workspace belongs to.",
-            "format": "uuid",
-            "type": "string"
-          },
           "archived": {
             "description": "Whether this item is archived.",
             "type": "boolean"
@@ -4152,6 +4142,16 @@
             "format": "int32",
             "type": "integer"
           },
+          "statusId": {
+            "description": "Id of the status of this item.",
+            "format": "uuid",
+            "type": "string"
+          },
+          "workspaceId": {
+            "description": "Id of the workspace this workspace belongs to.",
+            "format": "uuid",
+            "type": "string"
+          },
           "createdAt": {
             "description": "Timestamp of when this item was created.",
             "format": "date-time",
@@ -4224,16 +4224,6 @@
         "properties": {
           "id": {
             "description": "Unique identifier of this item.",
-            "format": "uuid",
-            "type": "string"
-          },
-          "statusId": {
-            "description": "Id of the status of this item.",
-            "format": "uuid",
-            "type": "string"
-          },
-          "workspaceId": {
-            "description": "Id of the workspace this workspace belongs to.",
             "format": "uuid",
             "type": "string"
           },
@@ -4314,6 +4304,16 @@
             "description": "A order number of this item for sorting.",
             "format": "int32",
             "type": "integer"
+          },
+          "statusId": {
+            "description": "Id of the status of this item.",
+            "format": "uuid",
+            "type": "string"
+          },
+          "workspaceId": {
+            "description": "Id of the workspace this workspace belongs to.",
+            "format": "uuid",
+            "type": "string"
           },
           "createdAt": {
             "description": "Timestamp of when this item was created.",
@@ -4591,10 +4591,6 @@
             "format": "uuid",
             "type": "string"
           },
-          "workspaceId": {
-            "format": "uuid",
-            "type": "string"
-          },
           "date": {
             "format": "date",
             "type": "string"
@@ -4606,6 +4602,10 @@
             "type": "string"
           },
           "timezone": {
+            "type": "string"
+          },
+          "workspaceId": {
+            "format": "uuid",
             "type": "string"
           },
           "createdAt": {
@@ -4657,14 +4657,14 @@
       },
       "MilestoneBulkCreate": {
         "properties": {
+          "resource": {
+            "$ref": "#/components/schemas/Milestone"
+          },
           "type": {
             "enum": [
               "create"
             ],
             "type": "string"
-          },
-          "resource": {
-            "$ref": "#/components/schemas/Milestone"
           }
         },
         "required": [
@@ -4700,14 +4700,14 @@
             "format": "uuid",
             "type": "string"
           },
+          "transform": {
+            "$ref": "#/components/schemas/JsonPatch"
+          },
           "type": {
             "enum": [
               "patch"
             ],
             "type": "string"
-          },
-          "transform": {
-            "$ref": "#/components/schemas/JsonPatch"
           }
         },
         "required": [
@@ -4724,14 +4724,14 @@
             "format": "uuid",
             "type": "string"
           },
+          "resource": {
+            "$ref": "#/components/schemas/Milestone"
+          },
           "type": {
             "enum": [
               "update"
             ],
             "type": "string"
-          },
-          "resource": {
-            "$ref": "#/components/schemas/Milestone"
           }
         },
         "required": [
@@ -4748,10 +4748,6 @@
             "format": "uuid",
             "type": "string"
           },
-          "workspaceId": {
-            "format": "uuid",
-            "type": "string"
-          },
           "date": {
             "format": "date",
             "type": "string"
@@ -4763,6 +4759,10 @@
             "type": "string"
           },
           "timezone": {
+            "type": "string"
+          },
+          "workspaceId": {
+            "format": "uuid",
             "type": "string"
           },
           "createdAt": {
@@ -4822,13 +4822,6 @@
             "format": "uuid",
             "type": "string"
           },
-          "teamId": {
-            "format": "uuid",
-            "type": "string"
-          },
-          "typeId": {
-            "type": "string"
-          },
           "description": {
             "type": "string"
           },
@@ -4836,6 +4829,13 @@
             "type": "boolean"
           },
           "name": {
+            "type": "string"
+          },
+          "teamId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "typeId": {
             "type": "string"
           },
           "createdAt": {
@@ -4865,13 +4865,6 @@
             "format": "uuid",
             "type": "string"
           },
-          "teamId": {
-            "format": "uuid",
-            "type": "string"
-          },
-          "typeId": {
-            "type": "string"
-          },
           "description": {
             "type": "string"
           },
@@ -4879,6 +4872,13 @@
             "type": "boolean"
           },
           "name": {
+            "type": "string"
+          },
+          "teamId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "typeId": {
             "type": "string"
           },
           "createdAt": {
@@ -5044,13 +5044,6 @@
             "format": "uuid",
             "type": "string"
           },
-          "teamId": {
-            "format": "uuid",
-            "type": "string"
-          },
-          "typeId": {
-            "type": "string"
-          },
           "description": {
             "type": "string"
           },
@@ -5062,6 +5055,13 @@
           },
           "settings": {
             "$ref": "#/components/schemas/NumberFieldTypeSettings"
+          },
+          "teamId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "typeId": {
+            "type": "string"
           },
           "createdAt": {
             "format": "date-time",
@@ -5091,13 +5091,6 @@
             "format": "uuid",
             "type": "string"
           },
-          "teamId": {
-            "format": "uuid",
-            "type": "string"
-          },
-          "typeId": {
-            "type": "string"
-          },
           "description": {
             "type": "string"
           },
@@ -5105,6 +5098,13 @@
             "type": "boolean"
           },
           "name": {
+            "type": "string"
+          },
+          "teamId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "typeId": {
             "type": "string"
           },
           "createdAt": {
@@ -5152,13 +5152,6 @@
             "format": "uuid",
             "type": "string"
           },
-          "teamId": {
-            "format": "uuid",
-            "type": "string"
-          },
-          "typeId": {
-            "type": "string"
-          },
           "description": {
             "type": "string"
           },
@@ -5170,6 +5163,13 @@
           },
           "settings": {
             "$ref": "#/components/schemas/OkrConfidenceFieldSettings"
+          },
+          "teamId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "typeId": {
+            "type": "string"
           },
           "createdAt": {
             "format": "date-time",
@@ -5199,13 +5199,6 @@
             "format": "uuid",
             "type": "string"
           },
-          "teamId": {
-            "format": "uuid",
-            "type": "string"
-          },
-          "typeId": {
-            "type": "string"
-          },
           "description": {
             "type": "string"
           },
@@ -5213,6 +5206,13 @@
             "type": "boolean"
           },
           "name": {
+            "type": "string"
+          },
+          "teamId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "typeId": {
             "type": "string"
           },
           "createdAt": {
@@ -5242,13 +5242,6 @@
             "format": "uuid",
             "type": "string"
           },
-          "teamId": {
-            "format": "uuid",
-            "type": "string"
-          },
-          "typeId": {
-            "type": "string"
-          },
           "description": {
             "type": "string"
           },
@@ -5256,6 +5249,13 @@
             "type": "boolean"
           },
           "name": {
+            "type": "string"
+          },
+          "teamId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "typeId": {
             "type": "string"
           },
           "createdAt": {
@@ -5285,13 +5285,6 @@
             "format": "uuid",
             "type": "string"
           },
-          "teamId": {
-            "format": "uuid",
-            "type": "string"
-          },
-          "typeId": {
-            "type": "string"
-          },
           "description": {
             "type": "string"
           },
@@ -5299,6 +5292,13 @@
             "type": "boolean"
           },
           "name": {
+            "type": "string"
+          },
+          "teamId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "typeId": {
             "type": "string"
           },
           "createdAt": {
@@ -5340,13 +5340,6 @@
             "format": "uuid",
             "type": "string"
           },
-          "teamId": {
-            "format": "uuid",
-            "type": "string"
-          },
-          "typeId": {
-            "type": "string"
-          },
           "description": {
             "type": "string"
           },
@@ -5358,6 +5351,13 @@
           },
           "settings": {
             "$ref": "#/components/schemas/OkrTimePeriodFieldSettings"
+          },
+          "teamId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "typeId": {
+            "type": "string"
           },
           "createdAt": {
             "format": "date-time",
@@ -5399,13 +5399,6 @@
             "format": "uuid",
             "type": "string"
           },
-          "teamId": {
-            "format": "uuid",
-            "type": "string"
-          },
-          "typeId": {
-            "type": "string"
-          },
           "description": {
             "type": "string"
           },
@@ -5417,6 +5410,13 @@
           },
           "settings": {
             "$ref": "#/components/schemas/PeopleFieldTypeSettings"
+          },
+          "teamId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "typeId": {
+            "type": "string"
           },
           "createdAt": {
             "format": "date-time",
@@ -5456,13 +5456,6 @@
             "format": "uuid",
             "type": "string"
           },
-          "teamId": {
-            "format": "uuid",
-            "type": "string"
-          },
-          "typeId": {
-            "type": "string"
-          },
           "description": {
             "type": "string"
           },
@@ -5470,6 +5463,13 @@
             "type": "boolean"
           },
           "name": {
+            "type": "string"
+          },
+          "teamId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "typeId": {
             "type": "string"
           },
           "createdAt": {
@@ -5499,13 +5499,6 @@
             "format": "uuid",
             "type": "string"
           },
-          "teamId": {
-            "format": "uuid",
-            "type": "string"
-          },
-          "typeId": {
-            "type": "string"
-          },
           "description": {
             "type": "string"
           },
@@ -5513,6 +5506,13 @@
             "type": "boolean"
           },
           "name": {
+            "type": "string"
+          },
+          "teamId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "typeId": {
             "type": "string"
           },
           "createdAt": {
@@ -6092,13 +6092,6 @@
             "format": "uuid",
             "type": "string"
           },
-          "teamId": {
-            "format": "uuid",
-            "type": "string"
-          },
-          "typeId": {
-            "type": "string"
-          },
           "description": {
             "type": "string"
           },
@@ -6110,6 +6103,13 @@
           },
           "settings": {
             "$ref": "#/components/schemas/SelectFieldTypeSettings"
+          },
+          "teamId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "typeId": {
+            "type": "string"
           },
           "createdAt": {
             "format": "date-time",
@@ -6176,10 +6176,6 @@
             "format": "uuid",
             "type": "string"
           },
-          "workspaceId": {
-            "format": "uuid",
-            "type": "string"
-          },
           "category": {
             "$ref": "#/components/schemas/StatusCategory"
           },
@@ -6198,6 +6194,10 @@
             "description": "Order of this status comparing to other statuses in the same workspace.",
             "format": "int32",
             "type": "integer"
+          },
+          "workspaceId": {
+            "format": "uuid",
+            "type": "string"
           }
         },
         "required": [
@@ -6251,10 +6251,6 @@
       },
       "Team": {
         "properties": {
-          "teamId": {
-            "format": "uuid",
-            "type": "string"
-          },
           "companyInfo": {
             "$ref": "#/components/schemas/TeamCompanyInfo"
           },
@@ -6269,6 +6265,10 @@
           },
           "state": {
             "$ref": "#/components/schemas/TeamState"
+          },
+          "teamId": {
+            "format": "uuid",
+            "type": "string"
           },
           "createdAt": {
             "format": "date-time",
@@ -6588,13 +6588,13 @@
       },
       "TemplateApp": {
         "properties": {
-          "typeId": {
-            "type": "string"
-          },
           "description": {
             "type": "string"
           },
           "name": {
+            "type": "string"
+          },
+          "typeId": {
             "type": "string"
           }
         },
@@ -6700,13 +6700,6 @@
             "format": "uuid",
             "type": "string"
           },
-          "teamId": {
-            "format": "uuid",
-            "type": "string"
-          },
-          "typeId": {
-            "type": "string"
-          },
           "description": {
             "type": "string"
           },
@@ -6714,6 +6707,13 @@
             "type": "boolean"
           },
           "name": {
+            "type": "string"
+          },
+          "teamId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "typeId": {
             "type": "string"
           },
           "createdAt": {
@@ -6829,13 +6829,6 @@
             "format": "uuid",
             "type": "string"
           },
-          "teamId": {
-            "format": "uuid",
-            "type": "string"
-          },
-          "typeId": {
-            "type": "string"
-          },
           "description": {
             "type": "string"
           },
@@ -6847,6 +6840,13 @@
           },
           "settings": {
             "$ref": "#/components/schemas/TimePeriodFieldSettings"
+          },
+          "teamId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "typeId": {
+            "type": "string"
           },
           "createdAt": {
             "format": "date-time",
@@ -6876,22 +6876,22 @@
             "format": "uuid",
             "type": "string"
           },
-          "toItemId": {
-            "format": "uuid",
-            "type": "string"
-          },
-          "type": {
-            "$ref": "#/components/schemas/ItemLinkType"
-          },
           "fromOrder": {
             "description": "How this link is ordered in the list of links of the \"fromItem\".",
             "format": "int32",
             "type": "integer"
           },
+          "toItemId": {
+            "format": "uuid",
+            "type": "string"
+          },
           "toOrder": {
             "description": "How this link is ordered in the list of links of the \"toItem\".",
             "format": "int32",
             "type": "integer"
+          },
+          "type": {
+            "$ref": "#/components/schemas/ItemLinkType"
           }
         },
         "required": [
@@ -6906,11 +6906,6 @@
       },
       "UpdateItemRequest": {
         "properties": {
-          "statusId": {
-            "description": "Id of the status of this item.",
-            "format": "uuid",
-            "type": "string"
-          },
           "archived": {
             "default": false,
             "description": "Whether this item is archived.",
@@ -6980,6 +6975,11 @@
             "description": "A order number of this item for sorting.",
             "format": "int32",
             "type": "integer"
+          },
+          "statusId": {
+            "description": "Id of the status of this item.",
+            "format": "uuid",
+            "type": "string"
           }
         },
         "required": [
@@ -6996,11 +6996,6 @@
       "UpdateItemRequestWithMD": {
         "description": "Item with Markdown string description.",
         "properties": {
-          "statusId": {
-            "description": "Id of the status of this item.",
-            "format": "uuid",
-            "type": "string"
-          },
           "archived": {
             "default": false,
             "description": "Whether this item is archived.",
@@ -7074,6 +7069,11 @@
             "description": "A order number of this item for sorting.",
             "format": "int32",
             "type": "integer"
+          },
+          "statusId": {
+            "description": "Id of the status of this item.",
+            "format": "uuid",
+            "type": "string"
           }
         },
         "required": [
@@ -7181,14 +7181,6 @@
             "format": "uuid",
             "type": "string"
           },
-          "teamId": {
-            "format": "uuid",
-            "type": "string"
-          },
-          "userId": {
-            "format": "uuid",
-            "type": "string"
-          },
           "disabled": {
             "type": "boolean"
           },
@@ -7209,6 +7201,14 @@
           },
           "state": {
             "$ref": "#/components/schemas/UserState"
+          },
+          "teamId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "userId": {
+            "format": "uuid",
+            "type": "string"
           },
           "createdAt": {
             "format": "date-time",
@@ -7296,17 +7296,6 @@
             "format": "uuid",
             "type": "string"
           },
-          "privateOwnerId": {
-            "format": "uuid",
-            "type": "string"
-          },
-          "typeId": {
-            "type": "string"
-          },
-          "workspaceId": {
-            "format": "uuid",
-            "type": "string"
-          },
           "description": {
             "type": "string"
           },
@@ -7330,10 +7319,21 @@
             "format": "int32",
             "type": "integer"
           },
+          "privateOwnerId": {
+            "format": "uuid",
+            "type": "string"
+          },
           "requiredPermission": {
             "$ref": "#/components/schemas/Permission"
           },
-          "settings": {}
+          "settings": {},
+          "typeId": {
+            "type": "string"
+          },
+          "workspaceId": {
+            "format": "uuid",
+            "type": "string"
+          }
         },
         "required": [
           "id",
@@ -7353,13 +7353,6 @@
             "format": "uuid",
             "type": "string"
           },
-          "teamId": {
-            "format": "uuid",
-            "type": "string"
-          },
-          "typeId": {
-            "type": "string"
-          },
           "description": {
             "type": "string"
           },
@@ -7367,6 +7360,13 @@
             "type": "boolean"
           },
           "name": {
+            "type": "string"
+          },
+          "teamId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "typeId": {
             "type": "string"
           },
           "createdAt": {
@@ -7408,13 +7408,6 @@
             "format": "uuid",
             "type": "string"
           },
-          "teamId": {
-            "format": "uuid",
-            "type": "string"
-          },
-          "typeId": {
-            "type": "string"
-          },
           "description": {
             "type": "string"
           },
@@ -7426,6 +7419,13 @@
           },
           "settings": {
             "$ref": "#/components/schemas/VotingAppScoreFieldTypeSettings"
+          },
+          "teamId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "typeId": {
+            "type": "string"
           },
           "createdAt": {
             "format": "date-time",
@@ -7453,11 +7453,6 @@
         "properties": {
           "id": {
             "description": "Unique identifier of this workspace.",
-            "format": "uuid",
-            "type": "string"
-          },
-          "teamId": {
-            "description": "Id of the team this workspace belongs to.",
             "format": "uuid",
             "type": "string"
           },
@@ -7494,6 +7489,11 @@
           },
           "progressMode": {
             "$ref": "#/components/schemas/WorkspaceProgressMode"
+          },
+          "teamId": {
+            "description": "Id of the team this workspace belongs to.",
+            "format": "uuid",
+            "type": "string"
           },
           "createdAt": {
             "description": "Timestamp of when this workspace was created.",
@@ -7547,14 +7547,14 @@
       },
       "WorkspaceBulkCreate": {
         "properties": {
+          "resource": {
+            "$ref": "#/components/schemas/CreateWorkspaceRequest"
+          },
           "type": {
             "enum": [
               "create"
             ],
             "type": "string"
-          },
-          "resource": {
-            "$ref": "#/components/schemas/CreateWorkspaceRequest"
           }
         },
         "required": [
@@ -7590,14 +7590,14 @@
             "format": "uuid",
             "type": "string"
           },
+          "transform": {
+            "$ref": "#/components/schemas/JsonPatch"
+          },
           "type": {
             "enum": [
               "patch"
             ],
             "type": "string"
-          },
-          "transform": {
-            "$ref": "#/components/schemas/JsonPatch"
           }
         },
         "required": [
@@ -7614,14 +7614,14 @@
             "format": "uuid",
             "type": "string"
           },
+          "resource": {
+            "$ref": "#/components/schemas/UpdateWorkspaceRequest"
+          },
           "type": {
             "enum": [
               "update"
             ],
             "type": "string"
-          },
-          "resource": {
-            "$ref": "#/components/schemas/UpdateWorkspaceRequest"
           }
         },
         "required": [
@@ -7647,23 +7647,17 @@
       },
       "WorkspaceEmbed": {
         "properties": {
-          "children": {
-            "items": {
-              "$ref": "#/components/schemas/WorkspaceEmbedRelation"
-            },
-            "type": "array"
-          },
-          "parents": {
-            "items": {
-              "$ref": "#/components/schemas/WorkspaceEmbedRelation"
-            },
-            "type": "array"
-          },
           "apps": {
             "additionalProperties": {
               "$ref": "#/components/schemas/App"
             },
             "type": "object"
+          },
+          "children": {
+            "items": {
+              "$ref": "#/components/schemas/WorkspaceEmbedRelation"
+            },
+            "type": "array"
           },
           "currentPermission": {
             "$ref": "#/components/schemas/Permission"
@@ -7697,6 +7691,12 @@
               "type": "integer"
             },
             "type": "object"
+          },
+          "parents": {
+            "items": {
+              "$ref": "#/components/schemas/WorkspaceEmbedRelation"
+            },
+            "type": "array"
           },
           "permissions": {
             "additionalProperties": {
@@ -7737,12 +7737,12 @@
             "format": "uuid",
             "type": "string"
           },
+          "workspace": {
+            "$ref": "#/components/schemas/Workspace"
+          },
           "workspaceId": {
             "format": "uuid",
             "type": "string"
-          },
-          "workspace": {
-            "$ref": "#/components/schemas/Workspace"
           }
         },
         "required": [
@@ -7758,14 +7758,14 @@
             "format": "uuid",
             "type": "string"
           },
-          "teamId": {
-            "format": "uuid",
-            "type": "string"
-          },
           "defaultPermission": {
             "$ref": "#/components/schemas/Permission"
           },
           "name": {
+            "type": "string"
+          },
+          "teamId": {
+            "format": "uuid",
             "type": "string"
           },
           "createdAt": {
@@ -7832,14 +7832,14 @@
       },
       "WorkspaceGroupBulkCreate": {
         "properties": {
+          "resource": {
+            "$ref": "#/components/schemas/WorkspaceGroup"
+          },
           "type": {
             "enum": [
               "create"
             ],
             "type": "string"
-          },
-          "resource": {
-            "$ref": "#/components/schemas/WorkspaceGroup"
           }
         },
         "required": [
@@ -7875,14 +7875,14 @@
             "format": "uuid",
             "type": "string"
           },
+          "transform": {
+            "$ref": "#/components/schemas/JsonPatch"
+          },
           "type": {
             "enum": [
               "patch"
             ],
             "type": "string"
-          },
-          "transform": {
-            "$ref": "#/components/schemas/JsonPatch"
           }
         },
         "required": [
@@ -7899,14 +7899,14 @@
             "format": "uuid",
             "type": "string"
           },
+          "resource": {
+            "$ref": "#/components/schemas/WorkspaceGroup"
+          },
           "type": {
             "enum": [
               "update"
             ],
             "type": "string"
-          },
-          "resource": {
-            "$ref": "#/components/schemas/WorkspaceGroup"
           }
         },
         "required": [
@@ -7966,14 +7966,14 @@
             "format": "uuid",
             "type": "string"
           },
-          "teamId": {
-            "format": "uuid",
-            "type": "string"
-          },
           "defaultPermission": {
             "$ref": "#/components/schemas/Permission"
           },
           "name": {
+            "type": "string"
+          },
+          "teamId": {
+            "format": "uuid",
             "type": "string"
           },
           "createdAt": {
@@ -8112,14 +8112,14 @@
       },
       "WorkspaceRelationBulkCreate": {
         "properties": {
+          "resource": {
+            "$ref": "#/components/schemas/WorkspaceRelation"
+          },
           "type": {
             "enum": [
               "create"
             ],
             "type": "string"
-          },
-          "resource": {
-            "$ref": "#/components/schemas/WorkspaceRelation"
           }
         },
         "required": [
@@ -8155,14 +8155,14 @@
             "format": "uuid",
             "type": "string"
           },
+          "transform": {
+            "$ref": "#/components/schemas/JsonPatch"
+          },
           "type": {
             "enum": [
               "patch"
             ],
             "type": "string"
-          },
-          "transform": {
-            "$ref": "#/components/schemas/JsonPatch"
           }
         },
         "required": [
@@ -8179,14 +8179,14 @@
             "format": "uuid",
             "type": "string"
           },
+          "resource": {
+            "$ref": "#/components/schemas/WorkspaceRelation"
+          },
           "type": {
             "enum": [
               "update"
             ],
             "type": "string"
-          },
-          "resource": {
-            "$ref": "#/components/schemas/WorkspaceRelation"
           }
         },
         "required": [
@@ -8417,10 +8417,6 @@
       },
       "WorkspaceRelationsSetRequest": {
         "properties": {
-          "workspaceId": {
-            "format": "uuid",
-            "type": "string"
-          },
           "childIds": {
             "items": {
               "format": "uuid",
@@ -8436,6 +8432,10 @@
             },
             "type": "array",
             "uniqueItems": true
+          },
+          "workspaceId": {
+            "format": "uuid",
+            "type": "string"
           }
         },
         "required": [
@@ -8740,11 +8740,6 @@
             "format": "uuid",
             "type": "string"
           },
-          "teamId": {
-            "description": "Id of the team this workspace belongs to.",
-            "format": "uuid",
-            "type": "string"
-          },
           "alias": {
             "description": "A custom code of this workspace (e.g. PROD, DEV, etc), which is used to create aliases for items (e.g. DEV-123). Alias should consist of 1-10 uppercase letters, and should be unique within the team.",
             "type": "string"
@@ -8778,6 +8773,11 @@
           },
           "progressMode": {
             "$ref": "#/components/schemas/WorkspaceProgressMode"
+          },
+          "teamId": {
+            "description": "Id of the team this workspace belongs to.",
+            "format": "uuid",
+            "type": "string"
           },
           "createdAt": {
             "description": "Timestamp of when this workspace was created.",
@@ -8821,11 +8821,6 @@
             "format": "uuid",
             "type": "string"
           },
-          "teamId": {
-            "description": "Id of the team this workspace belongs to.",
-            "format": "uuid",
-            "type": "string"
-          },
           "alias": {
             "description": "A custom code of this workspace (e.g. PROD, DEV, etc), which is used to create aliases for items (e.g. DEV-123). Alias should consist of 1-10 uppercase letters, and should be unique within the team.",
             "type": "string"
@@ -8859,6 +8854,11 @@
           },
           "progressMode": {
             "$ref": "#/components/schemas/WorkspaceProgressMode"
+          },
+          "teamId": {
+            "description": "Id of the team this workspace belongs to.",
+            "format": "uuid",
+            "type": "string"
           },
           "createdAt": {
             "description": "Timestamp of when this workspace was created.",
@@ -8910,13 +8910,13 @@
       "WorkspaceWorkspaceMetadata": {
         "description": "Additional metadata about this workspace.",
         "properties": {
-          "templateId": {
-            "description": "Id of the template used to create this workspace.",
-            "type": "string"
-          },
           "duplicated": {
             "description": "Whether this workspace was duplicated from another workspace.",
             "type": "boolean"
+          },
+          "templateId": {
+            "description": "Id of the template used to create this workspace.",
+            "type": "string"
           },
           "templateWorkspaceRef": {
             "description": "Which specific workspace-instruction in the template was used to create this workspace.",
