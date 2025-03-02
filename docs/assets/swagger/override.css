@@ -1,0 +1,257 @@
+/* the CRUD tag is just metadata, let's hide it */
+.opblock-tag-section:has(#operations-tag-CRUD) {
+    display: none !important;
+}
+
+/* hide that weirdly looking border around the server selector */
+.swagger-ui .scheme-container {
+    box-shadow: none !important;
+}
+
+/* hide the swagger header */
+.topbar {
+    display: none !important;
+}
+
+.swagger-ui .info {
+    margin: 0;
+}
+.swagger-ui .info hgroup.main {
+    margin: 0 !important;
+}
+.swagger-ui .info a.link {
+    display: none;
+}
+.swagger-ui .info .title {
+    visibility: collapse;
+}
+.swagger-ui .info .title span {
+    visibility: visible;
+    margin-left: -210px;
+}
+.swagger-ui .info .title small {
+    background: #2c84fa;
+}
+.scheme-container {
+    padding: 10px 0 !important;
+}
+.swagger-ui .model-box {
+    background: none;
+}
+
+* {
+    box-sizing: border-box;
+}
+body {
+    margin: 0;
+}
+.main {
+    max-width: none !important;
+}
+.side-bar {
+    font-family: system-ui, -apple-system, blinkmacsystemfont, "Segoe UI", roboto, "Helvetica Neue", arial, sans-serif, "Segoe UI Emoji";
+    font-size: inherit;
+    line-height: 1.4;
+}
+.site-nav {
+    display: none
+}
+.site-nav.nav-open {
+    display: block
+}
+.side-bar a {
+    color: #2c84fa;
+    text-decoration: none;
+}
+.side-bar a:not([class]) {
+    text-decoration: underline;
+    text-decoration-color: #eeebee;
+    text-underline-offset: 2px;
+}
+
+.side-bar {
+    z-index: 0;
+    display: flex;
+    flex-wrap: wrap;
+    background-color: #f5f6fa
+}
+
+.nav-list {
+    padding: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    list-style: none;
+    font-family: system-ui, -apple-system, blinkmacsystemfont, "Segoe UI", roboto, "Helvetica Neue", arial, sans-serif, "Segoe UI Emoji";
+}
+.nav-list .nav-list-item .nav-list-link {
+    display: block;
+    min-height: 3rem;
+    padding-top: .25rem;
+    padding-bottom: .25rem;
+    line-height: 2.5rem;
+    padding-right: 3rem;
+    padding-left: 1rem;
+}
+.nav-list .nav-list-item .nav-list-link.active {
+    font-weight: 600;
+    text-decoration: none;
+}
+.nav-list .nav-list-item .nav-list-link:hover, .nav-list .nav-list-item .nav-list-link.active {
+    background-image: linear-gradient(-90deg, #ebedf5 0%, rgba(235, 237, 245, 0.8) 80%, rgba(235, 237, 245, 0) 100%);
+}
+
+.site-header {
+    display: flex;
+    min-height: 3.75rem;
+    align-items: center;
+}
+.site-nav, .site-header, .site-footer {
+    width: 100%;
+}
+
+.site-title {
+     padding-right: 1rem;
+     padding-left: 1rem;
+     flex-grow: 1;
+     display: flex;
+     height: 100%;
+     align-items: center;
+     padding-top: .75rem;
+     padding-bottom: .75rem;
+     color: #27262b;
+     font-size: 1.125rem !important;
+ }
+.site-logo {
+    width: 100%;
+    height: 100%;
+    background-image: url(/assets/logo.svg);
+    background-repeat: no-repeat;
+    background-position: left center;
+    background-size: contain;
+}
+.lh-tight {
+    line-height: 1.25;
+}
+
+.btn-reset {
+    background: none;
+    border: none;
+    margin: 0;
+    text-align: inherit;
+    font: inherit;
+    border-radius: 0;
+    appearance: none;
+}
+.site-button {
+    display: flex;
+    height: 100%;
+    padding: 1rem;
+    align-items: center;
+}
+
+.site-footer {
+    padding-right: 1rem;
+    padding-left: 1rem;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    color: #959396;
+    font-size: .6875rem !important;
+}
+
+@media (min-width: 66.5rem) {
+    .main {
+        margin-left: 16.5rem !important;
+    }
+    .side-bar {
+        min-width: 16.5rem !important;
+        width: auto !important;
+    }
+    .site-nav, .site-header, .site-footer {
+        width: 16.5rem;
+    }
+    .site-nav, .site-header, .site-footer {
+        width: 16.5rem;
+    }
+}
+
+@media (min-width: 50rem) {
+    .site-nav {
+        display:block;
+        padding-top: 3rem;
+        padding-bottom: 1rem;
+        overflow-y: auto;
+        flex: 1 1 auto
+    }
+    .side-bar {
+        flex-flow:column nowrap;
+        position: fixed;
+        width: 10.5rem !important;
+        height: 100%;
+        border-right: 1px solid #eeebee;
+        align-items: flex-end
+    }
+    .site-header {
+        height: 3.75rem;
+        max-height: 3.75rem;
+        border-bottom: 1px solid #eeebee;
+    }
+    .site-header .site-button {
+        display: none;
+    }
+    .site-title {
+        padding-top: .5rem;
+        padding-bottom: .5rem;
+    }
+    .site-title {
+        padding-right: 2rem;
+        padding-left: 2rem;
+    }
+
+    .nav-list .nav-list-item .nav-list-link {
+        min-height: 2rem;
+        line-height: 1.5rem;
+        padding-right: 2rem;
+        padding-left: 2rem;
+    }
+
+    .site-footer {
+        position: static;
+        justify-self: end;
+        padding-right: 2rem;
+        padding-left: 2rem;
+    }
+
+    .main {
+        position: relative;
+        max-width: 50rem;
+        margin-left: 10.5rem;
+    }
+}
+
+@media (min-width: 31.25rem) {
+    .site-title {
+        font-size: 1.5rem !important;
+        line-height: 1.25;
+    }
+    .nav-list .nav-list-item {
+        font-size: .875rem !important;
+    }
+    .site-footer {
+        font-size: .75rem !important;
+    }
+}
+
+@media print {
+    .site-footer,.site-button,#edit-this-page,#back-to-top,.site-nav,.main-header {
+        display: none !important
+    }
+
+    .side-bar {
+        width: 100%;
+        height: auto;
+        border-right: 0 !important
+    }
+}
