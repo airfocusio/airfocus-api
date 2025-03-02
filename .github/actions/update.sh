@@ -4,7 +4,7 @@ DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &> /dev/null && pwd)"
 cd "$DIR/../.."
 
 OPENAPI_URL="https://app.airfocus.com/api/docs/openapi.json"
-OPENAPI_JSON=$(curl -fsSL "$OPENAPI_URL" | jq --sort-keys -r)
+OPENAPI_JSON=$(curl -fsSL "$OPENAPI_URL" | jq -r)
 OPENAPI_VERSION=$(echo "$OPENAPI_JSON" | jq -r '.info.version')
 echo "$OPENAPI_JSON" > docs/openapi.json
 git add docs/openapi.json
