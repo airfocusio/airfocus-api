@@ -1,39 +1,38 @@
 ---
-layout: default
+layout: none
 title: Endpoints
 nav_order: 30
 search_exclude: true
 ---
+{% comment %}
+Note:
+On this page we want to combine Just The Docs (Jekyll) UI with Swagger UI.
+This creates a problem, that the Jekyll's CSS rules override some Swagger CSS rules, which results in a broken Swagger UI.
+We can not solve it by encapsulating Swagger UI in an iframe, because it would break the navigation.
+Therefore, we solve it by disabling the Jekyll layout (see "layout: none" above) and manually injecting Just The Docs sidebar next to the Swagger UI.
+The styles for the sidebar are copy-pasted from Just The Docs CSS into the "override.css" file.
+{% endcomment %}
 
-<style>
-    .main-header {
-        display: none !important;
-    }
-    .main {
-        max-width: none !important;
-    }
-    .main-content-wrap {
-        padding-top: 0;
-        padding-bottom: 0;
-        padding-right: 0;
-    }
-    #swagger-embed {
-        display: block;
-        overflow: scroll;
-        width: 100%;
-        height: 100dvh; /* % of viewport height */
-    }
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ page.title }}</title>
 
-    @media (min-width: 66.5rem) {
-        .main {
-            margin-left: 16.5rem !important;
-        }
-    }
-</style>
+    <link href="./assets/swagger/swagger-ui.css" rel="stylesheet">
+    <script src="./assets/swagger/swagger-ui-bundle.js"></script>
 
-<!--
-  Ideally, we could just inline the Swagger UI (its div-container with CSS and JS) into this page.
-  However, in that case the CSS of "Just The Docs" theme overrides some styles of Swagger UI and makes them look broken.
-  So, in order to isolate the Swagger UI styles from the rest of the page, we embed it as a nested document.
--->
-<object data="./swagger/index.html" type="text/html" id="swagger-embed"></object>
+    <link href="./assets/swagger/override.css" rel="stylesheet">
+    <script src="./assets/swagger/main.js"></script>
+</head>
+<body>
+{% include components/sidebar.html %}
+<div class="main">
+    <div class="main-content-wrap">
+        <div class="main-content">
+            &nbsp;<div id="swagger-ui"></div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
