@@ -227,49 +227,6 @@
         "title": "ChangeUserRoleRequest",
         "type": "object"
       },
-      "Comment": {
-        "properties": {
-          "content": {
-            "$ref": "#/components/schemas/RichText"
-          },
-          "createdAt": {
-            "format": "date-time",
-            "type": "string"
-          },
-          "id": {
-            "format": "uuid",
-            "type": "string"
-          },
-          "itemId": {
-            "format": "uuid",
-            "type": "string"
-          },
-          "lastUpdatedAt": {
-            "format": "date-time",
-            "type": "string"
-          },
-          "reactions": {
-            "items": {
-              "$ref": "#/components/schemas/CommentReaction"
-            },
-            "type": "array"
-          },
-          "userId": {
-            "format": "uuid",
-            "type": "string"
-          }
-        },
-        "required": [
-          "id",
-          "itemId",
-          "userId",
-          "content",
-          "createdAt",
-          "lastUpdatedAt"
-        ],
-        "title": "Comment",
-        "type": "object"
-      },
       "CommentBulkAction": {
         "discriminator": {
           "mapping": {
@@ -299,7 +256,7 @@
       "CommentBulkCreate": {
         "properties": {
           "resource": {
-            "$ref": "#/components/schemas/Comment"
+            "$ref": "#/components/schemas/ItemComment"
           },
           "type": {
             "enum": [
@@ -366,7 +323,7 @@
             "type": "string"
           },
           "resource": {
-            "$ref": "#/components/schemas/Comment"
+            "$ref": "#/components/schemas/ItemComment"
           },
           "type": {
             "enum": [
@@ -381,126 +338,6 @@
           "type"
         ],
         "title": "CommentBulkUpdate",
-        "type": "object"
-      },
-      "CommentEmbed": {
-        "title": "CommentEmbed",
-        "type": "object"
-      },
-      "CommentReaction": {
-        "properties": {
-          "emoji": {
-            "$ref": "#/components/schemas/CommentReactionEmoji"
-          },
-          "userIds": {
-            "items": {
-              "format": "uuid",
-              "type": "string"
-            },
-            "type": "array"
-          }
-        },
-        "required": [
-          "emoji"
-        ],
-        "title": "CommentReaction",
-        "type": "object"
-      },
-      "CommentReactionEmoji": {
-        "enum": [
-          "blue_heart",
-          "clap",
-          "confused",
-          "eyes",
-          "+1",
-          "rocket",
-          "thinking_face",
-          "white_check_mark"
-        ],
-        "title": "CommentReactionEmoji",
-        "type": "string"
-      },
-      "CommentSearchQuery": {
-        "properties": {
-          "itemId": {
-            "format": "uuid",
-            "type": "string"
-          }
-        },
-        "title": "CommentSearchQuery",
-        "type": "object"
-      },
-      "CommentWithCommentEmbed": {
-        "properties": {
-          "_embedded": {
-            "$ref": "#/components/schemas/CommentEmbed"
-          },
-          "content": {
-            "$ref": "#/components/schemas/RichText"
-          },
-          "createdAt": {
-            "format": "date-time",
-            "type": "string"
-          },
-          "id": {
-            "format": "uuid",
-            "type": "string"
-          },
-          "itemId": {
-            "format": "uuid",
-            "type": "string"
-          },
-          "lastUpdatedAt": {
-            "format": "date-time",
-            "type": "string"
-          },
-          "reactions": {
-            "items": {
-              "$ref": "#/components/schemas/CommentReaction"
-            },
-            "type": "array"
-          },
-          "userId": {
-            "format": "uuid",
-            "type": "string"
-          }
-        },
-        "required": [
-          "id",
-          "itemId",
-          "userId",
-          "content",
-          "createdAt",
-          "lastUpdatedAt",
-          "_embedded"
-        ],
-        "title": "CommentWithCommentEmbed",
-        "type": "object"
-      },
-      "CommentWithCommentEmbedOrNullList": {
-        "items": {
-          "$ref": "#/components/schemas/CommentWithCommentEmbed"
-        },
-        "title": "CommentWithCommentEmbedOrNullList",
-        "type": "array"
-      },
-      "CommentWithCommentEmbedPage": {
-        "properties": {
-          "items": {
-            "items": {
-              "$ref": "#/components/schemas/CommentWithCommentEmbed"
-            },
-            "type": "array"
-          },
-          "totalItems": {
-            "format": "int32",
-            "type": "integer"
-          }
-        },
-        "required": [
-          "totalItems"
-        ],
-        "title": "CommentWithCommentEmbedPage",
         "type": "object"
       },
       "CreateApiKeyRequest": {
@@ -545,7 +382,7 @@
             "type": "string"
           },
           "fromOrder": {
-            "description": "How this link is ordered in the list of links of the \"fromItem\".",
+            "description": "How this item-link is ordered in the list of links of the \"fromItem\".",
             "format": "int32",
             "type": "integer"
           },
@@ -554,7 +391,7 @@
             "type": "string"
           },
           "toOrder": {
-            "description": "How this link is ordered in the list of links of the \"toItem\".",
+            "description": "How this item-link is ordered in the list of links of the \"toItem\".",
             "format": "int32",
             "type": "integer"
           },
@@ -891,6 +728,20 @@
         ],
         "title": "DateRangeFieldWithFieldEmbed",
         "type": "object"
+      },
+      "Emoji": {
+        "enum": [
+          "blue_heart",
+          "clap",
+          "confused",
+          "eyes",
+          "+1",
+          "rocket",
+          "thinking_face",
+          "white_check_mark"
+        ],
+        "title": "Emoji",
+        "type": "string"
       },
       "ErrorResponse": {
         "description": "A general error response which is returned by the server for all handled errors.",
@@ -1506,16 +1357,19 @@
         "title": "GlobalSearchResultPage",
         "type": "object"
       },
-      "InboxCounter": {
+      "InboxViewCounter": {
         "properties": {
           "count": {
+            "description": "Number of items in the counter.",
             "format": "int32",
             "type": "integer"
           },
           "id": {
+            "description": "Machine-readable ID of the counter.",
             "type": "string"
           },
           "name": {
+            "description": "Human-readable name of the counter.",
             "type": "string"
           }
         },
@@ -1524,26 +1378,29 @@
           "name",
           "count"
         ],
-        "title": "InboxCounter",
+        "title": "InboxViewCounter",
         "type": "object"
       },
-      "InboxViewEndpointsInboxCountersRequest": {
+      "InboxViewCountersRequest": {
         "properties": {
           "archived": {
+            "description": "Whether archived items should be included or excluded from all the counters.",
             "type": "boolean"
           },
           "countAssigned": {
+            "description": "Whether to also additionally return a counter of items with assigned users.",
             "type": "boolean"
           },
           "filter": {
-            "$ref": "#/components/schemas/ItemSearchQueryFilter"
+            "$ref": "#/components/schemas/ItemSearchQueryFilter",
+            "description": "Custom filter to apply to the counted items. If not specified, then the default filter from the view settings is used."
           }
         },
         "required": [
           "countAssigned",
           "archived"
         ],
-        "title": "InboxViewEndpointsInboxCountersRequest",
+        "title": "InboxViewCountersRequest",
         "type": "object"
       },
       "InsightsFieldTypeSettings": {
@@ -2506,6 +2363,155 @@
         "title": "ItemColor",
         "type": "string"
       },
+      "ItemComment": {
+        "properties": {
+          "content": {
+            "$ref": "#/components/schemas/RichText"
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "itemId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "lastUpdatedAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "reactions": {
+            "items": {
+              "$ref": "#/components/schemas/ItemCommentReaction"
+            },
+            "type": "array"
+          },
+          "userId": {
+            "format": "uuid",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "itemId",
+          "userId",
+          "content",
+          "createdAt",
+          "lastUpdatedAt"
+        ],
+        "title": "ItemComment",
+        "type": "object"
+      },
+      "ItemCommentEmbed": {
+        "title": "ItemCommentEmbed",
+        "type": "object"
+      },
+      "ItemCommentReaction": {
+        "properties": {
+          "emoji": {
+            "$ref": "#/components/schemas/Emoji"
+          },
+          "userIds": {
+            "items": {
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": "array"
+          }
+        },
+        "required": [
+          "emoji"
+        ],
+        "title": "ItemCommentReaction",
+        "type": "object"
+      },
+      "ItemCommentSearchQuery": {
+        "properties": {
+          "itemId": {
+            "format": "uuid",
+            "type": "string"
+          }
+        },
+        "title": "ItemCommentSearchQuery",
+        "type": "object"
+      },
+      "ItemCommentWithItemCommentEmbed": {
+        "properties": {
+          "_embedded": {
+            "$ref": "#/components/schemas/ItemCommentEmbed"
+          },
+          "content": {
+            "$ref": "#/components/schemas/RichText"
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "itemId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "lastUpdatedAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "reactions": {
+            "items": {
+              "$ref": "#/components/schemas/ItemCommentReaction"
+            },
+            "type": "array"
+          },
+          "userId": {
+            "format": "uuid",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "itemId",
+          "userId",
+          "content",
+          "createdAt",
+          "lastUpdatedAt",
+          "_embedded"
+        ],
+        "title": "ItemCommentWithItemCommentEmbed",
+        "type": "object"
+      },
+      "ItemCommentWithItemCommentEmbedOrNullList": {
+        "items": {
+          "$ref": "#/components/schemas/ItemCommentWithItemCommentEmbed"
+        },
+        "title": "ItemCommentWithItemCommentEmbedOrNullList",
+        "type": "array"
+      },
+      "ItemCommentWithItemCommentEmbedPage": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/ItemCommentWithItemCommentEmbed"
+            },
+            "type": "array"
+          },
+          "totalItems": {
+            "format": "int32",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "totalItems"
+        ],
+        "title": "ItemCommentWithItemCommentEmbedPage",
+        "type": "object"
+      },
       "ItemConstraint": {
         "discriminator": {
           "mapping": {
@@ -2868,6 +2874,20 @@
         "title": "ItemLinkBulkUpdate",
         "type": "object"
       },
+      "ItemLinkConstraint": {
+        "discriminator": {
+          "mapping": {
+            "undeletable": "#/components/schemas/ItemLinkConstraintUndeletable"
+          },
+          "propertyName": "type"
+        },
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/ItemLinkConstraintUndeletable"
+          }
+        ],
+        "title": "ItemLinkConstraint"
+      },
       "ItemLinkConstraintUndeletable": {
         "properties": {
           "extensionId": {
@@ -2891,7 +2911,7 @@
           },
           "constraints": {
             "items": {
-              "$ref": "#/components/schemas/LinkConstraint"
+              "$ref": "#/components/schemas/ItemLinkConstraint"
             },
             "type": "array"
           },
@@ -2932,15 +2952,15 @@
         "type": "object"
       },
       "ItemLinkSearchQuery": {
-        "description": "Query-parameters for searching links.",
+        "description": "Query-parameters for searching item-links.",
         "properties": {
           "includeArchived": {
             "default": false,
-            "description": "Also include links which connect archived items.",
+            "description": "Also include item-links which connect archived items.",
             "type": "boolean"
           },
           "itemIds": {
-            "description": "Return only those links which connect the specified items.",
+            "description": "Return only those item-links which connect the specified items.",
             "items": {
               "format": "uuid",
               "type": "string"
@@ -2949,7 +2969,7 @@
             "uniqueItems": true
           },
           "workspaceIds": {
-            "description": "Return only those links which connect items in the specified workspaces.",
+            "description": "Return only those item-links which connect items in the specified workspaces.",
             "items": {
               "format": "uuid",
               "type": "string"
@@ -2962,7 +2982,7 @@
         "type": "object"
       },
       "ItemLinkType": {
-        "description": "Type of a link",
+        "description": "Type of an item-link",
         "enum": [
           "dependency",
           "duplicate",
@@ -2981,7 +3001,7 @@
             "type": "string"
           },
           "fromOrder": {
-            "description": "How this link is ordered in the list of links of the \"fromItem\".",
+            "description": "How this item-link is ordered in the list of links of the \"fromItem\".",
             "format": "int32",
             "type": "integer"
           },
@@ -2994,7 +3014,7 @@
             "type": "string"
           },
           "toOrder": {
-            "description": "How this link is ordered in the list of links of the \"toItem\".",
+            "description": "How this item-link is ordered in the list of links of the \"toItem\".",
             "format": "int32",
             "type": "integer"
           },
@@ -3378,6 +3398,23 @@
           },
           "propertyName": "type"
         },
+        "examples": [
+          {
+            "inner": [
+              {
+                "caseSensitive": false,
+                "mode": "contain",
+                "text": "foo",
+                "type": "name"
+              },
+              {
+                "mode": "defined",
+                "type": "assignees"
+              }
+            ],
+            "type": "and"
+          }
+        ],
         "oneOf": [
           {
             "$ref": "#/components/schemas/ItemSearchQueryFilterAnd"
@@ -4570,20 +4607,6 @@
         ],
         "title": "KickUserRequest",
         "type": "object"
-      },
-      "LinkConstraint": {
-        "discriminator": {
-          "mapping": {
-            "undeletable": "#/components/schemas/ItemLinkConstraintUndeletable"
-          },
-          "propertyName": "type"
-        },
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/ItemLinkConstraintUndeletable"
-          }
-        ],
-        "title": "LinkConstraint"
       },
       "Milestone": {
         "properties": {
@@ -6877,7 +6900,7 @@
             "type": "string"
           },
           "fromOrder": {
-            "description": "How this link is ordered in the list of links of the \"fromItem\".",
+            "description": "How this item-link is ordered in the list of links of the \"fromItem\".",
             "format": "int32",
             "type": "integer"
           },
@@ -6886,7 +6909,7 @@
             "type": "string"
           },
           "toOrder": {
-            "description": "How this link is ordered in the list of links of the \"toItem\".",
+            "description": "How this item-link is ordered in the list of links of the \"toItem\".",
             "format": "int32",
             "type": "integer"
           },
@@ -8943,7 +8966,7 @@
   },
   "info": {
     "title": "airfocus API",
-    "version": "1.0.0-beta.34.5.2"
+    "version": "1.0.0-beta.34.6.5"
   },
   "openapi": "3.1.0",
   "paths": {
@@ -11072,8 +11095,8 @@
     },
     "/api/workspaces/extensions/views/inbox/{viewId}/counters": {
       "post": {
-        "description": "Returns counters for each.",
-        "operationId": "retrieveInboxCounters",
+        "description": "Requirements:<br/>- auth-client scopes: \"workspace:read\"<br/>- team features: \"view:inbox\"<br/>- user permission: \"read\" or higher",
+        "operationId": "retrieveInboxViewCounters",
         "parameters": [
           {
             "deprecated": true,
@@ -11099,7 +11122,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/InboxViewEndpointsInboxCountersRequest"
+                "$ref": "#/components/schemas/InboxViewCountersRequest"
               }
             }
           },
@@ -11111,20 +11134,81 @@
               "application/json": {
                 "schema": {
                   "items": {
-                    "$ref": "#/components/schemas/InboxCounter"
+                    "$ref": "#/components/schemas/InboxViewCounter"
                   },
                   "type": "array"
                 }
               }
             },
             "description": ""
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "not_found",
+                  "data": {},
+                  "message": "Unknown entity 'fe4c0f30-aa35-3c41-99f9-a5f69c8c4192'"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If path parameters are invalid or payload is invalid or resource does not exist."
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "missing_token",
+                  "data": {},
+                  "message": "Access token is missing"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If missing authentication token."
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "forbidden",
+                  "data": {},
+                  "message": "Insufficient permission"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If user does not have the required permission, or user's team does not have access to the required features, or authenticated client does not have the required access scopes."
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "unknown_error",
+                  "data": {},
+                  "message": "Server error"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If any other error happens."
           }
         },
         "security": [
           {
             "httpAuth": []
           }
-        ]
+        ],
+        "summary": "Retrieve counters of items in each tab of the view."
       }
     },
     "/api/workspaces/fields/add-team-field": {
@@ -15342,12 +15426,12 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/Comment"
+                "$ref": "#/components/schemas/ItemComment"
               }
             },
             "application/json+markdown": {
               "schema": {
-                "$ref": "#/components/schemas/Comment"
+                "$ref": "#/components/schemas/ItemComment"
               }
             }
           },
@@ -15358,12 +15442,12 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/CommentWithCommentEmbed"
+                  "$ref": "#/components/schemas/ItemCommentWithItemCommentEmbed"
                 }
               },
               "application/json+markdown": {
                 "schema": {
-                  "$ref": "#/components/schemas/CommentWithCommentEmbed"
+                  "$ref": "#/components/schemas/ItemCommentWithItemCommentEmbed"
                 }
               }
             },
@@ -15443,12 +15527,12 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/CommentWithCommentEmbedOrNullList"
+                  "$ref": "#/components/schemas/ItemCommentWithItemCommentEmbedOrNullList"
                 }
               },
               "application/json+markdown": {
                 "schema": {
-                  "$ref": "#/components/schemas/CommentWithCommentEmbedOrNullList"
+                  "$ref": "#/components/schemas/ItemCommentWithItemCommentEmbedOrNullList"
                 }
               }
             },
@@ -15521,12 +15605,12 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/CommentWithCommentEmbedOrNullList"
+                  "$ref": "#/components/schemas/ItemCommentWithItemCommentEmbedOrNullList"
                 }
               },
               "application/json+markdown": {
                 "schema": {
-                  "$ref": "#/components/schemas/CommentWithCommentEmbedOrNullList"
+                  "$ref": "#/components/schemas/ItemCommentWithItemCommentEmbedOrNullList"
                 }
               }
             },
@@ -15635,7 +15719,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/CommentSearchQuery"
+                "$ref": "#/components/schemas/ItemCommentSearchQuery"
               }
             }
           },
@@ -15646,12 +15730,12 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/CommentWithCommentEmbedPage"
+                  "$ref": "#/components/schemas/ItemCommentWithItemCommentEmbedPage"
                 }
               },
               "application/json+markdown": {
                 "schema": {
-                  "$ref": "#/components/schemas/CommentWithCommentEmbedPage"
+                  "$ref": "#/components/schemas/ItemCommentWithItemCommentEmbedPage"
                 }
               }
             },
@@ -15778,12 +15862,12 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/CommentWithCommentEmbed"
+                  "$ref": "#/components/schemas/ItemCommentWithItemCommentEmbed"
                 }
               },
               "application/json+markdown": {
                 "schema": {
-                  "$ref": "#/components/schemas/CommentWithCommentEmbed"
+                  "$ref": "#/components/schemas/ItemCommentWithItemCommentEmbed"
                 }
               }
             },
@@ -15859,12 +15943,12 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/CommentWithCommentEmbed"
+                  "$ref": "#/components/schemas/ItemCommentWithItemCommentEmbed"
                 }
               },
               "application/json+markdown": {
                 "schema": {
-                  "$ref": "#/components/schemas/CommentWithCommentEmbed"
+                  "$ref": "#/components/schemas/ItemCommentWithItemCommentEmbed"
                 }
               }
             },
@@ -15929,12 +16013,12 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/Comment"
+                "$ref": "#/components/schemas/ItemComment"
               }
             },
             "application/json+markdown": {
               "schema": {
-                "$ref": "#/components/schemas/Comment"
+                "$ref": "#/components/schemas/ItemComment"
               }
             }
           },
@@ -15945,12 +16029,12 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/CommentWithCommentEmbed"
+                  "$ref": "#/components/schemas/ItemCommentWithItemCommentEmbed"
                 }
               },
               "application/json+markdown": {
                 "schema": {
-                  "$ref": "#/components/schemas/CommentWithCommentEmbed"
+                  "$ref": "#/components/schemas/ItemCommentWithItemCommentEmbed"
                 }
               }
             },
@@ -16017,7 +16101,7 @@
             "name": "emojiCode",
             "required": true,
             "schema": {
-              "$ref": "#/components/schemas/CommentReactionEmoji"
+              "$ref": "#/components/schemas/Emoji"
             }
           }
         ],
@@ -16083,7 +16167,7 @@
             "name": "emojiCode",
             "required": true,
             "schema": {
-              "$ref": "#/components/schemas/CommentReactionEmoji"
+              "$ref": "#/components/schemas/Emoji"
             }
           }
         ],
@@ -17705,7 +17789,7 @@
     },
     "/api/workspaces/{workspaceId}/links": {
       "post": {
-        "description": "Returns newly created item link with its sanitised data.<br/>Requirements:<br/>- auth-client scopes: \"workspace\"<br/>- user permission: \"write\" or higher",
+        "description": "Returns newly created item-link with its sanitised data.<br/>Requirements:<br/>- auth-client scopes: \"workspace\"<br/>- user permission: \"write\" or higher",
         "operationId": "createItemLink",
         "parameters": [
           {
@@ -17719,7 +17803,7 @@
             }
           },
           {
-            "description": "ID of the workspace which contains the managed links.",
+            "description": "ID of the workspace which contains the managed item-links.",
             "in": "path",
             "name": "workspaceId",
             "required": true,
@@ -17816,16 +17900,16 @@
             "httpAuth": []
           }
         ],
-        "summary": "Create a new item link",
+        "summary": "Create a new item-link",
         "tags": [
           "CRUD",
-          "ItemLinks"
+          "Items:Links"
         ]
       }
     },
     "/api/workspaces/{workspaceId}/links/bulk": {
       "post": {
-        "description": "Accepts a list of create/update/patch/delete operations (see the request model for more details).<br/>\nEach operation can target a single or multiple item links.<br/>\nReturns a list of results for each input operation including errors.<br/>\nGuarantees that the size and order of the returned results matches the input list of operations.<br/>Requirements:<br/>- auth-client scopes: \"workspace\"<br/>- user permission: \"write\" or higher",
+        "description": "Accepts a list of create/update/patch/delete operations (see the request model for more details).<br/>\nEach operation can target a single or multiple item-links.<br/>\nReturns a list of results for each input operation including errors.<br/>\nGuarantees that the size and order of the returned results matches the input list of operations.<br/>Requirements:<br/>- auth-client scopes: \"workspace\"<br/>- user permission: \"write\" or higher",
         "operationId": "bulkItemLinks",
         "parameters": [
           {
@@ -17839,7 +17923,7 @@
             }
           },
           {
-            "description": "ID of the workspace which contains the managed links.",
+            "description": "ID of the workspace which contains the managed item-links.",
             "in": "path",
             "name": "workspaceId",
             "required": true,
@@ -17939,16 +18023,16 @@
             "httpAuth": []
           }
         ],
-        "summary": "Perform multiple operations with item links",
+        "summary": "Perform multiple operations with item-links",
         "tags": [
           "CRUD",
-          "ItemLinks"
+          "Items:Links"
         ]
       }
     },
     "/api/workspaces/{workspaceId}/links/list": {
       "post": {
-        "description": "Returns a list of item links resolved for the provided IDs.<br/>\nDoes not fail if any of the requested item links is not found or not accessible - instead it returns corresponding error-object instead of an entity-object.<br/>\nGuarantees that the size and order of the returned list matches the requested IDs.<br/>Requirements:<br/>- auth-client scopes: \"workspace:read\"<br/>- user permission: \"read\" or higher",
+        "description": "Returns a list of item-links resolved for the provided IDs.<br/>\nDoes not fail if any of the requested item-links is not found or not accessible - instead it returns corresponding error-object instead of an entity-object.<br/>\nGuarantees that the size and order of the returned list matches the requested IDs.<br/>Requirements:<br/>- auth-client scopes: \"workspace:read\"<br/>- user permission: \"read\" or higher",
         "operationId": "listItemLinks",
         "parameters": [
           {
@@ -17962,7 +18046,7 @@
             }
           },
           {
-            "description": "ID of the workspace which contains the managed links.",
+            "description": "ID of the workspace which contains the managed item-links.",
             "in": "path",
             "name": "workspaceId",
             "required": true,
@@ -18063,16 +18147,16 @@
             "httpAuth": []
           }
         ],
-        "summary": "Retrieve multiple item links by their IDs",
+        "summary": "Retrieve multiple item-links by their IDs",
         "tags": [
           "CRUD",
-          "ItemLinks"
+          "Items:Links"
         ]
       }
     },
     "/api/workspaces/{workspaceId}/links/search": {
       "post": {
-        "description": "Returns all item links or searches item links by query. Always returns only item links which are accessible by the current user.<br/>Requirements:<br/>- auth-client scopes: \"workspace:read\"<br/>- user permission: \"read\" or higher",
+        "description": "Returns all item-links or searches item-links by query. Always returns only item-links which are accessible by the current user.<br/>Requirements:<br/>- auth-client scopes: \"workspace:read\"<br/>- user permission: \"read\" or higher",
         "operationId": "searchItemLinks",
         "parameters": [
           {
@@ -18086,7 +18170,7 @@
             }
           },
           {
-            "description": "ID of the workspace which contains the managed links.",
+            "description": "ID of the workspace which contains the managed item-links.",
             "in": "path",
             "name": "workspaceId",
             "required": true,
@@ -18234,16 +18318,16 @@
             "httpAuth": []
           }
         ],
-        "summary": "Retrieve or search item links",
+        "summary": "Retrieve or search item-links",
         "tags": [
           "CRUD",
-          "ItemLinks"
+          "Items:Links"
         ]
       }
     },
     "/api/workspaces/{workspaceId}/links/{itemLinkId}": {
       "delete": {
-        "description": "Returns empty result if the item link was successfully deleted.<br/>Requirements:<br/>- auth-client scopes: \"workspace\"<br/>- user permission: \"write\" or higher",
+        "description": "Returns empty result if the item-link was successfully deleted.<br/>Requirements:<br/>- auth-client scopes: \"workspace\"<br/>- user permission: \"write\" or higher",
         "operationId": "deleteItemLink",
         "parameters": [
           {
@@ -18257,7 +18341,7 @@
             }
           },
           {
-            "description": "ID of the workspace which contains the managed links.",
+            "description": "ID of the workspace which contains the managed item-links.",
             "in": "path",
             "name": "workspaceId",
             "required": true,
@@ -18346,14 +18430,14 @@
             "httpAuth": []
           }
         ],
-        "summary": "Delete an existing item link",
+        "summary": "Delete an existing item-link",
         "tags": [
           "CRUD",
-          "ItemLinks"
+          "Items:Links"
         ]
       },
       "get": {
-        "description": "Returns found item link.<br/>Requirements:<br/>- auth-client scopes: \"workspace:read\"<br/>- user permission: \"read\" or higher",
+        "description": "Returns found item-link.<br/>Requirements:<br/>- auth-client scopes: \"workspace:read\"<br/>- user permission: \"read\" or higher",
         "operationId": "retrieveItemLink",
         "parameters": [
           {
@@ -18367,7 +18451,7 @@
             }
           },
           {
-            "description": "ID of the workspace which contains the managed links.",
+            "description": "ID of the workspace which contains the managed item-links.",
             "in": "path",
             "name": "workspaceId",
             "required": true,
@@ -18463,14 +18547,14 @@
             "httpAuth": []
           }
         ],
-        "summary": "Retrieve a single item link by its ID",
+        "summary": "Retrieve a single item-link by its ID",
         "tags": [
           "CRUD",
-          "ItemLinks"
+          "Items:Links"
         ]
       },
       "patch": {
-        "description": "Returns the whole updated item link with its sanitised data.<br/>Requirements:<br/>- auth-client scopes: \"workspace\"<br/>- user permission: \"write\" or higher",
+        "description": "Returns the whole updated item-link with its sanitised data.<br/>Requirements:<br/>- auth-client scopes: \"workspace\"<br/>- user permission: \"write\" or higher",
         "operationId": "patchItemLink",
         "parameters": [
           {
@@ -18484,7 +18568,7 @@
             }
           },
           {
-            "description": "ID of the workspace which contains the managed links.",
+            "description": "ID of the workspace which contains the managed item-links.",
             "in": "path",
             "name": "workspaceId",
             "required": true,
@@ -18590,14 +18674,14 @@
             "httpAuth": []
           }
         ],
-        "summary": "Patch an existing item link",
+        "summary": "Patch an existing item-link",
         "tags": [
           "CRUD",
-          "ItemLinks"
+          "Items:Links"
         ]
       },
       "put": {
-        "description": "Returns updated item link with its sanitised data.<br/>Requirements:<br/>- auth-client scopes: \"workspace\"<br/>- user permission: \"write\" or higher",
+        "description": "Returns updated item-link with its sanitised data.<br/>Requirements:<br/>- auth-client scopes: \"workspace\"<br/>- user permission: \"write\" or higher",
         "operationId": "updateItemLink",
         "parameters": [
           {
@@ -18611,7 +18695,7 @@
             }
           },
           {
-            "description": "ID of the workspace which contains the managed links.",
+            "description": "ID of the workspace which contains the managed item-links.",
             "in": "path",
             "name": "workspaceId",
             "required": true,
@@ -18717,10 +18801,10 @@
             "httpAuth": []
           }
         ],
-        "summary": "Update an existing item link",
+        "summary": "Update an existing item-link",
         "tags": [
           "CRUD",
-          "ItemLinks"
+          "Items:Links"
         ]
       }
     },
@@ -19768,16 +19852,16 @@
       "name": "ItemAttachments"
     },
     {
-      "description": "Endpoints for linking/unlinking items.",
-      "name": "ItemLinks"
-    },
-    {
       "description": "Manage item relations (hierarchy).",
       "name": "ItemRelations"
     },
     {
       "description": "Endpoints for managing items.",
       "name": "Items"
+    },
+    {
+      "description": "Endpoints for linking/unlinking items.",
+      "name": "Items:Links"
     },
     {
       "description": "Manage milestones in a single workspace.",
@@ -19794,6 +19878,10 @@
     {
       "description": "Endpoints for creating workspaces via templates.",
       "name": "Templates"
+    },
+    {
+      "description": "Additional endpoints for the Inbox View.",
+      "name": "Views:Inbox"
     },
     {
       "description": "Manage workspace groups.",
