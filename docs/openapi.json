@@ -592,6 +592,30 @@
         "title": "CreateItemRequestWithMD",
         "type": "object"
       },
+      "CreateMilestoneRequest": {
+        "properties": {
+          "date": {
+            "format": "date",
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "timezone": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "description",
+          "date"
+        ],
+        "title": "CreateMilestoneRequest",
+        "type": "object"
+      },
       "CreateUserInviteRequest": {
         "properties": {
           "userId": {
@@ -4608,50 +4632,6 @@
         "title": "KickUserRequest",
         "type": "object"
       },
-      "Milestone": {
-        "properties": {
-          "createdAt": {
-            "format": "date-time",
-            "type": "string"
-          },
-          "date": {
-            "format": "date",
-            "type": "string"
-          },
-          "description": {
-            "type": "string"
-          },
-          "id": {
-            "format": "uuid",
-            "type": "string"
-          },
-          "lastUpdatedAt": {
-            "format": "date-time",
-            "type": "string"
-          },
-          "name": {
-            "type": "string"
-          },
-          "timezone": {
-            "type": "string"
-          },
-          "workspaceId": {
-            "format": "uuid",
-            "type": "string"
-          }
-        },
-        "required": [
-          "id",
-          "workspaceId",
-          "name",
-          "description",
-          "date",
-          "createdAt",
-          "lastUpdatedAt"
-        ],
-        "title": "Milestone",
-        "type": "object"
-      },
       "MilestoneBulkAction": {
         "discriminator": {
           "mapping": {
@@ -4681,7 +4661,7 @@
       "MilestoneBulkCreate": {
         "properties": {
           "resource": {
-            "$ref": "#/components/schemas/Milestone"
+            "$ref": "#/components/schemas/CreateMilestoneRequest"
           },
           "type": {
             "enum": [
@@ -4748,7 +4728,7 @@
             "type": "string"
           },
           "resource": {
-            "$ref": "#/components/schemas/Milestone"
+            "$ref": "#/components/schemas/UpdateMilestoneRequest"
           },
           "type": {
             "enum": [
@@ -7110,6 +7090,30 @@
         "title": "UpdateItemRequestWithMD",
         "type": "object"
       },
+      "UpdateMilestoneRequest": {
+        "properties": {
+          "date": {
+            "format": "date",
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "timezone": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "description",
+          "date"
+        ],
+        "title": "UpdateMilestoneRequest",
+        "type": "object"
+      },
       "UpdateTeamFlagsRequest": {
         "properties": {
           "enableAi": {
@@ -8966,7 +8970,7 @@
   },
   "info": {
     "title": "airfocus API",
-    "version": "1.0.0-beta.34.6.5"
+    "version": "1.0.0-beta.34.6.8"
   },
   "openapi": "3.1.0",
   "paths": {
@@ -18810,7 +18814,7 @@
     },
     "/api/workspaces/{workspaceId}/milestones": {
       "post": {
-        "description": "Returns newly created milestone with its sanitised data.<br/>Requirements:<br/>  - auth-client scopes: \"workspace\"<br/>  - user permission: \"write\" or higher<br/>Returns:<br/>403 if user does not have the required permission",
+        "description": "Returns newly created milestone with its sanitised data.<br/>Requirements:<br/>- auth-client scopes: \"workspace\"<br/>- user permission: \"write\" or higher",
         "operationId": "createMilestone",
         "parameters": [
           {
@@ -18824,7 +18828,7 @@
             }
           },
           {
-            "description": "ID of the workspace which contains the managed attachments.",
+            "description": "ID of the workspace which contains the managed milestones.",
             "in": "path",
             "name": "workspaceId",
             "required": true,
@@ -18838,7 +18842,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/Milestone"
+                "$ref": "#/components/schemas/CreateMilestoneRequest"
               }
             }
           },
@@ -18855,15 +18859,65 @@
             },
             "description": ""
           },
-          "default": {
+          "400": {
             "content": {
               "application/json": {
+                "example": {
+                  "code": "bad_request",
+                  "data": {},
+                  "message": "Request body is invalid"
+                },
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             },
-            "description": ""
+            "description": "If payload is invalid."
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "missing_token",
+                  "data": {},
+                  "message": "Access token is missing"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If missing authentication token."
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "forbidden",
+                  "data": {},
+                  "message": "Insufficient permission"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If user does not have the required permission, or authenticated client does not have the required access scopes."
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "unknown_error",
+                  "data": {},
+                  "message": "Server error"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If any other error happens."
           }
         },
         "security": [
@@ -18880,7 +18934,7 @@
     },
     "/api/workspaces/{workspaceId}/milestones/bulk": {
       "post": {
-        "description": "Accepts a list of create/update/patch/delete operations (see the request model for more details).<br/>\nEach operations can target a single or multiple milestones.<br/>\nReturns a list of results for each input operation including errors.<br/>\nGuarantees that the size and order of the returned results matches the input list of operations.<br/>Requirements:<br/>  - auth-client scopes: \"workspace\"<br/>  - user permission: \"write\" or higher<br/>Returns:<br/>403 if user does not have the required permission",
+        "description": "Accepts a list of create/update/patch/delete operations (see the request model for more details).<br/>\nEach operation can target a single or multiple milestones.<br/>\nReturns a list of results for each input operation including errors.<br/>\nGuarantees that the size and order of the returned results matches the input list of operations.<br/>Requirements:<br/>- auth-client scopes: \"workspace\"<br/>- user permission: \"write\" or higher",
         "operationId": "bulkMilestones",
         "parameters": [
           {
@@ -18894,7 +18948,7 @@
             }
           },
           {
-            "description": "ID of the workspace which contains the managed attachments.",
+            "description": "ID of the workspace which contains the managed milestones.",
             "in": "path",
             "name": "workspaceId",
             "required": true,
@@ -18928,15 +18982,65 @@
             },
             "description": ""
           },
-          "default": {
+          "400": {
             "content": {
               "application/json": {
+                "example": {
+                  "code": "bad_request",
+                  "data": {},
+                  "message": "Request body is invalid"
+                },
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             },
-            "description": ""
+            "description": "If payload is invalid."
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "missing_token",
+                  "data": {},
+                  "message": "Access token is missing"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If missing authentication token."
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "forbidden",
+                  "data": {},
+                  "message": "Insufficient permission"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If user does not have the required permission, or authenticated client does not have the required access scopes."
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "unknown_error",
+                  "data": {},
+                  "message": "Server error"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If any other error happens."
           }
         },
         "security": [
@@ -18953,7 +19057,7 @@
     },
     "/api/workspaces/{workspaceId}/milestones/list": {
       "post": {
-        "description": "Returns a list of milestones.<br/>\nReturns null for those milestones which are not found or not accessible.<br/>\nGuarantees that the size and order of the returned list matches the requested IDs.<br/>Requirements:<br/>  - auth-client scopes: \"workspace:read\"<br/>  - user permission: \"read\" or higher<br/>Returns:<br/>403 if user does not have the required permission",
+        "description": "Returns a list of milestones resolved for the provided IDs.<br/>\nDoes not fail if any of the requested milestones is not found or not accessible - instead it returns corresponding error-object instead of an entity-object.<br/>\nGuarantees that the size and order of the returned list matches the requested IDs.<br/>Requirements:<br/>- auth-client scopes: \"workspace:read\"<br/>- user permission: \"read\" or higher",
         "operationId": "listMilestones",
         "parameters": [
           {
@@ -18967,7 +19071,7 @@
             }
           },
           {
-            "description": "ID of the workspace which contains the managed attachments.",
+            "description": "ID of the workspace which contains the managed milestones.",
             "in": "path",
             "name": "workspaceId",
             "required": true,
@@ -19002,15 +19106,65 @@
             },
             "description": ""
           },
-          "default": {
+          "400": {
             "content": {
               "application/json": {
+                "example": {
+                  "code": "bad_request",
+                  "data": {},
+                  "message": "Request body is invalid"
+                },
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             },
-            "description": ""
+            "description": "If payload is invalid."
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "missing_token",
+                  "data": {},
+                  "message": "Access token is missing"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If missing authentication token."
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "forbidden",
+                  "data": {},
+                  "message": "Insufficient permission"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If user does not have the required permission, or authenticated client does not have the required access scopes."
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "unknown_error",
+                  "data": {},
+                  "message": "Server error"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If any other error happens."
           }
         },
         "security": [
@@ -19027,7 +19181,7 @@
     },
     "/api/workspaces/{workspaceId}/milestones/search": {
       "post": {
-        "description": "Returns all milestones or searches milestones by query. Always returns only milestones which are accessible by the current user.<br/>Requirements:<br/>  - auth-client scopes: \"workspace:read\"<br/>  - user permission: \"read\" or higher<br/>Returns:<br/>403 if user does not have the required permission",
+        "description": "Returns all milestones or searches milestones by query. Always returns only milestones which are accessible by the current user.<br/>Requirements:<br/>- auth-client scopes: \"workspace:read\"<br/>- user permission: \"read\" or higher",
         "operationId": "searchMilestones",
         "parameters": [
           {
@@ -19041,7 +19195,7 @@
             }
           },
           {
-            "description": "ID of the workspace which contains the managed attachments.",
+            "description": "ID of the workspace which contains the managed milestones.",
             "in": "path",
             "name": "workspaceId",
             "required": true,
@@ -19123,15 +19277,65 @@
             },
             "description": ""
           },
-          "default": {
+          "400": {
             "content": {
               "application/json": {
+                "example": {
+                  "code": "bad_request",
+                  "data": {},
+                  "message": "Request body is invalid"
+                },
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             },
-            "description": ""
+            "description": "If payload is invalid."
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "missing_token",
+                  "data": {},
+                  "message": "Access token is missing"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If missing authentication token."
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "forbidden",
+                  "data": {},
+                  "message": "Insufficient permission"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If user does not have the required permission, or authenticated client does not have the required access scopes."
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "unknown_error",
+                  "data": {},
+                  "message": "Server error"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If any other error happens."
           }
         },
         "security": [
@@ -19148,7 +19352,7 @@
     },
     "/api/workspaces/{workspaceId}/milestones/{milestoneId}": {
       "delete": {
-        "description": "Returns empty result if the milestone was successfully deleted.<br/>Requirements:<br/>  - auth-client scopes: \"workspace\"<br/>  - user permission: \"write\" or higher<br/>Returns:<br/>400 if the resource is not found<br/>403 if user does not have the required permission",
+        "description": "Returns empty result if the milestone was successfully deleted.<br/>Requirements:<br/>- auth-client scopes: \"workspace\"<br/>- user permission: \"write\" or higher",
         "operationId": "deleteMilestone",
         "parameters": [
           {
@@ -19162,7 +19366,7 @@
             }
           },
           {
-            "description": "ID of the workspace which contains the managed attachments.",
+            "description": "ID of the workspace which contains the managed milestones.",
             "in": "path",
             "name": "workspaceId",
             "required": true,
@@ -19185,15 +19389,65 @@
           "204": {
             "description": ""
           },
-          "default": {
+          "400": {
             "content": {
               "application/json": {
+                "example": {
+                  "code": "not_found",
+                  "data": {},
+                  "message": "Unknown entity 'fe4c0f30-aa35-3c41-99f9-a5f69c8c4192'"
+                },
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             },
-            "description": ""
+            "description": "If path parameters are invalid or resource does not exist."
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "missing_token",
+                  "data": {},
+                  "message": "Access token is missing"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If missing authentication token."
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "forbidden",
+                  "data": {},
+                  "message": "Insufficient permission"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If user does not have the required permission, or authenticated client does not have the required access scopes."
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "unknown_error",
+                  "data": {},
+                  "message": "Server error"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If any other error happens."
           }
         },
         "security": [
@@ -19208,7 +19462,7 @@
         ]
       },
       "get": {
-        "description": "Returns found milestone.<br/>Requirements:<br/>  - auth-client scopes: \"workspace:read\"<br/>  - user permission: \"read\" or higher<br/>Returns:<br/>400 if the resource is not found<br/>403 if user does not have the required permission",
+        "description": "Returns found milestone.<br/>Requirements:<br/>- auth-client scopes: \"workspace:read\"<br/>- user permission: \"read\" or higher",
         "operationId": "retrieveMilestone",
         "parameters": [
           {
@@ -19222,7 +19476,7 @@
             }
           },
           {
-            "description": "ID of the workspace which contains the managed attachments.",
+            "description": "ID of the workspace which contains the managed milestones.",
             "in": "path",
             "name": "workspaceId",
             "required": true,
@@ -19252,15 +19506,65 @@
             },
             "description": ""
           },
-          "default": {
+          "400": {
             "content": {
               "application/json": {
+                "example": {
+                  "code": "not_found",
+                  "data": {},
+                  "message": "Unknown entity 'fe4c0f30-aa35-3c41-99f9-a5f69c8c4192'"
+                },
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             },
-            "description": ""
+            "description": "If path parameters are invalid or payload is invalid or resource does not exist."
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "missing_token",
+                  "data": {},
+                  "message": "Access token is missing"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If missing authentication token."
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "forbidden",
+                  "data": {},
+                  "message": "Insufficient permission"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If user does not have the required permission, or authenticated client does not have the required access scopes."
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "unknown_error",
+                  "data": {},
+                  "message": "Server error"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If any other error happens."
           }
         },
         "security": [
@@ -19275,7 +19579,7 @@
         ]
       },
       "patch": {
-        "description": "Returns the whole updated milestone with its sanitised data.<br/>Requirements:<br/>  - auth-client scopes: \"workspace\"<br/>  - user permission: \"write\" or higher<br/>Returns:<br/>400 if the resource is not found<br/>403 if user does not have the required permission",
+        "description": "Returns the whole updated milestone with its sanitised data.<br/>Requirements:<br/>- auth-client scopes: \"workspace\"<br/>- user permission: \"write\" or higher",
         "operationId": "patchMilestone",
         "parameters": [
           {
@@ -19289,7 +19593,7 @@
             }
           },
           {
-            "description": "ID of the workspace which contains the managed attachments.",
+            "description": "ID of the workspace which contains the managed milestones.",
             "in": "path",
             "name": "workspaceId",
             "required": true,
@@ -19329,15 +19633,65 @@
             },
             "description": ""
           },
-          "default": {
+          "400": {
             "content": {
               "application/json": {
+                "example": {
+                  "code": "not_found",
+                  "data": {},
+                  "message": "Unknown entity 'fe4c0f30-aa35-3c41-99f9-a5f69c8c4192'"
+                },
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             },
-            "description": ""
+            "description": "If path parameters are invalid or payload is invalid or resource does not exist."
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "missing_token",
+                  "data": {},
+                  "message": "Access token is missing"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If missing authentication token."
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "forbidden",
+                  "data": {},
+                  "message": "Insufficient permission"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If user does not have the required permission, or authenticated client does not have the required access scopes."
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "unknown_error",
+                  "data": {},
+                  "message": "Server error"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If any other error happens."
           }
         },
         "security": [
@@ -19352,7 +19706,7 @@
         ]
       },
       "put": {
-        "description": "Returns updated milestone with its sanitised data.<br/>Requirements:<br/>  - auth-client scopes: \"workspace\"<br/>  - user permission: \"write\" or higher<br/>Returns:<br/>400 if the resource is not found<br/>403 if user does not have the required permission",
+        "description": "Returns updated milestone with its sanitised data.<br/>Requirements:<br/>- auth-client scopes: \"workspace\"<br/>- user permission: \"write\" or higher",
         "operationId": "updateMilestone",
         "parameters": [
           {
@@ -19366,7 +19720,7 @@
             }
           },
           {
-            "description": "ID of the workspace which contains the managed attachments.",
+            "description": "ID of the workspace which contains the managed milestones.",
             "in": "path",
             "name": "workspaceId",
             "required": true,
@@ -19389,7 +19743,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/Milestone"
+                "$ref": "#/components/schemas/UpdateMilestoneRequest"
               }
             }
           },
@@ -19406,15 +19760,65 @@
             },
             "description": ""
           },
-          "default": {
+          "400": {
             "content": {
               "application/json": {
+                "example": {
+                  "code": "not_found",
+                  "data": {},
+                  "message": "Unknown entity 'fe4c0f30-aa35-3c41-99f9-a5f69c8c4192'"
+                },
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             },
-            "description": ""
+            "description": "If path parameters are invalid or payload is invalid or resource does not exist."
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "missing_token",
+                  "data": {},
+                  "message": "Access token is missing"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If missing authentication token."
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "forbidden",
+                  "data": {},
+                  "message": "Insufficient permission"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If user does not have the required permission, or authenticated client does not have the required access scopes."
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "unknown_error",
+                  "data": {},
+                  "message": "Server error"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If any other error happens."
           }
         },
         "security": [
@@ -19864,7 +20268,7 @@
       "name": "Items:Links"
     },
     {
-      "description": "Manage milestones in a single workspace.",
+      "description": "Manage milestones in a single workspace. Milestones are time-anchors which are displayed in the Timeline and Gantt views.",
       "name": "Milestones"
     },
     {
