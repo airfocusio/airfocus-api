@@ -20236,6 +20236,9 @@
   "servers": [
     {
       "url": "https://app.airfocus.com"
+    },
+    {
+      "url": "https://app.us.airfocus.com"
     }
   ],
   "tags": [
