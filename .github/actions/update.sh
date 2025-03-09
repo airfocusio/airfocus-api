@@ -14,7 +14,7 @@ if [ $GIT_COMMIT_EXIT_CODE == "0" ]; then
     echo "OpenAPI changed (version is $OPENAPI_VERSION)"
     git tag -f "$OPENAPI_VERSION"
     if [ "$1" == "--push" ]; then
-        git push origin main "$OPENAPI_VERSION"
+        git push origin main "$OPENAPI_VERSION" -f
     fi
 elif [ $GIT_COMMIT_EXIT_CODE == "1" ]; then
     echo "OpenAPI unchanged"
