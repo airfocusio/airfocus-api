@@ -11212,7 +11212,10 @@
             "httpAuth": []
           }
         ],
-        "summary": "Retrieve counters of items in each tab of the view."
+        "summary": "Retrieve counters of items in each tab of the view.",
+        "tags": [
+          "Views:Inbox"
+        ]
       }
     },
     "/api/workspaces/fields/add-team-field": {
