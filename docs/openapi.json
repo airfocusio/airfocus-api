@@ -655,6 +655,11 @@
             "description": "Name of this workspace.",
             "type": "string"
           },
+          "order": {
+            "description": "Order number of this workspace for sorting.",
+            "format": "int32",
+            "type": "integer"
+          },
           "progressMode": {
             "$ref": "#/components/schemas/WorkspaceProgressMode",
             "default": "count"
@@ -662,7 +667,8 @@
         },
         "required": [
           "name",
-          "description"
+          "description",
+          "order"
         ],
         "title": "CreateWorkspaceRequest",
         "type": "object"
@@ -2639,7 +2645,7 @@
           },
           "children": {
             "items": {
-              "$ref": "#/components/schemas/ItemEmbedRelativeItem"
+              "$ref": "#/components/schemas/RelativeItemInfo"
             },
             "type": "array"
           },
@@ -2662,7 +2668,7 @@
           },
           "parents": {
             "items": {
-              "$ref": "#/components/schemas/ItemEmbedRelativeItem"
+              "$ref": "#/components/schemas/RelativeItemInfo"
             },
             "type": "array"
           },
@@ -2741,48 +2747,6 @@
           "total"
         ],
         "title": "ItemEmbedProgress",
-        "type": "object"
-      },
-      "ItemEmbedRelativeItem": {
-        "properties": {
-          "alias": {
-            "type": "string"
-          },
-          "childOrder": {
-            "format": "int32",
-            "type": "integer"
-          },
-          "item": {
-            "$ref": "#/components/schemas/Item"
-          },
-          "itemId": {
-            "format": "uuid",
-            "type": "string"
-          },
-          "itemType": {
-            "$ref": "#/components/schemas/ItemType"
-          },
-          "parentOrder": {
-            "format": "int32",
-            "type": "integer"
-          },
-          "relationId": {
-            "format": "uuid",
-            "type": "string"
-          },
-          "workspaceId": {
-            "format": "uuid",
-            "type": "string"
-          }
-        },
-        "required": [
-          "relationId",
-          "workspaceId",
-          "itemId",
-          "parentOrder",
-          "childOrder"
-        ],
-        "title": "ItemEmbedRelativeItem",
         "type": "object"
       },
       "ItemLinkBulkAction": {
@@ -3084,39 +3048,6 @@
         "title": "ItemLinkWithItemLinkEmbedPage",
         "type": "object"
       },
-      "ItemRelation": {
-        "properties": {
-          "childId": {
-            "format": "uuid",
-            "type": "string"
-          },
-          "childOrder": {
-            "format": "int32",
-            "type": "integer"
-          },
-          "id": {
-            "format": "uuid",
-            "type": "string"
-          },
-          "parentId": {
-            "format": "uuid",
-            "type": "string"
-          },
-          "parentOrder": {
-            "format": "int32",
-            "type": "integer"
-          }
-        },
-        "required": [
-          "id",
-          "parentId",
-          "childId",
-          "parentOrder",
-          "childOrder"
-        ],
-        "title": "ItemRelation",
-        "type": "object"
-      },
       "ItemRelationBulkAction": {
         "discriminator": {
           "mapping": {
@@ -3146,7 +3077,7 @@
       "ItemRelationBulkCreate": {
         "properties": {
           "resource": {
-            "$ref": "#/components/schemas/ItemRelation"
+            "$ref": "#/components/schemas/ItemRelationCreateRequest"
           },
           "type": {
             "enum": [
@@ -3213,7 +3144,7 @@
             "type": "string"
           },
           "resource": {
-            "$ref": "#/components/schemas/ItemRelation"
+            "$ref": "#/components/schemas/ItemRelationUpdateRequest"
           },
           "type": {
             "enum": [
@@ -3228,6 +3159,32 @@
           "type"
         ],
         "title": "ItemRelationBulkUpdate",
+        "type": "object"
+      },
+      "ItemRelationCreateRequest": {
+        "properties": {
+          "childId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "childOrder": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "parentId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "parentOrder": {
+            "format": "int32",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "parentId",
+          "childId"
+        ],
+        "title": "ItemRelationCreateRequest",
         "type": "object"
       },
       "ItemRelationSearchQuery": {
@@ -3298,6 +3255,24 @@
           "itemId"
         ],
         "title": "ItemRelationSearchQueryFilterParentOrChild",
+        "type": "object"
+      },
+      "ItemRelationUpdateRequest": {
+        "properties": {
+          "childOrder": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "parentOrder": {
+            "format": "int32",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "parentOrder",
+          "childOrder"
+        ],
+        "title": "ItemRelationUpdateRequest",
         "type": "object"
       },
       "ItemRelationWithEmbed": {
@@ -5560,6 +5535,48 @@
         ],
         "title": "RefItemProperty"
       },
+      "RelativeItemInfo": {
+        "properties": {
+          "alias": {
+            "type": "string"
+          },
+          "childOrder": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "item": {
+            "$ref": "#/components/schemas/Item"
+          },
+          "itemId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "itemType": {
+            "$ref": "#/components/schemas/ItemType"
+          },
+          "parentOrder": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "relationId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "workspaceId": {
+            "format": "uuid",
+            "type": "string"
+          }
+        },
+        "required": [
+          "relationId",
+          "workspaceId",
+          "itemId",
+          "parentOrder",
+          "childOrder"
+        ],
+        "title": "RelativeItemInfo",
+        "type": "object"
+      },
       "ResendUserInviteRequest": {
         "properties": {
           "email": {
@@ -7190,6 +7207,11 @@
             "description": "Name of this workspace.",
             "type": "string"
           },
+          "order": {
+            "description": "Order number of this workspace for sorting.",
+            "format": "int32",
+            "type": "integer"
+          },
           "progressMode": {
             "$ref": "#/components/schemas/WorkspaceProgressMode",
             "default": "count"
@@ -7197,7 +7219,8 @@
         },
         "required": [
           "name",
-          "description"
+          "description",
+          "order"
         ],
         "title": "UpdateWorkspaceRequest",
         "type": "object"
@@ -7524,6 +7547,11 @@
             "$ref": "#/components/schemas/WorkspaceNamespace",
             "description": "The system namespace of this workspace."
           },
+          "order": {
+            "description": "Order number of this workspace for sorting.",
+            "format": "int32",
+            "type": "integer"
+          },
           "progressMode": {
             "$ref": "#/components/schemas/WorkspaceProgressMode"
           },
@@ -7541,7 +7569,8 @@
           "progressMode",
           "createdAt",
           "lastUpdatedAt",
-          "namespace"
+          "namespace",
+          "order"
         ],
         "title": "Workspace",
         "type": "object"
@@ -7780,26 +7809,43 @@
         "type": "object"
       },
       "WorkspaceGroup": {
+        "description": "An entity for grouping workspaces (like folders).",
         "properties": {
           "createdAt": {
+            "description": "Date-time when this group was created.",
             "format": "date-time",
             "type": "string"
           },
           "defaultPermission": {
-            "$ref": "#/components/schemas/Permission"
+            "$ref": "#/components/schemas/Permission",
+            "description": "Default permission for all team-members to all the inner contents of this group."
           },
           "id": {
+            "description": "UUID of this group.",
             "format": "uuid",
             "type": "string"
           },
           "lastUpdatedAt": {
+            "description": "Date-time when this group was last updated.",
             "format": "date-time",
             "type": "string"
           },
           "name": {
+            "description": "Name of this group.",
+            "type": "string"
+          },
+          "order": {
+            "description": "Order number of this group for sorting.",
+            "format": "int32",
+            "type": "integer"
+          },
+          "parentId": {
+            "description": "UUID of the parent group (if applicable).",
+            "format": "uuid",
             "type": "string"
           },
           "teamId": {
+            "description": "UUID of the team which owns this group.",
             "format": "uuid",
             "type": "string"
           }
@@ -7808,6 +7854,7 @@
           "id",
           "teamId",
           "name",
+          "order",
           "createdAt",
           "lastUpdatedAt"
         ],
@@ -7945,17 +7992,21 @@
         "type": "object"
       },
       "WorkspaceGroupEmbed": {
+        "description": "An object embedded into each workspace-group when retrieving/listing specific workspaces.",
         "properties": {
           "currentPermission": {
-            "$ref": "#/components/schemas/Permission"
+            "$ref": "#/components/schemas/Permission",
+            "description": "Actual permission of the current user for this workspace-group."
           },
           "permissions": {
             "additionalProperties": {
               "$ref": "#/components/schemas/Permission"
             },
+            "description": "All explicitly defined permissions for all users for this workspace-group.",
             "type": "object"
           },
           "workspaces": {
+            "description": "List of workspaces which belongs to this workspace-group.",
             "items": {
               "$ref": "#/components/schemas/Workspace"
             },
@@ -7983,34 +8034,88 @@
         "title": "WorkspaceGroupPermissionsUpdateRequest",
         "type": "object"
       },
+      "WorkspaceGroupSearchEmbed": {
+        "description": "An object embedded into each workspace-group when searching workspaces.",
+        "properties": {
+          "currentPermission": {
+            "$ref": "#/components/schemas/Permission",
+            "description": "Actual permission of the current user for this workspace-group."
+          },
+          "permissions": {
+            "additionalProperties": {
+              "$ref": "#/components/schemas/Permission"
+            },
+            "description": "All explicitly defined permissions for all users for this workspace-group.",
+            "type": "object"
+          },
+          "workspaceIds": {
+            "description": "List of workspace-ids which belongs to this workspace-group.",
+            "items": {
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "workspaces": {
+            "deprecated": true,
+            "description": "Deprecated and will be removed. Use 'workspaceIds' instead, and a followup workspace-search request.",
+            "items": {
+              "$ref": "#/components/schemas/Workspace"
+            },
+            "type": "array"
+          }
+        },
+        "required": [
+          "permissions"
+        ],
+        "title": "WorkspaceGroupSearchEmbed",
+        "type": "object"
+      },
       "WorkspaceGroupSearchQuery": {
         "title": "WorkspaceGroupSearchQuery",
         "type": "object"
       },
       "WorkspaceGroupWithWorkspaceGroupEmbed": {
+        "description": "An entity for grouping workspaces (like folders).",
         "properties": {
           "_embedded": {
             "$ref": "#/components/schemas/WorkspaceGroupEmbed"
           },
           "createdAt": {
+            "description": "Date-time when this group was created.",
             "format": "date-time",
             "type": "string"
           },
           "defaultPermission": {
-            "$ref": "#/components/schemas/Permission"
+            "$ref": "#/components/schemas/Permission",
+            "description": "Default permission for all team-members to all the inner contents of this group."
           },
           "id": {
+            "description": "UUID of this group.",
             "format": "uuid",
             "type": "string"
           },
           "lastUpdatedAt": {
+            "description": "Date-time when this group was last updated.",
             "format": "date-time",
             "type": "string"
           },
           "name": {
+            "description": "Name of this group.",
+            "type": "string"
+          },
+          "order": {
+            "description": "Order number of this group for sorting.",
+            "format": "int32",
+            "type": "integer"
+          },
+          "parentId": {
+            "description": "UUID of the parent group (if applicable).",
+            "format": "uuid",
             "type": "string"
           },
           "teamId": {
+            "description": "UUID of the team which owns this group.",
             "format": "uuid",
             "type": "string"
           }
@@ -8019,6 +8124,7 @@
           "id",
           "teamId",
           "name",
+          "order",
           "createdAt",
           "lastUpdatedAt",
           "_embedded"
@@ -8033,11 +8139,68 @@
         "title": "WorkspaceGroupWithWorkspaceGroupEmbedOrNullList",
         "type": "array"
       },
-      "WorkspaceGroupWithWorkspaceGroupEmbedPage": {
+      "WorkspaceGroupWithWorkspaceGroupSearchEmbed": {
+        "description": "An entity for grouping workspaces (like folders).",
+        "properties": {
+          "_embedded": {
+            "$ref": "#/components/schemas/WorkspaceGroupSearchEmbed"
+          },
+          "createdAt": {
+            "description": "Date-time when this group was created.",
+            "format": "date-time",
+            "type": "string"
+          },
+          "defaultPermission": {
+            "$ref": "#/components/schemas/Permission",
+            "description": "Default permission for all team-members to all the inner contents of this group."
+          },
+          "id": {
+            "description": "UUID of this group.",
+            "format": "uuid",
+            "type": "string"
+          },
+          "lastUpdatedAt": {
+            "description": "Date-time when this group was last updated.",
+            "format": "date-time",
+            "type": "string"
+          },
+          "name": {
+            "description": "Name of this group.",
+            "type": "string"
+          },
+          "order": {
+            "description": "Order number of this group for sorting.",
+            "format": "int32",
+            "type": "integer"
+          },
+          "parentId": {
+            "description": "UUID of the parent group (if applicable).",
+            "format": "uuid",
+            "type": "string"
+          },
+          "teamId": {
+            "description": "UUID of the team which owns this group.",
+            "format": "uuid",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "teamId",
+          "name",
+          "order",
+          "createdAt",
+          "lastUpdatedAt",
+          "_embedded"
+        ],
+        "title": "WorkspaceGroupWithWorkspaceGroupSearchEmbed",
+        "type": "object"
+      },
+      "WorkspaceGroupWithWorkspaceGroupSearchEmbedPage": {
         "properties": {
           "items": {
             "items": {
-              "$ref": "#/components/schemas/WorkspaceGroupWithWorkspaceGroupEmbed"
+              "$ref": "#/components/schemas/WorkspaceGroupWithWorkspaceGroupSearchEmbed"
             },
             "type": "array"
           },
@@ -8049,7 +8212,7 @@
         "required": [
           "totalItems"
         ],
-        "title": "WorkspaceGroupWithWorkspaceGroupEmbedPage",
+        "title": "WorkspaceGroupWithWorkspaceGroupSearchEmbedPage",
         "type": "object"
       },
       "WorkspaceNamespace": {
@@ -8811,6 +8974,11 @@
             "$ref": "#/components/schemas/WorkspaceNamespace",
             "description": "The system namespace of this workspace."
           },
+          "order": {
+            "description": "Order number of this workspace for sorting.",
+            "format": "int32",
+            "type": "integer"
+          },
           "progressMode": {
             "$ref": "#/components/schemas/WorkspaceProgressMode"
           },
@@ -8829,6 +8997,7 @@
           "createdAt",
           "lastUpdatedAt",
           "namespace",
+          "order",
           "_embedded"
         ],
         "title": "WorkspaceWithWorkspaceEmbed",
@@ -8892,6 +9061,11 @@
             "$ref": "#/components/schemas/WorkspaceNamespace",
             "description": "The system namespace of this workspace."
           },
+          "order": {
+            "description": "Order number of this workspace for sorting.",
+            "format": "int32",
+            "type": "integer"
+          },
           "progressMode": {
             "$ref": "#/components/schemas/WorkspaceProgressMode"
           },
@@ -8910,6 +9084,7 @@
           "createdAt",
           "lastUpdatedAt",
           "namespace",
+          "order",
           "_embedded"
         ],
         "title": "WorkspaceWithWorkspaceSearchEmbed",
@@ -8970,7 +9145,7 @@
   },
   "info": {
     "title": "airfocus API",
-    "version": "1.0.0-beta.34.16.3"
+    "version": "1.0.0-beta.35.0.10"
   },
   "openapi": "3.1.0",
   "paths": {
@@ -11212,10 +11387,7 @@
             "httpAuth": []
           }
         ],
-        "summary": "Retrieve counters of items in each tab of the view.",
-        "tags": [
-          "Views:Inbox"
-        ]
+        "summary": "Retrieve counters of items in each tab of the view."
       }
     },
     "/api/workspaces/fields/add-team-field": {
@@ -11858,7 +12030,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/WorkspaceGroupWithWorkspaceGroupEmbedPage"
+                  "$ref": "#/components/schemas/WorkspaceGroupWithWorkspaceGroupSearchEmbedPage"
                 }
               }
             },
@@ -12193,7 +12365,7 @@
     },
     "/api/workspaces/item-relations": {
       "post": {
-        "description": "Returns newly created item relation with its sanitised data.<br/>Requirements:<br/>  - auth-client scopes: \"workspace\"<br/>  - user permission: \"write\" or higher<br/>Returns:<br/>403 if user does not have the required permission",
+        "description": "Returns newly created item-relation with its sanitised data.<br/>Requirements:<br/>- auth-client scopes: \"workspace\"<br/>- user permission: \"write\" or higher",
         "operationId": "createItemRelation",
         "parameters": [
           {
@@ -12211,7 +12383,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/ItemRelation"
+                "$ref": "#/components/schemas/ItemRelationCreateRequest"
               }
             }
           },
@@ -12228,15 +12400,65 @@
             },
             "description": ""
           },
-          "default": {
+          "400": {
             "content": {
               "application/json": {
+                "example": {
+                  "code": "bad_request",
+                  "data": {},
+                  "message": "Request body is invalid"
+                },
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             },
-            "description": ""
+            "description": "If payload is invalid."
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "missing_token",
+                  "data": {},
+                  "message": "Access token is missing"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If missing authentication token."
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "forbidden",
+                  "data": {},
+                  "message": "Insufficient permission"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If user does not have the required permission, or authenticated client does not have the required access scopes."
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "unknown_error",
+                  "data": {},
+                  "message": "Server error"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If any other error happens."
           }
         },
         "security": [
@@ -12244,16 +12466,16 @@
             "httpAuth": []
           }
         ],
-        "summary": "Create a new item relation",
+        "summary": "Create a new item-relation",
         "tags": [
           "CRUD",
-          "ItemRelations"
+          "Items:Relations"
         ]
       }
     },
     "/api/workspaces/item-relations/bulk": {
       "post": {
-        "description": "Accepts a list of create/update/patch/delete operations (see the request model for more details).<br/>\nEach operations can target a single or multiple item relations.<br/>\nReturns a list of results for each input operation including errors.<br/>\nGuarantees that the size and order of the returned results matches the input list of operations.<br/>Requirements:<br/>  - auth-client scopes: \"workspace\"<br/>  - user permission: \"write\" or higher<br/>Returns:<br/>403 if user does not have the required permission",
+        "description": "Accepts a list of create/update/patch/delete operations (see the request model for more details).<br/>\nEach operation can target a single or multiple item-relations.<br/>\nReturns a list of results for each input operation including errors.<br/>\nGuarantees that the size and order of the returned results matches the input list of operations.<br/>Requirements:<br/>- auth-client scopes: \"workspace\"<br/>- user permission: \"write\" or higher",
         "operationId": "bulkItemRelations",
         "parameters": [
           {
@@ -12291,15 +12513,65 @@
             },
             "description": ""
           },
-          "default": {
+          "400": {
             "content": {
               "application/json": {
+                "example": {
+                  "code": "bad_request",
+                  "data": {},
+                  "message": "Request body is invalid"
+                },
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             },
-            "description": ""
+            "description": "If payload is invalid."
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "missing_token",
+                  "data": {},
+                  "message": "Access token is missing"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If missing authentication token."
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "forbidden",
+                  "data": {},
+                  "message": "Insufficient permission"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If user does not have the required permission, or authenticated client does not have the required access scopes."
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "unknown_error",
+                  "data": {},
+                  "message": "Server error"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If any other error happens."
           }
         },
         "security": [
@@ -12307,16 +12579,16 @@
             "httpAuth": []
           }
         ],
-        "summary": "Perform multiple operations with item relations",
+        "summary": "Perform multiple operations with item-relations",
         "tags": [
           "CRUD",
-          "ItemRelations"
+          "Items:Relations"
         ]
       }
     },
     "/api/workspaces/item-relations/list": {
       "post": {
-        "description": "Returns a list of item relations.<br/>\nReturns null for those item relations which are not found or not accessible.<br/>\nGuarantees that the size and order of the returned list matches the requested IDs.<br/>Requirements:<br/>  - auth-client scopes: \"workspace:read\"<br/>  - user permission: \"read\" or higher<br/>Returns:<br/>403 if user does not have the required permission",
+        "description": "Returns a list of item-relations resolved for the provided IDs.<br/>\nDoes not fail if any of the requested item-relations is not found or not accessible - instead it returns corresponding error-object instead of an entity-object.<br/>\nGuarantees that the size and order of the returned list matches the requested IDs.<br/>Requirements:<br/>- auth-client scopes: \"workspace:read\"<br/>- user permission: \"read\" or higher",
         "operationId": "listItemRelations",
         "parameters": [
           {
@@ -12355,15 +12627,65 @@
             },
             "description": ""
           },
-          "default": {
+          "400": {
             "content": {
               "application/json": {
+                "example": {
+                  "code": "bad_request",
+                  "data": {},
+                  "message": "Request body is invalid"
+                },
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             },
-            "description": ""
+            "description": "If payload is invalid."
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "missing_token",
+                  "data": {},
+                  "message": "Access token is missing"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If missing authentication token."
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "forbidden",
+                  "data": {},
+                  "message": "Insufficient permission"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If user does not have the required permission, or authenticated client does not have the required access scopes."
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "unknown_error",
+                  "data": {},
+                  "message": "Server error"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If any other error happens."
           }
         },
         "security": [
@@ -12371,16 +12693,16 @@
             "httpAuth": []
           }
         ],
-        "summary": "Retrieve multiple item relations by their IDs",
+        "summary": "Retrieve multiple item-relations by their IDs",
         "tags": [
           "CRUD",
-          "ItemRelations"
+          "Items:Relations"
         ]
       }
     },
     "/api/workspaces/item-relations/search": {
       "post": {
-        "description": "Returns all item relations or searches item relations by query. Always returns only item relations which are accessible by the current user.<br/>Requirements:<br/>  - auth-client scopes: \"workspace:read\"<br/>  - user permission: \"read\" or higher<br/>Returns:<br/>403 if user does not have the required permission",
+        "description": "Returns all item-relations or searches item-relations by query. Always returns only item-relations which are accessible by the current user.<br/>Requirements:<br/>- auth-client scopes: \"workspace:read\"<br/>- user permission: \"read\" or higher",
         "operationId": "searchItemRelations",
         "parameters": [
           {
@@ -12466,15 +12788,65 @@
             },
             "description": ""
           },
-          "default": {
+          "400": {
             "content": {
               "application/json": {
+                "example": {
+                  "code": "bad_request",
+                  "data": {},
+                  "message": "Request body is invalid"
+                },
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             },
-            "description": ""
+            "description": "If payload is invalid."
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "missing_token",
+                  "data": {},
+                  "message": "Access token is missing"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If missing authentication token."
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "forbidden",
+                  "data": {},
+                  "message": "Insufficient permission"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If user does not have the required permission, or authenticated client does not have the required access scopes."
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "unknown_error",
+                  "data": {},
+                  "message": "Server error"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If any other error happens."
           }
         },
         "security": [
@@ -12482,16 +12854,16 @@
             "httpAuth": []
           }
         ],
-        "summary": "Retrieve or search item relations",
+        "summary": "Retrieve or search item-relations",
         "tags": [
           "CRUD",
-          "ItemRelations"
+          "Items:Relations"
         ]
       }
     },
     "/api/workspaces/item-relations/{itemRelationId}": {
       "delete": {
-        "description": "Returns empty result if the item relation was successfully deleted.<br/>Requirements:<br/>  - auth-client scopes: \"workspace\"<br/>  - user permission: \"write\" or higher<br/>Returns:<br/>400 if the resource is not found<br/>403 if user does not have the required permission",
+        "description": "Returns empty result if the item-relation was successfully deleted.<br/>Requirements:<br/>- auth-client scopes: \"workspace\"<br/>- user permission: \"write\" or higher",
         "operationId": "deleteItemRelation",
         "parameters": [
           {
@@ -12518,15 +12890,65 @@
           "204": {
             "description": ""
           },
-          "default": {
+          "400": {
             "content": {
               "application/json": {
+                "example": {
+                  "code": "not_found",
+                  "data": {},
+                  "message": "Unknown entity 'fe4c0f30-aa35-3c41-99f9-a5f69c8c4192'"
+                },
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             },
-            "description": ""
+            "description": "If path parameters are invalid or resource does not exist."
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "missing_token",
+                  "data": {},
+                  "message": "Access token is missing"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If missing authentication token."
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "forbidden",
+                  "data": {},
+                  "message": "Insufficient permission"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If user does not have the required permission, or authenticated client does not have the required access scopes."
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "unknown_error",
+                  "data": {},
+                  "message": "Server error"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If any other error happens."
           }
         },
         "security": [
@@ -12534,14 +12956,14 @@
             "httpAuth": []
           }
         ],
-        "summary": "Delete an existing item relation",
+        "summary": "Delete an existing item-relation",
         "tags": [
           "CRUD",
-          "ItemRelations"
+          "Items:Relations"
         ]
       },
       "get": {
-        "description": "Returns found item relation.<br/>Requirements:<br/>  - auth-client scopes: \"workspace:read\"<br/>  - user permission: \"read\" or higher<br/>Returns:<br/>400 if the resource is not found<br/>403 if user does not have the required permission",
+        "description": "Returns found item-relation.<br/>Requirements:<br/>- auth-client scopes: \"workspace:read\"<br/>- user permission: \"read\" or higher",
         "operationId": "retrieveItemRelation",
         "parameters": [
           {
@@ -12575,15 +12997,65 @@
             },
             "description": ""
           },
-          "default": {
+          "400": {
             "content": {
               "application/json": {
+                "example": {
+                  "code": "not_found",
+                  "data": {},
+                  "message": "Unknown entity 'fe4c0f30-aa35-3c41-99f9-a5f69c8c4192'"
+                },
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             },
-            "description": ""
+            "description": "If path parameters are invalid or payload is invalid or resource does not exist."
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "missing_token",
+                  "data": {},
+                  "message": "Access token is missing"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If missing authentication token."
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "forbidden",
+                  "data": {},
+                  "message": "Insufficient permission"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If user does not have the required permission, or authenticated client does not have the required access scopes."
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "unknown_error",
+                  "data": {},
+                  "message": "Server error"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If any other error happens."
           }
         },
         "security": [
@@ -12591,14 +13063,14 @@
             "httpAuth": []
           }
         ],
-        "summary": "Retrieve a single item relation by its ID",
+        "summary": "Retrieve a single item-relation by its ID",
         "tags": [
           "CRUD",
-          "ItemRelations"
+          "Items:Relations"
         ]
       },
       "patch": {
-        "description": "Returns the whole updated item relation with its sanitised data.<br/>Requirements:<br/>  - auth-client scopes: \"workspace\"<br/>  - user permission: \"write\" or higher<br/>Returns:<br/>400 if the resource is not found<br/>403 if user does not have the required permission",
+        "description": "Returns the whole updated item-relation with its sanitised data.<br/>Requirements:<br/>- auth-client scopes: \"workspace\"<br/>- user permission: \"write\" or higher",
         "operationId": "patchItemRelation",
         "parameters": [
           {
@@ -12642,15 +13114,65 @@
             },
             "description": ""
           },
-          "default": {
+          "400": {
             "content": {
               "application/json": {
+                "example": {
+                  "code": "not_found",
+                  "data": {},
+                  "message": "Unknown entity 'fe4c0f30-aa35-3c41-99f9-a5f69c8c4192'"
+                },
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             },
-            "description": ""
+            "description": "If path parameters are invalid or payload is invalid or resource does not exist."
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "missing_token",
+                  "data": {},
+                  "message": "Access token is missing"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If missing authentication token."
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "forbidden",
+                  "data": {},
+                  "message": "Insufficient permission"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If user does not have the required permission, or authenticated client does not have the required access scopes."
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "unknown_error",
+                  "data": {},
+                  "message": "Server error"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If any other error happens."
           }
         },
         "security": [
@@ -12658,14 +13180,14 @@
             "httpAuth": []
           }
         ],
-        "summary": "Patch an existing item relation",
+        "summary": "Patch an existing item-relation",
         "tags": [
           "CRUD",
-          "ItemRelations"
+          "Items:Relations"
         ]
       },
       "put": {
-        "description": "Returns updated item relation with its sanitised data.<br/>Requirements:<br/>  - auth-client scopes: \"workspace\"<br/>  - user permission: \"write\" or higher<br/>Returns:<br/>400 if the resource is not found<br/>403 if user does not have the required permission",
+        "description": "Returns updated item-relation with its sanitised data.<br/>Requirements:<br/>- auth-client scopes: \"workspace\"<br/>- user permission: \"write\" or higher",
         "operationId": "updateItemRelation",
         "parameters": [
           {
@@ -12692,7 +13214,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/ItemRelation"
+                "$ref": "#/components/schemas/ItemRelationUpdateRequest"
               }
             }
           },
@@ -12709,15 +13231,65 @@
             },
             "description": ""
           },
-          "default": {
+          "400": {
             "content": {
               "application/json": {
+                "example": {
+                  "code": "not_found",
+                  "data": {},
+                  "message": "Unknown entity 'fe4c0f30-aa35-3c41-99f9-a5f69c8c4192'"
+                },
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             },
-            "description": ""
+            "description": "If path parameters are invalid or payload is invalid or resource does not exist."
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "missing_token",
+                  "data": {},
+                  "message": "Access token is missing"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If missing authentication token."
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "forbidden",
+                  "data": {},
+                  "message": "Insufficient permission"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If user does not have the required permission, or authenticated client does not have the required access scopes."
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "unknown_error",
+                  "data": {},
+                  "message": "Server error"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If any other error happens."
           }
         },
         "security": [
@@ -12725,10 +13297,10 @@
             "httpAuth": []
           }
         ],
-        "summary": "Update an existing item relation",
+        "summary": "Update an existing item-relation",
         "tags": [
           "CRUD",
-          "ItemRelations"
+          "Items:Relations"
         ]
       }
     },
@@ -20262,16 +20834,16 @@
       "name": "ItemAttachments"
     },
     {
-      "description": "Manage item relations (hierarchy).",
-      "name": "ItemRelations"
-    },
-    {
       "description": "Endpoints for managing items.",
       "name": "Items"
     },
     {
       "description": "Endpoints for linking/unlinking items.",
       "name": "Items:Links"
+    },
+    {
+      "description": "Endpoints for managing hierarchical relations between items.",
+      "name": "Items:Relations"
     },
     {
       "description": "Manage milestones in a single workspace. Milestones are time-anchors which are displayed in the Timeline and Gantt views.",
