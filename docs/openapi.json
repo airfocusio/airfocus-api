@@ -5678,6 +5678,9 @@
           "contentType": {
             "type": "string"
           },
+          "meta": {
+            "type": "object"
+          },
           "width": {
             "format": "int32",
             "type": "integer"
@@ -5697,6 +5700,9 @@
               "$ref": "#/components/schemas/RichTextInline"
             },
             "type": "array"
+          },
+          "meta": {
+            "type": "object"
           }
         },
         "title": "RichTextBlockBlockquote",
@@ -5709,6 +5715,9 @@
           },
           "language": {
             "type": "string"
+          },
+          "meta": {
+            "type": "object"
           }
         },
         "required": [
@@ -5721,6 +5730,9 @@
         "properties": {
           "id": {
             "type": "string"
+          },
+          "meta": {
+            "type": "object"
           },
           "raw": {
             "type": "string"
@@ -5741,6 +5753,9 @@
           "height": {
             "format": "int32",
             "type": "integer"
+          },
+          "meta": {
+            "type": "object"
           },
           "url": {
             "type": "string"
@@ -5763,6 +5778,9 @@
           "level": {
             "format": "int32",
             "type": "integer"
+          },
+          "meta": {
+            "type": "object"
           }
         },
         "required": [
@@ -5793,6 +5811,9 @@
               "$ref": "#/components/schemas/RichTextListItem"
             },
             "type": "array"
+          },
+          "meta": {
+            "type": "object"
           },
           "ordered": {
             "type": "boolean"
@@ -5834,6 +5855,9 @@
               "$ref": "#/components/schemas/RichTextInline"
             },
             "type": "array"
+          },
+          "meta": {
+            "type": "object"
           }
         },
         "title": "RichTextBlockParagraph",
@@ -5905,6 +5929,9 @@
         "properties": {
           "content": {
             "type": "string"
+          },
+          "meta": {
+            "type": "object"
           }
         },
         "required": [
@@ -5917,6 +5944,9 @@
         "properties": {
           "id": {
             "type": "string"
+          },
+          "meta": {
+            "type": "object"
           },
           "raw": {
             "type": "string"
@@ -5975,6 +6005,9 @@
       },
       "RichTextInlineMention": {
         "properties": {
+          "meta": {
+            "type": "object"
+          },
           "userId": {
             "format": "uuid",
             "type": "string"
@@ -6002,6 +6035,9 @@
         "properties": {
           "content": {
             "type": "string"
+          },
+          "meta": {
+            "type": "object"
           }
         },
         "required": [
@@ -9145,7 +9181,7 @@
   },
   "info": {
     "title": "airfocus API",
-    "version": "1.0.0-beta.35.1.10"
+    "version": "1.0.0-beta.35.3.2"
   },
   "openapi": "3.1.0",
   "paths": {
@@ -11387,10 +11423,7 @@
             "httpAuth": []
           }
         ],
-        "summary": "Retrieve counters of items in each tab of the view.",
-        "tags": [
-          "Views:Inbox"
-        ]
+        "summary": "Retrieve counters of items in each tab of the view."
       }
     },
     "/api/workspaces/fields/add-team-field": {
