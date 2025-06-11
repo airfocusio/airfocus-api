@@ -9181,7 +9181,7 @@
   },
   "info": {
     "title": "airfocus API",
-    "version": "1.0.0-beta.35.3.3"
+    "version": "1.0.0-beta.35.3.5"
   },
   "openapi": "3.1.0",
   "paths": {
@@ -11423,10 +11423,7 @@
             "httpAuth": []
           }
         ],
-        "summary": "Retrieve counters of items in each tab of the view.",
-        "tags": [
-          "Views:Inbox"
-        ]
+        "summary": "Retrieve counters of items in each tab of the view."
       }
     },
     "/api/workspaces/fields/add-team-field": {
