@@ -9181,7 +9181,7 @@
   },
   "info": {
     "title": "airfocus API",
-    "version": "1.0.0-beta.36.0.1"
+    "version": "1.0.0-beta.36.0.4"
   },
   "openapi": "3.1.0",
   "paths": {
@@ -10888,7 +10888,7 @@
     "/api/templates/{templateId}": {
       "post": {
         "description": "Installs the requested template with the given parameters.\nReturns a newly created workspace.\nIf the template creates multiple workspaces - then it still returns a single workspace which is considered by the template as \"main\".<br/>Requirements:<br/>- auth-client scopes: \"workspace\"",
-        "operationId": "installTemplate",
+        "operationId": "applyTemplate",
         "parameters": [
           {
             "deprecated": true,
@@ -11423,10 +11423,7 @@
             "httpAuth": []
           }
         ],
-        "summary": "Retrieve counters of items in each tab of the view.",
-        "tags": [
-          "Views:Inbox"
-        ]
+        "summary": "Retrieve counters of items in each tab of the view."
       }
     },
     "/api/workspaces/fields/add-team-field": {
@@ -14225,7 +14222,7 @@
       "post": {
         "deprecated": true,
         "description": "Installs the requested template with the given parameters.\nReturns a newly created workspace.\nIf the template creates multiple workspaces - then it still returns a single workspace which is considered by the template as \"main\".<br/>Requirements:<br/>- auth-client scopes: \"workspace\"",
-        "operationId": "installTemplateLegacy",
+        "operationId": "applyTemplateLegacy",
         "parameters": [
           {
             "deprecated": true,
@@ -20899,10 +20896,6 @@
     {
       "description": "Endpoints for creating workspaces via templates.",
       "name": "Templates"
-    },
-    {
-      "description": "Additional endpoints for the Inbox View.",
-      "name": "Views:Inbox"
     },
     {
       "description": "Manage workspace groups.",
