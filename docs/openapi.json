@@ -1823,6 +1823,9 @@
             "format": "date-time",
             "type": "string"
           },
+          "enabled": {
+            "type": "boolean"
+          },
           "id": {
             "format": "uuid",
             "type": "string"
@@ -1844,7 +1847,8 @@
           "typeId",
           "settings",
           "createdAt",
-          "capabilities"
+          "capabilities",
+          "enabled"
         ],
         "title": "IntegrationSummary",
         "type": "object"
@@ -1855,6 +1859,10 @@
             "format": "int32",
             "type": "integer"
           },
+          "failedRunsCount": {
+            "format": "int32",
+            "type": "integer"
+          },
           "successCount": {
             "format": "int32",
             "type": "integer"
@@ -1862,7 +1870,8 @@
         },
         "required": [
           "successCount",
-          "errorCount"
+          "errorCount",
+          "failedRunsCount"
         ],
         "title": "IntegrationSyncState",
         "type": "object"
@@ -9183,7 +9192,7 @@
   },
   "info": {
     "title": "airfocus API",
-    "version": "1.0.0-beta.37.7.0"
+    "version": "1.0.0-beta.37.7.3"
   },
   "openapi": "3.1.0",
   "paths": {
