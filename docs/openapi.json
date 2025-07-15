@@ -7818,6 +7818,9 @@
               "$ref": "#/components/schemas/View"
             },
             "type": "object"
+          },
+          "workspaceGroup": {
+            "$ref": "#/components/schemas/WorkspaceEmbedWorkspaceGroup"
           }
         },
         "required": [
@@ -7853,6 +7856,32 @@
           "workspaceId"
         ],
         "title": "WorkspaceEmbedRelation",
+        "type": "object"
+      },
+      "WorkspaceEmbedWorkspaceGroup": {
+        "properties": {
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "order": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "parentId": {
+            "format": "uuid",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "order"
+        ],
+        "title": "WorkspaceEmbedWorkspaceGroup",
         "type": "object"
       },
       "WorkspaceGroup": {
@@ -9192,7 +9221,7 @@
   },
   "info": {
     "title": "airfocus API",
-    "version": "1.0.0-beta.37.7.3"
+    "version": "1.0.0-beta.37.8.0"
   },
   "openapi": "3.1.0",
   "paths": {
