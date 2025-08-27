@@ -84,11 +84,18 @@
               "$ref": "#/components/schemas/Permission"
             },
             "type": "object"
+          },
+          "userGroupPermissions": {
+            "additionalProperties": {
+              "$ref": "#/components/schemas/Permission"
+            },
+            "type": "object"
           }
         },
         "required": [
           "parameters",
-          "permissions"
+          "permissions",
+          "userGroupPermissions"
         ],
         "title": "ApplyTemplateRequest",
         "type": "object"
@@ -3477,12 +3484,12 @@
       "ItemSearchQueryFilterAnd": {
         "properties": {
           "inner": {
-            "$ref": "#/components/schemas/ItemSearchQueryFilter"
+            "items": {
+              "$ref": "#/components/schemas/ItemSearchQueryFilter"
+            },
+            "type": "array"
           }
         },
-        "required": [
-          "inner"
-        ],
         "title": "ItemSearchQueryFilterAnd",
         "type": "object"
       },
@@ -3736,12 +3743,12 @@
       "ItemSearchQueryFilterOr": {
         "properties": {
           "inner": {
-            "$ref": "#/components/schemas/ItemSearchQueryFilter"
+            "items": {
+              "$ref": "#/components/schemas/ItemSearchQueryFilter"
+            },
+            "type": "array"
           }
         },
-        "required": [
-          "inner"
-        ],
         "title": "ItemSearchQueryFilterOr",
         "type": "object"
       },
@@ -5808,12 +5815,12 @@
       "RichTextBlockIndentation": {
         "properties": {
           "content": {
-            "$ref": "#/components/schemas/RichTextBlock"
+            "items": {
+              "$ref": "#/components/schemas/RichTextBlock"
+            },
+            "type": "array"
           }
         },
-        "required": [
-          "content"
-        ],
         "title": "RichTextBlockIndentation",
         "type": "object"
       },
@@ -5854,11 +5861,13 @@
             "type": "string"
           },
           "content": {
-            "$ref": "#/components/schemas/RichTextBlock"
+            "items": {
+              "$ref": "#/components/schemas/RichTextBlock"
+            },
+            "type": "array"
           }
         },
         "required": [
-          "content",
           "colorHex"
         ],
         "title": "RichTextBlockPanel",
@@ -5932,12 +5941,12 @@
       "RichTextInlineBold": {
         "properties": {
           "content": {
-            "$ref": "#/components/schemas/RichTextInline"
+            "items": {
+              "$ref": "#/components/schemas/RichTextInline"
+            },
+            "type": "array"
           }
         },
-        "required": [
-          "content"
-        ],
         "title": "RichTextInlineBold",
         "type": "object"
       },
@@ -5978,14 +5987,16 @@
       "RichTextInlineImage": {
         "properties": {
           "content": {
-            "$ref": "#/components/schemas/RichTextInline"
+            "items": {
+              "$ref": "#/components/schemas/RichTextInline"
+            },
+            "type": "array"
           },
           "url": {
             "type": "string"
           }
         },
         "required": [
-          "content",
           "url"
         ],
         "title": "RichTextInlineImage",
@@ -5994,26 +6005,28 @@
       "RichTextInlineItalic": {
         "properties": {
           "content": {
-            "$ref": "#/components/schemas/RichTextInline"
+            "items": {
+              "$ref": "#/components/schemas/RichTextInline"
+            },
+            "type": "array"
           }
         },
-        "required": [
-          "content"
-        ],
         "title": "RichTextInlineItalic",
         "type": "object"
       },
       "RichTextInlineLink": {
         "properties": {
           "content": {
-            "$ref": "#/components/schemas/RichTextInline"
+            "items": {
+              "$ref": "#/components/schemas/RichTextInline"
+            },
+            "type": "array"
           },
           "url": {
             "type": "string"
           }
         },
         "required": [
-          "content",
           "url"
         ],
         "title": "RichTextInlineLink",
@@ -6038,12 +6051,12 @@
       "RichTextInlineStrikeThrough": {
         "properties": {
           "content": {
-            "$ref": "#/components/schemas/RichTextInline"
+            "items": {
+              "$ref": "#/components/schemas/RichTextInline"
+            },
+            "type": "array"
           }
         },
-        "required": [
-          "content"
-        ],
         "title": "RichTextInlineStrikeThrough",
         "type": "object"
       },
@@ -6065,24 +6078,24 @@
       "RichTextInlineUnderline": {
         "properties": {
           "content": {
-            "$ref": "#/components/schemas/RichTextInline"
+            "items": {
+              "$ref": "#/components/schemas/RichTextInline"
+            },
+            "type": "array"
           }
         },
-        "required": [
-          "content"
-        ],
         "title": "RichTextInlineUnderline",
         "type": "object"
       },
       "RichTextListItem": {
         "properties": {
           "content": {
-            "$ref": "#/components/schemas/RichTextBlock"
+            "items": {
+              "$ref": "#/components/schemas/RichTextBlock"
+            },
+            "type": "array"
           }
         },
-        "required": [
-          "content"
-        ],
         "title": "RichTextListItem",
         "type": "object"
       },
@@ -7818,6 +7831,12 @@
             },
             "type": "object"
           },
+          "userGroupPermissions": {
+            "additionalProperties": {
+              "$ref": "#/components/schemas/Permission"
+            },
+            "type": "object"
+          },
           "views": {
             "additionalProperties": {
               "$ref": "#/components/schemas/View"
@@ -7830,6 +7849,7 @@
         },
         "required": [
           "permissions",
+          "userGroupPermissions",
           "itemCount",
           "statuses",
           "itemStatusCount",
@@ -8086,6 +8106,13 @@
             "description": "All explicitly defined permissions for all users for this workspace-group.",
             "type": "object"
           },
+          "userGroupPermissions": {
+            "additionalProperties": {
+              "$ref": "#/components/schemas/Permission"
+            },
+            "description": "All explicitly defined permissions for all user groups for this workspace-group.",
+            "type": "object"
+          },
           "workspaces": {
             "description": "List of workspaces which belongs to this workspace-group.",
             "items": {
@@ -8095,7 +8122,8 @@
           }
         },
         "required": [
-          "permissions"
+          "permissions",
+          "userGroupPermissions"
         ],
         "title": "WorkspaceGroupEmbed",
         "type": "object"
@@ -8107,10 +8135,17 @@
               "$ref": "#/components/schemas/Permission"
             },
             "type": "object"
+          },
+          "userGroupPermissions": {
+            "additionalProperties": {
+              "$ref": "#/components/schemas/Permission"
+            },
+            "type": "object"
           }
         },
         "required": [
-          "permissions"
+          "permissions",
+          "userGroupPermissions"
         ],
         "title": "WorkspaceGroupPermissionsUpdateRequest",
         "type": "object"
@@ -8127,6 +8162,13 @@
               "$ref": "#/components/schemas/Permission"
             },
             "description": "All explicitly defined permissions for all users for this workspace-group.",
+            "type": "object"
+          },
+          "userGroupPermissions": {
+            "additionalProperties": {
+              "$ref": "#/components/schemas/Permission"
+            },
+            "description": "All explicitly defined permissions for all user groups for this workspace-group.",
             "type": "object"
           },
           "workspaceIds": {
@@ -8147,7 +8189,8 @@
           }
         },
         "required": [
-          "permissions"
+          "permissions",
+          "userGroupPermissions"
         ],
         "title": "WorkspaceGroupSearchEmbed",
         "type": "object"
@@ -8315,10 +8358,18 @@
             },
             "description": "Explicit permissions for specific users in the team.",
             "type": "object"
+          },
+          "userGroupPermissions": {
+            "additionalProperties": {
+              "$ref": "#/components/schemas/Permission"
+            },
+            "description": "Explicit permissions for specific teams.",
+            "type": "object"
           }
         },
         "required": [
-          "permissions"
+          "permissions",
+          "userGroupPermissions"
         ],
         "title": "WorkspacePermissionsUpdateRequest",
         "type": "object"
@@ -8510,12 +8561,12 @@
       "WorkspaceRelationSearchQueryFilterAnd": {
         "properties": {
           "inner": {
-            "$ref": "#/components/schemas/WorkspaceRelationSearchQueryFilter"
+            "items": {
+              "$ref": "#/components/schemas/WorkspaceRelationSearchQueryFilter"
+            },
+            "type": "array"
           }
         },
-        "required": [
-          "inner"
-        ],
         "title": "WorkspaceRelationSearchQueryFilterAnd",
         "type": "object"
       },
@@ -8567,24 +8618,24 @@
       "WorkspaceRelationSearchQueryFilterNot": {
         "properties": {
           "inner": {
-            "$ref": "#/components/schemas/WorkspaceRelationSearchQueryFilter"
+            "items": {
+              "$ref": "#/components/schemas/WorkspaceRelationSearchQueryFilter"
+            },
+            "type": "array"
           }
         },
-        "required": [
-          "inner"
-        ],
         "title": "WorkspaceRelationSearchQueryFilterNot",
         "type": "object"
       },
       "WorkspaceRelationSearchQueryFilterOr": {
         "properties": {
           "inner": {
-            "$ref": "#/components/schemas/WorkspaceRelationSearchQueryFilter"
+            "items": {
+              "$ref": "#/components/schemas/WorkspaceRelationSearchQueryFilter"
+            },
+            "type": "array"
           }
         },
-        "required": [
-          "inner"
-        ],
         "title": "WorkspaceRelationSearchQueryFilterOr",
         "type": "object"
       },
@@ -8735,10 +8786,17 @@
               "$ref": "#/components/schemas/Status"
             },
             "type": "object"
+          },
+          "userGroupPermissions": {
+            "additionalProperties": {
+              "$ref": "#/components/schemas/Permission"
+            },
+            "type": "object"
           }
         },
         "required": [
           "permissions",
+          "userGroupPermissions",
           "statuses",
           "itemCount"
         ],
@@ -8801,12 +8859,12 @@
       "WorkspaceSearchQueryFilterAnd": {
         "properties": {
           "inner": {
-            "$ref": "#/components/schemas/WorkspaceSearchQueryFilter"
+            "items": {
+              "$ref": "#/components/schemas/WorkspaceSearchQueryFilter"
+            },
+            "type": "array"
           }
         },
-        "required": [
-          "inner"
-        ],
         "title": "WorkspaceSearchQueryFilterAnd",
         "type": "object"
       },
@@ -8917,24 +8975,24 @@
       "WorkspaceSearchQueryFilterNot": {
         "properties": {
           "inner": {
-            "$ref": "#/components/schemas/WorkspaceSearchQueryFilter"
+            "items": {
+              "$ref": "#/components/schemas/WorkspaceSearchQueryFilter"
+            },
+            "type": "array"
           }
         },
-        "required": [
-          "inner"
-        ],
         "title": "WorkspaceSearchQueryFilterNot",
         "type": "object"
       },
       "WorkspaceSearchQueryFilterOr": {
         "properties": {
           "inner": {
-            "$ref": "#/components/schemas/WorkspaceSearchQueryFilter"
+            "items": {
+              "$ref": "#/components/schemas/WorkspaceSearchQueryFilter"
+            },
+            "type": "array"
           }
         },
-        "required": [
-          "inner"
-        ],
         "title": "WorkspaceSearchQueryFilterOr",
         "type": "object"
       },
@@ -9226,7 +9284,7 @@
   },
   "info": {
     "title": "airfocus API",
-    "version": "1.0.0-beta.37.31.1"
+    "version": "1.0.0-beta.37.33.0"
   },
   "openapi": "3.1.0",
   "paths": {
