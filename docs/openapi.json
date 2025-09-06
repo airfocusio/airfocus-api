@@ -423,6 +423,14 @@
             "description": "Whether this item is archived.",
             "type": "boolean"
           },
+          "assigneeUserGroupIds": {
+            "description": "Ids of user groups that are assigned to this item.",
+            "items": {
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": "array"
+          },
           "assigneeUserIds": {
             "description": "Ids of users who are assigned to this item.",
             "items": {
@@ -436,7 +444,8 @@
             "description": "Color of this item."
           },
           "description": {
-            "$ref": "#/components/schemas/RichText"
+            "$ref": "#/components/schemas/RichText",
+            "description": "Rich text content as structured blocks. Different media types provide markdown support:\n• application/json - Default blocks format\n• application/vnd.airfocus.markdown+json - All RichText fields become markdown strings (recommended)\n• application/json+markdown - Legacy format, only top-level fields converted to markdown"
           },
           "fields": {
             "additionalProperties": {},
@@ -450,6 +459,9 @@
                   "boolean": true
                 },
                 "5396681e-ea50-3d63-9ae3-c9f8ca17b7d8": {
+                  "userGroupIds": [
+                    "70e2b87a-b774-3022-9ef0-e55031a1c4fb"
+                  ],
                   "userIds": [
                     "24c9e15e-52af-347c-a25b-757e7bee1f9d"
                   ]
@@ -513,6 +525,14 @@
             "description": "Whether this item is archived.",
             "type": "boolean"
           },
+          "assigneeUserGroupIds": {
+            "description": "Ids of user groups that are assigned to this item.",
+            "items": {
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": "array"
+          },
           "assigneeUserIds": {
             "description": "Ids of users who are assigned to this item.",
             "items": {
@@ -526,7 +546,7 @@
             "description": "Color of this item."
           },
           "description": {
-            "description": "Rich-text as markdown string.",
+            "description": "Rich text content as a markdown string (used with markdown media types)",
             "examples": [
               "hello **world**!"
             ],
@@ -544,6 +564,9 @@
                   "boolean": true
                 },
                 "5396681e-ea50-3d63-9ae3-c9f8ca17b7d8": {
+                  "userGroupIds": [
+                    "70e2b87a-b774-3022-9ef0-e55031a1c4fb"
+                  ],
                   "userIds": [
                     "24c9e15e-52af-347c-a25b-757e7bee1f9d"
                   ]
@@ -678,6 +701,54 @@
           "order"
         ],
         "title": "CreateWorkspaceRequest",
+        "type": "object"
+      },
+      "CreateWorkspaceRequestWithMD": {
+        "description": "Workspace with Markdown string description.",
+        "properties": {
+          "alias": {
+            "description": "A custom code of this workspace (e.g. PROD, DEV, etc), which is used to create aliases for items (e.g. DEV-123). Alias should consist of 1-10 uppercase letters, and should be unique within the team.",
+            "type": "string"
+          },
+          "defaultPermission": {
+            "$ref": "#/components/schemas/Permission",
+            "description": "Default permission for all the team members in this workspace. Note: the final permission can be adjusted corresponding to each user's role, e.g. contributors can't have more than Comment permission."
+          },
+          "description": {
+            "description": "Rich text content as a markdown string (used with markdown media types)",
+            "examples": [
+              "hello **world**!"
+            ],
+            "type": "string"
+          },
+          "itemColor": {
+            "$ref": "#/components/schemas/ItemColor",
+            "description": "Default color applied to newly created items in this workspace. If not defined - a random color will be assigned to each new item."
+          },
+          "itemType": {
+            "$ref": "#/components/schemas/ItemType",
+            "description": "Type of items in this workspace."
+          },
+          "name": {
+            "description": "Name of this workspace.",
+            "type": "string"
+          },
+          "order": {
+            "description": "Order number of this workspace for sorting.",
+            "format": "int32",
+            "type": "integer"
+          },
+          "progressMode": {
+            "$ref": "#/components/schemas/WorkspaceProgressMode",
+            "default": "count"
+          }
+        },
+        "required": [
+          "name",
+          "description",
+          "order"
+        ],
+        "title": "CreateWorkspaceRequestWithMD",
         "type": "object"
       },
       "DateFieldWithFieldEmbed": {
@@ -1302,6 +1373,7 @@
       "GlobalSearchQuery": {
         "default": {
           "archived": false,
+          "assigneeUserGroupIds": [],
           "assigneeUserIds": [],
           "statusCategories": [],
           "workspaceIds": []
@@ -1310,6 +1382,14 @@
           "archived": {
             "description": "Search only archived or only non-archived items (only non-archived by default)",
             "type": "boolean"
+          },
+          "assigneeUserGroupIds": {
+            "description": "Narrow down the search to items which are assigned to the specified user groups",
+            "items": {
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": "array"
           },
           "assigneeUserIds": {
             "description": "Narrow down the search to items which are assigned to the specified users",
@@ -1914,6 +1994,14 @@
             "description": "Whether this item is archived.",
             "type": "boolean"
           },
+          "assigneeUserGroupIds": {
+            "description": "Ids of user groups that are assigned to this item.",
+            "items": {
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": "array"
+          },
           "assigneeUserIds": {
             "description": "Ids of users who are assigned to this item.",
             "items": {
@@ -1932,7 +2020,8 @@
             "type": "string"
           },
           "description": {
-            "$ref": "#/components/schemas/RichText"
+            "$ref": "#/components/schemas/RichText",
+            "description": "Rich text content as structured blocks. Different media types provide markdown support:\n• application/json - Default blocks format\n• application/vnd.airfocus.markdown+json - All RichText fields become markdown strings (recommended)\n• application/json+markdown - Legacy format, only top-level fields converted to markdown"
           },
           "fields": {
             "additionalProperties": {},
@@ -1946,6 +2035,9 @@
                   "boolean": true
                 },
                 "5396681e-ea50-3d63-9ae3-c9f8ca17b7d8": {
+                  "userGroupIds": [
+                    "70e2b87a-b774-3022-9ef0-e55031a1c4fb"
+                  ],
                   "userIds": [
                     "24c9e15e-52af-347c-a25b-757e7bee1f9d"
                   ]
@@ -2304,7 +2396,7 @@
       "ItemBulkCreate": {
         "properties": {
           "resource": {
-            "$ref": "#/components/schemas/Item"
+            "$ref": "#/components/schemas/CreateItemRequest"
           },
           "type": {
             "enum": [
@@ -2371,7 +2463,7 @@
             "type": "string"
           },
           "resource": {
-            "$ref": "#/components/schemas/Item"
+            "$ref": "#/components/schemas/UpdateItemRequest"
           },
           "type": {
             "enum": [
@@ -2417,7 +2509,8 @@
       "ItemComment": {
         "properties": {
           "content": {
-            "$ref": "#/components/schemas/RichText"
+            "$ref": "#/components/schemas/RichText",
+            "description": "Rich text content as structured blocks. Different media types provide markdown support:\n• application/json - Default blocks format\n• application/vnd.airfocus.markdown+json - All RichText fields become markdown strings (recommended)\n• application/json+markdown - Legacy format, only top-level fields converted to markdown"
           },
           "createdAt": {
             "format": "date-time",
@@ -2496,7 +2589,8 @@
             "$ref": "#/components/schemas/ItemCommentEmbed"
           },
           "content": {
-            "$ref": "#/components/schemas/RichText"
+            "$ref": "#/components/schemas/RichText",
+            "description": "Rich text content as structured blocks. Different media types provide markdown support:\n• application/json - Default blocks format\n• application/vnd.airfocus.markdown+json - All RichText fields become markdown strings (recommended)\n• application/json+markdown - Legacy format, only top-level fields converted to markdown"
           },
           "createdAt": {
             "format": "date-time",
@@ -4127,6 +4221,14 @@
             "description": "Whether this item is archived.",
             "type": "boolean"
           },
+          "assigneeUserGroupIds": {
+            "description": "Ids of user groups that are assigned to this item.",
+            "items": {
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": "array"
+          },
           "assigneeUserIds": {
             "description": "Ids of users who are assigned to this item.",
             "items": {
@@ -4145,7 +4247,8 @@
             "type": "string"
           },
           "description": {
-            "$ref": "#/components/schemas/RichText"
+            "$ref": "#/components/schemas/RichText",
+            "description": "Rich text content as structured blocks. Different media types provide markdown support:\n• application/json - Default blocks format\n• application/vnd.airfocus.markdown+json - All RichText fields become markdown strings (recommended)\n• application/json+markdown - Legacy format, only top-level fields converted to markdown"
           },
           "fields": {
             "additionalProperties": {},
@@ -4159,6 +4262,9 @@
                   "boolean": true
                 },
                 "5396681e-ea50-3d63-9ae3-c9f8ca17b7d8": {
+                  "userGroupIds": [
+                    "70e2b87a-b774-3022-9ef0-e55031a1c4fb"
+                  ],
                   "userIds": [
                     "24c9e15e-52af-347c-a25b-757e7bee1f9d"
                   ]
@@ -4286,6 +4392,14 @@
             "description": "Whether this item is archived.",
             "type": "boolean"
           },
+          "assigneeUserGroupIds": {
+            "description": "Ids of user groups that are assigned to this item.",
+            "items": {
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": "array"
+          },
           "assigneeUserIds": {
             "description": "Ids of users who are assigned to this item.",
             "items": {
@@ -4304,7 +4418,7 @@
             "type": "string"
           },
           "description": {
-            "description": "Rich-text as markdown string.",
+            "description": "Rich text content as a markdown string (used with markdown media types)",
             "examples": [
               "hello **world**!"
             ],
@@ -4322,6 +4436,9 @@
                   "boolean": true
                 },
                 "5396681e-ea50-3d63-9ae3-c9f8ca17b7d8": {
+                  "userGroupIds": [
+                    "70e2b87a-b774-3022-9ef0-e55031a1c4fb"
+                  ],
                   "userIds": [
                     "24c9e15e-52af-347c-a25b-757e7bee1f9d"
                   ]
@@ -5625,7 +5742,8 @@
                 ],
                 "type": "paragraph"
               }
-            ]
+            ],
+            "richText": true
           }
         ],
         "properties": {
@@ -5894,6 +6012,7 @@
             "bold": "#/components/schemas/RichTextInlineBold",
             "code": "#/components/schemas/RichTextInlineCode",
             "custom": "#/components/schemas/RichTextInlineCustom",
+            "groupMention": "#/components/schemas/RichTextInlineGroupMention",
             "image": "#/components/schemas/RichTextInlineImage",
             "italic": "#/components/schemas/RichTextInlineItalic",
             "link": "#/components/schemas/RichTextInlineLink",
@@ -5913,6 +6032,9 @@
           },
           {
             "$ref": "#/components/schemas/RichTextInlineCustom"
+          },
+          {
+            "$ref": "#/components/schemas/RichTextInlineGroupMention"
           },
           {
             "$ref": "#/components/schemas/RichTextInlineImage"
@@ -5982,6 +6104,22 @@
           "raw"
         ],
         "title": "RichTextInlineCustom",
+        "type": "object"
+      },
+      "RichTextInlineGroupMention": {
+        "properties": {
+          "meta": {
+            "type": "object"
+          },
+          "userGroupId": {
+            "format": "uuid",
+            "type": "string"
+          }
+        },
+        "required": [
+          "userGroupId"
+        ],
+        "title": "RichTextInlineGroupMention",
         "type": "object"
       },
       "RichTextInlineImage": {
@@ -6996,6 +7134,14 @@
             "description": "Whether this item is archived.",
             "type": "boolean"
           },
+          "assigneeUserGroupIds": {
+            "description": "Ids of user groups that are assigned to this item.",
+            "items": {
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": "array"
+          },
           "assigneeUserIds": {
             "description": "Ids of users who are assigned to this item.",
             "items": {
@@ -7009,7 +7155,8 @@
             "description": "Color of this item."
           },
           "description": {
-            "$ref": "#/components/schemas/RichText"
+            "$ref": "#/components/schemas/RichText",
+            "description": "Rich text content as structured blocks. Different media types provide markdown support:\n• application/json - Default blocks format\n• application/vnd.airfocus.markdown+json - All RichText fields become markdown strings (recommended)\n• application/json+markdown - Legacy format, only top-level fields converted to markdown"
           },
           "fields": {
             "additionalProperties": {},
@@ -7023,6 +7170,9 @@
                   "boolean": true
                 },
                 "5396681e-ea50-3d63-9ae3-c9f8ca17b7d8": {
+                  "userGroupIds": [
+                    "70e2b87a-b774-3022-9ef0-e55031a1c4fb"
+                  ],
                   "userIds": [
                     "24c9e15e-52af-347c-a25b-757e7bee1f9d"
                   ]
@@ -7086,6 +7236,14 @@
             "description": "Whether this item is archived.",
             "type": "boolean"
           },
+          "assigneeUserGroupIds": {
+            "description": "Ids of user groups that are assigned to this item.",
+            "items": {
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": "array"
+          },
           "assigneeUserIds": {
             "description": "Ids of users who are assigned to this item.",
             "items": {
@@ -7099,7 +7257,7 @@
             "description": "Color of this item."
           },
           "description": {
-            "description": "Rich-text as markdown string.",
+            "description": "Rich text content as a markdown string (used with markdown media types)",
             "examples": [
               "hello **world**!"
             ],
@@ -7117,6 +7275,9 @@
                   "boolean": true
                 },
                 "5396681e-ea50-3d63-9ae3-c9f8ca17b7d8": {
+                  "userGroupIds": [
+                    "70e2b87a-b774-3022-9ef0-e55031a1c4fb"
+                  ],
                   "userIds": [
                     "24c9e15e-52af-347c-a25b-757e7bee1f9d"
                   ]
@@ -7290,6 +7451,54 @@
         "title": "UpdateWorkspaceRequest",
         "type": "object"
       },
+      "UpdateWorkspaceRequestWithMD": {
+        "description": "Workspace with Markdown string description.",
+        "properties": {
+          "alias": {
+            "description": "A custom code of this workspace (e.g. PROD, DEV, etc), which is used to create aliases for items (e.g. DEV-123). Alias should consist of 1-10 uppercase letters, and should be unique within the team.",
+            "type": "string"
+          },
+          "defaultPermission": {
+            "$ref": "#/components/schemas/Permission",
+            "description": "Default permission for all the team members in this workspace. Note: the final permission can be adjusted corresponding to each user's role, e.g. contributors can't have more than Comment permission."
+          },
+          "description": {
+            "description": "Rich text content as a markdown string (used with markdown media types)",
+            "examples": [
+              "hello **world**!"
+            ],
+            "type": "string"
+          },
+          "itemColor": {
+            "$ref": "#/components/schemas/ItemColor",
+            "description": "Default color applied to newly created items in this workspace. If not defined - a random color will be assigned to each new item."
+          },
+          "itemType": {
+            "$ref": "#/components/schemas/ItemType",
+            "description": "Type of items in this workspace."
+          },
+          "name": {
+            "description": "Name of this workspace.",
+            "type": "string"
+          },
+          "order": {
+            "description": "Order number of this workspace for sorting.",
+            "format": "int32",
+            "type": "integer"
+          },
+          "progressMode": {
+            "$ref": "#/components/schemas/WorkspaceProgressMode",
+            "default": "count"
+          }
+        },
+        "required": [
+          "name",
+          "description",
+          "order"
+        ],
+        "title": "UpdateWorkspaceRequestWithMD",
+        "type": "object"
+      },
       "User": {
         "properties": {
           "avatarAttachmentId": {
@@ -7358,11 +7567,15 @@
         "discriminator": {
           "mapping": {
             "current": "#/components/schemas/UserRefUserRefCurrent",
+            "groupId": "#/components/schemas/UserRefUserGroupRefId",
             "id": "#/components/schemas/UserRefUserRefId"
           },
           "propertyName": "type"
         },
         "oneOf": [
+          {
+            "$ref": "#/components/schemas/UserRefUserGroupRefId"
+          },
           {
             "$ref": "#/components/schemas/UserRefUserRefCurrent"
           },
@@ -7371,6 +7584,19 @@
           }
         ],
         "title": "UserRef"
+      },
+      "UserRefUserGroupRefId": {
+        "properties": {
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id"
+        ],
+        "title": "UserRefUserGroupRefId",
+        "type": "object"
       },
       "UserRefUserRefCurrent": {
         "title": "UserRefUserRefCurrent",
@@ -9062,6 +9288,200 @@
         "title": "WorkspaceSearchQuerySortName",
         "type": "object"
       },
+      "WorkspaceWithMDWithWorkspaceEmbed": {
+        "description": "Workspace with Markdown string description.",
+        "properties": {
+          "_embedded": {
+            "$ref": "#/components/schemas/WorkspaceEmbed"
+          },
+          "alias": {
+            "description": "A custom code of this workspace (e.g. PROD, DEV, etc), which is used to create aliases for items (e.g. DEV-123). Alias should consist of 1-10 uppercase letters, and should be unique within the team.",
+            "type": "string"
+          },
+          "createdAt": {
+            "description": "Timestamp of when this workspace was created.",
+            "format": "date-time",
+            "type": "string"
+          },
+          "defaultPermission": {
+            "$ref": "#/components/schemas/Permission",
+            "description": "Default permission for all the team members in this workspace. Note: the final permission can be adjusted corresponding to each user's role, e.g. contributors can't have more than Comment permission."
+          },
+          "description": {
+            "description": "Rich text content as a markdown string (used with markdown media types)",
+            "examples": [
+              "hello **world**!"
+            ],
+            "type": "string"
+          },
+          "id": {
+            "description": "Unique identifier of this workspace.",
+            "format": "uuid",
+            "type": "string"
+          },
+          "itemColor": {
+            "$ref": "#/components/schemas/ItemColor",
+            "description": "Default color applied to newly created items in this workspace. If not defined - a random color will be assigned to each new item."
+          },
+          "itemType": {
+            "$ref": "#/components/schemas/ItemType",
+            "description": "Type of items in this workspace."
+          },
+          "lastUpdatedAt": {
+            "description": "Timestamp of when this workspace was last updated.",
+            "format": "date-time",
+            "type": "string"
+          },
+          "metadata": {
+            "$ref": "#/components/schemas/WorkspaceWorkspaceMetadata"
+          },
+          "name": {
+            "description": "Name of this workspace.",
+            "type": "string"
+          },
+          "namespace": {
+            "$ref": "#/components/schemas/WorkspaceNamespace",
+            "description": "The system namespace of this workspace."
+          },
+          "order": {
+            "description": "Order number of this workspace for sorting.",
+            "format": "int32",
+            "type": "integer"
+          },
+          "progressMode": {
+            "$ref": "#/components/schemas/WorkspaceProgressMode"
+          },
+          "teamId": {
+            "description": "Id of the team this workspace belongs to.",
+            "format": "uuid",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "teamId",
+          "name",
+          "description",
+          "progressMode",
+          "createdAt",
+          "lastUpdatedAt",
+          "namespace",
+          "order",
+          "_embedded"
+        ],
+        "title": "WorkspaceWithMDWithWorkspaceEmbed",
+        "type": "object"
+      },
+      "WorkspaceWithMDWithWorkspaceEmbedOrNullList": {
+        "items": {
+          "$ref": "#/components/schemas/WorkspaceWithMDWithWorkspaceEmbed"
+        },
+        "title": "WorkspaceWithMDWithWorkspaceEmbedOrNullList",
+        "type": "array"
+      },
+      "WorkspaceWithMDWithWorkspaceSearchEmbed": {
+        "description": "Workspace with Markdown string description.",
+        "properties": {
+          "_embedded": {
+            "$ref": "#/components/schemas/WorkspaceSearchEmbed"
+          },
+          "alias": {
+            "description": "A custom code of this workspace (e.g. PROD, DEV, etc), which is used to create aliases for items (e.g. DEV-123). Alias should consist of 1-10 uppercase letters, and should be unique within the team.",
+            "type": "string"
+          },
+          "createdAt": {
+            "description": "Timestamp of when this workspace was created.",
+            "format": "date-time",
+            "type": "string"
+          },
+          "defaultPermission": {
+            "$ref": "#/components/schemas/Permission",
+            "description": "Default permission for all the team members in this workspace. Note: the final permission can be adjusted corresponding to each user's role, e.g. contributors can't have more than Comment permission."
+          },
+          "description": {
+            "description": "Rich text content as a markdown string (used with markdown media types)",
+            "examples": [
+              "hello **world**!"
+            ],
+            "type": "string"
+          },
+          "id": {
+            "description": "Unique identifier of this workspace.",
+            "format": "uuid",
+            "type": "string"
+          },
+          "itemColor": {
+            "$ref": "#/components/schemas/ItemColor",
+            "description": "Default color applied to newly created items in this workspace. If not defined - a random color will be assigned to each new item."
+          },
+          "itemType": {
+            "$ref": "#/components/schemas/ItemType",
+            "description": "Type of items in this workspace."
+          },
+          "lastUpdatedAt": {
+            "description": "Timestamp of when this workspace was last updated.",
+            "format": "date-time",
+            "type": "string"
+          },
+          "metadata": {
+            "$ref": "#/components/schemas/WorkspaceWorkspaceMetadata"
+          },
+          "name": {
+            "description": "Name of this workspace.",
+            "type": "string"
+          },
+          "namespace": {
+            "$ref": "#/components/schemas/WorkspaceNamespace",
+            "description": "The system namespace of this workspace."
+          },
+          "order": {
+            "description": "Order number of this workspace for sorting.",
+            "format": "int32",
+            "type": "integer"
+          },
+          "progressMode": {
+            "$ref": "#/components/schemas/WorkspaceProgressMode"
+          },
+          "teamId": {
+            "description": "Id of the team this workspace belongs to.",
+            "format": "uuid",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "teamId",
+          "name",
+          "description",
+          "progressMode",
+          "createdAt",
+          "lastUpdatedAt",
+          "namespace",
+          "order",
+          "_embedded"
+        ],
+        "title": "WorkspaceWithMDWithWorkspaceSearchEmbed",
+        "type": "object"
+      },
+      "WorkspaceWithMDWithWorkspaceSearchEmbedPage": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/WorkspaceWithMDWithWorkspaceSearchEmbed"
+            },
+            "type": "array"
+          },
+          "totalItems": {
+            "format": "int32",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "totalItems"
+        ],
+        "title": "WorkspaceWithMDWithWorkspaceSearchEmbedPage",
+        "type": "object"
+      },
       "WorkspaceWithWorkspaceEmbed": {
         "properties": {
           "_embedded": {
@@ -9284,7 +9704,7 @@
   },
   "info": {
     "title": "airfocus API",
-    "version": "1.0.0-beta.37.38.0"
+    "version": "1.0.0-beta.37.44.1"
   },
   "openapi": "3.1.0",
   "paths": {
@@ -11097,6 +11517,16 @@
               "schema": {
                 "$ref": "#/components/schemas/CreateWorkspaceRequest"
               }
+            },
+            "application/json+markdown": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateWorkspaceRequestWithMD"
+              }
+            },
+            "application/vnd.airfocus.markdown+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateWorkspaceRequest"
+              }
             }
           },
           "required": true
@@ -11105,6 +11535,16 @@
           "200": {
             "content": {
               "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WorkspaceWithWorkspaceEmbed"
+                }
+              },
+              "application/json+markdown": {
+                "schema": {
+                  "$ref": "#/components/schemas/WorkspaceWithMDWithWorkspaceEmbed"
+                }
+              },
+              "application/vnd.airfocus.markdown+json": {
                 "schema": {
                   "$ref": "#/components/schemas/WorkspaceWithWorkspaceEmbed"
                 }
@@ -11210,6 +11650,22 @@
                 },
                 "type": "array"
               }
+            },
+            "application/json+markdown": {
+              "schema": {
+                "items": {
+                  "$ref": "#/components/schemas/WorkspaceBulkAction"
+                },
+                "type": "array"
+              }
+            },
+            "application/vnd.airfocus.markdown+json": {
+              "schema": {
+                "items": {
+                  "$ref": "#/components/schemas/WorkspaceBulkAction"
+                },
+                "type": "array"
+              }
             }
           },
           "required": false
@@ -11218,6 +11674,16 @@
           "200": {
             "content": {
               "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WorkspaceWithWorkspaceEmbedOrNullList"
+                }
+              },
+              "application/json+markdown": {
+                "schema": {
+                  "$ref": "#/components/schemas/WorkspaceWithMDWithWorkspaceEmbedOrNullList"
+                }
+              },
+              "application/vnd.airfocus.markdown+json": {
                 "schema": {
                   "$ref": "#/components/schemas/WorkspaceWithWorkspaceEmbedOrNullList"
                 }
@@ -13480,6 +13946,11 @@
                 "schema": {
                   "$ref": "#/components/schemas/ItemWithMDWithItemEmbed"
                 }
+              },
+              "application/vnd.airfocus.markdown+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ItemWithItemEmbed"
+                }
               }
             },
             "description": ""
@@ -13737,6 +14208,11 @@
                 "schema": {
                   "$ref": "#/components/schemas/ItemWithMDWithItemEmbedOrNullList"
                 }
+              },
+              "application/vnd.airfocus.markdown+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ItemWithItemEmbedOrNullList"
+                }
               }
             },
             "description": ""
@@ -13988,6 +14464,16 @@
                 "schema": {
                   "$ref": "#/components/schemas/WorkspaceWithWorkspaceEmbedOrNullList"
                 }
+              },
+              "application/json+markdown": {
+                "schema": {
+                  "$ref": "#/components/schemas/WorkspaceWithMDWithWorkspaceEmbedOrNullList"
+                }
+              },
+              "application/vnd.airfocus.markdown+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WorkspaceWithWorkspaceEmbedOrNullList"
+                }
               }
             },
             "description": ""
@@ -14146,6 +14632,16 @@
           "200": {
             "content": {
               "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WorkspaceWithWorkspaceSearchEmbedPage"
+                }
+              },
+              "application/json+markdown": {
+                "schema": {
+                  "$ref": "#/components/schemas/WorkspaceWithMDWithWorkspaceSearchEmbedPage"
+                }
+              },
+              "application/vnd.airfocus.markdown+json": {
                 "schema": {
                   "$ref": "#/components/schemas/WorkspaceWithWorkspaceSearchEmbedPage"
                 }
@@ -15183,6 +15679,16 @@
                 "schema": {
                   "$ref": "#/components/schemas/WorkspaceWithWorkspaceEmbed"
                 }
+              },
+              "application/json+markdown": {
+                "schema": {
+                  "$ref": "#/components/schemas/WorkspaceWithMDWithWorkspaceEmbed"
+                }
+              },
+              "application/vnd.airfocus.markdown+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WorkspaceWithWorkspaceEmbed"
+                }
               }
             },
             "description": ""
@@ -15260,7 +15766,7 @@
         ]
       },
       "patch": {
-        "description": "Returns the whole updated workspace with its sanitised data.<br/>Requirements:<br/>- auth-client scopes: \"workspace\"<br/>- user permission: \"write\" or higher",
+        "description": "Returns the whole updated workspace with its sanitised data.<br>Note: also supports patching description as a Markdown string.<br/>Requirements:<br/>- auth-client scopes: \"workspace\"<br/>- user permission: \"write\" or higher",
         "operationId": "patchWorkspace",
         "parameters": [
           {
@@ -15297,6 +15803,16 @@
           "200": {
             "content": {
               "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WorkspaceWithWorkspaceEmbed"
+                }
+              },
+              "application/json+markdown": {
+                "schema": {
+                  "$ref": "#/components/schemas/WorkspaceWithMDWithWorkspaceEmbed"
+                }
+              },
+              "application/vnd.airfocus.markdown+json": {
                 "schema": {
                   "$ref": "#/components/schemas/WorkspaceWithWorkspaceEmbed"
                 }
@@ -15406,6 +15922,16 @@
               "schema": {
                 "$ref": "#/components/schemas/UpdateWorkspaceRequest"
               }
+            },
+            "application/json+markdown": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateWorkspaceRequestWithMD"
+              }
+            },
+            "application/vnd.airfocus.markdown+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateWorkspaceRequest"
+              }
             }
           },
           "required": true
@@ -15414,6 +15940,16 @@
           "200": {
             "content": {
               "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WorkspaceWithWorkspaceEmbed"
+                }
+              },
+              "application/json+markdown": {
+                "schema": {
+                  "$ref": "#/components/schemas/WorkspaceWithMDWithWorkspaceEmbed"
+                }
+              },
+              "application/vnd.airfocus.markdown+json": {
                 "schema": {
                   "$ref": "#/components/schemas/WorkspaceWithWorkspaceEmbed"
                 }
@@ -16151,6 +16687,11 @@
               "schema": {
                 "$ref": "#/components/schemas/ItemComment"
               }
+            },
+            "application/vnd.airfocus.markdown+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ItemComment"
+              }
             }
           },
           "required": true
@@ -16164,6 +16705,11 @@
                 }
               },
               "application/json+markdown": {
+                "schema": {
+                  "$ref": "#/components/schemas/ItemCommentWithItemCommentEmbed"
+                }
+              },
+              "application/vnd.airfocus.markdown+json": {
                 "schema": {
                   "$ref": "#/components/schemas/ItemCommentWithItemCommentEmbed"
                 }
@@ -16236,6 +16782,14 @@
                 },
                 "type": "array"
               }
+            },
+            "application/vnd.airfocus.markdown+json": {
+              "schema": {
+                "items": {
+                  "$ref": "#/components/schemas/CommentBulkAction"
+                },
+                "type": "array"
+              }
             }
           },
           "required": false
@@ -16249,6 +16803,11 @@
                 }
               },
               "application/json+markdown": {
+                "schema": {
+                  "$ref": "#/components/schemas/ItemCommentWithItemCommentEmbedOrNullList"
+                }
+              },
+              "application/vnd.airfocus.markdown+json": {
                 "schema": {
                   "$ref": "#/components/schemas/ItemCommentWithItemCommentEmbedOrNullList"
                 }
@@ -16327,6 +16886,11 @@
                 }
               },
               "application/json+markdown": {
+                "schema": {
+                  "$ref": "#/components/schemas/ItemCommentWithItemCommentEmbedOrNullList"
+                }
+              },
+              "application/vnd.airfocus.markdown+json": {
                 "schema": {
                   "$ref": "#/components/schemas/ItemCommentWithItemCommentEmbedOrNullList"
                 }
@@ -16452,6 +17016,11 @@
                 }
               },
               "application/json+markdown": {
+                "schema": {
+                  "$ref": "#/components/schemas/ItemCommentWithItemCommentEmbedPage"
+                }
+              },
+              "application/vnd.airfocus.markdown+json": {
                 "schema": {
                   "$ref": "#/components/schemas/ItemCommentWithItemCommentEmbedPage"
                 }
@@ -16587,6 +17156,11 @@
                 "schema": {
                   "$ref": "#/components/schemas/ItemCommentWithItemCommentEmbed"
                 }
+              },
+              "application/vnd.airfocus.markdown+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ItemCommentWithItemCommentEmbed"
+                }
               }
             },
             "description": ""
@@ -16668,6 +17242,11 @@
                 "schema": {
                   "$ref": "#/components/schemas/ItemCommentWithItemCommentEmbed"
                 }
+              },
+              "application/vnd.airfocus.markdown+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ItemCommentWithItemCommentEmbed"
+                }
               }
             },
             "description": ""
@@ -16738,6 +17317,11 @@
               "schema": {
                 "$ref": "#/components/schemas/ItemComment"
               }
+            },
+            "application/vnd.airfocus.markdown+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ItemComment"
+              }
             }
           },
           "required": true
@@ -16751,6 +17335,11 @@
                 }
               },
               "application/json+markdown": {
+                "schema": {
+                  "$ref": "#/components/schemas/ItemCommentWithItemCommentEmbed"
+                }
+              },
+              "application/vnd.airfocus.markdown+json": {
                 "schema": {
                   "$ref": "#/components/schemas/ItemCommentWithItemCommentEmbed"
                 }
@@ -17130,6 +17719,11 @@
               "schema": {
                 "$ref": "#/components/schemas/CreateItemRequestWithMD"
               }
+            },
+            "application/vnd.airfocus.markdown+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateItemRequest"
+              }
             }
           },
           "required": true
@@ -17145,6 +17739,11 @@
               "application/json+markdown": {
                 "schema": {
                   "$ref": "#/components/schemas/ItemWithMDWithItemEmbed"
+                }
+              },
+              "application/vnd.airfocus.markdown+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ItemWithItemEmbed"
                 }
               }
             },
@@ -17266,6 +17865,14 @@
                 },
                 "type": "array"
               }
+            },
+            "application/vnd.airfocus.markdown+json": {
+              "schema": {
+                "items": {
+                  "$ref": "#/components/schemas/ItemBulkAction"
+                },
+                "type": "array"
+              }
             }
           },
           "required": false
@@ -17281,6 +17888,11 @@
               "application/json+markdown": {
                 "schema": {
                   "$ref": "#/components/schemas/ItemWithMDWithItemEmbedOrNullList"
+                }
+              },
+              "application/vnd.airfocus.markdown+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ItemWithItemEmbedOrNullList"
                 }
               }
             },
@@ -17410,6 +18022,11 @@
               "application/json+markdown": {
                 "schema": {
                   "$ref": "#/components/schemas/ItemWithMDWithItemEmbedOrNullList"
+                }
+              },
+              "application/vnd.airfocus.markdown+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ItemWithItemEmbedOrNullList"
                 }
               }
             },
@@ -17688,6 +18305,11 @@
               "application/json+markdown": {
                 "schema": {
                   "$ref": "#/components/schemas/ItemWithMDWithItemEmbedPage"
+                }
+              },
+              "application/vnd.airfocus.markdown+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ItemWithItemEmbedPage"
                 }
               }
             },
@@ -18159,6 +18781,11 @@
                 "schema": {
                   "$ref": "#/components/schemas/ItemWithMDWithItemEmbed"
                 }
+              },
+              "application/vnd.airfocus.markdown+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ItemWithItemEmbed"
+                }
               }
             },
             "description": ""
@@ -18291,6 +18918,11 @@
                 "schema": {
                   "$ref": "#/components/schemas/ItemWithMDWithItemEmbed"
                 }
+              },
+              "application/vnd.airfocus.markdown+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ItemWithItemEmbed"
+                }
               }
             },
             "description": ""
@@ -18412,6 +19044,11 @@
               "schema": {
                 "$ref": "#/components/schemas/UpdateItemRequestWithMD"
               }
+            },
+            "application/vnd.airfocus.markdown+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateItemRequest"
+              }
             }
           },
           "required": true
@@ -18427,6 +19064,11 @@
               "application/json+markdown": {
                 "schema": {
                   "$ref": "#/components/schemas/ItemWithMDWithItemEmbed"
+                }
+              },
+              "application/vnd.airfocus.markdown+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ItemWithItemEmbed"
                 }
               }
             },
