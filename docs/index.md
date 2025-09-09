@@ -76,12 +76,20 @@ For the sake of data protection, we do not return detailed messages for most of 
 ### Rich-text formatting
 
 Resources which include `RichText` (e.g. `Item` with its `description` field) can be optionally handled by the server in Markdown format:
-- to send a request payload which includes Markdown-formatted `RichText`, change `Content-Type` header to `application/json+markdown`
-- to receive a response payload which includes `RichText` formatted as Markdown, change `Accept` header to `application/json+markdown`
+- to send a request payload which includes Markdown-formatted `RichText`, change `Content-Type` header to `application/vnd.airfocus.markdown+json`
+- to receive a response payload which includes `RichText` formatted as Markdown, change `Accept` header to `application/vnd.airfocus.markdown+json`
 
 {: .note }
-> The `application/json+markdown` media-type can be only used with endpoints which support rich-text formatting.
+> The `application/vnd.airfocus.markdown+json` media-type can be only used with endpoints which support rich-text formatting.
 > For all the other endpoints using this media-type will result in `HTTP 406 Not Acceptable` response.
+
+The Markdown response returned by using the `application/vnd.airfocus.markdown+json` has the following structure:
+```json
+{
+  "markdown": "Markdown text here. This is **bold**.",
+  "richText": true
+}
+```
 
 ---
 [Next: Authentication](/authentication){: .btn }
