@@ -41,28 +41,46 @@
         "type": "object"
       },
       "App": {
-        "properties": {
-          "id": {
-            "format": "uuid",
-            "type": "string"
+        "discriminator": {
+          "mapping": {
+            "forms": "#/components/schemas/FormsApp",
+            "health-check-ins": "#/components/schemas/HealthCheckInsApp",
+            "insights": "#/components/schemas/InsightsApp",
+            "mirror": "#/components/schemas/MirrorApp",
+            "okr": "#/components/schemas/OkrApp",
+            "portal": "#/components/schemas/PortalApp",
+            "prioritization": "#/components/schemas/PrioritizationApp",
+            "voting": "#/components/schemas/VotingApp"
           },
-          "settings": {},
-          "teamId": {
-            "format": "uuid",
-            "type": "string"
-          },
-          "typeId": {
-            "type": "string"
-          }
+          "propertyName": "typeId"
         },
-        "required": [
-          "id",
-          "teamId",
-          "typeId",
-          "settings"
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/FormsApp"
+          },
+          {
+            "$ref": "#/components/schemas/HealthCheckInsApp"
+          },
+          {
+            "$ref": "#/components/schemas/InsightsApp"
+          },
+          {
+            "$ref": "#/components/schemas/MirrorApp"
+          },
+          {
+            "$ref": "#/components/schemas/OkrApp"
+          },
+          {
+            "$ref": "#/components/schemas/PortalApp"
+          },
+          {
+            "$ref": "#/components/schemas/PrioritizationApp"
+          },
+          {
+            "$ref": "#/components/schemas/VotingApp"
+          }
         ],
-        "title": "App",
-        "type": "object"
+        "title": "App"
       },
       "ApplyTemplateRequest": {
         "properties": {
@@ -162,6 +180,9 @@
             "type": "array"
           }
         },
+        "required": [
+          "users"
+        ],
         "title": "BulkInviteUsersRequest",
         "type": "object"
       },
@@ -361,6 +382,7 @@
           }
         },
         "required": [
+          "scopes",
           "name"
         ],
         "title": "CreateApiKeyRequest",
@@ -511,6 +533,8 @@
           "color",
           "name",
           "description",
+          "assigneeUserIds",
+          "assigneeUserGroupIds",
           "fields",
           "order"
         ],
@@ -616,6 +640,8 @@
           "color",
           "name",
           "description",
+          "assigneeUserIds",
+          "assigneeUserGroupIds",
           "fields",
           "order"
         ],
@@ -881,6 +907,101 @@
         "title": "ErrorResponse",
         "type": "object"
       },
+      "ExtensionShareLink": {
+        "properties": {
+          "branding": {
+            "type": "boolean"
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          },
+          "secret": {
+            "type": "string"
+          },
+          "userId": {
+            "format": "uuid",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "userId",
+          "name",
+          "secret",
+          "branding",
+          "createdAt"
+        ],
+        "title": "ExtensionShareLink",
+        "type": "object"
+      },
+      "Factor": {
+        "properties": {
+          "criteria": {
+            "items": {
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "description": {
+            "type": "string"
+          },
+          "direction": {
+            "$ref": "#/components/schemas/ScoringDirection"
+          },
+          "name": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "description",
+          "criteria",
+          "direction"
+        ],
+        "title": "Factor",
+        "type": "object"
+      },
+      "FactorId": {
+        "enum": [
+          "r",
+          "x",
+          "y"
+        ],
+        "title": "FactorId",
+        "type": "string"
+      },
+      "Factors": {
+        "properties": {
+          "r": {
+            "$ref": "#/components/schemas/Factor"
+          },
+          "x": {
+            "$ref": "#/components/schemas/Factor"
+          },
+          "y": {
+            "$ref": "#/components/schemas/Factor"
+          }
+        },
+        "required": [
+          "y",
+          "x",
+          "r"
+        ],
+        "title": "Factors",
+        "type": "object"
+      },
       "FieldEmbed": {
         "properties": {
           "workspaces": {
@@ -891,6 +1012,9 @@
             "type": "array"
           }
         },
+        "required": [
+          "workspaces"
+        ],
         "title": "FieldEmbed",
         "type": "object"
       },
@@ -923,6 +1047,7 @@
             "type": "boolean"
           },
           "workspaceIds": {
+            "default": [],
             "description": "Return only fields which are installed in the specified workspaces.",
             "items": {
               "format": "uuid",
@@ -1131,7 +1256,8 @@
           }
         },
         "required": [
-          "workspaceId"
+          "workspaceId",
+          "fieldIds"
         ],
         "title": "FieldServerEndpointsReorderFieldsRequest",
         "type": "object"
@@ -1265,9 +1391,36 @@
           }
         },
         "required": [
+          "items",
           "totalItems"
         ],
         "title": "FieldWithFieldEmbedPage",
+        "type": "object"
+      },
+      "FormAudience": {
+        "discriminator": {
+          "mapping": {
+            "anonymousUsers": "#/components/schemas/FormAudienceAnonymousUsers",
+            "teamMembers": "#/components/schemas/FormAudienceTeamMembers"
+          },
+          "propertyName": "type"
+        },
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/FormAudienceAnonymousUsers"
+          },
+          {
+            "$ref": "#/components/schemas/FormAudienceTeamMembers"
+          }
+        ],
+        "title": "FormAudience"
+      },
+      "FormAudienceAnonymousUsers": {
+        "title": "FormAudienceAnonymousUsers",
+        "type": "object"
+      },
+      "FormAudienceTeamMembers": {
+        "title": "FormAudienceTeamMembers",
         "type": "object"
       },
       "FormSourceFieldTypeSettings": {
@@ -1370,6 +1523,162 @@
         "title": "FormTargetFieldWithFieldEmbed",
         "type": "object"
       },
+      "FormsApp": {
+        "properties": {
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "settings": {
+            "$ref": "#/components/schemas/FormsAppTypeSettings"
+          },
+          "teamId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "typeId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "teamId",
+          "typeId",
+          "settings"
+        ],
+        "title": "FormsApp",
+        "type": "object"
+      },
+      "FormsAppTypeFieldSettings": {
+        "properties": {
+          "fieldId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "order": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "required": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "fieldId",
+          "required",
+          "order"
+        ],
+        "title": "FormsAppTypeFieldSettings",
+        "type": "object"
+      },
+      "FormsAppTypeSettings": {
+        "properties": {
+          "audience": {
+            "items": {
+              "$ref": "#/components/schemas/FormAudience"
+            },
+            "type": "array"
+          },
+          "descriptionName": {
+            "type": "string"
+          },
+          "descriptionOrder": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "fields": {
+            "items": {
+              "$ref": "#/components/schemas/FormsAppTypeFieldSettings"
+            },
+            "type": "array",
+            "uniqueItems": true
+          },
+          "formDescription": {
+            "type": "string"
+          },
+          "formSourceFieldId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "formTargetFieldId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "formType": {
+            "$ref": "#/components/schemas/FormsAppTypeSettingsFormType"
+          },
+          "requireLogin": {
+            "type": "boolean"
+          },
+          "shareLinks": {
+            "items": {
+              "$ref": "#/components/schemas/ExtensionShareLink"
+            },
+            "type": "array"
+          },
+          "subjectName": {
+            "type": "string"
+          },
+          "targetWorkspaceId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "workspaceId": {
+            "format": "uuid",
+            "type": "string"
+          }
+        },
+        "required": [
+          "workspaceId",
+          "targetWorkspaceId",
+          "descriptionOrder",
+          "formSourceFieldId",
+          "formTargetFieldId",
+          "fields",
+          "formDescription",
+          "formType",
+          "audience",
+          "requireLogin",
+          "shareLinks"
+        ],
+        "title": "FormsAppTypeSettings",
+        "type": "object"
+      },
+      "FormsAppTypeSettingsFormType": {
+        "properties": {
+          "general": {
+            "$ref": "#/components/schemas/FormsAppTypeSettingsFormTypeSettings"
+          },
+          "item": {
+            "$ref": "#/components/schemas/FormsAppTypeSettingsFormTypeSettings"
+          }
+        },
+        "required": [
+          "general",
+          "item"
+        ],
+        "title": "FormsAppTypeSettingsFormType",
+        "type": "object"
+      },
+      "FormsAppTypeSettingsFormTypeSettings": {
+        "properties": {
+          "enabled": {
+            "type": "boolean"
+          },
+          "label": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "enabled",
+          "label"
+        ],
+        "title": "FormsAppTypeSettingsFormTypeSettings",
+        "type": "object"
+      },
       "GlobalSearchQuery": {
         "default": {
           "archived": false,
@@ -1423,6 +1732,12 @@
             "type": "array"
           }
         },
+        "required": [
+          "workspaceIds",
+          "assigneeUserIds",
+          "assigneeUserGroupIds",
+          "statusCategories"
+        ],
         "title": "GlobalSearchQuery",
         "type": "object"
       },
@@ -1469,9 +1784,54 @@
           }
         },
         "required": [
+          "items",
           "totalItems"
         ],
         "title": "GlobalSearchResultPage",
+        "type": "object"
+      },
+      "HealthCheckInsApp": {
+        "properties": {
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "settings": {
+            "$ref": "#/components/schemas/HealthCheckInsAppTypeSettings"
+          },
+          "teamId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "typeId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "teamId",
+          "typeId",
+          "settings"
+        ],
+        "title": "HealthCheckInsApp",
+        "type": "object"
+      },
+      "HealthCheckInsAppTypeSettings": {
+        "properties": {
+          "healthCheckInsFieldId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "workspaceId": {
+            "format": "uuid",
+            "type": "string"
+          }
+        },
+        "required": [
+          "workspaceId",
+          "healthCheckInsFieldId"
+        ],
+        "title": "HealthCheckInsAppTypeSettings",
         "type": "object"
       },
       "InboxViewCounter": {
@@ -1518,6 +1878,92 @@
           "archived"
         ],
         "title": "InboxViewCountersRequest",
+        "type": "object"
+      },
+      "InsightsApp": {
+        "properties": {
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "settings": {
+            "$ref": "#/components/schemas/InsightsAppTypeSettings"
+          },
+          "teamId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "typeId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "teamId",
+          "typeId",
+          "settings"
+        ],
+        "title": "InsightsApp",
+        "type": "object"
+      },
+      "InsightsAppTypeSettings": {
+        "properties": {
+          "fieldIds": {
+            "items": {
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": "array",
+            "uniqueItems": true
+          },
+          "insightsFieldId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "scoringMode": {
+            "$ref": "#/components/schemas/InsightsScoringMode"
+          },
+          "showStatus": {
+            "type": "boolean"
+          },
+          "targets": {
+            "items": {
+              "$ref": "#/components/schemas/InsightsAppTypeSettingsTarget"
+            },
+            "type": "array"
+          },
+          "workspaceId": {
+            "format": "uuid",
+            "type": "string"
+          }
+        },
+        "required": [
+          "workspaceId",
+          "insightsFieldId",
+          "targets",
+          "fieldIds",
+          "showStatus",
+          "scoringMode"
+        ],
+        "title": "InsightsAppTypeSettings",
+        "type": "object"
+      },
+      "InsightsAppTypeSettingsTarget": {
+        "properties": {
+          "insightsFieldId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "workspaceId": {
+            "format": "uuid",
+            "type": "string"
+          }
+        },
+        "required": [
+          "workspaceId",
+          "insightsFieldId"
+        ],
+        "title": "InsightsAppTypeSettingsTarget",
         "type": "object"
       },
       "InsightsFieldTypeSettings": {
@@ -1577,6 +2023,40 @@
         "title": "InsightsFieldWithFieldEmbed",
         "type": "object"
       },
+      "InsightsScoringMode": {
+        "discriminator": {
+          "mapping": {
+            "customFormula": "#/components/schemas/InsightsScoringModeCustomFormula",
+            "default": "#/components/schemas/InsightsScoringModeDefault"
+          },
+          "propertyName": "type"
+        },
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/InsightsScoringModeCustomFormula"
+          },
+          {
+            "$ref": "#/components/schemas/InsightsScoringModeDefault"
+          }
+        ],
+        "title": "InsightsScoringMode"
+      },
+      "InsightsScoringModeCustomFormula": {
+        "properties": {
+          "scoringFormula": {
+            "$ref": "#/components/schemas/ScoringFormula"
+          }
+        },
+        "required": [
+          "scoringFormula"
+        ],
+        "title": "InsightsScoringModeCustomFormula",
+        "type": "object"
+      },
+      "InsightsScoringModeDefault": {
+        "title": "InsightsScoringModeDefault",
+        "type": "object"
+      },
       "InstallBooleanFieldRequest": {
         "properties": {
           "description": {
@@ -1597,6 +2077,7 @@
             "type": "string"
           },
           "workspaceIds": {
+            "default": [],
             "description": "If isTeamField=false then exactly one workspace ID should be provided.\nIf isTeamField=true then any amount of workspace IDs can be provided to be linked to the newly installed field.",
             "items": {
               "format": "uuid",
@@ -1632,6 +2113,7 @@
             "type": "string"
           },
           "workspaceIds": {
+            "default": [],
             "description": "If isTeamField=false then exactly one workspace ID should be provided.\nIf isTeamField=true then any amount of workspace IDs can be provided to be linked to the newly installed field.",
             "items": {
               "format": "uuid",
@@ -1667,6 +2149,7 @@
             "type": "string"
           },
           "workspaceIds": {
+            "default": [],
             "description": "If isTeamField=false then exactly one workspace ID should be provided.\nIf isTeamField=true then any amount of workspace IDs can be provided to be linked to the newly installed field.",
             "items": {
               "format": "uuid",
@@ -1706,6 +2189,7 @@
             "type": "string"
           },
           "workspaceIds": {
+            "default": [],
             "description": "If isTeamField=false then exactly one workspace ID should be provided.\nIf isTeamField=true then any amount of workspace IDs can be provided to be linked to the newly installed field.",
             "items": {
               "format": "uuid",
@@ -1746,6 +2230,7 @@
             "type": "string"
           },
           "workspaceIds": {
+            "default": [],
             "description": "If isTeamField=false then exactly one workspace ID should be provided.\nIf isTeamField=true then any amount of workspace IDs can be provided to be linked to the newly installed field.",
             "items": {
               "format": "uuid",
@@ -1786,6 +2271,7 @@
             "type": "string"
           },
           "workspaceIds": {
+            "default": [],
             "description": "If isTeamField=false then exactly one workspace ID should be provided.\nIf isTeamField=true then any amount of workspace IDs can be provided to be linked to the newly installed field.",
             "items": {
               "format": "uuid",
@@ -1822,6 +2308,7 @@
             "type": "string"
           },
           "workspaceIds": {
+            "default": [],
             "description": "If isTeamField=false then exactly one workspace ID should be provided.\nIf isTeamField=true then any amount of workspace IDs can be provided to be linked to the newly installed field.",
             "items": {
               "format": "uuid",
@@ -1861,6 +2348,7 @@
             "type": "string"
           },
           "workspaceIds": {
+            "default": [],
             "description": "If isTeamField=false then exactly one workspace ID should be provided.\nIf isTeamField=true then any amount of workspace IDs can be provided to be linked to the newly installed field.",
             "items": {
               "format": "uuid",
@@ -2119,6 +2607,8 @@
           "color",
           "name",
           "description",
+          "assigneeUserIds",
+          "assigneeUserGroupIds",
           "fields",
           "archived",
           "createdAt",
@@ -2362,6 +2852,7 @@
           }
         },
         "required": [
+          "items",
           "totalItems"
         ],
         "title": "ItemAttachmentWithEmbedPage",
@@ -2544,6 +3035,7 @@
           "itemId",
           "userId",
           "content",
+          "reactions",
           "createdAt",
           "lastUpdatedAt"
         ],
@@ -2568,7 +3060,8 @@
           }
         },
         "required": [
-          "emoji"
+          "emoji",
+          "userIds"
         ],
         "title": "ItemCommentReaction",
         "type": "object"
@@ -2624,6 +3117,7 @@
           "itemId",
           "userId",
           "content",
+          "reactions",
           "createdAt",
           "lastUpdatedAt",
           "_embedded"
@@ -2652,6 +3146,7 @@
           }
         },
         "required": [
+          "items",
           "totalItems"
         ],
         "title": "ItemCommentWithItemCommentEmbedPage",
@@ -2798,8 +3293,11 @@
           }
         },
         "required": [
+          "parents",
+          "children",
           "progress",
           "apps",
+          "constraints",
           "watched",
           "linkCount",
           "commentCount",
@@ -2980,16 +3478,33 @@
       "ItemLinkConstraint": {
         "discriminator": {
           "mapping": {
+            "readonly": "#/components/schemas/ItemLinkConstraintReadonly",
             "undeletable": "#/components/schemas/ItemLinkConstraintUndeletable"
           },
           "propertyName": "type"
         },
         "oneOf": [
           {
+            "$ref": "#/components/schemas/ItemLinkConstraintReadonly"
+          },
+          {
             "$ref": "#/components/schemas/ItemLinkConstraintUndeletable"
           }
         ],
         "title": "ItemLinkConstraint"
+      },
+      "ItemLinkConstraintReadonly": {
+        "properties": {
+          "integrationId": {
+            "format": "uuid",
+            "type": "string"
+          }
+        },
+        "required": [
+          "integrationId"
+        ],
+        "title": "ItemLinkConstraintReadonly",
+        "type": "object"
       },
       "ItemLinkConstraintUndeletable": {
         "properties": {
@@ -3030,7 +3545,8 @@
         "required": [
           "fromWorkspaceId",
           "toWorkspaceId",
-          "apps"
+          "apps",
+          "constraints"
         ],
         "title": "ItemLinkEmbed",
         "type": "object"
@@ -3063,6 +3579,7 @@
             "type": "boolean"
           },
           "itemIds": {
+            "default": [],
             "description": "Return only those item-links which connect the specified items.",
             "items": {
               "format": "uuid",
@@ -3072,6 +3589,7 @@
             "uniqueItems": true
           },
           "workspaceIds": {
+            "default": [],
             "description": "Return only those item-links which connect items in the specified workspaces.",
             "items": {
               "format": "uuid",
@@ -3158,6 +3676,7 @@
           }
         },
         "required": [
+          "items",
           "totalItems"
         ],
         "title": "ItemLinkWithItemLinkEmbedPage",
@@ -3276,6 +3795,33 @@
         "title": "ItemRelationBulkUpdate",
         "type": "object"
       },
+      "ItemRelationConstraint": {
+        "discriminator": {
+          "mapping": {
+            "readonly": "#/components/schemas/ItemRelationConstraintReadonly"
+          },
+          "propertyName": "type"
+        },
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/ItemRelationConstraintReadonly"
+          }
+        ],
+        "title": "ItemRelationConstraint"
+      },
+      "ItemRelationConstraintReadonly": {
+        "properties": {
+          "integrationId": {
+            "format": "uuid",
+            "type": "string"
+          }
+        },
+        "required": [
+          "integrationId"
+        ],
+        "title": "ItemRelationConstraintReadonly",
+        "type": "object"
+      },
       "ItemRelationCreateRequest": {
         "properties": {
           "childId": {
@@ -3300,6 +3846,21 @@
           "childId"
         ],
         "title": "ItemRelationCreateRequest",
+        "type": "object"
+      },
+      "ItemRelationEmbed": {
+        "properties": {
+          "constraints": {
+            "items": {
+              "$ref": "#/components/schemas/ItemRelationConstraint"
+            },
+            "type": "array"
+          }
+        },
+        "required": [
+          "constraints"
+        ],
+        "title": "ItemRelationEmbed",
         "type": "object"
       },
       "ItemRelationSearchQuery": {
@@ -3390,10 +3951,10 @@
         "title": "ItemRelationUpdateRequest",
         "type": "object"
       },
-      "ItemRelationWithEmbed": {
+      "ItemRelationWithItemRelationEmbed": {
         "properties": {
           "_embedded": {
-            "type": "object"
+            "$ref": "#/components/schemas/ItemRelationEmbed"
           },
           "childId": {
             "format": "uuid",
@@ -3424,21 +3985,21 @@
           "childOrder",
           "_embedded"
         ],
-        "title": "ItemRelationWithEmbed",
+        "title": "ItemRelationWithItemRelationEmbed",
         "type": "object"
       },
-      "ItemRelationWithEmbedOrNullList": {
+      "ItemRelationWithItemRelationEmbedOrNullList": {
         "items": {
-          "$ref": "#/components/schemas/ItemRelationWithEmbed"
+          "$ref": "#/components/schemas/ItemRelationWithItemRelationEmbed"
         },
-        "title": "ItemRelationWithEmbedOrNullList",
+        "title": "ItemRelationWithItemRelationEmbedOrNullList",
         "type": "array"
       },
-      "ItemRelationWithEmbedPage": {
+      "ItemRelationWithItemRelationEmbedPage": {
         "properties": {
           "items": {
             "items": {
-              "$ref": "#/components/schemas/ItemRelationWithEmbed"
+              "$ref": "#/components/schemas/ItemRelationWithItemRelationEmbed"
             },
             "type": "array"
           },
@@ -3448,9 +4009,10 @@
           }
         },
         "required": [
+          "items",
           "totalItems"
         ],
-        "title": "ItemRelationWithEmbedPage",
+        "title": "ItemRelationWithItemRelationEmbedPage",
         "type": "object"
       },
       "ItemSearchQuery": {
@@ -3466,6 +4028,7 @@
           }
         },
         "required": [
+          "filter",
           "sort",
           "archived"
         ],
@@ -3584,6 +4147,9 @@
             "type": "array"
           }
         },
+        "required": [
+          "inner"
+        ],
         "title": "ItemSearchQueryFilterAnd",
         "type": "object"
       },
@@ -3634,6 +4200,9 @@
             "type": "array"
           }
         },
+        "required": [
+          "users"
+        ],
         "title": "ItemSearchQueryFilterAssigneesContainsAll",
         "type": "object"
       },
@@ -3646,6 +4215,9 @@
             "type": "array"
           }
         },
+        "required": [
+          "users"
+        ],
         "title": "ItemSearchQueryFilterAssigneesContainsAny",
         "type": "object"
       },
@@ -3843,6 +4415,9 @@
             "type": "array"
           }
         },
+        "required": [
+          "inner"
+        ],
         "title": "ItemSearchQueryFilterOr",
         "type": "object"
       },
@@ -3932,6 +4507,9 @@
             "uniqueItems": true
           }
         },
+        "required": [
+          "categories"
+        ],
         "title": "ItemSearchQueryFilterStatusCategoryContainsAny",
         "type": "object"
       },
@@ -3958,6 +4536,9 @@
             "uniqueItems": true
           }
         },
+        "required": [
+          "statusIds"
+        ],
         "title": "ItemSearchQueryFilterStatusContainsAny",
         "type": "object"
       },
@@ -4346,6 +4927,8 @@
           "color",
           "name",
           "description",
+          "assigneeUserIds",
+          "assigneeUserGroupIds",
           "fields",
           "archived",
           "createdAt",
@@ -4377,6 +4960,7 @@
           }
         },
         "required": [
+          "items",
           "totalItems"
         ],
         "title": "ItemWithItemEmbedPage",
@@ -4520,6 +5104,8 @@
           "color",
           "name",
           "description",
+          "assigneeUserIds",
+          "assigneeUserGroupIds",
           "fields",
           "archived",
           "createdAt",
@@ -4551,6 +5137,7 @@
           }
         },
         "required": [
+          "items",
           "totalItems"
         ],
         "title": "ItemWithMDWithItemEmbedPage",
@@ -4745,6 +5332,118 @@
         "title": "KickUserRequest",
         "type": "object"
       },
+      "MappingDirection": {
+        "description": "The direction in which mapped values are written.",
+        "enum": [
+          "both",
+          "toInternalOnce",
+          "toExternal",
+          "toInternal"
+        ],
+        "title": "MappingDirection",
+        "type": "string"
+      },
+      "MappingSettingsAirfocusMappingSettings": {
+        "discriminator": {
+          "mapping": {
+            "simple": "#/components/schemas/MappingSettingsAirfocusMappingSettingsSimple",
+            "withOptions": "#/components/schemas/MappingSettingsAirfocusMappingSettingsWithOptions"
+          },
+          "propertyName": "type"
+        },
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/MappingSettingsAirfocusMappingSettingsSimple"
+          },
+          {
+            "$ref": "#/components/schemas/MappingSettingsAirfocusMappingSettingsWithOptions"
+          }
+        ],
+        "title": "MappingSettingsAirfocusMappingSettings"
+      },
+      "MappingSettingsAirfocusMappingSettingsOptionPair": {
+        "properties": {
+          "externalId": {
+            "type": "string"
+          },
+          "internalId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "internalId",
+          "externalId"
+        ],
+        "title": "MappingSettingsAirfocusMappingSettingsOptionPair",
+        "type": "object"
+      },
+      "MappingSettingsAirfocusMappingSettingsSimple": {
+        "properties": {
+          "direction": {
+            "$ref": "#/components/schemas/MappingDirection"
+          },
+          "externalId": {
+            "$ref": "#/components/schemas/RefItemProperty"
+          },
+          "internalId": {
+            "$ref": "#/components/schemas/RefItemProperty"
+          },
+          "required": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "internalId",
+          "externalId",
+          "direction",
+          "required"
+        ],
+        "title": "MappingSettingsAirfocusMappingSettingsSimple",
+        "type": "object"
+      },
+      "MappingSettingsAirfocusMappingSettingsWithOptions": {
+        "properties": {
+          "direction": {
+            "$ref": "#/components/schemas/MappingDirection"
+          },
+          "enableAutoCreateOptionsExternal": {
+            "type": "boolean"
+          },
+          "enableAutoCreateOptionsInternal": {
+            "type": "boolean"
+          },
+          "enableAutoMapping": {
+            "type": "boolean"
+          },
+          "externalId": {
+            "$ref": "#/components/schemas/RefItemProperty"
+          },
+          "internalId": {
+            "$ref": "#/components/schemas/RefItemProperty"
+          },
+          "pairs": {
+            "items": {
+              "$ref": "#/components/schemas/MappingSettingsAirfocusMappingSettingsOptionPair"
+            },
+            "type": "array"
+          },
+          "required": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "internalId",
+          "externalId",
+          "direction",
+          "pairs",
+          "required",
+          "enableAutoMapping",
+          "enableAutoCreateOptionsInternal",
+          "enableAutoCreateOptionsExternal"
+        ],
+        "title": "MappingSettingsAirfocusMappingSettingsWithOptions",
+        "type": "object"
+      },
       "MilestoneBulkAction": {
         "discriminator": {
           "mapping": {
@@ -4927,9 +5626,97 @@
           }
         },
         "required": [
+          "items",
           "totalItems"
         ],
         "title": "MilestoneWithEmbedPage",
+        "type": "object"
+      },
+      "MirrorApp": {
+        "properties": {
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "settings": {
+            "$ref": "#/components/schemas/MirrorAppTypeSettings"
+          },
+          "teamId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "typeId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "teamId",
+          "typeId",
+          "settings"
+        ],
+        "title": "MirrorApp",
+        "type": "object"
+      },
+      "MirrorAppTypeSettings": {
+        "properties": {
+          "mirrorFieldId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "prioritizationFieldId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "sources": {
+            "items": {
+              "$ref": "#/components/schemas/MirrorAppTypeSettingsSource"
+            },
+            "type": "array"
+          },
+          "workspaceId": {
+            "format": "uuid",
+            "type": "string"
+          }
+        },
+        "required": [
+          "workspaceId",
+          "mirrorFieldId",
+          "sources"
+        ],
+        "title": "MirrorAppTypeSettings",
+        "type": "object"
+      },
+      "MirrorAppTypeSettingsSource": {
+        "properties": {
+          "filter": {
+            "$ref": "#/components/schemas/ItemSearchQueryFilter"
+          },
+          "mapping": {
+            "items": {
+              "$ref": "#/components/schemas/MappingSettingsAirfocusMappingSettings"
+            },
+            "type": "array"
+          },
+          "mirrorFieldId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "prioritizationFieldId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "workspaceId": {
+            "format": "uuid",
+            "type": "string"
+          }
+        },
+        "required": [
+          "workspaceId",
+          "mirrorFieldId",
+          "mapping"
+        ],
+        "title": "MirrorAppTypeSettingsSource",
         "type": "object"
       },
       "MirrorSourceFieldWithFieldEmbed": {
@@ -5201,6 +5988,149 @@
         "title": "NumberFieldWithFieldEmbed",
         "type": "object"
       },
+      "OkrApp": {
+        "properties": {
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "settings": {
+            "$ref": "#/components/schemas/OkrAppTypeSettings"
+          },
+          "teamId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "typeId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "teamId",
+          "typeId",
+          "settings"
+        ],
+        "title": "OkrApp",
+        "type": "object"
+      },
+      "OkrAppTypeSettings": {
+        "properties": {
+          "confidence": {
+            "$ref": "#/components/schemas/OkrConfidenceFieldSettings"
+          },
+          "hierarchy": {
+            "$ref": "#/components/schemas/OkrAppTypeSettingsHierarchyNode"
+          },
+          "linkedWorkspaces": {
+            "additionalProperties": {
+              "$ref": "#/components/schemas/OkrAppTypeSettingsLinkedWorkspaceSettings"
+            },
+            "type": "object"
+          },
+          "objectiveWorkspaces": {
+            "additionalProperties": {
+              "$ref": "#/components/schemas/OkrAppTypeSettingsObjectiveWorkspaceSettings"
+            },
+            "type": "object"
+          },
+          "timePeriods": {
+            "$ref": "#/components/schemas/OkrTimePeriodFieldSettings"
+          }
+        },
+        "required": [
+          "objectiveWorkspaces",
+          "linkedWorkspaces",
+          "timePeriods",
+          "confidence"
+        ],
+        "title": "OkrAppTypeSettings",
+        "type": "object"
+      },
+      "OkrAppTypeSettingsHierarchyNode": {
+        "properties": {
+          "children": {
+            "items": {
+              "$ref": "#/components/schemas/OkrAppTypeSettingsHierarchyNode"
+            },
+            "type": "array"
+          },
+          "workspaceId": {
+            "format": "uuid",
+            "type": "string"
+          }
+        },
+        "required": [
+          "workspaceId",
+          "children"
+        ],
+        "title": "OkrAppTypeSettingsHierarchyNode",
+        "type": "object"
+      },
+      "OkrAppTypeSettingsLinkedWorkspaceSettings": {
+        "properties": {
+          "keyResultReferenceFieldId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "workspaceId": {
+            "format": "uuid",
+            "type": "string"
+          }
+        },
+        "required": [
+          "workspaceId",
+          "keyResultReferenceFieldId"
+        ],
+        "title": "OkrAppTypeSettingsLinkedWorkspaceSettings",
+        "type": "object"
+      },
+      "OkrAppTypeSettingsObjectiveWorkspaceSettings": {
+        "properties": {
+          "checkinsFieldId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "confidenceFieldId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "keyResultsFieldId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "linkedWorkspaceIds": {
+            "items": {
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "progressFieldId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "timePeriodFieldId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "workspaceId": {
+            "format": "uuid",
+            "type": "string"
+          }
+        },
+        "required": [
+          "workspaceId",
+          "linkedWorkspaceIds",
+          "checkinsFieldId",
+          "confidenceFieldId",
+          "keyResultsFieldId",
+          "progressFieldId",
+          "timePeriodFieldId"
+        ],
+        "title": "OkrAppTypeSettingsObjectiveWorkspaceSettings",
+        "type": "object"
+      },
       "OkrCheckinsFieldWithFieldEmbed": {
         "properties": {
           "_embedded": {
@@ -5447,6 +6377,9 @@
             "type": "array"
           }
         },
+        "required": [
+          "timePeriods"
+        ],
         "title": "OkrTimePeriodFieldSettings",
         "type": "object"
       },
@@ -5566,6 +6499,257 @@
         "title": "Permission",
         "type": "string"
       },
+      "PortalApp": {
+        "properties": {
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "settings": {
+            "$ref": "#/components/schemas/PortalAppTypeSettings"
+          },
+          "teamId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "typeId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "teamId",
+          "typeId",
+          "settings"
+        ],
+        "title": "PortalApp",
+        "type": "object"
+      },
+      "PortalAppTypeSettings": {
+        "properties": {
+          "color": {
+            "type": "string"
+          },
+          "faviconImageId": {
+            "type": "string"
+          },
+          "logoImageId": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "ownerUserId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "pages": {
+            "items": {
+              "$ref": "#/components/schemas/PortalAppTypeSettingsPortalPage"
+            },
+            "type": "array"
+          },
+          "password": {
+            "type": "string"
+          },
+          "public": {
+            "type": "boolean"
+          },
+          "requireLogin": {
+            "type": "boolean"
+          },
+          "slug": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "public",
+          "name",
+          "slug",
+          "ownerUserId",
+          "pages",
+          "requireLogin"
+        ],
+        "title": "PortalAppTypeSettings",
+        "type": "object"
+      },
+      "PortalAppTypeSettingsPortalPage": {
+        "discriminator": {
+          "mapping": {
+            "url": "#/components/schemas/PortalAppTypeSettingsPortalPageUrlPage",
+            "workspace": "#/components/schemas/PortalAppTypeSettingsPortalPageWorkspacePage"
+          },
+          "propertyName": "type"
+        },
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/PortalAppTypeSettingsPortalPageUrlPage"
+          },
+          {
+            "$ref": "#/components/schemas/PortalAppTypeSettingsPortalPageWorkspacePage"
+          }
+        ],
+        "title": "PortalAppTypeSettingsPortalPage"
+      },
+      "PortalAppTypeSettingsPortalPageUrlPage": {
+        "properties": {
+          "public": {
+            "type": "boolean"
+          },
+          "title": {
+            "type": "string"
+          },
+          "url": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "title",
+          "url",
+          "public"
+        ],
+        "title": "PortalAppTypeSettingsPortalPageUrlPage",
+        "type": "object"
+      },
+      "PortalAppTypeSettingsPortalPageWorkspacePage": {
+        "properties": {
+          "fieldIds": {
+            "items": {
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": "array",
+            "uniqueItems": true
+          },
+          "heroDescription": {
+            "type": "string"
+          },
+          "heroTitle": {
+            "type": "string"
+          },
+          "metaDescription": {
+            "type": "string"
+          },
+          "metaTitle": {
+            "type": "string"
+          },
+          "portalFieldId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "public": {
+            "type": "boolean"
+          },
+          "searchIndex": {
+            "type": "boolean"
+          },
+          "slug": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "view": {
+            "$ref": "#/components/schemas/PortalAppTypeSettingsPortalView"
+          },
+          "workspaceId": {
+            "format": "uuid",
+            "type": "string"
+          }
+        },
+        "required": [
+          "slug",
+          "title",
+          "workspaceId",
+          "view",
+          "public",
+          "portalFieldId",
+          "fieldIds",
+          "searchIndex"
+        ],
+        "title": "PortalAppTypeSettingsPortalPageWorkspacePage",
+        "type": "object"
+      },
+      "PortalAppTypeSettingsPortalView": {
+        "discriminator": {
+          "mapping": {
+            "grid": "#/components/schemas/PortalAppTypeSettingsPortalViewGridView"
+          },
+          "propertyName": "type"
+        },
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/PortalAppTypeSettingsPortalViewGridView"
+          }
+        ],
+        "title": "PortalAppTypeSettingsPortalView"
+      },
+      "PortalAppTypeSettingsPortalViewGridView": {
+        "properties": {
+          "publicFields": {
+            "default": [],
+            "items": {
+              "$ref": "#/components/schemas/PortalAppTypeSettingsPortalViewPortalField"
+            },
+            "type": "array",
+            "uniqueItems": true
+          },
+          "showFilters": {
+            "type": "boolean"
+          },
+          "swimlaneMode": {
+            "$ref": "#/components/schemas/SwimlaneMode"
+          },
+          "tabMode": {
+            "$ref": "#/components/schemas/SwimlaneMode"
+          }
+        },
+        "title": "PortalAppTypeSettingsPortalViewGridView",
+        "type": "object"
+      },
+      "PortalAppTypeSettingsPortalViewPortalField": {
+        "discriminator": {
+          "mapping": {
+            "field": "#/components/schemas/PortalAppTypeSettingsPortalViewPortalFieldField",
+            "status": "#/components/schemas/PortalAppTypeSettingsPortalViewPortalFieldStatus",
+            "statusCategory": "#/components/schemas/PortalAppTypeSettingsPortalViewPortalFieldStatusCategory"
+          },
+          "propertyName": "type"
+        },
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/PortalAppTypeSettingsPortalViewPortalFieldField"
+          },
+          {
+            "$ref": "#/components/schemas/PortalAppTypeSettingsPortalViewPortalFieldStatus"
+          },
+          {
+            "$ref": "#/components/schemas/PortalAppTypeSettingsPortalViewPortalFieldStatusCategory"
+          }
+        ],
+        "title": "PortalAppTypeSettingsPortalViewPortalField"
+      },
+      "PortalAppTypeSettingsPortalViewPortalFieldField": {
+        "properties": {
+          "fieldId": {
+            "format": "uuid",
+            "type": "string"
+          }
+        },
+        "required": [
+          "fieldId"
+        ],
+        "title": "PortalAppTypeSettingsPortalViewPortalFieldField",
+        "type": "object"
+      },
+      "PortalAppTypeSettingsPortalViewPortalFieldStatus": {
+        "title": "PortalAppTypeSettingsPortalViewPortalFieldStatus",
+        "type": "object"
+      },
+      "PortalAppTypeSettingsPortalViewPortalFieldStatusCategory": {
+        "title": "PortalAppTypeSettingsPortalViewPortalFieldStatusCategory",
+        "type": "object"
+      },
       "PortalFieldWithFieldEmbed": {
         "properties": {
           "_embedded": {
@@ -5607,6 +6791,53 @@
           "_embedded"
         ],
         "title": "PortalFieldWithFieldEmbed",
+        "type": "object"
+      },
+      "PrioritizationApp": {
+        "properties": {
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "settings": {
+            "$ref": "#/components/schemas/PrioritizationAppTypeConfiguration"
+          },
+          "teamId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "typeId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "teamId",
+          "typeId",
+          "settings"
+        ],
+        "title": "PrioritizationApp",
+        "type": "object"
+      },
+      "PrioritizationAppTypeConfiguration": {
+        "properties": {
+          "factors": {
+            "$ref": "#/components/schemas/Factors"
+          },
+          "mode": {
+            "$ref": "#/components/schemas/ScoringMode"
+          },
+          "workspaceId": {
+            "format": "uuid",
+            "type": "string"
+          }
+        },
+        "required": [
+          "workspaceId",
+          "factors",
+          "mode"
+        ],
+        "title": "PrioritizationAppTypeConfiguration",
         "type": "object"
       },
       "PrioritizationFieldWithFieldEmbed": {
@@ -5754,6 +6985,9 @@
             "type": "array"
           }
         },
+        "required": [
+          "blocks"
+        ],
         "title": "RichText",
         "type": "object"
       },
@@ -5846,6 +7080,9 @@
             "type": "object"
           }
         },
+        "required": [
+          "content"
+        ],
         "title": "RichTextBlockBlockquote",
         "type": "object"
       },
@@ -5925,7 +7162,8 @@
           }
         },
         "required": [
-          "level"
+          "level",
+          "content"
         ],
         "title": "RichTextBlockHeadline",
         "type": "object"
@@ -5939,6 +7177,9 @@
             "type": "array"
           }
         },
+        "required": [
+          "content"
+        ],
         "title": "RichTextBlockIndentation",
         "type": "object"
       },
@@ -5968,7 +7209,8 @@
           }
         },
         "required": [
-          "ordered"
+          "ordered",
+          "items"
         ],
         "title": "RichTextBlockList",
         "type": "object"
@@ -5986,6 +7228,7 @@
           }
         },
         "required": [
+          "content",
           "colorHex"
         ],
         "title": "RichTextBlockPanel",
@@ -6003,6 +7246,9 @@
             "type": "object"
           }
         },
+        "required": [
+          "content"
+        ],
         "title": "RichTextBlockParagraph",
         "type": "object"
       },
@@ -6069,6 +7315,9 @@
             "type": "array"
           }
         },
+        "required": [
+          "content"
+        ],
         "title": "RichTextInlineBold",
         "type": "object"
       },
@@ -6135,6 +7384,7 @@
           }
         },
         "required": [
+          "content",
           "url"
         ],
         "title": "RichTextInlineImage",
@@ -6149,6 +7399,9 @@
             "type": "array"
           }
         },
+        "required": [
+          "content"
+        ],
         "title": "RichTextInlineItalic",
         "type": "object"
       },
@@ -6165,6 +7418,7 @@
           }
         },
         "required": [
+          "content",
           "url"
         ],
         "title": "RichTextInlineLink",
@@ -6195,6 +7449,9 @@
             "type": "array"
           }
         },
+        "required": [
+          "content"
+        ],
         "title": "RichTextInlineStrikeThrough",
         "type": "object"
       },
@@ -6222,6 +7479,9 @@
             "type": "array"
           }
         },
+        "required": [
+          "content"
+        ],
         "title": "RichTextInlineUnderline",
         "type": "object"
       },
@@ -6234,6 +7494,9 @@
             "type": "array"
           }
         },
+        "required": [
+          "content"
+        ],
         "title": "RichTextListItem",
         "type": "object"
       },
@@ -6245,6 +7508,351 @@
         ],
         "title": "Role",
         "type": "string"
+      },
+      "ScoringDirection": {
+        "enum": [
+          "higherIsBetter",
+          "lowerIsBetter"
+        ],
+        "title": "ScoringDirection",
+        "type": "string"
+      },
+      "ScoringFormula": {
+        "discriminator": {
+          "mapping": {
+            "absolute": "#/components/schemas/ScoringFormulaAbsolute",
+            "addition": "#/components/schemas/ScoringFormulaAddition",
+            "constant": "#/components/schemas/ScoringFormulaConstant",
+            "criterionNormalizedNumericValue": "#/components/schemas/ScoringFormulaCriterionNormalizedNumericValue",
+            "criterionNumericValue": "#/components/schemas/ScoringFormulaCriterionNumericValue",
+            "division": "#/components/schemas/ScoringFormulaDivision",
+            "factorScore": "#/components/schemas/ScoringFormulaFactorScore",
+            "logarithm": "#/components/schemas/ScoringFormulaLogarithm",
+            "maximum": "#/components/schemas/ScoringFormulaMaximum",
+            "minimum": "#/components/schemas/ScoringFormulaMinimum",
+            "multiplication": "#/components/schemas/ScoringFormulaMultiplication",
+            "negative": "#/components/schemas/ScoringFormulaNegative",
+            "power": "#/components/schemas/ScoringFormulaPower",
+            "sqrt": "#/components/schemas/ScoringFormulaSquareRoot",
+            "subtraction": "#/components/schemas/ScoringFormulaSubtraction"
+          },
+          "propertyName": "type"
+        },
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/ScoringFormulaAbsolute"
+          },
+          {
+            "$ref": "#/components/schemas/ScoringFormulaAddition"
+          },
+          {
+            "$ref": "#/components/schemas/ScoringFormulaConstant"
+          },
+          {
+            "$ref": "#/components/schemas/ScoringFormulaCriterionNormalizedNumericValue"
+          },
+          {
+            "$ref": "#/components/schemas/ScoringFormulaCriterionNumericValue"
+          },
+          {
+            "$ref": "#/components/schemas/ScoringFormulaDivision"
+          },
+          {
+            "$ref": "#/components/schemas/ScoringFormulaFactorScore"
+          },
+          {
+            "$ref": "#/components/schemas/ScoringFormulaLogarithm"
+          },
+          {
+            "$ref": "#/components/schemas/ScoringFormulaMaximum"
+          },
+          {
+            "$ref": "#/components/schemas/ScoringFormulaMinimum"
+          },
+          {
+            "$ref": "#/components/schemas/ScoringFormulaMultiplication"
+          },
+          {
+            "$ref": "#/components/schemas/ScoringFormulaNegative"
+          },
+          {
+            "$ref": "#/components/schemas/ScoringFormulaPower"
+          },
+          {
+            "$ref": "#/components/schemas/ScoringFormulaSquareRoot"
+          },
+          {
+            "$ref": "#/components/schemas/ScoringFormulaSubtraction"
+          }
+        ],
+        "title": "ScoringFormula"
+      },
+      "ScoringFormulaAbsolute": {
+        "properties": {
+          "innder": {
+            "$ref": "#/components/schemas/ScoringFormula"
+          }
+        },
+        "required": [
+          "innder"
+        ],
+        "title": "ScoringFormulaAbsolute",
+        "type": "object"
+      },
+      "ScoringFormulaAddition": {
+        "properties": {
+          "left": {
+            "$ref": "#/components/schemas/ScoringFormula"
+          },
+          "right": {
+            "$ref": "#/components/schemas/ScoringFormula"
+          }
+        },
+        "required": [
+          "left",
+          "right"
+        ],
+        "title": "ScoringFormulaAddition",
+        "type": "object"
+      },
+      "ScoringFormulaConstant": {
+        "properties": {
+          "value": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "value"
+        ],
+        "title": "ScoringFormulaConstant",
+        "type": "object"
+      },
+      "ScoringFormulaCriterionNormalizedNumericValue": {
+        "properties": {
+          "criterionId": {
+            "format": "uuid",
+            "type": "string"
+          }
+        },
+        "required": [
+          "criterionId"
+        ],
+        "title": "ScoringFormulaCriterionNormalizedNumericValue",
+        "type": "object"
+      },
+      "ScoringFormulaCriterionNumericValue": {
+        "properties": {
+          "criterionId": {
+            "format": "uuid",
+            "type": "string"
+          }
+        },
+        "required": [
+          "criterionId"
+        ],
+        "title": "ScoringFormulaCriterionNumericValue",
+        "type": "object"
+      },
+      "ScoringFormulaDivision": {
+        "properties": {
+          "left": {
+            "$ref": "#/components/schemas/ScoringFormula"
+          },
+          "right": {
+            "$ref": "#/components/schemas/ScoringFormula"
+          }
+        },
+        "required": [
+          "left",
+          "right"
+        ],
+        "title": "ScoringFormulaDivision",
+        "type": "object"
+      },
+      "ScoringFormulaFactorScore": {
+        "properties": {
+          "factorId": {
+            "$ref": "#/components/schemas/FactorId"
+          }
+        },
+        "required": [
+          "factorId"
+        ],
+        "title": "ScoringFormulaFactorScore",
+        "type": "object"
+      },
+      "ScoringFormulaLogarithm": {
+        "properties": {
+          "innder": {
+            "$ref": "#/components/schemas/ScoringFormula"
+          }
+        },
+        "required": [
+          "innder"
+        ],
+        "title": "ScoringFormulaLogarithm",
+        "type": "object"
+      },
+      "ScoringFormulaMaximum": {
+        "properties": {
+          "arguments": {
+            "items": {
+              "$ref": "#/components/schemas/ScoringFormula"
+            },
+            "type": "array"
+          }
+        },
+        "required": [
+          "arguments"
+        ],
+        "title": "ScoringFormulaMaximum",
+        "type": "object"
+      },
+      "ScoringFormulaMinimum": {
+        "properties": {
+          "arguments": {
+            "items": {
+              "$ref": "#/components/schemas/ScoringFormula"
+            },
+            "type": "array"
+          }
+        },
+        "required": [
+          "arguments"
+        ],
+        "title": "ScoringFormulaMinimum",
+        "type": "object"
+      },
+      "ScoringFormulaMultiplication": {
+        "properties": {
+          "left": {
+            "$ref": "#/components/schemas/ScoringFormula"
+          },
+          "right": {
+            "$ref": "#/components/schemas/ScoringFormula"
+          }
+        },
+        "required": [
+          "left",
+          "right"
+        ],
+        "title": "ScoringFormulaMultiplication",
+        "type": "object"
+      },
+      "ScoringFormulaNegative": {
+        "properties": {
+          "innder": {
+            "$ref": "#/components/schemas/ScoringFormula"
+          }
+        },
+        "required": [
+          "innder"
+        ],
+        "title": "ScoringFormulaNegative",
+        "type": "object"
+      },
+      "ScoringFormulaPower": {
+        "properties": {
+          "left": {
+            "$ref": "#/components/schemas/ScoringFormula"
+          },
+          "right": {
+            "$ref": "#/components/schemas/ScoringFormula"
+          }
+        },
+        "required": [
+          "left",
+          "right"
+        ],
+        "title": "ScoringFormulaPower",
+        "type": "object"
+      },
+      "ScoringFormulaSquareRoot": {
+        "properties": {
+          "innder": {
+            "$ref": "#/components/schemas/ScoringFormula"
+          }
+        },
+        "required": [
+          "innder"
+        ],
+        "title": "ScoringFormulaSquareRoot",
+        "type": "object"
+      },
+      "ScoringFormulaSubtraction": {
+        "properties": {
+          "left": {
+            "$ref": "#/components/schemas/ScoringFormula"
+          },
+          "right": {
+            "$ref": "#/components/schemas/ScoringFormula"
+          }
+        },
+        "required": [
+          "left",
+          "right"
+        ],
+        "title": "ScoringFormulaSubtraction",
+        "type": "object"
+      },
+      "ScoringMode": {
+        "discriminator": {
+          "mapping": {
+            "customFormula": "#/components/schemas/ScoringModeCustomFormula",
+            "customWeighting": "#/components/schemas/ScoringModeCustomWeighting"
+          },
+          "propertyName": "type"
+        },
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/ScoringModeCustomFormula"
+          },
+          {
+            "$ref": "#/components/schemas/ScoringModeCustomWeighting"
+          }
+        ],
+        "title": "ScoringMode"
+      },
+      "ScoringModeCustomFormula": {
+        "properties": {
+          "factorFormulas": {
+            "additionalProperties": {
+              "$ref": "#/components/schemas/ScoringFormula"
+            },
+            "type": "object"
+          },
+          "itemScoreFormula": {
+            "$ref": "#/components/schemas/ScoringFormula"
+          }
+        },
+        "required": [
+          "factorFormulas",
+          "itemScoreFormula"
+        ],
+        "title": "ScoringModeCustomFormula",
+        "type": "object"
+      },
+      "ScoringModeCustomWeighting": {
+        "properties": {
+          "criterionWeights": {
+            "additionalProperties": {
+              "type": "number"
+            },
+            "type": "object"
+          },
+          "factorWeights": {
+            "additionalProperties": {
+              "type": "number"
+            },
+            "type": "object"
+          }
+        },
+        "required": [
+          "factorWeights",
+          "criterionWeights"
+        ],
+        "title": "ScoringModeCustomWeighting",
+        "type": "object"
       },
       "SelectFieldOptionColor": {
         "enum": [
@@ -6304,6 +7912,7 @@
           }
         },
         "required": [
+          "options",
           "multi"
         ],
         "title": "SelectFieldTypeSettings",
@@ -6388,6 +7997,7 @@
           }
         },
         "required": [
+          "statuses",
           "replacements"
         ],
         "title": "SetWorkspaceStatusesRequest",
@@ -6470,6 +8080,82 @@
           "text"
         ],
         "title": "StoreAcceptedTosRequest",
+        "type": "object"
+      },
+      "SwimlaneMode": {
+        "discriminator": {
+          "mapping": {
+            "app": "#/components/schemas/SwimlaneModeApp",
+            "assignees": "#/components/schemas/SwimlaneModeAssignees",
+            "field": "#/components/schemas/SwimlaneModeField",
+            "parent": "#/components/schemas/SwimlaneModeParent",
+            "status": "#/components/schemas/SwimlaneModeStatus",
+            "statusCategory": "#/components/schemas/SwimlaneModeStatusCategory"
+          },
+          "propertyName": "type"
+        },
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/SwimlaneModeApp"
+          },
+          {
+            "$ref": "#/components/schemas/SwimlaneModeAssignees"
+          },
+          {
+            "$ref": "#/components/schemas/SwimlaneModeField"
+          },
+          {
+            "$ref": "#/components/schemas/SwimlaneModeParent"
+          },
+          {
+            "$ref": "#/components/schemas/SwimlaneModeStatus"
+          },
+          {
+            "$ref": "#/components/schemas/SwimlaneModeStatusCategory"
+          }
+        ],
+        "title": "SwimlaneMode"
+      },
+      "SwimlaneModeApp": {
+        "properties": {
+          "appId": {
+            "format": "uuid",
+            "type": "string"
+          }
+        },
+        "required": [
+          "appId"
+        ],
+        "title": "SwimlaneModeApp",
+        "type": "object"
+      },
+      "SwimlaneModeAssignees": {
+        "title": "SwimlaneModeAssignees",
+        "type": "object"
+      },
+      "SwimlaneModeField": {
+        "properties": {
+          "fieldId": {
+            "format": "uuid",
+            "type": "string"
+          }
+        },
+        "required": [
+          "fieldId"
+        ],
+        "title": "SwimlaneModeField",
+        "type": "object"
+      },
+      "SwimlaneModeParent": {
+        "title": "SwimlaneModeParent",
+        "type": "object"
+      },
+      "SwimlaneModeStatus": {
+        "title": "SwimlaneModeStatus",
+        "type": "object"
+      },
+      "SwimlaneModeStatusCategory": {
+        "title": "SwimlaneModeStatusCategory",
         "type": "object"
       },
       "Team": {
@@ -6804,7 +8490,9 @@
           "abstract",
           "description",
           "viewsSectionTitle",
-          "workspacesCount"
+          "workspacesCount",
+          "apps",
+          "views"
         ],
         "title": "Template",
         "type": "object"
@@ -6845,7 +8533,8 @@
         },
         "required": [
           "slug",
-          "name"
+          "name",
+          "templateIds"
         ],
         "title": "TemplateCategory",
         "type": "object"
@@ -6867,6 +8556,7 @@
           }
         },
         "required": [
+          "items",
           "_embedded",
           "totalItems"
         ],
@@ -6892,6 +8582,9 @@
             "type": "array"
           }
         },
+        "required": [
+          "categories"
+        ],
         "title": "TemplateSearchEmbed",
         "type": "object"
       },
@@ -7022,6 +8715,7 @@
           }
         },
         "required": [
+          "timePeriods",
           "currentId",
           "multi"
         ],
@@ -7041,6 +8735,7 @@
           }
         },
         "required": [
+          "timePeriods",
           "multi"
         ],
         "title": "TimePeriodFieldSettingsSimple",
@@ -7222,6 +8917,8 @@
           "color",
           "name",
           "description",
+          "assigneeUserIds",
+          "assigneeUserGroupIds",
           "fields",
           "order"
         ],
@@ -7327,6 +9024,8 @@
           "color",
           "name",
           "description",
+          "assigneeUserIds",
+          "assigneeUserGroupIds",
           "fields",
           "order"
         ],
@@ -7683,6 +9382,7 @@
           "settings",
           "name",
           "description",
+          "itemSort",
           "order"
         ],
         "title": "View",
@@ -7731,6 +9431,79 @@
         "title": "VotesFieldWithFieldEmbed",
         "type": "object"
       },
+      "VotingApp": {
+        "properties": {
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "settings": {
+            "$ref": "#/components/schemas/VotingAppTypeSettings"
+          },
+          "teamId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "typeId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "teamId",
+          "typeId",
+          "settings"
+        ],
+        "title": "VotingApp",
+        "type": "object"
+      },
+      "VotingAppAudience": {
+        "discriminator": {
+          "mapping": {
+            "anonymousUsers": "#/components/schemas/VotingAppAudienceAnonymousUsers",
+            "teamMembers": "#/components/schemas/VotingAppAudienceTeamMembers"
+          },
+          "propertyName": "type"
+        },
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/VotingAppAudienceAnonymousUsers"
+          },
+          {
+            "$ref": "#/components/schemas/VotingAppAudienceTeamMembers"
+          }
+        ],
+        "title": "VotingAppAudience"
+      },
+      "VotingAppAudienceAnonymousUsers": {
+        "title": "VotingAppAudienceAnonymousUsers",
+        "type": "object"
+      },
+      "VotingAppAudienceTeamMembers": {
+        "title": "VotingAppAudienceTeamMembers",
+        "type": "object"
+      },
+      "VotingAppReactionType": {
+        "properties": {
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "weight": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "id",
+          "title",
+          "weight"
+        ],
+        "title": "VotingAppReactionType",
+        "type": "object"
+      },
       "VotingAppScoreFieldTypeSettings": {
         "properties": {
           "maximum": {
@@ -7741,6 +9514,47 @@
           }
         },
         "title": "VotingAppScoreFieldTypeSettings",
+        "type": "object"
+      },
+      "VotingAppTypeSettings": {
+        "properties": {
+          "allowedReactions": {
+            "items": {
+              "$ref": "#/components/schemas/VotingAppReactionType"
+            },
+            "type": "array"
+          },
+          "audience": {
+            "items": {
+              "$ref": "#/components/schemas/VotingAppAudience"
+            },
+            "type": "array"
+          },
+          "scoreFieldId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "showCountsForPublic": {
+            "type": "boolean"
+          },
+          "votesFieldId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "workspaceId": {
+            "format": "uuid",
+            "type": "string"
+          }
+        },
+        "required": [
+          "workspaceId",
+          "votesFieldId",
+          "scoreFieldId",
+          "allowedReactions",
+          "audience",
+          "showCountsForPublic"
+        ],
+        "title": "VotingAppTypeSettings",
         "type": "object"
       },
       "VotingScoreFieldWithFieldEmbed": {
@@ -8074,6 +9888,8 @@
           }
         },
         "required": [
+          "parents",
+          "children",
           "permissions",
           "userGroupPermissions",
           "itemCount",
@@ -8348,6 +10164,7 @@
           }
         },
         "required": [
+          "workspaces",
           "permissions",
           "userGroupPermissions"
         ],
@@ -8415,6 +10232,8 @@
           }
         },
         "required": [
+          "workspaceIds",
+          "workspaces",
           "permissions",
           "userGroupPermissions"
         ],
@@ -8560,6 +10379,7 @@
           }
         },
         "required": [
+          "items",
           "totalItems"
         ],
         "title": "WorkspaceGroupWithWorkspaceGroupSearchEmbedPage",
@@ -8793,6 +10613,9 @@
             "type": "array"
           }
         },
+        "required": [
+          "inner"
+        ],
         "title": "WorkspaceRelationSearchQueryFilterAnd",
         "type": "object"
       },
@@ -8825,6 +10648,9 @@
             "uniqueItems": true
           }
         },
+        "required": [
+          "workspaceIds"
+        ],
         "title": "WorkspaceRelationSearchQueryFilterChildContainAny",
         "type": "object"
       },
@@ -8850,6 +10676,9 @@
             "type": "array"
           }
         },
+        "required": [
+          "inner"
+        ],
         "title": "WorkspaceRelationSearchQueryFilterNot",
         "type": "object"
       },
@@ -8862,6 +10691,9 @@
             "type": "array"
           }
         },
+        "required": [
+          "inner"
+        ],
         "title": "WorkspaceRelationSearchQueryFilterOr",
         "type": "object"
       },
@@ -8894,6 +10726,9 @@
             "uniqueItems": true
           }
         },
+        "required": [
+          "workspaceIds"
+        ],
         "title": "WorkspaceRelationSearchQueryFilterParentContainAny",
         "type": "object"
       },
@@ -8958,6 +10793,7 @@
           }
         },
         "required": [
+          "items",
           "totalItems"
         ],
         "title": "WorkspaceRelationWithEmbedPage",
@@ -8987,7 +10823,9 @@
           }
         },
         "required": [
-          "workspaceId"
+          "workspaceId",
+          "parentIds",
+          "childIds"
         ],
         "title": "WorkspaceRelationsSetRequest",
         "type": "object"
@@ -9091,6 +10929,9 @@
             "type": "array"
           }
         },
+        "required": [
+          "inner"
+        ],
         "title": "WorkspaceSearchQueryFilterAnd",
         "type": "object"
       },
@@ -9119,6 +10960,9 @@
             "uniqueItems": true
           }
         },
+        "required": [
+          "ids"
+        ],
         "title": "WorkspaceSearchQueryFilterMembersContainAny",
         "type": "object"
       },
@@ -9195,6 +11039,9 @@
             "type": "array"
           }
         },
+        "required": [
+          "values"
+        ],
         "title": "WorkspaceSearchQueryFilterNamespaceContainAny",
         "type": "object"
       },
@@ -9207,6 +11054,9 @@
             "type": "array"
           }
         },
+        "required": [
+          "inner"
+        ],
         "title": "WorkspaceSearchQueryFilterNot",
         "type": "object"
       },
@@ -9219,6 +11069,9 @@
             "type": "array"
           }
         },
+        "required": [
+          "inner"
+        ],
         "title": "WorkspaceSearchQueryFilterOr",
         "type": "object"
       },
@@ -9477,6 +11330,7 @@
           }
         },
         "required": [
+          "items",
           "totalItems"
         ],
         "title": "WorkspaceWithMDWithWorkspaceSearchEmbedPage",
@@ -9663,6 +11517,7 @@
           }
         },
         "required": [
+          "items",
           "totalItems"
         ],
         "title": "WorkspaceWithWorkspaceSearchEmbedPage",
@@ -9704,7 +11559,7 @@
   },
   "info": {
     "title": "airfocus API",
-    "version": "1.0.0-beta.37.44.6"
+    "version": "1.0.0-beta.37.50.2"
   },
   "openapi": "3.1.0",
   "paths": {
@@ -12999,7 +14854,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ItemRelationWithEmbed"
+                  "$ref": "#/components/schemas/ItemRelationWithItemRelationEmbed"
                 }
               }
             },
@@ -13112,7 +14967,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ItemRelationWithEmbedOrNullList"
+                  "$ref": "#/components/schemas/ItemRelationWithItemRelationEmbedOrNullList"
                 }
               }
             },
@@ -13226,7 +15081,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ItemRelationWithEmbedOrNullList"
+                  "$ref": "#/components/schemas/ItemRelationWithItemRelationEmbedOrNullList"
                 }
               }
             },
@@ -13387,7 +15242,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ItemRelationWithEmbedPage"
+                  "$ref": "#/components/schemas/ItemRelationWithItemRelationEmbedPage"
                 }
               }
             },
@@ -13596,7 +15451,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ItemRelationWithEmbed"
+                  "$ref": "#/components/schemas/ItemRelationWithItemRelationEmbed"
                 }
               }
             },
@@ -13713,7 +15568,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ItemRelationWithEmbed"
+                  "$ref": "#/components/schemas/ItemRelationWithItemRelationEmbed"
                 }
               }
             },
@@ -13830,7 +15685,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ItemRelationWithEmbed"
+                  "$ref": "#/components/schemas/ItemRelationWithItemRelationEmbed"
                 }
               }
             },
