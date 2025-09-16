@@ -49,6 +49,7 @@
             "mirror": "#/components/schemas/MirrorApp",
             "okr": "#/components/schemas/OkrApp",
             "portal": "#/components/schemas/PortalApp",
+            "portfolio": "#/components/schemas/PortfolioApp",
             "prioritization": "#/components/schemas/PrioritizationApp",
             "voting": "#/components/schemas/VotingApp"
           },
@@ -72,6 +73,9 @@
           },
           {
             "$ref": "#/components/schemas/PortalApp"
+          },
+          {
+            "$ref": "#/components/schemas/PortfolioApp"
           },
           {
             "$ref": "#/components/schemas/PrioritizationApp"
@@ -6793,6 +6797,73 @@
         "title": "PortalFieldWithFieldEmbed",
         "type": "object"
       },
+      "PortfolioApp": {
+        "properties": {
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "settings": {
+            "$ref": "#/components/schemas/PortfolioAppSettings"
+          },
+          "teamId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "typeId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "teamId",
+          "typeId",
+          "settings"
+        ],
+        "title": "PortfolioApp",
+        "type": "object"
+      },
+      "PortfolioAppSettings": {
+        "properties": {
+          "sources": {
+            "items": {
+              "$ref": "#/components/schemas/PortfolioAppSourceSettings"
+            },
+            "type": "array"
+          },
+          "targetFieldId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "workspaceId": {
+            "format": "uuid",
+            "type": "string"
+          }
+        },
+        "required": [
+          "workspaceId",
+          "targetFieldId",
+          "sources"
+        ],
+        "title": "PortfolioAppSettings",
+        "type": "object"
+      },
+      "PortfolioAppSourceSettings": {
+        "properties": {
+          "filter": {
+            "$ref": "#/components/schemas/ItemSearchQueryFilter"
+          },
+          "workspaceId": {
+            "format": "uuid",
+            "type": "string"
+          }
+        },
+        "required": [
+          "workspaceId"
+        ],
+        "title": "PortfolioAppSourceSettings",
+        "type": "object"
+      },
       "PrioritizationApp": {
         "properties": {
           "id": {
@@ -10388,7 +10459,8 @@
       "WorkspaceNamespace": {
         "enum": [
           "main",
-          "app:okr"
+          "app:okr",
+          "app:portfolio"
         ],
         "title": "WorkspaceNamespace",
         "type": "string"
@@ -11559,7 +11631,7 @@
   },
   "info": {
     "title": "airfocus API",
-    "version": "1.0.0-beta.37.50.2"
+    "version": "1.0.0-beta.37.53.1"
   },
   "openapi": "3.1.0",
   "paths": {
