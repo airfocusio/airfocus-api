@@ -159,6 +159,7 @@
             "type": "string"
           },
           "typeId": {
+            "const": "boolean",
             "type": "string"
           }
         },
@@ -808,6 +809,7 @@
             "type": "string"
           },
           "typeId": {
+            "const": "date",
             "type": "string"
           }
         },
@@ -851,6 +853,7 @@
             "type": "string"
           },
           "typeId": {
+            "const": "date-range",
             "type": "string"
           }
         },
@@ -1420,10 +1423,28 @@
         "title": "FormAudience"
       },
       "FormAudienceAnonymousUsers": {
+        "properties": {
+          "type": {
+            "const": "anonymousUsers",
+            "type": "string"
+          }
+        },
+        "required": [
+          "type"
+        ],
         "title": "FormAudienceAnonymousUsers",
         "type": "object"
       },
       "FormAudienceTeamMembers": {
+        "properties": {
+          "type": {
+            "const": "teamMembers",
+            "type": "string"
+          }
+        },
+        "required": [
+          "type"
+        ],
         "title": "FormAudienceTeamMembers",
         "type": "object"
       },
@@ -1467,6 +1488,7 @@
             "type": "string"
           },
           "typeId": {
+            "const": "form-source",
             "type": "string"
           }
         },
@@ -1511,6 +1533,7 @@
             "type": "string"
           },
           "typeId": {
+            "const": "form-target",
             "type": "string"
           }
         },
@@ -1541,6 +1564,7 @@
             "type": "string"
           },
           "typeId": {
+            "const": "forms",
             "type": "string"
           }
         },
@@ -1764,12 +1788,17 @@
           "alias": {
             "type": "string"
           },
+          "type": {
+            "const": "item",
+            "type": "string"
+          },
           "value": {
             "$ref": "#/components/schemas/Item"
           }
         },
         "required": [
-          "value"
+          "value",
+          "type"
         ],
         "title": "GlobalSearchResultItem",
         "type": "object"
@@ -1808,6 +1837,7 @@
             "type": "string"
           },
           "typeId": {
+            "const": "health-check-ins",
             "type": "string"
           }
         },
@@ -1898,6 +1928,7 @@
             "type": "string"
           },
           "typeId": {
+            "const": "insights",
             "type": "string"
           }
         },
@@ -2010,6 +2041,7 @@
             "type": "string"
           },
           "typeId": {
+            "const": "insights",
             "type": "string"
           }
         },
@@ -2049,15 +2081,29 @@
         "properties": {
           "scoringFormula": {
             "$ref": "#/components/schemas/ScoringFormula"
+          },
+          "type": {
+            "const": "customFormula",
+            "type": "string"
           }
         },
         "required": [
-          "scoringFormula"
+          "scoringFormula",
+          "type"
         ],
         "title": "InsightsScoringModeCustomFormula",
         "type": "object"
       },
       "InsightsScoringModeDefault": {
+        "properties": {
+          "type": {
+            "const": "default",
+            "type": "string"
+          }
+        },
+        "required": [
+          "type"
+        ],
         "title": "InsightsScoringModeDefault",
         "type": "object"
       },
@@ -2078,6 +2124,7 @@
             "type": "string"
           },
           "typeId": {
+            "const": "boolean",
             "type": "string"
           },
           "workspaceIds": {
@@ -2114,6 +2161,7 @@
             "type": "string"
           },
           "typeId": {
+            "const": "date",
             "type": "string"
           },
           "workspaceIds": {
@@ -2150,6 +2198,7 @@
             "type": "string"
           },
           "typeId": {
+            "const": "date-range",
             "type": "string"
           },
           "workspaceIds": {
@@ -2190,6 +2239,7 @@
             "description": "Field settings."
           },
           "typeId": {
+            "const": "number",
             "type": "string"
           },
           "workspaceIds": {
@@ -2231,6 +2281,7 @@
             "description": "Field settings."
           },
           "typeId": {
+            "const": "people",
             "type": "string"
           },
           "workspaceIds": {
@@ -2272,6 +2323,7 @@
             "description": "Field settings."
           },
           "typeId": {
+            "const": "select",
             "type": "string"
           },
           "workspaceIds": {
@@ -2309,6 +2361,7 @@
             "type": "string"
           },
           "typeId": {
+            "const": "text",
             "type": "string"
           },
           "workspaceIds": {
@@ -2349,6 +2402,7 @@
             "description": "Field settings."
           },
           "typeId": {
+            "const": "time-period",
             "type": "string"
           },
           "workspaceIds": {
@@ -3187,10 +3241,15 @@
           "extensionId": {
             "format": "uuid",
             "type": "string"
+          },
+          "type": {
+            "const": "integrationPushForbidden",
+            "type": "string"
           }
         },
         "required": [
-          "extensionId"
+          "extensionId",
+          "type"
         ],
         "title": "ItemConstraintIntegrationPushForbidden",
         "type": "object"
@@ -3203,11 +3262,16 @@
           },
           "property": {
             "$ref": "#/components/schemas/RefItemProperty"
+          },
+          "type": {
+            "const": "integrationToInternal",
+            "type": "string"
           }
         },
         "required": [
           "extensionId",
-          "property"
+          "property",
+          "type"
         ],
         "title": "ItemConstraintIntegrationToInternal",
         "type": "object"
@@ -3220,11 +3284,16 @@
           },
           "property": {
             "$ref": "#/components/schemas/RefItemProperty"
+          },
+          "type": {
+            "const": "propertyReadOnly",
+            "type": "string"
           }
         },
         "required": [
           "extensionId",
-          "property"
+          "property",
+          "type"
         ],
         "title": "ItemConstraintPropertyReadOnly",
         "type": "object"
@@ -3234,10 +3303,15 @@
           "extensionId": {
             "format": "uuid",
             "type": "string"
+          },
+          "type": {
+            "const": "undeletable",
+            "type": "string"
           }
         },
         "required": [
-          "extensionId"
+          "extensionId",
+          "type"
         ],
         "title": "ItemConstraintUndeletable",
         "type": "object"
@@ -3502,10 +3576,15 @@
           "integrationId": {
             "format": "uuid",
             "type": "string"
+          },
+          "type": {
+            "const": "readonly",
+            "type": "string"
           }
         },
         "required": [
-          "integrationId"
+          "integrationId",
+          "type"
         ],
         "title": "ItemLinkConstraintReadonly",
         "type": "object"
@@ -3515,10 +3594,15 @@
           "extensionId": {
             "format": "uuid",
             "type": "string"
+          },
+          "type": {
+            "const": "undeletable",
+            "type": "string"
           }
         },
         "required": [
-          "extensionId"
+          "extensionId",
+          "type"
         ],
         "title": "ItemLinkConstraintUndeletable",
         "type": "object"
@@ -3818,10 +3902,15 @@
           "integrationId": {
             "format": "uuid",
             "type": "string"
+          },
+          "type": {
+            "const": "readonly",
+            "type": "string"
           }
         },
         "required": [
-          "integrationId"
+          "integrationId",
+          "type"
         ],
         "title": "ItemRelationConstraintReadonly",
         "type": "object"
@@ -3903,10 +3992,15 @@
           "itemId": {
             "format": "uuid",
             "type": "string"
+          },
+          "type": {
+            "const": "child",
+            "type": "string"
           }
         },
         "required": [
-          "itemId"
+          "itemId",
+          "type"
         ],
         "title": "ItemRelationSearchQueryFilterChild",
         "type": "object"
@@ -3916,10 +4010,15 @@
           "itemId": {
             "format": "uuid",
             "type": "string"
+          },
+          "type": {
+            "const": "parent",
+            "type": "string"
           }
         },
         "required": [
-          "itemId"
+          "itemId",
+          "type"
         ],
         "title": "ItemRelationSearchQueryFilterParent",
         "type": "object"
@@ -3929,10 +4028,15 @@
           "itemId": {
             "format": "uuid",
             "type": "string"
+          },
+          "type": {
+            "const": "parentOrChild",
+            "type": "string"
           }
         },
         "required": [
-          "itemId"
+          "itemId",
+          "type"
         ],
         "title": "ItemRelationSearchQueryFilterParentOrChild",
         "type": "object"
@@ -4063,34 +4167,45 @@
         "discriminator": {
           "mapping": {
             "and": "#/components/schemas/ItemSearchQueryFilterAnd",
-            "assignees": "#/components/schemas/ItemSearchQueryFilterAssignees",
-            "createdAt": "#/components/schemas/ItemSearchQueryFilterCreatedAt",
-            "field": "#/components/schemas/ItemSearchQueryFilterField",
-            "integration": "#/components/schemas/ItemSearchQueryFilterIntegration",
-            "item": "#/components/schemas/ItemSearchQueryFilterItem",
-            "lastUpdatedAt": "#/components/schemas/ItemSearchQueryFilterLastUpdatedAt",
-            "name": "#/components/schemas/ItemSearchQueryFilterName",
+            "assignees:contain": "#/components/schemas/ItemSearchQueryFilterAssigneesContain",
+            "assignees:containsAll": "#/components/schemas/ItemSearchQueryFilterAssigneesContainsAll",
+            "assignees:containsAny": "#/components/schemas/ItemSearchQueryFilterAssigneesContainsAny",
+            "assignees:defined": "#/components/schemas/ItemSearchQueryFilterAssigneesDefined",
+            "createdAt:absolute": "#/components/schemas/ItemSearchQueryFilterCreatedAtAbsolute",
+            "createdAt:range": "#/components/schemas/ItemSearchQueryFilterCreatedAtRange",
+            "createdAt:relative": "#/components/schemas/ItemSearchQueryFilterCreatedAtRelative",
+            "field:value": "#/components/schemas/ItemSearchQueryFilterFieldValue",
+            "integration:defined": "#/components/schemas/ItemSearchQueryFilterIntegrationDefined",
+            "integration:value": "#/components/schemas/ItemSearchQueryFilterIntegrationValue",
+            "item:watchSelf": "#/components/schemas/ItemSearchQueryFilterItemWatchSelf",
+            "lastUpdatedAt:absolute": "#/components/schemas/ItemSearchQueryFilterLastUpdatedAtAbsolute",
+            "lastUpdatedAt:range": "#/components/schemas/ItemSearchQueryFilterLastUpdatedAtRange",
+            "lastUpdatedAt:relative": "#/components/schemas/ItemSearchQueryFilterLastUpdatedAtRelative",
+            "name:contain": "#/components/schemas/ItemSearchQueryFilterNameContain",
+            "name:equal": "#/components/schemas/ItemSearchQueryFilterNameEqual",
             "not": "#/components/schemas/ItemSearchQueryFilterNot",
             "or": "#/components/schemas/ItemSearchQueryFilterOr",
-            "parent": "#/components/schemas/ItemSearchQueryFilterParent",
-            "status": "#/components/schemas/ItemSearchQueryFilterStatus",
-            "statusCategory": "#/components/schemas/ItemSearchQueryFilterStatusCategory",
-            "updated": "#/components/schemas/ItemSearchQueryFilterUpdated"
+            "parent:defined": "#/components/schemas/ItemSearchQueryFilterParentDefined",
+            "parent:value": "#/components/schemas/ItemSearchQueryFilterParentValue",
+            "status:containsAny": "#/components/schemas/ItemSearchQueryFilterStatusContainsAny",
+            "status:updatedSince": "#/components/schemas/ItemSearchQueryFilterStatusUpdatedSince",
+            "statusCategory:containsAny": "#/components/schemas/ItemSearchQueryFilterStatusCategoryContainsAny",
+            "statusCategory:updatedSince": "#/components/schemas/ItemSearchQueryFilterStatusCategoryUpdatedSince",
+            "updated:since": "#/components/schemas/ItemSearchQueryFilterUpdatedSince"
           },
           "propertyName": "type"
         },
         "examples": [
           {
+            "_coproduct": "ItemSearchQueryFilter",
             "inner": [
               {
                 "caseSensitive": false,
-                "mode": "contain",
                 "text": "foo",
-                "type": "name"
+                "type": "name:contain"
               },
               {
-                "mode": "defined",
-                "type": "assignees"
+                "type": "assignees:defined"
               }
             ],
             "type": "and"
@@ -4100,74 +4215,6 @@
           {
             "$ref": "#/components/schemas/ItemSearchQueryFilterAnd"
           },
-          {
-            "$ref": "#/components/schemas/ItemSearchQueryFilterAssignees"
-          },
-          {
-            "$ref": "#/components/schemas/ItemSearchQueryFilterCreatedAt"
-          },
-          {
-            "$ref": "#/components/schemas/ItemSearchQueryFilterField"
-          },
-          {
-            "$ref": "#/components/schemas/ItemSearchQueryFilterIntegration"
-          },
-          {
-            "$ref": "#/components/schemas/ItemSearchQueryFilterItem"
-          },
-          {
-            "$ref": "#/components/schemas/ItemSearchQueryFilterLastUpdatedAt"
-          },
-          {
-            "$ref": "#/components/schemas/ItemSearchQueryFilterName"
-          },
-          {
-            "$ref": "#/components/schemas/ItemSearchQueryFilterNot"
-          },
-          {
-            "$ref": "#/components/schemas/ItemSearchQueryFilterOr"
-          },
-          {
-            "$ref": "#/components/schemas/ItemSearchQueryFilterParent"
-          },
-          {
-            "$ref": "#/components/schemas/ItemSearchQueryFilterStatus"
-          },
-          {
-            "$ref": "#/components/schemas/ItemSearchQueryFilterStatusCategory"
-          },
-          {
-            "$ref": "#/components/schemas/ItemSearchQueryFilterUpdated"
-          }
-        ],
-        "title": "ItemSearchQueryFilter"
-      },
-      "ItemSearchQueryFilterAnd": {
-        "properties": {
-          "inner": {
-            "items": {
-              "$ref": "#/components/schemas/ItemSearchQueryFilter"
-            },
-            "type": "array"
-          }
-        },
-        "required": [
-          "inner"
-        ],
-        "title": "ItemSearchQueryFilterAnd",
-        "type": "object"
-      },
-      "ItemSearchQueryFilterAssignees": {
-        "discriminator": {
-          "mapping": {
-            "contain": "#/components/schemas/ItemSearchQueryFilterAssigneesContain",
-            "containsAll": "#/components/schemas/ItemSearchQueryFilterAssigneesContainsAll",
-            "containsAny": "#/components/schemas/ItemSearchQueryFilterAssigneesContainsAny",
-            "defined": "#/components/schemas/ItemSearchQueryFilterAssigneesDefined"
-          },
-          "propertyName": "mode"
-        },
-        "oneOf": [
           {
             "$ref": "#/components/schemas/ItemSearchQueryFilterAssigneesContain"
           },
@@ -4179,24 +4226,116 @@
           },
           {
             "$ref": "#/components/schemas/ItemSearchQueryFilterAssigneesDefined"
+          },
+          {
+            "$ref": "#/components/schemas/ItemSearchQueryFilterCreatedAtAbsolute"
+          },
+          {
+            "$ref": "#/components/schemas/ItemSearchQueryFilterCreatedAtRange"
+          },
+          {
+            "$ref": "#/components/schemas/ItemSearchQueryFilterCreatedAtRelative"
+          },
+          {
+            "$ref": "#/components/schemas/ItemSearchQueryFilterFieldValue"
+          },
+          {
+            "$ref": "#/components/schemas/ItemSearchQueryFilterIntegrationDefined"
+          },
+          {
+            "$ref": "#/components/schemas/ItemSearchQueryFilterIntegrationValue"
+          },
+          {
+            "$ref": "#/components/schemas/ItemSearchQueryFilterItemWatchSelf"
+          },
+          {
+            "$ref": "#/components/schemas/ItemSearchQueryFilterLastUpdatedAtAbsolute"
+          },
+          {
+            "$ref": "#/components/schemas/ItemSearchQueryFilterLastUpdatedAtRange"
+          },
+          {
+            "$ref": "#/components/schemas/ItemSearchQueryFilterLastUpdatedAtRelative"
+          },
+          {
+            "$ref": "#/components/schemas/ItemSearchQueryFilterNameContain"
+          },
+          {
+            "$ref": "#/components/schemas/ItemSearchQueryFilterNameEqual"
+          },
+          {
+            "$ref": "#/components/schemas/ItemSearchQueryFilterNot"
+          },
+          {
+            "$ref": "#/components/schemas/ItemSearchQueryFilterOr"
+          },
+          {
+            "$ref": "#/components/schemas/ItemSearchQueryFilterParentDefined"
+          },
+          {
+            "$ref": "#/components/schemas/ItemSearchQueryFilterParentValue"
+          },
+          {
+            "$ref": "#/components/schemas/ItemSearchQueryFilterStatusCategoryContainsAny"
+          },
+          {
+            "$ref": "#/components/schemas/ItemSearchQueryFilterStatusCategoryUpdatedSince"
+          },
+          {
+            "$ref": "#/components/schemas/ItemSearchQueryFilterStatusContainsAny"
+          },
+          {
+            "$ref": "#/components/schemas/ItemSearchQueryFilterStatusUpdatedSince"
+          },
+          {
+            "$ref": "#/components/schemas/ItemSearchQueryFilterUpdatedSince"
           }
         ],
-        "title": "ItemSearchQueryFilterAssignees"
+        "title": "ItemSearchQueryFilter"
+      },
+      "ItemSearchQueryFilterAnd": {
+        "properties": {
+          "inner": {
+            "items": {
+              "$ref": "#/components/schemas/ItemSearchQueryFilter"
+            },
+            "type": "array"
+          },
+          "type": {
+            "const": "and",
+            "type": "string"
+          }
+        },
+        "required": [
+          "inner",
+          "type"
+        ],
+        "title": "ItemSearchQueryFilterAnd",
+        "type": "object"
       },
       "ItemSearchQueryFilterAssigneesContain": {
         "properties": {
+          "type": {
+            "const": "assignees:contain",
+            "type": "string"
+          },
           "user": {
             "$ref": "#/components/schemas/UserRef"
           }
         },
         "required": [
-          "user"
+          "user",
+          "type"
         ],
         "title": "ItemSearchQueryFilterAssigneesContain",
         "type": "object"
       },
       "ItemSearchQueryFilterAssigneesContainsAll": {
         "properties": {
+          "type": {
+            "const": "assignees:containsAll",
+            "type": "string"
+          },
           "users": {
             "items": {
               "$ref": "#/components/schemas/UserRef"
@@ -4205,13 +4344,18 @@
           }
         },
         "required": [
-          "users"
+          "users",
+          "type"
         ],
         "title": "ItemSearchQueryFilterAssigneesContainsAll",
         "type": "object"
       },
       "ItemSearchQueryFilterAssigneesContainsAny": {
         "properties": {
+          "type": {
+            "const": "assignees:containsAny",
+            "type": "string"
+          },
           "users": {
             "items": {
               "$ref": "#/components/schemas/UserRef"
@@ -4220,19 +4364,33 @@
           }
         },
         "required": [
-          "users"
+          "users",
+          "type"
         ],
         "title": "ItemSearchQueryFilterAssigneesContainsAny",
         "type": "object"
       },
       "ItemSearchQueryFilterAssigneesDefined": {
+        "properties": {
+          "type": {
+            "const": "assignees:defined",
+            "type": "string"
+          }
+        },
+        "required": [
+          "type"
+        ],
         "title": "ItemSearchQueryFilterAssigneesDefined",
         "type": "object"
       },
-      "ItemSearchQueryFilterCreatedAt": {
+      "ItemSearchQueryFilterCreatedAtAbsolute": {
         "properties": {
           "mode": {
             "$ref": "#/components/schemas/ItemSearchQueryTimeMode"
+          },
+          "type": {
+            "const": "createdAt:absolute",
+            "type": "string"
           },
           "value": {
             "$ref": "#/components/schemas/ItemSearchQueryDateTimeFilterValue"
@@ -4240,24 +4398,51 @@
         },
         "required": [
           "mode",
-          "value"
+          "value",
+          "type"
         ],
-        "title": "ItemSearchQueryFilterCreatedAt",
+        "title": "ItemSearchQueryFilterCreatedAtAbsolute",
         "type": "object"
       },
-      "ItemSearchQueryFilterField": {
-        "discriminator": {
-          "mapping": {
-            "value": "#/components/schemas/ItemSearchQueryFilterFieldValue"
+      "ItemSearchQueryFilterCreatedAtRange": {
+        "properties": {
+          "from": {
+            "format": "date",
+            "type": "string"
           },
-          "propertyName": "mode"
-        },
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/ItemSearchQueryFilterFieldValue"
+          "type": {
+            "const": "createdAt:range",
+            "type": "string"
+          },
+          "until": {
+            "format": "date",
+            "type": "string"
           }
+        },
+        "required": [
+          "from",
+          "until",
+          "type"
         ],
-        "title": "ItemSearchQueryFilterField"
+        "title": "ItemSearchQueryFilterCreatedAtRange",
+        "type": "object"
+      },
+      "ItemSearchQueryFilterCreatedAtRelative": {
+        "properties": {
+          "anchor": {
+            "$ref": "#/components/schemas/ItemSearchQueryTimeAnchor"
+          },
+          "type": {
+            "const": "createdAt:relative",
+            "type": "string"
+          }
+        },
+        "required": [
+          "anchor",
+          "type"
+        ],
+        "title": "ItemSearchQueryFilterCreatedAtRelative",
+        "type": "object"
       },
       "ItemSearchQueryFilterFieldValue": {
         "properties": {
@@ -4267,34 +4452,30 @@
           },
           "filter": {
             "$ref": "#/components/schemas/JsObject"
+          },
+          "type": {
+            "const": "field:value",
+            "type": "string"
           }
         },
         "required": [
           "fieldId",
-          "filter"
+          "filter",
+          "type"
         ],
         "title": "ItemSearchQueryFilterFieldValue",
         "type": "object"
       },
-      "ItemSearchQueryFilterIntegration": {
-        "discriminator": {
-          "mapping": {
-            "defined": "#/components/schemas/ItemSearchQueryFilterIntegrationDefined",
-            "value": "#/components/schemas/ItemSearchQueryFilterIntegrationValue"
-          },
-          "propertyName": "mode"
-        },
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/ItemSearchQueryFilterIntegrationDefined"
-          },
-          {
-            "$ref": "#/components/schemas/ItemSearchQueryFilterIntegrationValue"
-          }
-        ],
-        "title": "ItemSearchQueryFilterIntegration"
-      },
       "ItemSearchQueryFilterIntegrationDefined": {
+        "properties": {
+          "type": {
+            "const": "integration:defined",
+            "type": "string"
+          }
+        },
+        "required": [
+          "type"
+        ],
         "title": "ItemSearchQueryFilterIntegrationDefined",
         "type": "object"
       },
@@ -4303,33 +4484,33 @@
           "integrationId": {
             "format": "uuid",
             "type": "string"
+          },
+          "type": {
+            "const": "integration:value",
+            "type": "string"
           }
         },
         "required": [
-          "integrationId"
+          "integrationId",
+          "type"
         ],
         "title": "ItemSearchQueryFilterIntegrationValue",
         "type": "object"
       },
-      "ItemSearchQueryFilterItem": {
-        "discriminator": {
-          "mapping": {
-            "watchSelf": "#/components/schemas/ItemSearchQueryFilterItemWatchSelf"
-          },
-          "propertyName": "mode"
-        },
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/ItemSearchQueryFilterItemWatchSelf"
-          }
-        ],
-        "title": "ItemSearchQueryFilterItem"
-      },
       "ItemSearchQueryFilterItemWatchSelf": {
+        "properties": {
+          "type": {
+            "const": "item:watchSelf",
+            "type": "string"
+          }
+        },
+        "required": [
+          "type"
+        ],
         "title": "ItemSearchQueryFilterItemWatchSelf",
         "type": "object"
       },
-      "ItemSearchQueryFilterLastUpdatedAt": {
+      "ItemSearchQueryFilterLastUpdatedAtAbsolute": {
         "properties": {
           "mode": {
             "$ref": "#/components/schemas/ItemSearchQueryTimeMode"
@@ -4337,34 +4518,67 @@
           "property": {
             "$ref": "#/components/schemas/RefItemProperty"
           },
+          "type": {
+            "const": "lastUpdatedAt:absolute",
+            "type": "string"
+          },
           "value": {
             "$ref": "#/components/schemas/ItemSearchQueryDateTimeFilterValue"
           }
         },
         "required": [
           "mode",
-          "value"
+          "value",
+          "type"
         ],
-        "title": "ItemSearchQueryFilterLastUpdatedAt",
+        "title": "ItemSearchQueryFilterLastUpdatedAtAbsolute",
         "type": "object"
       },
-      "ItemSearchQueryFilterName": {
-        "discriminator": {
-          "mapping": {
-            "contain": "#/components/schemas/ItemSearchQueryFilterNameContain",
-            "equal": "#/components/schemas/ItemSearchQueryFilterNameEqual"
+      "ItemSearchQueryFilterLastUpdatedAtRange": {
+        "properties": {
+          "from": {
+            "format": "date",
+            "type": "string"
           },
-          "propertyName": "mode"
-        },
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/ItemSearchQueryFilterNameContain"
+          "property": {
+            "$ref": "#/components/schemas/RefItemProperty"
           },
-          {
-            "$ref": "#/components/schemas/ItemSearchQueryFilterNameEqual"
+          "type": {
+            "const": "lastUpdatedAt:range",
+            "type": "string"
+          },
+          "until": {
+            "format": "date",
+            "type": "string"
           }
+        },
+        "required": [
+          "from",
+          "until",
+          "type"
         ],
-        "title": "ItemSearchQueryFilterName"
+        "title": "ItemSearchQueryFilterLastUpdatedAtRange",
+        "type": "object"
+      },
+      "ItemSearchQueryFilterLastUpdatedAtRelative": {
+        "properties": {
+          "anchor": {
+            "$ref": "#/components/schemas/ItemSearchQueryTimeAnchor"
+          },
+          "property": {
+            "$ref": "#/components/schemas/RefItemProperty"
+          },
+          "type": {
+            "const": "lastUpdatedAt:relative",
+            "type": "string"
+          }
+        },
+        "required": [
+          "anchor",
+          "type"
+        ],
+        "title": "ItemSearchQueryFilterLastUpdatedAtRelative",
+        "type": "object"
       },
       "ItemSearchQueryFilterNameContain": {
         "properties": {
@@ -4373,11 +4587,16 @@
           },
           "text": {
             "type": "string"
+          },
+          "type": {
+            "const": "name:contain",
+            "type": "string"
           }
         },
         "required": [
           "text",
-          "caseSensitive"
+          "caseSensitive",
+          "type"
         ],
         "title": "ItemSearchQueryFilterNameContain",
         "type": "object"
@@ -4389,11 +4608,16 @@
           },
           "text": {
             "type": "string"
+          },
+          "type": {
+            "const": "name:equal",
+            "type": "string"
           }
         },
         "required": [
           "text",
-          "caseSensitive"
+          "caseSensitive",
+          "type"
         ],
         "title": "ItemSearchQueryFilterNameEqual",
         "type": "object"
@@ -4402,10 +4626,15 @@
         "properties": {
           "inner": {
             "$ref": "#/components/schemas/ItemSearchQueryFilter"
+          },
+          "type": {
+            "const": "not",
+            "type": "string"
           }
         },
         "required": [
-          "inner"
+          "inner",
+          "type"
         ],
         "title": "ItemSearchQueryFilterNot",
         "type": "object"
@@ -4417,33 +4646,29 @@
               "$ref": "#/components/schemas/ItemSearchQueryFilter"
             },
             "type": "array"
+          },
+          "type": {
+            "const": "or",
+            "type": "string"
           }
         },
         "required": [
-          "inner"
+          "inner",
+          "type"
         ],
         "title": "ItemSearchQueryFilterOr",
         "type": "object"
       },
-      "ItemSearchQueryFilterParent": {
-        "discriminator": {
-          "mapping": {
-            "defined": "#/components/schemas/ItemSearchQueryFilterParentDefined",
-            "value": "#/components/schemas/ItemSearchQueryFilterParentValue"
-          },
-          "propertyName": "mode"
-        },
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/ItemSearchQueryFilterParentDefined"
-          },
-          {
-            "$ref": "#/components/schemas/ItemSearchQueryFilterParentValue"
-          }
-        ],
-        "title": "ItemSearchQueryFilterParent"
-      },
       "ItemSearchQueryFilterParentDefined": {
+        "properties": {
+          "type": {
+            "const": "parent:defined",
+            "type": "string"
+          }
+        },
+        "required": [
+          "type"
+        ],
         "title": "ItemSearchQueryFilterParentDefined",
         "type": "object"
       },
@@ -4453,6 +4678,10 @@
             "format": "uuid",
             "type": "string"
           },
+          "type": {
+            "const": "parent:value",
+            "type": "string"
+          },
           "workspaceId": {
             "format": "uuid",
             "type": "string"
@@ -4460,46 +4689,11 @@
         },
         "required": [
           "workspaceId",
-          "itemId"
+          "itemId",
+          "type"
         ],
         "title": "ItemSearchQueryFilterParentValue",
         "type": "object"
-      },
-      "ItemSearchQueryFilterStatus": {
-        "discriminator": {
-          "mapping": {
-            "containsAny": "#/components/schemas/ItemSearchQueryFilterStatusContainsAny",
-            "updatedSince": "#/components/schemas/ItemSearchQueryFilterStatusUpdatedSince"
-          },
-          "propertyName": "mode"
-        },
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/ItemSearchQueryFilterStatusContainsAny"
-          },
-          {
-            "$ref": "#/components/schemas/ItemSearchQueryFilterStatusUpdatedSince"
-          }
-        ],
-        "title": "ItemSearchQueryFilterStatus"
-      },
-      "ItemSearchQueryFilterStatusCategory": {
-        "discriminator": {
-          "mapping": {
-            "containsAny": "#/components/schemas/ItemSearchQueryFilterStatusCategoryContainsAny",
-            "updatedSince": "#/components/schemas/ItemSearchQueryFilterStatusCategoryUpdatedSince"
-          },
-          "propertyName": "mode"
-        },
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/ItemSearchQueryFilterStatusCategoryContainsAny"
-          },
-          {
-            "$ref": "#/components/schemas/ItemSearchQueryFilterStatusCategoryUpdatedSince"
-          }
-        ],
-        "title": "ItemSearchQueryFilterStatusCategory"
       },
       "ItemSearchQueryFilterStatusCategoryContainsAny": {
         "properties": {
@@ -4509,22 +4703,32 @@
             },
             "type": "array",
             "uniqueItems": true
+          },
+          "type": {
+            "const": "statusCategory:containsAny",
+            "type": "string"
           }
         },
         "required": [
-          "categories"
+          "categories",
+          "type"
         ],
         "title": "ItemSearchQueryFilterStatusCategoryContainsAny",
         "type": "object"
       },
       "ItemSearchQueryFilterStatusCategoryUpdatedSince": {
         "properties": {
+          "type": {
+            "const": "statusCategory:updatedSince",
+            "type": "string"
+          },
           "value": {
             "$ref": "#/components/schemas/ItemSearchQueryTimeAnchor"
           }
         },
         "required": [
-          "value"
+          "value",
+          "type"
         ],
         "title": "ItemSearchQueryFilterStatusCategoryUpdatedSince",
         "type": "object"
@@ -4538,39 +4742,35 @@
             },
             "type": "array",
             "uniqueItems": true
+          },
+          "type": {
+            "const": "status:containsAny",
+            "type": "string"
           }
         },
         "required": [
-          "statusIds"
+          "statusIds",
+          "type"
         ],
         "title": "ItemSearchQueryFilterStatusContainsAny",
         "type": "object"
       },
       "ItemSearchQueryFilterStatusUpdatedSince": {
         "properties": {
+          "type": {
+            "const": "status:updatedSince",
+            "type": "string"
+          },
           "value": {
             "$ref": "#/components/schemas/ItemSearchQueryTimeAnchor"
           }
         },
         "required": [
-          "value"
+          "value",
+          "type"
         ],
         "title": "ItemSearchQueryFilterStatusUpdatedSince",
         "type": "object"
-      },
-      "ItemSearchQueryFilterUpdated": {
-        "discriminator": {
-          "mapping": {
-            "since": "#/components/schemas/ItemSearchQueryFilterUpdatedSince"
-          },
-          "propertyName": "mode"
-        },
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/ItemSearchQueryFilterUpdatedSince"
-          }
-        ],
-        "title": "ItemSearchQueryFilterUpdated"
       },
       "ItemSearchQueryFilterUpdatedSince": {
         "properties": {
@@ -4580,10 +4780,15 @@
           "timestamp": {
             "format": "date-time",
             "type": "string"
+          },
+          "type": {
+            "const": "updated:since",
+            "type": "string"
           }
         },
         "required": [
-          "timestamp"
+          "timestamp",
+          "type"
         ],
         "title": "ItemSearchQueryFilterUpdatedSince",
         "type": "object"
@@ -4626,10 +4831,15 @@
         "properties": {
           "direction": {
             "$ref": "#/components/schemas/ItemSearchQuerySortDirection"
+          },
+          "type": {
+            "const": "createdAt",
+            "type": "string"
           }
         },
         "required": [
-          "direction"
+          "direction",
+          "type"
         ],
         "title": "ItemSearchQuerySortCreatedAt",
         "type": "object"
@@ -4650,11 +4860,16 @@
           "fieldId": {
             "format": "uuid",
             "type": "string"
+          },
+          "type": {
+            "const": "field",
+            "type": "string"
           }
         },
         "required": [
           "fieldId",
-          "direction"
+          "direction",
+          "type"
         ],
         "title": "ItemSearchQuerySortField",
         "type": "object"
@@ -4663,10 +4878,15 @@
         "properties": {
           "direction": {
             "$ref": "#/components/schemas/ItemSearchQuerySortDirection"
+          },
+          "type": {
+            "const": "lastUpdatedAt",
+            "type": "string"
           }
         },
         "required": [
-          "direction"
+          "direction",
+          "type"
         ],
         "title": "ItemSearchQuerySortLastUpdatedAt",
         "type": "object"
@@ -4675,10 +4895,15 @@
         "properties": {
           "direction": {
             "$ref": "#/components/schemas/ItemSearchQuerySortDirection"
+          },
+          "type": {
+            "const": "name",
+            "type": "string"
           }
         },
         "required": [
-          "direction"
+          "direction",
+          "type"
         ],
         "title": "ItemSearchQuerySortName",
         "type": "object"
@@ -4687,10 +4912,15 @@
         "properties": {
           "direction": {
             "$ref": "#/components/schemas/ItemSearchQuerySortDirection"
+          },
+          "type": {
+            "const": "order",
+            "type": "string"
           }
         },
         "required": [
-          "direction"
+          "direction",
+          "type"
         ],
         "title": "ItemSearchQuerySortOrder",
         "type": "object"
@@ -4699,10 +4929,15 @@
         "properties": {
           "direction": {
             "$ref": "#/components/schemas/ItemSearchQuerySortDirection"
+          },
+          "type": {
+            "const": "status",
+            "type": "string"
           }
         },
         "required": [
-          "direction"
+          "direction",
+          "type"
         ],
         "title": "ItemSearchQuerySortStatus",
         "type": "object"
@@ -4734,10 +4969,15 @@
           "count": {
             "format": "int32",
             "type": "integer"
+          },
+          "type": {
+            "const": "days",
+            "type": "string"
           }
         },
         "required": [
-          "count"
+          "count",
+          "type"
         ],
         "title": "ItemSearchQueryTimeAnchorDays",
         "type": "object"
@@ -4747,10 +4987,15 @@
           "count": {
             "format": "int32",
             "type": "integer"
+          },
+          "type": {
+            "const": "months",
+            "type": "string"
           }
         },
         "required": [
-          "count"
+          "count",
+          "type"
         ],
         "title": "ItemSearchQueryTimeAnchorMonths",
         "type": "object"
@@ -4760,10 +5005,15 @@
           "count": {
             "format": "int32",
             "type": "integer"
+          },
+          "type": {
+            "const": "weeks",
+            "type": "string"
           }
         },
         "required": [
-          "count"
+          "count",
+          "type"
         ],
         "title": "ItemSearchQueryTimeAnchorWeeks",
         "type": "object"
@@ -5394,13 +5644,18 @@
           },
           "required": {
             "type": "boolean"
+          },
+          "type": {
+            "const": "simple",
+            "type": "string"
           }
         },
         "required": [
           "internalId",
           "externalId",
           "direction",
-          "required"
+          "required",
+          "type"
         ],
         "title": "MappingSettingsAirfocusMappingSettingsSimple",
         "type": "object"
@@ -5433,6 +5688,10 @@
           },
           "required": {
             "type": "boolean"
+          },
+          "type": {
+            "const": "withOptions",
+            "type": "string"
           }
         },
         "required": [
@@ -5443,7 +5702,8 @@
           "required",
           "enableAutoMapping",
           "enableAutoCreateOptionsInternal",
-          "enableAutoCreateOptionsExternal"
+          "enableAutoCreateOptionsExternal",
+          "type"
         ],
         "title": "MappingSettingsAirfocusMappingSettingsWithOptions",
         "type": "object"
@@ -5650,6 +5910,7 @@
             "type": "string"
           },
           "typeId": {
+            "const": "mirror",
             "type": "string"
           }
         },
@@ -5750,6 +6011,7 @@
             "type": "string"
           },
           "typeId": {
+            "const": "mirror-source",
             "type": "string"
           }
         },
@@ -5793,6 +6055,7 @@
             "type": "string"
           },
           "typeId": {
+            "const": "mirror-target",
             "type": "string"
           }
         },
@@ -5859,10 +6122,15 @@
         "properties": {
           "delta": {
             "type": "number"
+          },
+          "type": {
+            "const": "equal",
+            "type": "string"
           }
         },
         "required": [
-          "delta"
+          "delta",
+          "type"
         ],
         "title": "NumberFieldTypeSettingsSteppingEqual",
         "type": "object"
@@ -5871,15 +6139,29 @@
         "properties": {
           "factor": {
             "type": "number"
+          },
+          "type": {
+            "const": "exponential",
+            "type": "string"
           }
         },
         "required": [
-          "factor"
+          "factor",
+          "type"
         ],
         "title": "NumberFieldTypeSettingsSteppingExponential",
         "type": "object"
       },
       "NumberFieldTypeSettingsSteppingFibonacci": {
+        "properties": {
+          "type": {
+            "const": "fibonacci",
+            "type": "string"
+          }
+        },
+        "required": [
+          "type"
+        ],
         "title": "NumberFieldTypeSettingsSteppingFibonacci",
         "type": "object"
       },
@@ -5916,11 +6198,16 @@
           },
           "suffix": {
             "type": "string"
+          },
+          "type": {
+            "const": "custom",
+            "type": "string"
           }
         },
         "required": [
           "prefix",
-          "suffix"
+          "suffix",
+          "type"
         ],
         "title": "NumberFieldTypeSettingsUnitCustom",
         "type": "object"
@@ -5929,19 +6216,42 @@
         "properties": {
           "currency": {
             "type": "string"
+          },
+          "type": {
+            "const": "money",
+            "type": "string"
           }
         },
         "required": [
-          "currency"
+          "currency",
+          "type"
         ],
         "title": "NumberFieldTypeSettingsUnitMoney",
         "type": "object"
       },
       "NumberFieldTypeSettingsUnitPercent": {
+        "properties": {
+          "type": {
+            "const": "percent",
+            "type": "string"
+          }
+        },
+        "required": [
+          "type"
+        ],
         "title": "NumberFieldTypeSettingsUnitPercent",
         "type": "object"
       },
       "NumberFieldTypeSettingsUnitStoryPoints": {
+        "properties": {
+          "type": {
+            "const": "storyPoints",
+            "type": "string"
+          }
+        },
+        "required": [
+          "type"
+        ],
         "title": "NumberFieldTypeSettingsUnitStoryPoints",
         "type": "object"
       },
@@ -5975,6 +6285,7 @@
             "type": "string"
           },
           "typeId": {
+            "const": "number",
             "type": "string"
           }
         },
@@ -6006,6 +6317,7 @@
             "type": "string"
           },
           "typeId": {
+            "const": "okr",
             "type": "string"
           }
         },
@@ -6162,6 +6474,7 @@
             "type": "string"
           },
           "typeId": {
+            "const": "okr-checkins",
             "type": "string"
           }
         },
@@ -6226,6 +6539,7 @@
             "type": "string"
           },
           "typeId": {
+            "const": "okr-confidence",
             "type": "string"
           }
         },
@@ -6270,6 +6584,7 @@
             "type": "string"
           },
           "typeId": {
+            "const": "okr-key-result-reference",
             "type": "string"
           }
         },
@@ -6313,6 +6628,7 @@
             "type": "string"
           },
           "typeId": {
+            "const": "okr-key-results",
             "type": "string"
           }
         },
@@ -6356,6 +6672,7 @@
             "type": "string"
           },
           "typeId": {
+            "const": "okr-progress",
             "type": "string"
           }
         },
@@ -6417,6 +6734,7 @@
             "type": "string"
           },
           "typeId": {
+            "const": "okr-time-period",
             "type": "string"
           }
         },
@@ -6476,6 +6794,7 @@
             "type": "string"
           },
           "typeId": {
+            "const": "people",
             "type": "string"
           }
         },
@@ -6517,6 +6836,7 @@
             "type": "string"
           },
           "typeId": {
+            "const": "portal",
             "type": "string"
           }
         },
@@ -6603,6 +6923,10 @@
           "title": {
             "type": "string"
           },
+          "type": {
+            "const": "url",
+            "type": "string"
+          },
           "url": {
             "type": "string"
           }
@@ -6610,7 +6934,8 @@
         "required": [
           "title",
           "url",
-          "public"
+          "public",
+          "type"
         ],
         "title": "PortalAppTypeSettingsPortalPageUrlPage",
         "type": "object"
@@ -6653,6 +6978,10 @@
           "title": {
             "type": "string"
           },
+          "type": {
+            "const": "workspace",
+            "type": "string"
+          },
           "view": {
             "$ref": "#/components/schemas/PortalAppTypeSettingsPortalView"
           },
@@ -6669,7 +6998,8 @@
           "public",
           "portalFieldId",
           "fieldIds",
-          "searchIndex"
+          "searchIndex",
+          "type"
         ],
         "title": "PortalAppTypeSettingsPortalPageWorkspacePage",
         "type": "object"
@@ -6706,8 +7036,15 @@
           },
           "tabMode": {
             "$ref": "#/components/schemas/SwimlaneMode"
+          },
+          "type": {
+            "const": "grid",
+            "type": "string"
           }
         },
+        "required": [
+          "type"
+        ],
         "title": "PortalAppTypeSettingsPortalViewGridView",
         "type": "object"
       },
@@ -6738,19 +7075,42 @@
           "fieldId": {
             "format": "uuid",
             "type": "string"
+          },
+          "type": {
+            "const": "field",
+            "type": "string"
           }
         },
         "required": [
-          "fieldId"
+          "fieldId",
+          "type"
         ],
         "title": "PortalAppTypeSettingsPortalViewPortalFieldField",
         "type": "object"
       },
       "PortalAppTypeSettingsPortalViewPortalFieldStatus": {
+        "properties": {
+          "type": {
+            "const": "status",
+            "type": "string"
+          }
+        },
+        "required": [
+          "type"
+        ],
         "title": "PortalAppTypeSettingsPortalViewPortalFieldStatus",
         "type": "object"
       },
       "PortalAppTypeSettingsPortalViewPortalFieldStatusCategory": {
+        "properties": {
+          "type": {
+            "const": "statusCategory",
+            "type": "string"
+          }
+        },
+        "required": [
+          "type"
+        ],
         "title": "PortalAppTypeSettingsPortalViewPortalFieldStatusCategory",
         "type": "object"
       },
@@ -6781,6 +7141,7 @@
             "type": "string"
           },
           "typeId": {
+            "const": "portal",
             "type": "string"
           }
         },
@@ -6811,6 +7172,7 @@
             "type": "string"
           },
           "typeId": {
+            "const": "portfolio",
             "type": "string"
           }
         },
@@ -6878,6 +7240,7 @@
             "type": "string"
           },
           "typeId": {
+            "const": "prioritization",
             "type": "string"
           }
         },
@@ -6938,6 +7301,7 @@
             "type": "string"
           },
           "typeId": {
+            "const": "prioritization",
             "type": "string"
           }
         },
@@ -7127,6 +7491,10 @@
           "meta": {
             "type": "object"
           },
+          "type": {
+            "const": "attachment",
+            "type": "string"
+          },
           "width": {
             "format": "int32",
             "type": "integer"
@@ -7134,7 +7502,8 @@
         },
         "required": [
           "attachmentId",
-          "contentType"
+          "contentType",
+          "type"
         ],
         "title": "RichTextBlockAttachment",
         "type": "object"
@@ -7149,10 +7518,15 @@
           },
           "meta": {
             "type": "object"
+          },
+          "type": {
+            "const": "blockquote",
+            "type": "string"
           }
         },
         "required": [
-          "content"
+          "content",
+          "type"
         ],
         "title": "RichTextBlockBlockquote",
         "type": "object"
@@ -7167,10 +7541,15 @@
           },
           "meta": {
             "type": "object"
+          },
+          "type": {
+            "const": "code",
+            "type": "string"
           }
         },
         "required": [
-          "content"
+          "content",
+          "type"
         ],
         "title": "RichTextBlockCode",
         "type": "object"
@@ -7185,11 +7564,16 @@
           },
           "raw": {
             "type": "string"
+          },
+          "type": {
+            "const": "custom",
+            "type": "string"
           }
         },
         "required": [
           "id",
-          "raw"
+          "raw",
+          "type"
         ],
         "title": "RichTextBlockCustom",
         "type": "object"
@@ -7206,12 +7590,17 @@
           "meta": {
             "type": "object"
           },
+          "type": {
+            "const": "embed",
+            "type": "string"
+          },
           "url": {
             "type": "string"
           }
         },
         "required": [
-          "url"
+          "url",
+          "type"
         ],
         "title": "RichTextBlockEmbed",
         "type": "object"
@@ -7230,11 +7619,16 @@
           },
           "meta": {
             "type": "object"
+          },
+          "type": {
+            "const": "headline",
+            "type": "string"
           }
         },
         "required": [
           "level",
-          "content"
+          "content",
+          "type"
         ],
         "title": "RichTextBlockHeadline",
         "type": "object"
@@ -7246,10 +7640,15 @@
               "$ref": "#/components/schemas/RichTextBlock"
             },
             "type": "array"
+          },
+          "type": {
+            "const": "indentation",
+            "type": "string"
           }
         },
         "required": [
-          "content"
+          "content",
+          "type"
         ],
         "title": "RichTextBlockIndentation",
         "type": "object"
@@ -7277,11 +7676,16 @@
           "orderedListStartsAt": {
             "format": "int32",
             "type": "integer"
+          },
+          "type": {
+            "const": "list",
+            "type": "string"
           }
         },
         "required": [
           "ordered",
-          "items"
+          "items",
+          "type"
         ],
         "title": "RichTextBlockList",
         "type": "object"
@@ -7299,10 +7703,15 @@
           },
           "title": {
             "type": "string"
+          },
+          "type": {
+            "const": "panel",
+            "type": "string"
           }
         },
         "required": [
-          "content"
+          "content",
+          "type"
         ],
         "title": "RichTextBlockPanel",
         "type": "object"
@@ -7317,10 +7726,15 @@
           },
           "meta": {
             "type": "object"
+          },
+          "type": {
+            "const": "paragraph",
+            "type": "string"
           }
         },
         "required": [
-          "content"
+          "content",
+          "type"
         ],
         "title": "RichTextBlockParagraph",
         "type": "object"
@@ -7386,10 +7800,15 @@
               "$ref": "#/components/schemas/RichTextInline"
             },
             "type": "array"
+          },
+          "type": {
+            "const": "bold",
+            "type": "string"
           }
         },
         "required": [
-          "content"
+          "content",
+          "type"
         ],
         "title": "RichTextInlineBold",
         "type": "object"
@@ -7401,10 +7820,15 @@
           },
           "meta": {
             "type": "object"
+          },
+          "type": {
+            "const": "code",
+            "type": "string"
           }
         },
         "required": [
-          "content"
+          "content",
+          "type"
         ],
         "title": "RichTextInlineCode",
         "type": "object"
@@ -7419,11 +7843,16 @@
           },
           "raw": {
             "type": "string"
+          },
+          "type": {
+            "const": "custom",
+            "type": "string"
           }
         },
         "required": [
           "id",
-          "raw"
+          "raw",
+          "type"
         ],
         "title": "RichTextInlineCustom",
         "type": "object"
@@ -7433,13 +7862,18 @@
           "meta": {
             "type": "object"
           },
+          "type": {
+            "const": "groupMention",
+            "type": "string"
+          },
           "userGroupId": {
             "format": "uuid",
             "type": "string"
           }
         },
         "required": [
-          "userGroupId"
+          "userGroupId",
+          "type"
         ],
         "title": "RichTextInlineGroupMention",
         "type": "object"
@@ -7452,13 +7886,18 @@
             },
             "type": "array"
           },
+          "type": {
+            "const": "image",
+            "type": "string"
+          },
           "url": {
             "type": "string"
           }
         },
         "required": [
           "content",
-          "url"
+          "url",
+          "type"
         ],
         "title": "RichTextInlineImage",
         "type": "object"
@@ -7470,10 +7909,15 @@
               "$ref": "#/components/schemas/RichTextInline"
             },
             "type": "array"
+          },
+          "type": {
+            "const": "italic",
+            "type": "string"
           }
         },
         "required": [
-          "content"
+          "content",
+          "type"
         ],
         "title": "RichTextInlineItalic",
         "type": "object"
@@ -7486,13 +7930,18 @@
             },
             "type": "array"
           },
+          "type": {
+            "const": "link",
+            "type": "string"
+          },
           "url": {
             "type": "string"
           }
         },
         "required": [
           "content",
-          "url"
+          "url",
+          "type"
         ],
         "title": "RichTextInlineLink",
         "type": "object"
@@ -7502,13 +7951,18 @@
           "meta": {
             "type": "object"
           },
+          "type": {
+            "const": "mention",
+            "type": "string"
+          },
           "userId": {
             "format": "uuid",
             "type": "string"
           }
         },
         "required": [
-          "userId"
+          "userId",
+          "type"
         ],
         "title": "RichTextInlineMention",
         "type": "object"
@@ -7520,10 +7974,15 @@
               "$ref": "#/components/schemas/RichTextInline"
             },
             "type": "array"
+          },
+          "type": {
+            "const": "strikeThrough",
+            "type": "string"
           }
         },
         "required": [
-          "content"
+          "content",
+          "type"
         ],
         "title": "RichTextInlineStrikeThrough",
         "type": "object"
@@ -7535,10 +7994,15 @@
           },
           "meta": {
             "type": "object"
+          },
+          "type": {
+            "const": "text",
+            "type": "string"
           }
         },
         "required": [
-          "content"
+          "content",
+          "type"
         ],
         "title": "RichTextInlineText",
         "type": "object"
@@ -7550,10 +8014,15 @@
               "$ref": "#/components/schemas/RichTextInline"
             },
             "type": "array"
+          },
+          "type": {
+            "const": "underline",
+            "type": "string"
           }
         },
         "required": [
-          "content"
+          "content",
+          "type"
         ],
         "title": "RichTextInlineUnderline",
         "type": "object"
@@ -7664,10 +8133,15 @@
         "properties": {
           "innder": {
             "$ref": "#/components/schemas/ScoringFormula"
+          },
+          "type": {
+            "const": "absolute",
+            "type": "string"
           }
         },
         "required": [
-          "innder"
+          "innder",
+          "type"
         ],
         "title": "ScoringFormulaAbsolute",
         "type": "object"
@@ -7679,23 +8153,33 @@
           },
           "right": {
             "$ref": "#/components/schemas/ScoringFormula"
+          },
+          "type": {
+            "const": "addition",
+            "type": "string"
           }
         },
         "required": [
           "left",
-          "right"
+          "right",
+          "type"
         ],
         "title": "ScoringFormulaAddition",
         "type": "object"
       },
       "ScoringFormulaConstant": {
         "properties": {
+          "type": {
+            "const": "constant",
+            "type": "string"
+          },
           "value": {
             "type": "number"
           }
         },
         "required": [
-          "value"
+          "value",
+          "type"
         ],
         "title": "ScoringFormulaConstant",
         "type": "object"
@@ -7705,10 +8189,15 @@
           "criterionId": {
             "format": "uuid",
             "type": "string"
+          },
+          "type": {
+            "const": "criterionNormalizedNumericValue",
+            "type": "string"
           }
         },
         "required": [
-          "criterionId"
+          "criterionId",
+          "type"
         ],
         "title": "ScoringFormulaCriterionNormalizedNumericValue",
         "type": "object"
@@ -7718,10 +8207,15 @@
           "criterionId": {
             "format": "uuid",
             "type": "string"
+          },
+          "type": {
+            "const": "criterionNumericValue",
+            "type": "string"
           }
         },
         "required": [
-          "criterionId"
+          "criterionId",
+          "type"
         ],
         "title": "ScoringFormulaCriterionNumericValue",
         "type": "object"
@@ -7733,11 +8227,16 @@
           },
           "right": {
             "$ref": "#/components/schemas/ScoringFormula"
+          },
+          "type": {
+            "const": "division",
+            "type": "string"
           }
         },
         "required": [
           "left",
-          "right"
+          "right",
+          "type"
         ],
         "title": "ScoringFormulaDivision",
         "type": "object"
@@ -7746,10 +8245,15 @@
         "properties": {
           "factorId": {
             "$ref": "#/components/schemas/FactorId"
+          },
+          "type": {
+            "const": "factorScore",
+            "type": "string"
           }
         },
         "required": [
-          "factorId"
+          "factorId",
+          "type"
         ],
         "title": "ScoringFormulaFactorScore",
         "type": "object"
@@ -7758,10 +8262,15 @@
         "properties": {
           "innder": {
             "$ref": "#/components/schemas/ScoringFormula"
+          },
+          "type": {
+            "const": "logarithm",
+            "type": "string"
           }
         },
         "required": [
-          "innder"
+          "innder",
+          "type"
         ],
         "title": "ScoringFormulaLogarithm",
         "type": "object"
@@ -7773,10 +8282,15 @@
               "$ref": "#/components/schemas/ScoringFormula"
             },
             "type": "array"
+          },
+          "type": {
+            "const": "maximum",
+            "type": "string"
           }
         },
         "required": [
-          "arguments"
+          "arguments",
+          "type"
         ],
         "title": "ScoringFormulaMaximum",
         "type": "object"
@@ -7788,10 +8302,15 @@
               "$ref": "#/components/schemas/ScoringFormula"
             },
             "type": "array"
+          },
+          "type": {
+            "const": "minimum",
+            "type": "string"
           }
         },
         "required": [
-          "arguments"
+          "arguments",
+          "type"
         ],
         "title": "ScoringFormulaMinimum",
         "type": "object"
@@ -7803,11 +8322,16 @@
           },
           "right": {
             "$ref": "#/components/schemas/ScoringFormula"
+          },
+          "type": {
+            "const": "multiplication",
+            "type": "string"
           }
         },
         "required": [
           "left",
-          "right"
+          "right",
+          "type"
         ],
         "title": "ScoringFormulaMultiplication",
         "type": "object"
@@ -7816,10 +8340,15 @@
         "properties": {
           "innder": {
             "$ref": "#/components/schemas/ScoringFormula"
+          },
+          "type": {
+            "const": "negative",
+            "type": "string"
           }
         },
         "required": [
-          "innder"
+          "innder",
+          "type"
         ],
         "title": "ScoringFormulaNegative",
         "type": "object"
@@ -7831,11 +8360,16 @@
           },
           "right": {
             "$ref": "#/components/schemas/ScoringFormula"
+          },
+          "type": {
+            "const": "power",
+            "type": "string"
           }
         },
         "required": [
           "left",
-          "right"
+          "right",
+          "type"
         ],
         "title": "ScoringFormulaPower",
         "type": "object"
@@ -7844,10 +8378,15 @@
         "properties": {
           "innder": {
             "$ref": "#/components/schemas/ScoringFormula"
+          },
+          "type": {
+            "const": "sqrt",
+            "type": "string"
           }
         },
         "required": [
-          "innder"
+          "innder",
+          "type"
         ],
         "title": "ScoringFormulaSquareRoot",
         "type": "object"
@@ -7859,11 +8398,16 @@
           },
           "right": {
             "$ref": "#/components/schemas/ScoringFormula"
+          },
+          "type": {
+            "const": "subtraction",
+            "type": "string"
           }
         },
         "required": [
           "left",
-          "right"
+          "right",
+          "type"
         ],
         "title": "ScoringFormulaSubtraction",
         "type": "object"
@@ -7896,11 +8440,16 @@
           },
           "itemScoreFormula": {
             "$ref": "#/components/schemas/ScoringFormula"
+          },
+          "type": {
+            "const": "customFormula",
+            "type": "string"
           }
         },
         "required": [
           "factorFormulas",
-          "itemScoreFormula"
+          "itemScoreFormula",
+          "type"
         ],
         "title": "ScoringModeCustomFormula",
         "type": "object"
@@ -7918,11 +8467,16 @@
               "type": "number"
             },
             "type": "object"
+          },
+          "type": {
+            "const": "customWeighting",
+            "type": "string"
           }
         },
         "required": [
           "factorWeights",
-          "criterionWeights"
+          "criterionWeights",
+          "type"
         ],
         "title": "ScoringModeCustomWeighting",
         "type": "object"
@@ -8021,6 +8575,7 @@
             "type": "string"
           },
           "typeId": {
+            "const": "select",
             "type": "string"
           }
         },
@@ -8194,15 +8749,29 @@
           "appId": {
             "format": "uuid",
             "type": "string"
+          },
+          "type": {
+            "const": "app",
+            "type": "string"
           }
         },
         "required": [
-          "appId"
+          "appId",
+          "type"
         ],
         "title": "SwimlaneModeApp",
         "type": "object"
       },
       "SwimlaneModeAssignees": {
+        "properties": {
+          "type": {
+            "const": "assignees",
+            "type": "string"
+          }
+        },
+        "required": [
+          "type"
+        ],
         "title": "SwimlaneModeAssignees",
         "type": "object"
       },
@@ -8211,23 +8780,55 @@
           "fieldId": {
             "format": "uuid",
             "type": "string"
+          },
+          "type": {
+            "const": "field",
+            "type": "string"
           }
         },
         "required": [
-          "fieldId"
+          "fieldId",
+          "type"
         ],
         "title": "SwimlaneModeField",
         "type": "object"
       },
       "SwimlaneModeParent": {
+        "properties": {
+          "type": {
+            "const": "parent",
+            "type": "string"
+          }
+        },
+        "required": [
+          "type"
+        ],
         "title": "SwimlaneModeParent",
         "type": "object"
       },
       "SwimlaneModeStatus": {
+        "properties": {
+          "type": {
+            "const": "status",
+            "type": "string"
+          }
+        },
+        "required": [
+          "type"
+        ],
         "title": "SwimlaneModeStatus",
         "type": "object"
       },
       "SwimlaneModeStatusCategory": {
+        "properties": {
+          "type": {
+            "const": "statusCategory",
+            "type": "string"
+          }
+        },
+        "required": [
+          "type"
+        ],
         "title": "SwimlaneModeStatusCategory",
         "type": "object"
       },
@@ -8479,15 +9080,29 @@
           "trialUntil": {
             "format": "date-time",
             "type": "string"
+          },
+          "type": {
+            "const": "expired",
+            "type": "string"
           }
         },
         "required": [
-          "trialUntil"
+          "trialUntil",
+          "type"
         ],
         "title": "TeamStateSubscriptionExpired",
         "type": "object"
       },
       "TeamStateSubscriptionSubscribed": {
+        "properties": {
+          "type": {
+            "const": "subscribed",
+            "type": "string"
+          }
+        },
+        "required": [
+          "type"
+        ],
         "title": "TeamStateSubscriptionSubscribed",
         "type": "object"
       },
@@ -8496,10 +9111,15 @@
           "trialUntil": {
             "format": "date-time",
             "type": "string"
+          },
+          "type": {
+            "const": "trial",
+            "type": "string"
           }
         },
         "required": [
-          "trialUntil"
+          "trialUntil",
+          "type"
         ],
         "title": "TeamStateSubscriptionTrial",
         "type": "object"
@@ -8710,6 +9330,7 @@
             "type": "string"
           },
           "typeId": {
+            "const": "text",
             "type": "string"
           }
         },
@@ -8785,12 +9406,17 @@
               "$ref": "#/components/schemas/TimePeriod"
             },
             "type": "array"
+          },
+          "type": {
+            "const": "iterations",
+            "type": "string"
           }
         },
         "required": [
           "timePeriods",
           "currentId",
-          "multi"
+          "multi",
+          "type"
         ],
         "title": "TimePeriodFieldSettingsIterations",
         "type": "object"
@@ -8805,11 +9431,16 @@
               "$ref": "#/components/schemas/TimePeriod"
             },
             "type": "array"
+          },
+          "type": {
+            "const": "simple",
+            "type": "string"
           }
         },
         "required": [
           "timePeriods",
-          "multi"
+          "multi",
+          "type"
         ],
         "title": "TimePeriodFieldSettingsSimple",
         "type": "object"
@@ -8844,6 +9475,7 @@
             "type": "string"
           },
           "typeId": {
+            "const": "time-period",
             "type": "string"
           }
         },
@@ -9362,15 +9994,29 @@
           "id": {
             "format": "uuid",
             "type": "string"
+          },
+          "type": {
+            "const": "groupId",
+            "type": "string"
           }
         },
         "required": [
-          "id"
+          "id",
+          "type"
         ],
         "title": "UserRefUserGroupRefId",
         "type": "object"
       },
       "UserRefUserRefCurrent": {
+        "properties": {
+          "type": {
+            "const": "current",
+            "type": "string"
+          }
+        },
+        "required": [
+          "type"
+        ],
         "title": "UserRefUserRefCurrent",
         "type": "object"
       },
@@ -9379,10 +10025,15 @@
           "id": {
             "format": "uuid",
             "type": "string"
+          },
+          "type": {
+            "const": "id",
+            "type": "string"
           }
         },
         "required": [
-          "id"
+          "id",
+          "type"
         ],
         "title": "UserRefUserRefId",
         "type": "object"
@@ -9488,6 +10139,7 @@
             "type": "string"
           },
           "typeId": {
+            "const": "votes",
             "type": "string"
           }
         },
@@ -9518,6 +10170,7 @@
             "type": "string"
           },
           "typeId": {
+            "const": "voting",
             "type": "string"
           }
         },
@@ -9549,10 +10202,28 @@
         "title": "VotingAppAudience"
       },
       "VotingAppAudienceAnonymousUsers": {
+        "properties": {
+          "type": {
+            "const": "anonymousUsers",
+            "type": "string"
+          }
+        },
+        "required": [
+          "type"
+        ],
         "title": "VotingAppAudienceAnonymousUsers",
         "type": "object"
       },
       "VotingAppAudienceTeamMembers": {
+        "properties": {
+          "type": {
+            "const": "teamMembers",
+            "type": "string"
+          }
+        },
+        "required": [
+          "type"
+        ],
         "title": "VotingAppAudienceTeamMembers",
         "type": "object"
       },
@@ -9660,6 +10331,7 @@
             "type": "string"
           },
           "typeId": {
+            "const": "votingScore",
             "type": "string"
           }
         },
@@ -10685,10 +11357,15 @@
               "$ref": "#/components/schemas/WorkspaceRelationSearchQueryFilter"
             },
             "type": "array"
+          },
+          "type": {
+            "const": "and",
+            "type": "string"
           }
         },
         "required": [
-          "inner"
+          "inner",
+          "type"
         ],
         "title": "WorkspaceRelationSearchQueryFilterAnd",
         "type": "object"
@@ -10713,6 +11390,10 @@
       },
       "WorkspaceRelationSearchQueryFilterChildContainAny": {
         "properties": {
+          "mode": {
+            "const": "containAny",
+            "type": "string"
+          },
           "workspaceIds": {
             "items": {
               "format": "uuid",
@@ -10723,20 +11404,26 @@
           }
         },
         "required": [
-          "workspaceIds"
+          "workspaceIds",
+          "mode"
         ],
         "title": "WorkspaceRelationSearchQueryFilterChildContainAny",
         "type": "object"
       },
       "WorkspaceRelationSearchQueryFilterChildEqual": {
         "properties": {
+          "mode": {
+            "const": "equal",
+            "type": "string"
+          },
           "workspaceId": {
             "format": "uuid",
             "type": "string"
           }
         },
         "required": [
-          "workspaceId"
+          "workspaceId",
+          "mode"
         ],
         "title": "WorkspaceRelationSearchQueryFilterChildEqual",
         "type": "object"
@@ -10748,10 +11435,15 @@
               "$ref": "#/components/schemas/WorkspaceRelationSearchQueryFilter"
             },
             "type": "array"
+          },
+          "type": {
+            "const": "not",
+            "type": "string"
           }
         },
         "required": [
-          "inner"
+          "inner",
+          "type"
         ],
         "title": "WorkspaceRelationSearchQueryFilterNot",
         "type": "object"
@@ -10763,10 +11455,15 @@
               "$ref": "#/components/schemas/WorkspaceRelationSearchQueryFilter"
             },
             "type": "array"
+          },
+          "type": {
+            "const": "or",
+            "type": "string"
           }
         },
         "required": [
-          "inner"
+          "inner",
+          "type"
         ],
         "title": "WorkspaceRelationSearchQueryFilterOr",
         "type": "object"
@@ -10791,6 +11488,10 @@
       },
       "WorkspaceRelationSearchQueryFilterParentContainAny": {
         "properties": {
+          "mode": {
+            "const": "containAny",
+            "type": "string"
+          },
           "workspaceIds": {
             "items": {
               "format": "uuid",
@@ -10801,20 +11502,26 @@
           }
         },
         "required": [
-          "workspaceIds"
+          "workspaceIds",
+          "mode"
         ],
         "title": "WorkspaceRelationSearchQueryFilterParentContainAny",
         "type": "object"
       },
       "WorkspaceRelationSearchQueryFilterParentEqual": {
         "properties": {
+          "mode": {
+            "const": "equal",
+            "type": "string"
+          },
           "workspaceId": {
             "format": "uuid",
             "type": "string"
           }
         },
         "required": [
-          "workspaceId"
+          "workspaceId",
+          "mode"
         ],
         "title": "WorkspaceRelationSearchQueryFilterParentEqual",
         "type": "object"
@@ -11001,10 +11708,15 @@
               "$ref": "#/components/schemas/WorkspaceSearchQueryFilter"
             },
             "type": "array"
+          },
+          "type": {
+            "const": "and",
+            "type": "string"
           }
         },
         "required": [
-          "inner"
+          "inner",
+          "type"
         ],
         "title": "WorkspaceSearchQueryFilterAnd",
         "type": "object"
@@ -11032,10 +11744,15 @@
             },
             "type": "array",
             "uniqueItems": true
+          },
+          "mode": {
+            "const": "containAny",
+            "type": "string"
           }
         },
         "required": [
-          "ids"
+          "ids",
+          "mode"
         ],
         "title": "WorkspaceSearchQueryFilterMembersContainAny",
         "type": "object"
@@ -11063,13 +11780,18 @@
           "caseSensitive": {
             "type": "boolean"
           },
+          "mode": {
+            "const": "contain",
+            "type": "string"
+          },
           "text": {
             "type": "string"
           }
         },
         "required": [
           "text",
-          "caseSensitive"
+          "caseSensitive",
+          "mode"
         ],
         "title": "WorkspaceSearchQueryFilterNameContain",
         "type": "object"
@@ -11079,13 +11801,18 @@
           "caseSensitive": {
             "type": "boolean"
           },
+          "mode": {
+            "const": "equal",
+            "type": "string"
+          },
           "text": {
             "type": "string"
           }
         },
         "required": [
           "text",
-          "caseSensitive"
+          "caseSensitive",
+          "mode"
         ],
         "title": "WorkspaceSearchQueryFilterNameEqual",
         "type": "object"
@@ -11106,6 +11833,10 @@
       },
       "WorkspaceSearchQueryFilterNamespaceContainAny": {
         "properties": {
+          "mode": {
+            "const": "containAny",
+            "type": "string"
+          },
           "values": {
             "items": {
               "$ref": "#/components/schemas/WorkspaceNamespace"
@@ -11114,7 +11845,8 @@
           }
         },
         "required": [
-          "values"
+          "values",
+          "mode"
         ],
         "title": "WorkspaceSearchQueryFilterNamespaceContainAny",
         "type": "object"
@@ -11126,10 +11858,15 @@
               "$ref": "#/components/schemas/WorkspaceSearchQueryFilter"
             },
             "type": "array"
+          },
+          "type": {
+            "const": "not",
+            "type": "string"
           }
         },
         "required": [
-          "inner"
+          "inner",
+          "type"
         ],
         "title": "WorkspaceSearchQueryFilterNot",
         "type": "object"
@@ -11141,10 +11878,15 @@
               "$ref": "#/components/schemas/WorkspaceSearchQueryFilter"
             },
             "type": "array"
+          },
+          "type": {
+            "const": "or",
+            "type": "string"
           }
         },
         "required": [
-          "inner"
+          "inner",
+          "type"
         ],
         "title": "WorkspaceSearchQueryFilterOr",
         "type": "object"
@@ -11175,10 +11917,15 @@
         "properties": {
           "direction": {
             "$ref": "#/components/schemas/WorkspaceSearchQuerySortDirection"
+          },
+          "type": {
+            "const": "createdAt",
+            "type": "string"
           }
         },
         "required": [
-          "direction"
+          "direction",
+          "type"
         ],
         "title": "WorkspaceSearchQuerySortCreatedAt",
         "type": "object"
@@ -11195,10 +11942,15 @@
         "properties": {
           "direction": {
             "$ref": "#/components/schemas/WorkspaceSearchQuerySortDirection"
+          },
+          "type": {
+            "const": "lastUpdatedAt",
+            "type": "string"
           }
         },
         "required": [
-          "direction"
+          "direction",
+          "type"
         ],
         "title": "WorkspaceSearchQuerySortLastUpdatedAt",
         "type": "object"
@@ -11207,10 +11959,15 @@
         "properties": {
           "direction": {
             "$ref": "#/components/schemas/WorkspaceSearchQuerySortDirection"
+          },
+          "type": {
+            "const": "name",
+            "type": "string"
           }
         },
         "required": [
-          "direction"
+          "direction",
+          "type"
         ],
         "title": "WorkspaceSearchQuerySortName",
         "type": "object"
@@ -11633,7 +12390,7 @@
   },
   "info": {
     "title": "airfocus API",
-    "version": "1.0.0-beta.38.0.5"
+    "version": "1.0.0-beta.38.2.0"
   },
   "openapi": "3.1.0",
   "paths": {
