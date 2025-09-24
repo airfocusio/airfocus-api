@@ -12390,7 +12390,7 @@
   },
   "info": {
     "title": "airfocus API",
-    "version": "1.0.0-beta.38.4.0"
+    "version": "1.0.0-beta.38.5.0"
   },
   "openapi": "3.1.0",
   "paths": {
