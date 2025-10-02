@@ -3573,7 +3573,7 @@
       },
       "ItemLinkConstraintReadonly": {
         "properties": {
-          "integrationId": {
+          "extensionId": {
             "format": "uuid",
             "type": "string"
           },
@@ -3583,7 +3583,7 @@
           }
         },
         "required": [
-          "integrationId",
+          "extensionId",
           "type"
         ],
         "title": "ItemLinkConstraintReadonly",
@@ -5643,9 +5643,6 @@
           "internalId": {
             "$ref": "#/components/schemas/RefItemProperty"
           },
-          "required": {
-            "type": "boolean"
-          },
           "type": {
             "const": "simple",
             "type": "string"
@@ -5655,7 +5652,6 @@
           "internalId",
           "externalId",
           "direction",
-          "required",
           "type"
         ],
         "title": "MappingSettingsAirfocusMappingSettingsSimple",
@@ -5687,9 +5683,6 @@
             },
             "type": "array"
           },
-          "required": {
-            "type": "boolean"
-          },
           "type": {
             "const": "withOptions",
             "type": "string"
@@ -5700,7 +5693,6 @@
           "externalId",
           "direction",
           "pairs",
-          "required",
           "enableAutoMapping",
           "enableAutoCreateOptionsInternal",
           "enableAutoCreateOptionsExternal",
@@ -12391,7 +12383,7 @@
   },
   "info": {
     "title": "airfocus API",
-    "version": "1.0.0-beta.38.7.3"
+    "version": "1.0.0-beta.39.2.0"
   },
   "openapi": "3.1.0",
   "paths": {
