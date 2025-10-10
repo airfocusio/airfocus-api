@@ -3931,7 +3931,7 @@
       },
       "ItemRelationConstraintReadonly": {
         "properties": {
-          "integrationId": {
+          "extensionId": {
             "format": "uuid",
             "type": "string"
           },
@@ -3941,7 +3941,7 @@
           }
         },
         "required": [
-          "integrationId",
+          "extensionId",
           "type"
         ],
         "title": "ItemRelationConstraintReadonly",
@@ -12529,7 +12529,7 @@
   },
   "info": {
     "title": "airfocus API",
-    "version": "1.0.0-beta.39.9.4"
+    "version": "1.0.0-beta.39.14.2"
   },
   "openapi": "3.1.0",
   "paths": {
