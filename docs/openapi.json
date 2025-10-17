@@ -12522,7 +12522,7 @@
   },
   "info": {
     "title": "airfocus API",
-    "version": "1.0.0-beta.40.3.0"
+    "version": "1.0.0-beta.40.14.2"
   },
   "openapi": "3.1.0",
   "paths": {
@@ -12709,59 +12709,6 @@
       }
     },
     "/api/fields/workspaces": {
-      "delete": {
-        "description": "Removes existing links between team-fields and workspaces.\nReturns updated fields with their linked workspaces embedded.\nReturns an error if either of the requested fields is not a team-field.\nIgnores when trying to delete non-existing links.\n<br/>Requirements:<br/>  - auth-client scopes: \"workspace\"<br/>  - user permission: \"full\"<br/>  - team features: \"team-fields\" when operating with team-fields<br/>  - user role: \"admin\" when operating with team-fields<br/>Returns:<br/>403 if user does not have the required permission",
-        "operationId": "unlinkTeamFieldsFromWorkspaces",
-        "parameters": [
-          {
-            "deprecated": true,
-            "description": "Enable sudo-mode for admins for a single request, which gives full permission to all workspaces in the team.",
-            "in": "query",
-            "name": "actAsAdmin",
-            "required": false,
-            "schema": {
-              "type": "boolean"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "items": {
-                  "$ref": "#/components/schemas/FieldServerEndpointsFieldToWorkspaceLink"
-                },
-                "type": "array"
-              }
-            }
-          },
-          "required": false
-        },
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "items": {
-                    "$ref": "#/components/schemas/FieldWithFieldEmbed"
-                  },
-                  "type": "array"
-                }
-              }
-            },
-            "description": ""
-          }
-        },
-        "security": [
-          {
-            "httpAuth": []
-          }
-        ],
-        "summary": "Unlink team-fields from workspaces",
-        "tags": [
-          "Fields"
-        ]
-      },
       "post": {
         "description": "Links existing team-fields to existing workspaces.\nReturns updated fields with their linked workspaces embedded.\nReturns an error if either of the requested fields is not a team-field.\nIgnores existing links.\n<br/>Requirements:<br/>  - auth-client scopes: \"workspace\"<br/>  - user permission: \"full\"<br/>  - team features: \"team-fields\" when operating with team-fields<br/>  - user role: \"admin\" when operating with team-fields<br/>Returns:<br/>403 if user does not have the required permission",
         "operationId": "linkTeamFieldsToWorkspaces",
