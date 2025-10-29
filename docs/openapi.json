@@ -1,6 +1,21 @@
 {
   "components": {
     "schemas": {
+      "AiFieldSettings": {
+        "properties": {
+          "prompt": {
+            "type": "string"
+          },
+          "shouldAutofill": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "shouldAutofill"
+        ],
+        "title": "AiFieldSettings",
+        "type": "object"
+      },
       "ApiKey": {
         "properties": {
           "createdAt": {
@@ -1166,6 +1181,9 @@
           "name": {
             "type": "string"
           },
+          "required": {
+            "type": "boolean"
+          },
           "settings": {},
           "typeId": {
             "type": "string"
@@ -1180,7 +1198,8 @@
           "name",
           "settings",
           "isTeamField",
-          "description"
+          "description",
+          "required"
         ],
         "title": "FieldServerEndpointsInstallFieldRequestLegacy",
         "type": "object"
@@ -1195,6 +1214,9 @@
           },
           "name": {
             "type": "string"
+          },
+          "required": {
+            "type": "boolean"
           },
           "settings": {
             "description": "The settings object which corresponds to the type of the requested field, or it can be skipped if the requested field does not have any settings.\nThis schema shows all the available field-settings. See also the Field schema to learn about settings of each specific field type.",
@@ -1251,6 +1273,9 @@
           },
           "name": {
             "type": "string"
+          },
+          "required": {
+            "type": "boolean"
           },
           "settings": {}
         },
@@ -2151,6 +2176,9 @@
             "description": "User-readable field name.",
             "type": "string"
           },
+          "required": {
+            "type": "boolean"
+          },
           "typeId": {
             "const": "boolean",
             "type": "string"
@@ -2167,7 +2195,8 @@
         },
         "required": [
           "typeId",
-          "name"
+          "name",
+          "required"
         ],
         "title": "InstallBooleanFieldRequest",
         "type": "object"
@@ -2188,6 +2217,9 @@
             "description": "User-readable field name.",
             "type": "string"
           },
+          "required": {
+            "type": "boolean"
+          },
           "typeId": {
             "const": "date",
             "type": "string"
@@ -2204,7 +2236,8 @@
         },
         "required": [
           "typeId",
-          "name"
+          "name",
+          "required"
         ],
         "title": "InstallDateFieldRequest",
         "type": "object"
@@ -2225,6 +2258,9 @@
             "description": "User-readable field name.",
             "type": "string"
           },
+          "required": {
+            "type": "boolean"
+          },
           "typeId": {
             "const": "date-range",
             "type": "string"
@@ -2241,7 +2277,8 @@
         },
         "required": [
           "typeId",
-          "name"
+          "name",
+          "required"
         ],
         "title": "InstallDateRangeFieldRequest",
         "type": "object"
@@ -2261,6 +2298,9 @@
           "name": {
             "description": "User-readable field name.",
             "type": "string"
+          },
+          "required": {
+            "type": "boolean"
           },
           "settings": {
             "$ref": "#/components/schemas/NumberFieldTypeSettings",
@@ -2283,7 +2323,8 @@
         "required": [
           "typeId",
           "name",
-          "settings"
+          "settings",
+          "required"
         ],
         "title": "InstallNumberFieldRequest",
         "type": "object"
@@ -2303,6 +2344,9 @@
           "name": {
             "description": "User-readable field name.",
             "type": "string"
+          },
+          "required": {
+            "type": "boolean"
           },
           "settings": {
             "$ref": "#/components/schemas/PeopleFieldTypeSettings",
@@ -2325,7 +2369,8 @@
         "required": [
           "typeId",
           "name",
-          "settings"
+          "settings",
+          "required"
         ],
         "title": "InstallPeopleFieldRequest",
         "type": "object"
@@ -2345,6 +2390,9 @@
           "name": {
             "description": "User-readable field name.",
             "type": "string"
+          },
+          "required": {
+            "type": "boolean"
           },
           "settings": {
             "$ref": "#/components/schemas/SelectFieldTypeSettings",
@@ -2367,7 +2415,8 @@
         "required": [
           "typeId",
           "name",
-          "settings"
+          "settings",
+          "required"
         ],
         "title": "InstallSelectFieldRequest",
         "type": "object"
@@ -2388,6 +2437,9 @@
             "description": "User-readable field name.",
             "type": "string"
           },
+          "required": {
+            "type": "boolean"
+          },
           "typeId": {
             "const": "text",
             "type": "string"
@@ -2404,7 +2456,8 @@
         },
         "required": [
           "typeId",
-          "name"
+          "name",
+          "required"
         ],
         "title": "InstallTextFieldRequest",
         "type": "object"
@@ -2424,6 +2477,9 @@
           "name": {
             "description": "User-readable field name.",
             "type": "string"
+          },
+          "required": {
+            "type": "boolean"
           },
           "settings": {
             "$ref": "#/components/schemas/TimePeriodFieldSettings",
@@ -2446,7 +2502,8 @@
         "required": [
           "typeId",
           "name",
-          "settings"
+          "settings",
+          "required"
         ],
         "title": "InstallTimePeriodFieldRequest",
         "type": "object"
@@ -8601,6 +8658,9 @@
       },
       "SelectFieldTypeSettings": {
         "properties": {
+          "aiSettings": {
+            "$ref": "#/components/schemas/AiFieldSettings"
+          },
           "multi": {
             "type": "boolean"
           },
@@ -12522,7 +12582,7 @@
   },
   "info": {
     "title": "airfocus API",
-    "version": "1.0.0-beta.40.19.0"
+    "version": "1.0.0-beta.40.30.0"
   },
   "openapi": "3.1.0",
   "paths": {
