@@ -147,6 +147,54 @@
         "title": "AttachmentSearchQuery",
         "type": "object"
       },
+      "BooleanFieldTypeFilter": {
+        "discriminator": {
+          "mapping": {
+            "defined": "#/components/schemas/BooleanFieldTypeFilterDefined",
+            "equal": "#/components/schemas/BooleanFieldTypeFilterEqual"
+          },
+          "propertyName": "type"
+        },
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/BooleanFieldTypeFilterDefined"
+          },
+          {
+            "$ref": "#/components/schemas/BooleanFieldTypeFilterEqual"
+          }
+        ],
+        "title": "BooleanFieldTypeFilter"
+      },
+      "BooleanFieldTypeFilterDefined": {
+        "properties": {
+          "type": {
+            "const": "defined",
+            "type": "string"
+          }
+        },
+        "required": [
+          "type"
+        ],
+        "title": "BooleanFieldTypeFilterDefined",
+        "type": "object"
+      },
+      "BooleanFieldTypeFilterEqual": {
+        "properties": {
+          "boolean": {
+            "type": "boolean"
+          },
+          "type": {
+            "const": "equal",
+            "type": "string"
+          }
+        },
+        "required": [
+          "boolean",
+          "type"
+        ],
+        "title": "BooleanFieldTypeFilterEqual",
+        "type": "object"
+      },
       "BooleanFieldWithFieldEmbed": {
         "properties": {
           "_embedded": {
@@ -391,6 +439,15 @@
         ],
         "title": "CommentBulkUpdate",
         "type": "object"
+      },
+      "Confidence": {
+        "enum": [
+          "high",
+          "low",
+          "medium"
+        ],
+        "title": "Confidence",
+        "type": "string"
       },
       "CreateApiKeyRequest": {
         "properties": {
@@ -805,6 +862,169 @@
         "title": "CreateWorkspaceRequestWithMD",
         "type": "object"
       },
+      "DateFieldTypeFilter": {
+        "discriminator": {
+          "mapping": {
+            "after": "#/components/schemas/DateFieldTypeFilterAfter",
+            "afterOrOn": "#/components/schemas/DateFieldTypeFilterAfterOrOn",
+            "before": "#/components/schemas/DateFieldTypeFilterBefore",
+            "beforeOrOn": "#/components/schemas/DateFieldTypeFilterBeforeOrOn",
+            "defined": "#/components/schemas/DateFieldTypeFilterDefined",
+            "range": "#/components/schemas/DateFieldTypeFilterRange",
+            "relative": "#/components/schemas/DateFieldTypeFilterRelative"
+          },
+          "propertyName": "type"
+        },
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/DateFieldTypeFilterAfter"
+          },
+          {
+            "$ref": "#/components/schemas/DateFieldTypeFilterAfterOrOn"
+          },
+          {
+            "$ref": "#/components/schemas/DateFieldTypeFilterBefore"
+          },
+          {
+            "$ref": "#/components/schemas/DateFieldTypeFilterBeforeOrOn"
+          },
+          {
+            "$ref": "#/components/schemas/DateFieldTypeFilterDefined"
+          },
+          {
+            "$ref": "#/components/schemas/DateFieldTypeFilterRange"
+          },
+          {
+            "$ref": "#/components/schemas/DateFieldTypeFilterRelative"
+          }
+        ],
+        "title": "DateFieldTypeFilter"
+      },
+      "DateFieldTypeFilterAfter": {
+        "properties": {
+          "date": {
+            "format": "date",
+            "type": "string"
+          },
+          "type": {
+            "const": "after",
+            "type": "string"
+          }
+        },
+        "required": [
+          "date",
+          "type"
+        ],
+        "title": "DateFieldTypeFilterAfter",
+        "type": "object"
+      },
+      "DateFieldTypeFilterAfterOrOn": {
+        "properties": {
+          "date": {
+            "format": "date",
+            "type": "string"
+          },
+          "type": {
+            "const": "afterOrOn",
+            "type": "string"
+          }
+        },
+        "required": [
+          "date",
+          "type"
+        ],
+        "title": "DateFieldTypeFilterAfterOrOn",
+        "type": "object"
+      },
+      "DateFieldTypeFilterBefore": {
+        "properties": {
+          "date": {
+            "format": "date",
+            "type": "string"
+          },
+          "type": {
+            "const": "before",
+            "type": "string"
+          }
+        },
+        "required": [
+          "date",
+          "type"
+        ],
+        "title": "DateFieldTypeFilterBefore",
+        "type": "object"
+      },
+      "DateFieldTypeFilterBeforeOrOn": {
+        "properties": {
+          "date": {
+            "format": "date",
+            "type": "string"
+          },
+          "type": {
+            "const": "beforeOrOn",
+            "type": "string"
+          }
+        },
+        "required": [
+          "date",
+          "type"
+        ],
+        "title": "DateFieldTypeFilterBeforeOrOn",
+        "type": "object"
+      },
+      "DateFieldTypeFilterDefined": {
+        "properties": {
+          "type": {
+            "const": "defined",
+            "type": "string"
+          }
+        },
+        "required": [
+          "type"
+        ],
+        "title": "DateFieldTypeFilterDefined",
+        "type": "object"
+      },
+      "DateFieldTypeFilterRange": {
+        "properties": {
+          "from": {
+            "format": "date",
+            "type": "string"
+          },
+          "type": {
+            "const": "range",
+            "type": "string"
+          },
+          "until": {
+            "format": "date",
+            "type": "string"
+          }
+        },
+        "required": [
+          "from",
+          "until",
+          "type"
+        ],
+        "title": "DateFieldTypeFilterRange",
+        "type": "object"
+      },
+      "DateFieldTypeFilterRelative": {
+        "properties": {
+          "anchor": {
+            "$ref": "#/components/schemas/ItemSearchQueryTimeAnchor"
+          },
+          "type": {
+            "const": "relative",
+            "type": "string"
+          }
+        },
+        "required": [
+          "anchor",
+          "type"
+        ],
+        "title": "DateFieldTypeFilterRelative",
+        "type": "object"
+      },
       "DateFieldWithFieldEmbed": {
         "properties": {
           "_embedded": {
@@ -851,6 +1071,121 @@
           "_embedded"
         ],
         "title": "DateFieldWithFieldEmbed",
+        "type": "object"
+      },
+      "DateRangeFieldTypeFilter": {
+        "discriminator": {
+          "mapping": {
+            "defined": "#/components/schemas/DateRangeFieldTypeFilterDefined",
+            "endBefore": "#/components/schemas/DateRangeFieldTypeFilterEndBefore",
+            "endBeforeOrOn": "#/components/schemas/DateRangeFieldTypeFilterEndBeforeOrOn",
+            "startAfter": "#/components/schemas/DateRangeFieldTypeFilterStartAfter",
+            "startAfterOrOn": "#/components/schemas/DateRangeFieldTypeFilterStartAfterOrOn"
+          },
+          "propertyName": "type"
+        },
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/DateRangeFieldTypeFilterDefined"
+          },
+          {
+            "$ref": "#/components/schemas/DateRangeFieldTypeFilterEndBefore"
+          },
+          {
+            "$ref": "#/components/schemas/DateRangeFieldTypeFilterEndBeforeOrOn"
+          },
+          {
+            "$ref": "#/components/schemas/DateRangeFieldTypeFilterStartAfter"
+          },
+          {
+            "$ref": "#/components/schemas/DateRangeFieldTypeFilterStartAfterOrOn"
+          }
+        ],
+        "title": "DateRangeFieldTypeFilter"
+      },
+      "DateRangeFieldTypeFilterDefined": {
+        "properties": {
+          "type": {
+            "const": "defined",
+            "type": "string"
+          }
+        },
+        "required": [
+          "type"
+        ],
+        "title": "DateRangeFieldTypeFilterDefined",
+        "type": "object"
+      },
+      "DateRangeFieldTypeFilterEndBefore": {
+        "properties": {
+          "date": {
+            "format": "date",
+            "type": "string"
+          },
+          "type": {
+            "const": "endBefore",
+            "type": "string"
+          }
+        },
+        "required": [
+          "date",
+          "type"
+        ],
+        "title": "DateRangeFieldTypeFilterEndBefore",
+        "type": "object"
+      },
+      "DateRangeFieldTypeFilterEndBeforeOrOn": {
+        "properties": {
+          "date": {
+            "format": "date",
+            "type": "string"
+          },
+          "type": {
+            "const": "endBeforeOrOn",
+            "type": "string"
+          }
+        },
+        "required": [
+          "date",
+          "type"
+        ],
+        "title": "DateRangeFieldTypeFilterEndBeforeOrOn",
+        "type": "object"
+      },
+      "DateRangeFieldTypeFilterStartAfter": {
+        "properties": {
+          "date": {
+            "format": "date",
+            "type": "string"
+          },
+          "type": {
+            "const": "startAfter",
+            "type": "string"
+          }
+        },
+        "required": [
+          "date",
+          "type"
+        ],
+        "title": "DateRangeFieldTypeFilterStartAfter",
+        "type": "object"
+      },
+      "DateRangeFieldTypeFilterStartAfterOrOn": {
+        "properties": {
+          "date": {
+            "format": "date",
+            "type": "string"
+          },
+          "type": {
+            "const": "startAfterOrOn",
+            "type": "string"
+          }
+        },
+        "required": [
+          "date",
+          "type"
+        ],
+        "title": "DateRangeFieldTypeFilterStartAfterOrOn",
         "type": "object"
       },
       "DateRangeFieldWithFieldEmbed": {
@@ -1489,6 +1824,55 @@
         "title": "FormAudienceTeamMembers",
         "type": "object"
       },
+      "FormSourceFieldTypeFilter": {
+        "discriminator": {
+          "mapping": {
+            "contain": "#/components/schemas/FormSourceFieldTypeFilterContain",
+            "defined": "#/components/schemas/FormSourceFieldTypeFilterDefined"
+          },
+          "propertyName": "type"
+        },
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/FormSourceFieldTypeFilterContain"
+          },
+          {
+            "$ref": "#/components/schemas/FormSourceFieldTypeFilterDefined"
+          }
+        ],
+        "title": "FormSourceFieldTypeFilter"
+      },
+      "FormSourceFieldTypeFilterContain": {
+        "properties": {
+          "itemId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "type": {
+            "const": "contain",
+            "type": "string"
+          }
+        },
+        "required": [
+          "itemId",
+          "type"
+        ],
+        "title": "FormSourceFieldTypeFilterContain",
+        "type": "object"
+      },
+      "FormSourceFieldTypeFilterDefined": {
+        "properties": {
+          "type": {
+            "const": "defined",
+            "type": "string"
+          }
+        },
+        "required": [
+          "type"
+        ],
+        "title": "FormSourceFieldTypeFilterDefined",
+        "type": "object"
+      },
       "FormSourceFieldTypeSettings": {
         "properties": {
           "maximum": {
@@ -1756,6 +2140,33 @@
         "title": "FormsAppTypeSettingsFormTypeSettings",
         "type": "object"
       },
+      "FormsTargetFieldTypeFilter": {
+        "discriminator": {
+          "mapping": {
+            "defined": "#/components/schemas/FormsTargetFieldTypeFilterDefined"
+          },
+          "propertyName": "type"
+        },
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/FormsTargetFieldTypeFilterDefined"
+          }
+        ],
+        "title": "FormsTargetFieldTypeFilter"
+      },
+      "FormsTargetFieldTypeFilterDefined": {
+        "properties": {
+          "type": {
+            "const": "defined",
+            "type": "string"
+          }
+        },
+        "required": [
+          "type"
+        ],
+        "title": "FormsTargetFieldTypeFilterDefined",
+        "type": "object"
+      },
       "GlobalSearchQuery": {
         "default": {
           "archived": false,
@@ -1872,6 +2283,15 @@
         "title": "GlobalSearchResultPage",
         "type": "object"
       },
+      "HealthCheckInHealthCheckInsConfidence": {
+        "enum": [
+          "atRisk",
+          "offTrack",
+          "onTrack"
+        ],
+        "title": "HealthCheckInHealthCheckInsConfidence",
+        "type": "string"
+      },
       "HealthCheckInsApp": {
         "properties": {
           "id": {
@@ -1915,6 +2335,41 @@
           "healthCheckInsFieldId"
         ],
         "title": "HealthCheckInsAppTypeSettings",
+        "type": "object"
+      },
+      "HealthCheckInsConfidenceFieldFilter": {
+        "discriminator": {
+          "mapping": {
+            "containsAny": "#/components/schemas/HealthCheckInsConfidenceFieldFilterContainsAny"
+          },
+          "propertyName": "type"
+        },
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/HealthCheckInsConfidenceFieldFilterContainsAny"
+          }
+        ],
+        "title": "HealthCheckInsConfidenceFieldFilter"
+      },
+      "HealthCheckInsConfidenceFieldFilterContainsAny": {
+        "properties": {
+          "type": {
+            "const": "containsAny",
+            "type": "string"
+          },
+          "values": {
+            "items": {
+              "$ref": "#/components/schemas/HealthCheckInHealthCheckInsConfidence"
+            },
+            "type": "array",
+            "uniqueItems": true
+          }
+        },
+        "required": [
+          "values",
+          "type"
+        ],
+        "title": "HealthCheckInsConfidenceFieldFilterContainsAny",
         "type": "object"
       },
       "InboxViewCounter": {
@@ -2048,6 +2503,165 @@
           "insightsFieldId"
         ],
         "title": "InsightsAppTypeSettingsTarget",
+        "type": "object"
+      },
+      "InsightsFieldTypeFilter": {
+        "discriminator": {
+          "mapping": {
+            "contain": "#/components/schemas/InsightsFieldTypeFilterContain",
+            "defined": "#/components/schemas/InsightsFieldTypeFilterDefined",
+            "scoreEqual": "#/components/schemas/InsightsFieldTypeFilterEqual",
+            "scoreGreaterThan": "#/components/schemas/InsightsFieldTypeFilterGreaterThan",
+            "scoreGreaterThanOrEqual": "#/components/schemas/InsightsFieldTypeFilterGreaterThanOrEqual",
+            "scoreLessThan": "#/components/schemas/InsightsFieldTypeFilterLessThan",
+            "scoreLessThanOrEqual": "#/components/schemas/InsightsFieldTypeFilterLessThanOrEqual"
+          },
+          "propertyName": "type"
+        },
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/InsightsFieldTypeFilterContain"
+          },
+          {
+            "$ref": "#/components/schemas/InsightsFieldTypeFilterDefined"
+          },
+          {
+            "$ref": "#/components/schemas/InsightsFieldTypeFilterEqual"
+          },
+          {
+            "$ref": "#/components/schemas/InsightsFieldTypeFilterGreaterThan"
+          },
+          {
+            "$ref": "#/components/schemas/InsightsFieldTypeFilterGreaterThanOrEqual"
+          },
+          {
+            "$ref": "#/components/schemas/InsightsFieldTypeFilterLessThan"
+          },
+          {
+            "$ref": "#/components/schemas/InsightsFieldTypeFilterLessThanOrEqual"
+          }
+        ],
+        "title": "InsightsFieldTypeFilter"
+      },
+      "InsightsFieldTypeFilterContain": {
+        "properties": {
+          "itemId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "type": {
+            "const": "contain",
+            "type": "string"
+          },
+          "workspaceId": {
+            "format": "uuid",
+            "type": "string"
+          }
+        },
+        "required": [
+          "itemId",
+          "workspaceId",
+          "type"
+        ],
+        "title": "InsightsFieldTypeFilterContain",
+        "type": "object"
+      },
+      "InsightsFieldTypeFilterDefined": {
+        "properties": {
+          "type": {
+            "const": "defined",
+            "type": "string"
+          }
+        },
+        "required": [
+          "type"
+        ],
+        "title": "InsightsFieldTypeFilterDefined",
+        "type": "object"
+      },
+      "InsightsFieldTypeFilterEqual": {
+        "properties": {
+          "number": {
+            "type": "number"
+          },
+          "type": {
+            "const": "scoreEqual",
+            "type": "string"
+          }
+        },
+        "required": [
+          "number",
+          "type"
+        ],
+        "title": "InsightsFieldTypeFilterEqual",
+        "type": "object"
+      },
+      "InsightsFieldTypeFilterGreaterThan": {
+        "properties": {
+          "number": {
+            "type": "number"
+          },
+          "type": {
+            "const": "scoreGreaterThan",
+            "type": "string"
+          }
+        },
+        "required": [
+          "number",
+          "type"
+        ],
+        "title": "InsightsFieldTypeFilterGreaterThan",
+        "type": "object"
+      },
+      "InsightsFieldTypeFilterGreaterThanOrEqual": {
+        "properties": {
+          "number": {
+            "type": "number"
+          },
+          "type": {
+            "const": "scoreGreaterThanOrEqual",
+            "type": "string"
+          }
+        },
+        "required": [
+          "number",
+          "type"
+        ],
+        "title": "InsightsFieldTypeFilterGreaterThanOrEqual",
+        "type": "object"
+      },
+      "InsightsFieldTypeFilterLessThan": {
+        "properties": {
+          "number": {
+            "type": "number"
+          },
+          "type": {
+            "const": "scoreLessThan",
+            "type": "string"
+          }
+        },
+        "required": [
+          "number",
+          "type"
+        ],
+        "title": "InsightsFieldTypeFilterLessThan",
+        "type": "object"
+      },
+      "InsightsFieldTypeFilterLessThanOrEqual": {
+        "properties": {
+          "number": {
+            "type": "number"
+          },
+          "type": {
+            "const": "scoreLessThanOrEqual",
+            "type": "string"
+          }
+        },
+        "required": [
+          "number",
+          "type"
+        ],
+        "title": "InsightsFieldTypeFilterLessThanOrEqual",
         "type": "object"
       },
       "InsightsFieldTypeSettings": {
@@ -4224,11 +4838,6 @@
             "$ref": "#/components/schemas/ItemSearchQuerySort"
           }
         },
-        "required": [
-          "filter",
-          "sort",
-          "archived"
-        ],
         "title": "ItemSearchQuery",
         "type": "object"
       },
@@ -4541,7 +5150,65 @@
             "type": "string"
           },
           "filter": {
-            "$ref": "#/components/schemas/JsObject"
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/BooleanFieldTypeFilter"
+              },
+              {
+                "$ref": "#/components/schemas/DateFieldTypeFilter"
+              },
+              {
+                "$ref": "#/components/schemas/DateRangeFieldTypeFilter"
+              },
+              {
+                "$ref": "#/components/schemas/FormSourceFieldTypeFilter"
+              },
+              {
+                "$ref": "#/components/schemas/FormsTargetFieldTypeFilter"
+              },
+              {
+                "$ref": "#/components/schemas/HealthCheckInsConfidenceFieldFilter"
+              },
+              {
+                "$ref": "#/components/schemas/InsightsFieldTypeFilter"
+              },
+              {
+                "$ref": "#/components/schemas/MirrorSourceFieldTypeFilter"
+              },
+              {
+                "$ref": "#/components/schemas/MirrorTargetFieldTypeFilter"
+              },
+              {
+                "$ref": "#/components/schemas/NumberFieldTypeLikeFilter"
+              },
+              {
+                "$ref": "#/components/schemas/OkrConfidenceFieldFilter"
+              },
+              {
+                "$ref": "#/components/schemas/OkrKeyResultReferenceFieldFilter"
+              },
+              {
+                "$ref": "#/components/schemas/OkrKeyResultsFieldFilter"
+              },
+              {
+                "$ref": "#/components/schemas/PeopleFieldTypeFilter"
+              },
+              {
+                "$ref": "#/components/schemas/PortalFieldTypeFilter"
+              },
+              {
+                "$ref": "#/components/schemas/SelectFieldTypeFilter"
+              },
+              {
+                "$ref": "#/components/schemas/TextFieldTypeFilter"
+              },
+              {
+                "$ref": "#/components/schemas/TimePeriodFieldFilter"
+              },
+              {
+                "$ref": "#/components/schemas/VotingAppVotesFieldTypeFilter"
+              }
+            ]
           },
           "type": {
             "const": "field:value",
@@ -5487,10 +6154,6 @@
         "title": "ItemWithMDWithItemEmbedPage",
         "type": "object"
       },
-      "JsObject": {
-        "title": "JsObject",
-        "type": "object"
-      },
       "JsonPatch": {
         "description": "A JSON Patch document. See https://jsonpatch.com/ for more information.",
         "items": {
@@ -6066,6 +6729,33 @@
         "title": "MirrorAppTypeSettingsSource",
         "type": "object"
       },
+      "MirrorSourceFieldTypeFilter": {
+        "discriminator": {
+          "mapping": {
+            "defined": "#/components/schemas/MirrorSourceFieldTypeFilterDefined"
+          },
+          "propertyName": "type"
+        },
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/MirrorSourceFieldTypeFilterDefined"
+          }
+        ],
+        "title": "MirrorSourceFieldTypeFilter"
+      },
+      "MirrorSourceFieldTypeFilterDefined": {
+        "properties": {
+          "type": {
+            "const": "defined",
+            "type": "string"
+          }
+        },
+        "required": [
+          "type"
+        ],
+        "title": "MirrorSourceFieldTypeFilterDefined",
+        "type": "object"
+      },
       "MirrorSourceFieldWithFieldEmbed": {
         "properties": {
           "_embedded": {
@@ -6114,6 +6804,33 @@
         "title": "MirrorSourceFieldWithFieldEmbed",
         "type": "object"
       },
+      "MirrorTargetFieldTypeFilter": {
+        "discriminator": {
+          "mapping": {
+            "defined": "#/components/schemas/MirrorTargetFieldTypeFilterDefined"
+          },
+          "propertyName": "type"
+        },
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/MirrorTargetFieldTypeFilterDefined"
+          }
+        ],
+        "title": "MirrorTargetFieldTypeFilter"
+      },
+      "MirrorTargetFieldTypeFilterDefined": {
+        "properties": {
+          "type": {
+            "const": "defined",
+            "type": "string"
+          }
+        },
+        "required": [
+          "type"
+        ],
+        "title": "MirrorTargetFieldTypeFilterDefined",
+        "type": "object"
+      },
       "MirrorTargetFieldWithFieldEmbed": {
         "properties": {
           "_embedded": {
@@ -6160,6 +6877,138 @@
           "_embedded"
         ],
         "title": "MirrorTargetFieldWithFieldEmbed",
+        "type": "object"
+      },
+      "NumberFieldTypeLikeFilter": {
+        "discriminator": {
+          "mapping": {
+            "defined": "#/components/schemas/NumberFieldTypeLikeFilterDefined",
+            "equal": "#/components/schemas/NumberFieldTypeLikeFilterEqual",
+            "greaterThan": "#/components/schemas/NumberFieldTypeLikeFilterGreaterThan",
+            "greaterThanOrEqual": "#/components/schemas/NumberFieldTypeLikeFilterGreaterThanOrEqual",
+            "lessThan": "#/components/schemas/NumberFieldTypeLikeFilterLessThan",
+            "lessThanOrEqual": "#/components/schemas/NumberFieldTypeLikeFilterLessThanOrEqual"
+          },
+          "propertyName": "type"
+        },
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/NumberFieldTypeLikeFilterDefined"
+          },
+          {
+            "$ref": "#/components/schemas/NumberFieldTypeLikeFilterEqual"
+          },
+          {
+            "$ref": "#/components/schemas/NumberFieldTypeLikeFilterGreaterThan"
+          },
+          {
+            "$ref": "#/components/schemas/NumberFieldTypeLikeFilterGreaterThanOrEqual"
+          },
+          {
+            "$ref": "#/components/schemas/NumberFieldTypeLikeFilterLessThan"
+          },
+          {
+            "$ref": "#/components/schemas/NumberFieldTypeLikeFilterLessThanOrEqual"
+          }
+        ],
+        "title": "NumberFieldTypeLikeFilter"
+      },
+      "NumberFieldTypeLikeFilterDefined": {
+        "properties": {
+          "type": {
+            "const": "defined",
+            "type": "string"
+          }
+        },
+        "required": [
+          "type"
+        ],
+        "title": "NumberFieldTypeLikeFilterDefined",
+        "type": "object"
+      },
+      "NumberFieldTypeLikeFilterEqual": {
+        "properties": {
+          "number": {
+            "type": "number"
+          },
+          "type": {
+            "const": "equal",
+            "type": "string"
+          }
+        },
+        "required": [
+          "number",
+          "type"
+        ],
+        "title": "NumberFieldTypeLikeFilterEqual",
+        "type": "object"
+      },
+      "NumberFieldTypeLikeFilterGreaterThan": {
+        "properties": {
+          "number": {
+            "type": "number"
+          },
+          "type": {
+            "const": "greaterThan",
+            "type": "string"
+          }
+        },
+        "required": [
+          "number",
+          "type"
+        ],
+        "title": "NumberFieldTypeLikeFilterGreaterThan",
+        "type": "object"
+      },
+      "NumberFieldTypeLikeFilterGreaterThanOrEqual": {
+        "properties": {
+          "number": {
+            "type": "number"
+          },
+          "type": {
+            "const": "greaterThanOrEqual",
+            "type": "string"
+          }
+        },
+        "required": [
+          "number",
+          "type"
+        ],
+        "title": "NumberFieldTypeLikeFilterGreaterThanOrEqual",
+        "type": "object"
+      },
+      "NumberFieldTypeLikeFilterLessThan": {
+        "properties": {
+          "number": {
+            "type": "number"
+          },
+          "type": {
+            "const": "lessThan",
+            "type": "string"
+          }
+        },
+        "required": [
+          "number",
+          "type"
+        ],
+        "title": "NumberFieldTypeLikeFilterLessThan",
+        "type": "object"
+      },
+      "NumberFieldTypeLikeFilterLessThanOrEqual": {
+        "properties": {
+          "number": {
+            "type": "number"
+          },
+          "type": {
+            "const": "lessThanOrEqual",
+            "type": "string"
+          }
+        },
+        "required": [
+          "number",
+          "type"
+        ],
+        "title": "NumberFieldTypeLikeFilterLessThanOrEqual",
         "type": "object"
       },
       "NumberFieldTypeSettings": {
@@ -6589,6 +7438,41 @@
         "title": "OkrCheckinsFieldWithFieldEmbed",
         "type": "object"
       },
+      "OkrConfidenceFieldFilter": {
+        "discriminator": {
+          "mapping": {
+            "containsAny": "#/components/schemas/OkrConfidenceFieldFilterContainsAny"
+          },
+          "propertyName": "type"
+        },
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/OkrConfidenceFieldFilterContainsAny"
+          }
+        ],
+        "title": "OkrConfidenceFieldFilter"
+      },
+      "OkrConfidenceFieldFilterContainsAny": {
+        "properties": {
+          "type": {
+            "const": "containsAny",
+            "type": "string"
+          },
+          "values": {
+            "items": {
+              "$ref": "#/components/schemas/Confidence"
+            },
+            "type": "array",
+            "uniqueItems": true
+          }
+        },
+        "required": [
+          "values",
+          "type"
+        ],
+        "title": "OkrConfidenceFieldFilterContainsAny",
+        "type": "object"
+      },
       "OkrConfidenceFieldSettings": {
         "properties": {
           "low": {
@@ -6659,6 +7543,33 @@
         "title": "OkrConfidenceFieldWithFieldEmbed",
         "type": "object"
       },
+      "OkrKeyResultReferenceFieldFilter": {
+        "discriminator": {
+          "mapping": {
+            "defined": "#/components/schemas/OkrKeyResultReferenceFieldFilterDefined"
+          },
+          "propertyName": "type"
+        },
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/OkrKeyResultReferenceFieldFilterDefined"
+          }
+        ],
+        "title": "OkrKeyResultReferenceFieldFilter"
+      },
+      "OkrKeyResultReferenceFieldFilterDefined": {
+        "properties": {
+          "type": {
+            "const": "defined",
+            "type": "string"
+          }
+        },
+        "required": [
+          "type"
+        ],
+        "title": "OkrKeyResultReferenceFieldFilterDefined",
+        "type": "object"
+      },
       "OkrKeyResultReferenceFieldWithFieldEmbed": {
         "properties": {
           "_embedded": {
@@ -6705,6 +7616,33 @@
           "_embedded"
         ],
         "title": "OkrKeyResultReferenceFieldWithFieldEmbed",
+        "type": "object"
+      },
+      "OkrKeyResultsFieldFilter": {
+        "discriminator": {
+          "mapping": {
+            "defined": "#/components/schemas/OkrKeyResultsFieldFilterDefined"
+          },
+          "propertyName": "type"
+        },
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/OkrKeyResultsFieldFilterDefined"
+          }
+        ],
+        "title": "OkrKeyResultsFieldFilter"
+      },
+      "OkrKeyResultsFieldFilterDefined": {
+        "properties": {
+          "type": {
+            "const": "defined",
+            "type": "string"
+          }
+        },
+        "required": [
+          "type"
+        ],
+        "title": "OkrKeyResultsFieldFilterDefined",
         "type": "object"
       },
       "OkrKeyResultsFieldWithFieldEmbed": {
@@ -6868,6 +7806,104 @@
           "_embedded"
         ],
         "title": "OkrTimePeriodFieldWithFieldEmbed",
+        "type": "object"
+      },
+      "PeopleFieldTypeFilter": {
+        "discriminator": {
+          "mapping": {
+            "contain": "#/components/schemas/PeopleFieldTypeFilterContain",
+            "containsAll": "#/components/schemas/PeopleFieldTypeFilterContainsAll",
+            "containsAny": "#/components/schemas/PeopleFieldTypeFilterContainsAny",
+            "defined": "#/components/schemas/PeopleFieldTypeFilterDefined"
+          },
+          "propertyName": "type"
+        },
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/PeopleFieldTypeFilterContain"
+          },
+          {
+            "$ref": "#/components/schemas/PeopleFieldTypeFilterContainsAll"
+          },
+          {
+            "$ref": "#/components/schemas/PeopleFieldTypeFilterContainsAny"
+          },
+          {
+            "$ref": "#/components/schemas/PeopleFieldTypeFilterDefined"
+          }
+        ],
+        "title": "PeopleFieldTypeFilter"
+      },
+      "PeopleFieldTypeFilterContain": {
+        "properties": {
+          "type": {
+            "const": "contain",
+            "type": "string"
+          },
+          "user": {
+            "$ref": "#/components/schemas/UserRef"
+          }
+        },
+        "required": [
+          "user",
+          "type"
+        ],
+        "title": "PeopleFieldTypeFilterContain",
+        "type": "object"
+      },
+      "PeopleFieldTypeFilterContainsAll": {
+        "properties": {
+          "type": {
+            "const": "containsAll",
+            "type": "string"
+          },
+          "users": {
+            "items": {
+              "$ref": "#/components/schemas/UserRef"
+            },
+            "type": "array",
+            "uniqueItems": true
+          }
+        },
+        "required": [
+          "users",
+          "type"
+        ],
+        "title": "PeopleFieldTypeFilterContainsAll",
+        "type": "object"
+      },
+      "PeopleFieldTypeFilterContainsAny": {
+        "properties": {
+          "type": {
+            "const": "containsAny",
+            "type": "string"
+          },
+          "users": {
+            "items": {
+              "$ref": "#/components/schemas/UserRef"
+            },
+            "type": "array",
+            "uniqueItems": true
+          }
+        },
+        "required": [
+          "users",
+          "type"
+        ],
+        "title": "PeopleFieldTypeFilterContainsAny",
+        "type": "object"
+      },
+      "PeopleFieldTypeFilterDefined": {
+        "properties": {
+          "type": {
+            "const": "defined",
+            "type": "string"
+          }
+        },
+        "required": [
+          "type"
+        ],
+        "title": "PeopleFieldTypeFilterDefined",
         "type": "object"
       },
       "PeopleFieldTypeSettings": {
@@ -7234,6 +8270,33 @@
           "type"
         ],
         "title": "PortalAppTypeSettingsPortalViewPortalFieldStatusCategory",
+        "type": "object"
+      },
+      "PortalFieldTypeFilter": {
+        "discriminator": {
+          "mapping": {
+            "public": "#/components/schemas/PortalFieldTypeFilterPublic"
+          },
+          "propertyName": "type"
+        },
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/PortalFieldTypeFilterPublic"
+          }
+        ],
+        "title": "PortalFieldTypeFilter"
+      },
+      "PortalFieldTypeFilterPublic": {
+        "properties": {
+          "type": {
+            "const": "public",
+            "type": "string"
+          }
+        },
+        "required": [
+          "type"
+        ],
+        "title": "PortalFieldTypeFilterPublic",
         "type": "object"
       },
       "PortalFieldWithFieldEmbed": {
@@ -8631,6 +9694,104 @@
         "title": "SelectFieldOptionColor",
         "type": "string"
       },
+      "SelectFieldTypeFilter": {
+        "discriminator": {
+          "mapping": {
+            "contain": "#/components/schemas/SelectFieldTypeFilterContain",
+            "containsAll": "#/components/schemas/SelectFieldTypeFilterContainsAll",
+            "containsAny": "#/components/schemas/SelectFieldTypeFilterContainsAny",
+            "defined": "#/components/schemas/SelectFieldTypeFilterDefined"
+          },
+          "propertyName": "type"
+        },
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/SelectFieldTypeFilterContain"
+          },
+          {
+            "$ref": "#/components/schemas/SelectFieldTypeFilterContainsAll"
+          },
+          {
+            "$ref": "#/components/schemas/SelectFieldTypeFilterContainsAny"
+          },
+          {
+            "$ref": "#/components/schemas/SelectFieldTypeFilterDefined"
+          }
+        ],
+        "title": "SelectFieldTypeFilter"
+      },
+      "SelectFieldTypeFilterContain": {
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "type": {
+            "const": "contain",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "type"
+        ],
+        "title": "SelectFieldTypeFilterContain",
+        "type": "object"
+      },
+      "SelectFieldTypeFilterContainsAll": {
+        "properties": {
+          "ids": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "uniqueItems": true
+          },
+          "type": {
+            "const": "containsAll",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ids",
+          "type"
+        ],
+        "title": "SelectFieldTypeFilterContainsAll",
+        "type": "object"
+      },
+      "SelectFieldTypeFilterContainsAny": {
+        "properties": {
+          "ids": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "uniqueItems": true
+          },
+          "type": {
+            "const": "containsAny",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ids",
+          "type"
+        ],
+        "title": "SelectFieldTypeFilterContainsAny",
+        "type": "object"
+      },
+      "SelectFieldTypeFilterDefined": {
+        "properties": {
+          "type": {
+            "const": "defined",
+            "type": "string"
+          }
+        },
+        "required": [
+          "type"
+        ],
+        "title": "SelectFieldTypeFilterDefined",
+        "type": "object"
+      },
       "SelectFieldTypeOption": {
         "properties": {
           "color": {
@@ -9445,6 +10606,81 @@
         "title": "TemplateView",
         "type": "object"
       },
+      "TextFieldTypeFilter": {
+        "discriminator": {
+          "mapping": {
+            "contain": "#/components/schemas/TextFieldTypeFilterContain",
+            "defined": "#/components/schemas/TextFieldTypeFilterDefined",
+            "equal": "#/components/schemas/TextFieldTypeFilterEqual"
+          },
+          "propertyName": "type"
+        },
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/TextFieldTypeFilterContain"
+          },
+          {
+            "$ref": "#/components/schemas/TextFieldTypeFilterDefined"
+          },
+          {
+            "$ref": "#/components/schemas/TextFieldTypeFilterEqual"
+          }
+        ],
+        "title": "TextFieldTypeFilter"
+      },
+      "TextFieldTypeFilterContain": {
+        "properties": {
+          "caseSensitive": {
+            "type": "boolean"
+          },
+          "text": {
+            "type": "string"
+          },
+          "type": {
+            "const": "contain",
+            "type": "string"
+          }
+        },
+        "required": [
+          "text",
+          "type"
+        ],
+        "title": "TextFieldTypeFilterContain",
+        "type": "object"
+      },
+      "TextFieldTypeFilterDefined": {
+        "properties": {
+          "type": {
+            "const": "defined",
+            "type": "string"
+          }
+        },
+        "required": [
+          "type"
+        ],
+        "title": "TextFieldTypeFilterDefined",
+        "type": "object"
+      },
+      "TextFieldTypeFilterEqual": {
+        "properties": {
+          "caseSensitive": {
+            "type": "boolean"
+          },
+          "text": {
+            "type": "string"
+          },
+          "type": {
+            "const": "equal",
+            "type": "string"
+          }
+        },
+        "required": [
+          "text",
+          "type"
+        ],
+        "title": "TextFieldTypeFilterEqual",
+        "type": "object"
+      },
       "TextFieldWithFieldEmbed": {
         "properties": {
           "_embedded": {
@@ -9518,6 +10754,255 @@
           "endDate"
         ],
         "title": "TimePeriod",
+        "type": "object"
+      },
+      "TimePeriodFieldFilter": {
+        "discriminator": {
+          "mapping": {
+            "containsAll": "#/components/schemas/TimePeriodFieldFilterContainsAll",
+            "containsAny": "#/components/schemas/TimePeriodFieldFilterContainsAny",
+            "defined": "#/components/schemas/TimePeriodFieldFilterDefined",
+            "endBefore": "#/components/schemas/TimePeriodFieldFilterEndBefore",
+            "endBeforeOrOn": "#/components/schemas/TimePeriodFieldFilterEndBeforeOrOn",
+            "endsBeforeEndOf": "#/components/schemas/TimePeriodFieldFilterEndsBeforeEndOf",
+            "endsBeforeStartOf": "#/components/schemas/TimePeriodFieldFilterEndsBeforeStartOf",
+            "startAfter": "#/components/schemas/TimePeriodFieldFilterStartAfter",
+            "startAfterOrOn": "#/components/schemas/TimePeriodFieldFilterStartAfterOrOn",
+            "startsAfterEndOf": "#/components/schemas/TimePeriodFieldFilterStartsAfterEndOf",
+            "startsFromStartOf": "#/components/schemas/TimePeriodFieldFilterStartsFromStartOf"
+          },
+          "propertyName": "type"
+        },
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/TimePeriodFieldFilterContainsAll"
+          },
+          {
+            "$ref": "#/components/schemas/TimePeriodFieldFilterContainsAny"
+          },
+          {
+            "$ref": "#/components/schemas/TimePeriodFieldFilterDefined"
+          },
+          {
+            "$ref": "#/components/schemas/TimePeriodFieldFilterEndBefore"
+          },
+          {
+            "$ref": "#/components/schemas/TimePeriodFieldFilterEndBeforeOrOn"
+          },
+          {
+            "$ref": "#/components/schemas/TimePeriodFieldFilterEndsBeforeEndOf"
+          },
+          {
+            "$ref": "#/components/schemas/TimePeriodFieldFilterEndsBeforeStartOf"
+          },
+          {
+            "$ref": "#/components/schemas/TimePeriodFieldFilterStartAfter"
+          },
+          {
+            "$ref": "#/components/schemas/TimePeriodFieldFilterStartAfterOrOn"
+          },
+          {
+            "$ref": "#/components/schemas/TimePeriodFieldFilterStartsAfterEndOf"
+          },
+          {
+            "$ref": "#/components/schemas/TimePeriodFieldFilterStartsFromStartOf"
+          }
+        ],
+        "title": "TimePeriodFieldFilter"
+      },
+      "TimePeriodFieldFilterContainsAll": {
+        "properties": {
+          "timePeriods": {
+            "items": {
+              "$ref": "#/components/schemas/TimePeriodRef"
+            },
+            "type": "array",
+            "uniqueItems": true
+          },
+          "type": {
+            "const": "containsAll",
+            "type": "string"
+          }
+        },
+        "required": [
+          "timePeriods",
+          "type"
+        ],
+        "title": "TimePeriodFieldFilterContainsAll",
+        "type": "object"
+      },
+      "TimePeriodFieldFilterContainsAny": {
+        "properties": {
+          "timePeriods": {
+            "items": {
+              "$ref": "#/components/schemas/TimePeriodRef"
+            },
+            "type": "array",
+            "uniqueItems": true
+          },
+          "type": {
+            "const": "containsAny",
+            "type": "string"
+          }
+        },
+        "required": [
+          "timePeriods",
+          "type"
+        ],
+        "title": "TimePeriodFieldFilterContainsAny",
+        "type": "object"
+      },
+      "TimePeriodFieldFilterDefined": {
+        "properties": {
+          "type": {
+            "const": "defined",
+            "type": "string"
+          }
+        },
+        "required": [
+          "type"
+        ],
+        "title": "TimePeriodFieldFilterDefined",
+        "type": "object"
+      },
+      "TimePeriodFieldFilterEndBefore": {
+        "properties": {
+          "date": {
+            "format": "date",
+            "type": "string"
+          },
+          "type": {
+            "const": "endBefore",
+            "type": "string"
+          }
+        },
+        "required": [
+          "date",
+          "type"
+        ],
+        "title": "TimePeriodFieldFilterEndBefore",
+        "type": "object"
+      },
+      "TimePeriodFieldFilterEndBeforeOrOn": {
+        "properties": {
+          "date": {
+            "format": "date",
+            "type": "string"
+          },
+          "type": {
+            "const": "endBeforeOrOn",
+            "type": "string"
+          }
+        },
+        "required": [
+          "date",
+          "type"
+        ],
+        "title": "TimePeriodFieldFilterEndBeforeOrOn",
+        "type": "object"
+      },
+      "TimePeriodFieldFilterEndsBeforeEndOf": {
+        "properties": {
+          "timePeriod": {
+            "$ref": "#/components/schemas/TimePeriodRef"
+          },
+          "type": {
+            "const": "endsBeforeEndOf",
+            "type": "string"
+          }
+        },
+        "required": [
+          "timePeriod",
+          "type"
+        ],
+        "title": "TimePeriodFieldFilterEndsBeforeEndOf",
+        "type": "object"
+      },
+      "TimePeriodFieldFilterEndsBeforeStartOf": {
+        "properties": {
+          "timePeriod": {
+            "$ref": "#/components/schemas/TimePeriodRef"
+          },
+          "type": {
+            "const": "endsBeforeStartOf",
+            "type": "string"
+          }
+        },
+        "required": [
+          "timePeriod",
+          "type"
+        ],
+        "title": "TimePeriodFieldFilterEndsBeforeStartOf",
+        "type": "object"
+      },
+      "TimePeriodFieldFilterStartAfter": {
+        "properties": {
+          "date": {
+            "format": "date",
+            "type": "string"
+          },
+          "type": {
+            "const": "startAfter",
+            "type": "string"
+          }
+        },
+        "required": [
+          "date",
+          "type"
+        ],
+        "title": "TimePeriodFieldFilterStartAfter",
+        "type": "object"
+      },
+      "TimePeriodFieldFilterStartAfterOrOn": {
+        "properties": {
+          "date": {
+            "format": "date",
+            "type": "string"
+          },
+          "type": {
+            "const": "startAfterOrOn",
+            "type": "string"
+          }
+        },
+        "required": [
+          "date",
+          "type"
+        ],
+        "title": "TimePeriodFieldFilterStartAfterOrOn",
+        "type": "object"
+      },
+      "TimePeriodFieldFilterStartsAfterEndOf": {
+        "properties": {
+          "timePeriod": {
+            "$ref": "#/components/schemas/TimePeriodRef"
+          },
+          "type": {
+            "const": "startsAfterEndOf",
+            "type": "string"
+          }
+        },
+        "required": [
+          "timePeriod",
+          "type"
+        ],
+        "title": "TimePeriodFieldFilterStartsAfterEndOf",
+        "type": "object"
+      },
+      "TimePeriodFieldFilterStartsFromStartOf": {
+        "properties": {
+          "timePeriod": {
+            "$ref": "#/components/schemas/TimePeriodRef"
+          },
+          "type": {
+            "const": "startsFromStartOf",
+            "type": "string"
+          }
+        },
+        "required": [
+          "timePeriod",
+          "type"
+        ],
+        "title": "TimePeriodFieldFilterStartsFromStartOf",
         "type": "object"
       },
       "TimePeriodFieldSettings": {
@@ -9641,6 +11126,55 @@
           "_embedded"
         ],
         "title": "TimePeriodFieldWithFieldEmbed",
+        "type": "object"
+      },
+      "TimePeriodRef": {
+        "discriminator": {
+          "mapping": {
+            "current": "#/components/schemas/TimePeriodRefCurrent",
+            "id": "#/components/schemas/TimePeriodRefId"
+          },
+          "propertyName": "type"
+        },
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/TimePeriodRefCurrent"
+          },
+          {
+            "$ref": "#/components/schemas/TimePeriodRefId"
+          }
+        ],
+        "title": "TimePeriodRef"
+      },
+      "TimePeriodRefCurrent": {
+        "properties": {
+          "type": {
+            "const": "current",
+            "type": "string"
+          }
+        },
+        "required": [
+          "type"
+        ],
+        "title": "TimePeriodRefCurrent",
+        "type": "object"
+      },
+      "TimePeriodRefId": {
+        "properties": {
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "type": {
+            "const": "id",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "type"
+        ],
+        "title": "TimePeriodRefId",
         "type": "object"
       },
       "UpdateItemLinkRequest": {
@@ -10492,6 +12026,83 @@
           "showCountsForPublic"
         ],
         "title": "VotingAppTypeSettings",
+        "type": "object"
+      },
+      "VotingAppVotesFieldTypeFilter": {
+        "discriminator": {
+          "mapping": {
+            "containsAllUsers": "#/components/schemas/VotingAppVotesFieldTypeFilterContainsAllUsers",
+            "containsAnyUsers": "#/components/schemas/VotingAppVotesFieldTypeFilterContainsAnyUsers",
+            "defined": "#/components/schemas/VotingAppVotesFieldTypeFilterDefined"
+          },
+          "propertyName": "type"
+        },
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/VotingAppVotesFieldTypeFilterContainsAllUsers"
+          },
+          {
+            "$ref": "#/components/schemas/VotingAppVotesFieldTypeFilterContainsAnyUsers"
+          },
+          {
+            "$ref": "#/components/schemas/VotingAppVotesFieldTypeFilterDefined"
+          }
+        ],
+        "title": "VotingAppVotesFieldTypeFilter"
+      },
+      "VotingAppVotesFieldTypeFilterContainsAllUsers": {
+        "properties": {
+          "ids": {
+            "items": {
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "type": {
+            "const": "containsAllUsers",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ids",
+          "type"
+        ],
+        "title": "VotingAppVotesFieldTypeFilterContainsAllUsers",
+        "type": "object"
+      },
+      "VotingAppVotesFieldTypeFilterContainsAnyUsers": {
+        "properties": {
+          "ids": {
+            "items": {
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "type": {
+            "const": "containsAnyUsers",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ids",
+          "type"
+        ],
+        "title": "VotingAppVotesFieldTypeFilterContainsAnyUsers",
+        "type": "object"
+      },
+      "VotingAppVotesFieldTypeFilterDefined": {
+        "properties": {
+          "type": {
+            "const": "defined",
+            "type": "string"
+          }
+        },
+        "required": [
+          "type"
+        ],
+        "title": "VotingAppVotesFieldTypeFilterDefined",
         "type": "object"
       },
       "VotingScoreFieldWithFieldEmbed": {
@@ -12587,7 +14198,7 @@
   },
   "info": {
     "title": "airfocus API",
-    "version": "1.0.0-beta.40.47.0"
+    "version": "1.0.0-beta.41.1.0"
   },
   "openapi": "3.1.0",
   "paths": {
