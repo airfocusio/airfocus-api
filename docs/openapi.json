@@ -5047,6 +5047,7 @@
             "createdAt:absolute": "#/components/schemas/ItemSearchQueryFilterCreatedAtAbsolute",
             "createdAt:range": "#/components/schemas/ItemSearchQueryFilterCreatedAtRange",
             "createdAt:relative": "#/components/schemas/ItemSearchQueryFilterCreatedAtRelative",
+            "field:type": "#/components/schemas/ItemSearchQueryFilterFieldType",
             "field:value": "#/components/schemas/ItemSearchQueryFilterFieldValue",
             "integration:defined": "#/components/schemas/ItemSearchQueryFilterIntegrationDefined",
             "integration:value": "#/components/schemas/ItemSearchQueryFilterIntegrationValue",
@@ -5109,6 +5110,9 @@
           },
           {
             "$ref": "#/components/schemas/ItemSearchQueryFilterCreatedAtRelative"
+          },
+          {
+            "$ref": "#/components/schemas/ItemSearchQueryFilterFieldType"
           },
           {
             "$ref": "#/components/schemas/ItemSearchQueryFilterFieldValue"
@@ -5316,6 +5320,88 @@
           "type"
         ],
         "title": "ItemSearchQueryFilterCreatedAtRelative",
+        "type": "object"
+      },
+      "ItemSearchQueryFilterFieldType": {
+        "properties": {
+          "fieldType": {
+            "type": "string"
+          },
+          "filter": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/BooleanFieldTypeFilter"
+              },
+              {
+                "$ref": "#/components/schemas/DateFieldTypeFilter"
+              },
+              {
+                "$ref": "#/components/schemas/DateRangeFieldTypeFilter"
+              },
+              {
+                "$ref": "#/components/schemas/FormSourceFieldTypeFilter"
+              },
+              {
+                "$ref": "#/components/schemas/FormsTargetFieldTypeFilter"
+              },
+              {
+                "$ref": "#/components/schemas/HealthCheckInsConfidenceFieldFilter"
+              },
+              {
+                "$ref": "#/components/schemas/InsightsFieldTypeFilter"
+              },
+              {
+                "$ref": "#/components/schemas/MirrorSourceFieldTypeFilter"
+              },
+              {
+                "$ref": "#/components/schemas/MirrorTargetFieldTypeFilter"
+              },
+              {
+                "$ref": "#/components/schemas/NumberFieldTypeLikeFilter"
+              },
+              {
+                "$ref": "#/components/schemas/OkrConfidenceFieldFilter"
+              },
+              {
+                "$ref": "#/components/schemas/OkrKeyResultReferenceFieldFilter"
+              },
+              {
+                "$ref": "#/components/schemas/OkrKeyResultsFieldFilter"
+              },
+              {
+                "$ref": "#/components/schemas/PeopleFieldTypeFilter"
+              },
+              {
+                "$ref": "#/components/schemas/PortalFieldTypeFilter"
+              },
+              {
+                "$ref": "#/components/schemas/RichTextFieldTypeFilter"
+              },
+              {
+                "$ref": "#/components/schemas/SelectFieldTypeFilter"
+              },
+              {
+                "$ref": "#/components/schemas/TextFieldTypeFilter"
+              },
+              {
+                "$ref": "#/components/schemas/TimePeriodFieldFilter"
+              },
+              {
+                "$ref": "#/components/schemas/VotingAppVotesFieldTypeFilter"
+              }
+            ]
+          },
+          "type": {
+            "const": "field:type",
+            "type": "string"
+          }
+        },
+        "required": [
+          "fieldType",
+          "filter",
+          "type"
+        ],
+        "title": "ItemSearchQueryFilterFieldType",
         "type": "object"
       },
       "ItemSearchQueryFilterFieldValue": {
@@ -5733,6 +5819,7 @@
           "mapping": {
             "createdAt": "#/components/schemas/ItemSearchQuerySortCreatedAt",
             "field": "#/components/schemas/ItemSearchQuerySortField",
+            "fieldType": "#/components/schemas/ItemSearchQuerySortFieldType",
             "lastUpdatedAt": "#/components/schemas/ItemSearchQuerySortLastUpdatedAt",
             "name": "#/components/schemas/ItemSearchQuerySortName",
             "order": "#/components/schemas/ItemSearchQuerySortOrder",
@@ -5746,6 +5833,9 @@
           },
           {
             "$ref": "#/components/schemas/ItemSearchQuerySortField"
+          },
+          {
+            "$ref": "#/components/schemas/ItemSearchQuerySortFieldType"
           },
           {
             "$ref": "#/components/schemas/ItemSearchQuerySortLastUpdatedAt"
@@ -5807,6 +5897,27 @@
           "type"
         ],
         "title": "ItemSearchQuerySortField",
+        "type": "object"
+      },
+      "ItemSearchQuerySortFieldType": {
+        "properties": {
+          "direction": {
+            "$ref": "#/components/schemas/ItemSearchQuerySortDirection"
+          },
+          "fieldType": {
+            "type": "string"
+          },
+          "type": {
+            "const": "fieldType",
+            "type": "string"
+          }
+        },
+        "required": [
+          "fieldType",
+          "direction",
+          "type"
+        ],
+        "title": "ItemSearchQuerySortFieldType",
         "type": "object"
       },
       "ItemSearchQuerySortLastUpdatedAt": {
@@ -14643,7 +14754,7 @@
   },
   "info": {
     "title": "airfocus API",
-    "version": "1.0.0-beta.41.28.0"
+    "version": "1.0.0-beta.41.31.0"
   },
   "openapi": "3.1.0",
   "paths": {
