@@ -1,6 +1,111 @@
 {
   "components": {
     "schemas": {
+      "AggregationMethod": {
+        "discriminator": {
+          "mapping": {
+            "average": "#/components/schemas/AggregationMethodAverage",
+            "median": "#/components/schemas/AggregationMethodMedian",
+            "sum": "#/components/schemas/AggregationMethodSum"
+          },
+          "propertyName": "type"
+        },
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/AggregationMethodAverage"
+          },
+          {
+            "$ref": "#/components/schemas/AggregationMethodMedian"
+          },
+          {
+            "$ref": "#/components/schemas/AggregationMethodSum"
+          }
+        ],
+        "title": "AggregationMethod"
+      },
+      "AggregationMethodAverage": {
+        "properties": {
+          "type": {
+            "const": "average",
+            "type": "string"
+          }
+        },
+        "required": [
+          "type"
+        ],
+        "title": "AggregationMethodAverage",
+        "type": "object"
+      },
+      "AggregationMethodMedian": {
+        "properties": {
+          "type": {
+            "const": "median",
+            "type": "string"
+          }
+        },
+        "required": [
+          "type"
+        ],
+        "title": "AggregationMethodMedian",
+        "type": "object"
+      },
+      "AggregationMethodSum": {
+        "properties": {
+          "type": {
+            "const": "sum",
+            "type": "string"
+          }
+        },
+        "required": [
+          "type"
+        ],
+        "title": "AggregationMethodSum",
+        "type": "object"
+      },
+      "AggregationMultiPartitionMode": {
+        "discriminator": {
+          "mapping": {
+            "fullValue": "#/components/schemas/AggregationMultiPartitionModeFullValue",
+            "splitValue": "#/components/schemas/AggregationMultiPartitionModeSplitValue"
+          },
+          "propertyName": "type"
+        },
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/AggregationMultiPartitionModeFullValue"
+          },
+          {
+            "$ref": "#/components/schemas/AggregationMultiPartitionModeSplitValue"
+          }
+        ],
+        "title": "AggregationMultiPartitionMode"
+      },
+      "AggregationMultiPartitionModeFullValue": {
+        "properties": {
+          "type": {
+            "const": "fullValue",
+            "type": "string"
+          }
+        },
+        "required": [
+          "type"
+        ],
+        "title": "AggregationMultiPartitionModeFullValue",
+        "type": "object"
+      },
+      "AggregationMultiPartitionModeSplitValue": {
+        "properties": {
+          "type": {
+            "const": "splitValue",
+            "type": "string"
+          }
+        },
+        "required": [
+          "type"
+        ],
+        "title": "AggregationMultiPartitionModeSplitValue",
+        "type": "object"
+      },
       "AiFieldSettings": {
         "properties": {
           "prompt": {
@@ -2278,6 +2383,977 @@
         "title": "FormsTargetFieldTypeFilterDefined",
         "type": "object"
       },
+      "GetItemsAnalyticsRequest": {
+        "discriminator": {
+          "mapping": {
+            "breakdown": "#/components/schemas/GetItemsAnalyticsRequestBreakdown"
+          },
+          "propertyName": "type"
+        },
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/GetItemsAnalyticsRequestBreakdown"
+          }
+        ],
+        "title": "GetItemsAnalyticsRequest"
+      },
+      "GetItemsAnalyticsRequestBreakdown": {
+        "properties": {
+          "aggregation": {
+            "$ref": "#/components/schemas/GetItemsAnalyticsRequestBreakdownValueAggregation"
+          },
+          "breakdown": {
+            "$ref": "#/components/schemas/GetItemsAnalyticsRequestBreakdownConfigurableProperty",
+            "description": "Property and setting used for breakdown"
+          },
+          "includeArchived": {
+            "default": false,
+            "description": "Includes archived items or not, default: false",
+            "type": "boolean"
+          },
+          "itemFilter": {
+            "$ref": "#/components/schemas/ItemSearchQueryFilter",
+            "description": "Filter applied on the items"
+          },
+          "segment": {
+            "$ref": "#/components/schemas/GetItemsAnalyticsRequestBreakdownConfigurableProperty",
+            "description": "Property used for segment"
+          },
+          "type": {
+            "const": "breakdown",
+            "type": "string"
+          }
+        },
+        "required": [
+          "type"
+        ],
+        "title": "GetItemsAnalyticsRequestBreakdown",
+        "type": "object"
+      },
+      "GetItemsAnalyticsRequestBreakdownConfigurableProperty": {
+        "properties": {
+          "property": {
+            "$ref": "#/components/schemas/GetItemsAnalyticsRequestProperty",
+            "description": "Item property"
+          },
+          "setting": {
+            "$ref": "#/components/schemas/GetItemsAnalyticsRequestBreakdownConfigurablePropertySetting"
+          }
+        },
+        "required": [
+          "property"
+        ],
+        "title": "GetItemsAnalyticsRequestBreakdownConfigurableProperty",
+        "type": "object"
+      },
+      "GetItemsAnalyticsRequestBreakdownConfigurablePropertySetting": {
+        "description": "Specific bucket setting used for breakdown",
+        "discriminator": {
+          "mapping": {
+            "grouping:bucketCount": "#/components/schemas/GetItemsAnalyticsRequestBreakdownConfigurablePropertySettingGroupingBucketCount",
+            "grouping:interval": "#/components/schemas/GetItemsAnalyticsRequestBreakdownConfigurablePropertySettingGroupingInterval",
+            "grouping:percentile": "#/components/schemas/GetItemsAnalyticsRequestBreakdownConfigurablePropertySettingGroupingPercentile",
+            "period:daily": "#/components/schemas/GetItemsAnalyticsRequestBreakdownConfigurablePropertySettingPeriodDaily",
+            "period:monthly": "#/components/schemas/GetItemsAnalyticsRequestBreakdownConfigurablePropertySettingPeriodMonthly",
+            "period:quarterly": "#/components/schemas/GetItemsAnalyticsRequestBreakdownConfigurablePropertySettingPeriodQuarterly",
+            "period:weekly": "#/components/schemas/GetItemsAnalyticsRequestBreakdownConfigurablePropertySettingPeriodWeekly",
+            "period:yearly": "#/components/schemas/GetItemsAnalyticsRequestBreakdownConfigurablePropertySettingPeriodYearly"
+          },
+          "propertyName": "type"
+        },
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/GetItemsAnalyticsRequestBreakdownConfigurablePropertySettingGroupingBucketCount"
+          },
+          {
+            "$ref": "#/components/schemas/GetItemsAnalyticsRequestBreakdownConfigurablePropertySettingGroupingInterval"
+          },
+          {
+            "$ref": "#/components/schemas/GetItemsAnalyticsRequestBreakdownConfigurablePropertySettingGroupingPercentile"
+          },
+          {
+            "$ref": "#/components/schemas/GetItemsAnalyticsRequestBreakdownConfigurablePropertySettingPeriodDaily"
+          },
+          {
+            "$ref": "#/components/schemas/GetItemsAnalyticsRequestBreakdownConfigurablePropertySettingPeriodMonthly"
+          },
+          {
+            "$ref": "#/components/schemas/GetItemsAnalyticsRequestBreakdownConfigurablePropertySettingPeriodQuarterly"
+          },
+          {
+            "$ref": "#/components/schemas/GetItemsAnalyticsRequestBreakdownConfigurablePropertySettingPeriodWeekly"
+          },
+          {
+            "$ref": "#/components/schemas/GetItemsAnalyticsRequestBreakdownConfigurablePropertySettingPeriodYearly"
+          }
+        ],
+        "title": "GetItemsAnalyticsRequestBreakdownConfigurablePropertySetting"
+      },
+      "GetItemsAnalyticsRequestBreakdownConfigurablePropertySettingGroupingBucketCount": {
+        "properties": {
+          "count": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "type": {
+            "const": "grouping:bucketCount",
+            "type": "string"
+          }
+        },
+        "required": [
+          "count",
+          "type"
+        ],
+        "title": "GetItemsAnalyticsRequestBreakdownConfigurablePropertySettingGroupingBucketCount",
+        "type": "object"
+      },
+      "GetItemsAnalyticsRequestBreakdownConfigurablePropertySettingGroupingInterval": {
+        "properties": {
+          "interval": {
+            "type": "number"
+          },
+          "type": {
+            "const": "grouping:interval",
+            "type": "string"
+          }
+        },
+        "required": [
+          "interval",
+          "type"
+        ],
+        "title": "GetItemsAnalyticsRequestBreakdownConfigurablePropertySettingGroupingInterval",
+        "type": "object"
+      },
+      "GetItemsAnalyticsRequestBreakdownConfigurablePropertySettingGroupingPercentile": {
+        "properties": {
+          "type": {
+            "const": "grouping:percentile",
+            "type": "string"
+          }
+        },
+        "required": [
+          "type"
+        ],
+        "title": "GetItemsAnalyticsRequestBreakdownConfigurablePropertySettingGroupingPercentile",
+        "type": "object"
+      },
+      "GetItemsAnalyticsRequestBreakdownConfigurablePropertySettingPeriodDaily": {
+        "properties": {
+          "type": {
+            "const": "period:daily",
+            "type": "string"
+          }
+        },
+        "required": [
+          "type"
+        ],
+        "title": "GetItemsAnalyticsRequestBreakdownConfigurablePropertySettingPeriodDaily",
+        "type": "object"
+      },
+      "GetItemsAnalyticsRequestBreakdownConfigurablePropertySettingPeriodMonthly": {
+        "properties": {
+          "type": {
+            "const": "period:monthly",
+            "type": "string"
+          }
+        },
+        "required": [
+          "type"
+        ],
+        "title": "GetItemsAnalyticsRequestBreakdownConfigurablePropertySettingPeriodMonthly",
+        "type": "object"
+      },
+      "GetItemsAnalyticsRequestBreakdownConfigurablePropertySettingPeriodQuarterly": {
+        "properties": {
+          "type": {
+            "const": "period:quarterly",
+            "type": "string"
+          }
+        },
+        "required": [
+          "type"
+        ],
+        "title": "GetItemsAnalyticsRequestBreakdownConfigurablePropertySettingPeriodQuarterly",
+        "type": "object"
+      },
+      "GetItemsAnalyticsRequestBreakdownConfigurablePropertySettingPeriodWeekly": {
+        "properties": {
+          "type": {
+            "const": "period:weekly",
+            "type": "string"
+          }
+        },
+        "required": [
+          "type"
+        ],
+        "title": "GetItemsAnalyticsRequestBreakdownConfigurablePropertySettingPeriodWeekly",
+        "type": "object"
+      },
+      "GetItemsAnalyticsRequestBreakdownConfigurablePropertySettingPeriodYearly": {
+        "properties": {
+          "type": {
+            "const": "period:yearly",
+            "type": "string"
+          }
+        },
+        "required": [
+          "type"
+        ],
+        "title": "GetItemsAnalyticsRequestBreakdownConfigurablePropertySettingPeriodYearly",
+        "type": "object"
+      },
+      "GetItemsAnalyticsRequestBreakdownValueAggregation": {
+        "description": "Settings to be used when calculating the return value (size is always given).",
+        "properties": {
+          "method": {
+            "$ref": "#/components/schemas/AggregationMethod"
+          },
+          "partitionMode": {
+            "$ref": "#/components/schemas/AggregationMultiPartitionMode"
+          },
+          "property": {
+            "$ref": "#/components/schemas/GetItemsAnalyticsRequestProperty"
+          }
+        },
+        "required": [
+          "property",
+          "method",
+          "partitionMode"
+        ],
+        "title": "GetItemsAnalyticsRequestBreakdownValueAggregation",
+        "type": "object"
+      },
+      "GetItemsAnalyticsRequestProperty": {
+        "discriminator": {
+          "mapping": {
+            "completionDate": "#/components/schemas/GetItemsAnalyticsRequestPropertyCompletionDate",
+            "completionTime": "#/components/schemas/GetItemsAnalyticsRequestPropertyCompletionTime",
+            "itemRef": "#/components/schemas/GetItemsAnalyticsRequestPropertyItemRef",
+            "keyResult": "#/components/schemas/GetItemsAnalyticsRequestPropertyKeyResult",
+            "objective": "#/components/schemas/GetItemsAnalyticsRequestPropertyObjective",
+            "statusCategory": "#/components/schemas/GetItemsAnalyticsRequestPropertyStatusCategory"
+          },
+          "propertyName": "type"
+        },
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/GetItemsAnalyticsRequestPropertyCompletionDate"
+          },
+          {
+            "$ref": "#/components/schemas/GetItemsAnalyticsRequestPropertyCompletionTime"
+          },
+          {
+            "$ref": "#/components/schemas/GetItemsAnalyticsRequestPropertyItemRef"
+          },
+          {
+            "$ref": "#/components/schemas/GetItemsAnalyticsRequestPropertyKeyResult"
+          },
+          {
+            "$ref": "#/components/schemas/GetItemsAnalyticsRequestPropertyObjective"
+          },
+          {
+            "$ref": "#/components/schemas/GetItemsAnalyticsRequestPropertyStatusCategory"
+          }
+        ],
+        "title": "GetItemsAnalyticsRequestProperty"
+      },
+      "GetItemsAnalyticsRequestPropertyCompletionDate": {
+        "properties": {
+          "type": {
+            "const": "completionDate",
+            "type": "string"
+          }
+        },
+        "required": [
+          "type"
+        ],
+        "title": "GetItemsAnalyticsRequestPropertyCompletionDate",
+        "type": "object"
+      },
+      "GetItemsAnalyticsRequestPropertyCompletionTime": {
+        "properties": {
+          "type": {
+            "const": "completionTime",
+            "type": "string"
+          }
+        },
+        "required": [
+          "type"
+        ],
+        "title": "GetItemsAnalyticsRequestPropertyCompletionTime",
+        "type": "object"
+      },
+      "GetItemsAnalyticsRequestPropertyItemRef": {
+        "properties": {
+          "ref": {
+            "$ref": "#/components/schemas/RefItemProperty"
+          },
+          "type": {
+            "const": "itemRef",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ref",
+          "type"
+        ],
+        "title": "GetItemsAnalyticsRequestPropertyItemRef",
+        "type": "object"
+      },
+      "GetItemsAnalyticsRequestPropertyKeyResult": {
+        "properties": {
+          "type": {
+            "const": "keyResult",
+            "type": "string"
+          }
+        },
+        "required": [
+          "type"
+        ],
+        "title": "GetItemsAnalyticsRequestPropertyKeyResult",
+        "type": "object"
+      },
+      "GetItemsAnalyticsRequestPropertyObjective": {
+        "properties": {
+          "type": {
+            "const": "objective",
+            "type": "string"
+          }
+        },
+        "required": [
+          "type"
+        ],
+        "title": "GetItemsAnalyticsRequestPropertyObjective",
+        "type": "object"
+      },
+      "GetItemsAnalyticsRequestPropertyStatusCategory": {
+        "properties": {
+          "type": {
+            "const": "statusCategory",
+            "type": "string"
+          }
+        },
+        "required": [
+          "type"
+        ],
+        "title": "GetItemsAnalyticsRequestPropertyStatusCategory",
+        "type": "object"
+      },
+      "GetItemsAnalyticsResponse": {
+        "discriminator": {
+          "mapping": {
+            "breakdown": "#/components/schemas/GetItemsAnalyticsResponseBreakdown",
+            "error": "#/components/schemas/GetItemsAnalyticsResponseError"
+          },
+          "propertyName": "type"
+        },
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/GetItemsAnalyticsResponseBreakdown"
+          },
+          {
+            "$ref": "#/components/schemas/GetItemsAnalyticsResponseError"
+          }
+        ],
+        "title": "GetItemsAnalyticsResponse"
+      },
+      "GetItemsAnalyticsResponseBreakdown": {
+        "properties": {
+          "breakdown": {
+            "description": "Buckets with items",
+            "items": {
+              "$ref": "#/components/schemas/GetItemsAnalyticsResponseBreakdownBreakdownBucket"
+            },
+            "type": "array"
+          },
+          "buckets": {
+            "additionalProperties": {
+              "$ref": "#/components/schemas/GetItemsAnalyticsResponseBreakdownBucket"
+            },
+            "description": "Buckets descriptions",
+            "type": "object"
+          },
+          "itemCount": {
+            "description": "Count of unique items in the breakdowns",
+            "format": "int64",
+            "type": "integer"
+          },
+          "type": {
+            "const": "breakdown",
+            "type": "string"
+          }
+        },
+        "required": [
+          "itemCount",
+          "breakdown",
+          "buckets",
+          "type"
+        ],
+        "title": "GetItemsAnalyticsResponseBreakdown",
+        "type": "object"
+      },
+      "GetItemsAnalyticsResponseBreakdownBreakdownBucket": {
+        "properties": {
+          "count": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "segments": {
+            "items": {
+              "$ref": "#/components/schemas/GetItemsAnalyticsResponseBreakdownSegmentBucket"
+            },
+            "type": "array"
+          },
+          "value": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "id",
+          "count",
+          "segments"
+        ],
+        "title": "GetItemsAnalyticsResponseBreakdownBreakdownBucket",
+        "type": "object"
+      },
+      "GetItemsAnalyticsResponseBreakdownBucket": {
+        "discriminator": {
+          "mapping": {
+            "confidence": "#/components/schemas/GetItemsAnalyticsResponseBreakdownBucketConfidence",
+            "date": "#/components/schemas/GetItemsAnalyticsResponseBreakdownBucketDate",
+            "empty": "#/components/schemas/GetItemsAnalyticsResponseBreakdownBucketEmpty",
+            "keyResult": "#/components/schemas/GetItemsAnalyticsResponseBreakdownBucketKeyResult",
+            "numeric": "#/components/schemas/GetItemsAnalyticsResponseBreakdownBucketNumeric",
+            "objective": "#/components/schemas/GetItemsAnalyticsResponseBreakdownBucketObjective",
+            "people": "#/components/schemas/GetItemsAnalyticsResponseBreakdownBucketPeople",
+            "property": "#/components/schemas/GetItemsAnalyticsResponseBreakdownBucketProperty",
+            "select": "#/components/schemas/GetItemsAnalyticsResponseBreakdownBucketSelect",
+            "status": "#/components/schemas/GetItemsAnalyticsResponseBreakdownBucketStatus",
+            "statusCategory": "#/components/schemas/GetItemsAnalyticsResponseBreakdownBucketStatusCategory",
+            "timePeriod": "#/components/schemas/GetItemsAnalyticsResponseBreakdownBucketTimePeriod",
+            "workspace": "#/components/schemas/GetItemsAnalyticsResponseBreakdownBucketWorkspace"
+          },
+          "propertyName": "type"
+        },
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/GetItemsAnalyticsResponseBreakdownBucketConfidence"
+          },
+          {
+            "$ref": "#/components/schemas/GetItemsAnalyticsResponseBreakdownBucketDate"
+          },
+          {
+            "$ref": "#/components/schemas/GetItemsAnalyticsResponseBreakdownBucketEmpty"
+          },
+          {
+            "$ref": "#/components/schemas/GetItemsAnalyticsResponseBreakdownBucketKeyResult"
+          },
+          {
+            "$ref": "#/components/schemas/GetItemsAnalyticsResponseBreakdownBucketNumeric"
+          },
+          {
+            "$ref": "#/components/schemas/GetItemsAnalyticsResponseBreakdownBucketObjective"
+          },
+          {
+            "$ref": "#/components/schemas/GetItemsAnalyticsResponseBreakdownBucketPeople"
+          },
+          {
+            "$ref": "#/components/schemas/GetItemsAnalyticsResponseBreakdownBucketProperty"
+          },
+          {
+            "$ref": "#/components/schemas/GetItemsAnalyticsResponseBreakdownBucketSelect"
+          },
+          {
+            "$ref": "#/components/schemas/GetItemsAnalyticsResponseBreakdownBucketStatus"
+          },
+          {
+            "$ref": "#/components/schemas/GetItemsAnalyticsResponseBreakdownBucketStatusCategory"
+          },
+          {
+            "$ref": "#/components/schemas/GetItemsAnalyticsResponseBreakdownBucketTimePeriod"
+          },
+          {
+            "$ref": "#/components/schemas/GetItemsAnalyticsResponseBreakdownBucketWorkspace"
+          }
+        ],
+        "title": "GetItemsAnalyticsResponseBreakdownBucket"
+      },
+      "GetItemsAnalyticsResponseBreakdownBucketConfidence": {
+        "properties": {
+          "filter": {
+            "$ref": "#/components/schemas/ItemSearchQueryFilter"
+          },
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "type": {
+            "const": "confidence",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "filter",
+          "type"
+        ],
+        "title": "GetItemsAnalyticsResponseBreakdownBucketConfidence",
+        "type": "object"
+      },
+      "GetItemsAnalyticsResponseBreakdownBucketDate": {
+        "properties": {
+          "end": {
+            "format": "date",
+            "type": "string"
+          },
+          "filter": {
+            "$ref": "#/components/schemas/ItemSearchQueryFilter"
+          },
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "start": {
+            "format": "date",
+            "type": "string"
+          },
+          "type": {
+            "const": "date",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "start",
+          "end",
+          "filter",
+          "type"
+        ],
+        "title": "GetItemsAnalyticsResponseBreakdownBucketDate",
+        "type": "object"
+      },
+      "GetItemsAnalyticsResponseBreakdownBucketEmpty": {
+        "properties": {
+          "filter": {
+            "$ref": "#/components/schemas/ItemSearchQueryFilter"
+          },
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "name": {
+            "default": "None",
+            "description": "Always 'None'",
+            "type": "string"
+          },
+          "type": {
+            "const": "empty",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "type"
+        ],
+        "title": "GetItemsAnalyticsResponseBreakdownBucketEmpty",
+        "type": "object"
+      },
+      "GetItemsAnalyticsResponseBreakdownBucketKeyResult": {
+        "properties": {
+          "filter": {
+            "$ref": "#/components/schemas/ItemSearchQueryFilter"
+          },
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "keyResultId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "objectiveItemId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "objectiveWorkspaceId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "type": {
+            "const": "keyResult",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "objectiveWorkspaceId",
+          "objectiveItemId",
+          "keyResultId",
+          "filter",
+          "type"
+        ],
+        "title": "GetItemsAnalyticsResponseBreakdownBucketKeyResult",
+        "type": "object"
+      },
+      "GetItemsAnalyticsResponseBreakdownBucketNumeric": {
+        "properties": {
+          "end": {
+            "type": "number"
+          },
+          "filter": {
+            "$ref": "#/components/schemas/ItemSearchQueryFilter"
+          },
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "start": {
+            "type": "number"
+          },
+          "type": {
+            "const": "numeric",
+            "type": "string"
+          },
+          "unit": {
+            "$ref": "#/components/schemas/NumberFieldTypeSettingsUnit"
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "start",
+          "end",
+          "filter",
+          "type"
+        ],
+        "title": "GetItemsAnalyticsResponseBreakdownBucketNumeric",
+        "type": "object"
+      },
+      "GetItemsAnalyticsResponseBreakdownBucketObjective": {
+        "properties": {
+          "filter": {
+            "$ref": "#/components/schemas/ItemSearchQueryFilter"
+          },
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "objectiveItemId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "objectiveWorkspaceId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "type": {
+            "const": "objective",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "objectiveWorkspaceId",
+          "objectiveItemId",
+          "filter",
+          "type"
+        ],
+        "title": "GetItemsAnalyticsResponseBreakdownBucketObjective",
+        "type": "object"
+      },
+      "GetItemsAnalyticsResponseBreakdownBucketPeople": {
+        "properties": {
+          "filter": {
+            "$ref": "#/components/schemas/ItemSearchQueryFilter"
+          },
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "type": {
+            "const": "people",
+            "type": "string"
+          },
+          "userRef": {
+            "$ref": "#/components/schemas/UserRef"
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "userRef",
+          "filter",
+          "type"
+        ],
+        "title": "GetItemsAnalyticsResponseBreakdownBucketPeople",
+        "type": "object"
+      },
+      "GetItemsAnalyticsResponseBreakdownBucketProperty": {
+        "properties": {
+          "filter": {
+            "$ref": "#/components/schemas/ItemSearchQueryFilter"
+          },
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "type": {
+            "const": "property",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "filter",
+          "type"
+        ],
+        "title": "GetItemsAnalyticsResponseBreakdownBucketProperty",
+        "type": "object"
+      },
+      "GetItemsAnalyticsResponseBreakdownBucketSelect": {
+        "properties": {
+          "color": {
+            "$ref": "#/components/schemas/SelectFieldOptionColor"
+          },
+          "filter": {
+            "$ref": "#/components/schemas/ItemSearchQueryFilter"
+          },
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "selectId": {
+            "type": "string"
+          },
+          "type": {
+            "const": "select",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "selectId",
+          "filter",
+          "type"
+        ],
+        "title": "GetItemsAnalyticsResponseBreakdownBucketSelect",
+        "type": "object"
+      },
+      "GetItemsAnalyticsResponseBreakdownBucketStatus": {
+        "properties": {
+          "category": {
+            "$ref": "#/components/schemas/StatusCategory"
+          },
+          "filter": {
+            "$ref": "#/components/schemas/ItemSearchQueryFilter"
+          },
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "statusId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "type": {
+            "const": "status",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "statusId",
+          "category",
+          "filter",
+          "type"
+        ],
+        "title": "GetItemsAnalyticsResponseBreakdownBucketStatus",
+        "type": "object"
+      },
+      "GetItemsAnalyticsResponseBreakdownBucketStatusCategory": {
+        "properties": {
+          "category": {
+            "$ref": "#/components/schemas/StatusCategory"
+          },
+          "filter": {
+            "$ref": "#/components/schemas/ItemSearchQueryFilter"
+          },
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "type": {
+            "const": "statusCategory",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "category",
+          "filter",
+          "type"
+        ],
+        "title": "GetItemsAnalyticsResponseBreakdownBucketStatusCategory",
+        "type": "object"
+      },
+      "GetItemsAnalyticsResponseBreakdownBucketTimePeriod": {
+        "properties": {
+          "end": {
+            "format": "date",
+            "type": "string"
+          },
+          "filter": {
+            "$ref": "#/components/schemas/ItemSearchQueryFilter"
+          },
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "start": {
+            "format": "date",
+            "type": "string"
+          },
+          "timePeriodId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "type": {
+            "const": "timePeriod",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "timePeriodId",
+          "start",
+          "end",
+          "filter",
+          "type"
+        ],
+        "title": "GetItemsAnalyticsResponseBreakdownBucketTimePeriod",
+        "type": "object"
+      },
+      "GetItemsAnalyticsResponseBreakdownBucketWorkspace": {
+        "properties": {
+          "filter": {
+            "$ref": "#/components/schemas/ItemSearchQueryFilter"
+          },
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "itemColor": {
+            "$ref": "#/components/schemas/ItemColor"
+          },
+          "itemType": {
+            "$ref": "#/components/schemas/ItemType"
+          },
+          "name": {
+            "type": "string"
+          },
+          "type": {
+            "const": "workspace",
+            "type": "string"
+          },
+          "workspaceId": {
+            "format": "uuid",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "workspaceId",
+          "filter",
+          "type"
+        ],
+        "title": "GetItemsAnalyticsResponseBreakdownBucketWorkspace",
+        "type": "object"
+      },
+      "GetItemsAnalyticsResponseBreakdownSegmentBucket": {
+        "properties": {
+          "count": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "value": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "id",
+          "count"
+        ],
+        "title": "GetItemsAnalyticsResponseBreakdownSegmentBucket",
+        "type": "object"
+      },
+      "GetItemsAnalyticsResponseError": {
+        "properties": {
+          "reason": {
+            "type": "string"
+          },
+          "type": {
+            "const": "error",
+            "type": "string"
+          }
+        },
+        "required": [
+          "reason",
+          "type"
+        ],
+        "title": "GetItemsAnalyticsResponseError",
+        "type": "object"
+      },
       "GlobalSearchQuery": {
         "default": {
           "archived": false,
@@ -2452,13 +3528,17 @@
       "HealthCheckInsConfidenceFieldFilter": {
         "discriminator": {
           "mapping": {
-            "containsAny": "#/components/schemas/HealthCheckInsConfidenceFieldFilterContainsAny"
+            "containsAny": "#/components/schemas/HealthCheckInsConfidenceFieldFilterContainsAny",
+            "defined": "#/components/schemas/HealthCheckInsConfidenceFieldFilterDefined"
           },
           "propertyName": "type"
         },
         "oneOf": [
           {
             "$ref": "#/components/schemas/HealthCheckInsConfidenceFieldFilterContainsAny"
+          },
+          {
+            "$ref": "#/components/schemas/HealthCheckInsConfidenceFieldFilterDefined"
           }
         ],
         "title": "HealthCheckInsConfidenceFieldFilter"
@@ -2482,6 +3562,19 @@
           "type"
         ],
         "title": "HealthCheckInsConfidenceFieldFilterContainsAny",
+        "type": "object"
+      },
+      "HealthCheckInsConfidenceFieldFilterDefined": {
+        "properties": {
+          "type": {
+            "const": "defined",
+            "type": "string"
+          }
+        },
+        "required": [
+          "type"
+        ],
+        "title": "HealthCheckInsConfidenceFieldFilterDefined",
         "type": "object"
       },
       "InboxViewCounter": {
@@ -4874,6 +5967,102 @@
         "title": "ItemLinkWithItemLinkEmbedPage",
         "type": "object"
       },
+      "ItemPartial": {
+        "properties": {
+          "archived": {
+            "type": "boolean"
+          },
+          "assigneeUserGroupIds": {
+            "items": {
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "assigneeUserIds": {
+            "items": {
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "color": {
+            "$ref": "#/components/schemas/ItemColor"
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "description": {
+            "$ref": "#/components/schemas/RichText",
+            "description": "Rich text content as structured blocks. Different media types provide markdown support:\n• application/json - Default blocks format\n• application/vnd.airfocus.markdown+json - All RichText fields become markdown strings (recommended)\n• application/json+markdown - Legacy format, only top-level fields converted to markdown"
+          },
+          "fields": {
+            "additionalProperties": {},
+            "type": "object"
+          },
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "lastUpdatedAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "number": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "order": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "statusCategoryUpdatedAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "statusId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "statusUpdatedAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "workspaceId": {
+            "format": "uuid",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id"
+        ],
+        "title": "ItemPartial",
+        "type": "object"
+      },
+      "ItemPartialPage": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/ItemPartial"
+            },
+            "type": "array"
+          },
+          "totalItems": {
+            "format": "int32",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "items",
+          "totalItems"
+        ],
+        "title": "ItemPartialPage",
+        "type": "object"
+      },
       "ItemRelationBulkAction": {
         "discriminator": {
           "mapping": {
@@ -5271,10 +6460,12 @@
         "discriminator": {
           "mapping": {
             "and": "#/components/schemas/ItemSearchQueryFilterAnd",
+            "archived:value": "#/components/schemas/ItemSearchQueryFilterArchivedValue",
             "assignees:contain": "#/components/schemas/ItemSearchQueryFilterAssigneesContain",
             "assignees:containsAll": "#/components/schemas/ItemSearchQueryFilterAssigneesContainsAll",
             "assignees:containsAny": "#/components/schemas/ItemSearchQueryFilterAssigneesContainsAny",
             "assignees:defined": "#/components/schemas/ItemSearchQueryFilterAssigneesDefined",
+            "completionTime:between": "#/components/schemas/ItemSearchQueryFilterCompletionTimeBetween",
             "createdAt:absolute": "#/components/schemas/ItemSearchQueryFilterCreatedAtAbsolute",
             "createdAt:range": "#/components/schemas/ItemSearchQueryFilterCreatedAtRange",
             "createdAt:relative": "#/components/schemas/ItemSearchQueryFilterCreatedAtRelative",
@@ -5295,8 +6486,10 @@
             "status:containsAny": "#/components/schemas/ItemSearchQueryFilterStatusContainsAny",
             "status:updatedSince": "#/components/schemas/ItemSearchQueryFilterStatusUpdatedSince",
             "statusCategory:containsAny": "#/components/schemas/ItemSearchQueryFilterStatusCategoryContainsAny",
+            "statusCategory:updatedBetween": "#/components/schemas/ItemSearchQueryFilterStatusCategoryUpdatedBetween",
             "statusCategory:updatedSince": "#/components/schemas/ItemSearchQueryFilterStatusCategoryUpdatedSince",
-            "updated:since": "#/components/schemas/ItemSearchQueryFilterUpdatedSince"
+            "updated:since": "#/components/schemas/ItemSearchQueryFilterUpdatedSince",
+            "workspace:contains": "#/components/schemas/ItemSearchQueryFilterWorkspaceContains"
           },
           "propertyName": "type"
         },
@@ -5322,6 +6515,9 @@
             "$ref": "#/components/schemas/ItemSearchQueryFilterAnd"
           },
           {
+            "$ref": "#/components/schemas/ItemSearchQueryFilterArchivedValue"
+          },
+          {
             "$ref": "#/components/schemas/ItemSearchQueryFilterAssigneesContain"
           },
           {
@@ -5332,6 +6528,9 @@
           },
           {
             "$ref": "#/components/schemas/ItemSearchQueryFilterAssigneesDefined"
+          },
+          {
+            "$ref": "#/components/schemas/ItemSearchQueryFilterCompletionTimeBetween"
           },
           {
             "$ref": "#/components/schemas/ItemSearchQueryFilterCreatedAtAbsolute"
@@ -5388,6 +6587,9 @@
             "$ref": "#/components/schemas/ItemSearchQueryFilterStatusCategoryContainsAny"
           },
           {
+            "$ref": "#/components/schemas/ItemSearchQueryFilterStatusCategoryUpdatedBetween"
+          },
+          {
             "$ref": "#/components/schemas/ItemSearchQueryFilterStatusCategoryUpdatedSince"
           },
           {
@@ -5398,6 +6600,9 @@
           },
           {
             "$ref": "#/components/schemas/ItemSearchQueryFilterUpdatedSince"
+          },
+          {
+            "$ref": "#/components/schemas/ItemSearchQueryFilterWorkspaceContains"
           }
         ],
         "title": "ItemSearchQueryFilter"
@@ -5420,6 +6625,23 @@
           "type"
         ],
         "title": "ItemSearchQueryFilterAnd",
+        "type": "object"
+      },
+      "ItemSearchQueryFilterArchivedValue": {
+        "properties": {
+          "type": {
+            "const": "archived:value",
+            "type": "string"
+          },
+          "value": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "value",
+          "type"
+        ],
+        "title": "ItemSearchQueryFilterArchivedValue",
         "type": "object"
       },
       "ItemSearchQueryFilterAssigneesContain": {
@@ -5490,6 +6712,31 @@
           "type"
         ],
         "title": "ItemSearchQueryFilterAssigneesDefined",
+        "type": "object"
+      },
+      "ItemSearchQueryFilterCompletionTimeBetween": {
+        "properties": {
+          "end": {
+            "description": "end range in days",
+            "format": "int32",
+            "type": "integer"
+          },
+          "start": {
+            "description": "start range in days",
+            "format": "int32",
+            "type": "integer"
+          },
+          "type": {
+            "const": "completionTime:between",
+            "type": "string"
+          }
+        },
+        "required": [
+          "start",
+          "end",
+          "type"
+        ],
+        "title": "ItemSearchQueryFilterCompletionTimeBetween",
         "type": "object"
       },
       "ItemSearchQueryFilterCreatedAtAbsolute": {
@@ -5968,6 +7215,29 @@
         "title": "ItemSearchQueryFilterStatusCategoryContainsAny",
         "type": "object"
       },
+      "ItemSearchQueryFilterStatusCategoryUpdatedBetween": {
+        "properties": {
+          "end": {
+            "format": "date",
+            "type": "string"
+          },
+          "start": {
+            "format": "date",
+            "type": "string"
+          },
+          "type": {
+            "const": "statusCategory:updatedBetween",
+            "type": "string"
+          }
+        },
+        "required": [
+          "start",
+          "end",
+          "type"
+        ],
+        "title": "ItemSearchQueryFilterStatusCategoryUpdatedBetween",
+        "type": "object"
+      },
       "ItemSearchQueryFilterStatusCategoryUpdatedSince": {
         "properties": {
           "type": {
@@ -6043,6 +7313,24 @@
           "type"
         ],
         "title": "ItemSearchQueryFilterUpdatedSince",
+        "type": "object"
+      },
+      "ItemSearchQueryFilterWorkspaceContains": {
+        "properties": {
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "type": {
+            "const": "workspace:contains",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "type"
+        ],
+        "title": "ItemSearchQueryFilterWorkspaceContains",
         "type": "object"
       },
       "ItemSearchQuerySort": {
@@ -8045,13 +9333,17 @@
       "OkrConfidenceFieldFilter": {
         "discriminator": {
           "mapping": {
-            "containsAny": "#/components/schemas/OkrConfidenceFieldFilterContainsAny"
+            "containsAny": "#/components/schemas/OkrConfidenceFieldFilterContainsAny",
+            "defined": "#/components/schemas/OkrConfidenceFieldFilterDefined"
           },
           "propertyName": "type"
         },
         "oneOf": [
           {
             "$ref": "#/components/schemas/OkrConfidenceFieldFilterContainsAny"
+          },
+          {
+            "$ref": "#/components/schemas/OkrConfidenceFieldFilterDefined"
           }
         ],
         "title": "OkrConfidenceFieldFilter"
@@ -8075,6 +9367,19 @@
           "type"
         ],
         "title": "OkrConfidenceFieldFilterContainsAny",
+        "type": "object"
+      },
+      "OkrConfidenceFieldFilterDefined": {
+        "properties": {
+          "type": {
+            "const": "defined",
+            "type": "string"
+          }
+        },
+        "required": [
+          "type"
+        ],
+        "title": "OkrConfidenceFieldFilterDefined",
         "type": "object"
       },
       "OkrConfidenceFieldSettings": {
@@ -8150,16 +9455,68 @@
       "OkrKeyResultReferenceFieldFilter": {
         "discriminator": {
           "mapping": {
+            "containsAnyKeyResult": "#/components/schemas/OkrKeyResultReferenceFieldFilterContainsAnyKeyResult",
+            "containsAnyObjective": "#/components/schemas/OkrKeyResultReferenceFieldFilterContainsAnyObjective",
             "defined": "#/components/schemas/OkrKeyResultReferenceFieldFilterDefined"
           },
           "propertyName": "type"
         },
         "oneOf": [
           {
+            "$ref": "#/components/schemas/OkrKeyResultReferenceFieldFilterContainsAnyKeyResult"
+          },
+          {
+            "$ref": "#/components/schemas/OkrKeyResultReferenceFieldFilterContainsAnyObjective"
+          },
+          {
             "$ref": "#/components/schemas/OkrKeyResultReferenceFieldFilterDefined"
           }
         ],
         "title": "OkrKeyResultReferenceFieldFilter"
+      },
+      "OkrKeyResultReferenceFieldFilterContainsAnyKeyResult": {
+        "properties": {
+          "keyResultId": {
+            "items": {
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": "array",
+            "uniqueItems": true
+          },
+          "type": {
+            "const": "containsAnyKeyResult",
+            "type": "string"
+          }
+        },
+        "required": [
+          "keyResultId",
+          "type"
+        ],
+        "title": "OkrKeyResultReferenceFieldFilterContainsAnyKeyResult",
+        "type": "object"
+      },
+      "OkrKeyResultReferenceFieldFilterContainsAnyObjective": {
+        "properties": {
+          "objectiveItemId": {
+            "items": {
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": "array",
+            "uniqueItems": true
+          },
+          "type": {
+            "const": "containsAnyObjective",
+            "type": "string"
+          }
+        },
+        "required": [
+          "objectiveItemId",
+          "type"
+        ],
+        "title": "OkrKeyResultReferenceFieldFilterContainsAnyObjective",
+        "type": "object"
       },
       "OkrKeyResultReferenceFieldFilterDefined": {
         "properties": {
@@ -10381,6 +11738,26 @@
           "type"
         ],
         "title": "ScoringModeCustomWeighting",
+        "type": "object"
+      },
+      "SearchPartialItemRequest": {
+        "properties": {
+          "properties": {
+            "items": {
+              "$ref": "#/components/schemas/RefItemProperty"
+            },
+            "type": "array",
+            "uniqueItems": true
+          },
+          "query": {
+            "$ref": "#/components/schemas/ItemSearchQuery",
+            "default": "ItemSearchQuery(None,Order(asc),false)"
+          }
+        },
+        "required": [
+          "properties"
+        ],
+        "title": "SearchPartialItemRequest",
         "type": "object"
       },
       "SelectFieldOptionColor": {
@@ -15007,7 +16384,7 @@
   },
   "info": {
     "title": "airfocus API",
-    "version": "1.0.0-beta.42.1.5"
+    "version": "1.0.0-beta.42.3.1"
   },
   "openapi": "3.1.0",
   "paths": {
@@ -24013,6 +25390,131 @@
         ]
       }
     },
+    "/api/workspaces/{workspaceId}/items/analytics": {
+      "post": {
+        "description": "Returns items in the requested shape. The responses has 1-1 mapping with requests for batching purposes.<br/>Requirements:<br/>- auth-client scopes: \"workspace:read\"<br/>- user permission: \"read\" or higher",
+        "operationId": "getItemsAnalytics",
+        "parameters": [
+          {
+            "deprecated": true,
+            "description": "Enable sudo-mode for admins for a single request, which gives full permission to all workspaces in the team.",
+            "in": "query",
+            "name": "actAsAdmin",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "description": "ID of the workspace which contains the managed items.",
+            "in": "path",
+            "name": "workspaceId",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "items": {
+                  "$ref": "#/components/schemas/GetItemsAnalyticsRequest"
+                },
+                "type": "array"
+              }
+            }
+          },
+          "required": false
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/GetItemsAnalyticsResponse"
+                  },
+                  "type": "array"
+                }
+              }
+            },
+            "description": ""
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "not_found",
+                  "data": {},
+                  "message": "Unknown entity 'fe4c0f30-aa35-3c41-99f9-a5f69c8c4192'"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If path parameters are invalid or payload is invalid or resource does not exist."
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "missing_token",
+                  "data": {},
+                  "message": "Access token is missing"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If missing authentication token."
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "forbidden",
+                  "data": {},
+                  "message": "Insufficient permission"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If user does not have the required permission, or authenticated client does not have the required access scopes."
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "unknown_error",
+                  "data": {},
+                  "message": "Server error"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If any other error happens."
+          }
+        },
+        "security": [
+          {
+            "httpAuth": []
+          }
+        ],
+        "summary": "Retrieve items used for dashboards and analytics",
+        "tags": [
+          "Items"
+        ]
+      }
+    },
     "/api/workspaces/{workspaceId}/items/bulk": {
       "post": {
         "description": "Accepts a list of create/update/patch/delete operations (see the request model for more details).<br/>\nEach operation can target a single or multiple items.<br/>\nReturns a list of results for each input operation including errors.<br/>\nGuarantees that the size and order of the returned results matches the input list of operations.<br/>Requirements:<br/>- auth-client scopes: \"workspace\"<br/>- user permission: \"write\" or higher",
@@ -24575,6 +26077,176 @@
         "summary": "Retrieve or search items",
         "tags": [
           "CRUD",
+          "Items"
+        ]
+      }
+    },
+    "/api/workspaces/{workspaceId}/items/search/partial": {
+      "post": {
+        "description": "Search and return all requested properties from items. Always returns only items which are accessible by the current user.<br/>Requirements:<br/>- auth-client scopes: \"workspace:read\"<br/>- user permission: \"read\" or higher",
+        "operationId": "searchPartialItems",
+        "parameters": [
+          {
+            "deprecated": true,
+            "description": "Enable sudo-mode for admins for a single request, which gives full permission to all workspaces in the team.",
+            "in": "query",
+            "name": "actAsAdmin",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "description": "ID of the workspace which contains the managed items.",
+            "in": "path",
+            "name": "workspaceId",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "description": "How many elements to skip.",
+            "in": "query",
+            "name": "offset",
+            "required": false,
+            "schema": {
+              "default": 0,
+              "format": "int32",
+              "minimum": 0,
+              "type": "integer"
+            }
+          },
+          {
+            "description": "How many elements to return.",
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "schema": {
+              "default": 1000,
+              "format": "int32",
+              "maximum": 1000,
+              "minimum": 0,
+              "type": "integer"
+            }
+          },
+          {
+            "deprecated": true,
+            "description": "From which element the page should start.",
+            "in": "query",
+            "name": "from",
+            "required": false,
+            "schema": {
+              "default": 0,
+              "deprecated": true,
+              "format": "int32",
+              "minimum": 0,
+              "type": "integer"
+            }
+          },
+          {
+            "deprecated": true,
+            "description": "At which element the page should end (excluding it).",
+            "in": "query",
+            "name": "to",
+            "required": false,
+            "schema": {
+              "deprecated": true,
+              "format": "int32",
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SearchPartialItemRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ItemPartialPage"
+                }
+              }
+            },
+            "description": ""
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "bad_request",
+                  "data": {},
+                  "message": "Request body is invalid"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If payload is invalid."
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "missing_token",
+                  "data": {},
+                  "message": "Access token is missing"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If missing authentication token."
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "forbidden",
+                  "data": {},
+                  "message": "Insufficient permission"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If user does not have the required permission, or authenticated client does not have the required access scopes."
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "unknown_error",
+                  "data": {},
+                  "message": "Server error"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If any other error happens."
+          }
+        },
+        "security": [
+          {
+            "httpAuth": []
+          }
+        ],
+        "summary": "Retrieve or search partial items",
+        "tags": [
           "Items"
         ]
       }
