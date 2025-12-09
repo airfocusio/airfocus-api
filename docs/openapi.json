@@ -1878,6 +1878,7 @@
             "date-range": "#/components/schemas/DateRangeFieldWithFieldEmbed",
             "form-source": "#/components/schemas/FormSourceFieldWithFieldEmbed",
             "form-target": "#/components/schemas/FormTargetFieldWithFieldEmbed",
+            "health-check-ins-field": "#/components/schemas/HealthCheckInsFieldFieldWithFieldEmbed",
             "insights": "#/components/schemas/InsightsFieldWithFieldEmbed",
             "mirror-source": "#/components/schemas/MirrorSourceFieldWithFieldEmbed",
             "mirror-target": "#/components/schemas/MirrorTargetFieldWithFieldEmbed",
@@ -1915,6 +1916,9 @@
           },
           {
             "$ref": "#/components/schemas/FormTargetFieldWithFieldEmbed"
+          },
+          {
+            "$ref": "#/components/schemas/HealthCheckInsFieldFieldWithFieldEmbed"
           },
           {
             "$ref": "#/components/schemas/InsightsFieldWithFieldEmbed"
@@ -2628,6 +2632,7 @@
           "mapping": {
             "completionDate": "#/components/schemas/GetItemsAnalyticsRequestPropertyCompletionDate",
             "completionTime": "#/components/schemas/GetItemsAnalyticsRequestPropertyCompletionTime",
+            "fieldType": "#/components/schemas/GetItemsAnalyticsRequestPropertyFieldType",
             "itemRef": "#/components/schemas/GetItemsAnalyticsRequestPropertyItemRef",
             "keyResult": "#/components/schemas/GetItemsAnalyticsRequestPropertyKeyResult",
             "objective": "#/components/schemas/GetItemsAnalyticsRequestPropertyObjective",
@@ -2641,6 +2646,9 @@
           },
           {
             "$ref": "#/components/schemas/GetItemsAnalyticsRequestPropertyCompletionTime"
+          },
+          {
+            "$ref": "#/components/schemas/GetItemsAnalyticsRequestPropertyFieldType"
           },
           {
             "$ref": "#/components/schemas/GetItemsAnalyticsRequestPropertyItemRef"
@@ -2681,6 +2689,29 @@
           "type"
         ],
         "title": "GetItemsAnalyticsRequestPropertyCompletionTime",
+        "type": "object"
+      },
+      "GetItemsAnalyticsRequestPropertyFieldType": {
+        "properties": {
+          "fieldType": {
+            "enum": [
+              "insights",
+              "prioritization",
+              "health-check-ins-field",
+              "votingScore"
+            ],
+            "type": "string"
+          },
+          "type": {
+            "const": "fieldType",
+            "type": "string"
+          }
+        },
+        "required": [
+          "fieldType",
+          "type"
+        ],
+        "title": "GetItemsAnalyticsRequestPropertyFieldType",
         "type": "object"
       },
       "GetItemsAnalyticsRequestPropertyItemRef": {
@@ -3575,6 +3606,54 @@
           "type"
         ],
         "title": "HealthCheckInsConfidenceFieldFilterDefined",
+        "type": "object"
+      },
+      "HealthCheckInsFieldFieldWithFieldEmbed": {
+        "properties": {
+          "_embedded": {
+            "$ref": "#/components/schemas/FieldEmbed"
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "isTeamField": {
+            "type": "boolean"
+          },
+          "name": {
+            "type": "string"
+          },
+          "required": {
+            "type": "boolean"
+          },
+          "teamId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "typeId": {
+            "const": "health-check-ins-field",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "typeId",
+          "name",
+          "description",
+          "isTeamField",
+          "teamId",
+          "createdAt",
+          "required",
+          "_embedded"
+        ],
+        "title": "HealthCheckInsFieldFieldWithFieldEmbed",
         "type": "object"
       },
       "InboxViewCounter": {
@@ -12229,9 +12308,11 @@
             "$ref": "#/components/schemas/TeamFlags"
           },
           "name": {
+            "description": "Display name for the team.",
             "type": "string"
           },
           "slug": {
+            "description": "Identifier that is unique for each team. The slug is used as the subdomain prefix (e.g., 'myteam' in myteam.airfocus.com).",
             "type": "string"
           },
           "state": {
@@ -16384,7 +16465,7 @@
   },
   "info": {
     "title": "airfocus API",
-    "version": "1.0.0-beta.42.3.2"
+    "version": "1.0.0-beta.42.8.0"
   },
   "openapi": "3.1.0",
   "paths": {
@@ -16768,6 +16849,861 @@
         "summary": "Reconfigure field",
         "tags": [
           "Fields"
+        ]
+      }
+    },
+    "/api/link-types": {
+      "post": {
+        "description": "Returns newly created item-link-type with its sanitised data.<br/>Requirements:<br/>- auth-client scopes: \"team\"<br/>- user role: \"admin\"<br/>- user permission: \"write\" or higher",
+        "operationId": "createItem-link-type",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateItemLinkTypeRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ItemLinkTypeRecordWithItemLinkTypeRecordEmbed"
+                }
+              }
+            },
+            "description": ""
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "bad_request",
+                  "data": {},
+                  "message": "Request body is invalid"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If payload is invalid."
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "missing_token",
+                  "data": {},
+                  "message": "Access token is missing"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If missing authentication token."
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "forbidden",
+                  "data": {},
+                  "message": "Insufficient permission"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If user does not have the required permission, or user does not match the required role, or authenticated client does not have the required access scopes."
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "unknown_error",
+                  "data": {},
+                  "message": "Server error"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If any other error happens."
+          }
+        },
+        "security": [
+          {
+            "httpAuth": []
+          }
+        ],
+        "summary": "Create a new item-link-type",
+        "tags": [
+          "CRUD",
+          "Items:Links:Types"
+        ]
+      }
+    },
+    "/api/link-types/bulk": {
+      "post": {
+        "description": "Accepts a list of create/update/patch/delete operations (see the request model for more details).<br/>\nEach operation can target a single or multiple item-link-types.<br/>\nReturns a list of results for each input operation including errors.<br/>\nGuarantees that the size and order of the returned results matches the input list of operations.<br/>Requirements:<br/>- auth-client scopes: \"team\"<br/>- user role: \"admin\"<br/>- user permission: \"write\" or higher",
+        "operationId": "bulkItem-link-types",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "items": {
+                  "$ref": "#/components/schemas/Item-link-typeBulkAction"
+                },
+                "type": "array"
+              }
+            }
+          },
+          "required": false
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ItemLinkTypeRecordWithItemLinkTypeRecordEmbedOrNullList"
+                }
+              }
+            },
+            "description": ""
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "bad_request",
+                  "data": {},
+                  "message": "Request body is invalid"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If payload is invalid."
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "missing_token",
+                  "data": {},
+                  "message": "Access token is missing"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If missing authentication token."
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "forbidden",
+                  "data": {},
+                  "message": "Insufficient permission"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If user does not have the required permission, or user does not match the required role, or authenticated client does not have the required access scopes."
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "unknown_error",
+                  "data": {},
+                  "message": "Server error"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If any other error happens."
+          }
+        },
+        "security": [
+          {
+            "httpAuth": []
+          }
+        ],
+        "summary": "Perform multiple operations with item-link-types",
+        "tags": [
+          "CRUD",
+          "Items:Links:Types"
+        ]
+      }
+    },
+    "/api/link-types/list": {
+      "post": {
+        "description": "Returns a list of item-link-types resolved for the provided IDs.<br/>\nDoes not fail if any of the requested item-link-types is not found or not accessible - instead it returns corresponding error-object instead of an entity-object.<br/>\nGuarantees that the size and order of the returned list matches the requested IDs.<br/>Requirements:<br/>- auth-client scopes: \"team:read\"<br/>- user permission: \"read\" or higher",
+        "operationId": "listItem-link-types",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "items": {
+                  "format": "uuid",
+                  "type": "string"
+                },
+                "type": "array"
+              }
+            }
+          },
+          "required": false
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ItemLinkTypeRecordWithItemLinkTypeRecordEmbedOrNullList"
+                }
+              }
+            },
+            "description": ""
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "bad_request",
+                  "data": {},
+                  "message": "Request body is invalid"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If payload is invalid."
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "missing_token",
+                  "data": {},
+                  "message": "Access token is missing"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If missing authentication token."
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "forbidden",
+                  "data": {},
+                  "message": "Insufficient permission"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If user does not have the required permission, or authenticated client does not have the required access scopes."
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "unknown_error",
+                  "data": {},
+                  "message": "Server error"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If any other error happens."
+          }
+        },
+        "security": [
+          {
+            "httpAuth": []
+          }
+        ],
+        "summary": "Retrieve multiple item-link-types by their IDs",
+        "tags": [
+          "CRUD",
+          "Items:Links:Types"
+        ]
+      }
+    },
+    "/api/link-types/search": {
+      "post": {
+        "description": "Returns all item-link-types or searches item-link-types by query. Always returns only item-link-types which are accessible by the current user.<br/>Requirements:<br/>- auth-client scopes: \"team:read\"<br/>- user permission: \"read\" or higher",
+        "operationId": "searchItem-link-types",
+        "parameters": [
+          {
+            "description": "How many elements to skip.",
+            "in": "query",
+            "name": "offset",
+            "required": false,
+            "schema": {
+              "default": 0,
+              "format": "int32",
+              "minimum": 0,
+              "type": "integer"
+            }
+          },
+          {
+            "description": "How many elements to return.",
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "schema": {
+              "default": 1000,
+              "format": "int32",
+              "maximum": 1000,
+              "minimum": 0,
+              "type": "integer"
+            }
+          },
+          {
+            "deprecated": true,
+            "description": "From which element the page should start.",
+            "in": "query",
+            "name": "from",
+            "required": false,
+            "schema": {
+              "default": 0,
+              "deprecated": true,
+              "format": "int32",
+              "minimum": 0,
+              "type": "integer"
+            }
+          },
+          {
+            "deprecated": true,
+            "description": "At which element the page should end (excluding it).",
+            "in": "query",
+            "name": "to",
+            "required": false,
+            "schema": {
+              "deprecated": true,
+              "format": "int32",
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ItemLinkTypeSearchQuery"
+              }
+            }
+          },
+          "required": false
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ItemLinkTypeRecordWithItemLinkTypeRecordEmbedPage"
+                }
+              }
+            },
+            "description": ""
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "bad_request",
+                  "data": {},
+                  "message": "Request body is invalid"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If payload is invalid."
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "missing_token",
+                  "data": {},
+                  "message": "Access token is missing"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If missing authentication token."
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "forbidden",
+                  "data": {},
+                  "message": "Insufficient permission"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If user does not have the required permission, or authenticated client does not have the required access scopes."
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "unknown_error",
+                  "data": {},
+                  "message": "Server error"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If any other error happens."
+          }
+        },
+        "security": [
+          {
+            "httpAuth": []
+          }
+        ],
+        "summary": "Retrieve or search item-link-types",
+        "tags": [
+          "CRUD",
+          "Items:Links:Types"
+        ]
+      }
+    },
+    "/api/link-types/{item-link-typeId}": {
+      "delete": {
+        "description": "Returns empty result if the item-link-type was successfully deleted.<br/>Requirements:<br/>- auth-client scopes: \"team\"<br/>- user role: \"admin\"<br/>- user permission: \"write\" or higher",
+        "operationId": "deleteItem-link-type",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "item-link-typeId",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": ""
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "not_found",
+                  "data": {},
+                  "message": "Unknown entity 'fe4c0f30-aa35-3c41-99f9-a5f69c8c4192'"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If path parameters are invalid or resource does not exist."
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "missing_token",
+                  "data": {},
+                  "message": "Access token is missing"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If missing authentication token."
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "forbidden",
+                  "data": {},
+                  "message": "Insufficient permission"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If user does not have the required permission, or user does not match the required role, or authenticated client does not have the required access scopes."
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "unknown_error",
+                  "data": {},
+                  "message": "Server error"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If any other error happens."
+          }
+        },
+        "security": [
+          {
+            "httpAuth": []
+          }
+        ],
+        "summary": "Delete an existing item-link-type",
+        "tags": [
+          "CRUD",
+          "Items:Links:Types"
+        ]
+      },
+      "get": {
+        "description": "Returns found item-link-type.<br/>Requirements:<br/>- auth-client scopes: \"team:read\"<br/>- user permission: \"read\" or higher",
+        "operationId": "retrieveItem-link-type",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "item-link-typeId",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ItemLinkTypeRecordWithItemLinkTypeRecordEmbed"
+                }
+              }
+            },
+            "description": ""
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "not_found",
+                  "data": {},
+                  "message": "Unknown entity 'fe4c0f30-aa35-3c41-99f9-a5f69c8c4192'"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If path parameters are invalid or payload is invalid or resource does not exist."
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "missing_token",
+                  "data": {},
+                  "message": "Access token is missing"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If missing authentication token."
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "forbidden",
+                  "data": {},
+                  "message": "Insufficient permission"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If user does not have the required permission, or authenticated client does not have the required access scopes."
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "unknown_error",
+                  "data": {},
+                  "message": "Server error"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If any other error happens."
+          }
+        },
+        "security": [
+          {
+            "httpAuth": []
+          }
+        ],
+        "summary": "Retrieve a single item-link-type by its ID",
+        "tags": [
+          "CRUD",
+          "Items:Links:Types"
+        ]
+      },
+      "patch": {
+        "description": "Returns the whole updated item-link-type with its sanitised data.<br/>Requirements:<br/>- auth-client scopes: \"team\"<br/>- user role: \"admin\"<br/>- user permission: \"write\" or higher",
+        "operationId": "patchItem-link-type",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "item-link-typeId",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/JsonPatch"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ItemLinkTypeRecordWithItemLinkTypeRecordEmbed"
+                }
+              }
+            },
+            "description": ""
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "not_found",
+                  "data": {},
+                  "message": "Unknown entity 'fe4c0f30-aa35-3c41-99f9-a5f69c8c4192'"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If path parameters are invalid or payload is invalid or resource does not exist."
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "missing_token",
+                  "data": {},
+                  "message": "Access token is missing"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If missing authentication token."
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "forbidden",
+                  "data": {},
+                  "message": "Insufficient permission"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If user does not have the required permission, or user does not match the required role, or authenticated client does not have the required access scopes."
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "unknown_error",
+                  "data": {},
+                  "message": "Server error"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If any other error happens."
+          }
+        },
+        "security": [
+          {
+            "httpAuth": []
+          }
+        ],
+        "summary": "Patch an existing item-link-type",
+        "tags": [
+          "CRUD",
+          "Items:Links:Types"
+        ]
+      },
+      "put": {
+        "description": "Returns updated item-link-type with its sanitised data.<br/>Requirements:<br/>- auth-client scopes: \"team\"<br/>- user role: \"admin\"<br/>- user permission: \"write\" or higher",
+        "operationId": "updateItem-link-type",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "item-link-typeId",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateItemLinkTypeRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ItemLinkTypeRecordWithItemLinkTypeRecordEmbed"
+                }
+              }
+            },
+            "description": ""
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "not_found",
+                  "data": {},
+                  "message": "Unknown entity 'fe4c0f30-aa35-3c41-99f9-a5f69c8c4192'"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If path parameters are invalid or payload is invalid or resource does not exist."
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "missing_token",
+                  "data": {},
+                  "message": "Access token is missing"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If missing authentication token."
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "forbidden",
+                  "data": {},
+                  "message": "Insufficient permission"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If user does not have the required permission, or user does not match the required role, or authenticated client does not have the required access scopes."
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "unknown_error",
+                  "data": {},
+                  "message": "Server error"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If any other error happens."
+          }
+        },
+        "security": [
+          {
+            "httpAuth": []
+          }
+        ],
+        "summary": "Update an existing item-link-type",
+        "tags": [
+          "CRUD",
+          "Items:Links:Types"
         ]
       }
     },
@@ -17938,947 +18874,6 @@
         ],
         "tags": [
           "Team"
-        ]
-      }
-    },
-    "/api/teams/{teamId}/link-types": {
-      "post": {
-        "description": "Returns newly created item-link-type with its sanitised data.<br/>Requirements:<br/>- auth-client scopes: \"team\"<br/>- user role: \"admin\"<br/>- user permission: \"write\" or higher",
-        "operationId": "createItem-link-type",
-        "parameters": [
-          {
-            "description": "ID of the team which contains the managed item-link-types.",
-            "in": "path",
-            "name": "teamId",
-            "required": true,
-            "schema": {
-              "format": "uuid",
-              "type": "string"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateItemLinkTypeRequest"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ItemLinkTypeRecordWithItemLinkTypeRecordEmbed"
-                }
-              }
-            },
-            "description": ""
-          },
-          "400": {
-            "content": {
-              "application/json": {
-                "example": {
-                  "code": "bad_request",
-                  "data": {},
-                  "message": "Request body is invalid"
-                },
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            },
-            "description": "If payload is invalid."
-          },
-          "401": {
-            "content": {
-              "application/json": {
-                "example": {
-                  "code": "missing_token",
-                  "data": {},
-                  "message": "Access token is missing"
-                },
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            },
-            "description": "If missing authentication token."
-          },
-          "403": {
-            "content": {
-              "application/json": {
-                "example": {
-                  "code": "forbidden",
-                  "data": {},
-                  "message": "Insufficient permission"
-                },
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            },
-            "description": "If user does not have the required permission, or user does not match the required role, or authenticated client does not have the required access scopes."
-          },
-          "default": {
-            "content": {
-              "application/json": {
-                "example": {
-                  "code": "unknown_error",
-                  "data": {},
-                  "message": "Server error"
-                },
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            },
-            "description": "If any other error happens."
-          }
-        },
-        "security": [
-          {
-            "httpAuth": []
-          }
-        ],
-        "summary": "Create a new item-link-type",
-        "tags": [
-          "CRUD",
-          "Items:Links:Types"
-        ]
-      }
-    },
-    "/api/teams/{teamId}/link-types/bulk": {
-      "post": {
-        "description": "Accepts a list of create/update/patch/delete operations (see the request model for more details).<br/>\nEach operation can target a single or multiple item-link-types.<br/>\nReturns a list of results for each input operation including errors.<br/>\nGuarantees that the size and order of the returned results matches the input list of operations.<br/>Requirements:<br/>- auth-client scopes: \"team\"<br/>- user role: \"admin\"<br/>- user permission: \"write\" or higher",
-        "operationId": "bulkItem-link-types",
-        "parameters": [
-          {
-            "description": "ID of the team which contains the managed item-link-types.",
-            "in": "path",
-            "name": "teamId",
-            "required": true,
-            "schema": {
-              "format": "uuid",
-              "type": "string"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "items": {
-                  "$ref": "#/components/schemas/Item-link-typeBulkAction"
-                },
-                "type": "array"
-              }
-            }
-          },
-          "required": false
-        },
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ItemLinkTypeRecordWithItemLinkTypeRecordEmbedOrNullList"
-                }
-              }
-            },
-            "description": ""
-          },
-          "400": {
-            "content": {
-              "application/json": {
-                "example": {
-                  "code": "bad_request",
-                  "data": {},
-                  "message": "Request body is invalid"
-                },
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            },
-            "description": "If payload is invalid."
-          },
-          "401": {
-            "content": {
-              "application/json": {
-                "example": {
-                  "code": "missing_token",
-                  "data": {},
-                  "message": "Access token is missing"
-                },
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            },
-            "description": "If missing authentication token."
-          },
-          "403": {
-            "content": {
-              "application/json": {
-                "example": {
-                  "code": "forbidden",
-                  "data": {},
-                  "message": "Insufficient permission"
-                },
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            },
-            "description": "If user does not have the required permission, or user does not match the required role, or authenticated client does not have the required access scopes."
-          },
-          "default": {
-            "content": {
-              "application/json": {
-                "example": {
-                  "code": "unknown_error",
-                  "data": {},
-                  "message": "Server error"
-                },
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            },
-            "description": "If any other error happens."
-          }
-        },
-        "security": [
-          {
-            "httpAuth": []
-          }
-        ],
-        "summary": "Perform multiple operations with item-link-types",
-        "tags": [
-          "CRUD",
-          "Items:Links:Types"
-        ]
-      }
-    },
-    "/api/teams/{teamId}/link-types/list": {
-      "post": {
-        "description": "Returns a list of item-link-types resolved for the provided IDs.<br/>\nDoes not fail if any of the requested item-link-types is not found or not accessible - instead it returns corresponding error-object instead of an entity-object.<br/>\nGuarantees that the size and order of the returned list matches the requested IDs.<br/>Requirements:<br/>- auth-client scopes: \"team:read\"<br/>- user permission: \"read\" or higher",
-        "operationId": "listItem-link-types",
-        "parameters": [
-          {
-            "description": "ID of the team which contains the managed item-link-types.",
-            "in": "path",
-            "name": "teamId",
-            "required": true,
-            "schema": {
-              "format": "uuid",
-              "type": "string"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "items": {
-                  "format": "uuid",
-                  "type": "string"
-                },
-                "type": "array"
-              }
-            }
-          },
-          "required": false
-        },
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ItemLinkTypeRecordWithItemLinkTypeRecordEmbedOrNullList"
-                }
-              }
-            },
-            "description": ""
-          },
-          "400": {
-            "content": {
-              "application/json": {
-                "example": {
-                  "code": "bad_request",
-                  "data": {},
-                  "message": "Request body is invalid"
-                },
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            },
-            "description": "If payload is invalid."
-          },
-          "401": {
-            "content": {
-              "application/json": {
-                "example": {
-                  "code": "missing_token",
-                  "data": {},
-                  "message": "Access token is missing"
-                },
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            },
-            "description": "If missing authentication token."
-          },
-          "403": {
-            "content": {
-              "application/json": {
-                "example": {
-                  "code": "forbidden",
-                  "data": {},
-                  "message": "Insufficient permission"
-                },
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            },
-            "description": "If user does not have the required permission, or authenticated client does not have the required access scopes."
-          },
-          "default": {
-            "content": {
-              "application/json": {
-                "example": {
-                  "code": "unknown_error",
-                  "data": {},
-                  "message": "Server error"
-                },
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            },
-            "description": "If any other error happens."
-          }
-        },
-        "security": [
-          {
-            "httpAuth": []
-          }
-        ],
-        "summary": "Retrieve multiple item-link-types by their IDs",
-        "tags": [
-          "CRUD",
-          "Items:Links:Types"
-        ]
-      }
-    },
-    "/api/teams/{teamId}/link-types/search": {
-      "post": {
-        "description": "Returns all item-link-types or searches item-link-types by query. Always returns only item-link-types which are accessible by the current user.<br/>Requirements:<br/>- auth-client scopes: \"team:read\"<br/>- user permission: \"read\" or higher",
-        "operationId": "searchItem-link-types",
-        "parameters": [
-          {
-            "description": "ID of the team which contains the managed item-link-types.",
-            "in": "path",
-            "name": "teamId",
-            "required": true,
-            "schema": {
-              "format": "uuid",
-              "type": "string"
-            }
-          },
-          {
-            "description": "How many elements to skip.",
-            "in": "query",
-            "name": "offset",
-            "required": false,
-            "schema": {
-              "default": 0,
-              "format": "int32",
-              "minimum": 0,
-              "type": "integer"
-            }
-          },
-          {
-            "description": "How many elements to return.",
-            "in": "query",
-            "name": "limit",
-            "required": false,
-            "schema": {
-              "default": 1000,
-              "format": "int32",
-              "maximum": 1000,
-              "minimum": 0,
-              "type": "integer"
-            }
-          },
-          {
-            "deprecated": true,
-            "description": "From which element the page should start.",
-            "in": "query",
-            "name": "from",
-            "required": false,
-            "schema": {
-              "default": 0,
-              "deprecated": true,
-              "format": "int32",
-              "minimum": 0,
-              "type": "integer"
-            }
-          },
-          {
-            "deprecated": true,
-            "description": "At which element the page should end (excluding it).",
-            "in": "query",
-            "name": "to",
-            "required": false,
-            "schema": {
-              "deprecated": true,
-              "format": "int32",
-              "type": "integer"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/ItemLinkTypeSearchQuery"
-              }
-            }
-          },
-          "required": false
-        },
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ItemLinkTypeRecordWithItemLinkTypeRecordEmbedPage"
-                }
-              }
-            },
-            "description": ""
-          },
-          "400": {
-            "content": {
-              "application/json": {
-                "example": {
-                  "code": "bad_request",
-                  "data": {},
-                  "message": "Request body is invalid"
-                },
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            },
-            "description": "If payload is invalid."
-          },
-          "401": {
-            "content": {
-              "application/json": {
-                "example": {
-                  "code": "missing_token",
-                  "data": {},
-                  "message": "Access token is missing"
-                },
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            },
-            "description": "If missing authentication token."
-          },
-          "403": {
-            "content": {
-              "application/json": {
-                "example": {
-                  "code": "forbidden",
-                  "data": {},
-                  "message": "Insufficient permission"
-                },
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            },
-            "description": "If user does not have the required permission, or authenticated client does not have the required access scopes."
-          },
-          "default": {
-            "content": {
-              "application/json": {
-                "example": {
-                  "code": "unknown_error",
-                  "data": {},
-                  "message": "Server error"
-                },
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            },
-            "description": "If any other error happens."
-          }
-        },
-        "security": [
-          {
-            "httpAuth": []
-          }
-        ],
-        "summary": "Retrieve or search item-link-types",
-        "tags": [
-          "CRUD",
-          "Items:Links:Types"
-        ]
-      }
-    },
-    "/api/teams/{teamId}/link-types/{item-link-typeId}": {
-      "delete": {
-        "description": "Returns empty result if the item-link-type was successfully deleted.<br/>Requirements:<br/>- auth-client scopes: \"team\"<br/>- user role: \"admin\"<br/>- user permission: \"write\" or higher",
-        "operationId": "deleteItem-link-type",
-        "parameters": [
-          {
-            "description": "ID of the team which contains the managed item-link-types.",
-            "in": "path",
-            "name": "teamId",
-            "required": true,
-            "schema": {
-              "format": "uuid",
-              "type": "string"
-            }
-          },
-          {
-            "in": "path",
-            "name": "item-link-typeId",
-            "required": true,
-            "schema": {
-              "format": "uuid",
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": ""
-          },
-          "400": {
-            "content": {
-              "application/json": {
-                "example": {
-                  "code": "not_found",
-                  "data": {},
-                  "message": "Unknown entity 'fe4c0f30-aa35-3c41-99f9-a5f69c8c4192'"
-                },
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            },
-            "description": "If path parameters are invalid or resource does not exist."
-          },
-          "401": {
-            "content": {
-              "application/json": {
-                "example": {
-                  "code": "missing_token",
-                  "data": {},
-                  "message": "Access token is missing"
-                },
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            },
-            "description": "If missing authentication token."
-          },
-          "403": {
-            "content": {
-              "application/json": {
-                "example": {
-                  "code": "forbidden",
-                  "data": {},
-                  "message": "Insufficient permission"
-                },
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            },
-            "description": "If user does not have the required permission, or user does not match the required role, or authenticated client does not have the required access scopes."
-          },
-          "default": {
-            "content": {
-              "application/json": {
-                "example": {
-                  "code": "unknown_error",
-                  "data": {},
-                  "message": "Server error"
-                },
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            },
-            "description": "If any other error happens."
-          }
-        },
-        "security": [
-          {
-            "httpAuth": []
-          }
-        ],
-        "summary": "Delete an existing item-link-type",
-        "tags": [
-          "CRUD",
-          "Items:Links:Types"
-        ]
-      },
-      "get": {
-        "description": "Returns found item-link-type.<br/>Requirements:<br/>- auth-client scopes: \"team:read\"<br/>- user permission: \"read\" or higher",
-        "operationId": "retrieveItem-link-type",
-        "parameters": [
-          {
-            "description": "ID of the team which contains the managed item-link-types.",
-            "in": "path",
-            "name": "teamId",
-            "required": true,
-            "schema": {
-              "format": "uuid",
-              "type": "string"
-            }
-          },
-          {
-            "in": "path",
-            "name": "item-link-typeId",
-            "required": true,
-            "schema": {
-              "format": "uuid",
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ItemLinkTypeRecordWithItemLinkTypeRecordEmbed"
-                }
-              }
-            },
-            "description": ""
-          },
-          "400": {
-            "content": {
-              "application/json": {
-                "example": {
-                  "code": "not_found",
-                  "data": {},
-                  "message": "Unknown entity 'fe4c0f30-aa35-3c41-99f9-a5f69c8c4192'"
-                },
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            },
-            "description": "If path parameters are invalid or payload is invalid or resource does not exist."
-          },
-          "401": {
-            "content": {
-              "application/json": {
-                "example": {
-                  "code": "missing_token",
-                  "data": {},
-                  "message": "Access token is missing"
-                },
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            },
-            "description": "If missing authentication token."
-          },
-          "403": {
-            "content": {
-              "application/json": {
-                "example": {
-                  "code": "forbidden",
-                  "data": {},
-                  "message": "Insufficient permission"
-                },
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            },
-            "description": "If user does not have the required permission, or authenticated client does not have the required access scopes."
-          },
-          "default": {
-            "content": {
-              "application/json": {
-                "example": {
-                  "code": "unknown_error",
-                  "data": {},
-                  "message": "Server error"
-                },
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            },
-            "description": "If any other error happens."
-          }
-        },
-        "security": [
-          {
-            "httpAuth": []
-          }
-        ],
-        "summary": "Retrieve a single item-link-type by its ID",
-        "tags": [
-          "CRUD",
-          "Items:Links:Types"
-        ]
-      },
-      "patch": {
-        "description": "Returns the whole updated item-link-type with its sanitised data.<br/>Requirements:<br/>- auth-client scopes: \"team\"<br/>- user role: \"admin\"<br/>- user permission: \"write\" or higher",
-        "operationId": "patchItem-link-type",
-        "parameters": [
-          {
-            "description": "ID of the team which contains the managed item-link-types.",
-            "in": "path",
-            "name": "teamId",
-            "required": true,
-            "schema": {
-              "format": "uuid",
-              "type": "string"
-            }
-          },
-          {
-            "in": "path",
-            "name": "item-link-typeId",
-            "required": true,
-            "schema": {
-              "format": "uuid",
-              "type": "string"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/JsonPatch"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ItemLinkTypeRecordWithItemLinkTypeRecordEmbed"
-                }
-              }
-            },
-            "description": ""
-          },
-          "400": {
-            "content": {
-              "application/json": {
-                "example": {
-                  "code": "not_found",
-                  "data": {},
-                  "message": "Unknown entity 'fe4c0f30-aa35-3c41-99f9-a5f69c8c4192'"
-                },
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            },
-            "description": "If path parameters are invalid or payload is invalid or resource does not exist."
-          },
-          "401": {
-            "content": {
-              "application/json": {
-                "example": {
-                  "code": "missing_token",
-                  "data": {},
-                  "message": "Access token is missing"
-                },
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            },
-            "description": "If missing authentication token."
-          },
-          "403": {
-            "content": {
-              "application/json": {
-                "example": {
-                  "code": "forbidden",
-                  "data": {},
-                  "message": "Insufficient permission"
-                },
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            },
-            "description": "If user does not have the required permission, or user does not match the required role, or authenticated client does not have the required access scopes."
-          },
-          "default": {
-            "content": {
-              "application/json": {
-                "example": {
-                  "code": "unknown_error",
-                  "data": {},
-                  "message": "Server error"
-                },
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            },
-            "description": "If any other error happens."
-          }
-        },
-        "security": [
-          {
-            "httpAuth": []
-          }
-        ],
-        "summary": "Patch an existing item-link-type",
-        "tags": [
-          "CRUD",
-          "Items:Links:Types"
-        ]
-      },
-      "put": {
-        "description": "Returns updated item-link-type with its sanitised data.<br/>Requirements:<br/>- auth-client scopes: \"team\"<br/>- user role: \"admin\"<br/>- user permission: \"write\" or higher",
-        "operationId": "updateItem-link-type",
-        "parameters": [
-          {
-            "description": "ID of the team which contains the managed item-link-types.",
-            "in": "path",
-            "name": "teamId",
-            "required": true,
-            "schema": {
-              "format": "uuid",
-              "type": "string"
-            }
-          },
-          {
-            "in": "path",
-            "name": "item-link-typeId",
-            "required": true,
-            "schema": {
-              "format": "uuid",
-              "type": "string"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/UpdateItemLinkTypeRequest"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ItemLinkTypeRecordWithItemLinkTypeRecordEmbed"
-                }
-              }
-            },
-            "description": ""
-          },
-          "400": {
-            "content": {
-              "application/json": {
-                "example": {
-                  "code": "not_found",
-                  "data": {},
-                  "message": "Unknown entity 'fe4c0f30-aa35-3c41-99f9-a5f69c8c4192'"
-                },
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            },
-            "description": "If path parameters are invalid or payload is invalid or resource does not exist."
-          },
-          "401": {
-            "content": {
-              "application/json": {
-                "example": {
-                  "code": "missing_token",
-                  "data": {},
-                  "message": "Access token is missing"
-                },
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            },
-            "description": "If missing authentication token."
-          },
-          "403": {
-            "content": {
-              "application/json": {
-                "example": {
-                  "code": "forbidden",
-                  "data": {},
-                  "message": "Insufficient permission"
-                },
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            },
-            "description": "If user does not have the required permission, or user does not match the required role, or authenticated client does not have the required access scopes."
-          },
-          "default": {
-            "content": {
-              "application/json": {
-                "example": {
-                  "code": "unknown_error",
-                  "data": {},
-                  "message": "Server error"
-                },
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            },
-            "description": "If any other error happens."
-          }
-        },
-        "security": [
-          {
-            "httpAuth": []
-          }
-        ],
-        "summary": "Update an existing item-link-type",
-        "tags": [
-          "CRUD",
-          "Items:Links:Types"
         ]
       }
     },
