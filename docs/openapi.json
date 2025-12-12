@@ -2390,13 +2390,17 @@
       "GetItemsAnalyticsRequest": {
         "discriminator": {
           "mapping": {
-            "breakdown": "#/components/schemas/GetItemsAnalyticsRequestBreakdown"
+            "breakdown": "#/components/schemas/GetItemsAnalyticsRequestBreakdown",
+            "number": "#/components/schemas/GetItemsAnalyticsRequestNumber"
           },
           "propertyName": "type"
         },
         "oneOf": [
           {
             "$ref": "#/components/schemas/GetItemsAnalyticsRequestBreakdown"
+          },
+          {
+            "$ref": "#/components/schemas/GetItemsAnalyticsRequestNumber"
           }
         ],
         "title": "GetItemsAnalyticsRequest"
@@ -2429,6 +2433,7 @@
           }
         },
         "required": [
+          "breakdown",
           "type"
         ],
         "title": "GetItemsAnalyticsRequestBreakdown",
@@ -2627,6 +2632,31 @@
         "title": "GetItemsAnalyticsRequestBreakdownValueAggregation",
         "type": "object"
       },
+      "GetItemsAnalyticsRequestNumber": {
+        "properties": {
+          "aggregation": {
+            "$ref": "#/components/schemas/GetItemsAnalyticsRequestBreakdownValueAggregation"
+          },
+          "includeArchived": {
+            "default": false,
+            "description": "Includes archived items or not, default: false",
+            "type": "boolean"
+          },
+          "itemFilter": {
+            "$ref": "#/components/schemas/ItemSearchQueryFilter",
+            "description": "Filter applied on the items"
+          },
+          "type": {
+            "const": "number",
+            "type": "string"
+          }
+        },
+        "required": [
+          "type"
+        ],
+        "title": "GetItemsAnalyticsRequestNumber",
+        "type": "object"
+      },
       "GetItemsAnalyticsRequestProperty": {
         "discriminator": {
           "mapping": {
@@ -2774,7 +2804,8 @@
         "discriminator": {
           "mapping": {
             "breakdown": "#/components/schemas/GetItemsAnalyticsResponseBreakdown",
-            "error": "#/components/schemas/GetItemsAnalyticsResponseError"
+            "error": "#/components/schemas/GetItemsAnalyticsResponseError",
+            "number": "#/components/schemas/GetItemsAnalyticsResponseNumber"
           },
           "propertyName": "type"
         },
@@ -2784,6 +2815,9 @@
           },
           {
             "$ref": "#/components/schemas/GetItemsAnalyticsResponseError"
+          },
+          {
+            "$ref": "#/components/schemas/GetItemsAnalyticsResponseNumber"
           }
         ],
         "title": "GetItemsAnalyticsResponse"
@@ -3383,6 +3417,29 @@
           "type"
         ],
         "title": "GetItemsAnalyticsResponseError",
+        "type": "object"
+      },
+      "GetItemsAnalyticsResponseNumber": {
+        "properties": {
+          "itemCount": {
+            "description": "Count of unique items",
+            "format": "int64",
+            "type": "integer"
+          },
+          "type": {
+            "const": "number",
+            "type": "string"
+          },
+          "value": {
+            "description": "Aggregated value",
+            "type": "number"
+          }
+        },
+        "required": [
+          "itemCount",
+          "type"
+        ],
+        "title": "GetItemsAnalyticsResponseNumber",
         "type": "object"
       },
       "GlobalSearchQuery": {
@@ -16465,7 +16522,7 @@
   },
   "info": {
     "title": "airfocus API",
-    "version": "1.0.0-beta.42.8.4"
+    "version": "1.0.0-beta.42.13.0"
   },
   "openapi": "3.1.0",
   "paths": {
