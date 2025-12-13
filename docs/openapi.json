@@ -1891,6 +1891,7 @@
             "okr-time-period": "#/components/schemas/OkrTimePeriodFieldWithFieldEmbed",
             "people": "#/components/schemas/PeopleFieldWithFieldEmbed",
             "portal": "#/components/schemas/PortalFieldWithFieldEmbed",
+            "portfolio-source": "#/components/schemas/PortfolioSourceFieldWithFieldEmbed",
             "prioritization": "#/components/schemas/PrioritizationFieldWithFieldEmbed",
             "rich-text": "#/components/schemas/RichTextFieldWithFieldEmbed",
             "select": "#/components/schemas/SelectFieldWithFieldEmbed",
@@ -1955,6 +1956,9 @@
           },
           {
             "$ref": "#/components/schemas/PortalFieldWithFieldEmbed"
+          },
+          {
+            "$ref": "#/components/schemas/PortfolioSourceFieldWithFieldEmbed"
           },
           {
             "$ref": "#/components/schemas/PrioritizationFieldWithFieldEmbed"
@@ -10473,24 +10477,27 @@
       },
       "PortfolioAppSettings": {
         "properties": {
+          "portfolioFieldId": {
+            "description": "Id of a team-field installed by this app in all the source workspaces, which contains links between source items and this portfolio.",
+            "format": "uuid",
+            "type": "string"
+          },
           "sources": {
+            "description": "List of source workspaces with their corresponding settings, from where portfolio items should be pulled.",
             "items": {
               "$ref": "#/components/schemas/PortfolioAppSourceSettings"
             },
             "type": "array"
           },
-          "targetFieldId": {
-            "format": "uuid",
-            "type": "string"
-          },
           "workspaceId": {
+            "description": "Target workspace, where the portfolio will be configured.",
             "format": "uuid",
             "type": "string"
           }
         },
         "required": [
           "workspaceId",
-          "targetFieldId",
+          "portfolioFieldId",
           "sources"
         ],
         "title": "PortfolioAppSettings",
@@ -10499,9 +10506,11 @@
       "PortfolioAppSourceSettings": {
         "properties": {
           "filter": {
-            "$ref": "#/components/schemas/ItemSearchQueryFilter"
+            "$ref": "#/components/schemas/ItemSearchQueryFilter",
+            "description": "An item-search filter to pull only specific items into this portfolio."
           },
           "workspaceId": {
+            "description": "Id of the workspace, where the items should be pulled from.",
             "format": "uuid",
             "type": "string"
           }
@@ -10510,6 +10519,54 @@
           "workspaceId"
         ],
         "title": "PortfolioAppSourceSettings",
+        "type": "object"
+      },
+      "PortfolioSourceFieldWithFieldEmbed": {
+        "properties": {
+          "_embedded": {
+            "$ref": "#/components/schemas/FieldEmbed"
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "isTeamField": {
+            "type": "boolean"
+          },
+          "name": {
+            "type": "string"
+          },
+          "required": {
+            "type": "boolean"
+          },
+          "teamId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "typeId": {
+            "const": "portfolio-source",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "typeId",
+          "name",
+          "description",
+          "isTeamField",
+          "teamId",
+          "createdAt",
+          "required",
+          "_embedded"
+        ],
+        "title": "PortfolioSourceFieldWithFieldEmbed",
         "type": "object"
       },
       "PrioritizationApp": {
@@ -16522,7 +16579,7 @@
   },
   "info": {
     "title": "airfocus API",
-    "version": "1.0.0-beta.42.13.0"
+    "version": "1.0.0-beta.42.16.0"
   },
   "openapi": "3.1.0",
   "paths": {
