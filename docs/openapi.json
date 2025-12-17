@@ -4803,119 +4803,6 @@
         "title": "Item",
         "type": "object"
       },
-      "Item-link-typeBulkAction": {
-        "discriminator": {
-          "mapping": {
-            "create": "#/components/schemas/Item-link-typeBulkCreate",
-            "delete": "#/components/schemas/Item-link-typeBulkDelete",
-            "patch": "#/components/schemas/Item-link-typeBulkPatch",
-            "update": "#/components/schemas/Item-link-typeBulkUpdate"
-          },
-          "propertyName": "type"
-        },
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/Item-link-typeBulkCreate"
-          },
-          {
-            "$ref": "#/components/schemas/Item-link-typeBulkDelete"
-          },
-          {
-            "$ref": "#/components/schemas/Item-link-typeBulkPatch"
-          },
-          {
-            "$ref": "#/components/schemas/Item-link-typeBulkUpdate"
-          }
-        ],
-        "title": "Item-link-typeBulkAction"
-      },
-      "Item-link-typeBulkCreate": {
-        "properties": {
-          "resource": {
-            "$ref": "#/components/schemas/CreateItemLinkTypeRequest"
-          },
-          "type": {
-            "enum": [
-              "create"
-            ],
-            "type": "string"
-          }
-        },
-        "required": [
-          "resource",
-          "type"
-        ],
-        "title": "Item-link-typeBulkCreate",
-        "type": "object"
-      },
-      "Item-link-typeBulkDelete": {
-        "properties": {
-          "id": {
-            "format": "uuid",
-            "type": "string"
-          },
-          "type": {
-            "enum": [
-              "delete"
-            ],
-            "type": "string"
-          }
-        },
-        "required": [
-          "id",
-          "type"
-        ],
-        "title": "Item-link-typeBulkDelete",
-        "type": "object"
-      },
-      "Item-link-typeBulkPatch": {
-        "properties": {
-          "id": {
-            "format": "uuid",
-            "type": "string"
-          },
-          "transform": {
-            "$ref": "#/components/schemas/JsonPatch"
-          },
-          "type": {
-            "enum": [
-              "patch"
-            ],
-            "type": "string"
-          }
-        },
-        "required": [
-          "id",
-          "transform",
-          "type"
-        ],
-        "title": "Item-link-typeBulkPatch",
-        "type": "object"
-      },
-      "Item-link-typeBulkUpdate": {
-        "properties": {
-          "id": {
-            "format": "uuid",
-            "type": "string"
-          },
-          "resource": {
-            "$ref": "#/components/schemas/UpdateItemLinkTypeRequest"
-          },
-          "type": {
-            "enum": [
-              "update"
-            ],
-            "type": "string"
-          }
-        },
-        "required": [
-          "id",
-          "resource",
-          "type"
-        ],
-        "title": "Item-link-typeBulkUpdate",
-        "type": "object"
-      },
       "ItemAttachment": {
         "description": "A connection link between an item and an uploaded attachment.",
         "properties": {
@@ -5960,6 +5847,119 @@
         "title": "ItemLinkType",
         "type": "string"
       },
+      "ItemLinkTypeBulkAction": {
+        "discriminator": {
+          "mapping": {
+            "create": "#/components/schemas/ItemLinkTypeBulkCreate",
+            "delete": "#/components/schemas/ItemLinkTypeBulkDelete",
+            "patch": "#/components/schemas/ItemLinkTypeBulkPatch",
+            "update": "#/components/schemas/ItemLinkTypeBulkUpdate"
+          },
+          "propertyName": "type"
+        },
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/ItemLinkTypeBulkCreate"
+          },
+          {
+            "$ref": "#/components/schemas/ItemLinkTypeBulkDelete"
+          },
+          {
+            "$ref": "#/components/schemas/ItemLinkTypeBulkPatch"
+          },
+          {
+            "$ref": "#/components/schemas/ItemLinkTypeBulkUpdate"
+          }
+        ],
+        "title": "ItemLinkTypeBulkAction"
+      },
+      "ItemLinkTypeBulkCreate": {
+        "properties": {
+          "resource": {
+            "$ref": "#/components/schemas/CreateItemLinkTypeRequest"
+          },
+          "type": {
+            "enum": [
+              "create"
+            ],
+            "type": "string"
+          }
+        },
+        "required": [
+          "resource",
+          "type"
+        ],
+        "title": "ItemLinkTypeBulkCreate",
+        "type": "object"
+      },
+      "ItemLinkTypeBulkDelete": {
+        "properties": {
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "type": {
+            "enum": [
+              "delete"
+            ],
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "type"
+        ],
+        "title": "ItemLinkTypeBulkDelete",
+        "type": "object"
+      },
+      "ItemLinkTypeBulkPatch": {
+        "properties": {
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "transform": {
+            "$ref": "#/components/schemas/JsonPatch"
+          },
+          "type": {
+            "enum": [
+              "patch"
+            ],
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "transform",
+          "type"
+        ],
+        "title": "ItemLinkTypeBulkPatch",
+        "type": "object"
+      },
+      "ItemLinkTypeBulkUpdate": {
+        "properties": {
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "resource": {
+            "$ref": "#/components/schemas/UpdateItemLinkTypeRequest"
+          },
+          "type": {
+            "enum": [
+              "update"
+            ],
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "resource",
+          "type"
+        ],
+        "title": "ItemLinkTypeBulkUpdate",
+        "type": "object"
+      },
       "ItemLinkTypeRecordEmbed": {
         "title": "ItemLinkTypeRecordEmbed",
         "type": "object"
@@ -6993,6 +6993,9 @@
                 "$ref": "#/components/schemas/PortalFieldTypeFilter"
               },
               {
+                "$ref": "#/components/schemas/PortfolioSourceFieldFilter"
+              },
+              {
                 "$ref": "#/components/schemas/RichTextFieldTypeFilter"
               },
               {
@@ -7074,6 +7077,9 @@
               },
               {
                 "$ref": "#/components/schemas/PortalFieldTypeFilter"
+              },
+              {
+                "$ref": "#/components/schemas/PortfolioSourceFieldFilter"
               },
               {
                 "$ref": "#/components/schemas/RichTextFieldTypeFilter"
@@ -10521,6 +10527,33 @@
         "title": "PortfolioAppSourceSettings",
         "type": "object"
       },
+      "PortfolioSourceFieldFilter": {
+        "discriminator": {
+          "mapping": {
+            "defined": "#/components/schemas/PortfolioSourceFieldFilterDefined"
+          },
+          "propertyName": "type"
+        },
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/PortfolioSourceFieldFilterDefined"
+          }
+        ],
+        "title": "PortfolioSourceFieldFilter"
+      },
+      "PortfolioSourceFieldFilterDefined": {
+        "properties": {
+          "type": {
+            "const": "defined",
+            "type": "string"
+          }
+        },
+        "required": [
+          "type"
+        ],
+        "title": "PortfolioSourceFieldFilterDefined",
+        "type": "object"
+      },
       "PortfolioSourceFieldWithFieldEmbed": {
         "properties": {
           "_embedded": {
@@ -12206,6 +12239,288 @@
           "replacements"
         ],
         "title": "SetWorkspaceStatusesRequest",
+        "type": "object"
+      },
+      "ShareLink": {
+        "properties": {
+          "branding": {
+            "type": "boolean"
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "lastUsedAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          },
+          "secret": {
+            "type": "string"
+          },
+          "shareComments": {
+            "type": "boolean"
+          },
+          "shareDisplayOptions": {
+            "type": "boolean"
+          },
+          "shareFilters": {
+            "type": "boolean"
+          },
+          "shareRelations": {
+            "type": "boolean"
+          },
+          "userId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "viewId": {
+            "format": "uuid",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "secret",
+          "userId",
+          "viewId",
+          "name",
+          "shareRelations",
+          "shareComments",
+          "shareFilters",
+          "shareDisplayOptions",
+          "branding",
+          "createdAt"
+        ],
+        "title": "ShareLink",
+        "type": "object"
+      },
+      "ShareLinkBulkAction": {
+        "discriminator": {
+          "mapping": {
+            "create": "#/components/schemas/ShareLinkBulkCreate",
+            "delete": "#/components/schemas/ShareLinkBulkDelete",
+            "patch": "#/components/schemas/ShareLinkBulkPatch",
+            "update": "#/components/schemas/ShareLinkBulkUpdate"
+          },
+          "propertyName": "type"
+        },
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/ShareLinkBulkCreate"
+          },
+          {
+            "$ref": "#/components/schemas/ShareLinkBulkDelete"
+          },
+          {
+            "$ref": "#/components/schemas/ShareLinkBulkPatch"
+          },
+          {
+            "$ref": "#/components/schemas/ShareLinkBulkUpdate"
+          }
+        ],
+        "title": "ShareLinkBulkAction"
+      },
+      "ShareLinkBulkCreate": {
+        "properties": {
+          "resource": {
+            "$ref": "#/components/schemas/ShareLink"
+          },
+          "type": {
+            "enum": [
+              "create"
+            ],
+            "type": "string"
+          }
+        },
+        "required": [
+          "resource",
+          "type"
+        ],
+        "title": "ShareLinkBulkCreate",
+        "type": "object"
+      },
+      "ShareLinkBulkDelete": {
+        "properties": {
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "type": {
+            "enum": [
+              "delete"
+            ],
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "type"
+        ],
+        "title": "ShareLinkBulkDelete",
+        "type": "object"
+      },
+      "ShareLinkBulkPatch": {
+        "properties": {
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "transform": {
+            "$ref": "#/components/schemas/JsonPatch"
+          },
+          "type": {
+            "enum": [
+              "patch"
+            ],
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "transform",
+          "type"
+        ],
+        "title": "ShareLinkBulkPatch",
+        "type": "object"
+      },
+      "ShareLinkBulkUpdate": {
+        "properties": {
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "resource": {
+            "$ref": "#/components/schemas/ShareLink"
+          },
+          "type": {
+            "enum": [
+              "update"
+            ],
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "resource",
+          "type"
+        ],
+        "title": "ShareLinkBulkUpdate",
+        "type": "object"
+      },
+      "ShareLinkEmbed": {
+        "properties": {
+          "view": {
+            "$ref": "#/components/schemas/View"
+          }
+        },
+        "required": [
+          "view"
+        ],
+        "title": "ShareLinkEmbed",
+        "type": "object"
+      },
+      "ShareLinkWithShareLinkEmbed": {
+        "properties": {
+          "_embedded": {
+            "$ref": "#/components/schemas/ShareLinkEmbed"
+          },
+          "branding": {
+            "type": "boolean"
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "lastUsedAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          },
+          "secret": {
+            "type": "string"
+          },
+          "shareComments": {
+            "type": "boolean"
+          },
+          "shareDisplayOptions": {
+            "type": "boolean"
+          },
+          "shareFilters": {
+            "type": "boolean"
+          },
+          "shareRelations": {
+            "type": "boolean"
+          },
+          "userId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "viewId": {
+            "format": "uuid",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "secret",
+          "userId",
+          "viewId",
+          "name",
+          "shareRelations",
+          "shareComments",
+          "shareFilters",
+          "shareDisplayOptions",
+          "branding",
+          "createdAt",
+          "_embedded"
+        ],
+        "title": "ShareLinkWithShareLinkEmbed",
+        "type": "object"
+      },
+      "ShareLinkWithShareLinkEmbedOrNullList": {
+        "items": {
+          "$ref": "#/components/schemas/ShareLinkWithShareLinkEmbed"
+        },
+        "title": "ShareLinkWithShareLinkEmbedOrNullList",
+        "type": "array"
+      },
+      "ShareLinkWithShareLinkEmbedPage": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/ShareLinkWithShareLinkEmbed"
+            },
+            "type": "array"
+          },
+          "totalItems": {
+            "format": "int32",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "items",
+          "totalItems"
+        ],
+        "title": "ShareLinkWithShareLinkEmbedPage",
         "type": "object"
       },
       "Status": {
@@ -14121,6 +14436,61 @@
           "pending"
         ],
         "title": "UserState",
+        "type": "object"
+      },
+      "View": {
+        "properties": {
+          "description": {
+            "type": "string"
+          },
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "isPrivate": {
+            "type": "boolean"
+          },
+          "itemFilter": {
+            "$ref": "#/components/schemas/ItemSearchQueryFilter"
+          },
+          "itemSort": {
+            "items": {
+              "$ref": "#/components/schemas/ItemSearchQuerySort"
+            },
+            "type": "array"
+          },
+          "name": {
+            "type": "string"
+          },
+          "order": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "pinnedToPosition": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "settings": {},
+          "typeId": {
+            "type": "string"
+          },
+          "workspaceId": {
+            "format": "uuid",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "workspaceId",
+          "typeId",
+          "settings",
+          "name",
+          "description",
+          "itemSort",
+          "order",
+          "isPrivate"
+        ],
+        "title": "View",
         "type": "object"
       },
       "ViewEmbed": {
@@ -16579,7 +16949,7 @@
   },
   "info": {
     "title": "airfocus API",
-    "version": "1.0.0-beta.42.16.0"
+    "version": "1.0.0-beta.42.18.0"
   },
   "openapi": "3.1.0",
   "paths": {
@@ -16969,7 +17339,7 @@
     "/api/link-types": {
       "post": {
         "description": "Returns newly created item-link-type with its sanitised data.<br/>Requirements:<br/>- auth-client scopes: \"team\"<br/>- user role: \"admin\"<br/>- user permission: \"write\" or higher",
-        "operationId": "createItem-link-type",
+        "operationId": "createItemLinkType",
         "requestBody": {
           "content": {
             "application/json": {
@@ -17067,13 +17437,13 @@
     "/api/link-types/bulk": {
       "post": {
         "description": "Accepts a list of create/update/patch/delete operations (see the request model for more details).<br/>\nEach operation can target a single or multiple item-link-types.<br/>\nReturns a list of results for each input operation including errors.<br/>\nGuarantees that the size and order of the returned results matches the input list of operations.<br/>Requirements:<br/>- auth-client scopes: \"team\"<br/>- user role: \"admin\"<br/>- user permission: \"write\" or higher",
-        "operationId": "bulkItem-link-types",
+        "operationId": "bulkItemLinkTypes",
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
                 "items": {
-                  "$ref": "#/components/schemas/Item-link-typeBulkAction"
+                  "$ref": "#/components/schemas/ItemLinkTypeBulkAction"
                 },
                 "type": "array"
               }
@@ -17168,7 +17538,7 @@
     "/api/link-types/list": {
       "post": {
         "description": "Returns a list of item-link-types resolved for the provided IDs.<br/>\nDoes not fail if any of the requested item-link-types is not found or not accessible - instead it returns corresponding error-object instead of an entity-object.<br/>\nGuarantees that the size and order of the returned list matches the requested IDs.<br/>Requirements:<br/>- auth-client scopes: \"team:read\"<br/>- user permission: \"read\" or higher",
-        "operationId": "listItem-link-types",
+        "operationId": "listItemLinkTypes",
         "requestBody": {
           "content": {
             "application/json": {
@@ -17270,7 +17640,7 @@
     "/api/link-types/search": {
       "post": {
         "description": "Returns all item-link-types or searches item-link-types by query. Always returns only item-link-types which are accessible by the current user.<br/>Requirements:<br/>- auth-client scopes: \"team:read\"<br/>- user permission: \"read\" or higher",
-        "operationId": "searchItem-link-types",
+        "operationId": "searchItemLinkTypes",
         "parameters": [
           {
             "description": "How many elements to skip.",
@@ -17418,14 +17788,14 @@
         ]
       }
     },
-    "/api/link-types/{item-link-typeId}": {
+    "/api/link-types/{itemLinkTypeId}": {
       "delete": {
         "description": "Returns empty result if the item-link-type was successfully deleted.<br/>Requirements:<br/>- auth-client scopes: \"team\"<br/>- user role: \"admin\"<br/>- user permission: \"write\" or higher",
-        "operationId": "deleteItem-link-type",
+        "operationId": "deleteItemLinkType",
         "parameters": [
           {
             "in": "path",
-            "name": "item-link-typeId",
+            "name": "itemLinkTypeId",
             "required": true,
             "schema": {
               "format": "uuid",
@@ -17511,11 +17881,11 @@
       },
       "get": {
         "description": "Returns found item-link-type.<br/>Requirements:<br/>- auth-client scopes: \"team:read\"<br/>- user permission: \"read\" or higher",
-        "operationId": "retrieveItem-link-type",
+        "operationId": "retrieveItemLinkType",
         "parameters": [
           {
             "in": "path",
-            "name": "item-link-typeId",
+            "name": "itemLinkTypeId",
             "required": true,
             "schema": {
               "format": "uuid",
@@ -17608,11 +17978,11 @@
       },
       "patch": {
         "description": "Returns the whole updated item-link-type with its sanitised data.<br/>Requirements:<br/>- auth-client scopes: \"team\"<br/>- user role: \"admin\"<br/>- user permission: \"write\" or higher",
-        "operationId": "patchItem-link-type",
+        "operationId": "patchItemLinkType",
         "parameters": [
           {
             "in": "path",
-            "name": "item-link-typeId",
+            "name": "itemLinkTypeId",
             "required": true,
             "schema": {
               "format": "uuid",
@@ -17715,11 +18085,11 @@
       },
       "put": {
         "description": "Returns updated item-link-type with its sanitised data.<br/>Requirements:<br/>- auth-client scopes: \"team\"<br/>- user role: \"admin\"<br/>- user permission: \"write\" or higher",
-        "operationId": "updateItem-link-type",
+        "operationId": "updateItemLinkType",
         "parameters": [
           {
             "in": "path",
-            "name": "item-link-typeId",
+            "name": "itemLinkTypeId",
             "required": true,
             "schema": {
               "format": "uuid",
@@ -29396,6 +29766,1027 @@
         ]
       }
     },
+    "/api/workspaces/{workspaceId}/share-links": {
+      "post": {
+        "description": "Returns newly created share-link with its sanitised data.<br/>Requirements:<br/>- auth-client scopes: \"workspace\"<br/>- user permission: \"write\" or higher",
+        "operationId": "createShareLink",
+        "parameters": [
+          {
+            "deprecated": true,
+            "description": "Enable sudo-mode for admins for a single request, which gives full permission to all workspaces in the team.",
+            "in": "query",
+            "name": "actAsAdmin",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "description": "ID of the workspace which contains the share links.",
+            "in": "path",
+            "name": "workspaceId",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ShareLink"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ShareLinkWithShareLinkEmbed"
+                }
+              }
+            },
+            "description": ""
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "bad_request",
+                  "data": {},
+                  "message": "Request body is invalid"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If payload is invalid."
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "missing_token",
+                  "data": {},
+                  "message": "Access token is missing"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If missing authentication token."
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "forbidden",
+                  "data": {},
+                  "message": "Insufficient permission"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If user does not have the required permission, or authenticated client does not have the required access scopes."
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "unknown_error",
+                  "data": {},
+                  "message": "Server error"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If any other error happens."
+          }
+        },
+        "security": [
+          {
+            "httpAuth": []
+          }
+        ],
+        "summary": "Create a new share-link",
+        "tags": [
+          "CRUD",
+          "ShareLinks"
+        ]
+      }
+    },
+    "/api/workspaces/{workspaceId}/share-links/bulk": {
+      "post": {
+        "description": "Accepts a list of create/update/patch/delete operations (see the request model for more details).<br/>\nEach operation can target a single or multiple share-links.<br/>\nReturns a list of results for each input operation including errors.<br/>\nGuarantees that the size and order of the returned results matches the input list of operations.<br/>Requirements:<br/>- auth-client scopes: \"workspace\"<br/>- user permission: \"write\" or higher",
+        "operationId": "bulkShareLinks",
+        "parameters": [
+          {
+            "deprecated": true,
+            "description": "Enable sudo-mode for admins for a single request, which gives full permission to all workspaces in the team.",
+            "in": "query",
+            "name": "actAsAdmin",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "description": "ID of the workspace which contains the share links.",
+            "in": "path",
+            "name": "workspaceId",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "items": {
+                  "$ref": "#/components/schemas/ShareLinkBulkAction"
+                },
+                "type": "array"
+              }
+            }
+          },
+          "required": false
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ShareLinkWithShareLinkEmbedOrNullList"
+                }
+              }
+            },
+            "description": ""
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "bad_request",
+                  "data": {},
+                  "message": "Request body is invalid"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If payload is invalid."
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "missing_token",
+                  "data": {},
+                  "message": "Access token is missing"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If missing authentication token."
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "forbidden",
+                  "data": {},
+                  "message": "Insufficient permission"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If user does not have the required permission, or authenticated client does not have the required access scopes."
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "unknown_error",
+                  "data": {},
+                  "message": "Server error"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If any other error happens."
+          }
+        },
+        "security": [
+          {
+            "httpAuth": []
+          }
+        ],
+        "summary": "Perform multiple operations with share-links",
+        "tags": [
+          "CRUD",
+          "ShareLinks"
+        ]
+      }
+    },
+    "/api/workspaces/{workspaceId}/share-links/list": {
+      "post": {
+        "description": "Returns a list of share-links resolved for the provided IDs.<br/>\nDoes not fail if any of the requested share-links is not found or not accessible - instead it returns corresponding error-object instead of an entity-object.<br/>\nGuarantees that the size and order of the returned list matches the requested IDs.<br/>Requirements:<br/>- auth-client scopes: \"workspace:read\"<br/>- user permission: \"write\" or higher",
+        "operationId": "listShareLinks",
+        "parameters": [
+          {
+            "deprecated": true,
+            "description": "Enable sudo-mode for admins for a single request, which gives full permission to all workspaces in the team.",
+            "in": "query",
+            "name": "actAsAdmin",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "description": "ID of the workspace which contains the share links.",
+            "in": "path",
+            "name": "workspaceId",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "items": {
+                  "format": "uuid",
+                  "type": "string"
+                },
+                "type": "array"
+              }
+            }
+          },
+          "required": false
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ShareLinkWithShareLinkEmbedOrNullList"
+                }
+              }
+            },
+            "description": ""
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "bad_request",
+                  "data": {},
+                  "message": "Request body is invalid"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If payload is invalid."
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "missing_token",
+                  "data": {},
+                  "message": "Access token is missing"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If missing authentication token."
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "forbidden",
+                  "data": {},
+                  "message": "Insufficient permission"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If user does not have the required permission, or authenticated client does not have the required access scopes."
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "unknown_error",
+                  "data": {},
+                  "message": "Server error"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If any other error happens."
+          }
+        },
+        "security": [
+          {
+            "httpAuth": []
+          }
+        ],
+        "summary": "Retrieve multiple share-links by their IDs",
+        "tags": [
+          "CRUD",
+          "ShareLinks"
+        ]
+      }
+    },
+    "/api/workspaces/{workspaceId}/share-links/search": {
+      "post": {
+        "description": "Returns all share-links or searches share-links by query. Always returns only share-links which are accessible by the current user.<br/>Requirements:<br/>- auth-client scopes: \"workspace:read\"<br/>- user permission: \"write\" or higher",
+        "operationId": "searchShareLinks",
+        "parameters": [
+          {
+            "deprecated": true,
+            "description": "Enable sudo-mode for admins for a single request, which gives full permission to all workspaces in the team.",
+            "in": "query",
+            "name": "actAsAdmin",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "description": "ID of the workspace which contains the share links.",
+            "in": "path",
+            "name": "workspaceId",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "description": "How many elements to skip.",
+            "in": "query",
+            "name": "offset",
+            "required": false,
+            "schema": {
+              "default": 0,
+              "format": "int32",
+              "minimum": 0,
+              "type": "integer"
+            }
+          },
+          {
+            "description": "How many elements to return.",
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "schema": {
+              "default": 1000,
+              "format": "int32",
+              "maximum": 1000,
+              "minimum": 0,
+              "type": "integer"
+            }
+          },
+          {
+            "deprecated": true,
+            "description": "From which element the page should start.",
+            "in": "query",
+            "name": "from",
+            "required": false,
+            "schema": {
+              "default": 0,
+              "deprecated": true,
+              "format": "int32",
+              "minimum": 0,
+              "type": "integer"
+            }
+          },
+          {
+            "deprecated": true,
+            "description": "At which element the page should end (excluding it).",
+            "in": "query",
+            "name": "to",
+            "required": false,
+            "schema": {
+              "deprecated": true,
+              "format": "int32",
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          },
+          "required": false
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ShareLinkWithShareLinkEmbedPage"
+                }
+              }
+            },
+            "description": ""
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "bad_request",
+                  "data": {},
+                  "message": "Request body is invalid"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If payload is invalid."
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "missing_token",
+                  "data": {},
+                  "message": "Access token is missing"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If missing authentication token."
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "forbidden",
+                  "data": {},
+                  "message": "Insufficient permission"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If user does not have the required permission, or authenticated client does not have the required access scopes."
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "unknown_error",
+                  "data": {},
+                  "message": "Server error"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If any other error happens."
+          }
+        },
+        "security": [
+          {
+            "httpAuth": []
+          }
+        ],
+        "summary": "Retrieve or search share-links",
+        "tags": [
+          "CRUD",
+          "ShareLinks"
+        ]
+      }
+    },
+    "/api/workspaces/{workspaceId}/share-links/{shareLinkId}": {
+      "delete": {
+        "description": "Returns empty result if the share-link was successfully deleted.<br/>Requirements:<br/>- auth-client scopes: \"workspace\"<br/>- user permission: \"write\" or higher",
+        "operationId": "deleteShareLink",
+        "parameters": [
+          {
+            "deprecated": true,
+            "description": "Enable sudo-mode for admins for a single request, which gives full permission to all workspaces in the team.",
+            "in": "query",
+            "name": "actAsAdmin",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "description": "ID of the workspace which contains the share links.",
+            "in": "path",
+            "name": "workspaceId",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "shareLinkId",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": ""
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "not_found",
+                  "data": {},
+                  "message": "Unknown entity 'fe4c0f30-aa35-3c41-99f9-a5f69c8c4192'"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If path parameters are invalid or resource does not exist."
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "missing_token",
+                  "data": {},
+                  "message": "Access token is missing"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If missing authentication token."
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "forbidden",
+                  "data": {},
+                  "message": "Insufficient permission"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If user does not have the required permission, or authenticated client does not have the required access scopes."
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "unknown_error",
+                  "data": {},
+                  "message": "Server error"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If any other error happens."
+          }
+        },
+        "security": [
+          {
+            "httpAuth": []
+          }
+        ],
+        "summary": "Delete an existing share-link",
+        "tags": [
+          "CRUD",
+          "ShareLinks"
+        ]
+      },
+      "get": {
+        "description": "Returns found share-link.<br/>Requirements:<br/>- auth-client scopes: \"workspace:read\"<br/>- user permission: \"write\" or higher",
+        "operationId": "retrieveShareLink",
+        "parameters": [
+          {
+            "deprecated": true,
+            "description": "Enable sudo-mode for admins for a single request, which gives full permission to all workspaces in the team.",
+            "in": "query",
+            "name": "actAsAdmin",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "description": "ID of the workspace which contains the share links.",
+            "in": "path",
+            "name": "workspaceId",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "shareLinkId",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ShareLinkWithShareLinkEmbed"
+                }
+              }
+            },
+            "description": ""
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "not_found",
+                  "data": {},
+                  "message": "Unknown entity 'fe4c0f30-aa35-3c41-99f9-a5f69c8c4192'"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If path parameters are invalid or payload is invalid or resource does not exist."
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "missing_token",
+                  "data": {},
+                  "message": "Access token is missing"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If missing authentication token."
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "forbidden",
+                  "data": {},
+                  "message": "Insufficient permission"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If user does not have the required permission, or authenticated client does not have the required access scopes."
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "unknown_error",
+                  "data": {},
+                  "message": "Server error"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If any other error happens."
+          }
+        },
+        "security": [
+          {
+            "httpAuth": []
+          }
+        ],
+        "summary": "Retrieve a single share-link by its ID",
+        "tags": [
+          "CRUD",
+          "ShareLinks"
+        ]
+      },
+      "patch": {
+        "description": "Returns the whole updated share-link with its sanitised data.<br/>Requirements:<br/>- auth-client scopes: \"workspace\"<br/>- user permission: \"write\" or higher",
+        "operationId": "patchShareLink",
+        "parameters": [
+          {
+            "deprecated": true,
+            "description": "Enable sudo-mode for admins for a single request, which gives full permission to all workspaces in the team.",
+            "in": "query",
+            "name": "actAsAdmin",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "description": "ID of the workspace which contains the share links.",
+            "in": "path",
+            "name": "workspaceId",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "shareLinkId",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/JsonPatch"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ShareLinkWithShareLinkEmbed"
+                }
+              }
+            },
+            "description": ""
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "not_found",
+                  "data": {},
+                  "message": "Unknown entity 'fe4c0f30-aa35-3c41-99f9-a5f69c8c4192'"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If path parameters are invalid or payload is invalid or resource does not exist."
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "missing_token",
+                  "data": {},
+                  "message": "Access token is missing"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If missing authentication token."
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "forbidden",
+                  "data": {},
+                  "message": "Insufficient permission"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If user does not have the required permission, or authenticated client does not have the required access scopes."
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "unknown_error",
+                  "data": {},
+                  "message": "Server error"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If any other error happens."
+          }
+        },
+        "security": [
+          {
+            "httpAuth": []
+          }
+        ],
+        "summary": "Patch an existing share-link",
+        "tags": [
+          "CRUD",
+          "ShareLinks"
+        ]
+      },
+      "put": {
+        "description": "Returns updated share-link with its sanitised data.<br/>Requirements:<br/>- auth-client scopes: \"workspace\"<br/>- user permission: \"write\" or higher",
+        "operationId": "updateShareLink",
+        "parameters": [
+          {
+            "deprecated": true,
+            "description": "Enable sudo-mode for admins for a single request, which gives full permission to all workspaces in the team.",
+            "in": "query",
+            "name": "actAsAdmin",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "description": "ID of the workspace which contains the share links.",
+            "in": "path",
+            "name": "workspaceId",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "shareLinkId",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ShareLink"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ShareLinkWithShareLinkEmbed"
+                }
+              }
+            },
+            "description": ""
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "not_found",
+                  "data": {},
+                  "message": "Unknown entity 'fe4c0f30-aa35-3c41-99f9-a5f69c8c4192'"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If path parameters are invalid or payload is invalid or resource does not exist."
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "missing_token",
+                  "data": {},
+                  "message": "Access token is missing"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If missing authentication token."
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "forbidden",
+                  "data": {},
+                  "message": "Insufficient permission"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If user does not have the required permission, or authenticated client does not have the required access scopes."
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "unknown_error",
+                  "data": {},
+                  "message": "Server error"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If any other error happens."
+          }
+        },
+        "security": [
+          {
+            "httpAuth": []
+          }
+        ],
+        "summary": "Update an existing share-link",
+        "tags": [
+          "CRUD",
+          "ShareLinks"
+        ]
+      }
+    },
     "/api/workspaces/{workspaceId}/statuses": {
       "post": {
         "description": "Sets statuses (all at once) for the specified workspace.\nNew statuses in the list will be added to the database, missing statuses will be removed from the database, all other statuses will be updated.\nEach workspace must have at least one status in each category: 'draft', 'active', 'closed'<br/>Requirements:<br/>- auth-client scopes: \"workspace\"<br/>- user permission: \"write\" or higher",
@@ -29609,6 +31000,10 @@
     {
       "description": "Endpoints for managing the user profile",
       "name": "Profile"
+    },
+    {
+      "description": "Endpoints for sharing views via public links.",
+      "name": "ShareLinks"
     },
     {
       "description": "Endpoints for managing the team and users",
