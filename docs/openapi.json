@@ -621,7 +621,7 @@
         "required": [
           "fromItemId",
           "toItemId",
-          "type",
+          "typeId",
           "fromOrder",
           "toOrder"
         ],
@@ -6073,6 +6073,7 @@
           "fromItemId",
           "toItemId",
           "type",
+          "typeId",
           "fromOrder",
           "toOrder",
           "_embedded"
@@ -13801,7 +13802,7 @@
         "required": [
           "fromItemId",
           "toItemId",
-          "type",
+          "typeId",
           "fromOrder",
           "toOrder"
         ],
@@ -16949,7 +16950,7 @@
   },
   "info": {
     "title": "airfocus API",
-    "version": "1.0.0-beta.42.21.7"
+    "version": "1.0.0-beta.42.25.0"
   },
   "openapi": "3.1.0",
   "paths": {
