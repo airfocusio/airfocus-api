@@ -984,6 +984,9 @@
             "description": "A custom code of this workspace (e.g. PROD, DEV, etc), which is used to create aliases for items (e.g. DEV-123). Alias should consist of 1-10 uppercase letters, and should be unique within the team.",
             "type": "string"
           },
+          "assigneeSettings": {
+            "$ref": "#/components/schemas/WorkspaceAssigneeSettings"
+          },
           "defaultPermission": {
             "$ref": "#/components/schemas/Permission",
             "description": "Default permission for all the team members in this workspace. Note: the final permission can be adjusted corresponding to each user's role, e.g. contributors can't have more than Comment permission."
@@ -1028,6 +1031,9 @@
           "alias": {
             "description": "A custom code of this workspace (e.g. PROD, DEV, etc), which is used to create aliases for items (e.g. DEV-123). Alias should consist of 1-10 uppercase letters, and should be unique within the team.",
             "type": "string"
+          },
+          "assigneeSettings": {
+            "$ref": "#/components/schemas/WorkspaceAssigneeSettings"
           },
           "defaultPermission": {
             "$ref": "#/components/schemas/Permission",
@@ -14208,6 +14214,9 @@
             "description": "A custom code of this workspace (e.g. PROD, DEV, etc), which is used to create aliases for items (e.g. DEV-123). Alias should consist of 1-10 uppercase letters, and should be unique within the team.",
             "type": "string"
           },
+          "assigneeSettings": {
+            "$ref": "#/components/schemas/WorkspaceAssigneeSettings"
+          },
           "defaultPermission": {
             "$ref": "#/components/schemas/Permission",
             "description": "Default permission for all the team members in this workspace. Note: the final permission can be adjusted corresponding to each user's role, e.g. contributors can't have more than Comment permission."
@@ -14252,6 +14261,9 @@
           "alias": {
             "description": "A custom code of this workspace (e.g. PROD, DEV, etc), which is used to create aliases for items (e.g. DEV-123). Alias should consist of 1-10 uppercase letters, and should be unique within the team.",
             "type": "string"
+          },
+          "assigneeSettings": {
+            "$ref": "#/components/schemas/WorkspaceAssigneeSettings"
           },
           "defaultPermission": {
             "$ref": "#/components/schemas/Permission",
@@ -14921,6 +14933,9 @@
             "description": "A custom code of this workspace (e.g. PROD, DEV, etc), which is used to create aliases for items (e.g. DEV-123). Alias should consist of 1-10 uppercase letters, and should be unique within the team.",
             "type": "string"
           },
+          "assigneeSettings": {
+            "$ref": "#/components/schemas/WorkspaceAssigneeSettings"
+          },
           "createdAt": {
             "description": "Timestamp of when this workspace was created.",
             "format": "date-time",
@@ -14989,6 +15004,23 @@
           "order"
         ],
         "title": "Workspace",
+        "type": "object"
+      },
+      "WorkspaceAssigneeSettings": {
+        "default": {
+          "required": false
+        },
+        "description": "Configuration settings for the assignees field in this workspace.",
+        "properties": {
+          "required": {
+            "description": "Whether the assignees field is required when creating or updating items.",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "required"
+        ],
+        "title": "WorkspaceAssigneeSettings",
         "type": "object"
       },
       "WorkspaceBulkAction": {
@@ -16548,6 +16580,9 @@
             "description": "A custom code of this workspace (e.g. PROD, DEV, etc), which is used to create aliases for items (e.g. DEV-123). Alias should consist of 1-10 uppercase letters, and should be unique within the team.",
             "type": "string"
           },
+          "assigneeSettings": {
+            "$ref": "#/components/schemas/WorkspaceAssigneeSettings"
+          },
           "createdAt": {
             "description": "Timestamp of when this workspace was created.",
             "format": "date-time",
@@ -16638,6 +16673,9 @@
           "alias": {
             "description": "A custom code of this workspace (e.g. PROD, DEV, etc), which is used to create aliases for items (e.g. DEV-123). Alias should consist of 1-10 uppercase letters, and should be unique within the team.",
             "type": "string"
+          },
+          "assigneeSettings": {
+            "$ref": "#/components/schemas/WorkspaceAssigneeSettings"
           },
           "createdAt": {
             "description": "Timestamp of when this workspace was created.",
@@ -16742,6 +16780,9 @@
             "description": "A custom code of this workspace (e.g. PROD, DEV, etc), which is used to create aliases for items (e.g. DEV-123). Alias should consist of 1-10 uppercase letters, and should be unique within the team.",
             "type": "string"
           },
+          "assigneeSettings": {
+            "$ref": "#/components/schemas/WorkspaceAssigneeSettings"
+          },
           "createdAt": {
             "description": "Timestamp of when this workspace was created.",
             "format": "date-time",
@@ -16828,6 +16869,9 @@
           "alias": {
             "description": "A custom code of this workspace (e.g. PROD, DEV, etc), which is used to create aliases for items (e.g. DEV-123). Alias should consist of 1-10 uppercase letters, and should be unique within the team.",
             "type": "string"
+          },
+          "assigneeSettings": {
+            "$ref": "#/components/schemas/WorkspaceAssigneeSettings"
           },
           "createdAt": {
             "description": "Timestamp of when this workspace was created.",
@@ -16956,7 +17000,7 @@
   },
   "info": {
     "title": "airfocus API",
-    "version": "1.0.0-beta.42.31.3"
+    "version": "1.0.0-beta.42.33.2"
   },
   "openapi": "3.1.0",
   "paths": {
