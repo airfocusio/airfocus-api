@@ -242,6 +242,89 @@
         "title": "ApplyTemplateRequest",
         "type": "object"
       },
+      "AsanaIntegrationSummary": {
+        "properties": {
+          "capabilities": {
+            "$ref": "#/components/schemas/IntegrationCapabilities"
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "enabled": {
+            "type": "boolean"
+          },
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "lastSyncAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "lastSyncState": {
+            "$ref": "#/components/schemas/IntegrationSyncState"
+          },
+          "settings": {
+            "$ref": "#/components/schemas/AsanaIntegrationTypeSettings"
+          },
+          "typeId": {
+            "const": "asana",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "typeId",
+          "settings",
+          "createdAt",
+          "capabilities",
+          "enabled"
+        ],
+        "title": "AsanaIntegrationSummary",
+        "type": "object"
+      },
+      "AsanaIntegrationTypeSettings": {
+        "properties": {
+          "autoSync": {
+            "type": "boolean"
+          },
+          "mappings": {
+            "default": [],
+            "items": {
+              "$ref": "#/components/schemas/MappingSettingsIntegrationMappingSettings"
+            },
+            "type": "array"
+          },
+          "removeExtraneous": {
+            "type": "boolean"
+          },
+          "secrets": {
+            "$ref": "#/components/schemas/IntegrationSecrets"
+          },
+          "selectProject": {
+            "type": "string"
+          },
+          "selectTags": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "selectWorkspace": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "removeExtraneous",
+          "autoSync"
+        ],
+        "title": "AsanaIntegrationTypeSettings",
+        "type": "object"
+      },
       "AttachmentSearchQuery": {
         "properties": {
           "itemId": {
@@ -250,6 +333,164 @@
           }
         },
         "title": "AttachmentSearchQuery",
+        "type": "object"
+      },
+      "AuthorFormatLevel": {
+        "enum": [
+          "email",
+          "name",
+          "type"
+        ],
+        "title": "AuthorFormatLevel",
+        "type": "string"
+      },
+      "AzureDevopsIntegrationSummary": {
+        "properties": {
+          "capabilities": {
+            "$ref": "#/components/schemas/IntegrationCapabilities"
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "enabled": {
+            "type": "boolean"
+          },
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "lastSyncAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "lastSyncState": {
+            "$ref": "#/components/schemas/IntegrationSyncState"
+          },
+          "settings": {
+            "$ref": "#/components/schemas/AzureDevopsIntegrationTypeSettings"
+          },
+          "typeId": {
+            "const": "azure-devops",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "typeId",
+          "settings",
+          "createdAt",
+          "capabilities",
+          "enabled"
+        ],
+        "title": "AzureDevopsIntegrationSummary",
+        "type": "object"
+      },
+      "AzureDevopsIntegrationTypeSettings": {
+        "properties": {
+          "addLabel": {
+            "type": "string"
+          },
+          "autoSync": {
+            "type": "boolean"
+          },
+          "baseUrl": {
+            "type": "string"
+          },
+          "connectRelatives": {
+            "type": "boolean"
+          },
+          "includeSubAreas": {
+            "type": "boolean"
+          },
+          "mappings": {
+            "default": [],
+            "items": {
+              "$ref": "#/components/schemas/MappingSettingsIntegrationMappingSettings"
+            },
+            "type": "array"
+          },
+          "onPremiseSecrets": {
+            "$ref": "#/components/schemas/AzureDevopsIntegrationTypeSettingsAzureDevopsOnPremiseSecrets"
+          },
+          "removeExtraneous": {
+            "type": "boolean"
+          },
+          "search": {
+            "type": "string"
+          },
+          "secrets": {
+            "$ref": "#/components/schemas/AzureDevopsIntegrationTypeSettingsAzureDevopsSettingsSecrets"
+          },
+          "selectAccount": {
+            "type": "string"
+          },
+          "selectArea": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "selectProject": {
+            "type": "string"
+          },
+          "showDescription": {
+            "type": "boolean"
+          },
+          "title": {
+            "type": "string"
+          },
+          "twoWay": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "includeSubAreas",
+          "showDescription",
+          "removeExtraneous",
+          "twoWay",
+          "autoSync",
+          "connectRelatives"
+        ],
+        "title": "AzureDevopsIntegrationTypeSettings",
+        "type": "object"
+      },
+      "AzureDevopsIntegrationTypeSettingsAzureDevopsOnPremiseSecrets": {
+        "properties": {
+          "accountName": {
+            "type": "string"
+          },
+          "personalAccessToken": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "personalAccessToken",
+          "accountName"
+        ],
+        "title": "AzureDevopsIntegrationTypeSettingsAzureDevopsOnPremiseSecrets",
+        "type": "object"
+      },
+      "AzureDevopsIntegrationTypeSettingsAzureDevopsSettingsSecrets": {
+        "properties": {
+          "accessToken": {
+            "type": "string"
+          },
+          "expiration": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "refreshToken": {
+            "type": "string"
+          },
+          "tokenType": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "accessToken",
+          "expiration",
+          "refreshToken"
+        ],
+        "title": "AzureDevopsIntegrationTypeSettingsAzureDevopsSettingsSecrets",
         "type": "object"
       },
       "BooleanFieldTypeFilter": {
@@ -430,6 +671,48 @@
           "role"
         ],
         "title": "ChangeUserRoleRequest",
+        "type": "object"
+      },
+      "ClubhouseIntegrationSummary": {
+        "properties": {
+          "capabilities": {
+            "$ref": "#/components/schemas/IntegrationCapabilities"
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "enabled": {
+            "type": "boolean"
+          },
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "lastSyncAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "lastSyncState": {
+            "$ref": "#/components/schemas/IntegrationSyncState"
+          },
+          "settings": {
+            "$ref": "#/components/schemas/ShortcutIntegrationTypeSettings"
+          },
+          "typeId": {
+            "const": "clubhouse",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "typeId",
+          "settings",
+          "createdAt",
+          "capabilities",
+          "enabled"
+        ],
+        "title": "ClubhouseIntegrationSummary",
         "type": "object"
       },
       "CommentBulkAction": {
@@ -3452,6 +3735,136 @@
         "title": "GetItemsAnalyticsResponseNumber",
         "type": "object"
       },
+      "GithubIntegrationSummary": {
+        "properties": {
+          "capabilities": {
+            "$ref": "#/components/schemas/IntegrationCapabilities"
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "enabled": {
+            "type": "boolean"
+          },
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "lastSyncAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "lastSyncState": {
+            "$ref": "#/components/schemas/IntegrationSyncState"
+          },
+          "settings": {
+            "$ref": "#/components/schemas/GithubIntegrationTypeSettings"
+          },
+          "typeId": {
+            "const": "github",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "typeId",
+          "settings",
+          "createdAt",
+          "capabilities",
+          "enabled"
+        ],
+        "title": "GithubIntegrationSummary",
+        "type": "object"
+      },
+      "GithubIntegrationTypeSettings": {
+        "properties": {
+          "accessToken": {
+            "type": "string"
+          },
+          "addLabel": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "autoSync": {
+            "type": "boolean"
+          },
+          "mapSelectFieldAndLabels": {
+            "$ref": "#/components/schemas/GithubIntegrationTypeSettingsLabelMapping"
+          },
+          "mappings": {
+            "default": [],
+            "items": {
+              "$ref": "#/components/schemas/MappingSettingsIntegrationMappingSettings"
+            },
+            "type": "array"
+          },
+          "removeExtraneous": {
+            "type": "boolean"
+          },
+          "selectLabels": {
+            "items": {
+              "format": "int64",
+              "type": "integer"
+            },
+            "type": "array"
+          },
+          "selectRepository": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "title": {
+            "type": "string"
+          },
+          "twoWay": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "removeExtraneous",
+          "twoWay",
+          "autoSync"
+        ],
+        "title": "GithubIntegrationTypeSettings",
+        "type": "object"
+      },
+      "GithubIntegrationTypeSettingsLabelMapping": {
+        "properties": {
+          "fieldId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "pairs": {
+            "items": {
+              "$ref": "#/components/schemas/GithubIntegrationTypeSettingsLabelMappingPair"
+            },
+            "type": "array"
+          }
+        },
+        "required": [
+          "fieldId",
+          "pairs"
+        ],
+        "title": "GithubIntegrationTypeSettingsLabelMapping",
+        "type": "object"
+      },
+      "GithubIntegrationTypeSettingsLabelMappingPair": {
+        "properties": {
+          "labelId": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "optionId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "optionId",
+          "labelId"
+        ],
+        "title": "GithubIntegrationTypeSettingsLabelMappingPair",
+        "type": "object"
+      },
       "GlobalSearchQuery": {
         "default": {
           "archived": false,
@@ -3768,6 +4181,17 @@
         ],
         "title": "InboxViewCountersRequest",
         "type": "object"
+      },
+      "InputFormat": {
+        "default": "text",
+        "enum": [
+          "html",
+          "markdown",
+          "slack",
+          "text"
+        ],
+        "title": "InputFormat",
+        "type": "string"
       },
       "InsightsApp": {
         "properties": {
@@ -4514,6 +4938,30 @@
         "title": "InstallTimePeriodFieldRequest",
         "type": "object"
       },
+      "IntegrationAuthorizationCodeChallenge": {
+        "properties": {
+          "challenge": {
+            "type": "string"
+          },
+          "method": {
+            "$ref": "#/components/schemas/IntegrationAuthorizationCodeChallengeMethod"
+          }
+        },
+        "required": [
+          "challenge",
+          "method"
+        ],
+        "title": "IntegrationAuthorizationCodeChallenge",
+        "type": "object"
+      },
+      "IntegrationAuthorizationCodeChallengeMethod": {
+        "enum": [
+          "plain",
+          "S256"
+        ],
+        "title": "IntegrationAuthorizationCodeChallengeMethod",
+        "type": "string"
+      },
       "IntegrationCapabilities": {
         "properties": {
           "debug": {
@@ -4538,44 +4986,132 @@
         "title": "IntegrationCapabilities",
         "type": "object"
       },
-      "IntegrationSummary": {
+      "IntegrationClientConnectionSettings": {
         "properties": {
-          "capabilities": {
-            "$ref": "#/components/schemas/IntegrationCapabilities"
-          },
-          "createdAt": {
-            "format": "date-time",
+          "clientId": {
             "type": "string"
           },
-          "enabled": {
-            "type": "boolean"
-          },
-          "id": {
-            "format": "uuid",
+          "clientSecret": {
             "type": "string"
           },
-          "lastSyncAt": {
-            "format": "date-time",
-            "type": "string"
+          "codeChallenge": {
+            "$ref": "#/components/schemas/IntegrationAuthorizationCodeChallenge"
           },
-          "lastSyncState": {
-            "$ref": "#/components/schemas/IntegrationSyncState"
-          },
-          "settings": {},
-          "typeId": {
+          "tokenIntrospectionUri": {
             "type": "string"
           }
         },
         "required": [
-          "id",
-          "typeId",
-          "settings",
-          "createdAt",
-          "capabilities",
-          "enabled"
+          "clientId",
+          "clientSecret"
         ],
-        "title": "IntegrationSummary",
+        "title": "IntegrationClientConnectionSettings",
         "type": "object"
+      },
+      "IntegrationSecrets": {
+        "properties": {
+          "accessToken": {
+            "type": "string"
+          },
+          "accessTokenExpiresAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "refreshToken": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "accessToken"
+        ],
+        "title": "IntegrationSecrets",
+        "type": "object"
+      },
+      "IntegrationSslConfiguration": {
+        "properties": {
+          "clientAuthentication": {
+            "$ref": "#/components/schemas/IntegrationSslConfigurationClientAuthentication"
+          },
+          "trustedCertificates": {
+            "type": "string"
+          }
+        },
+        "title": "IntegrationSslConfiguration",
+        "type": "object"
+      },
+      "IntegrationSslConfigurationClientAuthentication": {
+        "properties": {
+          "certificate": {
+            "type": "string"
+          },
+          "key": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "certificate",
+          "key"
+        ],
+        "title": "IntegrationSslConfigurationClientAuthentication",
+        "type": "object"
+      },
+      "IntegrationSummary": {
+        "discriminator": {
+          "mapping": {
+            "asana": "#/components/schemas/AsanaIntegrationSummary",
+            "azure-devops": "#/components/schemas/AzureDevopsIntegrationSummary",
+            "clubhouse": "#/components/schemas/ClubhouseIntegrationSummary",
+            "github": "#/components/schemas/GithubIntegrationSummary",
+            "intercom": "#/components/schemas/IntercomIntegrationSummary",
+            "jira": "#/components/schemas/JiraIntegrationSummary",
+            "linear": "#/components/schemas/LinearIntegrationSummary",
+            "planner": "#/components/schemas/PlannerIntegrationSummary",
+            "salesforce": "#/components/schemas/SalesforceIntegrationSummary",
+            "trello": "#/components/schemas/TrelloIntegrationSummary",
+            "webhook": "#/components/schemas/WebhookIntegrationSummary",
+            "zendesk": "#/components/schemas/ZendeskIntegrationSummary"
+          },
+          "propertyName": "typeId"
+        },
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/AsanaIntegrationSummary"
+          },
+          {
+            "$ref": "#/components/schemas/AzureDevopsIntegrationSummary"
+          },
+          {
+            "$ref": "#/components/schemas/ClubhouseIntegrationSummary"
+          },
+          {
+            "$ref": "#/components/schemas/GithubIntegrationSummary"
+          },
+          {
+            "$ref": "#/components/schemas/IntercomIntegrationSummary"
+          },
+          {
+            "$ref": "#/components/schemas/JiraIntegrationSummary"
+          },
+          {
+            "$ref": "#/components/schemas/LinearIntegrationSummary"
+          },
+          {
+            "$ref": "#/components/schemas/PlannerIntegrationSummary"
+          },
+          {
+            "$ref": "#/components/schemas/SalesforceIntegrationSummary"
+          },
+          {
+            "$ref": "#/components/schemas/TrelloIntegrationSummary"
+          },
+          {
+            "$ref": "#/components/schemas/WebhookIntegrationSummary"
+          },
+          {
+            "$ref": "#/components/schemas/ZendeskIntegrationSummary"
+          }
+        ],
+        "title": "IntegrationSummary"
       },
       "IntegrationSyncState": {
         "properties": {
@@ -4603,6 +5139,119 @@
           "failedRunsCount"
         ],
         "title": "IntegrationSyncState",
+        "type": "object"
+      },
+      "IntercomIntegrationSummary": {
+        "properties": {
+          "capabilities": {
+            "$ref": "#/components/schemas/IntegrationCapabilities"
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "enabled": {
+            "type": "boolean"
+          },
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "lastSyncAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "lastSyncState": {
+            "$ref": "#/components/schemas/IntegrationSyncState"
+          },
+          "settings": {
+            "$ref": "#/components/schemas/IntercomIntegrationTypeSettings"
+          },
+          "typeId": {
+            "const": "intercom",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "typeId",
+          "settings",
+          "createdAt",
+          "capabilities",
+          "enabled"
+        ],
+        "title": "IntercomIntegrationSummary",
+        "type": "object"
+      },
+      "IntercomIntegrationTypeSettings": {
+        "properties": {
+          "accessToken": {
+            "type": "string"
+          },
+          "authorFormat": {
+            "$ref": "#/components/schemas/AuthorFormatLevel"
+          },
+          "autoSync": {
+            "type": "boolean"
+          },
+          "importFrom": {
+            "format": "date",
+            "type": "string"
+          },
+          "mapping": {
+            "items": {
+              "$ref": "#/components/schemas/IntercomIntegrationTypeSettingsMapping"
+            },
+            "type": "array",
+            "uniqueItems": true
+          },
+          "mappings": {
+            "default": [],
+            "items": {
+              "$ref": "#/components/schemas/MappingSettingsIntegrationMappingSettings"
+            },
+            "type": "array"
+          },
+          "removeExtraneous": {
+            "type": "boolean"
+          },
+          "selectTags": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "uniqueItems": true
+          },
+          "summarizeTitle": {
+            "type": "boolean"
+          },
+          "title": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "autoSync",
+          "removeExtraneous",
+          "summarizeTitle"
+        ],
+        "title": "IntercomIntegrationTypeSettings",
+        "type": "object"
+      },
+      "IntercomIntegrationTypeSettingsMapping": {
+        "properties": {
+          "fieldId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "intercomFieldId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "intercomFieldId",
+          "fieldId"
+        ],
+        "title": "IntercomIntegrationTypeSettingsMapping",
         "type": "object"
       },
       "InviteUserRequest": {
@@ -4808,6 +5457,16 @@
         ],
         "title": "Item",
         "type": "object"
+      },
+      "ItemAssociation": {
+        "enum": [
+          "dependency",
+          "duplicate",
+          "hierarchy",
+          "relation"
+        ],
+        "title": "ItemAssociation",
+        "type": "string"
       },
       "ItemAttachment": {
         "description": "A connection link between an item and an uploaded attachment.",
@@ -8199,6 +8858,261 @@
         "title": "ItemWithMDWithItemEmbedPage",
         "type": "object"
       },
+      "JiraAppLink": {
+        "properties": {
+          "incomingConsumerKey": {
+            "type": "string"
+          },
+          "incomingKeyPairPrivateKey": {
+            "type": "string"
+          },
+          "incomingKeyPairPublicKey": {
+            "type": "string"
+          },
+          "outgoingConsumerKey": {
+            "type": "string"
+          },
+          "outgoingSharedSecret": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "outgoingConsumerKey",
+          "outgoingSharedSecret",
+          "incomingConsumerKey",
+          "incomingKeyPairPublicKey",
+          "incomingKeyPairPrivateKey"
+        ],
+        "title": "JiraAppLink",
+        "type": "object"
+      },
+      "JiraAppLinkToken": {
+        "properties": {
+          "token": {
+            "type": "string"
+          },
+          "tokenSecret": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "token",
+          "tokenSecret"
+        ],
+        "title": "JiraAppLinkToken",
+        "type": "object"
+      },
+      "JiraAuthentication": {
+        "discriminator": {
+          "mapping": {
+            "appLinkOAuth1": "#/components/schemas/JiraAuthenticationAppLinkOAuth1",
+            "basicAuthentication": "#/components/schemas/JiraAuthenticationBasicAuthentication"
+          },
+          "propertyName": "type"
+        },
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/JiraAuthenticationAppLinkOAuth1"
+          },
+          {
+            "$ref": "#/components/schemas/JiraAuthenticationBasicAuthentication"
+          }
+        ],
+        "title": "JiraAuthentication"
+      },
+      "JiraAuthenticationAppLinkOAuth1": {
+        "properties": {
+          "incomingConsumerKey": {
+            "type": "string"
+          },
+          "incomingKeyPairPrivateKey": {
+            "type": "string"
+          },
+          "incomingKeyPairPublicKey": {
+            "type": "string"
+          },
+          "outgoingConsumerKey": {
+            "type": "string"
+          },
+          "outgoingSharedSecret": {
+            "type": "string"
+          },
+          "token": {
+            "$ref": "#/components/schemas/JiraAuthenticationAppLinkOAuth1Token"
+          },
+          "type": {
+            "const": "appLinkOAuth1",
+            "type": "string"
+          }
+        },
+        "required": [
+          "outgoingConsumerKey",
+          "outgoingSharedSecret",
+          "incomingConsumerKey",
+          "incomingKeyPairPublicKey",
+          "incomingKeyPairPrivateKey",
+          "token",
+          "type"
+        ],
+        "title": "JiraAuthenticationAppLinkOAuth1",
+        "type": "object"
+      },
+      "JiraAuthenticationAppLinkOAuth1Token": {
+        "properties": {
+          "secret": {
+            "type": "string"
+          },
+          "token": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "token",
+          "secret"
+        ],
+        "title": "JiraAuthenticationAppLinkOAuth1Token",
+        "type": "object"
+      },
+      "JiraAuthenticationBasicAuthentication": {
+        "properties": {
+          "password": {
+            "type": "string"
+          },
+          "type": {
+            "const": "basicAuthentication",
+            "type": "string"
+          },
+          "username": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "username",
+          "password",
+          "type"
+        ],
+        "title": "JiraAuthenticationBasicAuthentication",
+        "type": "object"
+      },
+      "JiraIntegrationSummary": {
+        "properties": {
+          "capabilities": {
+            "$ref": "#/components/schemas/IntegrationCapabilities"
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "enabled": {
+            "type": "boolean"
+          },
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "lastSyncAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "lastSyncState": {
+            "$ref": "#/components/schemas/IntegrationSyncState"
+          },
+          "settings": {
+            "$ref": "#/components/schemas/JiraIntegrationTypeSettings"
+          },
+          "typeId": {
+            "const": "jira",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "typeId",
+          "settings",
+          "createdAt",
+          "capabilities",
+          "enabled"
+        ],
+        "title": "JiraIntegrationSummary",
+        "type": "object"
+      },
+      "JiraIntegrationTypeSettings": {
+        "properties": {
+          "appLink": {
+            "$ref": "#/components/schemas/JiraAppLink"
+          },
+          "appLinkToken": {
+            "$ref": "#/components/schemas/JiraAppLinkToken"
+          },
+          "authentication": {
+            "$ref": "#/components/schemas/JiraAuthentication"
+          },
+          "autoSync": {
+            "type": "boolean"
+          },
+          "baseUrl": {
+            "type": "string"
+          },
+          "connectRelatives": {
+            "type": "boolean"
+          },
+          "hierarchyIssueLinkTypes": {
+            "default": [],
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "issueType": {
+            "type": "string"
+          },
+          "itemAssociationMappings": {
+            "default": [],
+            "items": {
+              "$ref": "#/components/schemas/MappingSettingsIntegrationItemAssociationMappingSettings"
+            },
+            "type": "array"
+          },
+          "jql": {
+            "type": "string"
+          },
+          "mappings": {
+            "default": [],
+            "items": {
+              "$ref": "#/components/schemas/MappingSettingsIntegrationMappingSettings"
+            },
+            "type": "array"
+          },
+          "projectName": {
+            "type": "string"
+          },
+          "proxyBaseUrl": {
+            "type": "string"
+          },
+          "removeExtraneous": {
+            "type": "boolean"
+          },
+          "selectProject": {
+            "type": "string"
+          },
+          "signatureBaseUrl": {
+            "type": "string"
+          },
+          "sslConfiguration": {
+            "$ref": "#/components/schemas/IntegrationSslConfiguration"
+          },
+          "title": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "removeExtraneous",
+          "autoSync",
+          "connectRelatives"
+        ],
+        "title": "JiraIntegrationTypeSettings",
+        "type": "object"
+      },
       "JsonPatch": {
         "description": "A JSON Patch document. See https://jsonpatch.com/ for more information.",
         "items": {
@@ -8384,6 +9298,101 @@
         "title": "KickUserRequest",
         "type": "object"
       },
+      "LinearIntegrationSummary": {
+        "properties": {
+          "capabilities": {
+            "$ref": "#/components/schemas/IntegrationCapabilities"
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "enabled": {
+            "type": "boolean"
+          },
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "lastSyncAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "lastSyncState": {
+            "$ref": "#/components/schemas/IntegrationSyncState"
+          },
+          "settings": {
+            "$ref": "#/components/schemas/LinearIntegrationTypeSettings"
+          },
+          "typeId": {
+            "const": "linear",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "typeId",
+          "settings",
+          "createdAt",
+          "capabilities",
+          "enabled"
+        ],
+        "title": "LinearIntegrationSummary",
+        "type": "object"
+      },
+      "LinearIntegrationTypeSettings": {
+        "properties": {
+          "accessToken": {
+            "type": "string"
+          },
+          "autoSync": {
+            "type": "boolean"
+          },
+          "mappings": {
+            "default": [],
+            "items": {
+              "$ref": "#/components/schemas/MappingSettingsIntegrationMappingSettings"
+            },
+            "type": "array"
+          },
+          "removeExtraneous": {
+            "type": "boolean"
+          },
+          "secrets": {
+            "$ref": "#/components/schemas/IntegrationSecrets"
+          },
+          "selectItemType": {
+            "$ref": "#/components/schemas/LinearItemLinearItemType"
+          },
+          "selectLabels": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "selectTeam": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "removeExtraneous",
+          "autoSync"
+        ],
+        "title": "LinearIntegrationTypeSettings",
+        "type": "object"
+      },
+      "LinearItemLinearItemType": {
+        "enum": [
+          "Initiative",
+          "Issue",
+          "Project"
+        ],
+        "title": "LinearItemLinearItemType",
+        "type": "string"
+      },
       "MappingDirection": {
         "description": "The direction in which mapped values are written.",
         "enum": [
@@ -8496,6 +9505,135 @@
           "type"
         ],
         "title": "MappingSettingsAirfocusMappingSettingsWithOptions",
+        "type": "object"
+      },
+      "MappingSettingsIntegrationItemAssociationMappingSettings": {
+        "properties": {
+          "direction": {
+            "$ref": "#/components/schemas/MappingDirection"
+          },
+          "externalId": {
+            "type": "string"
+          },
+          "internalId": {
+            "$ref": "#/components/schemas/ItemAssociation"
+          },
+          "invertMapping": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "internalId",
+          "externalId",
+          "direction",
+          "invertMapping"
+        ],
+        "title": "MappingSettingsIntegrationItemAssociationMappingSettings",
+        "type": "object"
+      },
+      "MappingSettingsIntegrationMappingSettings": {
+        "discriminator": {
+          "mapping": {
+            "simple": "#/components/schemas/MappingSettingsIntegrationMappingSettingsSimple",
+            "withOptions": "#/components/schemas/MappingSettingsIntegrationMappingSettingsWithOptions"
+          },
+          "propertyName": "type"
+        },
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/MappingSettingsIntegrationMappingSettingsSimple"
+          },
+          {
+            "$ref": "#/components/schemas/MappingSettingsIntegrationMappingSettingsWithOptions"
+          }
+        ],
+        "title": "MappingSettingsIntegrationMappingSettings"
+      },
+      "MappingSettingsIntegrationMappingSettingsSimple": {
+        "properties": {
+          "direction": {
+            "$ref": "#/components/schemas/MappingDirection"
+          },
+          "externalId": {
+            "type": "string"
+          },
+          "internalId": {
+            "$ref": "#/components/schemas/RefItemProperty"
+          },
+          "type": {
+            "const": "simple",
+            "type": "string"
+          }
+        },
+        "required": [
+          "internalId",
+          "externalId",
+          "direction",
+          "type"
+        ],
+        "title": "MappingSettingsIntegrationMappingSettingsSimple",
+        "type": "object"
+      },
+      "MappingSettingsIntegrationMappingSettingsWithOptions": {
+        "properties": {
+          "addToExternal": {
+            "type": "string"
+          },
+          "direction": {
+            "$ref": "#/components/schemas/MappingDirection"
+          },
+          "enableAutoCreateOptionsExternal": {
+            "type": "boolean"
+          },
+          "enableAutoCreateOptionsInternal": {
+            "type": "boolean"
+          },
+          "enableAutoMapping": {
+            "type": "boolean"
+          },
+          "externalId": {
+            "type": "string"
+          },
+          "internalId": {
+            "$ref": "#/components/schemas/RefItemProperty"
+          },
+          "pairs": {
+            "items": {
+              "$ref": "#/components/schemas/MappingSettingsIntegrationMappingSettingsWithOptionsOptionPair"
+            },
+            "type": "array"
+          },
+          "type": {
+            "const": "withOptions",
+            "type": "string"
+          }
+        },
+        "required": [
+          "internalId",
+          "externalId",
+          "direction",
+          "pairs",
+          "enableAutoMapping",
+          "enableAutoCreateOptionsInternal",
+          "enableAutoCreateOptionsExternal",
+          "type"
+        ],
+        "title": "MappingSettingsIntegrationMappingSettingsWithOptions",
+        "type": "object"
+      },
+      "MappingSettingsIntegrationMappingSettingsWithOptionsOptionPair": {
+        "properties": {
+          "externalId": {
+            "type": "string"
+          },
+          "internalId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "externalId"
+        ],
+        "title": "MappingSettingsIntegrationMappingSettingsWithOptionsOptionPair",
         "type": "object"
       },
       "MilestoneBulkAction": {
@@ -10094,6 +11232,191 @@
         "title": "Permission",
         "type": "string"
       },
+      "PlannerIntegrationSummary": {
+        "properties": {
+          "capabilities": {
+            "$ref": "#/components/schemas/IntegrationCapabilities"
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "enabled": {
+            "type": "boolean"
+          },
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "lastSyncAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "lastSyncState": {
+            "$ref": "#/components/schemas/IntegrationSyncState"
+          },
+          "settings": {
+            "$ref": "#/components/schemas/PlannerIntegrationTypeSettings"
+          },
+          "typeId": {
+            "const": "planner",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "typeId",
+          "settings",
+          "createdAt",
+          "capabilities",
+          "enabled"
+        ],
+        "title": "PlannerIntegrationSummary",
+        "type": "object"
+      },
+      "PlannerIntegrationTypeSettings": {
+        "properties": {
+          "addLabel": {
+            "type": "string"
+          },
+          "autoSync": {
+            "type": "boolean"
+          },
+          "mapDateRangeField": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "mapSelectFieldAndBucket": {
+            "$ref": "#/components/schemas/PlannerIntegrationTypeSettingsBucketMapping"
+          },
+          "mapSelectFieldAndLabels": {
+            "$ref": "#/components/schemas/PlannerIntegrationTypeSettingsLabelMapping"
+          },
+          "removeExtraneous": {
+            "type": "boolean"
+          },
+          "secrets": {
+            "$ref": "#/components/schemas/PlannerSettingsSecrets"
+          },
+          "selectGroup": {
+            "type": "string"
+          },
+          "selectLabels": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "selectPlan": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "twoWay": {
+            "default": false,
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "removeExtraneous",
+          "autoSync"
+        ],
+        "title": "PlannerIntegrationTypeSettings",
+        "type": "object"
+      },
+      "PlannerIntegrationTypeSettingsBucketMapping": {
+        "properties": {
+          "fieldId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "pairs": {
+            "items": {
+              "$ref": "#/components/schemas/PlannerIntegrationTypeSettingsBucketMappingPair"
+            },
+            "type": "array"
+          }
+        },
+        "required": [
+          "fieldId",
+          "pairs"
+        ],
+        "title": "PlannerIntegrationTypeSettingsBucketMapping",
+        "type": "object"
+      },
+      "PlannerIntegrationTypeSettingsBucketMappingPair": {
+        "properties": {
+          "bucketId": {
+            "type": "string"
+          },
+          "optionId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "bucketId"
+        ],
+        "title": "PlannerIntegrationTypeSettingsBucketMappingPair",
+        "type": "object"
+      },
+      "PlannerIntegrationTypeSettingsLabelMapping": {
+        "properties": {
+          "fieldId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "pairs": {
+            "items": {
+              "$ref": "#/components/schemas/PlannerIntegrationTypeSettingsLabelMappingPair"
+            },
+            "type": "array"
+          }
+        },
+        "required": [
+          "fieldId",
+          "pairs"
+        ],
+        "title": "PlannerIntegrationTypeSettingsLabelMapping",
+        "type": "object"
+      },
+      "PlannerIntegrationTypeSettingsLabelMappingPair": {
+        "properties": {
+          "labelId": {
+            "type": "string"
+          },
+          "optionId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "optionId",
+          "labelId"
+        ],
+        "title": "PlannerIntegrationTypeSettingsLabelMappingPair",
+        "type": "object"
+      },
+      "PlannerSettingsSecrets": {
+        "properties": {
+          "accessToken": {
+            "type": "string"
+          },
+          "expiration": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "refreshToken": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "accessToken",
+          "expiration",
+          "refreshToken"
+        ],
+        "title": "PlannerSettingsSecrets",
+        "type": "object"
+      },
       "PortalApp": {
         "properties": {
           "id": {
@@ -11543,6 +12866,93 @@
         "title": "Role",
         "type": "string"
       },
+      "SalesforceIntegrationSummary": {
+        "properties": {
+          "capabilities": {
+            "$ref": "#/components/schemas/IntegrationCapabilities"
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "enabled": {
+            "type": "boolean"
+          },
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "lastSyncAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "lastSyncState": {
+            "$ref": "#/components/schemas/IntegrationSyncState"
+          },
+          "settings": {
+            "$ref": "#/components/schemas/SalesforceIntegrationTypeSettings"
+          },
+          "typeId": {
+            "const": "salesforce",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "typeId",
+          "settings",
+          "createdAt",
+          "capabilities",
+          "enabled"
+        ],
+        "title": "SalesforceIntegrationSummary",
+        "type": "object"
+      },
+      "SalesforceIntegrationTypeSettings": {
+        "properties": {
+          "autoSync": {
+            "type": "boolean"
+          },
+          "baseUrl": {
+            "type": "string"
+          },
+          "clientConnection": {
+            "$ref": "#/components/schemas/IntegrationClientConnectionSettings"
+          },
+          "importFrom": {
+            "format": "date",
+            "type": "string"
+          },
+          "mappings": {
+            "default": [],
+            "items": {
+              "$ref": "#/components/schemas/MappingSettingsIntegrationMappingSettings"
+            },
+            "type": "array"
+          },
+          "removeExtraneous": {
+            "type": "boolean"
+          },
+          "secrets": {
+            "$ref": "#/components/schemas/IntegrationSecrets"
+          },
+          "selectedSObject": {
+            "type": "string"
+          },
+          "soqlQuery": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "removeExtraneous",
+          "autoSync"
+        ],
+        "title": "SalesforceIntegrationTypeSettings",
+        "type": "object"
+      },
       "ScoringDirection": {
         "enum": [
           "higherIsBetter",
@@ -12252,6 +13662,52 @@
           "replacements"
         ],
         "title": "SetWorkspaceStatusesRequest",
+        "type": "object"
+      },
+      "ShortcutIntegrationTypeSettings": {
+        "properties": {
+          "apiKey": {
+            "type": "string"
+          },
+          "autoSync": {
+            "type": "boolean"
+          },
+          "mappings": {
+            "default": [],
+            "items": {
+              "$ref": "#/components/schemas/MappingSettingsIntegrationMappingSettings"
+            },
+            "type": "array"
+          },
+          "removeExtraneous": {
+            "type": "boolean"
+          },
+          "selectLabels": {
+            "items": {
+              "format": "int64",
+              "type": "integer"
+            },
+            "type": "array"
+          },
+          "selectProjects": {
+            "items": {
+              "format": "int64",
+              "type": "integer"
+            },
+            "type": "array"
+          },
+          "selectWorkflow": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "title": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "autoSync"
+        ],
+        "title": "ShortcutIntegrationTypeSettings",
         "type": "object"
       },
       "Status": {
@@ -13501,6 +14957,106 @@
         "title": "TimePeriodRefId",
         "type": "object"
       },
+      "TrelloIntegrationSummary": {
+        "properties": {
+          "capabilities": {
+            "$ref": "#/components/schemas/IntegrationCapabilities"
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "enabled": {
+            "type": "boolean"
+          },
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "lastSyncAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "lastSyncState": {
+            "$ref": "#/components/schemas/IntegrationSyncState"
+          },
+          "settings": {
+            "$ref": "#/components/schemas/TrelloIntegrationTypeSettings"
+          },
+          "typeId": {
+            "const": "trello",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "typeId",
+          "settings",
+          "createdAt",
+          "capabilities",
+          "enabled"
+        ],
+        "title": "TrelloIntegrationSummary",
+        "type": "object"
+      },
+      "TrelloIntegrationTypeSettings": {
+        "properties": {
+          "addLabel": {
+            "type": "string"
+          },
+          "apiKey": {
+            "type": "string"
+          },
+          "autoSync": {
+            "type": "boolean"
+          },
+          "mapNumberFieldAndVotesCount": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "mappings": {
+            "default": [],
+            "items": {
+              "$ref": "#/components/schemas/MappingSettingsIntegrationMappingSettings"
+            },
+            "type": "array"
+          },
+          "removeExtraneous": {
+            "type": "boolean"
+          },
+          "selectBoard": {
+            "type": "string"
+          },
+          "selectLabels": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "selectLists": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "title": {
+            "type": "string"
+          },
+          "token": {
+            "type": "string"
+          },
+          "twoWay": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "removeExtraneous",
+          "twoWay",
+          "autoSync"
+        ],
+        "title": "TrelloIntegrationTypeSettings",
+        "type": "object"
+      },
       "UpdateItemLinkRequest": {
         "properties": {
           "fromItemId": {
@@ -14588,6 +16144,173 @@
           "_embedded"
         ],
         "title": "VotingScoreFieldWithFieldEmbed",
+        "type": "object"
+      },
+      "WebhookEventFilter": {
+        "discriminator": {
+          "mapping": {
+            "itemCreated": "#/components/schemas/WebhookEventFilterItemCreated",
+            "itemFieldUpdated": "#/components/schemas/WebhookEventFilterItemFieldUpdated",
+            "itemRelationChanged": "#/components/schemas/WebhookEventFilterItemRelationChanged",
+            "itemStatusUpdated": "#/components/schemas/WebhookEventFilterItemStatusUpdated"
+          },
+          "propertyName": "type"
+        },
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/WebhookEventFilterItemCreated"
+          },
+          {
+            "$ref": "#/components/schemas/WebhookEventFilterItemFieldUpdated"
+          },
+          {
+            "$ref": "#/components/schemas/WebhookEventFilterItemRelationChanged"
+          },
+          {
+            "$ref": "#/components/schemas/WebhookEventFilterItemStatusUpdated"
+          }
+        ],
+        "title": "WebhookEventFilter"
+      },
+      "WebhookEventFilterItemCreated": {
+        "properties": {
+          "type": {
+            "const": "itemCreated",
+            "type": "string"
+          }
+        },
+        "required": [
+          "type"
+        ],
+        "title": "WebhookEventFilterItemCreated",
+        "type": "object"
+      },
+      "WebhookEventFilterItemFieldUpdated": {
+        "properties": {
+          "fieldId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "type": {
+            "const": "itemFieldUpdated",
+            "type": "string"
+          }
+        },
+        "required": [
+          "fieldId",
+          "type"
+        ],
+        "title": "WebhookEventFilterItemFieldUpdated",
+        "type": "object"
+      },
+      "WebhookEventFilterItemRelationChanged": {
+        "properties": {
+          "type": {
+            "const": "itemRelationChanged",
+            "type": "string"
+          }
+        },
+        "required": [
+          "type"
+        ],
+        "title": "WebhookEventFilterItemRelationChanged",
+        "type": "object"
+      },
+      "WebhookEventFilterItemStatusUpdated": {
+        "properties": {
+          "type": {
+            "const": "itemStatusUpdated",
+            "type": "string"
+          }
+        },
+        "required": [
+          "type"
+        ],
+        "title": "WebhookEventFilterItemStatusUpdated",
+        "type": "object"
+      },
+      "WebhookIntegrationSummary": {
+        "properties": {
+          "capabilities": {
+            "$ref": "#/components/schemas/IntegrationCapabilities"
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "enabled": {
+            "type": "boolean"
+          },
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "lastSyncAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "lastSyncState": {
+            "$ref": "#/components/schemas/IntegrationSyncState"
+          },
+          "settings": {
+            "$ref": "#/components/schemas/WebhookIntegrationTypeSettings"
+          },
+          "typeId": {
+            "const": "webhook",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "typeId",
+          "settings",
+          "createdAt",
+          "capabilities",
+          "enabled"
+        ],
+        "title": "WebhookIntegrationSummary",
+        "type": "object"
+      },
+      "WebhookIntegrationTypeSettings": {
+        "properties": {
+          "events": {
+            "items": {
+              "$ref": "#/components/schemas/WebhookEventFilter"
+            },
+            "type": "array"
+          },
+          "headers": {
+            "default": [],
+            "items": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "type": "array"
+          },
+          "inputFormat": {
+            "$ref": "#/components/schemas/InputFormat"
+          },
+          "method": {
+            "default": "POST",
+            "type": "string"
+          },
+          "template": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "url": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "url",
+          "events"
+        ],
+        "title": "WebhookIntegrationTypeSettings",
         "type": "object"
       },
       "Workspace": {
@@ -16652,6 +18375,92 @@
         ],
         "title": "WorkspaceWorkspaceMetadata",
         "type": "object"
+      },
+      "ZendeskIntegrationSummary": {
+        "properties": {
+          "capabilities": {
+            "$ref": "#/components/schemas/IntegrationCapabilities"
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "enabled": {
+            "type": "boolean"
+          },
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "lastSyncAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "lastSyncState": {
+            "$ref": "#/components/schemas/IntegrationSyncState"
+          },
+          "settings": {
+            "$ref": "#/components/schemas/ZendeskIntegrationTypeSettings"
+          },
+          "typeId": {
+            "const": "zendesk",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "typeId",
+          "settings",
+          "createdAt",
+          "capabilities",
+          "enabled"
+        ],
+        "title": "ZendeskIntegrationSummary",
+        "type": "object"
+      },
+      "ZendeskIntegrationTypeSettings": {
+        "properties": {
+          "accessToken": {
+            "type": "string"
+          },
+          "autoSync": {
+            "type": "boolean"
+          },
+          "baseUri": {
+            "type": "string"
+          },
+          "filterTags": {
+            "default": [],
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "importFrom": {
+            "format": "date",
+            "type": "string"
+          },
+          "mappings": {
+            "default": [],
+            "items": {
+              "$ref": "#/components/schemas/MappingSettingsIntegrationMappingSettings"
+            },
+            "type": "array"
+          },
+          "removeExtraneous": {
+            "type": "boolean"
+          },
+          "title": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "importFrom",
+          "autoSync",
+          "removeExtraneous"
+        ],
+        "title": "ZendeskIntegrationTypeSettings",
+        "type": "object"
       }
     },
     "securitySchemes": {
@@ -16663,7 +18472,7 @@
   },
   "info": {
     "title": "airfocus API",
-    "version": "1.0.0-beta.42.42.1"
+    "version": "1.0.0-beta.42.43.1"
   },
   "openapi": "3.1.0",
   "paths": {
