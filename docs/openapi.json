@@ -2756,6 +2756,7 @@
         "description": "Specific bucket setting used for breakdown",
         "discriminator": {
           "mapping": {
+            "grouping:auto": "#/components/schemas/GetItemsAnalyticsRequestBreakdownConfigurablePropertySettingGroupingAuto",
             "grouping:bucketCount": "#/components/schemas/GetItemsAnalyticsRequestBreakdownConfigurablePropertySettingGroupingBucketCount",
             "grouping:interval": "#/components/schemas/GetItemsAnalyticsRequestBreakdownConfigurablePropertySettingGroupingInterval",
             "grouping:percentile": "#/components/schemas/GetItemsAnalyticsRequestBreakdownConfigurablePropertySettingGroupingPercentile",
@@ -2768,6 +2769,9 @@
           "propertyName": "type"
         },
         "oneOf": [
+          {
+            "$ref": "#/components/schemas/GetItemsAnalyticsRequestBreakdownConfigurablePropertySettingGroupingAuto"
+          },
           {
             "$ref": "#/components/schemas/GetItemsAnalyticsRequestBreakdownConfigurablePropertySettingGroupingBucketCount"
           },
@@ -2794,6 +2798,19 @@
           }
         ],
         "title": "GetItemsAnalyticsRequestBreakdownConfigurablePropertySetting"
+      },
+      "GetItemsAnalyticsRequestBreakdownConfigurablePropertySettingGroupingAuto": {
+        "properties": {
+          "type": {
+            "const": "grouping:auto",
+            "type": "string"
+          }
+        },
+        "required": [
+          "type"
+        ],
+        "title": "GetItemsAnalyticsRequestBreakdownConfigurablePropertySettingGroupingAuto",
+        "type": "object"
       },
       "GetItemsAnalyticsRequestBreakdownConfigurablePropertySettingGroupingBucketCount": {
         "properties": {
@@ -18526,7 +18543,7 @@
   },
   "info": {
     "title": "airfocus API",
-    "version": "1.0.0-beta.42.51.0"
+    "version": "1.0.0-beta.42.54.0"
   },
   "openapi": "3.1.0",
   "paths": {
