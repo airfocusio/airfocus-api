@@ -493,6 +493,50 @@
         "title": "AzureDevopsIntegrationTypeSettingsAzureDevopsSettingsSecrets",
         "type": "object"
       },
+      "BooleanField": {
+        "properties": {
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "isTeamField": {
+            "type": "boolean"
+          },
+          "name": {
+            "type": "string"
+          },
+          "required": {
+            "type": "boolean"
+          },
+          "teamId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "typeId": {
+            "const": "boolean",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "typeId",
+          "name",
+          "description",
+          "isTeamField",
+          "teamId",
+          "createdAt",
+          "required"
+        ],
+        "title": "BooleanField",
+        "type": "object"
+      },
       "BooleanFieldTypeFilter": {
         "discriminator": {
           "mapping": {
@@ -1359,6 +1403,50 @@
         "title": "CreateWorkspaceRequestWithMD",
         "type": "object"
       },
+      "DateField": {
+        "properties": {
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "isTeamField": {
+            "type": "boolean"
+          },
+          "name": {
+            "type": "string"
+          },
+          "required": {
+            "type": "boolean"
+          },
+          "teamId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "typeId": {
+            "const": "date",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "typeId",
+          "name",
+          "description",
+          "isTeamField",
+          "teamId",
+          "createdAt",
+          "required"
+        ],
+        "title": "DateField",
+        "type": "object"
+      },
       "DateFieldTypeFilter": {
         "discriminator": {
           "mapping": {
@@ -1568,6 +1656,50 @@
           "_embedded"
         ],
         "title": "DateFieldWithFieldEmbed",
+        "type": "object"
+      },
+      "DateRangeField": {
+        "properties": {
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "isTeamField": {
+            "type": "boolean"
+          },
+          "name": {
+            "type": "string"
+          },
+          "required": {
+            "type": "boolean"
+          },
+          "teamId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "typeId": {
+            "const": "date-range",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "typeId",
+          "name",
+          "description",
+          "isTeamField",
+          "teamId",
+          "createdAt",
+          "required"
+        ],
+        "title": "DateRangeField",
         "type": "object"
       },
       "DateRangeFieldTypeFilter": {
@@ -1872,6 +2004,124 @@
         "title": "Factors",
         "type": "object"
       },
+      "Field": {
+        "discriminator": {
+          "mapping": {
+            "boolean": "#/components/schemas/BooleanField",
+            "date": "#/components/schemas/DateField",
+            "date-range": "#/components/schemas/DateRangeField",
+            "form-source": "#/components/schemas/FormSourceField",
+            "form-target": "#/components/schemas/FormTargetField",
+            "health-check-ins-field": "#/components/schemas/HealthCheckInsFieldField",
+            "insights": "#/components/schemas/InsightsField",
+            "milestone": "#/components/schemas/MilestoneField",
+            "mirror-source": "#/components/schemas/MirrorSourceField",
+            "mirror-target": "#/components/schemas/MirrorTargetField",
+            "number": "#/components/schemas/NumberField",
+            "okr-checkins": "#/components/schemas/OkrCheckinsField",
+            "okr-confidence": "#/components/schemas/OkrConfidenceField",
+            "okr-key-result-reference": "#/components/schemas/OkrKeyResultReferenceField",
+            "okr-key-results": "#/components/schemas/OkrKeyResultsField",
+            "okr-progress": "#/components/schemas/OkrProgressField",
+            "okr-time-period": "#/components/schemas/OkrTimePeriodField",
+            "people": "#/components/schemas/PeopleField",
+            "portal": "#/components/schemas/PortalField",
+            "portfolio-source": "#/components/schemas/PortfolioSourceField",
+            "prioritization": "#/components/schemas/PrioritizationField",
+            "rich-text": "#/components/schemas/RichTextField",
+            "select": "#/components/schemas/SelectField",
+            "text": "#/components/schemas/TextField",
+            "time-period": "#/components/schemas/TimePeriodField",
+            "votes": "#/components/schemas/VotesField",
+            "votingScore": "#/components/schemas/VotingScoreField"
+          },
+          "propertyName": "typeId"
+        },
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/BooleanField"
+          },
+          {
+            "$ref": "#/components/schemas/DateField"
+          },
+          {
+            "$ref": "#/components/schemas/DateRangeField"
+          },
+          {
+            "$ref": "#/components/schemas/FormSourceField"
+          },
+          {
+            "$ref": "#/components/schemas/FormTargetField"
+          },
+          {
+            "$ref": "#/components/schemas/HealthCheckInsFieldField"
+          },
+          {
+            "$ref": "#/components/schemas/InsightsField"
+          },
+          {
+            "$ref": "#/components/schemas/MilestoneField"
+          },
+          {
+            "$ref": "#/components/schemas/MirrorSourceField"
+          },
+          {
+            "$ref": "#/components/schemas/MirrorTargetField"
+          },
+          {
+            "$ref": "#/components/schemas/NumberField"
+          },
+          {
+            "$ref": "#/components/schemas/OkrCheckinsField"
+          },
+          {
+            "$ref": "#/components/schemas/OkrConfidenceField"
+          },
+          {
+            "$ref": "#/components/schemas/OkrKeyResultReferenceField"
+          },
+          {
+            "$ref": "#/components/schemas/OkrKeyResultsField"
+          },
+          {
+            "$ref": "#/components/schemas/OkrProgressField"
+          },
+          {
+            "$ref": "#/components/schemas/OkrTimePeriodField"
+          },
+          {
+            "$ref": "#/components/schemas/PeopleField"
+          },
+          {
+            "$ref": "#/components/schemas/PortalField"
+          },
+          {
+            "$ref": "#/components/schemas/PortfolioSourceField"
+          },
+          {
+            "$ref": "#/components/schemas/PrioritizationField"
+          },
+          {
+            "$ref": "#/components/schemas/RichTextField"
+          },
+          {
+            "$ref": "#/components/schemas/SelectField"
+          },
+          {
+            "$ref": "#/components/schemas/TextField"
+          },
+          {
+            "$ref": "#/components/schemas/TimePeriodField"
+          },
+          {
+            "$ref": "#/components/schemas/VotesField"
+          },
+          {
+            "$ref": "#/components/schemas/VotingScoreField"
+          }
+        ],
+        "title": "Field"
+      },
       "FieldEmbed": {
         "properties": {
           "workspaces": {
@@ -1970,6 +2220,7 @@
             "boolean": "#/components/schemas/InstallBooleanFieldRequest",
             "date": "#/components/schemas/InstallDateFieldRequest",
             "date-range": "#/components/schemas/InstallDateRangeFieldRequest",
+            "milestone": "#/components/schemas/InstallMilestoneFieldRequest",
             "number": "#/components/schemas/InstallNumberFieldRequest",
             "people": "#/components/schemas/InstallPeopleFieldRequest",
             "rich-text": "#/components/schemas/InstallRichTextFieldRequest",
@@ -1988,6 +2239,9 @@
           },
           {
             "$ref": "#/components/schemas/InstallDateRangeFieldRequest"
+          },
+          {
+            "$ref": "#/components/schemas/InstallMilestoneFieldRequest"
           },
           {
             "$ref": "#/components/schemas/InstallNumberFieldRequest"
@@ -2066,6 +2320,9 @@
               },
               {
                 "$ref": "#/components/schemas/InsightsFieldTypeSettings"
+              },
+              {
+                "$ref": "#/components/schemas/MilestoneFieldTypeSettings"
               },
               {
                 "$ref": "#/components/schemas/NumberFieldTypeSettings"
@@ -2173,6 +2430,7 @@
             "form-target": "#/components/schemas/FormTargetFieldWithFieldEmbed",
             "health-check-ins-field": "#/components/schemas/HealthCheckInsFieldFieldWithFieldEmbed",
             "insights": "#/components/schemas/InsightsFieldWithFieldEmbed",
+            "milestone": "#/components/schemas/MilestoneFieldWithFieldEmbed",
             "mirror-source": "#/components/schemas/MirrorSourceFieldWithFieldEmbed",
             "mirror-target": "#/components/schemas/MirrorTargetFieldWithFieldEmbed",
             "number": "#/components/schemas/NumberFieldWithFieldEmbed",
@@ -2216,6 +2474,9 @@
           },
           {
             "$ref": "#/components/schemas/InsightsFieldWithFieldEmbed"
+          },
+          {
+            "$ref": "#/components/schemas/MilestoneFieldWithFieldEmbed"
           },
           {
             "$ref": "#/components/schemas/MirrorSourceFieldWithFieldEmbed"
@@ -2341,6 +2602,54 @@
         "title": "FormAudienceTeamMembers",
         "type": "object"
       },
+      "FormSourceField": {
+        "properties": {
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "isTeamField": {
+            "type": "boolean"
+          },
+          "name": {
+            "type": "string"
+          },
+          "required": {
+            "type": "boolean"
+          },
+          "settings": {
+            "$ref": "#/components/schemas/FormSourceFieldTypeSettings"
+          },
+          "teamId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "typeId": {
+            "const": "form-source",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "typeId",
+          "settings",
+          "name",
+          "description",
+          "isTeamField",
+          "teamId",
+          "createdAt",
+          "required"
+        ],
+        "title": "FormSourceField",
+        "type": "object"
+      },
       "FormSourceFieldTypeFilter": {
         "discriminator": {
           "mapping": {
@@ -2450,6 +2759,50 @@
           "_embedded"
         ],
         "title": "FormSourceFieldWithFieldEmbed",
+        "type": "object"
+      },
+      "FormTargetField": {
+        "properties": {
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "isTeamField": {
+            "type": "boolean"
+          },
+          "name": {
+            "type": "string"
+          },
+          "required": {
+            "type": "boolean"
+          },
+          "teamId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "typeId": {
+            "const": "form-target",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "typeId",
+          "name",
+          "description",
+          "isTeamField",
+          "teamId",
+          "createdAt",
+          "required"
+        ],
+        "title": "FormTargetField",
         "type": "object"
       },
       "FormTargetFieldWithFieldEmbed": {
@@ -3206,6 +3559,7 @@
             "date": "#/components/schemas/GetItemsAnalyticsResponseBreakdownBucketDate",
             "empty": "#/components/schemas/GetItemsAnalyticsResponseBreakdownBucketEmpty",
             "keyResult": "#/components/schemas/GetItemsAnalyticsResponseBreakdownBucketKeyResult",
+            "milestone": "#/components/schemas/GetItemsAnalyticsResponseBreakdownBucketMilestone",
             "numeric": "#/components/schemas/GetItemsAnalyticsResponseBreakdownBucketNumeric",
             "objective": "#/components/schemas/GetItemsAnalyticsResponseBreakdownBucketObjective",
             "people": "#/components/schemas/GetItemsAnalyticsResponseBreakdownBucketPeople",
@@ -3230,6 +3584,9 @@
           },
           {
             "$ref": "#/components/schemas/GetItemsAnalyticsResponseBreakdownBucketKeyResult"
+          },
+          {
+            "$ref": "#/components/schemas/GetItemsAnalyticsResponseBreakdownBucketMilestone"
           },
           {
             "$ref": "#/components/schemas/GetItemsAnalyticsResponseBreakdownBucketNumeric"
@@ -3388,6 +3745,37 @@
           "type"
         ],
         "title": "GetItemsAnalyticsResponseBreakdownBucketKeyResult",
+        "type": "object"
+      },
+      "GetItemsAnalyticsResponseBreakdownBucketMilestone": {
+        "properties": {
+          "filter": {
+            "$ref": "#/components/schemas/ItemSearchQueryFilter"
+          },
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "milestoneId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "type": {
+            "const": "milestone",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "milestoneId",
+          "filter",
+          "type"
+        ],
+        "title": "GetItemsAnalyticsResponseBreakdownBucketMilestone",
         "type": "object"
       },
       "GetItemsAnalyticsResponseBreakdownBucketNumeric": {
@@ -4109,6 +4497,50 @@
         "title": "HealthCheckInsConfidenceFieldFilterDefined",
         "type": "object"
       },
+      "HealthCheckInsFieldField": {
+        "properties": {
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "isTeamField": {
+            "type": "boolean"
+          },
+          "name": {
+            "type": "string"
+          },
+          "required": {
+            "type": "boolean"
+          },
+          "teamId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "typeId": {
+            "const": "health-check-ins-field",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "typeId",
+          "name",
+          "description",
+          "isTeamField",
+          "teamId",
+          "createdAt",
+          "required"
+        ],
+        "title": "HealthCheckInsFieldField",
+        "type": "object"
+      },
       "HealthCheckInsFieldFieldWithFieldEmbed": {
         "properties": {
           "_embedded": {
@@ -4299,6 +4731,54 @@
           "insightsFieldId"
         ],
         "title": "InsightsAppTypeSettingsTarget",
+        "type": "object"
+      },
+      "InsightsField": {
+        "properties": {
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "isTeamField": {
+            "type": "boolean"
+          },
+          "name": {
+            "type": "string"
+          },
+          "required": {
+            "type": "boolean"
+          },
+          "settings": {
+            "$ref": "#/components/schemas/InsightsFieldTypeSettings"
+          },
+          "teamId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "typeId": {
+            "const": "insights",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "typeId",
+          "settings",
+          "name",
+          "description",
+          "isTeamField",
+          "teamId",
+          "createdAt",
+          "required"
+        ],
+        "title": "InsightsField",
         "type": "object"
       },
       "InsightsFieldTypeFilter": {
@@ -4691,6 +5171,52 @@
           "required"
         ],
         "title": "InstallDateRangeFieldRequest",
+        "type": "object"
+      },
+      "InstallMilestoneFieldRequest": {
+        "properties": {
+          "description": {
+            "default": "",
+            "description": "User-readable field description.",
+            "type": "string"
+          },
+          "isTeamField": {
+            "default": false,
+            "description": "Whether the field should be installed as a team-field or a workspace-specific field.",
+            "type": "boolean"
+          },
+          "name": {
+            "description": "User-readable field name.",
+            "type": "string"
+          },
+          "required": {
+            "type": "boolean"
+          },
+          "settings": {
+            "$ref": "#/components/schemas/MilestoneFieldTypeSettings",
+            "description": "Field settings."
+          },
+          "typeId": {
+            "const": "milestone",
+            "type": "string"
+          },
+          "workspaceIds": {
+            "default": [],
+            "description": "If isTeamField=false then exactly one workspace ID should be provided.\nIf isTeamField=true then any amount of workspace IDs can be provided to be linked to the newly installed field.",
+            "items": {
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": "array"
+          }
+        },
+        "required": [
+          "typeId",
+          "name",
+          "settings",
+          "required"
+        ],
+        "title": "InstallMilestoneFieldRequest",
         "type": "object"
       },
       "InstallNumberFieldRequest": {
@@ -7706,6 +8232,9 @@
                 "$ref": "#/components/schemas/InsightsFieldTypeFilter"
               },
               {
+                "$ref": "#/components/schemas/MilestoneFieldFilter"
+              },
+              {
                 "$ref": "#/components/schemas/MirrorSourceFieldTypeFilter"
               },
               {
@@ -7790,6 +8319,9 @@
               },
               {
                 "$ref": "#/components/schemas/InsightsFieldTypeFilter"
+              },
+              {
+                "$ref": "#/components/schemas/MilestoneFieldFilter"
               },
               {
                 "$ref": "#/components/schemas/MirrorSourceFieldTypeFilter"
@@ -9707,6 +10239,51 @@
         "title": "MappingSettingsIntegrationMappingSettingsWithOptionsOptionPair",
         "type": "object"
       },
+      "Milestone": {
+        "properties": {
+          "color": {
+            "$ref": "#/components/schemas/SelectFieldOptionColor",
+            "description": "Optional color of the milestone."
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "date": {
+            "description": "Date of the milestone. It's optional, assuming that a milestone can be pre-created before the actual date is known.",
+            "format": "date",
+            "type": "string"
+          },
+          "description": {
+            "description": "Description of the milestone.",
+            "type": "string"
+          },
+          "icon": {
+            "$ref": "#/components/schemas/MilestoneIcon"
+          },
+          "id": {
+            "description": "Unique identifier of the milestone.",
+            "format": "uuid",
+            "type": "string"
+          },
+          "name": {
+            "description": "Name of the milestone.",
+            "type": "string"
+          },
+          "timezone": {
+            "description": "Optional timezone of the milestone date.",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "description",
+          "createdAt"
+        ],
+        "title": "Milestone",
+        "type": "object"
+      },
       "MilestoneBulkAction": {
         "discriminator": {
           "mapping": {
@@ -9819,6 +10396,371 @@
         ],
         "title": "MilestoneBulkUpdate",
         "type": "object"
+      },
+      "MilestoneField": {
+        "properties": {
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "isTeamField": {
+            "type": "boolean"
+          },
+          "name": {
+            "type": "string"
+          },
+          "required": {
+            "type": "boolean"
+          },
+          "settings": {
+            "$ref": "#/components/schemas/MilestoneFieldTypeSettings"
+          },
+          "teamId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "typeId": {
+            "const": "milestone",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "typeId",
+          "settings",
+          "name",
+          "description",
+          "isTeamField",
+          "teamId",
+          "createdAt",
+          "required"
+        ],
+        "title": "MilestoneField",
+        "type": "object"
+      },
+      "MilestoneFieldFilter": {
+        "discriminator": {
+          "mapping": {
+            "after": "#/components/schemas/MilestoneFieldFilterAfter",
+            "afterOrOn": "#/components/schemas/MilestoneFieldFilterAfterOrOn",
+            "before": "#/components/schemas/MilestoneFieldFilterBefore",
+            "beforeOrOn": "#/components/schemas/MilestoneFieldFilterBeforeOrOn",
+            "containsAll": "#/components/schemas/MilestoneFieldFilterContainsAll",
+            "containsAny": "#/components/schemas/MilestoneFieldFilterContainsAny",
+            "defined": "#/components/schemas/MilestoneFieldFilterDefined",
+            "range": "#/components/schemas/MilestoneFieldFilterRange",
+            "relative": "#/components/schemas/MilestoneFieldFilterRelative"
+          },
+          "propertyName": "type"
+        },
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/MilestoneFieldFilterAfter"
+          },
+          {
+            "$ref": "#/components/schemas/MilestoneFieldFilterAfterOrOn"
+          },
+          {
+            "$ref": "#/components/schemas/MilestoneFieldFilterBefore"
+          },
+          {
+            "$ref": "#/components/schemas/MilestoneFieldFilterBeforeOrOn"
+          },
+          {
+            "$ref": "#/components/schemas/MilestoneFieldFilterContainsAll"
+          },
+          {
+            "$ref": "#/components/schemas/MilestoneFieldFilterContainsAny"
+          },
+          {
+            "$ref": "#/components/schemas/MilestoneFieldFilterDefined"
+          },
+          {
+            "$ref": "#/components/schemas/MilestoneFieldFilterRange"
+          },
+          {
+            "$ref": "#/components/schemas/MilestoneFieldFilterRelative"
+          }
+        ],
+        "title": "MilestoneFieldFilter"
+      },
+      "MilestoneFieldFilterAfter": {
+        "properties": {
+          "date": {
+            "format": "date",
+            "type": "string"
+          },
+          "type": {
+            "const": "after",
+            "type": "string"
+          }
+        },
+        "required": [
+          "date",
+          "type"
+        ],
+        "title": "MilestoneFieldFilterAfter",
+        "type": "object"
+      },
+      "MilestoneFieldFilterAfterOrOn": {
+        "properties": {
+          "date": {
+            "format": "date",
+            "type": "string"
+          },
+          "type": {
+            "const": "afterOrOn",
+            "type": "string"
+          }
+        },
+        "required": [
+          "date",
+          "type"
+        ],
+        "title": "MilestoneFieldFilterAfterOrOn",
+        "type": "object"
+      },
+      "MilestoneFieldFilterBefore": {
+        "properties": {
+          "date": {
+            "format": "date",
+            "type": "string"
+          },
+          "type": {
+            "const": "before",
+            "type": "string"
+          }
+        },
+        "required": [
+          "date",
+          "type"
+        ],
+        "title": "MilestoneFieldFilterBefore",
+        "type": "object"
+      },
+      "MilestoneFieldFilterBeforeOrOn": {
+        "properties": {
+          "date": {
+            "format": "date",
+            "type": "string"
+          },
+          "type": {
+            "const": "beforeOrOn",
+            "type": "string"
+          }
+        },
+        "required": [
+          "date",
+          "type"
+        ],
+        "title": "MilestoneFieldFilterBeforeOrOn",
+        "type": "object"
+      },
+      "MilestoneFieldFilterContainsAll": {
+        "properties": {
+          "ids": {
+            "items": {
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": "array",
+            "uniqueItems": true
+          },
+          "type": {
+            "const": "containsAll",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ids",
+          "type"
+        ],
+        "title": "MilestoneFieldFilterContainsAll",
+        "type": "object"
+      },
+      "MilestoneFieldFilterContainsAny": {
+        "properties": {
+          "ids": {
+            "items": {
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": "array",
+            "uniqueItems": true
+          },
+          "type": {
+            "const": "containsAny",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ids",
+          "type"
+        ],
+        "title": "MilestoneFieldFilterContainsAny",
+        "type": "object"
+      },
+      "MilestoneFieldFilterDefined": {
+        "properties": {
+          "type": {
+            "const": "defined",
+            "type": "string"
+          }
+        },
+        "required": [
+          "type"
+        ],
+        "title": "MilestoneFieldFilterDefined",
+        "type": "object"
+      },
+      "MilestoneFieldFilterRange": {
+        "properties": {
+          "from": {
+            "format": "date",
+            "type": "string"
+          },
+          "type": {
+            "const": "range",
+            "type": "string"
+          },
+          "until": {
+            "format": "date",
+            "type": "string"
+          }
+        },
+        "required": [
+          "from",
+          "until",
+          "type"
+        ],
+        "title": "MilestoneFieldFilterRange",
+        "type": "object"
+      },
+      "MilestoneFieldFilterRelative": {
+        "properties": {
+          "anchor": {
+            "$ref": "#/components/schemas/ItemSearchQueryTimeAnchor"
+          },
+          "type": {
+            "const": "relative",
+            "type": "string"
+          }
+        },
+        "required": [
+          "anchor",
+          "type"
+        ],
+        "title": "MilestoneFieldFilterRelative",
+        "type": "object"
+      },
+      "MilestoneFieldTypeSettings": {
+        "properties": {
+          "milestones": {
+            "description": "List of predefined milestones available for selection.",
+            "items": {
+              "$ref": "#/components/schemas/Milestone"
+            },
+            "type": "array"
+          },
+          "multi": {
+            "description": "Indicates whether multiple milestones can be selected per item.",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "milestones",
+          "multi"
+        ],
+        "title": "MilestoneFieldTypeSettings",
+        "type": "object"
+      },
+      "MilestoneFieldValue": {
+        "properties": {
+          "milestoneIds": {
+            "items": {
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": "array"
+          }
+        },
+        "required": [
+          "milestoneIds"
+        ],
+        "title": "MilestoneFieldValue",
+        "type": "object"
+      },
+      "MilestoneFieldWithFieldEmbed": {
+        "properties": {
+          "_embedded": {
+            "$ref": "#/components/schemas/FieldEmbed"
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "isTeamField": {
+            "type": "boolean"
+          },
+          "name": {
+            "type": "string"
+          },
+          "required": {
+            "type": "boolean"
+          },
+          "settings": {
+            "$ref": "#/components/schemas/MilestoneFieldTypeSettings"
+          },
+          "teamId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "typeId": {
+            "const": "milestone",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "typeId",
+          "settings",
+          "name",
+          "description",
+          "isTeamField",
+          "teamId",
+          "createdAt",
+          "required",
+          "_embedded"
+        ],
+        "title": "MilestoneFieldWithFieldEmbed",
+        "type": "object"
+      },
+      "MilestoneIcon": {
+        "description": "Optional icon of the milestone.",
+        "enum": [
+          "circle",
+          "diamond",
+          "hexagon",
+          "pentagon",
+          "square",
+          "triangle"
+        ],
+        "title": "MilestoneIcon",
+        "type": "string"
       },
       "MilestoneWithEmbed": {
         "properties": {
@@ -9983,6 +10925,50 @@
         "title": "MirrorAppTypeSettingsSource",
         "type": "object"
       },
+      "MirrorSourceField": {
+        "properties": {
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "isTeamField": {
+            "type": "boolean"
+          },
+          "name": {
+            "type": "string"
+          },
+          "required": {
+            "type": "boolean"
+          },
+          "teamId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "typeId": {
+            "const": "mirror-source",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "typeId",
+          "name",
+          "description",
+          "isTeamField",
+          "teamId",
+          "createdAt",
+          "required"
+        ],
+        "title": "MirrorSourceField",
+        "type": "object"
+      },
       "MirrorSourceFieldTypeFilter": {
         "discriminator": {
           "mapping": {
@@ -10058,6 +11044,50 @@
         "title": "MirrorSourceFieldWithFieldEmbed",
         "type": "object"
       },
+      "MirrorTargetField": {
+        "properties": {
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "isTeamField": {
+            "type": "boolean"
+          },
+          "name": {
+            "type": "string"
+          },
+          "required": {
+            "type": "boolean"
+          },
+          "teamId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "typeId": {
+            "const": "mirror-target",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "typeId",
+          "name",
+          "description",
+          "isTeamField",
+          "teamId",
+          "createdAt",
+          "required"
+        ],
+        "title": "MirrorTargetField",
+        "type": "object"
+      },
       "MirrorTargetFieldTypeFilter": {
         "discriminator": {
           "mapping": {
@@ -10131,6 +11161,54 @@
           "_embedded"
         ],
         "title": "MirrorTargetFieldWithFieldEmbed",
+        "type": "object"
+      },
+      "NumberField": {
+        "properties": {
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "isTeamField": {
+            "type": "boolean"
+          },
+          "name": {
+            "type": "string"
+          },
+          "required": {
+            "type": "boolean"
+          },
+          "settings": {
+            "$ref": "#/components/schemas/NumberFieldTypeSettings"
+          },
+          "teamId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "typeId": {
+            "const": "number",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "typeId",
+          "settings",
+          "name",
+          "description",
+          "isTeamField",
+          "teamId",
+          "createdAt",
+          "required"
+        ],
+        "title": "NumberField",
         "type": "object"
       },
       "NumberFieldTypeLikeFilter": {
@@ -10644,6 +11722,50 @@
         "title": "OkrAppTypeSettingsObjectiveWorkspaceSettings",
         "type": "object"
       },
+      "OkrCheckinsField": {
+        "properties": {
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "isTeamField": {
+            "type": "boolean"
+          },
+          "name": {
+            "type": "string"
+          },
+          "required": {
+            "type": "boolean"
+          },
+          "teamId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "typeId": {
+            "const": "okr-checkins",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "typeId",
+          "name",
+          "description",
+          "isTeamField",
+          "teamId",
+          "createdAt",
+          "required"
+        ],
+        "title": "OkrCheckinsField",
+        "type": "object"
+      },
       "OkrCheckinsFieldWithFieldEmbed": {
         "properties": {
           "_embedded": {
@@ -10690,6 +11812,54 @@
           "_embedded"
         ],
         "title": "OkrCheckinsFieldWithFieldEmbed",
+        "type": "object"
+      },
+      "OkrConfidenceField": {
+        "properties": {
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "isTeamField": {
+            "type": "boolean"
+          },
+          "name": {
+            "type": "string"
+          },
+          "required": {
+            "type": "boolean"
+          },
+          "settings": {
+            "$ref": "#/components/schemas/OkrConfidenceFieldSettings"
+          },
+          "teamId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "typeId": {
+            "const": "okr-confidence",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "typeId",
+          "settings",
+          "name",
+          "description",
+          "isTeamField",
+          "teamId",
+          "createdAt",
+          "required"
+        ],
+        "title": "OkrConfidenceField",
         "type": "object"
       },
       "OkrConfidenceFieldFilter": {
@@ -10812,6 +11982,50 @@
           "_embedded"
         ],
         "title": "OkrConfidenceFieldWithFieldEmbed",
+        "type": "object"
+      },
+      "OkrKeyResultReferenceField": {
+        "properties": {
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "isTeamField": {
+            "type": "boolean"
+          },
+          "name": {
+            "type": "string"
+          },
+          "required": {
+            "type": "boolean"
+          },
+          "teamId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "typeId": {
+            "const": "okr-key-result-reference",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "typeId",
+          "name",
+          "description",
+          "isTeamField",
+          "teamId",
+          "createdAt",
+          "required"
+        ],
+        "title": "OkrKeyResultReferenceField",
         "type": "object"
       },
       "OkrKeyResultReferenceFieldFilter": {
@@ -10941,6 +12155,50 @@
         "title": "OkrKeyResultReferenceFieldWithFieldEmbed",
         "type": "object"
       },
+      "OkrKeyResultsField": {
+        "properties": {
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "isTeamField": {
+            "type": "boolean"
+          },
+          "name": {
+            "type": "string"
+          },
+          "required": {
+            "type": "boolean"
+          },
+          "teamId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "typeId": {
+            "const": "okr-key-results",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "typeId",
+          "name",
+          "description",
+          "isTeamField",
+          "teamId",
+          "createdAt",
+          "required"
+        ],
+        "title": "OkrKeyResultsField",
+        "type": "object"
+      },
       "OkrKeyResultsFieldFilter": {
         "discriminator": {
           "mapping": {
@@ -11016,6 +12274,50 @@
         "title": "OkrKeyResultsFieldWithFieldEmbed",
         "type": "object"
       },
+      "OkrProgressField": {
+        "properties": {
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "isTeamField": {
+            "type": "boolean"
+          },
+          "name": {
+            "type": "string"
+          },
+          "required": {
+            "type": "boolean"
+          },
+          "teamId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "typeId": {
+            "const": "okr-progress",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "typeId",
+          "name",
+          "description",
+          "isTeamField",
+          "teamId",
+          "createdAt",
+          "required"
+        ],
+        "title": "OkrProgressField",
+        "type": "object"
+      },
       "OkrProgressFieldWithFieldEmbed": {
         "properties": {
           "_embedded": {
@@ -11062,6 +12364,54 @@
           "_embedded"
         ],
         "title": "OkrProgressFieldWithFieldEmbed",
+        "type": "object"
+      },
+      "OkrTimePeriodField": {
+        "properties": {
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "isTeamField": {
+            "type": "boolean"
+          },
+          "name": {
+            "type": "string"
+          },
+          "required": {
+            "type": "boolean"
+          },
+          "settings": {
+            "$ref": "#/components/schemas/OkrTimePeriodFieldSettings"
+          },
+          "teamId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "typeId": {
+            "const": "okr-time-period",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "typeId",
+          "settings",
+          "name",
+          "description",
+          "isTeamField",
+          "teamId",
+          "createdAt",
+          "required"
+        ],
+        "title": "OkrTimePeriodField",
         "type": "object"
       },
       "OkrTimePeriodFieldSettings": {
@@ -11129,6 +12479,54 @@
           "_embedded"
         ],
         "title": "OkrTimePeriodFieldWithFieldEmbed",
+        "type": "object"
+      },
+      "PeopleField": {
+        "properties": {
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "isTeamField": {
+            "type": "boolean"
+          },
+          "name": {
+            "type": "string"
+          },
+          "required": {
+            "type": "boolean"
+          },
+          "settings": {
+            "$ref": "#/components/schemas/PeopleFieldTypeSettings"
+          },
+          "teamId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "typeId": {
+            "const": "people",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "typeId",
+          "settings",
+          "name",
+          "description",
+          "isTeamField",
+          "teamId",
+          "createdAt",
+          "required"
+        ],
+        "title": "PeopleField",
         "type": "object"
       },
       "PeopleFieldTypeFilter": {
@@ -11780,6 +13178,50 @@
         "title": "PortalAppTypeSettingsPortalViewPortalFieldStatusCategory",
         "type": "object"
       },
+      "PortalField": {
+        "properties": {
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "isTeamField": {
+            "type": "boolean"
+          },
+          "name": {
+            "type": "string"
+          },
+          "required": {
+            "type": "boolean"
+          },
+          "teamId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "typeId": {
+            "const": "portal",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "typeId",
+          "name",
+          "description",
+          "isTeamField",
+          "teamId",
+          "createdAt",
+          "required"
+        ],
+        "title": "PortalField",
+        "type": "object"
+      },
       "PortalFieldTypeFilter": {
         "discriminator": {
           "mapping": {
@@ -11928,6 +13370,50 @@
         "title": "PortfolioAppSourceSettings",
         "type": "object"
       },
+      "PortfolioSourceField": {
+        "properties": {
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "isTeamField": {
+            "type": "boolean"
+          },
+          "name": {
+            "type": "string"
+          },
+          "required": {
+            "type": "boolean"
+          },
+          "teamId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "typeId": {
+            "const": "portfolio-source",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "typeId",
+          "name",
+          "description",
+          "isTeamField",
+          "teamId",
+          "createdAt",
+          "required"
+        ],
+        "title": "PortfolioSourceField",
+        "type": "object"
+      },
       "PortfolioSourceFieldFilter": {
         "discriminator": {
           "mapping": {
@@ -12049,6 +13535,50 @@
           "mode"
         ],
         "title": "PrioritizationAppTypeConfiguration",
+        "type": "object"
+      },
+      "PrioritizationField": {
+        "properties": {
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "isTeamField": {
+            "type": "boolean"
+          },
+          "name": {
+            "type": "string"
+          },
+          "required": {
+            "type": "boolean"
+          },
+          "teamId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "typeId": {
+            "const": "prioritization",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "typeId",
+          "name",
+          "description",
+          "isTeamField",
+          "teamId",
+          "createdAt",
+          "required"
+        ],
+        "title": "PrioritizationField",
         "type": "object"
       },
       "PrioritizationFieldWithFieldEmbed": {
@@ -12523,6 +14053,50 @@
           "type"
         ],
         "title": "RichTextBlockParagraph",
+        "type": "object"
+      },
+      "RichTextField": {
+        "properties": {
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "isTeamField": {
+            "type": "boolean"
+          },
+          "name": {
+            "type": "string"
+          },
+          "required": {
+            "type": "boolean"
+          },
+          "teamId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "typeId": {
+            "const": "rich-text",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "typeId",
+          "name",
+          "description",
+          "isTeamField",
+          "teamId",
+          "createdAt",
+          "required"
+        ],
+        "title": "RichTextField",
         "type": "object"
       },
       "RichTextFieldTypeFilter": {
@@ -13478,6 +15052,54 @@
           "properties"
         ],
         "title": "SearchPartialItemRequest",
+        "type": "object"
+      },
+      "SelectField": {
+        "properties": {
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "isTeamField": {
+            "type": "boolean"
+          },
+          "name": {
+            "type": "string"
+          },
+          "required": {
+            "type": "boolean"
+          },
+          "settings": {
+            "$ref": "#/components/schemas/SelectFieldTypeSettings"
+          },
+          "teamId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "typeId": {
+            "const": "select",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "typeId",
+          "settings",
+          "name",
+          "description",
+          "isTeamField",
+          "teamId",
+          "createdAt",
+          "required"
+        ],
+        "title": "SelectField",
         "type": "object"
       },
       "SelectFieldOptionColor": {
@@ -14455,6 +16077,50 @@
         "title": "TemplateView",
         "type": "object"
       },
+      "TextField": {
+        "properties": {
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "isTeamField": {
+            "type": "boolean"
+          },
+          "name": {
+            "type": "string"
+          },
+          "required": {
+            "type": "boolean"
+          },
+          "teamId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "typeId": {
+            "const": "text",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "typeId",
+          "name",
+          "description",
+          "isTeamField",
+          "teamId",
+          "createdAt",
+          "required"
+        ],
+        "title": "TextField",
+        "type": "object"
+      },
       "TextFieldTypeFilter": {
         "discriminator": {
           "mapping": {
@@ -14605,6 +16271,54 @@
           "endDate"
         ],
         "title": "TimePeriod",
+        "type": "object"
+      },
+      "TimePeriodField": {
+        "properties": {
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "isTeamField": {
+            "type": "boolean"
+          },
+          "name": {
+            "type": "string"
+          },
+          "required": {
+            "type": "boolean"
+          },
+          "settings": {
+            "$ref": "#/components/schemas/TimePeriodFieldSettings"
+          },
+          "teamId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "typeId": {
+            "const": "time-period",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "typeId",
+          "settings",
+          "name",
+          "description",
+          "isTeamField",
+          "teamId",
+          "createdAt",
+          "required"
+        ],
+        "title": "TimePeriodField",
         "type": "object"
       },
       "TimePeriodFieldFilter": {
@@ -15895,6 +17609,50 @@
         "title": "ViewWithViewEmbed",
         "type": "object"
       },
+      "VotesField": {
+        "properties": {
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "isTeamField": {
+            "type": "boolean"
+          },
+          "name": {
+            "type": "string"
+          },
+          "required": {
+            "type": "boolean"
+          },
+          "teamId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "typeId": {
+            "const": "votes",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "typeId",
+          "name",
+          "description",
+          "isTeamField",
+          "teamId",
+          "createdAt",
+          "required"
+        ],
+        "title": "VotesField",
+        "type": "object"
+      },
       "VotesFieldWithFieldEmbed": {
         "properties": {
           "_embedded": {
@@ -16163,6 +17921,54 @@
           "type"
         ],
         "title": "VotingAppVotesFieldTypeFilterDefined",
+        "type": "object"
+      },
+      "VotingScoreField": {
+        "properties": {
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "isTeamField": {
+            "type": "boolean"
+          },
+          "name": {
+            "type": "string"
+          },
+          "required": {
+            "type": "boolean"
+          },
+          "settings": {
+            "$ref": "#/components/schemas/VotingAppScoreFieldTypeSettings"
+          },
+          "teamId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "typeId": {
+            "const": "votingScore",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "typeId",
+          "settings",
+          "name",
+          "description",
+          "isTeamField",
+          "teamId",
+          "createdAt",
+          "required"
+        ],
+        "title": "VotingScoreField",
         "type": "object"
       },
       "VotingScoreFieldWithFieldEmbed": {
@@ -18543,7 +20349,7 @@
   },
   "info": {
     "title": "airfocus API",
-    "version": "1.0.0-beta.42.54.0"
+    "version": "1.0.0-beta.43.2.0"
   },
   "openapi": "3.1.0",
   "paths": {
@@ -30106,6 +31912,7 @@
     },
     "/api/workspaces/{workspaceId}/milestones": {
       "post": {
+        "deprecated": true,
         "description": "Returns newly created milestone with its sanitised data.<br/>Requirements:<br/>- auth-client scopes: \"workspace\"<br/>- user permission: \"write\" or higher",
         "operationId": "createMilestone",
         "parameters": [
@@ -30217,7 +32024,7 @@
             "httpAuth": []
           }
         ],
-        "summary": "Create a new milestone",
+        "summary": "[DEPRECATED: use custom fields of type 'milestone'] Create a new milestone",
         "tags": [
           "CRUD",
           "Milestones"
@@ -30226,6 +32033,7 @@
     },
     "/api/workspaces/{workspaceId}/milestones/bulk": {
       "post": {
+        "deprecated": true,
         "description": "Accepts a list of create/update/patch/delete operations (see the request model for more details).<br/>\nEach operation can target a single or multiple milestones.<br/>\nReturns a list of results for each input operation including errors.<br/>\nGuarantees that the size and order of the returned results matches the input list of operations.<br/>Requirements:<br/>- auth-client scopes: \"workspace\"<br/>- user permission: \"write\" or higher",
         "operationId": "bulkMilestones",
         "parameters": [
@@ -30340,7 +32148,7 @@
             "httpAuth": []
           }
         ],
-        "summary": "Perform multiple operations with milestones",
+        "summary": "[DEPRECATED: use custom fields of type 'milestone'] Perform multiple operations with milestones",
         "tags": [
           "CRUD",
           "Milestones"
@@ -30349,6 +32157,7 @@
     },
     "/api/workspaces/{workspaceId}/milestones/list": {
       "post": {
+        "deprecated": true,
         "description": "Returns a list of milestones resolved for the provided IDs.<br/>\nDoes not fail if any of the requested milestones is not found or not accessible - instead it returns corresponding error-object instead of an entity-object.<br/>\nGuarantees that the size and order of the returned list matches the requested IDs.<br/>Requirements:<br/>- auth-client scopes: \"workspace:read\"<br/>- user permission: \"read\" or higher",
         "operationId": "listMilestones",
         "parameters": [
@@ -30464,7 +32273,7 @@
             "httpAuth": []
           }
         ],
-        "summary": "Retrieve multiple milestones by their IDs",
+        "summary": "[DEPRECATED: use custom fields of type 'milestone'] Retrieve multiple milestones by their IDs",
         "tags": [
           "CRUD",
           "Milestones"
@@ -30473,6 +32282,7 @@
     },
     "/api/workspaces/{workspaceId}/milestones/search": {
       "post": {
+        "deprecated": true,
         "description": "Returns all milestones or searches milestones by query. Always returns only milestones which are accessible by the current user.<br/>Requirements:<br/>- auth-client scopes: \"workspace:read\"<br/>- user permission: \"read\" or higher",
         "operationId": "searchMilestones",
         "parameters": [
@@ -30635,7 +32445,7 @@
             "httpAuth": []
           }
         ],
-        "summary": "Retrieve or search milestones",
+        "summary": "[DEPRECATED: use custom fields of type 'milestone'] Retrieve or search milestones",
         "tags": [
           "CRUD",
           "Milestones"
@@ -30644,6 +32454,7 @@
     },
     "/api/workspaces/{workspaceId}/milestones/{milestoneId}": {
       "delete": {
+        "deprecated": true,
         "description": "Returns empty result if the milestone was successfully deleted.<br/>Requirements:<br/>- auth-client scopes: \"workspace\"<br/>- user permission: \"write\" or higher",
         "operationId": "deleteMilestone",
         "parameters": [
@@ -30747,13 +32558,14 @@
             "httpAuth": []
           }
         ],
-        "summary": "Delete an existing milestone",
+        "summary": "[DEPRECATED: use custom fields of type 'milestone'] Delete an existing milestone",
         "tags": [
           "CRUD",
           "Milestones"
         ]
       },
       "get": {
+        "deprecated": true,
         "description": "Returns found milestone.<br/>Requirements:<br/>- auth-client scopes: \"workspace:read\"<br/>- user permission: \"read\" or higher",
         "operationId": "retrieveMilestone",
         "parameters": [
@@ -30864,13 +32676,14 @@
             "httpAuth": []
           }
         ],
-        "summary": "Retrieve a single milestone by its ID",
+        "summary": "[DEPRECATED: use custom fields of type 'milestone'] Retrieve a single milestone by its ID",
         "tags": [
           "CRUD",
           "Milestones"
         ]
       },
       "patch": {
+        "deprecated": true,
         "description": "Returns the whole updated milestone with its sanitised data.<br/>Requirements:<br/>- auth-client scopes: \"workspace\"<br/>- user permission: \"write\" or higher",
         "operationId": "patchMilestone",
         "parameters": [
@@ -30991,13 +32804,14 @@
             "httpAuth": []
           }
         ],
-        "summary": "Patch an existing milestone",
+        "summary": "[DEPRECATED: use custom fields of type 'milestone'] Patch an existing milestone",
         "tags": [
           "CRUD",
           "Milestones"
         ]
       },
       "put": {
+        "deprecated": true,
         "description": "Returns updated milestone with its sanitised data.<br/>Requirements:<br/>- auth-client scopes: \"workspace\"<br/>- user permission: \"write\" or higher",
         "operationId": "updateMilestone",
         "parameters": [
@@ -31118,7 +32932,7 @@
             "httpAuth": []
           }
         ],
-        "summary": "Update an existing milestone",
+        "summary": "[DEPRECATED: use custom fields of type 'milestone'] Update an existing milestone",
         "tags": [
           "CRUD",
           "Milestones"
@@ -31567,7 +33381,7 @@
       "name": "Items:Relations"
     },
     {
-      "description": "Manage milestones in a single workspace. Milestones are time-anchors which are displayed in the Timeline and Gantt views.",
+      "description": "This module is deprecated. Use custom fields of type 'milestone' to manage milestones.",
       "name": "Milestones"
     },
     {
