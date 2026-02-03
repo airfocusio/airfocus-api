@@ -6005,16 +6005,6 @@
         "title": "Item",
         "type": "object"
       },
-      "ItemAssociation": {
-        "enum": [
-          "dependency",
-          "duplicate",
-          "hierarchy",
-          "relation"
-        ],
-        "title": "ItemAssociation",
-        "type": "string"
-      },
       "ItemAttachment": {
         "description": "A connection link between an item and an uploaded attachment.",
         "properties": {
@@ -10119,7 +10109,7 @@
             "type": "string"
           },
           "internalId": {
-            "$ref": "#/components/schemas/ItemAssociation"
+            "type": "string"
           },
           "invertMapping": {
             "type": "boolean"
@@ -20349,7 +20339,7 @@
   },
   "info": {
     "title": "airfocus API",
-    "version": "1.0.0-beta.43.7.3"
+    "version": "1.0.0-beta.43.12.0"
   },
   "openapi": "3.1.0",
   "paths": {
