@@ -7040,7 +7040,8 @@
         "type": "object"
       },
       "ItemLinkType": {
-        "description": "Type of an item-link",
+        "deprecated": true,
+        "description": "Deprecated: Use typeId instead",
         "enum": [
           "dependency",
           "duplicate",
@@ -7813,7 +7814,7 @@
             "createdAt:range": "#/components/schemas/ItemSearchQueryFilterCreatedAtRange",
             "createdAt:relative": "#/components/schemas/ItemSearchQueryFilterCreatedAtRelative",
             "description:contain": "#/components/schemas/ItemSearchQueryFilterDescriptionContain",
-            "description:equal": "#/components/schemas/ItemSearchQueryFilterDescriptionEqual",
+            "description:defined": "#/components/schemas/ItemSearchQueryFilterDescriptionDefined",
             "field:type": "#/components/schemas/ItemSearchQueryFilterFieldType",
             "field:value": "#/components/schemas/ItemSearchQueryFilterFieldValue",
             "integration:defined": "#/components/schemas/ItemSearchQueryFilterIntegrationDefined",
@@ -7890,7 +7891,7 @@
             "$ref": "#/components/schemas/ItemSearchQueryFilterDescriptionContain"
           },
           {
-            "$ref": "#/components/schemas/ItemSearchQueryFilterDescriptionEqual"
+            "$ref": "#/components/schemas/ItemSearchQueryFilterDescriptionDefined"
           },
           {
             "$ref": "#/components/schemas/ItemSearchQueryFilterFieldType"
@@ -8172,25 +8173,17 @@
         "title": "ItemSearchQueryFilterDescriptionContain",
         "type": "object"
       },
-      "ItemSearchQueryFilterDescriptionEqual": {
+      "ItemSearchQueryFilterDescriptionDefined": {
         "properties": {
-          "caseSensitive": {
-            "type": "boolean"
-          },
-          "text": {
-            "type": "string"
-          },
           "type": {
-            "const": "description:equal",
+            "const": "description:defined",
             "type": "string"
           }
         },
         "required": [
-          "text",
-          "caseSensitive",
           "type"
         ],
-        "title": "ItemSearchQueryFilterDescriptionEqual",
+        "title": "ItemSearchQueryFilterDescriptionDefined",
         "type": "object"
       },
       "ItemSearchQueryFilterFieldType": {
@@ -20339,7 +20332,7 @@
   },
   "info": {
     "title": "airfocus API",
-    "version": "1.0.0-beta.43.12.0"
+    "version": "1.0.0-beta.44.1.0"
   },
   "openapi": "3.1.0",
   "paths": {
