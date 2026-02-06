@@ -1330,6 +1330,11 @@
             "$ref": "#/components/schemas/ItemType",
             "description": "Type of items in this workspace."
           },
+          "lastActivity": {
+            "description": "Timestamp of when any entities related to this workspace were last changed.",
+            "format": "date-time",
+            "type": "string"
+          },
           "name": {
             "description": "Name of this workspace.",
             "type": "string"
@@ -1347,6 +1352,7 @@
         "required": [
           "name",
           "description",
+          "lastActivity",
           "order"
         ],
         "title": "CreateWorkspaceRequest",
@@ -1381,6 +1387,11 @@
             "$ref": "#/components/schemas/ItemType",
             "description": "Type of items in this workspace."
           },
+          "lastActivity": {
+            "description": "Timestamp of when any entities related to this workspace were last changed.",
+            "format": "date-time",
+            "type": "string"
+          },
           "name": {
             "description": "Name of this workspace.",
             "type": "string"
@@ -1398,6 +1409,7 @@
         "required": [
           "name",
           "description",
+          "lastActivity",
           "order"
         ],
         "title": "CreateWorkspaceRequestWithMD",
@@ -11143,6 +11155,55 @@
         "title": "MirrorTargetFieldWithFieldEmbed",
         "type": "object"
       },
+      "NotificationSettingUpdateRequest": {
+        "properties": {
+          "settings": {
+            "$ref": "#/components/schemas/NotificationSettingsData"
+          }
+        },
+        "required": [
+          "settings"
+        ],
+        "title": "NotificationSettingUpdateRequest",
+        "type": "object"
+      },
+      "NotificationSettings": {
+        "properties": {
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "lastUpdatedAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "settings": {
+            "$ref": "#/components/schemas/NotificationSettingsData"
+          },
+          "userId": {
+            "format": "uuid",
+            "type": "string"
+          }
+        },
+        "required": [
+          "userId",
+          "settings",
+          "createdAt",
+          "lastUpdatedAt"
+        ],
+        "title": "NotificationSettings",
+        "type": "object"
+      },
+      "NotificationSettingsData": {
+        "properties": {
+          "sendEmailNotifications": {
+            "default": false,
+            "type": "boolean"
+          }
+        },
+        "title": "NotificationSettingsData",
+        "type": "object"
+      },
       "NumberField": {
         "properties": {
           "createdAt": {
@@ -17272,6 +17333,11 @@
             "$ref": "#/components/schemas/ItemType",
             "description": "Type of items in this workspace."
           },
+          "lastActivity": {
+            "description": "Timestamp of when any entities related to this workspace were last changed.",
+            "format": "date-time",
+            "type": "string"
+          },
           "name": {
             "description": "Name of this workspace.",
             "type": "string"
@@ -17289,6 +17355,7 @@
         "required": [
           "name",
           "description",
+          "lastActivity",
           "order"
         ],
         "title": "UpdateWorkspaceRequest",
@@ -17323,6 +17390,11 @@
             "$ref": "#/components/schemas/ItemType",
             "description": "Type of items in this workspace."
           },
+          "lastActivity": {
+            "description": "Timestamp of when any entities related to this workspace were last changed.",
+            "format": "date-time",
+            "type": "string"
+          },
           "name": {
             "description": "Name of this workspace.",
             "type": "string"
@@ -17340,6 +17412,7 @@
         "required": [
           "name",
           "description",
+          "lastActivity",
           "order"
         ],
         "title": "UpdateWorkspaceRequestWithMD",
@@ -18205,6 +18278,11 @@
             "$ref": "#/components/schemas/ItemType",
             "description": "Type of items in this workspace."
           },
+          "lastActivity": {
+            "description": "Timestamp of when any entities related to this workspace were last changed.",
+            "format": "date-time",
+            "type": "string"
+          },
           "lastUpdatedAt": {
             "description": "Timestamp of when this workspace was last updated.",
             "format": "date-time",
@@ -18243,6 +18321,7 @@
           "progressMode",
           "createdAt",
           "lastUpdatedAt",
+          "lastActivity",
           "namespace",
           "order"
         ],
@@ -19736,6 +19815,7 @@
         "discriminator": {
           "mapping": {
             "createdAt": "#/components/schemas/WorkspaceSearchQuerySortCreatedAt",
+            "lastActivity": "#/components/schemas/WorkspaceSearchQuerySortLastActivity",
             "lastUpdatedAt": "#/components/schemas/WorkspaceSearchQuerySortLastUpdatedAt",
             "name": "#/components/schemas/WorkspaceSearchQuerySortName"
           },
@@ -19744,6 +19824,9 @@
         "oneOf": [
           {
             "$ref": "#/components/schemas/WorkspaceSearchQuerySortCreatedAt"
+          },
+          {
+            "$ref": "#/components/schemas/WorkspaceSearchQuerySortLastActivity"
           },
           {
             "$ref": "#/components/schemas/WorkspaceSearchQuerySortLastUpdatedAt"
@@ -19778,6 +19861,23 @@
         ],
         "title": "WorkspaceSearchQuerySortDirection",
         "type": "string"
+      },
+      "WorkspaceSearchQuerySortLastActivity": {
+        "properties": {
+          "direction": {
+            "$ref": "#/components/schemas/WorkspaceSearchQuerySortDirection"
+          },
+          "type": {
+            "const": "lastActivity",
+            "type": "string"
+          }
+        },
+        "required": [
+          "direction",
+          "type"
+        ],
+        "title": "WorkspaceSearchQuerySortLastActivity",
+        "type": "object"
       },
       "WorkspaceSearchQuerySortLastUpdatedAt": {
         "properties": {
@@ -19855,6 +19955,11 @@
             "$ref": "#/components/schemas/ItemType",
             "description": "Type of items in this workspace."
           },
+          "lastActivity": {
+            "description": "Timestamp of when any entities related to this workspace were last changed.",
+            "format": "date-time",
+            "type": "string"
+          },
           "lastUpdatedAt": {
             "description": "Timestamp of when this workspace was last updated.",
             "format": "date-time",
@@ -19893,6 +19998,7 @@
           "progressMode",
           "createdAt",
           "lastUpdatedAt",
+          "lastActivity",
           "namespace",
           "order",
           "_embedded"
@@ -19949,6 +20055,11 @@
             "$ref": "#/components/schemas/ItemType",
             "description": "Type of items in this workspace."
           },
+          "lastActivity": {
+            "description": "Timestamp of when any entities related to this workspace were last changed.",
+            "format": "date-time",
+            "type": "string"
+          },
           "lastUpdatedAt": {
             "description": "Timestamp of when this workspace was last updated.",
             "format": "date-time",
@@ -19987,6 +20098,7 @@
           "progressMode",
           "createdAt",
           "lastUpdatedAt",
+          "lastActivity",
           "namespace",
           "order",
           "_embedded"
@@ -20052,6 +20164,11 @@
             "$ref": "#/components/schemas/ItemType",
             "description": "Type of items in this workspace."
           },
+          "lastActivity": {
+            "description": "Timestamp of when any entities related to this workspace were last changed.",
+            "format": "date-time",
+            "type": "string"
+          },
           "lastUpdatedAt": {
             "description": "Timestamp of when this workspace was last updated.",
             "format": "date-time",
@@ -20090,6 +20207,7 @@
           "progressMode",
           "createdAt",
           "lastUpdatedAt",
+          "lastActivity",
           "namespace",
           "order",
           "_embedded"
@@ -20142,6 +20260,11 @@
             "$ref": "#/components/schemas/ItemType",
             "description": "Type of items in this workspace."
           },
+          "lastActivity": {
+            "description": "Timestamp of when any entities related to this workspace were last changed.",
+            "format": "date-time",
+            "type": "string"
+          },
           "lastUpdatedAt": {
             "description": "Timestamp of when this workspace was last updated.",
             "format": "date-time",
@@ -20180,6 +20303,7 @@
           "progressMode",
           "createdAt",
           "lastUpdatedAt",
+          "lastActivity",
           "namespace",
           "order",
           "_embedded"
@@ -20329,7 +20453,7 @@
   },
   "info": {
     "title": "airfocus API",
-    "version": "1.0.0-beta.44.5.2"
+    "version": "1.0.0-beta.44.6.4"
   },
   "openapi": "3.1.0",
   "paths": {
@@ -25975,6 +26099,188 @@
         "tags": [
           "CRUD",
           "Workspaces"
+        ]
+      }
+    },
+    "/api/workspaces/notifications/settings": {
+      "get": {
+        "description": "Requirements:<br/>- auth-client scopes: \"profile:read\"",
+        "operationId": "getNotificationSettings",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotificationSettings"
+                }
+              }
+            },
+            "description": ""
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "not_found",
+                  "data": {},
+                  "message": "Unknown entity 'fe4c0f30-aa35-3c41-99f9-a5f69c8c4192'"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If resource does not exist."
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "missing_token",
+                  "data": {},
+                  "message": "Access token is missing"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If missing authentication token."
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "forbidden",
+                  "data": {},
+                  "message": "Missing required access scope"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If authenticated client does not have the required access scopes."
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "unknown_error",
+                  "data": {},
+                  "message": "Server error"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If any other error happens."
+          }
+        },
+        "security": [
+          {
+            "httpAuth": []
+          }
+        ],
+        "summary": "Get notification settings of a user.",
+        "tags": [
+          "Notification Settings"
+        ]
+      },
+      "post": {
+        "description": "Requirements:<br/>- auth-client scopes: \"profile\"",
+        "operationId": "updateNotificationSettings",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NotificationSettingUpdateRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotificationSettings"
+                }
+              }
+            },
+            "description": ""
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "not_found",
+                  "data": {},
+                  "message": "Unknown entity 'fe4c0f30-aa35-3c41-99f9-a5f69c8c4192'"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If payload is invalid or resource does not exist."
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "missing_token",
+                  "data": {},
+                  "message": "Access token is missing"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If missing authentication token."
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "forbidden",
+                  "data": {},
+                  "message": "Missing required access scope"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If authenticated client does not have the required access scopes."
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "unknown_error",
+                  "data": {},
+                  "message": "Server error"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If any other error happens."
+          }
+        },
+        "security": [
+          {
+            "httpAuth": []
+          }
+        ],
+        "summary": "Update notification settings of a user.",
+        "tags": [
+          "Notification Settings"
         ]
       }
     },
@@ -33363,6 +33669,10 @@
     {
       "description": "This module is deprecated. Use custom fields of type 'milestone' to manage milestones.",
       "name": "Milestones"
+    },
+    {
+      "description": "Endpoints for managing user notification settings",
+      "name": "Notification Settings"
     },
     {
       "description": "Endpoints for managing the user profile",
