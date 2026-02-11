@@ -7815,6 +7815,7 @@
       "ItemSearchQueryFilter": {
         "discriminator": {
           "mapping": {
+            "alias:contain": "#/components/schemas/ItemSearchQueryFilterAliasContain",
             "and": "#/components/schemas/ItemSearchQueryFilterAnd",
             "archived:value": "#/components/schemas/ItemSearchQueryFilterArchivedValue",
             "assignees:contain": "#/components/schemas/ItemSearchQueryFilterAssigneesContain",
@@ -7869,6 +7870,9 @@
           }
         ],
         "oneOf": [
+          {
+            "$ref": "#/components/schemas/ItemSearchQueryFilterAliasContain"
+          },
           {
             "$ref": "#/components/schemas/ItemSearchQueryFilterAnd"
           },
@@ -7970,6 +7974,27 @@
           }
         ],
         "title": "ItemSearchQueryFilter"
+      },
+      "ItemSearchQueryFilterAliasContain": {
+        "properties": {
+          "caseSensitive": {
+            "type": "boolean"
+          },
+          "text": {
+            "type": "string"
+          },
+          "type": {
+            "const": "alias:contain",
+            "type": "string"
+          }
+        },
+        "required": [
+          "text",
+          "caseSensitive",
+          "type"
+        ],
+        "title": "ItemSearchQueryFilterAliasContain",
+        "type": "object"
       },
       "ItemSearchQueryFilterAnd": {
         "properties": {
@@ -20453,7 +20478,7 @@
   },
   "info": {
     "title": "airfocus API",
-    "version": "1.0.0-beta.44.16.2"
+    "version": "1.0.0-beta.44.18.2"
   },
   "openapi": "3.1.0",
   "paths": {
