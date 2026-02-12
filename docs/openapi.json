@@ -7848,7 +7848,8 @@
             "statusCategory:updatedBetween": "#/components/schemas/ItemSearchQueryFilterStatusCategoryUpdatedBetween",
             "statusCategory:updatedSince": "#/components/schemas/ItemSearchQueryFilterStatusCategoryUpdatedSince",
             "updated:since": "#/components/schemas/ItemSearchQueryFilterUpdatedSince",
-            "workspace:contains": "#/components/schemas/ItemSearchQueryFilterWorkspaceContains"
+            "workspace:contains": "#/components/schemas/ItemSearchQueryFilterWorkspaceContains",
+            "workspace:containsAny": "#/components/schemas/ItemSearchQueryFilterWorkspaceContainsAny"
           },
           "propertyName": "type"
         },
@@ -7971,6 +7972,9 @@
           },
           {
             "$ref": "#/components/schemas/ItemSearchQueryFilterWorkspaceContains"
+          },
+          {
+            "$ref": "#/components/schemas/ItemSearchQueryFilterWorkspaceContainsAny"
           }
         ],
         "title": "ItemSearchQueryFilter"
@@ -8751,6 +8755,7 @@
         "type": "object"
       },
       "ItemSearchQueryFilterWorkspaceContains": {
+        "deprecated": true,
         "properties": {
           "id": {
             "format": "uuid",
@@ -8766,6 +8771,28 @@
           "type"
         ],
         "title": "ItemSearchQueryFilterWorkspaceContains",
+        "type": "object"
+      },
+      "ItemSearchQueryFilterWorkspaceContainsAny": {
+        "properties": {
+          "type": {
+            "const": "workspace:containsAny",
+            "type": "string"
+          },
+          "workspaceIds": {
+            "items": {
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": "array",
+            "uniqueItems": true
+          }
+        },
+        "required": [
+          "workspaceIds",
+          "type"
+        ],
+        "title": "ItemSearchQueryFilterWorkspaceContainsAny",
         "type": "object"
       },
       "ItemSearchQuerySort": {
@@ -20478,7 +20505,7 @@
   },
   "info": {
     "title": "airfocus API",
-    "version": "1.0.0-beta.44.18.2"
+    "version": "1.0.0-beta.44.27.0"
   },
   "openapi": "3.1.0",
   "paths": {
