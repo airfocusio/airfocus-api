@@ -7772,6 +7772,99 @@
         "title": "ItemRelationWithItemRelationEmbedPage",
         "type": "object"
       },
+      "ItemScopeLimit": {
+        "discriminator": {
+          "mapping": {
+            "active": "#/components/schemas/ItemScopeLimitActive",
+            "history": "#/components/schemas/ItemScopeLimitHistory",
+            "unplanned": "#/components/schemas/ItemScopeLimitUnplanned"
+          },
+          "propertyName": "type"
+        },
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/ItemScopeLimitActive"
+          },
+          {
+            "$ref": "#/components/schemas/ItemScopeLimitHistory"
+          },
+          {
+            "$ref": "#/components/schemas/ItemScopeLimitUnplanned"
+          }
+        ],
+        "title": "ItemScopeLimit"
+      },
+      "ItemScopeLimitActive": {
+        "properties": {
+          "closed": {
+            "$ref": "#/components/schemas/ItemScopeLimitTimeAnchorSetting"
+          },
+          "type": {
+            "const": "active",
+            "type": "string"
+          },
+          "updated": {
+            "$ref": "#/components/schemas/ItemScopeLimitTimeAnchorSetting"
+          }
+        },
+        "required": [
+          "closed",
+          "updated",
+          "type"
+        ],
+        "title": "ItemScopeLimitActive",
+        "type": "object"
+      },
+      "ItemScopeLimitHistory": {
+        "properties": {
+          "closed": {
+            "$ref": "#/components/schemas/ItemScopeLimitTimeAnchorSetting"
+          },
+          "type": {
+            "const": "history",
+            "type": "string"
+          }
+        },
+        "required": [
+          "closed",
+          "type"
+        ],
+        "title": "ItemScopeLimitHistory",
+        "type": "object"
+      },
+      "ItemScopeLimitTimeAnchorSetting": {
+        "properties": {
+          "enabled": {
+            "type": "boolean"
+          },
+          "value": {
+            "$ref": "#/components/schemas/ItemSearchQueryTimeAnchor"
+          }
+        },
+        "required": [
+          "value",
+          "enabled"
+        ],
+        "title": "ItemScopeLimitTimeAnchorSetting",
+        "type": "object"
+      },
+      "ItemScopeLimitUnplanned": {
+        "properties": {
+          "created": {
+            "$ref": "#/components/schemas/ItemScopeLimitTimeAnchorSetting"
+          },
+          "type": {
+            "const": "unplanned",
+            "type": "string"
+          }
+        },
+        "required": [
+          "created",
+          "type"
+        ],
+        "title": "ItemScopeLimitUnplanned",
+        "type": "object"
+      },
       "ItemSearchQuery": {
         "properties": {
           "archived": {
@@ -17673,6 +17766,9 @@
           "itemFilter": {
             "$ref": "#/components/schemas/ItemSearchQueryFilter"
           },
+          "itemScopeLimit": {
+            "$ref": "#/components/schemas/ItemScopeLimit"
+          },
           "itemSort": {
             "items": {
               "$ref": "#/components/schemas/ItemSearchQuerySort"
@@ -20505,7 +20601,7 @@
   },
   "info": {
     "title": "airfocus API",
-    "version": "1.0.0-beta.44.27.0"
+    "version": "1.0.0-beta.44.36.0"
   },
   "openapi": "3.1.0",
   "paths": {
