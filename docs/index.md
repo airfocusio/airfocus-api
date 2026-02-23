@@ -8,7 +8,7 @@ nav_order: 0
 
 Welcome to the airfocus developer docs, where you'll find technical information about our API.<br>
 If you have any questions or feedback about the API, please hollow guides in the [Help](/help) section.<br>
-If you're looking for general information about airfocus and its features, please visit our [Help Center](https://help.airfocus.com).<br>
+If you're looking for general information about airfocus and its features, please visit our [Help Center](https://help.airfocus.com) or [ask the community](https://community.lucid.co/peer-support-1?utm_source=developer-airfocus&utm_medium=lucid-community&utm_campaign=airfocus-dev-links&utm_content=home-ask-community).<br>
 
 ## API overview
 
