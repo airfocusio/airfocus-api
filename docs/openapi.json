@@ -13602,6 +13602,10 @@
       },
       "PortfolioAppSettings": {
         "properties": {
+          "globalFilter": {
+            "$ref": "#/components/schemas/ItemSearchQueryFilter",
+            "description": "An item-search filter to pull only specific items into this portfolio. This filter will be applied to all source workspaces, in addition to the filters defined for each source."
+          },
           "portfolioFieldId": {
             "description": "Id of a team-field installed by this app in all the source workspaces, which contains links between source items and this portfolio.",
             "format": "uuid",
@@ -19690,6 +19694,9 @@
         "discriminator": {
           "mapping": {
             "and": "#/components/schemas/WorkspaceSearchQueryFilterAnd",
+            "appType": "#/components/schemas/WorkspaceSearchQueryFilterAppType",
+            "field": "#/components/schemas/WorkspaceSearchQueryFilterField",
+            "itemType": "#/components/schemas/WorkspaceSearchQueryFilterItemType",
             "members": "#/components/schemas/WorkspaceSearchQueryFilterMembers",
             "name": "#/components/schemas/WorkspaceSearchQueryFilterName",
             "namespace": "#/components/schemas/WorkspaceSearchQueryFilterNamespace",
@@ -19701,6 +19708,15 @@
         "oneOf": [
           {
             "$ref": "#/components/schemas/WorkspaceSearchQueryFilterAnd"
+          },
+          {
+            "$ref": "#/components/schemas/WorkspaceSearchQueryFilterAppType"
+          },
+          {
+            "$ref": "#/components/schemas/WorkspaceSearchQueryFilterField"
+          },
+          {
+            "$ref": "#/components/schemas/WorkspaceSearchQueryFilterItemType"
           },
           {
             "$ref": "#/components/schemas/WorkspaceSearchQueryFilterMembers"
@@ -19738,6 +19754,112 @@
           "type"
         ],
         "title": "WorkspaceSearchQueryFilterAnd",
+        "type": "object"
+      },
+      "WorkspaceSearchQueryFilterAppType": {
+        "discriminator": {
+          "mapping": {
+            "containAny": "#/components/schemas/WorkspaceSearchQueryFilterAppTypeContainAny"
+          },
+          "propertyName": "mode"
+        },
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/WorkspaceSearchQueryFilterAppTypeContainAny"
+          }
+        ],
+        "title": "WorkspaceSearchQueryFilterAppType"
+      },
+      "WorkspaceSearchQueryFilterAppTypeContainAny": {
+        "properties": {
+          "mode": {
+            "const": "containAny",
+            "type": "string"
+          },
+          "values": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "uniqueItems": true
+          }
+        },
+        "required": [
+          "values",
+          "mode"
+        ],
+        "title": "WorkspaceSearchQueryFilterAppTypeContainAny",
+        "type": "object"
+      },
+      "WorkspaceSearchQueryFilterField": {
+        "discriminator": {
+          "mapping": {
+            "containAny": "#/components/schemas/WorkspaceSearchQueryFilterFieldContainAny"
+          },
+          "propertyName": "mode"
+        },
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/WorkspaceSearchQueryFilterFieldContainAny"
+          }
+        ],
+        "title": "WorkspaceSearchQueryFilterField"
+      },
+      "WorkspaceSearchQueryFilterFieldContainAny": {
+        "properties": {
+          "mode": {
+            "const": "containAny",
+            "type": "string"
+          },
+          "values": {
+            "items": {
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": "array",
+            "uniqueItems": true
+          }
+        },
+        "required": [
+          "values",
+          "mode"
+        ],
+        "title": "WorkspaceSearchQueryFilterFieldContainAny",
+        "type": "object"
+      },
+      "WorkspaceSearchQueryFilterItemType": {
+        "discriminator": {
+          "mapping": {
+            "containAny": "#/components/schemas/WorkspaceSearchQueryFilterItemTypeContainAny"
+          },
+          "propertyName": "mode"
+        },
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/WorkspaceSearchQueryFilterItemTypeContainAny"
+          }
+        ],
+        "title": "WorkspaceSearchQueryFilterItemType"
+      },
+      "WorkspaceSearchQueryFilterItemTypeContainAny": {
+        "properties": {
+          "mode": {
+            "const": "containAny",
+            "type": "string"
+          },
+          "values": {
+            "items": {
+              "$ref": "#/components/schemas/ItemType"
+            },
+            "type": "array",
+            "uniqueItems": true
+          }
+        },
+        "required": [
+          "values",
+          "mode"
+        ],
+        "title": "WorkspaceSearchQueryFilterItemTypeContainAny",
         "type": "object"
       },
       "WorkspaceSearchQueryFilterMembers": {
@@ -20552,7 +20674,7 @@
   },
   "info": {
     "title": "airfocus API",
-    "version": "1.0.0-beta.44.88.0"
+    "version": "1.0.0-beta.44.97.1"
   },
   "openapi": "3.1.0",
   "paths": {
