@@ -439,6 +439,9 @@
           "showDescription": {
             "type": "boolean"
           },
+          "tenantId": {
+            "type": "string"
+          },
           "title": {
             "type": "string"
           },
@@ -1109,11 +1112,11 @@
         "description": "Custom item link type that defines how items can be related in both directions",
         "properties": {
           "backwardsName": {
-            "description": "The name of the link type used in the backward direction (\"{to} {backwards_name} {from}\"), e.g., \"is blocked by\" in \"B-34 is blocked by A-12\"",
+            "description": "The name of the link type used in the backward direction (\"{to} {backwards_name} {from}\"), e.g., \"is blocked by\" in \"B-34 is blocked by A-12\". Must contain at least one letter or digit.",
             "type": "string"
           },
           "name": {
-            "description": "The name of the link type used in the forward direction (\"{from} {name} {to}\"), e.g., \"blocks\" in \"A-12 blocks B-34\"",
+            "description": "The name of the link type used in the forward direction (\"{from} {name} {to}\"), e.g., \"blocks\" in \"A-12 blocks B-34\". Must contain at least one letter or digit.",
             "type": "string"
           }
         },
@@ -7283,7 +7286,7 @@
             "$ref": "#/components/schemas/ItemLinkTypeRecordEmbed"
           },
           "backwardsName": {
-            "description": "The name of the link type used in the backward direction (\"{to} {backwards_name} {from}\"), e.g., \"is blocked by\" in \"B-34 is blocked by A-12\"",
+            "description": "The name of the link type used in the backward direction (\"{to} {backwards_name} {from}\"), e.g., \"is blocked by\" in \"B-34 is blocked by A-12\". Must contain at least one letter or digit.",
             "type": "string"
           },
           "id": {
@@ -7291,7 +7294,7 @@
             "type": "string"
           },
           "name": {
-            "description": "The name of the link type used in the forward direction (\"{from} {name} {to}\"), e.g., \"blocks\" in \"A-12 blocks B-34\"",
+            "description": "The name of the link type used in the forward direction (\"{from} {name} {to}\"), e.g., \"blocks\" in \"A-12 blocks B-34\". Must contain at least one letter or digit.",
             "type": "string"
           },
           "teamId": {
@@ -17023,11 +17026,11 @@
         "description": "Custom item link type that defines how items can be related in both directions",
         "properties": {
           "backwardsName": {
-            "description": "The name of the link type used in the backward direction (\"{to} {backwards_name} {from}\"), e.g., \"is blocked by\" in \"B-34 is blocked by A-12\"",
+            "description": "The name of the link type used in the backward direction (\"{to} {backwards_name} {from}\"), e.g., \"is blocked by\" in \"B-34 is blocked by A-12\". Must contain at least one letter or digit.",
             "type": "string"
           },
           "name": {
-            "description": "The name of the link type used in the forward direction (\"{from} {name} {to}\"), e.g., \"blocks\" in \"A-12 blocks B-34\"",
+            "description": "The name of the link type used in the forward direction (\"{from} {name} {to}\"), e.g., \"blocks\" in \"A-12 blocks B-34\". Must contain at least one letter or digit.",
             "type": "string"
           }
         },
@@ -20677,7 +20680,7 @@
   },
   "info": {
     "title": "airfocus API",
-    "version": "1.0.0-beta.44.118.3"
+    "version": "1.0.0-beta.44.121.0"
   },
   "openapi": "3.1.0",
   "paths": {
