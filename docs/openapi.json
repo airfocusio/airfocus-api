@@ -20680,7 +20680,7 @@
   },
   "info": {
     "title": "airfocus API",
-    "version": "1.0.0-beta.45.0.2"
+    "version": "1.0.0-beta.45.6.1"
   },
   "openapi": "3.1.0",
   "paths": {
@@ -21407,7 +21407,7 @@
     },
     "/api/link-types/bulk": {
       "post": {
-        "description": "Accepts a list of create/update/patch/delete operations (see the request model for more details).<br/>\nEach operation can target a single or multiple item-link-types.<br/>\nReturns a list of results for each input operation including errors.<br/>\nGuarantees that the size and order of the returned results matches the input list of operations.<br/><strong>Note:</strong> The following item-link-type IDs are reserved as read-only and will be present on all teams:<br/>- 11111111-1111-1111-1111-111111111111<br/>- 22222222-2222-2222-2222-222222222222<br/>- 33333333-3333-3333-3333-333333333333<br/>Requirements:<br/>- auth-client scopes: \"team\"<br/>- user role: \"admin\"<br/>- user permission: \"write\" or higher",
+        "description": "Accepts a list of create/update/patch/delete operations (see the request model for more details).<br/>\nEach operation can target a single or multiple item-link-types.<br/>\nReturns a list of results for each input operation including errors.<br/>\nGuarantees that the size and order of the returned results matches the order of input operations.<br/><strong>Note:</strong> The following item-link-type IDs are reserved as read-only and will be present on all teams:<br/>- 11111111-1111-1111-1111-111111111111<br/>- 22222222-2222-2222-2222-222222222222<br/>- 33333333-3333-3333-3333-333333333333<br/>Requirements:<br/>- auth-client scopes: \"team\"<br/>- user role: \"admin\"<br/>- user permission: \"write\" or higher",
         "operationId": "bulkItemLinkTypes",
         "requestBody": {
           "content": {
@@ -21508,7 +21508,7 @@
     },
     "/api/link-types/list": {
       "post": {
-        "description": "Returns a list of item-link-types resolved for the provided IDs.<br/>\nDoes not fail if any of the requested item-link-types is not found or not accessible - instead it returns corresponding error-object instead of an entity-object.<br/>\nGuarantees that the size and order of the returned list matches the requested IDs.<br/>Requirements:<br/>- auth-client scopes: \"team:read\"<br/>- user permission: \"read\" or higher",
+        "description": "Returns a list of item-link-types resolved for the provided IDs.<br/>\nGuarantees that the array-size and order of the returned item-link-types matches the order of requested IDs.<br/>\nDoes not fail if any of the requested item-link-types is not found or not accessible - instead it returns null as an array-element of the corresponding item-link-type which could not be accessed.<br/>Requirements:<br/>- auth-client scopes: \"team:read\"<br/>- user permission: \"read\" or higher",
         "operationId": "listItemLinkTypes",
         "requestBody": {
           "content": {
@@ -23645,7 +23645,7 @@
     },
     "/api/workspaces/bulk": {
       "post": {
-        "description": "Accepts a list of create/update/patch/delete operations (see the request model for more details).<br/>\nEach operation can target a single or multiple workspaces.<br/>\nReturns a list of results for each input operation including errors.<br/>\nGuarantees that the size and order of the returned results matches the input list of operations.<br/>Requirements:<br/>- auth-client scopes: \"workspace\"<br/>- user permission: \"write\" or higher",
+        "description": "Accepts a list of create/update/patch/delete operations (see the request model for more details).<br/>\nEach operation can target a single or multiple workspaces.<br/>\nReturns a list of results for each input operation including errors.<br/>\nGuarantees that the size and order of the returned results matches the order of input operations.<br/>Requirements:<br/>- auth-client scopes: \"workspace\"<br/>- user permission: \"write\" or higher",
         "operationId": "bulkWorkspaces",
         "parameters": [
           {
@@ -25548,7 +25548,7 @@
     },
     "/api/workspaces/item-relations/bulk": {
       "post": {
-        "description": "Accepts a list of create/update/patch/delete operations (see the request model for more details).<br/>\nEach operation can target a single or multiple item-relations.<br/>\nReturns a list of results for each input operation including errors.<br/>\nGuarantees that the size and order of the returned results matches the input list of operations.<br/>Requirements:<br/>- auth-client scopes: \"workspace\"<br/>- user permission: \"write\" or higher",
+        "description": "Accepts a list of create/update/patch/delete operations (see the request model for more details).<br/>\nEach operation can target a single or multiple item-relations.<br/>\nReturns a list of results for each input operation including errors.<br/>\nGuarantees that the size and order of the returned results matches the order of input operations.<br/>Requirements:<br/>- auth-client scopes: \"workspace\"<br/>- user permission: \"write\" or higher",
         "operationId": "bulkItemRelations",
         "parameters": [
           {
@@ -25661,7 +25661,7 @@
     },
     "/api/workspaces/item-relations/list": {
       "post": {
-        "description": "Returns a list of item-relations resolved for the provided IDs.<br/>\nDoes not fail if any of the requested item-relations is not found or not accessible - instead it returns corresponding error-object instead of an entity-object.<br/>\nGuarantees that the size and order of the returned list matches the requested IDs.<br/>Requirements:<br/>- auth-client scopes: \"workspace:read\"<br/>- user permission: \"read\" or higher",
+        "description": "Returns a list of item-relations resolved for the provided IDs.<br/>\nGuarantees that the array-size and order of the returned item-relations matches the order of requested IDs.<br/>\nDoes not fail if any of the requested item-relations is not found or not accessible - instead it returns null as an array-element of the corresponding item-relation which could not be accessed.<br/>Requirements:<br/>- auth-client scopes: \"workspace:read\"<br/>- user permission: \"read\" or higher",
         "operationId": "listItemRelations",
         "parameters": [
           {
@@ -26897,7 +26897,7 @@
     },
     "/api/workspaces/list": {
       "post": {
-        "description": "Returns a list of workspaces resolved for the provided IDs.<br/>\nDoes not fail if any of the requested workspaces is not found or not accessible - instead it returns corresponding error-object instead of an entity-object.<br/>\nGuarantees that the size and order of the returned list matches the requested IDs.<br/>Requirements:<br/>- auth-client scopes: \"workspace:read\"<br/>- user permission: \"read\" or higher",
+        "description": "Returns a list of workspaces resolved for the provided IDs.<br/>\nGuarantees that the array-size and order of the returned workspaces matches the order of requested IDs.<br/>\nDoes not fail if any of the requested workspaces is not found or not accessible - instead it returns null as an array-element of the corresponding workspace which could not be accessed.<br/>Requirements:<br/>- auth-client scopes: \"workspace:read\"<br/>- user permission: \"read\" or higher",
         "operationId": "listWorkspaces",
         "parameters": [
           {
@@ -31469,7 +31469,7 @@
     },
     "/api/workspaces/{workspaceId}/items/bulk": {
       "post": {
-        "description": "Accepts a list of create/update/patch/delete operations (see the request model for more details).<br/>\nEach operation can target a single or multiple items.<br/>\nReturns a list of results for each input operation including errors.<br/>\nGuarantees that the size and order of the returned results matches the input list of operations.<br/>Requirements:<br/>- auth-client scopes: \"workspace\"<br/>- user permission: \"write\" or higher",
+        "description": "Accepts a list of create/update/patch/delete operations (see the request model for more details).<br/>\nEach operation can target a single or multiple items.<br/>\nReturns a list of results for each input operation including errors.<br/>\nGuarantees that the size and order of the returned results matches the order of input operations.<br/>Requirements:<br/>- auth-client scopes: \"workspace\"<br/>- user permission: \"write\" or higher",
         "operationId": "bulkItems",
         "parameters": [
           {
@@ -31618,7 +31618,7 @@
     },
     "/api/workspaces/{workspaceId}/items/list": {
       "post": {
-        "description": "Returns a list of items resolved for the provided IDs.<br/>\nDoes not fail if any of the requested items is not found or not accessible - instead it returns corresponding error-object instead of an entity-object.<br/>\nGuarantees that the size and order of the returned list matches the requested IDs.<br/>Requirements:<br/>- auth-client scopes: \"workspace:read\"<br/>- user permission: \"read\" or higher",
+        "description": "Returns a list of items resolved for the provided IDs.<br/>\nGuarantees that the array-size and order of the returned items matches the order of requested IDs.<br/>\nDoes not fail if any of the requested items is not found or not accessible - instead it returns null as an array-element of the corresponding item which could not be accessed.<br/>Requirements:<br/>- auth-client scopes: \"workspace:read\"<br/>- user permission: \"read\" or higher",
         "operationId": "listItems",
         "parameters": [
           {
@@ -33084,7 +33084,7 @@
     },
     "/api/workspaces/{workspaceId}/links/bulk": {
       "post": {
-        "description": "Accepts a list of create/update/patch/delete operations (see the request model for more details).<br/>\nEach operation can target a single or multiple item-links.<br/>\nReturns a list of results for each input operation including errors.<br/>\nGuarantees that the size and order of the returned results matches the input list of operations.<br/>Requirements:<br/>- auth-client scopes: \"workspace\"<br/>- user permission: \"write\" or higher",
+        "description": "Accepts a list of create/update/patch/delete operations (see the request model for more details).<br/>\nEach operation can target a single or multiple item-links.<br/>\nReturns a list of results for each input operation including errors.<br/>\nGuarantees that the size and order of the returned results matches the order of input operations.<br/>Requirements:<br/>- auth-client scopes: \"workspace\"<br/>- user permission: \"write\" or higher",
         "operationId": "bulkItemLinks",
         "parameters": [
           {
@@ -33207,7 +33207,7 @@
     },
     "/api/workspaces/{workspaceId}/links/list": {
       "post": {
-        "description": "Returns a list of item-links resolved for the provided IDs.<br/>\nDoes not fail if any of the requested item-links is not found or not accessible - instead it returns corresponding error-object instead of an entity-object.<br/>\nGuarantees that the size and order of the returned list matches the requested IDs.<br/>Requirements:<br/>- auth-client scopes: \"workspace:read\"<br/>- user permission: \"read\" or higher",
+        "description": "Returns a list of item-links resolved for the provided IDs.<br/>\nGuarantees that the array-size and order of the returned item-links matches the order of requested IDs.<br/>\nDoes not fail if any of the requested item-links is not found or not accessible - instead it returns null as an array-element of the corresponding item-link which could not be accessed.<br/>Requirements:<br/>- auth-client scopes: \"workspace:read\"<br/>- user permission: \"read\" or higher",
         "operationId": "listItemLinks",
         "parameters": [
           {
@@ -34107,7 +34107,7 @@
     "/api/workspaces/{workspaceId}/milestones/bulk": {
       "post": {
         "deprecated": true,
-        "description": "Accepts a list of create/update/patch/delete operations (see the request model for more details).<br/>\nEach operation can target a single or multiple milestones.<br/>\nReturns a list of results for each input operation including errors.<br/>\nGuarantees that the size and order of the returned results matches the input list of operations.<br/>Requirements:<br/>- auth-client scopes: \"workspace\"<br/>- user permission: \"write\" or higher",
+        "description": "Accepts a list of create/update/patch/delete operations (see the request model for more details).<br/>\nEach operation can target a single or multiple milestones.<br/>\nReturns a list of results for each input operation including errors.<br/>\nGuarantees that the size and order of the returned results matches the order of input operations.<br/>Requirements:<br/>- auth-client scopes: \"workspace\"<br/>- user permission: \"write\" or higher",
         "operationId": "bulkMilestones",
         "parameters": [
           {
@@ -34231,7 +34231,7 @@
     "/api/workspaces/{workspaceId}/milestones/list": {
       "post": {
         "deprecated": true,
-        "description": "Returns a list of milestones resolved for the provided IDs.<br/>\nDoes not fail if any of the requested milestones is not found or not accessible - instead it returns corresponding error-object instead of an entity-object.<br/>\nGuarantees that the size and order of the returned list matches the requested IDs.<br/>Requirements:<br/>- auth-client scopes: \"workspace:read\"<br/>- user permission: \"read\" or higher",
+        "description": "Returns a list of milestones resolved for the provided IDs.<br/>\nGuarantees that the array-size and order of the returned milestones matches the order of requested IDs.<br/>\nDoes not fail if any of the requested milestones is not found or not accessible - instead it returns null as an array-element of the corresponding milestone which could not be accessed.<br/>Requirements:<br/>- auth-client scopes: \"workspace:read\"<br/>- user permission: \"read\" or higher",
         "operationId": "listMilestones",
         "parameters": [
           {
