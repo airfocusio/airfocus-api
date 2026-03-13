@@ -20680,7 +20680,7 @@
   },
   "info": {
     "title": "airfocus API",
-    "version": "1.0.0-beta.45.11.0"
+    "version": "1.0.0-beta.45.20.1"
   },
   "openapi": "3.1.0",
   "paths": {
@@ -20758,6 +20758,82 @@
           }
         ],
         "summary": "Install a new field",
+        "tags": [
+          "Fields"
+        ]
+      }
+    },
+    "/api/fields/delete": {
+      "post": {
+        "description": "Deletes the requested fields together with all their workspace connections and item values.\n<br/>Requirements:<br/>  - auth-client scopes: \"workspace\"<br/>  - user permission: \"full\"<br/>  - team features: \"team-fields\" when operating with team-fields<br/>  - user role: \"admin\" when operating with team-fields<br/>Returns:<br/>403 if user does not have the required permission<br/>Requirements:<br/>- auth-client scopes: \"workspace\"",
+        "operationId": "bulkDeleteFields",
+        "parameters": [
+          {
+            "deprecated": true,
+            "description": "Enable sudo-mode for admins for a single request, which gives full permission to all workspaces in the team.",
+            "in": "query",
+            "name": "actAsAdmin",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "items": {
+                  "format": "uuid",
+                  "type": "string"
+                },
+                "type": "array"
+              }
+            }
+          },
+          "required": false
+        },
+        "responses": {
+          "204": {
+            "description": ""
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "missing_token",
+                  "data": {},
+                  "message": "Access token is missing"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If missing authentication token."
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "forbidden",
+                  "data": {},
+                  "message": "Missing required access scope"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If authenticated client does not have the required access scopes."
+          }
+        },
+        "security": [
+          {
+            "httpAuth": []
+          }
+        ],
+        "summary": "Delete multiple fields",
         "tags": [
           "Fields"
         ]
@@ -21066,6 +21142,91 @@
           }
         ],
         "summary": "Link team-fields to workspaces",
+        "tags": [
+          "Fields"
+        ]
+      }
+    },
+    "/api/fields/workspaces/unlink": {
+      "post": {
+        "description": "Unlinks existing team-fields from workspaces.\nReturns updated fields with their remaining linked workspaces embedded.\nReturns an error if either of the requested fields is not a team-field.\nIgnores non-existing links.\nField values are removed from items in unlinked workspaces.\n<br/>Requirements:<br/>  - auth-client scopes: \"workspace\"<br/>  - user permission: \"full\"<br/>  - team features: \"team-fields\" when operating with team-fields<br/>  - user role: \"admin\" when operating with team-fields<br/>Returns:<br/>403 if user does not have the required permission<br/>Requirements:<br/>- auth-client scopes: \"workspace\"",
+        "operationId": "unlinkTeamFieldsFromWorkspaces",
+        "parameters": [
+          {
+            "deprecated": true,
+            "description": "Enable sudo-mode for admins for a single request, which gives full permission to all workspaces in the team.",
+            "in": "query",
+            "name": "actAsAdmin",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "items": {
+                  "$ref": "#/components/schemas/FieldServerEndpointsFieldToWorkspaceLink"
+                },
+                "type": "array"
+              }
+            }
+          },
+          "required": false
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/FieldWithFieldEmbed"
+                  },
+                  "type": "array"
+                }
+              }
+            },
+            "description": ""
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "missing_token",
+                  "data": {},
+                  "message": "Access token is missing"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If missing authentication token."
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "forbidden",
+                  "data": {},
+                  "message": "Missing required access scope"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If authenticated client does not have the required access scopes."
+          }
+        },
+        "security": [
+          {
+            "httpAuth": []
+          }
+        ],
+        "summary": "Unlink team-fields from workspaces",
         "tags": [
           "Fields"
         ]
