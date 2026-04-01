@@ -912,119 +912,6 @@
         "title": "ClubhouseIntegrationSummary",
         "type": "object"
       },
-      "CommentBulkAction": {
-        "discriminator": {
-          "mapping": {
-            "create": "#/components/schemas/CommentBulkCreate",
-            "delete": "#/components/schemas/CommentBulkDelete",
-            "patch": "#/components/schemas/CommentBulkPatch",
-            "update": "#/components/schemas/CommentBulkUpdate"
-          },
-          "propertyName": "type"
-        },
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/CommentBulkCreate"
-          },
-          {
-            "$ref": "#/components/schemas/CommentBulkDelete"
-          },
-          {
-            "$ref": "#/components/schemas/CommentBulkPatch"
-          },
-          {
-            "$ref": "#/components/schemas/CommentBulkUpdate"
-          }
-        ],
-        "title": "CommentBulkAction"
-      },
-      "CommentBulkCreate": {
-        "properties": {
-          "resource": {
-            "$ref": "#/components/schemas/ItemComment"
-          },
-          "type": {
-            "enum": [
-              "create"
-            ],
-            "type": "string"
-          }
-        },
-        "required": [
-          "resource",
-          "type"
-        ],
-        "title": "CommentBulkCreate",
-        "type": "object"
-      },
-      "CommentBulkDelete": {
-        "properties": {
-          "id": {
-            "format": "uuid",
-            "type": "string"
-          },
-          "type": {
-            "enum": [
-              "delete"
-            ],
-            "type": "string"
-          }
-        },
-        "required": [
-          "id",
-          "type"
-        ],
-        "title": "CommentBulkDelete",
-        "type": "object"
-      },
-      "CommentBulkPatch": {
-        "properties": {
-          "id": {
-            "format": "uuid",
-            "type": "string"
-          },
-          "transform": {
-            "$ref": "#/components/schemas/JsonPatch"
-          },
-          "type": {
-            "enum": [
-              "patch"
-            ],
-            "type": "string"
-          }
-        },
-        "required": [
-          "id",
-          "transform",
-          "type"
-        ],
-        "title": "CommentBulkPatch",
-        "type": "object"
-      },
-      "CommentBulkUpdate": {
-        "properties": {
-          "id": {
-            "format": "uuid",
-            "type": "string"
-          },
-          "resource": {
-            "$ref": "#/components/schemas/ItemComment"
-          },
-          "type": {
-            "enum": [
-              "update"
-            ],
-            "type": "string"
-          }
-        },
-        "required": [
-          "id",
-          "resource",
-          "type"
-        ],
-        "title": "CommentBulkUpdate",
-        "type": "object"
-      },
       "Confidence": {
         "enum": [
           "high",
@@ -2030,20 +1917,6 @@
         "title": "DateRangeFieldWithFieldEmbed",
         "type": "object"
       },
-      "Emoji": {
-        "enum": [
-          "blue_heart",
-          "clap",
-          "confused",
-          "eyes",
-          "+1",
-          "rocket",
-          "thinking_face",
-          "white_check_mark"
-        ],
-        "title": "Emoji",
-        "type": "string"
-      },
       "ErrorResponse": {
         "description": "A general error response which is returned by the server for all handled errors.",
         "properties": {
@@ -2345,7 +2218,7 @@
         "title": "FieldSearchQuery",
         "type": "object"
       },
-      "FieldServerEndpointsFieldToWorkspaceLink": {
+      "FieldToWorkspaceLink": {
         "properties": {
           "fieldId": {
             "format": "uuid",
@@ -2360,10 +2233,10 @@
           "fieldId",
           "workspaceId"
         ],
-        "title": "FieldServerEndpointsFieldToWorkspaceLink",
+        "title": "FieldToWorkspaceLink",
         "type": "object"
       },
-      "FieldServerEndpointsFieldTypeInfo": {
+      "FieldTypeInfo": {
         "properties": {
           "typeId": {
             "type": "string"
@@ -2372,209 +2245,7 @@
         "required": [
           "typeId"
         ],
-        "title": "FieldServerEndpointsFieldTypeInfo",
-        "type": "object"
-      },
-      "FieldServerEndpointsInstallFieldRequest": {
-        "discriminator": {
-          "mapping": {
-            "boolean": "#/components/schemas/InstallBooleanFieldRequest",
-            "date": "#/components/schemas/InstallDateFieldRequest",
-            "date-range": "#/components/schemas/InstallDateRangeFieldRequest",
-            "milestone": "#/components/schemas/InstallMilestoneFieldRequest",
-            "number": "#/components/schemas/InstallNumberFieldRequest",
-            "people": "#/components/schemas/InstallPeopleFieldRequest",
-            "select": "#/components/schemas/InstallSelectFieldRequest",
-            "text": "#/components/schemas/InstallTextFieldRequest",
-            "time-period": "#/components/schemas/InstallTimePeriodFieldRequest"
-          },
-          "propertyName": "typeId"
-        },
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/InstallBooleanFieldRequest"
-          },
-          {
-            "$ref": "#/components/schemas/InstallDateFieldRequest"
-          },
-          {
-            "$ref": "#/components/schemas/InstallDateRangeFieldRequest"
-          },
-          {
-            "$ref": "#/components/schemas/InstallMilestoneFieldRequest"
-          },
-          {
-            "$ref": "#/components/schemas/InstallNumberFieldRequest"
-          },
-          {
-            "$ref": "#/components/schemas/InstallPeopleFieldRequest"
-          },
-          {
-            "$ref": "#/components/schemas/InstallSelectFieldRequest"
-          },
-          {
-            "$ref": "#/components/schemas/InstallTextFieldRequest"
-          },
-          {
-            "$ref": "#/components/schemas/InstallTimePeriodFieldRequest"
-          }
-        ],
-        "title": "FieldServerEndpointsInstallFieldRequest"
-      },
-      "FieldServerEndpointsInstallFieldRequestLegacy": {
-        "properties": {
-          "description": {
-            "type": "string"
-          },
-          "isTeamField": {
-            "type": "boolean"
-          },
-          "name": {
-            "type": "string"
-          },
-          "required": {
-            "type": "boolean"
-          },
-          "settings": {},
-          "typeId": {
-            "type": "string"
-          },
-          "workspaceId": {
-            "format": "uuid",
-            "type": "string"
-          }
-        },
-        "required": [
-          "typeId",
-          "name",
-          "settings",
-          "isTeamField",
-          "description",
-          "required"
-        ],
-        "title": "FieldServerEndpointsInstallFieldRequestLegacy",
-        "type": "object"
-      },
-      "FieldServerEndpointsReconfigureFieldRequest": {
-        "properties": {
-          "description": {
-            "type": "string"
-          },
-          "isTeamField": {
-            "type": "boolean"
-          },
-          "name": {
-            "type": "string"
-          },
-          "required": {
-            "type": "boolean"
-          },
-          "settings": {
-            "description": "The settings object which corresponds to the type of the requested field, or it can be skipped if the requested field does not have any settings.\nThis schema shows all the available field-settings. See also the Field schema to learn about settings of each specific field type.",
-            "oneOf": [
-              {
-                "$ref": "#/components/schemas/FormSourceFieldTypeSettings"
-              },
-              {
-                "$ref": "#/components/schemas/InsightsFieldTypeSettings"
-              },
-              {
-                "$ref": "#/components/schemas/MilestoneFieldTypeSettings"
-              },
-              {
-                "$ref": "#/components/schemas/NumberFieldTypeSettings"
-              },
-              {
-                "$ref": "#/components/schemas/OkrConfidenceFieldSettings"
-              },
-              {
-                "$ref": "#/components/schemas/OkrTimePeriodFieldSettings"
-              },
-              {
-                "$ref": "#/components/schemas/PeopleFieldTypeSettings"
-              },
-              {
-                "$ref": "#/components/schemas/SelectFieldTypeSettings"
-              },
-              {
-                "$ref": "#/components/schemas/TimePeriodFieldSettings"
-              },
-              {
-                "$ref": "#/components/schemas/VotingAppScoreFieldTypeSettings"
-              }
-            ]
-          }
-        },
-        "required": [
-          "name",
-          "description",
-          "isTeamField"
-        ],
-        "title": "FieldServerEndpointsReconfigureFieldRequest",
-        "type": "object"
-      },
-      "FieldServerEndpointsReconfigureFieldRequestLegacy": {
-        "properties": {
-          "description": {
-            "type": "string"
-          },
-          "fieldId": {
-            "format": "uuid",
-            "type": "string"
-          },
-          "isTeamField": {
-            "type": "boolean"
-          },
-          "name": {
-            "type": "string"
-          },
-          "required": {
-            "type": "boolean"
-          },
-          "settings": {}
-        },
-        "required": [
-          "fieldId",
-          "settings",
-          "name",
-          "description",
-          "isTeamField"
-        ],
-        "title": "FieldServerEndpointsReconfigureFieldRequestLegacy",
-        "type": "object"
-      },
-      "FieldServerEndpointsReorderFieldsRequest": {
-        "properties": {
-          "fieldIds": {
-            "items": {
-              "format": "uuid",
-              "type": "string"
-            },
-            "type": "array"
-          },
-          "workspaceId": {
-            "format": "uuid",
-            "type": "string"
-          }
-        },
-        "required": [
-          "workspaceId",
-          "fieldIds"
-        ],
-        "title": "FieldServerEndpointsReorderFieldsRequest",
-        "type": "object"
-      },
-      "FieldServerEndpointsUninstallFieldRequest": {
-        "properties": {
-          "fieldId": {
-            "format": "uuid",
-            "type": "string"
-          }
-        },
-        "required": [
-          "fieldId"
-        ],
-        "title": "FieldServerEndpointsUninstallFieldRequest",
+        "title": "FieldTypeInfo",
         "type": "object"
       },
       "FieldWithFieldEmbed": {
@@ -5210,7 +4881,6 @@
       "InstallBooleanFieldRequest": {
         "properties": {
           "description": {
-            "default": "",
             "description": "User-readable field description.",
             "type": "string"
           },
@@ -5243,6 +4913,7 @@
         "required": [
           "typeId",
           "name",
+          "description",
           "required"
         ],
         "title": "InstallBooleanFieldRequest",
@@ -5251,7 +4922,6 @@
       "InstallDateFieldRequest": {
         "properties": {
           "description": {
-            "default": "",
             "description": "User-readable field description.",
             "type": "string"
           },
@@ -5284,6 +4954,7 @@
         "required": [
           "typeId",
           "name",
+          "description",
           "required"
         ],
         "title": "InstallDateFieldRequest",
@@ -5292,7 +4963,6 @@
       "InstallDateRangeFieldRequest": {
         "properties": {
           "description": {
-            "default": "",
             "description": "User-readable field description.",
             "type": "string"
           },
@@ -5325,15 +4995,61 @@
         "required": [
           "typeId",
           "name",
+          "description",
           "required"
         ],
         "title": "InstallDateRangeFieldRequest",
         "type": "object"
       },
+      "InstallFieldRequest": {
+        "discriminator": {
+          "mapping": {
+            "boolean": "#/components/schemas/InstallBooleanFieldRequest",
+            "date": "#/components/schemas/InstallDateFieldRequest",
+            "date-range": "#/components/schemas/InstallDateRangeFieldRequest",
+            "milestone": "#/components/schemas/InstallMilestoneFieldRequest",
+            "number": "#/components/schemas/InstallNumberFieldRequest",
+            "people": "#/components/schemas/InstallPeopleFieldRequest",
+            "select": "#/components/schemas/InstallSelectFieldRequest",
+            "text": "#/components/schemas/InstallTextFieldRequest",
+            "time-period": "#/components/schemas/InstallTimePeriodFieldRequest"
+          },
+          "propertyName": "typeId"
+        },
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/InstallBooleanFieldRequest"
+          },
+          {
+            "$ref": "#/components/schemas/InstallDateFieldRequest"
+          },
+          {
+            "$ref": "#/components/schemas/InstallDateRangeFieldRequest"
+          },
+          {
+            "$ref": "#/components/schemas/InstallMilestoneFieldRequest"
+          },
+          {
+            "$ref": "#/components/schemas/InstallNumberFieldRequest"
+          },
+          {
+            "$ref": "#/components/schemas/InstallPeopleFieldRequest"
+          },
+          {
+            "$ref": "#/components/schemas/InstallSelectFieldRequest"
+          },
+          {
+            "$ref": "#/components/schemas/InstallTextFieldRequest"
+          },
+          {
+            "$ref": "#/components/schemas/InstallTimePeriodFieldRequest"
+          }
+        ],
+        "title": "InstallFieldRequest"
+      },
       "InstallMilestoneFieldRequest": {
         "properties": {
           "description": {
-            "default": "",
             "description": "User-readable field description.",
             "type": "string"
           },
@@ -5370,6 +5086,7 @@
         "required": [
           "typeId",
           "name",
+          "description",
           "settings",
           "required"
         ],
@@ -5379,7 +5096,6 @@
       "InstallNumberFieldRequest": {
         "properties": {
           "description": {
-            "default": "",
             "description": "User-readable field description.",
             "type": "string"
           },
@@ -5416,6 +5132,7 @@
         "required": [
           "typeId",
           "name",
+          "description",
           "settings",
           "required"
         ],
@@ -5425,7 +5142,6 @@
       "InstallPeopleFieldRequest": {
         "properties": {
           "description": {
-            "default": "",
             "description": "User-readable field description.",
             "type": "string"
           },
@@ -5462,6 +5178,7 @@
         "required": [
           "typeId",
           "name",
+          "description",
           "settings",
           "required"
         ],
@@ -5471,7 +5188,6 @@
       "InstallSelectFieldRequest": {
         "properties": {
           "description": {
-            "default": "",
             "description": "User-readable field description.",
             "type": "string"
           },
@@ -5508,6 +5224,7 @@
         "required": [
           "typeId",
           "name",
+          "description",
           "settings",
           "required"
         ],
@@ -5517,7 +5234,6 @@
       "InstallTextFieldRequest": {
         "properties": {
           "description": {
-            "default": "",
             "description": "User-readable field description.",
             "type": "string"
           },
@@ -5550,6 +5266,7 @@
         "required": [
           "typeId",
           "name",
+          "description",
           "required"
         ],
         "title": "InstallTextFieldRequest",
@@ -5558,7 +5275,6 @@
       "InstallTimePeriodFieldRequest": {
         "properties": {
           "description": {
-            "default": "",
             "description": "User-readable field description.",
             "type": "string"
           },
@@ -5595,6 +5311,7 @@
         "required": [
           "typeId",
           "name",
+          "description",
           "settings",
           "required"
         ],
@@ -6519,161 +6236,6 @@
         ],
         "title": "ItemColor",
         "type": "string"
-      },
-      "ItemComment": {
-        "properties": {
-          "content": {
-            "$ref": "#/components/schemas/RichText",
-            "description": "Rich text content as structured blocks. Different media types provide markdown support:\n• application/json - Default blocks format\n• application/vnd.airfocus.markdown+json - All RichText fields become markdown strings (recommended)\n• application/json+markdown - Legacy format, only top-level fields converted to markdown"
-          },
-          "createdAt": {
-            "format": "date-time",
-            "type": "string"
-          },
-          "id": {
-            "format": "uuid",
-            "type": "string"
-          },
-          "itemId": {
-            "format": "uuid",
-            "type": "string"
-          },
-          "lastUpdatedAt": {
-            "format": "date-time",
-            "type": "string"
-          },
-          "reactions": {
-            "items": {
-              "$ref": "#/components/schemas/ItemCommentReaction"
-            },
-            "type": "array"
-          },
-          "userId": {
-            "format": "uuid",
-            "type": "string"
-          }
-        },
-        "required": [
-          "id",
-          "itemId",
-          "userId",
-          "content",
-          "reactions",
-          "createdAt",
-          "lastUpdatedAt"
-        ],
-        "title": "ItemComment",
-        "type": "object"
-      },
-      "ItemCommentEmbed": {
-        "title": "ItemCommentEmbed",
-        "type": "object"
-      },
-      "ItemCommentReaction": {
-        "properties": {
-          "emoji": {
-            "$ref": "#/components/schemas/Emoji"
-          },
-          "userIds": {
-            "items": {
-              "format": "uuid",
-              "type": "string"
-            },
-            "type": "array"
-          }
-        },
-        "required": [
-          "emoji",
-          "userIds"
-        ],
-        "title": "ItemCommentReaction",
-        "type": "object"
-      },
-      "ItemCommentSearchQuery": {
-        "properties": {
-          "itemId": {
-            "format": "uuid",
-            "type": "string"
-          }
-        },
-        "title": "ItemCommentSearchQuery",
-        "type": "object"
-      },
-      "ItemCommentWithItemCommentEmbed": {
-        "properties": {
-          "_embedded": {
-            "$ref": "#/components/schemas/ItemCommentEmbed"
-          },
-          "content": {
-            "$ref": "#/components/schemas/RichText",
-            "description": "Rich text content as structured blocks. Different media types provide markdown support:\n• application/json - Default blocks format\n• application/vnd.airfocus.markdown+json - All RichText fields become markdown strings (recommended)\n• application/json+markdown - Legacy format, only top-level fields converted to markdown"
-          },
-          "createdAt": {
-            "format": "date-time",
-            "type": "string"
-          },
-          "id": {
-            "format": "uuid",
-            "type": "string"
-          },
-          "itemId": {
-            "format": "uuid",
-            "type": "string"
-          },
-          "lastUpdatedAt": {
-            "format": "date-time",
-            "type": "string"
-          },
-          "reactions": {
-            "items": {
-              "$ref": "#/components/schemas/ItemCommentReaction"
-            },
-            "type": "array"
-          },
-          "userId": {
-            "format": "uuid",
-            "type": "string"
-          }
-        },
-        "required": [
-          "id",
-          "itemId",
-          "userId",
-          "content",
-          "reactions",
-          "createdAt",
-          "lastUpdatedAt",
-          "_embedded"
-        ],
-        "title": "ItemCommentWithItemCommentEmbed",
-        "type": "object"
-      },
-      "ItemCommentWithItemCommentEmbedOrNullList": {
-        "items": {
-          "$ref": "#/components/schemas/ItemCommentWithItemCommentEmbed"
-        },
-        "title": "ItemCommentWithItemCommentEmbedOrNullList",
-        "type": "array"
-      },
-      "ItemCommentWithItemCommentEmbedPage": {
-        "properties": {
-          "items": {
-            "items": {
-              "$ref": "#/components/schemas/ItemCommentWithItemCommentEmbed"
-            },
-            "type": "array"
-          },
-          "totalItems": {
-            "format": "int32",
-            "type": "integer"
-          }
-        },
-        "required": [
-          "items",
-          "totalItems"
-        ],
-        "title": "ItemCommentWithItemCommentEmbedPage",
-        "type": "object"
       },
       "ItemConstraint": {
         "discriminator": {
@@ -13905,6 +13467,64 @@
         "title": "PrioritizationFieldWithFieldEmbed",
         "type": "object"
       },
+      "ReconfigureFieldRequest": {
+        "properties": {
+          "description": {
+            "type": "string"
+          },
+          "isTeamField": {
+            "type": "boolean"
+          },
+          "name": {
+            "type": "string"
+          },
+          "required": {
+            "type": "boolean"
+          },
+          "settings": {
+            "description": "The settings object which corresponds to the type of the requested field, or it can be skipped if the requested field does not have any settings.\nThis schema shows all the available field-settings. See also the Field schema to learn about settings of each specific field type.",
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/FormSourceFieldTypeSettings"
+              },
+              {
+                "$ref": "#/components/schemas/InsightsFieldTypeSettings"
+              },
+              {
+                "$ref": "#/components/schemas/MilestoneFieldTypeSettings"
+              },
+              {
+                "$ref": "#/components/schemas/NumberFieldTypeSettings"
+              },
+              {
+                "$ref": "#/components/schemas/OkrConfidenceFieldSettings"
+              },
+              {
+                "$ref": "#/components/schemas/OkrTimePeriodFieldSettings"
+              },
+              {
+                "$ref": "#/components/schemas/PeopleFieldTypeSettings"
+              },
+              {
+                "$ref": "#/components/schemas/SelectFieldTypeSettings"
+              },
+              {
+                "$ref": "#/components/schemas/TimePeriodFieldSettings"
+              },
+              {
+                "$ref": "#/components/schemas/VotingAppScoreFieldTypeSettings"
+              }
+            ]
+          }
+        },
+        "required": [
+          "name",
+          "description",
+          "isTeamField"
+        ],
+        "title": "ReconfigureFieldRequest",
+        "type": "object"
+      },
       "RefItemProperty": {
         "oneOf": [
           {
@@ -13973,6 +13593,27 @@
           "childOrder"
         ],
         "title": "RelativeItemInfo",
+        "type": "object"
+      },
+      "ReorderFieldsRequest": {
+        "properties": {
+          "fieldIds": {
+            "items": {
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "workspaceId": {
+            "format": "uuid",
+            "type": "string"
+          }
+        },
+        "required": [
+          "workspaceId",
+          "fieldIds"
+        ],
+        "title": "ReorderFieldsRequest",
         "type": "object"
       },
       "ResendUserInviteRequest": {
@@ -20673,13 +20314,13 @@
   },
   "info": {
     "title": "airfocus API",
-    "version": "1.0.0-beta.46.5.10"
+    "version": "1.0.0-beta.46.18.1"
   },
   "openapi": "3.1.0",
   "paths": {
     "/api/fields": {
       "post": {
-        "description": "Installs a new field.\nIf it's a team-field, then it's possible to install it with empty or any non-empty amount of linked workspaces.\nOtherwise, if it's not a team-field, then exactly one linked workspace should be specified.<br/>Requirements:<br/>  - auth-client scopes: \"workspace\"<br/>  - user permission: \"full\"<br/>  - team features: \"team-fields\" when operating with team-fields<br/>  - user role: \"admin\" when operating with team-fields<br/>Returns:<br/>403 if user does not have the required permission<br/>Requirements:<br/>- auth-client scopes: \"workspace\"",
+        "description": "Requirements:<br/>- auth-client scopes: \"workspace\"<br/>- user permission: \"full\"<br/>- team features: \"team-fields\" when operating with team-fields<br/>- user role: \"admin\" when operating with team-fields",
         "operationId": "installField",
         "parameters": [
           {
@@ -20697,7 +20338,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/FieldServerEndpointsInstallFieldRequest"
+                "$ref": "#/components/schemas/InstallFieldRequest"
               }
             }
           },
@@ -20735,14 +20376,14 @@
                 "example": {
                   "code": "forbidden",
                   "data": {},
-                  "message": "Missing required access scope"
+                  "message": "Insufficient permission"
                 },
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             },
-            "description": "If authenticated client does not have the required access scopes."
+            "description": "If user does not have the required permission, or authenticated client does not have the required access scopes."
           }
         },
         "security": [
@@ -20758,7 +20399,7 @@
     },
     "/api/fields/delete": {
       "post": {
-        "description": "Deletes the requested fields together with all their workspace connections and item values.\n<br/>Requirements:<br/>  - auth-client scopes: \"workspace\"<br/>  - user permission: \"full\"<br/>  - team features: \"team-fields\" when operating with team-fields<br/>  - user role: \"admin\" when operating with team-fields<br/>Returns:<br/>403 if user does not have the required permission<br/>Requirements:<br/>- auth-client scopes: \"workspace\"",
+        "description": "Requirements:<br/>- auth-client scopes: \"workspace\"<br/>- user permission: \"full\"<br/>- team features: \"team-fields\" when operating with team-fields<br/>- user role: \"admin\" when operating with team-fields",
         "operationId": "bulkDeleteFields",
         "parameters": [
           {
@@ -20811,14 +20452,14 @@
                 "example": {
                   "code": "forbidden",
                   "data": {},
-                  "message": "Missing required access scope"
+                  "message": "Insufficient permission"
                 },
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             },
-            "description": "If authenticated client does not have the required access scopes."
+            "description": "If user does not have the required permission, or authenticated client does not have the required access scopes."
           }
         },
         "security": [
@@ -20834,7 +20475,7 @@
     },
     "/api/fields/reorder": {
       "post": {
-        "description": "Updates the order of fields in the specified workspace.<br/>Requirements:<br/>  - auth-client scopes: \"workspace\"<br/>  - user permission: \"full\"<br/>  - team features: \"team-fields\" when operating with team-fields<br/>  - user role: \"admin\" when operating with team-fields<br/>Returns:<br/>403 if user does not have the required permission<br/>Requirements:<br/>- auth-client scopes: \"workspace\"",
+        "description": "Requirements:<br/>- auth-client scopes: \"workspace\"<br/>- user permission: \"full\"<br/>- team features: \"team-fields\" when operating with team-fields<br/>- user role: \"admin\" when operating with team-fields",
         "operationId": "reorderFields",
         "parameters": [
           {
@@ -20852,7 +20493,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/FieldServerEndpointsReorderFieldsRequest"
+                "$ref": "#/components/schemas/ReorderFieldsRequest"
               }
             }
           },
@@ -20883,14 +20524,14 @@
                 "example": {
                   "code": "forbidden",
                   "data": {},
-                  "message": "Missing required access scope"
+                  "message": "Insufficient permission"
                 },
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             },
-            "description": "If authenticated client does not have the required access scopes."
+            "description": "If user does not have the required permission, or authenticated client does not have the required access scopes."
           }
         },
         "security": [
@@ -20906,7 +20547,7 @@
     },
     "/api/fields/search": {
       "post": {
-        "description": "Searches fields in the current team based on the specified filters.<br/>Requirements:<br/>  - auth-client scopes: \"workspace:read\"<br/>  - user permission: \"read\" or higher<br/>  - team features: \"team-fields\" when operating with team-fields<br/>Returns:<br/>403 if user does not have the required permission<br/>Requirements:<br/>- auth-client scopes: \"workspace:read\"",
+        "description": "Requirements:<br/>- auth-client scopes: \"workspace:read\"<br/>- user permission: \"read\" or higher<br/>- team features: \"team-fields\" when operating with team-fields",
         "operationId": "searchFields",
         "parameters": [
           {
@@ -20962,14 +20603,14 @@
                 "example": {
                   "code": "forbidden",
                   "data": {},
-                  "message": "Missing required access scope"
+                  "message": "Insufficient permission"
                 },
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             },
-            "description": "If authenticated client does not have the required access scopes."
+            "description": "If user does not have the required permission, or authenticated client does not have the required access scopes."
           }
         },
         "security": [
@@ -20985,7 +20626,7 @@
     },
     "/api/fields/types": {
       "get": {
-        "description": "Returns all field-types available in the system.<br/>Requirements:<br/>  - auth-client scopes: \"workspace:read\"<br/>  - user permission: \"read\" or higher<br/>  - team features: \"team-fields\" when operating with team-fields<br/>Returns:<br/>403 if user does not have the required permission<br/>Requirements:<br/>- auth-client scopes: \"workspace:read\"",
+        "description": "Requirements:<br/>- auth-client scopes: \"workspace:read\"<br/>- user permission: \"read\" or higher<br/>- team features: \"team-fields\" when operating with team-fields",
         "operationId": "listFieldTypes",
         "parameters": [
           {
@@ -21005,7 +20646,7 @@
               "application/json": {
                 "schema": {
                   "items": {
-                    "$ref": "#/components/schemas/FieldServerEndpointsFieldTypeInfo"
+                    "$ref": "#/components/schemas/FieldTypeInfo"
                   },
                   "type": "array"
                 }
@@ -21034,14 +20675,14 @@
                 "example": {
                   "code": "forbidden",
                   "data": {},
-                  "message": "Missing required access scope"
+                  "message": "Insufficient permission"
                 },
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             },
-            "description": "If authenticated client does not have the required access scopes."
+            "description": "If user does not have the required permission, or authenticated client does not have the required access scopes."
           }
         },
         "security": [
@@ -21057,7 +20698,7 @@
     },
     "/api/fields/workspaces": {
       "post": {
-        "description": "Links existing team-fields to existing workspaces.\nReturns updated fields with their linked workspaces embedded.\nReturns an error if either of the requested fields is not a team-field.\nIgnores existing links.\n<br/>Requirements:<br/>  - auth-client scopes: \"workspace\"<br/>  - user permission: \"full\"<br/>  - team features: \"team-fields\" when operating with team-fields<br/>  - user role: \"admin\" when operating with team-fields<br/>Returns:<br/>403 if user does not have the required permission<br/>Requirements:<br/>- auth-client scopes: \"workspace\"",
+        "description": "Requirements:<br/>- auth-client scopes: \"workspace\"<br/>- user permission: \"full\"<br/>- team features: \"team-fields\" when operating with team-fields<br/>- user role: \"admin\" when operating with team-fields",
         "operationId": "linkTeamFieldsToWorkspaces",
         "parameters": [
           {
@@ -21076,7 +20717,7 @@
             "application/json": {
               "schema": {
                 "items": {
-                  "$ref": "#/components/schemas/FieldServerEndpointsFieldToWorkspaceLink"
+                  "$ref": "#/components/schemas/FieldToWorkspaceLink"
                 },
                 "type": "array"
               }
@@ -21119,14 +20760,14 @@
                 "example": {
                   "code": "forbidden",
                   "data": {},
-                  "message": "Missing required access scope"
+                  "message": "Insufficient permission"
                 },
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             },
-            "description": "If authenticated client does not have the required access scopes."
+            "description": "If user does not have the required permission, or authenticated client does not have the required access scopes."
           }
         },
         "security": [
@@ -21142,7 +20783,7 @@
     },
     "/api/fields/workspaces/unlink": {
       "post": {
-        "description": "Unlinks existing team-fields from workspaces.\nReturns updated fields with their remaining linked workspaces embedded.\nReturns an error if either of the requested fields is not a team-field.\nIgnores non-existing links.\nField values are removed from items in unlinked workspaces.\n<br/>Requirements:<br/>  - auth-client scopes: \"workspace\"<br/>  - user permission: \"full\"<br/>  - team features: \"team-fields\" when operating with team-fields<br/>  - user role: \"admin\" when operating with team-fields<br/>Returns:<br/>403 if user does not have the required permission<br/>Requirements:<br/>- auth-client scopes: \"workspace\"",
+        "description": "Requirements:<br/>- auth-client scopes: \"workspace\"<br/>- user permission: \"full\"<br/>- team features: \"team-fields\" when operating with team-fields<br/>- user role: \"admin\" when operating with team-fields",
         "operationId": "unlinkTeamFieldsFromWorkspaces",
         "parameters": [
           {
@@ -21161,7 +20802,7 @@
             "application/json": {
               "schema": {
                 "items": {
-                  "$ref": "#/components/schemas/FieldServerEndpointsFieldToWorkspaceLink"
+                  "$ref": "#/components/schemas/FieldToWorkspaceLink"
                 },
                 "type": "array"
               }
@@ -21204,14 +20845,14 @@
                 "example": {
                   "code": "forbidden",
                   "data": {},
-                  "message": "Missing required access scope"
+                  "message": "Insufficient permission"
                 },
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             },
-            "description": "If authenticated client does not have the required access scopes."
+            "description": "If user does not have the required permission, or authenticated client does not have the required access scopes."
           }
         },
         "security": [
@@ -21227,7 +20868,7 @@
     },
     "/api/fields/{fieldId}": {
       "delete": {
-        "description": "Deletes the requested field together with all its connections to workspaces and its values in the corresponding workspaces<br/>Requirements:<br/>  - auth-client scopes: \"workspace\"<br/>  - user permission: \"full\"<br/>  - team features: \"team-fields\" when operating with team-fields<br/>  - user role: \"admin\" when operating with team-fields<br/>Returns:<br/>403 if user does not have the required permission<br/>Requirements:<br/>- auth-client scopes: \"workspace\"",
+        "description": "Requirements:<br/>- auth-client scopes: \"workspace\"<br/>- user permission: \"full\"<br/>- team features: \"team-fields\" when operating with team-fields<br/>- user role: \"admin\" when operating with team-fields",
         "operationId": "deleteField",
         "parameters": [
           {
@@ -21276,14 +20917,14 @@
                 "example": {
                   "code": "forbidden",
                   "data": {},
-                  "message": "Missing required access scope"
+                  "message": "Insufficient permission"
                 },
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             },
-            "description": "If authenticated client does not have the required access scopes."
+            "description": "If user does not have the required permission, or authenticated client does not have the required access scopes."
           }
         },
         "security": [
@@ -21297,7 +20938,7 @@
         ]
       },
       "get": {
-        "description": "Returns a found field with its embedded data.\nThe field is accessible by the current user only if it's a team-field, or if it belongs to an accessible workspace.<br/>Requirements:<br/>  - auth-client scopes: \"workspace:read\"<br/>  - user permission: \"read\" or higher<br/>  - team features: \"team-fields\" when operating with team-fields<br/>Returns:<br/>403 if user does not have the required permission<br/>Requirements:<br/>- auth-client scopes: \"workspace:read\"",
+        "description": "Requirements:<br/>- auth-client scopes: \"workspace:read\"<br/>- user permission: \"read\" or higher<br/>- team features: \"team-fields\" when operating with team-fields",
         "operationId": "retrieveField",
         "parameters": [
           {
@@ -21353,14 +20994,14 @@
                 "example": {
                   "code": "forbidden",
                   "data": {},
-                  "message": "Missing required access scope"
+                  "message": "Insufficient permission"
                 },
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             },
-            "description": "If authenticated client does not have the required access scopes."
+            "description": "If user does not have the required permission, or authenticated client does not have the required access scopes."
           }
         },
         "security": [
@@ -21374,7 +21015,7 @@
         ]
       },
       "put": {
-        "description": "Updates configuration properties of an existing field.<br/>Requirements:<br/>  - auth-client scopes: \"workspace\"<br/>  - user permission: \"full\"<br/>  - team features: \"team-fields\" when operating with team-fields<br/>  - user role: \"admin\" when operating with team-fields<br/>Returns:<br/>403 if user does not have the required permission<br/>Requirements:<br/>- auth-client scopes: \"workspace\"",
+        "description": "Requirements:<br/>- auth-client scopes: \"workspace\"<br/>- user permission: \"full\"<br/>- team features: \"team-fields\" when operating with team-fields<br/>- user role: \"admin\" when operating with team-fields",
         "operationId": "reconfigureField",
         "parameters": [
           {
@@ -21402,7 +21043,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/FieldServerEndpointsReconfigureFieldRequest"
+                "$ref": "#/components/schemas/ReconfigureFieldRequest"
               }
             }
           },
@@ -21440,14 +21081,14 @@
                 "example": {
                   "code": "forbidden",
                   "data": {},
-                  "message": "Missing required access scope"
+                  "message": "Insufficient permission"
                 },
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             },
-            "description": "If authenticated client does not have the required access scopes."
+            "description": "If user does not have the required permission, or authenticated client does not have the required access scopes."
           }
         },
         "security": [
@@ -24006,79 +23647,6 @@
         ]
       }
     },
-    "/api/workspaces/extensions/fields": {
-      "get": {
-        "deprecated": true,
-        "description": "Returns all field-types available in the system.<br/>Requirements:<br/>  - auth-client scopes: \"workspace:read\"<br/>  - user permission: \"read\" or higher<br/>  - team features: \"team-fields\" when operating with team-fields<br/>Returns:<br/>403 if user does not have the required permission<br/>Requirements:<br/>- auth-client scopes: \"workspace:read\"",
-        "operationId": "listFieldTypesLegacy",
-        "parameters": [
-          {
-            "deprecated": true,
-            "description": "Enable sudo-mode for admins for a single request, which gives full permission to all workspaces in the team.",
-            "in": "query",
-            "name": "actAsAdmin",
-            "required": false,
-            "schema": {
-              "type": "boolean"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "items": {
-                    "$ref": "#/components/schemas/FieldServerEndpointsFieldTypeInfo"
-                  },
-                  "type": "array"
-                }
-              }
-            },
-            "description": ""
-          },
-          "401": {
-            "content": {
-              "application/json": {
-                "example": {
-                  "code": "missing_token",
-                  "data": {},
-                  "message": "Access token is missing"
-                },
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            },
-            "description": "If missing authentication token."
-          },
-          "403": {
-            "content": {
-              "application/json": {
-                "example": {
-                  "code": "forbidden",
-                  "data": {},
-                  "message": "Missing required access scope"
-                },
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            },
-            "description": "If authenticated client does not have the required access scopes."
-          }
-        },
-        "security": [
-          {
-            "httpAuth": []
-          }
-        ],
-        "summary": "List all available field types",
-        "tags": [
-          "Fields"
-        ]
-      }
-    },
     "/api/workspaces/extensions/views/inbox/{viewId}/counters": {
       "post": {
         "description": "Requirements:<br/>- auth-client scopes: \"workspace:read\"<br/>- team features: \"view:inbox\"<br/>- user permission: \"read\" or higher",
@@ -24195,316 +23763,6 @@
           }
         ],
         "summary": "Retrieve counters of items in each tab of the view."
-      }
-    },
-    "/api/workspaces/fields/add-team-field": {
-      "post": {
-        "deprecated": true,
-        "description": "Links existing team-fields to existing workspaces.\nReturns updated fields with their linked workspaces embedded.\nReturns an error if either of the requested fields is not a team-field.\nIgnores existing links.\n<br/>Requirements:<br/>  - auth-client scopes: \"workspace\"<br/>  - user permission: \"full\"<br/>  - team features: \"team-fields\" when operating with team-fields<br/>  - user role: \"admin\" when operating with team-fields<br/>Returns:<br/>403 if user does not have the required permission<br/>Requirements:<br/>- auth-client scopes: \"workspace\"",
-        "operationId": "linkTeamFieldsToWorkspacesLegacy",
-        "parameters": [
-          {
-            "deprecated": true,
-            "description": "Enable sudo-mode for admins for a single request, which gives full permission to all workspaces in the team.",
-            "in": "query",
-            "name": "actAsAdmin",
-            "required": false,
-            "schema": {
-              "type": "boolean"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/FieldServerEndpointsFieldToWorkspaceLink"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/FieldWithFieldEmbed"
-                }
-              }
-            },
-            "description": ""
-          },
-          "401": {
-            "content": {
-              "application/json": {
-                "example": {
-                  "code": "missing_token",
-                  "data": {},
-                  "message": "Access token is missing"
-                },
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            },
-            "description": "If missing authentication token."
-          },
-          "403": {
-            "content": {
-              "application/json": {
-                "example": {
-                  "code": "forbidden",
-                  "data": {},
-                  "message": "Missing required access scope"
-                },
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            },
-            "description": "If authenticated client does not have the required access scopes."
-          }
-        },
-        "security": [
-          {
-            "httpAuth": []
-          }
-        ],
-        "summary": "Add team-field to workspace",
-        "tags": [
-          "Fields"
-        ]
-      }
-    },
-    "/api/workspaces/fields/install-field": {
-      "post": {
-        "deprecated": true,
-        "description": "Installs a new field.\nIf it's a team-field, then it's possible to install it with empty or any non-empty amount of linked workspaces.\nOtherwise, if it's not a team-field, then exactly one linked workspace should be specified.<br/>Requirements:<br/>  - auth-client scopes: \"workspace\"<br/>  - user permission: \"full\"<br/>  - team features: \"team-fields\" when operating with team-fields<br/>  - user role: \"admin\" when operating with team-fields<br/>Returns:<br/>403 if user does not have the required permission<br/>Requirements:<br/>- auth-client scopes: \"workspace\"",
-        "operationId": "installFieldLegacy",
-        "parameters": [
-          {
-            "deprecated": true,
-            "description": "Enable sudo-mode for admins for a single request, which gives full permission to all workspaces in the team.",
-            "in": "query",
-            "name": "actAsAdmin",
-            "required": false,
-            "schema": {
-              "type": "boolean"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/FieldServerEndpointsInstallFieldRequestLegacy"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/FieldWithFieldEmbed"
-                }
-              }
-            },
-            "description": ""
-          },
-          "401": {
-            "content": {
-              "application/json": {
-                "example": {
-                  "code": "missing_token",
-                  "data": {},
-                  "message": "Access token is missing"
-                },
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            },
-            "description": "If missing authentication token."
-          },
-          "403": {
-            "content": {
-              "application/json": {
-                "example": {
-                  "code": "forbidden",
-                  "data": {},
-                  "message": "Missing required access scope"
-                },
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            },
-            "description": "If authenticated client does not have the required access scopes."
-          }
-        },
-        "security": [
-          {
-            "httpAuth": []
-          }
-        ],
-        "summary": "Install a new field",
-        "tags": [
-          "Fields"
-        ]
-      }
-    },
-    "/api/workspaces/fields/reconfigure-field": {
-      "post": {
-        "deprecated": true,
-        "description": "Updates configuration properties of an existing field.<br/>Requirements:<br/>  - auth-client scopes: \"workspace\"<br/>  - user permission: \"full\"<br/>  - team features: \"team-fields\" when operating with team-fields<br/>  - user role: \"admin\" when operating with team-fields<br/>Returns:<br/>403 if user does not have the required permission<br/>Requirements:<br/>- auth-client scopes: \"workspace\"",
-        "operationId": "reconfigureFieldLegacy",
-        "parameters": [
-          {
-            "deprecated": true,
-            "description": "Enable sudo-mode for admins for a single request, which gives full permission to all workspaces in the team.",
-            "in": "query",
-            "name": "actAsAdmin",
-            "required": false,
-            "schema": {
-              "type": "boolean"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/FieldServerEndpointsReconfigureFieldRequestLegacy"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/FieldWithFieldEmbed"
-                }
-              }
-            },
-            "description": ""
-          },
-          "401": {
-            "content": {
-              "application/json": {
-                "example": {
-                  "code": "missing_token",
-                  "data": {},
-                  "message": "Access token is missing"
-                },
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            },
-            "description": "If missing authentication token."
-          },
-          "403": {
-            "content": {
-              "application/json": {
-                "example": {
-                  "code": "forbidden",
-                  "data": {},
-                  "message": "Missing required access scope"
-                },
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            },
-            "description": "If authenticated client does not have the required access scopes."
-          }
-        },
-        "security": [
-          {
-            "httpAuth": []
-          }
-        ],
-        "summary": "Reconfigure field",
-        "tags": [
-          "Fields"
-        ]
-      }
-    },
-    "/api/workspaces/fields/team-fields": {
-      "get": {
-        "deprecated": true,
-        "description": "Returns all team-fields installed for the current team.<br/>Requirements:<br/>  - auth-client scopes: \"workspace:read\"<br/>  - user permission: \"read\" or higher<br/>  - team features: \"team-fields\" when operating with team-fields<br/>Returns:<br/>403 if user does not have the required permission<br/>Requirements:<br/>- auth-client scopes: \"workspace:read\"",
-        "operationId": "getAllTeamFieldsLegacy",
-        "parameters": [
-          {
-            "deprecated": true,
-            "description": "Enable sudo-mode for admins for a single request, which gives full permission to all workspaces in the team.",
-            "in": "query",
-            "name": "actAsAdmin",
-            "required": false,
-            "schema": {
-              "type": "boolean"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/FieldWithFieldEmbedPage"
-                }
-              }
-            },
-            "description": ""
-          },
-          "401": {
-            "content": {
-              "application/json": {
-                "example": {
-                  "code": "missing_token",
-                  "data": {},
-                  "message": "Access token is missing"
-                },
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            },
-            "description": "If missing authentication token."
-          },
-          "403": {
-            "content": {
-              "application/json": {
-                "example": {
-                  "code": "forbidden",
-                  "data": {},
-                  "message": "Missing required access scope"
-                },
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            },
-            "description": "If authenticated client does not have the required access scopes."
-          }
-        },
-        "security": [
-          {
-            "httpAuth": []
-          }
-        ],
-        "summary": "List team-fields",
-        "tags": [
-          "Fields"
-        ]
       }
     },
     "/api/workspaces/global-search": {
@@ -27709,79 +26967,6 @@
         ]
       }
     },
-    "/api/workspaces/uninstall-field": {
-      "post": {
-        "deprecated": true,
-        "description": "Removes the field and all its connections to workspaces, regardless whether it's a team-field or not.<br/>Requirements:<br/>  - auth-client scopes: \"workspace\"<br/>  - user permission: \"full\"<br/>  - team features: \"team-fields\" when operating with team-fields<br/>  - user role: \"admin\" when operating with team-fields<br/>Returns:<br/>403 if user does not have the required permission<br/>Requirements:<br/>- auth-client scopes: \"workspace\"",
-        "operationId": "uninstallFieldCompletelyLegacy",
-        "parameters": [
-          {
-            "deprecated": true,
-            "description": "Enable sudo-mode for admins for a single request, which gives full permission to all workspaces in the team.",
-            "in": "query",
-            "name": "actAsAdmin",
-            "required": false,
-            "schema": {
-              "type": "boolean"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/FieldServerEndpointsUninstallFieldRequest"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "204": {
-            "description": ""
-          },
-          "401": {
-            "content": {
-              "application/json": {
-                "example": {
-                  "code": "missing_token",
-                  "data": {},
-                  "message": "Access token is missing"
-                },
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            },
-            "description": "If missing authentication token."
-          },
-          "403": {
-            "content": {
-              "application/json": {
-                "example": {
-                  "code": "forbidden",
-                  "data": {},
-                  "message": "Missing required access scope"
-                },
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            },
-            "description": "If authenticated client does not have the required access scopes."
-          }
-        },
-        "security": [
-          {
-            "httpAuth": []
-          }
-        ],
-        "summary": "Completely delete field",
-        "tags": [
-          "Fields"
-        ]
-      }
-    },
     "/api/workspaces/workspace-relations": {
       "post": {
         "description": "Returns newly created workspace relation with its sanitised data.<br/>Requirements:<br/>  - auth-client scopes: \"workspace\"<br/>  - user permission: \"write\" or higher<br/>Returns:<br/>403 if user does not have the required permission<br/>Requirements:<br/>- auth-client scopes: \"workspace\"",
@@ -29995,1159 +29180,6 @@
         ]
       }
     },
-    "/api/workspaces/{workspaceId}/comments": {
-      "post": {
-        "description": "Returns newly created comment with its sanitised data.<br/>Requirements:<br/>  - auth-client scopes: \"workspace\"<br/>  - user permission: \"write\" or higher<br/>Returns:<br/>403 if user does not have the required permission<br/>Requirements:<br/>- auth-client scopes: \"workspace\"",
-        "operationId": "createComment",
-        "parameters": [
-          {
-            "deprecated": true,
-            "description": "Enable sudo-mode for admins for a single request, which gives full permission to all workspaces in the team.",
-            "in": "query",
-            "name": "actAsAdmin",
-            "required": false,
-            "schema": {
-              "type": "boolean"
-            }
-          },
-          {
-            "in": "path",
-            "name": "workspaceId",
-            "required": true,
-            "schema": {
-              "format": "uuid",
-              "type": "string"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/ItemComment"
-              }
-            },
-            "application/json+markdown": {
-              "schema": {
-                "$ref": "#/components/schemas/ItemComment"
-              }
-            },
-            "application/vnd.airfocus.markdown+json": {
-              "schema": {
-                "$ref": "#/components/schemas/ItemComment"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ItemCommentWithItemCommentEmbed"
-                }
-              },
-              "application/json+markdown": {
-                "schema": {
-                  "$ref": "#/components/schemas/ItemCommentWithItemCommentEmbed"
-                }
-              },
-              "application/vnd.airfocus.markdown+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ItemCommentWithItemCommentEmbed"
-                }
-              }
-            },
-            "description": ""
-          },
-          "401": {
-            "content": {
-              "application/json": {
-                "example": {
-                  "code": "missing_token",
-                  "data": {},
-                  "message": "Access token is missing"
-                },
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            },
-            "description": "If missing authentication token."
-          },
-          "403": {
-            "content": {
-              "application/json": {
-                "example": {
-                  "code": "forbidden",
-                  "data": {},
-                  "message": "Missing required access scope"
-                },
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            },
-            "description": "If authenticated client does not have the required access scopes."
-          },
-          "default": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            },
-            "description": ""
-          }
-        },
-        "security": [
-          {
-            "httpAuth": []
-          }
-        ],
-        "summary": "Create a new comment",
-        "tags": [
-          "CRUD",
-          "Comments"
-        ]
-      }
-    },
-    "/api/workspaces/{workspaceId}/comments/bulk": {
-      "post": {
-        "description": "Accepts a list of create/update/patch/delete operations (see the request model for more details).<br/>\nEach operations can target a single or multiple comments.<br/>\nReturns a list of results for each input operation including errors.<br/>\nGuarantees that the size and order of the returned results matches the input list of operations.<br/>Requirements:<br/>  - auth-client scopes: \"workspace\"<br/>  - user permission: \"write\" or higher<br/>Returns:<br/>403 if user does not have the required permission<br/>Requirements:<br/>- auth-client scopes: \"workspace\"",
-        "operationId": "bulkComments",
-        "parameters": [
-          {
-            "deprecated": true,
-            "description": "Enable sudo-mode for admins for a single request, which gives full permission to all workspaces in the team.",
-            "in": "query",
-            "name": "actAsAdmin",
-            "required": false,
-            "schema": {
-              "type": "boolean"
-            }
-          },
-          {
-            "in": "path",
-            "name": "workspaceId",
-            "required": true,
-            "schema": {
-              "format": "uuid",
-              "type": "string"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "items": {
-                  "$ref": "#/components/schemas/CommentBulkAction"
-                },
-                "type": "array"
-              }
-            },
-            "application/json+markdown": {
-              "schema": {
-                "items": {
-                  "$ref": "#/components/schemas/CommentBulkAction"
-                },
-                "type": "array"
-              }
-            },
-            "application/vnd.airfocus.markdown+json": {
-              "schema": {
-                "items": {
-                  "$ref": "#/components/schemas/CommentBulkAction"
-                },
-                "type": "array"
-              }
-            }
-          },
-          "required": false
-        },
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ItemCommentWithItemCommentEmbedOrNullList"
-                }
-              },
-              "application/json+markdown": {
-                "schema": {
-                  "$ref": "#/components/schemas/ItemCommentWithItemCommentEmbedOrNullList"
-                }
-              },
-              "application/vnd.airfocus.markdown+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ItemCommentWithItemCommentEmbedOrNullList"
-                }
-              }
-            },
-            "description": ""
-          },
-          "401": {
-            "content": {
-              "application/json": {
-                "example": {
-                  "code": "missing_token",
-                  "data": {},
-                  "message": "Access token is missing"
-                },
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            },
-            "description": "If missing authentication token."
-          },
-          "403": {
-            "content": {
-              "application/json": {
-                "example": {
-                  "code": "forbidden",
-                  "data": {},
-                  "message": "Missing required access scope"
-                },
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            },
-            "description": "If authenticated client does not have the required access scopes."
-          },
-          "default": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            },
-            "description": ""
-          }
-        },
-        "security": [
-          {
-            "httpAuth": []
-          }
-        ],
-        "summary": "Perform multiple operations with comments",
-        "tags": [
-          "CRUD",
-          "Comments"
-        ]
-      }
-    },
-    "/api/workspaces/{workspaceId}/comments/list": {
-      "post": {
-        "description": "Returns a list of comments.<br/>\nReturns null for those comments which are not found or not accessible.<br/>\nGuarantees that the size and order of the returned list matches the requested IDs.<br/>Requirements:<br/>  - auth-client scopes: \"workspace:read\"<br/>  - user permission: \"read\" or higher<br/>Returns:<br/>403 if user does not have the required permission<br/>Requirements:<br/>- auth-client scopes: \"workspace:read\"",
-        "operationId": "listComments",
-        "parameters": [
-          {
-            "deprecated": true,
-            "description": "Enable sudo-mode for admins for a single request, which gives full permission to all workspaces in the team.",
-            "in": "query",
-            "name": "actAsAdmin",
-            "required": false,
-            "schema": {
-              "type": "boolean"
-            }
-          },
-          {
-            "in": "path",
-            "name": "workspaceId",
-            "required": true,
-            "schema": {
-              "format": "uuid",
-              "type": "string"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "items": {
-                  "format": "uuid",
-                  "type": "string"
-                },
-                "type": "array"
-              }
-            }
-          },
-          "required": false
-        },
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ItemCommentWithItemCommentEmbedOrNullList"
-                }
-              },
-              "application/json+markdown": {
-                "schema": {
-                  "$ref": "#/components/schemas/ItemCommentWithItemCommentEmbedOrNullList"
-                }
-              },
-              "application/vnd.airfocus.markdown+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ItemCommentWithItemCommentEmbedOrNullList"
-                }
-              }
-            },
-            "description": ""
-          },
-          "401": {
-            "content": {
-              "application/json": {
-                "example": {
-                  "code": "missing_token",
-                  "data": {},
-                  "message": "Access token is missing"
-                },
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            },
-            "description": "If missing authentication token."
-          },
-          "403": {
-            "content": {
-              "application/json": {
-                "example": {
-                  "code": "forbidden",
-                  "data": {},
-                  "message": "Missing required access scope"
-                },
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            },
-            "description": "If authenticated client does not have the required access scopes."
-          },
-          "default": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            },
-            "description": ""
-          }
-        },
-        "security": [
-          {
-            "httpAuth": []
-          }
-        ],
-        "summary": "Retrieve multiple comments by their IDs",
-        "tags": [
-          "CRUD",
-          "Comments"
-        ]
-      }
-    },
-    "/api/workspaces/{workspaceId}/comments/search": {
-      "post": {
-        "description": "Returns all comments or searches comments by query. Always returns only comments which are accessible by the current user.<br/>Requirements:<br/>  - auth-client scopes: \"workspace:read\"<br/>  - user permission: \"read\" or higher<br/>Returns:<br/>403 if user does not have the required permission<br/>Requirements:<br/>- auth-client scopes: \"workspace:read\"",
-        "operationId": "searchComments",
-        "parameters": [
-          {
-            "deprecated": true,
-            "description": "Enable sudo-mode for admins for a single request, which gives full permission to all workspaces in the team.",
-            "in": "query",
-            "name": "actAsAdmin",
-            "required": false,
-            "schema": {
-              "type": "boolean"
-            }
-          },
-          {
-            "in": "path",
-            "name": "workspaceId",
-            "required": true,
-            "schema": {
-              "format": "uuid",
-              "type": "string"
-            }
-          },
-          {
-            "description": "How many elements to skip.",
-            "in": "query",
-            "name": "offset",
-            "required": false,
-            "schema": {
-              "default": 0,
-              "format": "int32",
-              "minimum": 0,
-              "type": "integer"
-            }
-          },
-          {
-            "description": "How many elements to return.",
-            "in": "query",
-            "name": "limit",
-            "required": false,
-            "schema": {
-              "default": 1000,
-              "format": "int32",
-              "maximum": 1000,
-              "minimum": 0,
-              "type": "integer"
-            }
-          },
-          {
-            "deprecated": true,
-            "description": "From which element the page should start.",
-            "in": "query",
-            "name": "from",
-            "required": false,
-            "schema": {
-              "default": 0,
-              "deprecated": true,
-              "format": "int32",
-              "minimum": 0,
-              "type": "integer"
-            }
-          },
-          {
-            "deprecated": true,
-            "description": "At which element the page should end (excluding it).",
-            "in": "query",
-            "name": "to",
-            "required": false,
-            "schema": {
-              "deprecated": true,
-              "format": "int32",
-              "type": "integer"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/ItemCommentSearchQuery"
-              }
-            }
-          },
-          "required": false
-        },
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ItemCommentWithItemCommentEmbedPage"
-                }
-              },
-              "application/json+markdown": {
-                "schema": {
-                  "$ref": "#/components/schemas/ItemCommentWithItemCommentEmbedPage"
-                }
-              },
-              "application/vnd.airfocus.markdown+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ItemCommentWithItemCommentEmbedPage"
-                }
-              }
-            },
-            "description": ""
-          },
-          "401": {
-            "content": {
-              "application/json": {
-                "example": {
-                  "code": "missing_token",
-                  "data": {},
-                  "message": "Access token is missing"
-                },
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            },
-            "description": "If missing authentication token."
-          },
-          "403": {
-            "content": {
-              "application/json": {
-                "example": {
-                  "code": "forbidden",
-                  "data": {},
-                  "message": "Missing required access scope"
-                },
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            },
-            "description": "If authenticated client does not have the required access scopes."
-          },
-          "default": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            },
-            "description": ""
-          }
-        },
-        "security": [
-          {
-            "httpAuth": []
-          }
-        ],
-        "summary": "Retrieve or search comments",
-        "tags": [
-          "CRUD",
-          "Comments"
-        ]
-      }
-    },
-    "/api/workspaces/{workspaceId}/comments/{commentId}": {
-      "delete": {
-        "description": "Returns empty result if the comment was successfully deleted.<br/>Requirements:<br/>  - auth-client scopes: \"workspace\"<br/>  - user permission: \"write\" or higher<br/>Returns:<br/>400 if the resource is not found<br/>403 if user does not have the required permission<br/>Requirements:<br/>- auth-client scopes: \"workspace\"",
-        "operationId": "deleteComment",
-        "parameters": [
-          {
-            "deprecated": true,
-            "description": "Enable sudo-mode for admins for a single request, which gives full permission to all workspaces in the team.",
-            "in": "query",
-            "name": "actAsAdmin",
-            "required": false,
-            "schema": {
-              "type": "boolean"
-            }
-          },
-          {
-            "in": "path",
-            "name": "workspaceId",
-            "required": true,
-            "schema": {
-              "format": "uuid",
-              "type": "string"
-            }
-          },
-          {
-            "in": "path",
-            "name": "commentId",
-            "required": true,
-            "schema": {
-              "format": "uuid",
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": ""
-          },
-          "401": {
-            "content": {
-              "application/json": {
-                "example": {
-                  "code": "missing_token",
-                  "data": {},
-                  "message": "Access token is missing"
-                },
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            },
-            "description": "If missing authentication token."
-          },
-          "403": {
-            "content": {
-              "application/json": {
-                "example": {
-                  "code": "forbidden",
-                  "data": {},
-                  "message": "Missing required access scope"
-                },
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            },
-            "description": "If authenticated client does not have the required access scopes."
-          },
-          "default": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            },
-            "description": ""
-          }
-        },
-        "security": [
-          {
-            "httpAuth": []
-          }
-        ],
-        "summary": "Delete an existing comment",
-        "tags": [
-          "CRUD",
-          "Comments"
-        ]
-      },
-      "get": {
-        "description": "Returns found comment.<br/>Requirements:<br/>  - auth-client scopes: \"workspace:read\"<br/>  - user permission: \"read\" or higher<br/>Returns:<br/>400 if the resource is not found<br/>403 if user does not have the required permission<br/>Requirements:<br/>- auth-client scopes: \"workspace:read\"",
-        "operationId": "retrieveComment",
-        "parameters": [
-          {
-            "deprecated": true,
-            "description": "Enable sudo-mode for admins for a single request, which gives full permission to all workspaces in the team.",
-            "in": "query",
-            "name": "actAsAdmin",
-            "required": false,
-            "schema": {
-              "type": "boolean"
-            }
-          },
-          {
-            "in": "path",
-            "name": "workspaceId",
-            "required": true,
-            "schema": {
-              "format": "uuid",
-              "type": "string"
-            }
-          },
-          {
-            "in": "path",
-            "name": "commentId",
-            "required": true,
-            "schema": {
-              "format": "uuid",
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ItemCommentWithItemCommentEmbed"
-                }
-              },
-              "application/json+markdown": {
-                "schema": {
-                  "$ref": "#/components/schemas/ItemCommentWithItemCommentEmbed"
-                }
-              },
-              "application/vnd.airfocus.markdown+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ItemCommentWithItemCommentEmbed"
-                }
-              }
-            },
-            "description": ""
-          },
-          "401": {
-            "content": {
-              "application/json": {
-                "example": {
-                  "code": "missing_token",
-                  "data": {},
-                  "message": "Access token is missing"
-                },
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            },
-            "description": "If missing authentication token."
-          },
-          "403": {
-            "content": {
-              "application/json": {
-                "example": {
-                  "code": "forbidden",
-                  "data": {},
-                  "message": "Missing required access scope"
-                },
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            },
-            "description": "If authenticated client does not have the required access scopes."
-          },
-          "default": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            },
-            "description": ""
-          }
-        },
-        "security": [
-          {
-            "httpAuth": []
-          }
-        ],
-        "summary": "Retrieve a single comment by its ID",
-        "tags": [
-          "CRUD",
-          "Comments"
-        ]
-      },
-      "patch": {
-        "description": "Returns the whole updated comment with its sanitised data.<br/>Requirements:<br/>  - auth-client scopes: \"workspace\"<br/>  - user permission: \"write\" or higher<br/>Returns:<br/>400 if the resource is not found<br/>403 if user does not have the required permission<br/>Requirements:<br/>- auth-client scopes: \"workspace\"",
-        "operationId": "patchComment",
-        "parameters": [
-          {
-            "deprecated": true,
-            "description": "Enable sudo-mode for admins for a single request, which gives full permission to all workspaces in the team.",
-            "in": "query",
-            "name": "actAsAdmin",
-            "required": false,
-            "schema": {
-              "type": "boolean"
-            }
-          },
-          {
-            "in": "path",
-            "name": "workspaceId",
-            "required": true,
-            "schema": {
-              "format": "uuid",
-              "type": "string"
-            }
-          },
-          {
-            "in": "path",
-            "name": "commentId",
-            "required": true,
-            "schema": {
-              "format": "uuid",
-              "type": "string"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/JsonPatch"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ItemCommentWithItemCommentEmbed"
-                }
-              },
-              "application/json+markdown": {
-                "schema": {
-                  "$ref": "#/components/schemas/ItemCommentWithItemCommentEmbed"
-                }
-              },
-              "application/vnd.airfocus.markdown+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ItemCommentWithItemCommentEmbed"
-                }
-              }
-            },
-            "description": ""
-          },
-          "401": {
-            "content": {
-              "application/json": {
-                "example": {
-                  "code": "missing_token",
-                  "data": {},
-                  "message": "Access token is missing"
-                },
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            },
-            "description": "If missing authentication token."
-          },
-          "403": {
-            "content": {
-              "application/json": {
-                "example": {
-                  "code": "forbidden",
-                  "data": {},
-                  "message": "Missing required access scope"
-                },
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            },
-            "description": "If authenticated client does not have the required access scopes."
-          },
-          "default": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            },
-            "description": ""
-          }
-        },
-        "security": [
-          {
-            "httpAuth": []
-          }
-        ],
-        "summary": "Patch an existing comment",
-        "tags": [
-          "CRUD",
-          "Comments"
-        ]
-      },
-      "put": {
-        "description": "Returns updated comment with its sanitised data.<br/>Requirements:<br/>  - auth-client scopes: \"workspace\"<br/>  - user permission: \"write\" or higher<br/>Returns:<br/>400 if the resource is not found<br/>403 if user does not have the required permission<br/>Requirements:<br/>- auth-client scopes: \"workspace\"",
-        "operationId": "updateComment",
-        "parameters": [
-          {
-            "deprecated": true,
-            "description": "Enable sudo-mode for admins for a single request, which gives full permission to all workspaces in the team.",
-            "in": "query",
-            "name": "actAsAdmin",
-            "required": false,
-            "schema": {
-              "type": "boolean"
-            }
-          },
-          {
-            "in": "path",
-            "name": "workspaceId",
-            "required": true,
-            "schema": {
-              "format": "uuid",
-              "type": "string"
-            }
-          },
-          {
-            "in": "path",
-            "name": "commentId",
-            "required": true,
-            "schema": {
-              "format": "uuid",
-              "type": "string"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/ItemComment"
-              }
-            },
-            "application/json+markdown": {
-              "schema": {
-                "$ref": "#/components/schemas/ItemComment"
-              }
-            },
-            "application/vnd.airfocus.markdown+json": {
-              "schema": {
-                "$ref": "#/components/schemas/ItemComment"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ItemCommentWithItemCommentEmbed"
-                }
-              },
-              "application/json+markdown": {
-                "schema": {
-                  "$ref": "#/components/schemas/ItemCommentWithItemCommentEmbed"
-                }
-              },
-              "application/vnd.airfocus.markdown+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ItemCommentWithItemCommentEmbed"
-                }
-              }
-            },
-            "description": ""
-          },
-          "401": {
-            "content": {
-              "application/json": {
-                "example": {
-                  "code": "missing_token",
-                  "data": {},
-                  "message": "Access token is missing"
-                },
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            },
-            "description": "If missing authentication token."
-          },
-          "403": {
-            "content": {
-              "application/json": {
-                "example": {
-                  "code": "forbidden",
-                  "data": {},
-                  "message": "Missing required access scope"
-                },
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            },
-            "description": "If authenticated client does not have the required access scopes."
-          },
-          "default": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            },
-            "description": ""
-          }
-        },
-        "security": [
-          {
-            "httpAuth": []
-          }
-        ],
-        "summary": "Update an existing comment",
-        "tags": [
-          "CRUD",
-          "Comments"
-        ]
-      }
-    },
-    "/api/workspaces/{workspaceId}/comments/{commentId}/reactions/{emojiCode}": {
-      "delete": {
-        "description": "This action can be performed only as a real authenticated user<br/>Requirements:<br/>  - auth-client scopes: \"workspace\"<br/>  - user permission: \"write\" or higher<br/>Returns:<br/>403 if user does not have the required permission<br/>Requirements:<br/>- auth-client scopes: \"workspace\"",
-        "operationId": "removeCommentReaction",
-        "parameters": [
-          {
-            "deprecated": true,
-            "description": "Enable sudo-mode for admins for a single request, which gives full permission to all workspaces in the team.",
-            "in": "query",
-            "name": "actAsAdmin",
-            "required": false,
-            "schema": {
-              "type": "boolean"
-            }
-          },
-          {
-            "in": "path",
-            "name": "workspaceId",
-            "required": true,
-            "schema": {
-              "format": "uuid",
-              "type": "string"
-            }
-          },
-          {
-            "in": "path",
-            "name": "commentId",
-            "required": true,
-            "schema": {
-              "format": "uuid",
-              "type": "string"
-            }
-          },
-          {
-            "in": "path",
-            "name": "emojiCode",
-            "required": true,
-            "schema": {
-              "$ref": "#/components/schemas/Emoji"
-            }
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": ""
-          },
-          "401": {
-            "content": {
-              "application/json": {
-                "example": {
-                  "code": "missing_token",
-                  "data": {},
-                  "message": "Access token is missing"
-                },
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            },
-            "description": "If missing authentication token."
-          },
-          "403": {
-            "content": {
-              "application/json": {
-                "example": {
-                  "code": "forbidden",
-                  "data": {},
-                  "message": "Missing required access scope"
-                },
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            },
-            "description": "If authenticated client does not have the required access scopes."
-          },
-          "default": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            },
-            "description": ""
-          }
-        },
-        "security": [
-          {
-            "httpAuth": []
-          }
-        ],
-        "summary": "Remove a reaction from the specified comment.",
-        "tags": [
-          "Comments"
-        ]
-      },
-      "post": {
-        "description": "This action can be performed only as a real authenticated user<br/>Requirements:<br/>  - auth-client scopes: \"workspace\"<br/>  - user permission: \"write\" or higher<br/>Returns:<br/>403 if user does not have the required permission<br/>Requirements:<br/>- auth-client scopes: \"workspace\"",
-        "operationId": "addCommentReaction",
-        "parameters": [
-          {
-            "deprecated": true,
-            "description": "Enable sudo-mode for admins for a single request, which gives full permission to all workspaces in the team.",
-            "in": "query",
-            "name": "actAsAdmin",
-            "required": false,
-            "schema": {
-              "type": "boolean"
-            }
-          },
-          {
-            "in": "path",
-            "name": "workspaceId",
-            "required": true,
-            "schema": {
-              "format": "uuid",
-              "type": "string"
-            }
-          },
-          {
-            "in": "path",
-            "name": "commentId",
-            "required": true,
-            "schema": {
-              "format": "uuid",
-              "type": "string"
-            }
-          },
-          {
-            "in": "path",
-            "name": "emojiCode",
-            "required": true,
-            "schema": {
-              "$ref": "#/components/schemas/Emoji"
-            }
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": ""
-          },
-          "401": {
-            "content": {
-              "application/json": {
-                "example": {
-                  "code": "missing_token",
-                  "data": {},
-                  "message": "Access token is missing"
-                },
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            },
-            "description": "If missing authentication token."
-          },
-          "403": {
-            "content": {
-              "application/json": {
-                "example": {
-                  "code": "forbidden",
-                  "data": {},
-                  "message": "Missing required access scope"
-                },
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            },
-            "description": "If authenticated client does not have the required access scopes."
-          },
-          "default": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            },
-            "description": ""
-          }
-        },
-        "security": [
-          {
-            "httpAuth": []
-          }
-        ],
-        "summary": "Add a reaction to the specified comment.",
-        "tags": [
-          "Comments"
-        ]
-      }
-    },
     "/api/workspaces/{workspaceId}/duplicate": {
       "post": {
         "description": "Returns the newly created workspace with embedded data.<br/>Requirements:<br/>- auth-client scopes: \"workspace\"<br/>- user permission: \"write\" or higher",
@@ -31263,96 +29295,6 @@
         "summary": "Duplicate workspace with all its items and apps.",
         "tags": [
           "Workspaces"
-        ]
-      }
-    },
-    "/api/workspaces/{workspaceId}/install-field": {
-      "post": {
-        "deprecated": true,
-        "description": "Installs a new field.\nIf it's a team-field, then it's possible to install it with empty or any non-empty amount of linked workspaces.\nOtherwise, if it's not a team-field, then exactly one linked workspace should be specified.<br/>Requirements:<br/>  - auth-client scopes: \"workspace\"<br/>  - user permission: \"full\"<br/>  - team features: \"team-fields\" when operating with team-fields<br/>  - user role: \"admin\" when operating with team-fields<br/>Returns:<br/>403 if user does not have the required permission<br/>Requirements:<br/>- auth-client scopes: \"workspace\"",
-        "operationId": "installFieldLegacyWithWorkspaceId",
-        "parameters": [
-          {
-            "deprecated": true,
-            "description": "Enable sudo-mode for admins for a single request, which gives full permission to all workspaces in the team.",
-            "in": "query",
-            "name": "actAsAdmin",
-            "required": false,
-            "schema": {
-              "type": "boolean"
-            }
-          },
-          {
-            "description": "ID of the workspace which contains the managed fields.",
-            "in": "path",
-            "name": "workspaceId",
-            "required": true,
-            "schema": {
-              "format": "uuid",
-              "type": "string"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/FieldServerEndpointsInstallFieldRequestLegacy"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/FieldWithFieldEmbed"
-                }
-              }
-            },
-            "description": ""
-          },
-          "401": {
-            "content": {
-              "application/json": {
-                "example": {
-                  "code": "missing_token",
-                  "data": {},
-                  "message": "Access token is missing"
-                },
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            },
-            "description": "If missing authentication token."
-          },
-          "403": {
-            "content": {
-              "application/json": {
-                "example": {
-                  "code": "forbidden",
-                  "data": {},
-                  "message": "Missing required access scope"
-                },
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            },
-            "description": "If authenticated client does not have the required access scopes."
-          }
-        },
-        "security": [
-          {
-            "httpAuth": []
-          }
-        ],
-        "summary": "Install a new field",
-        "tags": [
-          "Fields"
         ]
       }
     },
@@ -35284,183 +33226,6 @@
         ]
       }
     },
-    "/api/workspaces/{workspaceId}/reconfigure-field": {
-      "post": {
-        "deprecated": true,
-        "description": "Updates configuration properties of an existing field.<br/>Requirements:<br/>  - auth-client scopes: \"workspace\"<br/>  - user permission: \"full\"<br/>  - team features: \"team-fields\" when operating with team-fields<br/>  - user role: \"admin\" when operating with team-fields<br/>Returns:<br/>403 if user does not have the required permission<br/>Requirements:<br/>- auth-client scopes: \"workspace\"",
-        "operationId": "reconfigureFieldLegacyWithWorkspaceId",
-        "parameters": [
-          {
-            "deprecated": true,
-            "description": "Enable sudo-mode for admins for a single request, which gives full permission to all workspaces in the team.",
-            "in": "query",
-            "name": "actAsAdmin",
-            "required": false,
-            "schema": {
-              "type": "boolean"
-            }
-          },
-          {
-            "description": "ID of the workspace which contains the managed fields.",
-            "in": "path",
-            "name": "workspaceId",
-            "required": true,
-            "schema": {
-              "format": "uuid",
-              "type": "string"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/FieldServerEndpointsReconfigureFieldRequestLegacy"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/FieldWithFieldEmbed"
-                }
-              }
-            },
-            "description": ""
-          },
-          "401": {
-            "content": {
-              "application/json": {
-                "example": {
-                  "code": "missing_token",
-                  "data": {},
-                  "message": "Access token is missing"
-                },
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            },
-            "description": "If missing authentication token."
-          },
-          "403": {
-            "content": {
-              "application/json": {
-                "example": {
-                  "code": "forbidden",
-                  "data": {},
-                  "message": "Missing required access scope"
-                },
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            },
-            "description": "If authenticated client does not have the required access scopes."
-          }
-        },
-        "security": [
-          {
-            "httpAuth": []
-          }
-        ],
-        "summary": "Reconfigure field",
-        "tags": [
-          "Fields"
-        ]
-      }
-    },
-    "/api/workspaces/{workspaceId}/reorder-fields": {
-      "post": {
-        "deprecated": true,
-        "description": "Updates the order of fields in the specified workspace.<br/>Requirements:<br/>  - auth-client scopes: \"workspace\"<br/>  - user permission: \"full\"<br/>  - team features: \"team-fields\" when operating with team-fields<br/>  - user role: \"admin\" when operating with team-fields<br/>Returns:<br/>403 if user does not have the required permission<br/>Requirements:<br/>- auth-client scopes: \"workspace\"",
-        "operationId": "reorderFieldsLegacy",
-        "parameters": [
-          {
-            "deprecated": true,
-            "description": "Enable sudo-mode for admins for a single request, which gives full permission to all workspaces in the team.",
-            "in": "query",
-            "name": "actAsAdmin",
-            "required": false,
-            "schema": {
-              "type": "boolean"
-            }
-          },
-          {
-            "description": "ID of the workspace which contains the managed fields.",
-            "in": "path",
-            "name": "workspaceId",
-            "required": true,
-            "schema": {
-              "format": "uuid",
-              "type": "string"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "items": {
-                  "format": "uuid",
-                  "type": "string"
-                },
-                "type": "array"
-              }
-            }
-          },
-          "required": false
-        },
-        "responses": {
-          "204": {
-            "description": ""
-          },
-          "401": {
-            "content": {
-              "application/json": {
-                "example": {
-                  "code": "missing_token",
-                  "data": {},
-                  "message": "Access token is missing"
-                },
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            },
-            "description": "If missing authentication token."
-          },
-          "403": {
-            "content": {
-              "application/json": {
-                "example": {
-                  "code": "forbidden",
-                  "data": {},
-                  "message": "Missing required access scope"
-                },
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            },
-            "description": "If authenticated client does not have the required access scopes."
-          }
-        },
-        "security": [
-          {
-            "httpAuth": []
-          }
-        ],
-        "summary": "Reorder fields",
-        "tags": [
-          "Fields"
-        ]
-      }
-    },
     "/api/workspaces/{workspaceId}/statuses": {
       "post": {
         "description": "Sets statuses (all at once) for the specified workspace.\nNew statuses in the list will be added to the database, missing statuses will be removed from the database, all other statuses will be updated.\nEach workspace must have at least one status in each category: 'draft', 'active', 'closed'<br/>Requirements:<br/>- auth-client scopes: \"workspace\"<br/>- user permission: \"write\" or higher",
@@ -35571,89 +33336,6 @@
           "Workspaces"
         ]
       }
-    },
-    "/api/workspaces/{workspaceId}/uninstall-field": {
-      "post": {
-        "deprecated": true,
-        "description": "Uninstalls a field from the specified workspace.\nFor team-fields it results in just removing the field<>workspace connection, but the field itself won't be removed.\nFor non-team-fields it additionally results in removing the field.<br/>Requirements:<br/>  - auth-client scopes: \"workspace\"<br/>  - user permission: \"full\"<br/>  - team features: \"team-fields\" when operating with team-fields<br/>  - user role: \"admin\" when operating with team-fields<br/>Returns:<br/>403 if user does not have the required permission<br/>Requirements:<br/>- auth-client scopes: \"workspace\"",
-        "operationId": "uninstallFieldLegacy",
-        "parameters": [
-          {
-            "deprecated": true,
-            "description": "Enable sudo-mode for admins for a single request, which gives full permission to all workspaces in the team.",
-            "in": "query",
-            "name": "actAsAdmin",
-            "required": false,
-            "schema": {
-              "type": "boolean"
-            }
-          },
-          {
-            "description": "ID of the workspace which contains the managed fields.",
-            "in": "path",
-            "name": "workspaceId",
-            "required": true,
-            "schema": {
-              "format": "uuid",
-              "type": "string"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/FieldServerEndpointsUninstallFieldRequest"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "204": {
-            "description": ""
-          },
-          "401": {
-            "content": {
-              "application/json": {
-                "example": {
-                  "code": "missing_token",
-                  "data": {},
-                  "message": "Access token is missing"
-                },
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            },
-            "description": "If missing authentication token."
-          },
-          "403": {
-            "content": {
-              "application/json": {
-                "example": {
-                  "code": "forbidden",
-                  "data": {},
-                  "message": "Missing required access scope"
-                },
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            },
-            "description": "If authenticated client does not have the required access scopes."
-          }
-        },
-        "security": [
-          {
-            "httpAuth": []
-          }
-        ],
-        "summary": "Delete field",
-        "tags": [
-          "Fields"
-        ]
-      }
     }
   },
   "servers": [
@@ -35665,10 +33347,6 @@
     }
   ],
   "tags": [
-    {
-      "description": "Manage comments on items.",
-      "name": "Comments"
-    },
     {
       "description": "Endpoints for managing workspace fields.",
       "name": "Fields"
