@@ -1332,6 +1332,40 @@
         "title": "CreateMilestoneRequest",
         "type": "object"
       },
+      "CreateStatusPresetFromWorkspaceRequest": {
+        "properties": {
+          "name": {
+            "description": "Name of the status preset.",
+            "type": "string"
+          }
+        },
+        "required": [
+          "name"
+        ],
+        "title": "CreateStatusPresetFromWorkspaceRequest",
+        "type": "object"
+      },
+      "CreateStatusPresetRequest": {
+        "properties": {
+          "name": {
+            "description": "Name of the status preset.",
+            "type": "string"
+          },
+          "statuses": {
+            "description": "Statuses to include in this preset.",
+            "items": {
+              "$ref": "#/components/schemas/Status"
+            },
+            "type": "array"
+          }
+        },
+        "required": [
+          "name",
+          "statuses"
+        ],
+        "title": "CreateStatusPresetRequest",
+        "type": "object"
+      },
       "CreateUserInviteRequest": {
         "properties": {
           "userId": {
@@ -1387,6 +1421,11 @@
           "progressMode": {
             "$ref": "#/components/schemas/WorkspaceProgressMode",
             "default": "count"
+          },
+          "statusPresetId": {
+            "description": "Optional reference to a shared status preset. When set, statuses are read from the preset instead of workspace-specific statuses.",
+            "format": "uuid",
+            "type": "string"
           }
         },
         "required": [
@@ -1444,6 +1483,11 @@
           "progressMode": {
             "$ref": "#/components/schemas/WorkspaceProgressMode",
             "default": "count"
+          },
+          "statusPresetId": {
+            "description": "Optional reference to a shared status preset. When set, statuses are read from the preset instead of workspace-specific statuses.",
+            "format": "uuid",
+            "type": "string"
           }
         },
         "required": [
@@ -15108,6 +15152,28 @@
         "title": "SetClientSettingsRequest",
         "type": "object"
       },
+      "SetWorkspaceStatusPresetRequest": {
+        "properties": {
+          "replacements": {
+            "additionalProperties": {
+              "format": "uuid",
+              "type": "string"
+            },
+            "description": "A map of status replacements, where key is an OLD status-id and value is a NEW status-id. Replacements must be specified for each status being removed when switching presets. This mapping will be used to migrate all items in the workspace to new statuses before deleting the old ones.",
+            "type": "object"
+          },
+          "statusPresetId": {
+            "description": "Status preset ID to assign to this workspace. Set to null to unassign the current preset.",
+            "format": "uuid",
+            "type": "string"
+          }
+        },
+        "required": [
+          "replacements"
+        ],
+        "title": "SetWorkspaceStatusPresetRequest",
+        "type": "object"
+      },
       "SetWorkspaceStatusesRequest": {
         "properties": {
           "replacements": {
@@ -15204,14 +15270,19 @@
             "format": "int32",
             "type": "integer"
           },
+          "presetId": {
+            "description": "Id of the status preset it is part of. Empty if this status is custom for a workspace.",
+            "format": "uuid",
+            "type": "string"
+          },
           "workspaceId": {
+            "description": "The workspace this status belongs to. Empty for preset statuses, which are shared across workspaces",
             "format": "uuid",
             "type": "string"
           }
         },
         "required": [
           "id",
-          "workspaceId",
           "category",
           "name",
           "default",
@@ -15245,6 +15316,239 @@
         ],
         "title": "StatusColor",
         "type": "string"
+      },
+      "StatusPreset": {
+        "properties": {
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "name": {
+            "description": "Name of this status preset.",
+            "type": "string"
+          },
+          "teamId": {
+            "format": "uuid",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "teamId",
+          "name"
+        ],
+        "title": "StatusPreset",
+        "type": "object"
+      },
+      "StatusPresetBulkAction": {
+        "discriminator": {
+          "mapping": {
+            "create": "#/components/schemas/StatusPresetBulkCreate",
+            "delete": "#/components/schemas/StatusPresetBulkDelete",
+            "patch": "#/components/schemas/StatusPresetBulkPatch",
+            "update": "#/components/schemas/StatusPresetBulkUpdate"
+          },
+          "propertyName": "type"
+        },
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/StatusPresetBulkCreate"
+          },
+          {
+            "$ref": "#/components/schemas/StatusPresetBulkDelete"
+          },
+          {
+            "$ref": "#/components/schemas/StatusPresetBulkPatch"
+          },
+          {
+            "$ref": "#/components/schemas/StatusPresetBulkUpdate"
+          }
+        ],
+        "title": "StatusPresetBulkAction"
+      },
+      "StatusPresetBulkCreate": {
+        "properties": {
+          "resource": {
+            "$ref": "#/components/schemas/CreateStatusPresetRequest"
+          },
+          "type": {
+            "enum": [
+              "create"
+            ],
+            "type": "string"
+          }
+        },
+        "required": [
+          "resource",
+          "type"
+        ],
+        "title": "StatusPresetBulkCreate",
+        "type": "object"
+      },
+      "StatusPresetBulkDelete": {
+        "properties": {
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "type": {
+            "enum": [
+              "delete"
+            ],
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "type"
+        ],
+        "title": "StatusPresetBulkDelete",
+        "type": "object"
+      },
+      "StatusPresetBulkPatch": {
+        "properties": {
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "transform": {
+            "$ref": "#/components/schemas/JsonPatch"
+          },
+          "type": {
+            "enum": [
+              "patch"
+            ],
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "transform",
+          "type"
+        ],
+        "title": "StatusPresetBulkPatch",
+        "type": "object"
+      },
+      "StatusPresetBulkUpdate": {
+        "properties": {
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "resource": {
+            "$ref": "#/components/schemas/UpdateStatusPresetRequest"
+          },
+          "type": {
+            "enum": [
+              "update"
+            ],
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "resource",
+          "type"
+        ],
+        "title": "StatusPresetBulkUpdate",
+        "type": "object"
+      },
+      "StatusPresetEmbed": {
+        "properties": {
+          "itemStatusCount": {
+            "additionalProperties": {
+              "format": "int32",
+              "type": "integer"
+            },
+            "type": "object"
+          },
+          "itemStatusCountArchived": {
+            "additionalProperties": {
+              "format": "int32",
+              "type": "integer"
+            },
+            "type": "object"
+          },
+          "statuses": {
+            "items": {
+              "$ref": "#/components/schemas/Status"
+            },
+            "type": "array"
+          },
+          "workspaceIds": {
+            "items": {
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": "array"
+          }
+        },
+        "required": [
+          "statuses",
+          "workspaceIds",
+          "itemStatusCount",
+          "itemStatusCountArchived"
+        ],
+        "title": "StatusPresetEmbed",
+        "type": "object"
+      },
+      "StatusPresetSearchQuery": {
+        "title": "StatusPresetSearchQuery",
+        "type": "object"
+      },
+      "StatusPresetWithStatusPresetEmbed": {
+        "properties": {
+          "_embedded": {
+            "$ref": "#/components/schemas/StatusPresetEmbed"
+          },
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "name": {
+            "description": "Name of this status preset.",
+            "type": "string"
+          },
+          "teamId": {
+            "format": "uuid",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "teamId",
+          "name",
+          "_embedded"
+        ],
+        "title": "StatusPresetWithStatusPresetEmbed",
+        "type": "object"
+      },
+      "StatusPresetWithStatusPresetEmbedOrNullList": {
+        "items": {
+          "$ref": "#/components/schemas/StatusPresetWithStatusPresetEmbed"
+        },
+        "title": "StatusPresetWithStatusPresetEmbedOrNullList",
+        "type": "array"
+      },
+      "StatusPresetWithStatusPresetEmbedPage": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/StatusPresetWithStatusPresetEmbed"
+            },
+            "type": "array"
+          },
+          "totalItems": {
+            "format": "int32",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "items",
+          "totalItems"
+        ],
+        "title": "StatusPresetWithStatusPresetEmbedPage",
+        "type": "object"
       },
       "StoreAcceptedTosRequest": {
         "properties": {
@@ -16993,6 +17297,41 @@
         "title": "UpdateMilestoneRequest",
         "type": "object"
       },
+      "UpdateStatusPresetRequest": {
+        "properties": {
+          "name": {
+            "description": "Updated name of the status preset.",
+            "type": "string"
+          }
+        },
+        "title": "UpdateStatusPresetRequest",
+        "type": "object"
+      },
+      "UpdateStatusPresetStatusesRequest": {
+        "properties": {
+          "replacements": {
+            "additionalProperties": {
+              "format": "uuid",
+              "type": "string"
+            },
+            "description": "A map of status replacements, where key is an OLD status-id and value is a NEW status-id. Replacements must be specified for each status being deleted from the workspace. This mapping will be used to migrate all items in the workspace to new statuses before deleting the old ones.",
+            "type": "object"
+          },
+          "statuses": {
+            "description": "Updated list of statuses for this preset.",
+            "items": {
+              "$ref": "#/components/schemas/Status"
+            },
+            "type": "array"
+          }
+        },
+        "required": [
+          "statuses",
+          "replacements"
+        ],
+        "title": "UpdateStatusPresetStatusesRequest",
+        "type": "object"
+      },
       "UpdateTeamFlagsRequest": {
         "properties": {
           "enableAi": {
@@ -17085,6 +17424,11 @@
           "progressMode": {
             "$ref": "#/components/schemas/WorkspaceProgressMode",
             "default": "count"
+          },
+          "statusPresetId": {
+            "description": "Optional reference to a shared status preset. When set, statuses are read from the preset instead of workspace-specific statuses.",
+            "format": "uuid",
+            "type": "string"
           }
         },
         "required": [
@@ -17142,6 +17486,11 @@
           "progressMode": {
             "$ref": "#/components/schemas/WorkspaceProgressMode",
             "default": "count"
+          },
+          "statusPresetId": {
+            "description": "Optional reference to a shared status preset. When set, statuses are read from the preset instead of workspace-specific statuses.",
+            "format": "uuid",
+            "type": "string"
           }
         },
         "required": [
@@ -18049,6 +18398,11 @@
           },
           "progressMode": {
             "$ref": "#/components/schemas/WorkspaceProgressMode"
+          },
+          "statusPresetId": {
+            "description": "Optional reference to a shared status preset. When set, statuses are read from the preset instead of workspace-specific statuses.",
+            "format": "uuid",
+            "type": "string"
           },
           "teamId": {
             "description": "Id of the team this workspace belongs to.",
@@ -19845,6 +20199,11 @@
           "progressMode": {
             "$ref": "#/components/schemas/WorkspaceProgressMode"
           },
+          "statusPresetId": {
+            "description": "Optional reference to a shared status preset. When set, statuses are read from the preset instead of workspace-specific statuses.",
+            "format": "uuid",
+            "type": "string"
+          },
           "teamId": {
             "description": "Id of the team this workspace belongs to.",
             "format": "uuid",
@@ -19944,6 +20303,11 @@
           },
           "progressMode": {
             "$ref": "#/components/schemas/WorkspaceProgressMode"
+          },
+          "statusPresetId": {
+            "description": "Optional reference to a shared status preset. When set, statuses are read from the preset instead of workspace-specific statuses.",
+            "format": "uuid",
+            "type": "string"
           },
           "teamId": {
             "description": "Id of the team this workspace belongs to.",
@@ -20054,6 +20418,11 @@
           "progressMode": {
             "$ref": "#/components/schemas/WorkspaceProgressMode"
           },
+          "statusPresetId": {
+            "description": "Optional reference to a shared status preset. When set, statuses are read from the preset instead of workspace-specific statuses.",
+            "format": "uuid",
+            "type": "string"
+          },
           "teamId": {
             "description": "Id of the team this workspace belongs to.",
             "format": "uuid",
@@ -20149,6 +20518,11 @@
           },
           "progressMode": {
             "$ref": "#/components/schemas/WorkspaceProgressMode"
+          },
+          "statusPresetId": {
+            "description": "Optional reference to a shared status preset. When set, statuses are read from the preset instead of workspace-specific statuses.",
+            "format": "uuid",
+            "type": "string"
           },
           "teamId": {
             "description": "Id of the team this workspace belongs to.",
@@ -20314,7 +20688,7 @@
   },
   "info": {
     "title": "airfocus API",
-    "version": "1.0.0-beta.46.31.1"
+    "version": "1.0.0-beta.46.44.0"
   },
   "openapi": "3.1.0",
   "paths": {
@@ -22437,6 +22811,1292 @@
         ],
         "tags": [
           "Profile"
+        ]
+      }
+    },
+    "/api/status-presets": {
+      "post": {
+        "description": "Returns newly created status-preset with its sanitised data.<br/>Requirements:<br/>- auth-client scopes: \"team\"",
+        "operationId": "createStatusPreset",
+        "parameters": [
+          {
+            "deprecated": true,
+            "description": "Enable sudo-mode for admins for a single request, which gives full permission to all workspaces in the team.",
+            "in": "query",
+            "name": "actAsAdmin",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateStatusPresetRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StatusPresetWithStatusPresetEmbed"
+                }
+              }
+            },
+            "description": ""
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "bad_request",
+                  "data": {},
+                  "message": "Request body is invalid"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If payload is invalid."
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "missing_token",
+                  "data": {},
+                  "message": "Access token is missing"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If missing authentication token."
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "forbidden",
+                  "data": {},
+                  "message": "Missing required access scope"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If authenticated client does not have the required access scopes."
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "unknown_error",
+                  "data": {},
+                  "message": "Server error"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If any other error happens."
+          }
+        },
+        "security": [
+          {
+            "httpAuth": []
+          }
+        ],
+        "summary": "Create a new status-preset",
+        "tags": [
+          "CRUD",
+          "StatusPresets"
+        ]
+      }
+    },
+    "/api/status-presets/bulk": {
+      "post": {
+        "description": "Accepts a list of create/update/patch/delete operations (see the request model for more details).<br/>\nEach operation can target a single or multiple status-presets.<br/>\nReturns a list of results for each input operation including errors.<br/>\nGuarantees that the size and order of the returned results matches the order of input operations.<br/>Requirements:<br/>- auth-client scopes: \"team\"",
+        "operationId": "bulkStatusPresets",
+        "parameters": [
+          {
+            "deprecated": true,
+            "description": "Enable sudo-mode for admins for a single request, which gives full permission to all workspaces in the team.",
+            "in": "query",
+            "name": "actAsAdmin",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "items": {
+                  "$ref": "#/components/schemas/StatusPresetBulkAction"
+                },
+                "type": "array"
+              }
+            }
+          },
+          "required": false
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StatusPresetWithStatusPresetEmbedOrNullList"
+                }
+              }
+            },
+            "description": ""
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "bad_request",
+                  "data": {},
+                  "message": "Request body is invalid"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If payload is invalid."
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "missing_token",
+                  "data": {},
+                  "message": "Access token is missing"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If missing authentication token."
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "forbidden",
+                  "data": {},
+                  "message": "Missing required access scope"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If authenticated client does not have the required access scopes."
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "unknown_error",
+                  "data": {},
+                  "message": "Server error"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If any other error happens."
+          }
+        },
+        "security": [
+          {
+            "httpAuth": []
+          }
+        ],
+        "summary": "Perform multiple operations with status-presets",
+        "tags": [
+          "CRUD",
+          "StatusPresets"
+        ]
+      }
+    },
+    "/api/status-presets/list": {
+      "post": {
+        "description": "Returns a list of status-presets resolved for the provided IDs.<br/>\nGuarantees that the array-size and order of the returned status-presets matches the order of requested IDs.<br/>\nDoes not fail if any of the requested status-presets is not found or not accessible - instead it returns null as an array-element of the corresponding status-preset which could not be accessed.<br/>Requirements:<br/>- auth-client scopes: \"team:read\"",
+        "operationId": "listStatusPresets",
+        "parameters": [
+          {
+            "deprecated": true,
+            "description": "Enable sudo-mode for admins for a single request, which gives full permission to all workspaces in the team.",
+            "in": "query",
+            "name": "actAsAdmin",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "items": {
+                  "format": "uuid",
+                  "type": "string"
+                },
+                "type": "array"
+              }
+            }
+          },
+          "required": false
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StatusPresetWithStatusPresetEmbedOrNullList"
+                }
+              }
+            },
+            "description": ""
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "bad_request",
+                  "data": {},
+                  "message": "Request body is invalid"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If payload is invalid."
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "missing_token",
+                  "data": {},
+                  "message": "Access token is missing"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If missing authentication token."
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "forbidden",
+                  "data": {},
+                  "message": "Missing required access scope"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If authenticated client does not have the required access scopes."
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "unknown_error",
+                  "data": {},
+                  "message": "Server error"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If any other error happens."
+          }
+        },
+        "security": [
+          {
+            "httpAuth": []
+          }
+        ],
+        "summary": "Retrieve multiple status-presets by their IDs",
+        "tags": [
+          "CRUD",
+          "StatusPresets"
+        ]
+      }
+    },
+    "/api/status-presets/search": {
+      "post": {
+        "description": "Returns all status-presets or searches status-presets by query. Always returns only status-presets which are accessible by the current user.<br/>Requirements:<br/>- auth-client scopes: \"team:read\"",
+        "operationId": "searchStatusPresets",
+        "parameters": [
+          {
+            "deprecated": true,
+            "description": "Enable sudo-mode for admins for a single request, which gives full permission to all workspaces in the team.",
+            "in": "query",
+            "name": "actAsAdmin",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "description": "How many elements to skip.",
+            "in": "query",
+            "name": "offset",
+            "required": false,
+            "schema": {
+              "default": 0,
+              "format": "int32",
+              "minimum": 0,
+              "type": "integer"
+            }
+          },
+          {
+            "description": "How many elements to return.",
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "schema": {
+              "default": 1000,
+              "format": "int32",
+              "maximum": 1000,
+              "minimum": 0,
+              "type": "integer"
+            }
+          },
+          {
+            "deprecated": true,
+            "description": "From which element the page should start.",
+            "in": "query",
+            "name": "from",
+            "required": false,
+            "schema": {
+              "default": 0,
+              "deprecated": true,
+              "format": "int32",
+              "minimum": 0,
+              "type": "integer"
+            }
+          },
+          {
+            "deprecated": true,
+            "description": "At which element the page should end (excluding it).",
+            "in": "query",
+            "name": "to",
+            "required": false,
+            "schema": {
+              "deprecated": true,
+              "format": "int32",
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/StatusPresetSearchQuery"
+              }
+            }
+          },
+          "required": false
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StatusPresetWithStatusPresetEmbedPage"
+                }
+              }
+            },
+            "description": ""
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "bad_request",
+                  "data": {},
+                  "message": "Request body is invalid"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If payload is invalid."
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "missing_token",
+                  "data": {},
+                  "message": "Access token is missing"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If missing authentication token."
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "forbidden",
+                  "data": {},
+                  "message": "Missing required access scope"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If authenticated client does not have the required access scopes."
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "unknown_error",
+                  "data": {},
+                  "message": "Server error"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If any other error happens."
+          }
+        },
+        "security": [
+          {
+            "httpAuth": []
+          }
+        ],
+        "summary": "Retrieve or search status-presets",
+        "tags": [
+          "CRUD",
+          "StatusPresets"
+        ]
+      }
+    },
+    "/api/status-presets/workspace/{workspaceId}": {
+      "post": {
+        "description": "Creates a new status preset by copying statuses from an existing workspace.<br/>Requirements:<br/>- auth-client scopes: \"team\"",
+        "operationId": "createStatusPresetFromWorkspace",
+        "parameters": [
+          {
+            "deprecated": true,
+            "description": "Enable sudo-mode for admins for a single request, which gives full permission to all workspaces in the team.",
+            "in": "query",
+            "name": "actAsAdmin",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "in": "path",
+            "name": "workspaceId",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateStatusPresetFromWorkspaceRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StatusPreset"
+                }
+              }
+            },
+            "description": ""
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "not_found",
+                  "data": {},
+                  "message": "Unknown entity 'fe4c0f30-aa35-3c41-99f9-a5f69c8c4192'"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If path parameters are invalid or payload is invalid or resource does not exist."
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "missing_token",
+                  "data": {},
+                  "message": "Access token is missing"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If missing authentication token."
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "forbidden",
+                  "data": {},
+                  "message": "Missing required access scope"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If authenticated client does not have the required access scopes."
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "unknown_error",
+                  "data": {},
+                  "message": "Server error"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If any other error happens."
+          }
+        },
+        "security": [
+          {
+            "httpAuth": []
+          }
+        ],
+        "summary": "Create a status preset from a workspace",
+        "tags": [
+          "StatusPresets"
+        ]
+      },
+      "put": {
+        "description": "Sets the status preset for the workspace. When switching from one preset to another (or from custom statuses to a preset), replacements must be provided for statuses that have items assigned to them. When unassigning a preset, statuses are duplicated from the preset to the workspace.<br/>Requirements:<br/>- auth-client scopes: \"team\"",
+        "operationId": "setWorkspaceStatusPreset",
+        "parameters": [
+          {
+            "deprecated": true,
+            "description": "Enable sudo-mode for admins for a single request, which gives full permission to all workspaces in the team.",
+            "in": "query",
+            "name": "actAsAdmin",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "in": "path",
+            "name": "workspaceId",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SetWorkspaceStatusPresetRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "204": {
+            "description": ""
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "not_found",
+                  "data": {},
+                  "message": "Unknown entity 'fe4c0f30-aa35-3c41-99f9-a5f69c8c4192'"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If path parameters are invalid or payload is invalid or resource does not exist."
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "missing_token",
+                  "data": {},
+                  "message": "Access token is missing"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If missing authentication token."
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "forbidden",
+                  "data": {},
+                  "message": "Missing required access scope"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If authenticated client does not have the required access scopes."
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "unknown_error",
+                  "data": {},
+                  "message": "Server error"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If any other error happens."
+          }
+        },
+        "security": [
+          {
+            "httpAuth": []
+          }
+        ],
+        "summary": "Assign or unassign a status preset for a workspace.",
+        "tags": [
+          "StatusPresets"
+        ]
+      }
+    },
+    "/api/status-presets/{statusPresetId}": {
+      "delete": {
+        "description": "Returns empty result if the status-preset was successfully deleted.<br/>Requirements:<br/>- auth-client scopes: \"team\"",
+        "operationId": "deleteStatusPreset",
+        "parameters": [
+          {
+            "deprecated": true,
+            "description": "Enable sudo-mode for admins for a single request, which gives full permission to all workspaces in the team.",
+            "in": "query",
+            "name": "actAsAdmin",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "in": "path",
+            "name": "statusPresetId",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": ""
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "not_found",
+                  "data": {},
+                  "message": "Unknown entity 'fe4c0f30-aa35-3c41-99f9-a5f69c8c4192'"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If path parameters are invalid or resource does not exist."
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "missing_token",
+                  "data": {},
+                  "message": "Access token is missing"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If missing authentication token."
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "forbidden",
+                  "data": {},
+                  "message": "Missing required access scope"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If authenticated client does not have the required access scopes."
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "unknown_error",
+                  "data": {},
+                  "message": "Server error"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If any other error happens."
+          }
+        },
+        "security": [
+          {
+            "httpAuth": []
+          }
+        ],
+        "summary": "Delete an existing status-preset",
+        "tags": [
+          "CRUD",
+          "StatusPresets"
+        ]
+      },
+      "get": {
+        "description": "Returns found status-preset.<br/>Requirements:<br/>- auth-client scopes: \"team:read\"",
+        "operationId": "retrieveStatusPreset",
+        "parameters": [
+          {
+            "deprecated": true,
+            "description": "Enable sudo-mode for admins for a single request, which gives full permission to all workspaces in the team.",
+            "in": "query",
+            "name": "actAsAdmin",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "in": "path",
+            "name": "statusPresetId",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StatusPresetWithStatusPresetEmbed"
+                }
+              }
+            },
+            "description": ""
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "not_found",
+                  "data": {},
+                  "message": "Unknown entity 'fe4c0f30-aa35-3c41-99f9-a5f69c8c4192'"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If path parameters are invalid or payload is invalid or resource does not exist."
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "missing_token",
+                  "data": {},
+                  "message": "Access token is missing"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If missing authentication token."
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "forbidden",
+                  "data": {},
+                  "message": "Missing required access scope"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If authenticated client does not have the required access scopes."
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "unknown_error",
+                  "data": {},
+                  "message": "Server error"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If any other error happens."
+          }
+        },
+        "security": [
+          {
+            "httpAuth": []
+          }
+        ],
+        "summary": "Retrieve a single status-preset by its ID",
+        "tags": [
+          "CRUD",
+          "StatusPresets"
+        ]
+      },
+      "patch": {
+        "description": "Returns the whole updated status-preset with its sanitised data.<br/>Requirements:<br/>- auth-client scopes: \"team\"",
+        "operationId": "patchStatusPreset",
+        "parameters": [
+          {
+            "deprecated": true,
+            "description": "Enable sudo-mode for admins for a single request, which gives full permission to all workspaces in the team.",
+            "in": "query",
+            "name": "actAsAdmin",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "in": "path",
+            "name": "statusPresetId",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/JsonPatch"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StatusPresetWithStatusPresetEmbed"
+                }
+              }
+            },
+            "description": ""
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "not_found",
+                  "data": {},
+                  "message": "Unknown entity 'fe4c0f30-aa35-3c41-99f9-a5f69c8c4192'"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If path parameters are invalid or payload is invalid or resource does not exist."
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "missing_token",
+                  "data": {},
+                  "message": "Access token is missing"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If missing authentication token."
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "forbidden",
+                  "data": {},
+                  "message": "Missing required access scope"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If authenticated client does not have the required access scopes."
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "unknown_error",
+                  "data": {},
+                  "message": "Server error"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If any other error happens."
+          }
+        },
+        "security": [
+          {
+            "httpAuth": []
+          }
+        ],
+        "summary": "Patch an existing status-preset",
+        "tags": [
+          "CRUD",
+          "StatusPresets"
+        ]
+      },
+      "put": {
+        "description": "Returns updated status-preset with its sanitised data.<br/>Requirements:<br/>- auth-client scopes: \"team\"",
+        "operationId": "updateStatusPreset",
+        "parameters": [
+          {
+            "deprecated": true,
+            "description": "Enable sudo-mode for admins for a single request, which gives full permission to all workspaces in the team.",
+            "in": "query",
+            "name": "actAsAdmin",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "in": "path",
+            "name": "statusPresetId",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateStatusPresetRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StatusPresetWithStatusPresetEmbed"
+                }
+              }
+            },
+            "description": ""
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "not_found",
+                  "data": {},
+                  "message": "Unknown entity 'fe4c0f30-aa35-3c41-99f9-a5f69c8c4192'"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If path parameters are invalid or payload is invalid or resource does not exist."
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "missing_token",
+                  "data": {},
+                  "message": "Access token is missing"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If missing authentication token."
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "forbidden",
+                  "data": {},
+                  "message": "Missing required access scope"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If authenticated client does not have the required access scopes."
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "unknown_error",
+                  "data": {},
+                  "message": "Server error"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If any other error happens."
+          }
+        },
+        "security": [
+          {
+            "httpAuth": []
+          }
+        ],
+        "summary": "Update an existing status-preset",
+        "tags": [
+          "CRUD",
+          "StatusPresets"
+        ]
+      }
+    },
+    "/api/status-presets/{statusPresetId}/statuses": {
+      "put": {
+        "description": "Updates the statuses linked to a status preset. Replacements must be specified for each status being removed, so that items in workspaces using this preset can be migrated to new statuses.<br/>Requirements:<br/>- auth-client scopes: \"team\"",
+        "operationId": "updateStatusPresetStatuses",
+        "parameters": [
+          {
+            "deprecated": true,
+            "description": "Enable sudo-mode for admins for a single request, which gives full permission to all workspaces in the team.",
+            "in": "query",
+            "name": "actAsAdmin",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "in": "path",
+            "name": "statusPresetId",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateStatusPresetStatusesRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StatusPresetWithStatusPresetEmbed"
+                }
+              }
+            },
+            "description": ""
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "not_found",
+                  "data": {},
+                  "message": "Unknown entity 'fe4c0f30-aa35-3c41-99f9-a5f69c8c4192'"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If payload is invalid or resource does not exist."
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "missing_token",
+                  "data": {},
+                  "message": "Access token is missing"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If missing authentication token."
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "forbidden",
+                  "data": {},
+                  "message": "Missing required access scope"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If authenticated client does not have the required access scopes."
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "unknown_error",
+                  "data": {},
+                  "message": "Server error"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If any other error happens."
+          }
+        },
+        "security": [
+          {
+            "httpAuth": []
+          }
+        ],
+        "summary": "Update statuses of a status preset",
+        "tags": [
+          "StatusPresets"
         ]
       }
     },
@@ -33386,6 +35046,10 @@
     {
       "description": "Endpoints for managing the user profile",
       "name": "Profile"
+    },
+    {
+      "description": "Endpoints for managing reusable status presets.",
+      "name": "StatusPresets"
     },
     {
       "description": "Endpoints for managing the team and users",
