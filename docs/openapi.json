@@ -4518,6 +4518,29 @@
         "title": "InputFormat",
         "type": "string"
       },
+      "InsightsAgentSettings": {
+        "properties": {
+          "createItemWhenNoneFound": {
+            "type": "boolean"
+          },
+          "enabled": {
+            "type": "boolean"
+          },
+          "extraInstructions": {
+            "type": "string"
+          },
+          "triggerOnItemCreate": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "enabled",
+          "triggerOnItemCreate",
+          "createItemWhenNoneFound"
+        ],
+        "title": "InsightsAgentSettings",
+        "type": "object"
+      },
       "InsightsApp": {
         "properties": {
           "id": {
@@ -4547,6 +4570,9 @@
       },
       "InsightsAppTypeSettings": {
         "properties": {
+          "agentSettings": {
+            "$ref": "#/components/schemas/InsightsAgentSettings"
+          },
           "fieldIds": {
             "items": {
               "format": "uuid",
@@ -7032,8 +7058,68 @@
         "title": "ItemLinkWithItemLinkEmbedPage",
         "type": "object"
       },
-      "ItemPartial": {
+      "ItemPartialEmbed": {
         "properties": {
+          "alias": {
+            "type": "string"
+          },
+          "apps": {
+            "additionalProperties": {
+              "$ref": "#/components/schemas/ItemEmbedApp"
+            },
+            "type": "object"
+          },
+          "attachmentCount": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "children": {
+            "items": {
+              "$ref": "#/components/schemas/RelativeItemInfo"
+            },
+            "type": "array"
+          },
+          "commentCount": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "constraints": {
+            "items": {
+              "$ref": "#/components/schemas/ItemConstraint"
+            },
+            "type": "array"
+          },
+          "integration": {
+            "$ref": "#/components/schemas/ItemEmbedIntegration"
+          },
+          "linkCount": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "parents": {
+            "items": {
+              "$ref": "#/components/schemas/RelativeItemInfo"
+            },
+            "type": "array"
+          },
+          "progress": {
+            "$ref": "#/components/schemas/ItemEmbedProgress"
+          },
+          "watched": {
+            "type": "boolean"
+          },
+          "workspaceItemType": {
+            "$ref": "#/components/schemas/ItemType"
+          }
+        },
+        "title": "ItemPartialEmbed",
+        "type": "object"
+      },
+      "ItemPartialWithItemPartialEmbed": {
+        "properties": {
+          "_embedded": {
+            "$ref": "#/components/schemas/ItemPartialEmbed"
+          },
           "archived": {
             "type": "boolean"
           },
@@ -7103,16 +7189,17 @@
           }
         },
         "required": [
-          "id"
+          "id",
+          "_embedded"
         ],
-        "title": "ItemPartial",
+        "title": "ItemPartialWithItemPartialEmbed",
         "type": "object"
       },
-      "ItemPartialPage": {
+      "ItemPartialWithItemPartialEmbedPage": {
         "properties": {
           "items": {
             "items": {
-              "$ref": "#/components/schemas/ItemPartial"
+              "$ref": "#/components/schemas/ItemPartialWithItemPartialEmbed"
             },
             "type": "array"
           },
@@ -7125,7 +7212,7 @@
           "items",
           "totalItems"
         ],
-        "title": "ItemPartialPage",
+        "title": "ItemPartialWithItemPartialEmbedPage",
         "type": "object"
       },
       "ItemRelationBulkAction": {
@@ -13569,6 +13656,51 @@
         "title": "ReconfigureFieldRequest",
         "type": "object"
       },
+      "RefItemExtendedProperty": {
+        "oneOf": [
+          {
+            "enum": [
+              "archived",
+              "assignees",
+              "color",
+              "createdAt",
+              "description",
+              "embed:alias",
+              "embed:apps",
+              "embed:attachmentCount",
+              "embed:children",
+              "embed:commentCount",
+              "embed:constraints",
+              "embed:integration",
+              "embed:linkCount",
+              "embed:parents",
+              "embed:progress",
+              "embed:watched",
+              "embed:workspaceItemType",
+              "lastUpdatedAt",
+              "name",
+              "number",
+              "order",
+              "status",
+              "statusCategoryUpdatedAt",
+              "statusUpdatedAt",
+              "workspace"
+            ],
+            "type": "string"
+          },
+          {
+            "description": "A combination of 'fieldid:' prefix and a UUID field-id.",
+            "pattern": "^fieldid:[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
+            "type": "string"
+          },
+          {
+            "description": "A combination of 'fieldtype:' prefix and a field type id.",
+            "pattern": "^fieldtype:.+$",
+            "type": "string"
+          }
+        ],
+        "title": "RefItemExtendedProperty"
+      },
       "RefItemProperty": {
         "oneOf": [
           {
@@ -14849,7 +14981,7 @@
         "properties": {
           "properties": {
             "items": {
-              "$ref": "#/components/schemas/RefItemProperty"
+              "$ref": "#/components/schemas/RefItemExtendedProperty"
             },
             "type": "array",
             "uniqueItems": true
@@ -20688,7 +20820,7 @@
   },
   "info": {
     "title": "airfocus API",
-    "version": "1.0.0-beta.46.44.0"
+    "version": "1.0.0-beta.46.47.1"
   },
   "openapi": "3.1.0",
   "paths": {
@@ -31881,7 +32013,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ItemPartialPage"
+                  "$ref": "#/components/schemas/ItemPartialWithItemPartialEmbedPage"
                 }
               }
             },
