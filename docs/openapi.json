@@ -977,9 +977,6 @@
             "format": "int32",
             "type": "integer"
           },
-          "type": {
-            "$ref": "#/components/schemas/ItemLinkType"
-          },
           "typeId": {
             "format": "uuid",
             "type": "string"
@@ -4519,6 +4516,11 @@
         "type": "string"
       },
       "InsightsAgentSettings": {
+        "default": {
+          "createItemWhenNoneFound": false,
+          "enabled": false,
+          "triggerOnItemCreate": false
+        },
         "properties": {
           "createItemWhenNoneFound": {
             "type": "boolean"
@@ -4526,7 +4528,7 @@
           "enabled": {
             "type": "boolean"
           },
-          "extraInstructions": {
+          "extraPrompt": {
             "type": "string"
           },
           "triggerOnItemCreate": {
@@ -6787,17 +6789,6 @@
         "title": "ItemLinkSearchQuery",
         "type": "object"
       },
-      "ItemLinkType": {
-        "deprecated": true,
-        "description": "Deprecated: Use typeId instead",
-        "enum": [
-          "dependency",
-          "duplicate",
-          "relation"
-        ],
-        "title": "ItemLinkType",
-        "type": "string"
-      },
       "ItemLinkTypeBulkAction": {
         "discriminator": {
           "mapping": {
@@ -7010,9 +7001,6 @@
             "description": "How this item-link is ordered in the list of links of the \"toItem\".",
             "format": "int32",
             "type": "integer"
-          },
-          "type": {
-            "$ref": "#/components/schemas/ItemLinkType"
           },
           "typeId": {
             "format": "uuid",
@@ -17074,9 +17062,6 @@
             "format": "int32",
             "type": "integer"
           },
-          "type": {
-            "$ref": "#/components/schemas/ItemLinkType"
-          },
           "typeId": {
             "format": "uuid",
             "type": "string"
@@ -20820,7 +20805,7 @@
   },
   "info": {
     "title": "airfocus API",
-    "version": "1.0.0-beta.46.47.1"
+    "version": "1.0.0-beta.46.51.1"
   },
   "openapi": "3.1.0",
   "paths": {
@@ -25226,6 +25211,124 @@
         "summary": "Create a new workspace",
         "tags": [
           "CRUD",
+          "Workspaces"
+        ]
+      }
+    },
+    "/api/workspaces/alias/{aliasValue}": {
+      "get": {
+        "description": "Returns found workspace.<br/>Requirements:<br/>- auth-client scopes: \"workspace:read\"<br/>- user permission: \"read\" or higher",
+        "operationId": "retrieveWorkspaceByAlias",
+        "parameters": [
+          {
+            "deprecated": true,
+            "description": "Enable sudo-mode for admins for a single request, which gives full permission to all workspaces in the team.",
+            "in": "query",
+            "name": "actAsAdmin",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "example": "DEV",
+            "in": "path",
+            "name": "aliasValue",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WorkspaceWithWorkspaceEmbed"
+                }
+              },
+              "application/json+markdown": {
+                "schema": {
+                  "$ref": "#/components/schemas/WorkspaceWithMDWithWorkspaceEmbed"
+                }
+              },
+              "application/vnd.airfocus.markdown+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WorkspaceWithWorkspaceEmbed"
+                }
+              }
+            },
+            "description": ""
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "not_found",
+                  "data": {},
+                  "message": "Unknown entity 'fe4c0f30-aa35-3c41-99f9-a5f69c8c4192'"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If path parameters are invalid or resource does not exist."
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "missing_token",
+                  "data": {},
+                  "message": "Access token is missing"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If missing authentication token."
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "forbidden",
+                  "data": {},
+                  "message": "Insufficient permission"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If user does not have the required permission, or authenticated client does not have the required access scopes."
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "unknown_error",
+                  "data": {},
+                  "message": "Server error"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If any other error happens."
+          }
+        },
+        "security": [
+          {
+            "httpAuth": []
+          }
+        ],
+        "summary": "Retrieve a single workspace by its alias (e.g. 'DEV').",
+        "tags": [
           "Workspaces"
         ]
       }
