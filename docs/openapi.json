@@ -13665,6 +13665,7 @@
               "embed:progress",
               "embed:watched",
               "embed:workspaceItemType",
+              "id",
               "lastUpdatedAt",
               "name",
               "number",
@@ -13698,6 +13699,7 @@
               "color",
               "createdAt",
               "description",
+              "id",
               "lastUpdatedAt",
               "name",
               "number",
@@ -15366,6 +15368,18 @@
         "type": "object"
       },
       "Status": {
+        "examples": [
+          {
+            "category": "active",
+            "color": "blue",
+            "default": true,
+            "id": "7e5a6ca1-93e2-3b2b-8c07-c911b370ff40",
+            "name": "In Progress",
+            "order": 1,
+            "presetId": "aabe8348-a1b8-371c-be47-4c43039dcc6e",
+            "workspaceId": "668953d2-25f2-34fd-bd72-1e8cf024a277"
+          }
+        ],
         "properties": {
           "category": {
             "$ref": "#/components/schemas/StatusCategory"
@@ -15919,6 +15933,9 @@
           "enableAi": {
             "$ref": "#/components/schemas/TeamFlag"
           },
+          "enableMcpServer": {
+            "$ref": "#/components/schemas/TeamFlag"
+          },
           "enableOkrApp": {
             "$ref": "#/components/schemas/TeamFlag"
           },
@@ -15949,7 +15966,8 @@
           "restrictShareLinkCreation",
           "requireShareLinkPassword",
           "requirePortalLogin",
-          "requirePortalPassword"
+          "requirePortalPassword",
+          "enableMcpServer"
         ],
         "title": "TeamFlags",
         "type": "object"
@@ -17452,6 +17470,9 @@
       "UpdateTeamFlagsRequest": {
         "properties": {
           "enableAi": {
+            "type": "boolean"
+          },
+          "enableMcpServer": {
             "type": "boolean"
           },
           "enableOkrApp": {
@@ -20805,7 +20826,7 @@
   },
   "info": {
     "title": "airfocus API",
-    "version": "1.0.0-beta.46.56.3"
+    "version": "1.0.0-beta.46.68.0"
   },
   "openapi": "3.1.0",
   "paths": {
