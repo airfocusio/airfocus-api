@@ -15954,6 +15954,9 @@
           "requireShareLinkPassword": {
             "$ref": "#/components/schemas/TeamFlag"
           },
+          "restrictIntegrationManagement": {
+            "$ref": "#/components/schemas/TeamFlag"
+          },
           "restrictShareLinkCreation": {
             "$ref": "#/components/schemas/TeamFlag"
           }
@@ -15963,6 +15966,7 @@
           "enableOkrApp",
           "removeBranding",
           "forbidShareLinkCreation",
+          "restrictIntegrationManagement",
           "restrictShareLinkCreation",
           "requireShareLinkPassword",
           "requirePortalLogin",
@@ -17491,6 +17495,9 @@
             "type": "boolean"
           },
           "requireShareLinkPassword": {
+            "type": "boolean"
+          },
+          "restrictIntegrationManagement": {
             "type": "boolean"
           },
           "restrictShareLinkCreation": {
@@ -20826,7 +20833,7 @@
   },
   "info": {
     "title": "airfocus API",
-    "version": "1.0.0-beta.46.91.1"
+    "version": "1.0.0-beta.46.94.0"
   },
   "openapi": "3.1.0",
   "paths": {
