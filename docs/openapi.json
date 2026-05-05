@@ -2828,7 +2828,24 @@
           },
           "itemFilter": {
             "$ref": "#/components/schemas/ItemSearchQueryFilter",
-            "description": "Filter applied on the items"
+            "description": "Filter applied on the items",
+            "examples": [
+              {
+                "inner": [
+                  {
+                    "text": "foo",
+                    "caseSensitive": false,
+                    "mode": "contain",
+                    "type": "name"
+                  },
+                  {
+                    "mode": "defined",
+                    "type": "assignees"
+                  }
+                ],
+                "type": "and"
+              }
+            ]
           },
           "segment": {
             "$ref": "#/components/schemas/GetItemsAnalyticsRequestBreakdownConfigurableProperty",
@@ -3026,7 +3043,24 @@
           },
           "itemFilter": {
             "$ref": "#/components/schemas/ItemSearchQueryFilter",
-            "description": "Filter applied on the items"
+            "description": "Filter applied on the items",
+            "examples": [
+              {
+                "inner": [
+                  {
+                    "text": "foo",
+                    "caseSensitive": false,
+                    "mode": "contain",
+                    "type": "name"
+                  },
+                  {
+                    "mode": "defined",
+                    "type": "assignees"
+                  }
+                ],
+                "type": "and"
+              }
+            ]
           },
           "type": {
             "const": "number",
@@ -3334,7 +3368,24 @@
       "GetItemsAnalyticsResponseBreakdownBucketConfidence": {
         "properties": {
           "filter": {
-            "$ref": "#/components/schemas/ItemSearchQueryFilter"
+            "$ref": "#/components/schemas/ItemSearchQueryFilter",
+            "examples": [
+              {
+                "inner": [
+                  {
+                    "text": "foo",
+                    "caseSensitive": false,
+                    "mode": "contain",
+                    "type": "name"
+                  },
+                  {
+                    "mode": "defined",
+                    "type": "assignees"
+                  }
+                ],
+                "type": "and"
+              }
+            ]
           },
           "id": {
             "format": "uuid",
@@ -3364,7 +3415,24 @@
             "type": "string"
           },
           "filter": {
-            "$ref": "#/components/schemas/ItemSearchQueryFilter"
+            "$ref": "#/components/schemas/ItemSearchQueryFilter",
+            "examples": [
+              {
+                "inner": [
+                  {
+                    "text": "foo",
+                    "caseSensitive": false,
+                    "mode": "contain",
+                    "type": "name"
+                  },
+                  {
+                    "mode": "defined",
+                    "type": "assignees"
+                  }
+                ],
+                "type": "and"
+              }
+            ]
           },
           "id": {
             "format": "uuid",
@@ -3396,7 +3464,24 @@
       "GetItemsAnalyticsResponseBreakdownBucketEmpty": {
         "properties": {
           "filter": {
-            "$ref": "#/components/schemas/ItemSearchQueryFilter"
+            "$ref": "#/components/schemas/ItemSearchQueryFilter",
+            "examples": [
+              {
+                "inner": [
+                  {
+                    "text": "foo",
+                    "caseSensitive": false,
+                    "mode": "contain",
+                    "type": "name"
+                  },
+                  {
+                    "mode": "defined",
+                    "type": "assignees"
+                  }
+                ],
+                "type": "and"
+              }
+            ]
           },
           "id": {
             "format": "uuid",
@@ -3422,7 +3507,24 @@
       "GetItemsAnalyticsResponseBreakdownBucketKeyResult": {
         "properties": {
           "filter": {
-            "$ref": "#/components/schemas/ItemSearchQueryFilter"
+            "$ref": "#/components/schemas/ItemSearchQueryFilter",
+            "examples": [
+              {
+                "inner": [
+                  {
+                    "text": "foo",
+                    "caseSensitive": false,
+                    "mode": "contain",
+                    "type": "name"
+                  },
+                  {
+                    "mode": "defined",
+                    "type": "assignees"
+                  }
+                ],
+                "type": "and"
+              }
+            ]
           },
           "id": {
             "format": "uuid",
@@ -3463,7 +3565,24 @@
       "GetItemsAnalyticsResponseBreakdownBucketMilestone": {
         "properties": {
           "filter": {
-            "$ref": "#/components/schemas/ItemSearchQueryFilter"
+            "$ref": "#/components/schemas/ItemSearchQueryFilter",
+            "examples": [
+              {
+                "inner": [
+                  {
+                    "text": "foo",
+                    "caseSensitive": false,
+                    "mode": "contain",
+                    "type": "name"
+                  },
+                  {
+                    "mode": "defined",
+                    "type": "assignees"
+                  }
+                ],
+                "type": "and"
+              }
+            ]
           },
           "id": {
             "format": "uuid",
@@ -3497,7 +3616,24 @@
             "type": "number"
           },
           "filter": {
-            "$ref": "#/components/schemas/ItemSearchQueryFilter"
+            "$ref": "#/components/schemas/ItemSearchQueryFilter",
+            "examples": [
+              {
+                "inner": [
+                  {
+                    "text": "foo",
+                    "caseSensitive": false,
+                    "mode": "contain",
+                    "type": "name"
+                  },
+                  {
+                    "mode": "defined",
+                    "type": "assignees"
+                  }
+                ],
+                "type": "and"
+              }
+            ]
           },
           "id": {
             "format": "uuid",
@@ -3531,7 +3667,24 @@
       "GetItemsAnalyticsResponseBreakdownBucketObjective": {
         "properties": {
           "filter": {
-            "$ref": "#/components/schemas/ItemSearchQueryFilter"
+            "$ref": "#/components/schemas/ItemSearchQueryFilter",
+            "examples": [
+              {
+                "inner": [
+                  {
+                    "text": "foo",
+                    "caseSensitive": false,
+                    "mode": "contain",
+                    "type": "name"
+                  },
+                  {
+                    "mode": "defined",
+                    "type": "assignees"
+                  }
+                ],
+                "type": "and"
+              }
+            ]
           },
           "id": {
             "format": "uuid",
@@ -3567,7 +3720,24 @@
       "GetItemsAnalyticsResponseBreakdownBucketPeople": {
         "properties": {
           "filter": {
-            "$ref": "#/components/schemas/ItemSearchQueryFilter"
+            "$ref": "#/components/schemas/ItemSearchQueryFilter",
+            "examples": [
+              {
+                "inner": [
+                  {
+                    "text": "foo",
+                    "caseSensitive": false,
+                    "mode": "contain",
+                    "type": "name"
+                  },
+                  {
+                    "mode": "defined",
+                    "type": "assignees"
+                  }
+                ],
+                "type": "and"
+              }
+            ]
           },
           "id": {
             "format": "uuid",
@@ -3597,7 +3767,24 @@
       "GetItemsAnalyticsResponseBreakdownBucketProperty": {
         "properties": {
           "filter": {
-            "$ref": "#/components/schemas/ItemSearchQueryFilter"
+            "$ref": "#/components/schemas/ItemSearchQueryFilter",
+            "examples": [
+              {
+                "inner": [
+                  {
+                    "text": "foo",
+                    "caseSensitive": false,
+                    "mode": "contain",
+                    "type": "name"
+                  },
+                  {
+                    "mode": "defined",
+                    "type": "assignees"
+                  }
+                ],
+                "type": "and"
+              }
+            ]
           },
           "id": {
             "format": "uuid",
@@ -3626,7 +3813,24 @@
             "$ref": "#/components/schemas/SelectFieldOptionColor"
           },
           "filter": {
-            "$ref": "#/components/schemas/ItemSearchQueryFilter"
+            "$ref": "#/components/schemas/ItemSearchQueryFilter",
+            "examples": [
+              {
+                "inner": [
+                  {
+                    "text": "foo",
+                    "caseSensitive": false,
+                    "mode": "contain",
+                    "type": "name"
+                  },
+                  {
+                    "mode": "defined",
+                    "type": "assignees"
+                  }
+                ],
+                "type": "and"
+              }
+            ]
           },
           "id": {
             "format": "uuid",
@@ -3659,7 +3863,24 @@
             "$ref": "#/components/schemas/StatusCategory"
           },
           "filter": {
-            "$ref": "#/components/schemas/ItemSearchQueryFilter"
+            "$ref": "#/components/schemas/ItemSearchQueryFilter",
+            "examples": [
+              {
+                "inner": [
+                  {
+                    "text": "foo",
+                    "caseSensitive": false,
+                    "mode": "contain",
+                    "type": "name"
+                  },
+                  {
+                    "mode": "defined",
+                    "type": "assignees"
+                  }
+                ],
+                "type": "and"
+              }
+            ]
           },
           "id": {
             "format": "uuid",
@@ -3694,7 +3915,24 @@
             "$ref": "#/components/schemas/StatusCategory"
           },
           "filter": {
-            "$ref": "#/components/schemas/ItemSearchQueryFilter"
+            "$ref": "#/components/schemas/ItemSearchQueryFilter",
+            "examples": [
+              {
+                "inner": [
+                  {
+                    "text": "foo",
+                    "caseSensitive": false,
+                    "mode": "contain",
+                    "type": "name"
+                  },
+                  {
+                    "mode": "defined",
+                    "type": "assignees"
+                  }
+                ],
+                "type": "and"
+              }
+            ]
           },
           "id": {
             "format": "uuid",
@@ -3725,7 +3963,24 @@
             "type": "string"
           },
           "filter": {
-            "$ref": "#/components/schemas/ItemSearchQueryFilter"
+            "$ref": "#/components/schemas/ItemSearchQueryFilter",
+            "examples": [
+              {
+                "inner": [
+                  {
+                    "text": "foo",
+                    "caseSensitive": false,
+                    "mode": "contain",
+                    "type": "name"
+                  },
+                  {
+                    "mode": "defined",
+                    "type": "assignees"
+                  }
+                ],
+                "type": "and"
+              }
+            ]
           },
           "id": {
             "format": "uuid",
@@ -3762,7 +4017,24 @@
       "GetItemsAnalyticsResponseBreakdownBucketWorkspace": {
         "properties": {
           "filter": {
-            "$ref": "#/components/schemas/ItemSearchQueryFilter"
+            "$ref": "#/components/schemas/ItemSearchQueryFilter",
+            "examples": [
+              {
+                "inner": [
+                  {
+                    "text": "foo",
+                    "caseSensitive": false,
+                    "mode": "contain",
+                    "type": "name"
+                  },
+                  {
+                    "mode": "defined",
+                    "type": "assignees"
+                  }
+                ],
+                "type": "and"
+              }
+            ]
           },
           "id": {
             "format": "uuid",
@@ -4335,7 +4607,24 @@
           },
           "filter": {
             "$ref": "#/components/schemas/ItemSearchQueryFilter",
-            "description": "Custom filter to apply to the counted items. If not specified, then the default filter from the view settings is used."
+            "description": "Custom filter to apply to the counted items. If not specified, then the default filter from the view settings is used.",
+            "examples": [
+              {
+                "inner": [
+                  {
+                    "text": "foo",
+                    "caseSensitive": false,
+                    "mode": "contain",
+                    "type": "name"
+                  },
+                  {
+                    "mode": "defined",
+                    "type": "assignees"
+                  }
+                ],
+                "type": "and"
+              }
+            ]
           }
         },
         "required": [
@@ -7497,7 +7786,24 @@
             "type": "boolean"
           },
           "filter": {
-            "$ref": "#/components/schemas/ItemSearchQueryFilter"
+            "$ref": "#/components/schemas/ItemSearchQueryFilter",
+            "examples": [
+              {
+                "inner": [
+                  {
+                    "text": "foo",
+                    "caseSensitive": false,
+                    "mode": "contain",
+                    "type": "name"
+                  },
+                  {
+                    "mode": "defined",
+                    "type": "assignees"
+                  }
+                ],
+                "type": "and"
+              }
+            ]
           },
           "sort": {
             "$ref": "#/components/schemas/ItemSearchQuerySort",
@@ -7571,23 +7877,6 @@
           },
           "propertyName": "type"
         },
-        "examples": [
-          {
-            "inner": [
-              {
-                "text": "foo",
-                "caseSensitive": false,
-                "mode": "contain",
-                "type": "name"
-              },
-              {
-                "mode": "defined",
-                "type": "assignees"
-              }
-            ],
-            "type": "and"
-          }
-        ],
         "oneOf": [
           {
             "$ref": "#/components/schemas/ItemSearchQueryFilterAliasContain"
@@ -10641,7 +10930,24 @@
       "MirrorAppTypeSettingsSource": {
         "properties": {
           "filter": {
-            "$ref": "#/components/schemas/ItemSearchQueryFilter"
+            "$ref": "#/components/schemas/ItemSearchQueryFilter",
+            "examples": [
+              {
+                "inner": [
+                  {
+                    "text": "foo",
+                    "caseSensitive": false,
+                    "mode": "contain",
+                    "type": "name"
+                  },
+                  {
+                    "mode": "defined",
+                    "type": "assignees"
+                  }
+                ],
+                "type": "and"
+              }
+            ]
           },
           "mapping": {
             "items": {
@@ -13126,7 +13432,24 @@
         "properties": {
           "globalFilter": {
             "$ref": "#/components/schemas/ItemSearchQueryFilter",
-            "description": "An item-search filter to pull only specific items into this portfolio. This filter will be applied to all source workspaces, in addition to the filters defined for each source."
+            "description": "An item-search filter to pull only specific items into this portfolio. This filter will be applied to all source workspaces, in addition to the filters defined for each source.",
+            "examples": [
+              {
+                "inner": [
+                  {
+                    "text": "foo",
+                    "caseSensitive": false,
+                    "mode": "contain",
+                    "type": "name"
+                  },
+                  {
+                    "mode": "defined",
+                    "type": "assignees"
+                  }
+                ],
+                "type": "and"
+              }
+            ]
           },
           "portfolioFieldId": {
             "description": "Id of a team-field installed by this app in all the source workspaces, which contains links between source items and this portfolio.",
@@ -13158,7 +13481,24 @@
         "properties": {
           "filter": {
             "$ref": "#/components/schemas/ItemSearchQueryFilter",
-            "description": "An item-search filter to pull only specific items into this portfolio."
+            "description": "An item-search filter to pull only specific items into this portfolio.",
+            "examples": [
+              {
+                "inner": [
+                  {
+                    "text": "foo",
+                    "caseSensitive": false,
+                    "mode": "contain",
+                    "type": "name"
+                  },
+                  {
+                    "mode": "defined",
+                    "type": "assignees"
+                  }
+                ],
+                "type": "and"
+              }
+            ]
           },
           "workspaceId": {
             "description": "Id of the workspace, where the items should be pulled from.",
@@ -17726,7 +18066,24 @@
             "type": "boolean"
           },
           "itemFilter": {
-            "$ref": "#/components/schemas/ItemSearchQueryFilter"
+            "$ref": "#/components/schemas/ItemSearchQueryFilter",
+            "examples": [
+              {
+                "inner": [
+                  {
+                    "text": "foo",
+                    "caseSensitive": false,
+                    "mode": "contain",
+                    "type": "name"
+                  },
+                  {
+                    "mode": "defined",
+                    "type": "assignees"
+                  }
+                ],
+                "type": "and"
+              }
+            ]
           },
           "itemScopeLimit": {
             "$ref": "#/components/schemas/ItemScopeLimit"
@@ -20706,7 +21063,7 @@
   },
   "info": {
     "title": "airfocus API",
-    "version": "1.0.0-beta.46.122.1"
+    "version": "1.0.0-beta.46.127.0"
   },
   "openapi": "3.1.0",
   "paths": {
