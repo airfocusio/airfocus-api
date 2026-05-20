@@ -456,6 +456,10 @@
           "description": {
             "type": "string"
           },
+          "groupId": {
+            "format": "uuid",
+            "type": "string"
+          },
           "id": {
             "format": "uuid",
             "type": "string"
@@ -468,6 +472,10 @@
           },
           "required": {
             "type": "boolean"
+          },
+          "teamFieldOrder": {
+            "format": "int32",
+            "type": "integer"
           },
           "teamId": {
             "format": "uuid",
@@ -551,6 +559,10 @@
           "description": {
             "type": "string"
           },
+          "groupId": {
+            "format": "uuid",
+            "type": "string"
+          },
           "id": {
             "format": "uuid",
             "type": "string"
@@ -563,6 +575,10 @@
           },
           "required": {
             "type": "boolean"
+          },
+          "teamFieldOrder": {
+            "format": "int32",
+            "type": "integer"
           },
           "teamId": {
             "format": "uuid",
@@ -1452,6 +1468,10 @@
           "description": {
             "type": "string"
           },
+          "groupId": {
+            "format": "uuid",
+            "type": "string"
+          },
           "id": {
             "format": "uuid",
             "type": "string"
@@ -1464,6 +1484,10 @@
           },
           "required": {
             "type": "boolean"
+          },
+          "teamFieldOrder": {
+            "format": "int32",
+            "type": "integer"
           },
           "teamId": {
             "format": "uuid",
@@ -1662,6 +1686,10 @@
           "description": {
             "type": "string"
           },
+          "groupId": {
+            "format": "uuid",
+            "type": "string"
+          },
           "id": {
             "format": "uuid",
             "type": "string"
@@ -1674,6 +1702,10 @@
           },
           "required": {
             "type": "boolean"
+          },
+          "teamFieldOrder": {
+            "format": "int32",
+            "type": "integer"
           },
           "teamId": {
             "format": "uuid",
@@ -1707,6 +1739,10 @@
           "description": {
             "type": "string"
           },
+          "groupId": {
+            "format": "uuid",
+            "type": "string"
+          },
           "id": {
             "format": "uuid",
             "type": "string"
@@ -1719,6 +1755,10 @@
           },
           "required": {
             "type": "boolean"
+          },
+          "teamFieldOrder": {
+            "format": "int32",
+            "type": "integer"
           },
           "teamId": {
             "format": "uuid",
@@ -1869,6 +1909,10 @@
           "description": {
             "type": "string"
           },
+          "groupId": {
+            "format": "uuid",
+            "type": "string"
+          },
           "id": {
             "format": "uuid",
             "type": "string"
@@ -1881,6 +1925,10 @@
           },
           "required": {
             "type": "boolean"
+          },
+          "teamFieldOrder": {
+            "format": "int32",
+            "type": "integer"
           },
           "teamId": {
             "format": "uuid",
@@ -2423,6 +2471,10 @@
           "description": {
             "type": "string"
           },
+          "groupId": {
+            "format": "uuid",
+            "type": "string"
+          },
           "id": {
             "format": "uuid",
             "type": "string"
@@ -2438,6 +2490,10 @@
           },
           "settings": {
             "$ref": "#/components/schemas/FormSourceFieldTypeSettings"
+          },
+          "teamFieldOrder": {
+            "format": "int32",
+            "type": "integer"
           },
           "teamId": {
             "format": "uuid",
@@ -2533,6 +2589,10 @@
           "description": {
             "type": "string"
           },
+          "groupId": {
+            "format": "uuid",
+            "type": "string"
+          },
           "id": {
             "format": "uuid",
             "type": "string"
@@ -2548,6 +2608,10 @@
           },
           "settings": {
             "$ref": "#/components/schemas/FormSourceFieldTypeSettings"
+          },
+          "teamFieldOrder": {
+            "format": "int32",
+            "type": "integer"
           },
           "teamId": {
             "format": "uuid",
@@ -2582,6 +2646,10 @@
           "description": {
             "type": "string"
           },
+          "groupId": {
+            "format": "uuid",
+            "type": "string"
+          },
           "id": {
             "format": "uuid",
             "type": "string"
@@ -2594,6 +2662,10 @@
           },
           "required": {
             "type": "boolean"
+          },
+          "teamFieldOrder": {
+            "format": "int32",
+            "type": "integer"
           },
           "teamId": {
             "format": "uuid",
@@ -2629,6 +2701,10 @@
           "description": {
             "type": "string"
           },
+          "groupId": {
+            "format": "uuid",
+            "type": "string"
+          },
           "id": {
             "format": "uuid",
             "type": "string"
@@ -2641,6 +2717,10 @@
           },
           "required": {
             "type": "boolean"
+          },
+          "teamFieldOrder": {
+            "format": "int32",
+            "type": "integer"
           },
           "teamId": {
             "format": "uuid",
@@ -4309,6 +4389,7 @@
           "archived": false,
           "assigneeUserGroupIds": [],
           "assigneeUserIds": [],
+          "searchTargets": [],
           "statusCategories": [],
           "workspaceIds": []
         },
@@ -4319,6 +4400,7 @@
             "type": "boolean"
           },
           "assigneeUserGroupIds": {
+            "default": [],
             "description": "Narrow down the search to items which are assigned to the specified user groups",
             "items": {
               "format": "uuid",
@@ -4327,6 +4409,7 @@
             "type": "array"
           },
           "assigneeUserIds": {
+            "default": [],
             "description": "Narrow down the search to items which are assigned to the specified users",
             "items": {
               "format": "uuid",
@@ -4342,7 +4425,18 @@
             "description": "Text to search in contents of items",
             "type": "string"
           },
+          "searchTargets": {
+            "default": [],
+            "description": "Narrow down the search to specific targeted fields, exclusive.",
+            "items": {
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": "array",
+            "uniqueItems": true
+          },
           "statusCategories": {
+            "default": [],
             "description": "Narrow down the search to items with status in the specified status-categories",
             "items": {
               "$ref": "#/components/schemas/StatusCategory"
@@ -4350,6 +4444,7 @@
             "type": "array"
           },
           "workspaceIds": {
+            "default": [],
             "description": "Narrow down the search to specific workspaces",
             "items": {
               "format": "uuid",
@@ -4358,12 +4453,6 @@
             "type": "array"
           }
         },
-        "required": [
-          "workspaceIds",
-          "assigneeUserIds",
-          "assigneeUserGroupIds",
-          "statusCategories"
-        ],
         "title": "GlobalSearchQuery",
         "type": "object"
       },
@@ -4540,6 +4629,10 @@
           "description": {
             "type": "string"
           },
+          "groupId": {
+            "format": "uuid",
+            "type": "string"
+          },
           "id": {
             "format": "uuid",
             "type": "string"
@@ -4552,6 +4645,10 @@
           },
           "required": {
             "type": "boolean"
+          },
+          "teamFieldOrder": {
+            "format": "int32",
+            "type": "integer"
           },
           "teamId": {
             "format": "uuid",
@@ -4587,6 +4684,10 @@
           "description": {
             "type": "string"
           },
+          "groupId": {
+            "format": "uuid",
+            "type": "string"
+          },
           "id": {
             "format": "uuid",
             "type": "string"
@@ -4599,6 +4700,10 @@
           },
           "required": {
             "type": "boolean"
+          },
+          "teamFieldOrder": {
+            "format": "int32",
+            "type": "integer"
           },
           "teamId": {
             "format": "uuid",
@@ -4824,6 +4929,10 @@
           "description": {
             "type": "string"
           },
+          "groupId": {
+            "format": "uuid",
+            "type": "string"
+          },
           "id": {
             "format": "uuid",
             "type": "string"
@@ -4839,6 +4948,10 @@
           },
           "settings": {
             "$ref": "#/components/schemas/InsightsFieldTypeSettings"
+          },
+          "teamFieldOrder": {
+            "format": "int32",
+            "type": "integer"
           },
           "teamId": {
             "format": "uuid",
@@ -5044,6 +5157,10 @@
           "description": {
             "type": "string"
           },
+          "groupId": {
+            "format": "uuid",
+            "type": "string"
+          },
           "id": {
             "format": "uuid",
             "type": "string"
@@ -5059,6 +5176,10 @@
           },
           "settings": {
             "$ref": "#/components/schemas/InsightsFieldTypeSettings"
+          },
+          "teamFieldOrder": {
+            "format": "int32",
+            "type": "integer"
           },
           "teamId": {
             "format": "uuid",
@@ -10505,6 +10626,10 @@
           "description": {
             "type": "string"
           },
+          "groupId": {
+            "format": "uuid",
+            "type": "string"
+          },
           "id": {
             "format": "uuid",
             "type": "string"
@@ -10520,6 +10645,10 @@
           },
           "settings": {
             "$ref": "#/components/schemas/MilestoneFieldTypeSettings"
+          },
+          "teamFieldOrder": {
+            "format": "int32",
+            "type": "integer"
           },
           "teamId": {
             "format": "uuid",
@@ -10808,6 +10937,10 @@
           "description": {
             "type": "string"
           },
+          "groupId": {
+            "format": "uuid",
+            "type": "string"
+          },
           "id": {
             "format": "uuid",
             "type": "string"
@@ -10823,6 +10956,10 @@
           },
           "settings": {
             "$ref": "#/components/schemas/MilestoneFieldTypeSettings"
+          },
+          "teamFieldOrder": {
+            "format": "int32",
+            "type": "integer"
           },
           "teamId": {
             "format": "uuid",
@@ -11050,6 +11187,10 @@
           "description": {
             "type": "string"
           },
+          "groupId": {
+            "format": "uuid",
+            "type": "string"
+          },
           "id": {
             "format": "uuid",
             "type": "string"
@@ -11062,6 +11203,10 @@
           },
           "required": {
             "type": "boolean"
+          },
+          "teamFieldOrder": {
+            "format": "int32",
+            "type": "integer"
           },
           "teamId": {
             "format": "uuid",
@@ -11124,6 +11269,10 @@
           "description": {
             "type": "string"
           },
+          "groupId": {
+            "format": "uuid",
+            "type": "string"
+          },
           "id": {
             "format": "uuid",
             "type": "string"
@@ -11136,6 +11285,10 @@
           },
           "required": {
             "type": "boolean"
+          },
+          "teamFieldOrder": {
+            "format": "int32",
+            "type": "integer"
           },
           "teamId": {
             "format": "uuid",
@@ -11169,6 +11322,10 @@
           "description": {
             "type": "string"
           },
+          "groupId": {
+            "format": "uuid",
+            "type": "string"
+          },
           "id": {
             "format": "uuid",
             "type": "string"
@@ -11181,6 +11338,10 @@
           },
           "required": {
             "type": "boolean"
+          },
+          "teamFieldOrder": {
+            "format": "int32",
+            "type": "integer"
           },
           "teamId": {
             "format": "uuid",
@@ -11243,6 +11404,10 @@
           "description": {
             "type": "string"
           },
+          "groupId": {
+            "format": "uuid",
+            "type": "string"
+          },
           "id": {
             "format": "uuid",
             "type": "string"
@@ -11255,6 +11420,10 @@
           },
           "required": {
             "type": "boolean"
+          },
+          "teamFieldOrder": {
+            "format": "int32",
+            "type": "integer"
           },
           "teamId": {
             "format": "uuid",
@@ -11337,6 +11506,10 @@
           "description": {
             "type": "string"
           },
+          "groupId": {
+            "format": "uuid",
+            "type": "string"
+          },
           "id": {
             "format": "uuid",
             "type": "string"
@@ -11352,6 +11525,10 @@
           },
           "settings": {
             "$ref": "#/components/schemas/NumberFieldTypeSettings"
+          },
+          "teamFieldOrder": {
+            "format": "int32",
+            "type": "integer"
           },
           "teamId": {
             "format": "uuid",
@@ -11703,6 +11880,10 @@
           "description": {
             "type": "string"
           },
+          "groupId": {
+            "format": "uuid",
+            "type": "string"
+          },
           "id": {
             "format": "uuid",
             "type": "string"
@@ -11718,6 +11899,10 @@
           },
           "settings": {
             "$ref": "#/components/schemas/NumberFieldTypeSettings"
+          },
+          "teamFieldOrder": {
+            "format": "int32",
+            "type": "integer"
           },
           "teamId": {
             "format": "uuid",
@@ -11900,6 +12085,10 @@
           "description": {
             "type": "string"
           },
+          "groupId": {
+            "format": "uuid",
+            "type": "string"
+          },
           "id": {
             "format": "uuid",
             "type": "string"
@@ -11912,6 +12101,10 @@
           },
           "required": {
             "type": "boolean"
+          },
+          "teamFieldOrder": {
+            "format": "int32",
+            "type": "integer"
           },
           "teamId": {
             "format": "uuid",
@@ -11947,6 +12140,10 @@
           "description": {
             "type": "string"
           },
+          "groupId": {
+            "format": "uuid",
+            "type": "string"
+          },
           "id": {
             "format": "uuid",
             "type": "string"
@@ -11959,6 +12156,10 @@
           },
           "required": {
             "type": "boolean"
+          },
+          "teamFieldOrder": {
+            "format": "int32",
+            "type": "integer"
           },
           "teamId": {
             "format": "uuid",
@@ -11992,6 +12193,10 @@
           "description": {
             "type": "string"
           },
+          "groupId": {
+            "format": "uuid",
+            "type": "string"
+          },
           "id": {
             "format": "uuid",
             "type": "string"
@@ -12007,6 +12212,10 @@
           },
           "settings": {
             "$ref": "#/components/schemas/OkrConfidenceFieldSettings"
+          },
+          "teamFieldOrder": {
+            "format": "int32",
+            "type": "integer"
           },
           "teamId": {
             "format": "uuid",
@@ -12113,6 +12322,10 @@
           "description": {
             "type": "string"
           },
+          "groupId": {
+            "format": "uuid",
+            "type": "string"
+          },
           "id": {
             "format": "uuid",
             "type": "string"
@@ -12128,6 +12341,10 @@
           },
           "settings": {
             "$ref": "#/components/schemas/OkrConfidenceFieldSettings"
+          },
+          "teamFieldOrder": {
+            "format": "int32",
+            "type": "integer"
           },
           "teamId": {
             "format": "uuid",
@@ -12162,6 +12379,10 @@
           "description": {
             "type": "string"
           },
+          "groupId": {
+            "format": "uuid",
+            "type": "string"
+          },
           "id": {
             "format": "uuid",
             "type": "string"
@@ -12174,6 +12395,10 @@
           },
           "required": {
             "type": "boolean"
+          },
+          "teamFieldOrder": {
+            "format": "int32",
+            "type": "integer"
           },
           "teamId": {
             "format": "uuid",
@@ -12288,6 +12513,10 @@
           "description": {
             "type": "string"
           },
+          "groupId": {
+            "format": "uuid",
+            "type": "string"
+          },
           "id": {
             "format": "uuid",
             "type": "string"
@@ -12300,6 +12529,10 @@
           },
           "required": {
             "type": "boolean"
+          },
+          "teamFieldOrder": {
+            "format": "int32",
+            "type": "integer"
           },
           "teamId": {
             "format": "uuid",
@@ -12333,6 +12566,10 @@
           "description": {
             "type": "string"
           },
+          "groupId": {
+            "format": "uuid",
+            "type": "string"
+          },
           "id": {
             "format": "uuid",
             "type": "string"
@@ -12345,6 +12582,10 @@
           },
           "required": {
             "type": "boolean"
+          },
+          "teamFieldOrder": {
+            "format": "int32",
+            "type": "integer"
           },
           "teamId": {
             "format": "uuid",
@@ -12407,6 +12648,10 @@
           "description": {
             "type": "string"
           },
+          "groupId": {
+            "format": "uuid",
+            "type": "string"
+          },
           "id": {
             "format": "uuid",
             "type": "string"
@@ -12419,6 +12664,10 @@
           },
           "required": {
             "type": "boolean"
+          },
+          "teamFieldOrder": {
+            "format": "int32",
+            "type": "integer"
           },
           "teamId": {
             "format": "uuid",
@@ -12452,6 +12701,10 @@
           "description": {
             "type": "string"
           },
+          "groupId": {
+            "format": "uuid",
+            "type": "string"
+          },
           "id": {
             "format": "uuid",
             "type": "string"
@@ -12464,6 +12717,10 @@
           },
           "required": {
             "type": "boolean"
+          },
+          "teamFieldOrder": {
+            "format": "int32",
+            "type": "integer"
           },
           "teamId": {
             "format": "uuid",
@@ -12499,6 +12756,10 @@
           "description": {
             "type": "string"
           },
+          "groupId": {
+            "format": "uuid",
+            "type": "string"
+          },
           "id": {
             "format": "uuid",
             "type": "string"
@@ -12511,6 +12772,10 @@
           },
           "required": {
             "type": "boolean"
+          },
+          "teamFieldOrder": {
+            "format": "int32",
+            "type": "integer"
           },
           "teamId": {
             "format": "uuid",
@@ -12544,6 +12809,10 @@
           "description": {
             "type": "string"
           },
+          "groupId": {
+            "format": "uuid",
+            "type": "string"
+          },
           "id": {
             "format": "uuid",
             "type": "string"
@@ -12559,6 +12828,10 @@
           },
           "settings": {
             "$ref": "#/components/schemas/OkrTimePeriodFieldSettings"
+          },
+          "teamFieldOrder": {
+            "format": "int32",
+            "type": "integer"
           },
           "teamId": {
             "format": "uuid",
@@ -12610,6 +12883,10 @@
           "description": {
             "type": "string"
           },
+          "groupId": {
+            "format": "uuid",
+            "type": "string"
+          },
           "id": {
             "format": "uuid",
             "type": "string"
@@ -12625,6 +12902,10 @@
           },
           "settings": {
             "$ref": "#/components/schemas/OkrTimePeriodFieldSettings"
+          },
+          "teamFieldOrder": {
+            "format": "int32",
+            "type": "integer"
           },
           "teamId": {
             "format": "uuid",
@@ -12659,6 +12940,10 @@
           "description": {
             "type": "string"
           },
+          "groupId": {
+            "format": "uuid",
+            "type": "string"
+          },
           "id": {
             "format": "uuid",
             "type": "string"
@@ -12674,6 +12959,10 @@
           },
           "settings": {
             "$ref": "#/components/schemas/PeopleFieldTypeSettings"
+          },
+          "teamFieldOrder": {
+            "format": "int32",
+            "type": "integer"
           },
           "teamId": {
             "format": "uuid",
@@ -12820,6 +13109,10 @@
           "description": {
             "type": "string"
           },
+          "groupId": {
+            "format": "uuid",
+            "type": "string"
+          },
           "id": {
             "format": "uuid",
             "type": "string"
@@ -12835,6 +13128,10 @@
           },
           "settings": {
             "$ref": "#/components/schemas/PeopleFieldTypeSettings"
+          },
+          "teamFieldOrder": {
+            "format": "int32",
+            "type": "integer"
           },
           "teamId": {
             "format": "uuid",
@@ -13356,6 +13653,10 @@
           "description": {
             "type": "string"
           },
+          "groupId": {
+            "format": "uuid",
+            "type": "string"
+          },
           "id": {
             "format": "uuid",
             "type": "string"
@@ -13368,6 +13669,10 @@
           },
           "required": {
             "type": "boolean"
+          },
+          "teamFieldOrder": {
+            "format": "int32",
+            "type": "integer"
           },
           "teamId": {
             "format": "uuid",
@@ -13430,6 +13735,10 @@
           "description": {
             "type": "string"
           },
+          "groupId": {
+            "format": "uuid",
+            "type": "string"
+          },
           "id": {
             "format": "uuid",
             "type": "string"
@@ -13442,6 +13751,10 @@
           },
           "required": {
             "type": "boolean"
+          },
+          "teamFieldOrder": {
+            "format": "int32",
+            "type": "integer"
           },
           "teamId": {
             "format": "uuid",
@@ -13586,6 +13899,10 @@
           "description": {
             "type": "string"
           },
+          "groupId": {
+            "format": "uuid",
+            "type": "string"
+          },
           "id": {
             "format": "uuid",
             "type": "string"
@@ -13598,6 +13915,10 @@
           },
           "required": {
             "type": "boolean"
+          },
+          "teamFieldOrder": {
+            "format": "int32",
+            "type": "integer"
           },
           "teamId": {
             "format": "uuid",
@@ -13660,6 +13981,10 @@
           "description": {
             "type": "string"
           },
+          "groupId": {
+            "format": "uuid",
+            "type": "string"
+          },
           "id": {
             "format": "uuid",
             "type": "string"
@@ -13672,6 +13997,10 @@
           },
           "required": {
             "type": "boolean"
+          },
+          "teamFieldOrder": {
+            "format": "int32",
+            "type": "integer"
           },
           "teamId": {
             "format": "uuid",
@@ -13753,6 +14082,10 @@
           "description": {
             "type": "string"
           },
+          "groupId": {
+            "format": "uuid",
+            "type": "string"
+          },
           "id": {
             "format": "uuid",
             "type": "string"
@@ -13765,6 +14098,10 @@
           },
           "required": {
             "type": "boolean"
+          },
+          "teamFieldOrder": {
+            "format": "int32",
+            "type": "integer"
           },
           "teamId": {
             "format": "uuid",
@@ -13800,6 +14137,10 @@
           "description": {
             "type": "string"
           },
+          "groupId": {
+            "format": "uuid",
+            "type": "string"
+          },
           "id": {
             "format": "uuid",
             "type": "string"
@@ -13812,6 +14153,10 @@
           },
           "required": {
             "type": "boolean"
+          },
+          "teamFieldOrder": {
+            "format": "int32",
+            "type": "integer"
           },
           "teamId": {
             "format": "uuid",
@@ -15252,6 +15597,10 @@
           "description": {
             "type": "string"
           },
+          "groupId": {
+            "format": "uuid",
+            "type": "string"
+          },
           "id": {
             "format": "uuid",
             "type": "string"
@@ -15267,6 +15616,10 @@
           },
           "settings": {
             "$ref": "#/components/schemas/SelectFieldTypeSettings"
+          },
+          "teamFieldOrder": {
+            "format": "int32",
+            "type": "integer"
           },
           "teamId": {
             "format": "uuid",
@@ -15471,6 +15824,10 @@
           "description": {
             "type": "string"
           },
+          "groupId": {
+            "format": "uuid",
+            "type": "string"
+          },
           "id": {
             "format": "uuid",
             "type": "string"
@@ -15486,6 +15843,10 @@
           },
           "settings": {
             "$ref": "#/components/schemas/SelectFieldTypeSettings"
+          },
+          "teamFieldOrder": {
+            "format": "int32",
+            "type": "integer"
           },
           "teamId": {
             "format": "uuid",
@@ -16586,6 +16947,10 @@
           "description": {
             "type": "string"
           },
+          "groupId": {
+            "format": "uuid",
+            "type": "string"
+          },
           "id": {
             "format": "uuid",
             "type": "string"
@@ -16598,6 +16963,10 @@
           },
           "required": {
             "type": "boolean"
+          },
+          "teamFieldOrder": {
+            "format": "int32",
+            "type": "integer"
           },
           "teamId": {
             "format": "uuid",
@@ -16710,6 +17079,10 @@
           "description": {
             "type": "string"
           },
+          "groupId": {
+            "format": "uuid",
+            "type": "string"
+          },
           "id": {
             "format": "uuid",
             "type": "string"
@@ -16722,6 +17095,10 @@
           },
           "required": {
             "type": "boolean"
+          },
+          "teamFieldOrder": {
+            "format": "int32",
+            "type": "integer"
           },
           "teamId": {
             "format": "uuid",
@@ -16782,6 +17159,10 @@
           "description": {
             "type": "string"
           },
+          "groupId": {
+            "format": "uuid",
+            "type": "string"
+          },
           "id": {
             "format": "uuid",
             "type": "string"
@@ -16797,6 +17178,10 @@
           },
           "settings": {
             "$ref": "#/components/schemas/TimePeriodFieldSettings"
+          },
+          "teamFieldOrder": {
+            "format": "int32",
+            "type": "integer"
           },
           "teamId": {
             "format": "uuid",
@@ -17153,6 +17538,10 @@
           "description": {
             "type": "string"
           },
+          "groupId": {
+            "format": "uuid",
+            "type": "string"
+          },
           "id": {
             "format": "uuid",
             "type": "string"
@@ -17168,6 +17557,10 @@
           },
           "settings": {
             "$ref": "#/components/schemas/TimePeriodFieldSettings"
+          },
+          "teamFieldOrder": {
+            "format": "int32",
+            "type": "integer"
           },
           "teamId": {
             "format": "uuid",
@@ -18203,6 +18596,10 @@
           "description": {
             "type": "string"
           },
+          "groupId": {
+            "format": "uuid",
+            "type": "string"
+          },
           "id": {
             "format": "uuid",
             "type": "string"
@@ -18215,6 +18612,10 @@
           },
           "required": {
             "type": "boolean"
+          },
+          "teamFieldOrder": {
+            "format": "int32",
+            "type": "integer"
           },
           "teamId": {
             "format": "uuid",
@@ -18250,6 +18651,10 @@
           "description": {
             "type": "string"
           },
+          "groupId": {
+            "format": "uuid",
+            "type": "string"
+          },
           "id": {
             "format": "uuid",
             "type": "string"
@@ -18262,6 +18667,10 @@
           },
           "required": {
             "type": "boolean"
+          },
+          "teamFieldOrder": {
+            "format": "int32",
+            "type": "integer"
           },
           "teamId": {
             "format": "uuid",
@@ -18517,6 +18926,10 @@
           "description": {
             "type": "string"
           },
+          "groupId": {
+            "format": "uuid",
+            "type": "string"
+          },
           "id": {
             "format": "uuid",
             "type": "string"
@@ -18532,6 +18945,10 @@
           },
           "settings": {
             "$ref": "#/components/schemas/VotingAppScoreFieldTypeSettings"
+          },
+          "teamFieldOrder": {
+            "format": "int32",
+            "type": "integer"
           },
           "teamId": {
             "format": "uuid",
@@ -18568,6 +18985,10 @@
           "description": {
             "type": "string"
           },
+          "groupId": {
+            "format": "uuid",
+            "type": "string"
+          },
           "id": {
             "format": "uuid",
             "type": "string"
@@ -18583,6 +19004,10 @@
           },
           "settings": {
             "$ref": "#/components/schemas/VotingAppScoreFieldTypeSettings"
+          },
+          "teamFieldOrder": {
+            "format": "int32",
+            "type": "integer"
           },
           "teamId": {
             "format": "uuid",
@@ -20692,7 +21117,7 @@
   },
   "info": {
     "title": "airfocus API",
-    "version": "1.0.0-beta.46.153.0"
+    "version": "1.0.0-beta.46.158.1"
   },
   "openapi": "3.1.0",
   "paths": {
