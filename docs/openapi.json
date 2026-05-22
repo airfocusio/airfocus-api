@@ -1039,48 +1039,6 @@
                 "c7824f3d-4d5f-3b2f-a2d0-34758c1e9454": {
                   "text": "A platform built for the new way of doing product management"
                 },
-                "c9c0d13b-a4e5-363b-a475-736cd0366142": {
-                  "richText": {
-                    "blocks": [
-                      {
-                        "content": [
-                          {
-                            "content": "This is a rich text field with ",
-                            "type": "text"
-                          },
-                          {
-                            "content": [
-                              {
-                                "content": "bold text",
-                                "type": "text"
-                              }
-                            ],
-                            "type": "bold"
-                          },
-                          {
-                            "content": " and ",
-                            "type": "text"
-                          },
-                          {
-                            "content": [
-                              {
-                                "content": "italic text",
-                                "type": "text"
-                              }
-                            ],
-                            "type": "italic"
-                          },
-                          {
-                            "content": ".",
-                            "type": "text"
-                          }
-                        ],
-                        "type": "paragraph"
-                      }
-                    ],
-                    "richText": true
-                  }
-                },
                 "e34d514f-7db5-38aa-872a-7c8191a09617": {
                   "date": {
                     "date": "2024-01-01",
@@ -1187,48 +1145,6 @@
                 },
                 "c7824f3d-4d5f-3b2f-a2d0-34758c1e9454": {
                   "text": "A platform built for the new way of doing product management"
-                },
-                "c9c0d13b-a4e5-363b-a475-736cd0366142": {
-                  "richText": {
-                    "blocks": [
-                      {
-                        "content": [
-                          {
-                            "content": "This is a rich text field with ",
-                            "type": "text"
-                          },
-                          {
-                            "content": [
-                              {
-                                "content": "bold text",
-                                "type": "text"
-                              }
-                            ],
-                            "type": "bold"
-                          },
-                          {
-                            "content": " and ",
-                            "type": "text"
-                          },
-                          {
-                            "content": [
-                              {
-                                "content": "italic text",
-                                "type": "text"
-                              }
-                            ],
-                            "type": "italic"
-                          },
-                          {
-                            "content": ".",
-                            "type": "text"
-                          }
-                        ],
-                        "type": "paragraph"
-                      }
-                    ],
-                    "richText": true
-                  }
                 },
                 "e34d514f-7db5-38aa-872a-7c8191a09617": {
                   "date": {
@@ -6098,48 +6014,6 @@
                 "c7824f3d-4d5f-3b2f-a2d0-34758c1e9454": {
                   "text": "A platform built for the new way of doing product management"
                 },
-                "c9c0d13b-a4e5-363b-a475-736cd0366142": {
-                  "richText": {
-                    "blocks": [
-                      {
-                        "content": [
-                          {
-                            "content": "This is a rich text field with ",
-                            "type": "text"
-                          },
-                          {
-                            "content": [
-                              {
-                                "content": "bold text",
-                                "type": "text"
-                              }
-                            ],
-                            "type": "bold"
-                          },
-                          {
-                            "content": " and ",
-                            "type": "text"
-                          },
-                          {
-                            "content": [
-                              {
-                                "content": "italic text",
-                                "type": "text"
-                              }
-                            ],
-                            "type": "italic"
-                          },
-                          {
-                            "content": ".",
-                            "type": "text"
-                          }
-                        ],
-                        "type": "paragraph"
-                      }
-                    ],
-                    "richText": true
-                  }
-                },
                 "e34d514f-7db5-38aa-872a-7c8191a09617": {
                   "date": {
                     "date": "2024-01-01",
@@ -9333,48 +9207,6 @@
                 "c7824f3d-4d5f-3b2f-a2d0-34758c1e9454": {
                   "text": "A platform built for the new way of doing product management"
                 },
-                "c9c0d13b-a4e5-363b-a475-736cd0366142": {
-                  "richText": {
-                    "blocks": [
-                      {
-                        "content": [
-                          {
-                            "content": "This is a rich text field with ",
-                            "type": "text"
-                          },
-                          {
-                            "content": [
-                              {
-                                "content": "bold text",
-                                "type": "text"
-                              }
-                            ],
-                            "type": "bold"
-                          },
-                          {
-                            "content": " and ",
-                            "type": "text"
-                          },
-                          {
-                            "content": [
-                              {
-                                "content": "italic text",
-                                "type": "text"
-                              }
-                            ],
-                            "type": "italic"
-                          },
-                          {
-                            "content": ".",
-                            "type": "text"
-                          }
-                        ],
-                        "type": "paragraph"
-                      }
-                    ],
-                    "richText": true
-                  }
-                },
                 "e34d514f-7db5-38aa-872a-7c8191a09617": {
                   "date": {
                     "date": "2024-01-01",
@@ -9551,48 +9383,6 @@
                 },
                 "c7824f3d-4d5f-3b2f-a2d0-34758c1e9454": {
                   "text": "A platform built for the new way of doing product management"
-                },
-                "c9c0d13b-a4e5-363b-a475-736cd0366142": {
-                  "richText": {
-                    "blocks": [
-                      {
-                        "content": [
-                          {
-                            "content": "This is a rich text field with ",
-                            "type": "text"
-                          },
-                          {
-                            "content": [
-                              {
-                                "content": "bold text",
-                                "type": "text"
-                              }
-                            ],
-                            "type": "bold"
-                          },
-                          {
-                            "content": " and ",
-                            "type": "text"
-                          },
-                          {
-                            "content": [
-                              {
-                                "content": "italic text",
-                                "type": "text"
-                              }
-                            ],
-                            "type": "italic"
-                          },
-                          {
-                            "content": ".",
-                            "type": "text"
-                          }
-                        ],
-                        "type": "paragraph"
-                      }
-                    ],
-                    "richText": true
-                  }
                 },
                 "e34d514f-7db5-38aa-872a-7c8191a09617": {
                   "date": {
@@ -17854,48 +17644,6 @@
                 "c7824f3d-4d5f-3b2f-a2d0-34758c1e9454": {
                   "text": "A platform built for the new way of doing product management"
                 },
-                "c9c0d13b-a4e5-363b-a475-736cd0366142": {
-                  "richText": {
-                    "blocks": [
-                      {
-                        "content": [
-                          {
-                            "content": "This is a rich text field with ",
-                            "type": "text"
-                          },
-                          {
-                            "content": [
-                              {
-                                "content": "bold text",
-                                "type": "text"
-                              }
-                            ],
-                            "type": "bold"
-                          },
-                          {
-                            "content": " and ",
-                            "type": "text"
-                          },
-                          {
-                            "content": [
-                              {
-                                "content": "italic text",
-                                "type": "text"
-                              }
-                            ],
-                            "type": "italic"
-                          },
-                          {
-                            "content": ".",
-                            "type": "text"
-                          }
-                        ],
-                        "type": "paragraph"
-                      }
-                    ],
-                    "richText": true
-                  }
-                },
                 "e34d514f-7db5-38aa-872a-7c8191a09617": {
                   "date": {
                     "date": "2024-01-01",
@@ -18002,48 +17750,6 @@
                 },
                 "c7824f3d-4d5f-3b2f-a2d0-34758c1e9454": {
                   "text": "A platform built for the new way of doing product management"
-                },
-                "c9c0d13b-a4e5-363b-a475-736cd0366142": {
-                  "richText": {
-                    "blocks": [
-                      {
-                        "content": [
-                          {
-                            "content": "This is a rich text field with ",
-                            "type": "text"
-                          },
-                          {
-                            "content": [
-                              {
-                                "content": "bold text",
-                                "type": "text"
-                              }
-                            ],
-                            "type": "bold"
-                          },
-                          {
-                            "content": " and ",
-                            "type": "text"
-                          },
-                          {
-                            "content": [
-                              {
-                                "content": "italic text",
-                                "type": "text"
-                              }
-                            ],
-                            "type": "italic"
-                          },
-                          {
-                            "content": ".",
-                            "type": "text"
-                          }
-                        ],
-                        "type": "paragraph"
-                      }
-                    ],
-                    "richText": true
-                  }
                 },
                 "e34d514f-7db5-38aa-872a-7c8191a09617": {
                   "date": {
@@ -19578,66 +19284,16 @@
         "title": "WorkspaceEmbedWorkspaceGroup",
         "type": "object"
       },
-      "WorkspaceGroup": {
-        "description": "An entity for grouping workspaces (like folders).",
-        "properties": {
-          "createdAt": {
-            "description": "Date-time when this group was created.",
-            "format": "date-time",
-            "type": "string"
-          },
-          "defaultPermission": {
-            "$ref": "#/components/schemas/Permission",
-            "description": "Default permission for all team-members to all the inner contents of this group."
-          },
-          "id": {
-            "description": "UUID of this group.",
-            "format": "uuid",
-            "type": "string"
-          },
-          "lastUpdatedAt": {
-            "description": "Date-time when this group was last updated.",
-            "format": "date-time",
-            "type": "string"
-          },
-          "name": {
-            "description": "Name of this group.",
-            "type": "string"
-          },
-          "order": {
-            "description": "Order number of this group for sorting.",
-            "format": "int32",
-            "type": "integer"
-          },
-          "parentId": {
-            "description": "UUID of the parent group (if applicable).",
-            "format": "uuid",
-            "type": "string"
-          },
-          "teamId": {
-            "description": "UUID of the team which owns this group.",
-            "format": "uuid",
-            "type": "string"
-          }
-        },
-        "required": [
-          "id",
-          "teamId",
-          "name",
-          "order",
-          "createdAt",
-          "lastUpdatedAt"
-        ],
-        "title": "WorkspaceGroup",
-        "type": "object"
-      },
       "WorkspaceGroupAssignWorkspaceRequest": {
+        "description": "Payload to assign a workspace to a workspace-group (or move it to the root when no group is provided).",
         "properties": {
           "workspaceGroupId": {
+            "description": "UUID of the target workspace-group. If omitted, the workspace is moved out of any group to the root.",
             "format": "uuid",
             "type": "string"
           },
           "workspaceId": {
+            "description": "UUID of the workspace to assign.",
             "format": "uuid",
             "type": "string"
           }
@@ -19677,7 +19333,7 @@
       "WorkspaceGroupBulkCreate": {
         "properties": {
           "resource": {
-            "$ref": "#/components/schemas/WorkspaceGroup"
+            "$ref": "#/components/schemas/WorkspaceGroupParams"
           },
           "type": {
             "enum": [
@@ -19744,7 +19400,7 @@
             "type": "string"
           },
           "resource": {
-            "$ref": "#/components/schemas/WorkspaceGroup"
+            "$ref": "#/components/schemas/WorkspaceGroupParams"
           },
           "type": {
             "enum": [
@@ -19798,18 +19454,49 @@
         "title": "WorkspaceGroupEmbed",
         "type": "object"
       },
+      "WorkspaceGroupParams": {
+        "description": "Payload to create or update a workspace-group.",
+        "properties": {
+          "defaultPermission": {
+            "$ref": "#/components/schemas/Permission",
+            "description": "Default permission for all team-members to all the inner contents of this group."
+          },
+          "name": {
+            "description": "Name of this group.",
+            "type": "string"
+          },
+          "order": {
+            "description": "Order number of this group for sorting. If omitted, the group is appended at the end on create and kept as-is on update.",
+            "format": "int32",
+            "type": "integer"
+          },
+          "parentId": {
+            "description": "UUID of the parent group (if applicable).",
+            "format": "uuid",
+            "type": "string"
+          }
+        },
+        "required": [
+          "name"
+        ],
+        "title": "WorkspaceGroupParams",
+        "type": "object"
+      },
       "WorkspaceGroupPermissionsUpdateRequest": {
+        "description": "Payload to replace the permissions of a workspace-group for individual users and user-groups.",
         "properties": {
           "permissions": {
             "additionalProperties": {
               "$ref": "#/components/schemas/Permission"
             },
+            "description": "Per-user permissions for the workspace-group, keyed by user UUID.",
             "type": "object"
           },
           "userGroupPermissions": {
             "additionalProperties": {
               "$ref": "#/components/schemas/Permission"
             },
+            "description": "Per-user-group permissions for the workspace-group, keyed by user-group UUID.",
             "type": "object"
           }
         },
@@ -21117,7 +20804,7 @@
   },
   "info": {
     "title": "airfocus API",
-    "version": "1.0.0-beta.46.161.1"
+    "version": "1.0.0-beta.46.165.0"
   },
   "openapi": "3.1.0",
   "paths": {
@@ -26345,7 +26032,7 @@
     },
     "/api/workspaces/groups": {
       "post": {
-        "description": "Returns newly created workspace group with its sanitised data.<br/>Requirements:<br/>  - auth-client scopes: \"workspace\"<br/>  - user permission: \"write\" or higher<br/>Returns:<br/>403 if user does not have the required permission<br/>Requirements:<br/>- auth-client scopes: \"workspace\"",
+        "description": "Returns newly created workspace group with its sanitised data.<br/>Requirements:<br/>- auth-client scopes: \"workspace\"<br/>- user permission: \"write\" or higher",
         "operationId": "createWorkspaceGroup",
         "parameters": [
           {
@@ -26363,7 +26050,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/WorkspaceGroup"
+                "$ref": "#/components/schemas/WorkspaceGroupParams"
               }
             }
           },
@@ -26379,6 +26066,21 @@
               }
             },
             "description": ""
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "bad_request",
+                  "data": {},
+                  "message": "Request body is invalid"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If payload is invalid."
           },
           "401": {
             "content": {
@@ -26401,24 +26103,29 @@
                 "example": {
                   "code": "forbidden",
                   "data": {},
-                  "message": "Missing required access scope"
+                  "message": "Insufficient permission"
                 },
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             },
-            "description": "If authenticated client does not have the required access scopes."
+            "description": "If user does not have the required permission, or authenticated client does not have the required access scopes."
           },
           "default": {
             "content": {
               "application/json": {
+                "example": {
+                  "code": "unknown_error",
+                  "data": {},
+                  "message": "Server error"
+                },
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             },
-            "description": ""
+            "description": "If any other error happens."
           }
         },
         "security": [
@@ -26435,7 +26142,7 @@
     },
     "/api/workspaces/groups/assign": {
       "post": {
-        "description": "<br/>Requirements:<br/>  - auth-client scopes: \"workspace\"<br/>  - user permission: \"write\" or higher<br/>Returns:<br/>403 if user does not have the required permission<br/>Requirements:<br/>- auth-client scopes: \"workspace\"",
+        "description": "Requirements:<br/>- auth-client scopes: \"workspace\"<br/>- user permission: \"write\" or higher",
         "operationId": "assignWorkspaceToGroup",
         "parameters": [
           {
@@ -26463,6 +26170,21 @@
           "204": {
             "description": ""
           },
+          "400": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "not_found",
+                  "data": {},
+                  "message": "Unknown entity 'fe4c0f30-aa35-3c41-99f9-a5f69c8c4192'"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If payload is invalid or resource does not exist."
+          },
           "401": {
             "content": {
               "application/json": {
@@ -26484,24 +26206,29 @@
                 "example": {
                   "code": "forbidden",
                   "data": {},
-                  "message": "Missing required access scope"
+                  "message": "Insufficient permission"
                 },
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             },
-            "description": "If authenticated client does not have the required access scopes."
+            "description": "If user does not have the required permission, or authenticated client does not have the required access scopes."
           },
           "default": {
             "content": {
               "application/json": {
+                "example": {
+                  "code": "unknown_error",
+                  "data": {},
+                  "message": "Server error"
+                },
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             },
-            "description": ""
+            "description": "If any other error happens."
           }
         },
         "security": [
@@ -26509,7 +26236,7 @@
             "httpAuth": []
           }
         ],
-        "summary": "Update workspace-group permissions.",
+        "summary": "Assign workspace to group.",
         "tags": [
           "WorkspaceGroups"
         ]
@@ -26517,7 +26244,7 @@
     },
     "/api/workspaces/groups/bulk": {
       "post": {
-        "description": "Accepts a list of create/update/patch/delete operations (see the request model for more details).<br/>\nEach operations can target a single or multiple workspace groups.<br/>\nReturns a list of results for each input operation including errors.<br/>\nGuarantees that the size and order of the returned results matches the input list of operations.<br/>Requirements:<br/>  - auth-client scopes: \"workspace\"<br/>  - user permission: \"write\" or higher<br/>Returns:<br/>403 if user does not have the required permission<br/>Requirements:<br/>- auth-client scopes: \"workspace\"",
+        "description": "Accepts a list of create/update/patch/delete operations (see the request model for more details).<br/>\nEach operation can target a single or multiple workspace groups.<br/>\nReturns a list of results for each input operation including errors.<br/>\nGuarantees that the size and order of the returned results matches the order of input operations.<br/>Requirements:<br/>- auth-client scopes: \"workspace\"<br/>- user permission: \"write\" or higher",
         "operationId": "bulkWorkspaceGroups",
         "parameters": [
           {
@@ -26555,6 +26282,21 @@
             },
             "description": ""
           },
+          "400": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "bad_request",
+                  "data": {},
+                  "message": "Request body is invalid"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If payload is invalid."
+          },
           "401": {
             "content": {
               "application/json": {
@@ -26576,24 +26318,29 @@
                 "example": {
                   "code": "forbidden",
                   "data": {},
-                  "message": "Missing required access scope"
+                  "message": "Insufficient permission"
                 },
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             },
-            "description": "If authenticated client does not have the required access scopes."
+            "description": "If user does not have the required permission, or authenticated client does not have the required access scopes."
           },
           "default": {
             "content": {
               "application/json": {
+                "example": {
+                  "code": "unknown_error",
+                  "data": {},
+                  "message": "Server error"
+                },
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             },
-            "description": ""
+            "description": "If any other error happens."
           }
         },
         "security": [
@@ -26610,7 +26357,7 @@
     },
     "/api/workspaces/groups/list": {
       "post": {
-        "description": "Returns a list of workspace groups.<br/>\nReturns null for those workspace groups which are not found or not accessible.<br/>\nGuarantees that the size and order of the returned list matches the requested IDs.<br/>Requirements:<br/>  - auth-client scopes: \"workspace:read\"<br/>  - user permission: \"read\" or higher<br/>Returns:<br/>403 if user does not have the required permission<br/>Requirements:<br/>- auth-client scopes: \"workspace:read\"",
+        "description": "Returns a list of workspace groups resolved for the provided IDs.<br/>\nGuarantees that the array-size and order of the returned workspace groups matches the order of requested IDs.<br/>\nDoes not fail if any of the requested workspace groups is not found or not accessible - instead it returns null as an array-element of the corresponding workspace group which could not be accessed.<br/>Requirements:<br/>- auth-client scopes: \"workspace:read\"<br/>- user permission: \"read\" or higher",
         "operationId": "listWorkspaceGroups",
         "parameters": [
           {
@@ -26649,6 +26396,21 @@
             },
             "description": ""
           },
+          "400": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "bad_request",
+                  "data": {},
+                  "message": "Request body is invalid"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If payload is invalid."
+          },
           "401": {
             "content": {
               "application/json": {
@@ -26670,24 +26432,29 @@
                 "example": {
                   "code": "forbidden",
                   "data": {},
-                  "message": "Missing required access scope"
+                  "message": "Insufficient permission"
                 },
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             },
-            "description": "If authenticated client does not have the required access scopes."
+            "description": "If user does not have the required permission, or authenticated client does not have the required access scopes."
           },
           "default": {
             "content": {
               "application/json": {
+                "example": {
+                  "code": "unknown_error",
+                  "data": {},
+                  "message": "Server error"
+                },
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             },
-            "description": ""
+            "description": "If any other error happens."
           }
         },
         "security": [
@@ -26704,7 +26471,7 @@
     },
     "/api/workspaces/groups/search": {
       "post": {
-        "description": "Returns all workspace groups or searches workspace groups by query. Always returns only workspace groups which are accessible by the current user.<br/>Requirements:<br/>  - auth-client scopes: \"workspace:read\"<br/>  - user permission: \"read\" or higher<br/>Returns:<br/>403 if user does not have the required permission<br/>Requirements:<br/>- auth-client scopes: \"workspace:read\"",
+        "description": "Returns all workspace groups or searches workspace groups by query. Always returns only workspace groups which are accessible by the current user.<br/>Requirements:<br/>- auth-client scopes: \"workspace:read\"<br/>- user permission: \"read\" or higher",
         "operationId": "searchWorkspaceGroups",
         "parameters": [
           {
@@ -26790,6 +26557,21 @@
             },
             "description": ""
           },
+          "400": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "bad_request",
+                  "data": {},
+                  "message": "Request body is invalid"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If payload is invalid."
+          },
           "401": {
             "content": {
               "application/json": {
@@ -26811,24 +26593,29 @@
                 "example": {
                   "code": "forbidden",
                   "data": {},
-                  "message": "Missing required access scope"
+                  "message": "Insufficient permission"
                 },
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             },
-            "description": "If authenticated client does not have the required access scopes."
+            "description": "If user does not have the required permission, or authenticated client does not have the required access scopes."
           },
           "default": {
             "content": {
               "application/json": {
+                "example": {
+                  "code": "unknown_error",
+                  "data": {},
+                  "message": "Server error"
+                },
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             },
-            "description": ""
+            "description": "If any other error happens."
           }
         },
         "security": [
@@ -26845,7 +26632,7 @@
     },
     "/api/workspaces/groups/{workspaceGroupId}": {
       "delete": {
-        "description": "Returns empty result if the workspace group was successfully deleted.<br/>Requirements:<br/>  - auth-client scopes: \"workspace\"<br/>  - user permission: \"write\" or higher<br/>Returns:<br/>400 if the resource is not found<br/>403 if user does not have the required permission<br/>Requirements:<br/>- auth-client scopes: \"workspace\"",
+        "description": "Returns empty result if the workspace group was successfully deleted.<br/>Requirements:<br/>- auth-client scopes: \"workspace\"<br/>- user permission: \"write\" or higher",
         "operationId": "deleteWorkspaceGroup",
         "parameters": [
           {
@@ -26872,6 +26659,21 @@
           "204": {
             "description": ""
           },
+          "400": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "not_found",
+                  "data": {},
+                  "message": "Unknown entity 'fe4c0f30-aa35-3c41-99f9-a5f69c8c4192'"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If path parameters are invalid or resource does not exist."
+          },
           "401": {
             "content": {
               "application/json": {
@@ -26893,24 +26695,29 @@
                 "example": {
                   "code": "forbidden",
                   "data": {},
-                  "message": "Missing required access scope"
+                  "message": "Insufficient permission"
                 },
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             },
-            "description": "If authenticated client does not have the required access scopes."
+            "description": "If user does not have the required permission, or authenticated client does not have the required access scopes."
           },
           "default": {
             "content": {
               "application/json": {
+                "example": {
+                  "code": "unknown_error",
+                  "data": {},
+                  "message": "Server error"
+                },
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             },
-            "description": ""
+            "description": "If any other error happens."
           }
         },
         "security": [
@@ -26925,7 +26732,7 @@
         ]
       },
       "get": {
-        "description": "Returns found workspace group.<br/>Requirements:<br/>  - auth-client scopes: \"workspace:read\"<br/>  - user permission: \"read\" or higher<br/>Returns:<br/>400 if the resource is not found<br/>403 if user does not have the required permission<br/>Requirements:<br/>- auth-client scopes: \"workspace:read\"",
+        "description": "Returns found workspace group.<br/>Requirements:<br/>- auth-client scopes: \"workspace:read\"<br/>- user permission: \"read\" or higher",
         "operationId": "retrieveWorkspaceGroup",
         "parameters": [
           {
@@ -26959,6 +26766,21 @@
             },
             "description": ""
           },
+          "400": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "not_found",
+                  "data": {},
+                  "message": "Unknown entity 'fe4c0f30-aa35-3c41-99f9-a5f69c8c4192'"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If path parameters are invalid or payload is invalid or resource does not exist."
+          },
           "401": {
             "content": {
               "application/json": {
@@ -26980,24 +26802,29 @@
                 "example": {
                   "code": "forbidden",
                   "data": {},
-                  "message": "Missing required access scope"
+                  "message": "Insufficient permission"
                 },
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             },
-            "description": "If authenticated client does not have the required access scopes."
+            "description": "If user does not have the required permission, or authenticated client does not have the required access scopes."
           },
           "default": {
             "content": {
               "application/json": {
+                "example": {
+                  "code": "unknown_error",
+                  "data": {},
+                  "message": "Server error"
+                },
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             },
-            "description": ""
+            "description": "If any other error happens."
           }
         },
         "security": [
@@ -27012,7 +26839,7 @@
         ]
       },
       "patch": {
-        "description": "Returns the whole updated workspace group with its sanitised data.<br/>Requirements:<br/>  - auth-client scopes: \"workspace\"<br/>  - user permission: \"write\" or higher<br/>Returns:<br/>400 if the resource is not found<br/>403 if user does not have the required permission<br/>Requirements:<br/>- auth-client scopes: \"workspace\"",
+        "description": "Returns the whole updated workspace group with its sanitised data.<br/>Requirements:<br/>- auth-client scopes: \"workspace\"<br/>- user permission: \"write\" or higher",
         "operationId": "patchWorkspaceGroup",
         "parameters": [
           {
@@ -27056,6 +26883,21 @@
             },
             "description": ""
           },
+          "400": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "not_found",
+                  "data": {},
+                  "message": "Unknown entity 'fe4c0f30-aa35-3c41-99f9-a5f69c8c4192'"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If path parameters are invalid or payload is invalid or resource does not exist."
+          },
           "401": {
             "content": {
               "application/json": {
@@ -27077,24 +26919,29 @@
                 "example": {
                   "code": "forbidden",
                   "data": {},
-                  "message": "Missing required access scope"
+                  "message": "Insufficient permission"
                 },
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             },
-            "description": "If authenticated client does not have the required access scopes."
+            "description": "If user does not have the required permission, or authenticated client does not have the required access scopes."
           },
           "default": {
             "content": {
               "application/json": {
+                "example": {
+                  "code": "unknown_error",
+                  "data": {},
+                  "message": "Server error"
+                },
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             },
-            "description": ""
+            "description": "If any other error happens."
           }
         },
         "security": [
@@ -27109,7 +26956,7 @@
         ]
       },
       "put": {
-        "description": "Returns updated workspace group with its sanitised data.<br/>Requirements:<br/>  - auth-client scopes: \"workspace\"<br/>  - user permission: \"write\" or higher<br/>Returns:<br/>400 if the resource is not found<br/>403 if user does not have the required permission<br/>Requirements:<br/>- auth-client scopes: \"workspace\"",
+        "description": "Returns updated workspace group with its sanitised data.<br/>Requirements:<br/>- auth-client scopes: \"workspace\"<br/>- user permission: \"write\" or higher",
         "operationId": "updateWorkspaceGroup",
         "parameters": [
           {
@@ -27136,7 +26983,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/WorkspaceGroup"
+                "$ref": "#/components/schemas/WorkspaceGroupParams"
               }
             }
           },
@@ -27152,6 +26999,21 @@
               }
             },
             "description": ""
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "not_found",
+                  "data": {},
+                  "message": "Unknown entity 'fe4c0f30-aa35-3c41-99f9-a5f69c8c4192'"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If path parameters are invalid or payload is invalid or resource does not exist."
           },
           "401": {
             "content": {
@@ -27174,24 +27036,29 @@
                 "example": {
                   "code": "forbidden",
                   "data": {},
-                  "message": "Missing required access scope"
+                  "message": "Insufficient permission"
                 },
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             },
-            "description": "If authenticated client does not have the required access scopes."
+            "description": "If user does not have the required permission, or authenticated client does not have the required access scopes."
           },
           "default": {
             "content": {
               "application/json": {
+                "example": {
+                  "code": "unknown_error",
+                  "data": {},
+                  "message": "Server error"
+                },
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             },
-            "description": ""
+            "description": "If any other error happens."
           }
         },
         "security": [
@@ -27208,7 +27075,7 @@
     },
     "/api/workspaces/groups/{workspaceGroupId}/permissions": {
       "post": {
-        "description": "<br/>Requirements:<br/>  - auth-client scopes: \"workspace\"<br/>  - user permission: \"write\" or higher<br/>Returns:<br/>403 if user does not have the required permission<br/>Requirements:<br/>- auth-client scopes: \"workspace\"",
+        "description": "Requirements:<br/>- auth-client scopes: \"workspace\"<br/>- user permission: \"write\" or higher",
         "operationId": "updateWorkspaceGroupPermissions",
         "parameters": [
           {
@@ -27245,6 +27112,21 @@
           "204": {
             "description": ""
           },
+          "400": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "not_found",
+                  "data": {},
+                  "message": "Unknown entity 'fe4c0f30-aa35-3c41-99f9-a5f69c8c4192'"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If path parameters are invalid or payload is invalid or resource does not exist."
+          },
           "401": {
             "content": {
               "application/json": {
@@ -27266,24 +27148,29 @@
                 "example": {
                   "code": "forbidden",
                   "data": {},
-                  "message": "Missing required access scope"
+                  "message": "Insufficient permission"
                 },
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             },
-            "description": "If authenticated client does not have the required access scopes."
+            "description": "If user does not have the required permission, or authenticated client does not have the required access scopes."
           },
           "default": {
             "content": {
               "application/json": {
+                "example": {
+                  "code": "unknown_error",
+                  "data": {},
+                  "message": "Server error"
+                },
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             },
-            "description": ""
+            "description": "If any other error happens."
           }
         },
         "security": [
