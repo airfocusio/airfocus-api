@@ -17,6 +17,9 @@
           "name": {
             "type": "string"
           },
+          "singletonKey": {
+            "type": "string"
+          },
           "teamId": {
             "format": "uuid",
             "type": "string"
@@ -40,14 +43,11 @@
       "AiActorType": {
         "oneOf": [
           {
-            "enum": [
-              "agent:custom"
-            ],
             "type": "string"
           },
           {
-            "description": "An 'agent:default:' prefix followed by the specific agent type, e.g., 'agent:default:insight'",
-            "pattern": "^agent:default:[a-zA-Z0-9_-]+$",
+            "description": "An 'agent:' prefix followed by the specific agent type, e.g., 'agent:default:insights:create'",
+            "pattern": "^agent:[a-zA-Z0-9_:-]+$",
             "type": "string"
           }
         ],
@@ -20804,7 +20804,7 @@
   },
   "info": {
     "title": "airfocus API",
-    "version": "1.0.0-beta.46.173.0"
+    "version": "1.0.0-beta.46.187.0"
   },
   "openapi": "3.1.0",
   "paths": {
