@@ -8,53 +8,42 @@ nav_order: 0
 
 Welcome to the airfocus developer docs, where you'll find technical information about our API.<br>
 If you have any questions or feedback about the API, please hollow guides in the [Help](/help) section.<br>
-If you're looking for general information about airfocus and its features, please visit our [Help Center](https://help.airfocus.com) or [ask the community](https://community.lucid.co/peer-support-1?utm_source=developer-airfocus&utm_medium=lucid-community&utm_campaign=airfocus-dev-links&utm_content=home-ask-community).<br>
+If you're looking for general information about airfocus and its features, please visit our [Help Center](https://help.lucid.co/hc/en-us/categories/14652566349972) or [ask the community](https://community.lucid.co/peer-support-1?utm_source=developer-airfocus&utm_medium=lucid-community&utm_campaign=airfocus-dev-links&utm_content=home-ask-community).<br>
 
 ## API overview
 
-{: .important }
-> The current API in version v0.* is a subject to change until it reaches stable v1.0.<br>
-> We plan the next two major changes for 2024/2025:
-> - changed/simplified path names for the endpoints
-> - new format of the returned embedded data: better structure of the embedded data, and clients will be able to control which embedded data
->   should be returned
->
-> ### How breaking changes will be communicated
-> Before we introduce a breaking change, we will analyze the usage of the affected part of API for the last month:
-> - if there will be zero usages - then we can decide to deploy the breaking change without any notice
-> - if there will be small amount of usages - then we can consider contacting the affected clients and asking if they're willing to migrate to the new version
-> - otherwise we will introduce the breaking change in a new version of the API, and the old version will be still available for some time (marked as deprecated)
-
 ### General conventions
 
-1. all the endpoints always accept and return JSON (including error responses)
-2. most of the retrieve/search endpoints return resources with additional embedded data, injected into the resource as `_embedded` field, and that the moment
-  clients can not control which embedded data is returned. This will be changed/improved in the future (see the notes above).
-3. at the moment API shares the same schema-type for both read and write operations in most of the resources.
-  However, server reserves the right to ignore some read-only fields in the request (e.g. `id`, `createdAt`, `updatedAt`, etc.).
+1. All the endpoints always accept and return JSON (including error responses). The only exception is the attachment endpoints which work with binary files.
+2. Most of the retrieve/search endpoints return resources with additional embedded data, injected into the resource as `_embedded` field. There is no way to control what data is returned, i.e. they always return the full data. However, some endpoints (like item-search) have an alternative "partial" version, which allows requesting only specific fields. It's recommented to use the "partial" endpoints if possible, to reduce the amount of data transferred and improve performance.
+3. At the moment we have multiple API endpoints which share the same schema-type for both read and write operations in most of the resources.
+  However, server reserves the right to ignore some read-only fields during write-operations - e.g. fields `id`, `createdAt`, `updatedAt`, etc. are ignored when updating a resource.
   We will gradually improve it in the future by defining separated schemas for read and write operations.
-4. HTTP 404 is returned when client tries to access a non-existing endpoint (invalid path)
-5. HTTP 400 is returned when client tries to access a non-existing resource (valid path, but invalid ID)
-6. each response includes an `X-Request-Id` header, which can be included as an additional info when reporting bugs to airfocus team -
-   this will help us investigate the issue faster
+4. HTTP response code conventions:
+   - 404 is returned when trying to access a non-existing endpoint (invalid path)
+   - 400 is returned when trying to access a non-existing resource (valid path, but invalid resource ID)
+5. each response includes an `X-Request-Id` header, which can be included as an additional info when reporting bugs to airfocus team -
+   this will help us with issue investigation and debugging.
 
 ### API Schema
 
-Our API schema is defined using the OpenAPI 3.1 standard.<br>
+Our API schema is defined based on the OpenAPI 3.1 standard.<br>
 This website provides a Swagger UI interface (see [Endpoints](/endpoints)) where you can explore the API and try out the requests.
 Also, you can use another OpenAPI viewer (e.g. Postman or Intellij IDEA) to explore the API, by providing a URL to the JSON schema.
 
-There are 2 sources of the schema:
-1. our server provides an up-to-date schema which always matches its current API: [https://app.airfocus.com/api/docs/openapi.json](https://app.airfocus.com/api/docs/openapi.json)
-2. this website serves a static file, which is a snapshot of the schema at the time of the latest deployment: [https://developer.airfocus.com/openapi.json](https://developer.airfocus.com/openapi.json)
+The raw JSON schema can be found here: [https://developer.airfocus.com/openapi.json](https://developer.airfocus.com/openapi.json), and it always corresponds to the current server capabilities.
 
-Use the 1st source if you want to be sure that the schema matches the current server capabilities.<br>
-Use the 2nd source if you want to have more stable source of schema, for example for code generation.
+### API Versioning
 
-{: .note }
-> The 2nd source has additional benefits:
-> - you can use the [source code of the JSON schema](https://github.com/airfocusio/airfocus-api/blob/main/docs/openapi.json) when you need to reference to its specific parts (e.g. when reporting bugs)
-> - as this schema is under VCS, you can see the history of its changes and switch between different versions
+Each published version of OpenAPI schema corresponds to a specific version of the server.
+The server version can be found by requesting the `GET /api/version` endpoint.
+The schema version can be found:
+- in the `info.version` field of the openapi.json
+- in the top-left corner of the Swagger UI interface
+
+It's also possible to access schema in its older versions via https://raw.githubusercontent.com/airfocusio/airfocus-api/refs/tags/{version}/docs/openapi.json by replacing `{version}` with the desired version number.
+
+In the [Changelog](/changelog.html) section you can find the history of all schema versions with the list of changes and release dates.
 
 ### Rate limits
 
@@ -90,6 +79,25 @@ The Markdown response returned by using the `application/vnd.airfocus.markdown+j
   "richText": true
 }
 ```
+
+### Enums with discriminator field
+
+Swagger UI can be not very intuitive when it comes to displaying enums with discriminator fields.<br>
+When you explore the schema, you may see some data-types described as `One of` followed by a list of possible types, and an additional `Discriminator` field.<br>
+Here is how to understand it (see the example screenshot below):
+- all objects in the list share one common field, called the discriminator field
+- to know which of the fields is the discriminator field, look for the `Discriminator` section in the schema, which includes the name of this field in the first row (in this case it's `type`)
+- therefore, each object in the list must have this field defined with a unique fixed value, which corresponds to this object
+- then find the name of the specific object (for example `ItemConstraintIntegrationPushForbidden`), and then find it on the right side in the `Discriminator` section
+- then the value on the left side will be the fixed value for the discriminator field (in this case it's `integrationPushForbidden`)
+- therefore, the full JSON value would look like this:
+```json
+{
+  "extensionId": "...",
+  "type": "integrationPushForbidden"
+}
+```
+![enum-example.png](assets/enum-example.png)
 
 ---
 [Next: Authentication](/authentication){: .btn }

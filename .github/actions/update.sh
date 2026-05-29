@@ -13,6 +13,9 @@ git commit -m 'Update openapi.json' && GIT_COMMIT_EXIT_CODE=$? || GIT_COMMIT_EXI
 if [ $GIT_COMMIT_EXIT_CODE == "0" ]; then
     echo "OpenAPI changed (version is $OPENAPI_VERSION)"
     git tag -f "$OPENAPI_VERSION"
+    bash .github/actions/changelog.sh
+    git add docs/changelog/ docs/changelog.md
+    git diff --cached --quiet || git commit -m 'Update changelog'
     if [ "$1" == "--push" ]; then
         git push origin main "$OPENAPI_VERSION" -f
     fi

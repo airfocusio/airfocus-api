@@ -1,3 +1,7 @@
+[data-tag="hidden"] {
+    display: none !important;
+}
+
 /* the CRUD tag is just metadata, let's hide it */
 .opblock-tag-section:has(#operations-tag-CRUD) {
     display: none !important;
