@@ -24,15 +24,16 @@ Creating personal access tokens:
 - go to "Account settings" > "API keys"
 - click on "Add API key", give it a name and select the required scopes, then click "Create"
 
-## Impersonal access tokens
+[//]: # (## Impersonal access tokens)
 
-{: .important }
-> At the moment this feature is not supported, but we plan to add it in the nearest future.
-
-When implementing an integration with API, it's often useful to not authenticate as a specific user, but rather as some kind of application or bot,
-which allows to identify actions performed by the integration.
-Personal access tokens are not suitable for this, because they act on behalf of the user who has created them.
-And so we plan to add a feature which will allow to create impersonal access tokens which act on behalf of a bot-user.
+[//]: # ()
+[//]: # ({: .important })
+[//]: # (> At the moment this feature is not supported, but we plan to add it in the nearest future.)
+[//]: # ()
+[//]: # (When implementing an integration with API, it's often useful to not authenticate as a specific user, but rather as some kind of application or bot,)
+[//]: # (which allows to identify actions performed by the integration.)
+[//]: # (Personal access tokens are not suitable for this, because they act on behalf of the user who has created them.)
+[//]: # (And so we plan to add a feature which will allow to create impersonal access tokens which act on behalf of a bot-user.)
 
 ## Safety and data protection
 

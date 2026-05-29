@@ -12,3 +12,6 @@ logs:
 
 bash:
 	docker compose exec jekyll bash
+
+changelog:
+	@bash .github/actions/changelog.sh "$(from)" "$(to)"
