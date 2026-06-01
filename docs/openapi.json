@@ -1,6 +1,120 @@
 {
   "components": {
     "schemas": {
+      "Actor": {
+        "discriminator": {
+          "mapping": {
+            "aiActor": "#/components/schemas/ActorAiActor",
+            "app": "#/components/schemas/ActorApp",
+            "integration": "#/components/schemas/ActorIntegration",
+            "user": "#/components/schemas/ActorUser"
+          },
+          "propertyName": "type"
+        },
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/ActorAiActor"
+          },
+          {
+            "$ref": "#/components/schemas/ActorApp"
+          },
+          {
+            "$ref": "#/components/schemas/ActorIntegration"
+          },
+          {
+            "$ref": "#/components/schemas/ActorUser"
+          }
+        ],
+        "title": "Actor"
+      },
+      "ActorAiActor": {
+        "properties": {
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "onBehalfOf": {
+            "$ref": "#/components/schemas/Actor"
+          },
+          "type": {
+            "const": "aiActor",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "onBehalfOf",
+          "type"
+        ],
+        "title": "ActorAiActor",
+        "type": "object"
+      },
+      "ActorApp": {
+        "properties": {
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "onBehalfOf": {
+            "$ref": "#/components/schemas/Actor"
+          },
+          "type": {
+            "const": "app",
+            "type": "string"
+          },
+          "typeId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "type"
+        ],
+        "title": "ActorApp",
+        "type": "object"
+      },
+      "ActorIntegration": {
+        "properties": {
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "onBehalfOf": {
+            "$ref": "#/components/schemas/Actor"
+          },
+          "type": {
+            "const": "integration",
+            "type": "string"
+          },
+          "typeId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "type"
+        ],
+        "title": "ActorIntegration",
+        "type": "object"
+      },
+      "ActorUser": {
+        "properties": {
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "type": {
+            "const": "user",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "type"
+        ],
+        "title": "ActorUser",
+        "type": "object"
+      },
       "AiActor": {
         "properties": {
           "actorType": {
@@ -873,6 +987,119 @@
           "enabled"
         ],
         "title": "ClubhouseIntegrationSummary",
+        "type": "object"
+      },
+      "CommentBulkAction": {
+        "discriminator": {
+          "mapping": {
+            "create": "#/components/schemas/CommentBulkCreate",
+            "delete": "#/components/schemas/CommentBulkDelete",
+            "patch": "#/components/schemas/CommentBulkPatch",
+            "update": "#/components/schemas/CommentBulkUpdate"
+          },
+          "propertyName": "type"
+        },
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/CommentBulkCreate"
+          },
+          {
+            "$ref": "#/components/schemas/CommentBulkDelete"
+          },
+          {
+            "$ref": "#/components/schemas/CommentBulkPatch"
+          },
+          {
+            "$ref": "#/components/schemas/CommentBulkUpdate"
+          }
+        ],
+        "title": "CommentBulkAction"
+      },
+      "CommentBulkCreate": {
+        "properties": {
+          "resource": {
+            "$ref": "#/components/schemas/ItemCommentCreateRequest"
+          },
+          "type": {
+            "enum": [
+              "create"
+            ],
+            "type": "string"
+          }
+        },
+        "required": [
+          "resource",
+          "type"
+        ],
+        "title": "CommentBulkCreate",
+        "type": "object"
+      },
+      "CommentBulkDelete": {
+        "properties": {
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "type": {
+            "enum": [
+              "delete"
+            ],
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "type"
+        ],
+        "title": "CommentBulkDelete",
+        "type": "object"
+      },
+      "CommentBulkPatch": {
+        "properties": {
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "transform": {
+            "$ref": "#/components/schemas/JsonPatch"
+          },
+          "type": {
+            "enum": [
+              "patch"
+            ],
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "transform",
+          "type"
+        ],
+        "title": "CommentBulkPatch",
+        "type": "object"
+      },
+      "CommentBulkUpdate": {
+        "properties": {
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "resource": {
+            "$ref": "#/components/schemas/ItemCommentUpdateRequest"
+          },
+          "type": {
+            "enum": [
+              "update"
+            ],
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "resource",
+          "type"
+        ],
+        "title": "CommentBulkUpdate",
         "type": "object"
       },
       "Confidence": {
@@ -1869,6 +2096,20 @@
         "title": "DateRangeFieldWithFieldEmbed",
         "type": "object"
       },
+      "Emoji": {
+        "enum": [
+          "blue_heart",
+          "clap",
+          "confused",
+          "eyes",
+          "+1",
+          "rocket",
+          "thinking_face",
+          "white_check_mark"
+        ],
+        "title": "Emoji",
+        "type": "string"
+      },
       "ErrorResponse": {
         "description": "A general error response which is returned by the server for all handled errors.",
         "properties": {
@@ -1897,6 +2138,34 @@
           "data"
         ],
         "title": "ErrorResponse",
+        "type": "object"
+      },
+      "ExportTemplateRequest": {
+        "properties": {
+          "exportUsers": {
+            "default": false,
+            "description": "Whether to export user-related data (assignees, people-fields, etc).",
+            "type": "boolean"
+          },
+          "exportWorkspaceGroups": {
+            "default": false,
+            "description": "Whether to also export a parent group of the exported workspaces.",
+            "type": "boolean"
+          },
+          "workspaceIds": {
+            "description": "A set of workspaces which need to be exported into a template.",
+            "items": {
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": "array",
+            "uniqueItems": true
+          }
+        },
+        "required": [
+          "workspaceIds"
+        ],
+        "title": "ExportTemplateRequest",
         "type": "object"
       },
       "ExtensionShareLink": {
@@ -6485,6 +6754,146 @@
         ],
         "title": "ItemColor",
         "type": "string"
+      },
+      "ItemCommentCreateRequest": {
+        "properties": {
+          "content": {
+            "$ref": "#/components/schemas/RichText",
+            "description": "Rich text content as structured blocks. Different media types provide markdown support:\n• application/json - Default blocks format\n• application/vnd.airfocus.markdown+json - All RichText fields become markdown strings (recommended)\n• application/json+markdown - Legacy format, only top-level fields converted to markdown"
+          },
+          "itemId": {
+            "format": "uuid",
+            "type": "string"
+          }
+        },
+        "required": [
+          "itemId",
+          "content"
+        ],
+        "title": "ItemCommentCreateRequest",
+        "type": "object"
+      },
+      "ItemCommentEmbed": {
+        "title": "ItemCommentEmbed",
+        "type": "object"
+      },
+      "ItemCommentReaction": {
+        "properties": {
+          "emoji": {
+            "$ref": "#/components/schemas/Emoji"
+          },
+          "userIds": {
+            "items": {
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": "array"
+          }
+        },
+        "required": [
+          "emoji",
+          "userIds"
+        ],
+        "title": "ItemCommentReaction",
+        "type": "object"
+      },
+      "ItemCommentSearchQuery": {
+        "properties": {
+          "itemId": {
+            "format": "uuid",
+            "type": "string"
+          }
+        },
+        "title": "ItemCommentSearchQuery",
+        "type": "object"
+      },
+      "ItemCommentUpdateRequest": {
+        "properties": {
+          "content": {
+            "$ref": "#/components/schemas/RichText",
+            "description": "Rich text content as structured blocks. Different media types provide markdown support:\n• application/json - Default blocks format\n• application/vnd.airfocus.markdown+json - All RichText fields become markdown strings (recommended)\n• application/json+markdown - Legacy format, only top-level fields converted to markdown"
+          }
+        },
+        "required": [
+          "content"
+        ],
+        "title": "ItemCommentUpdateRequest",
+        "type": "object"
+      },
+      "ItemCommentWithItemCommentEmbed": {
+        "properties": {
+          "_embedded": {
+            "$ref": "#/components/schemas/ItemCommentEmbed"
+          },
+          "content": {
+            "$ref": "#/components/schemas/RichText",
+            "description": "Rich text content as structured blocks. Different media types provide markdown support:\n• application/json - Default blocks format\n• application/vnd.airfocus.markdown+json - All RichText fields become markdown strings (recommended)\n• application/json+markdown - Legacy format, only top-level fields converted to markdown"
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "initiator": {
+            "$ref": "#/components/schemas/Actor"
+          },
+          "itemId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "lastUpdatedAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "reactions": {
+            "items": {
+              "$ref": "#/components/schemas/ItemCommentReaction"
+            },
+            "type": "array"
+          }
+        },
+        "required": [
+          "id",
+          "itemId",
+          "initiator",
+          "content",
+          "reactions",
+          "createdAt",
+          "lastUpdatedAt",
+          "_embedded"
+        ],
+        "title": "ItemCommentWithItemCommentEmbed",
+        "type": "object"
+      },
+      "ItemCommentWithItemCommentEmbedOrNullList": {
+        "items": {
+          "$ref": "#/components/schemas/ItemCommentWithItemCommentEmbed"
+        },
+        "title": "ItemCommentWithItemCommentEmbedOrNullList",
+        "type": "array"
+      },
+      "ItemCommentWithItemCommentEmbedPage": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/ItemCommentWithItemCommentEmbed"
+            },
+            "type": "array"
+          },
+          "totalItems": {
+            "format": "int32",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "items",
+          "totalItems"
+        ],
+        "title": "ItemCommentWithItemCommentEmbedPage",
+        "type": "object"
       },
       "ItemConstraint": {
         "discriminator": {
@@ -16657,6 +17066,606 @@
         "title": "TemplateCategory",
         "type": "object"
       },
+      "TemplateInstructions": {
+        "properties": {
+          "apps": {
+            "default": [],
+            "items": {
+              "$ref": "#/components/schemas/TemplateInstructionsInstallApp"
+            },
+            "type": "array"
+          },
+          "fields": {
+            "default": [],
+            "items": {
+              "$ref": "#/components/schemas/TemplateInstructionsInstallField"
+            },
+            "type": "array"
+          },
+          "itemRelations": {
+            "default": [],
+            "items": {
+              "$ref": "#/components/schemas/TemplateInstructionsCreateItemRelation"
+            },
+            "type": "array"
+          },
+          "items": {
+            "default": [],
+            "items": {
+              "$ref": "#/components/schemas/TemplateInstructionsCreateItem"
+            },
+            "type": "array"
+          },
+          "links": {
+            "default": [],
+            "items": {
+              "$ref": "#/components/schemas/TemplateInstructionsCreateLink"
+            },
+            "type": "array"
+          },
+          "statuses": {
+            "default": [],
+            "items": {
+              "$ref": "#/components/schemas/TemplateInstructionsCreateStatus"
+            },
+            "type": "array"
+          },
+          "views": {
+            "default": [],
+            "items": {
+              "$ref": "#/components/schemas/TemplateInstructionsInstallView"
+            },
+            "type": "array"
+          },
+          "workspaceGroups": {
+            "default": [],
+            "items": {
+              "$ref": "#/components/schemas/TemplateInstructionsCreateWorkspaceGroup"
+            },
+            "type": "array"
+          },
+          "workspaceRelations": {
+            "default": [],
+            "items": {
+              "$ref": "#/components/schemas/TemplateInstructionsCreateWorkspaceRelation"
+            },
+            "type": "array"
+          },
+          "workspaces": {
+            "default": [],
+            "items": {
+              "$ref": "#/components/schemas/TemplateInstructionsCreateWorkspace"
+            },
+            "type": "array"
+          }
+        },
+        "title": "TemplateInstructions",
+        "type": "object"
+      },
+      "TemplateInstructionsCreateItem": {
+        "properties": {
+          "assigneeUserIds": {
+            "default": [],
+            "items": {
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "color": {
+            "$ref": "#/components/schemas/ItemColor"
+          },
+          "conditions": {
+            "default": [],
+            "items": {
+              "$ref": "#/components/schemas/TemplateInstructionsInstructionCondition"
+            },
+            "type": "array"
+          },
+          "description": {
+            "$ref": "#/components/schemas/RichText",
+            "description": "Rich text content as structured blocks. Different media types provide markdown support:\n• application/json - Default blocks format\n• application/vnd.airfocus.markdown+json - All RichText fields become markdown strings (recommended)\n• application/json+markdown - Legacy format, only top-level fields converted to markdown"
+          },
+          "fields": {
+            "additionalProperties": {},
+            "type": "object"
+          },
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "order": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "statusId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "workspaceId": {
+            "format": "uuid",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "workspaceId",
+          "statusId",
+          "name",
+          "description",
+          "color",
+          "fields",
+          "order"
+        ],
+        "title": "TemplateInstructionsCreateItem",
+        "type": "object"
+      },
+      "TemplateInstructionsCreateItemRelation": {
+        "properties": {
+          "childId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "childOrder": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "conditions": {
+            "default": [],
+            "items": {
+              "$ref": "#/components/schemas/TemplateInstructionsInstructionCondition"
+            },
+            "type": "array"
+          },
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "parentId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "parentOrder": {
+            "format": "int32",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "id",
+          "parentId",
+          "childId",
+          "parentOrder",
+          "childOrder"
+        ],
+        "title": "TemplateInstructionsCreateItemRelation",
+        "type": "object"
+      },
+      "TemplateInstructionsCreateLink": {
+        "properties": {
+          "conditions": {
+            "default": [],
+            "items": {
+              "$ref": "#/components/schemas/TemplateInstructionsInstructionCondition"
+            },
+            "type": "array"
+          },
+          "fromItemId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "fromOrder": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "linkTypeId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "toItemId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "toOrder": {
+            "format": "int32",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "id",
+          "fromItemId",
+          "toItemId",
+          "linkTypeId",
+          "fromOrder",
+          "toOrder"
+        ],
+        "title": "TemplateInstructionsCreateLink",
+        "type": "object"
+      },
+      "TemplateInstructionsCreateStatus": {
+        "properties": {
+          "category": {
+            "$ref": "#/components/schemas/StatusCategory"
+          },
+          "color": {
+            "$ref": "#/components/schemas/StatusColor"
+          },
+          "conditions": {
+            "default": [],
+            "items": {
+              "$ref": "#/components/schemas/TemplateInstructionsInstructionCondition"
+            },
+            "type": "array"
+          },
+          "default": {
+            "type": "boolean"
+          },
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "order": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "value": {
+            "type": "number"
+          },
+          "workspaceId": {
+            "format": "uuid",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "workspaceId",
+          "category",
+          "name",
+          "default",
+          "value",
+          "order"
+        ],
+        "title": "TemplateInstructionsCreateStatus",
+        "type": "object"
+      },
+      "TemplateInstructionsCreateWorkspace": {
+        "properties": {
+          "archived": {
+            "type": "boolean"
+          },
+          "conditions": {
+            "default": [],
+            "items": {
+              "$ref": "#/components/schemas/TemplateInstructionsInstructionCondition"
+            },
+            "type": "array"
+          },
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "itemColor": {
+            "$ref": "#/components/schemas/ItemColor"
+          },
+          "itemType": {
+            "$ref": "#/components/schemas/ItemType"
+          },
+          "metadata": {
+            "$ref": "#/components/schemas/WorkspaceWorkspaceMetadata"
+          },
+          "name": {
+            "type": "string"
+          },
+          "namespace": {
+            "$ref": "#/components/schemas/WorkspaceNamespace"
+          },
+          "orderedFieldIds": {
+            "default": [],
+            "items": {
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "parentGroupId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "progressMode": {
+            "$ref": "#/components/schemas/WorkspaceProgressMode"
+          },
+          "statusPresetId": {
+            "format": "uuid",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "progressMode",
+          "namespace",
+          "archived"
+        ],
+        "title": "TemplateInstructionsCreateWorkspace",
+        "type": "object"
+      },
+      "TemplateInstructionsCreateWorkspaceGroup": {
+        "properties": {
+          "conditions": {
+            "default": [],
+            "items": {
+              "$ref": "#/components/schemas/TemplateInstructionsInstructionCondition"
+            },
+            "type": "array"
+          },
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "parentId": {
+            "format": "uuid",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "name"
+        ],
+        "title": "TemplateInstructionsCreateWorkspaceGroup",
+        "type": "object"
+      },
+      "TemplateInstructionsCreateWorkspaceRelation": {
+        "properties": {
+          "childId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "conditions": {
+            "default": [],
+            "items": {
+              "$ref": "#/components/schemas/TemplateInstructionsInstructionCondition"
+            },
+            "type": "array"
+          },
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "parentId": {
+            "format": "uuid",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "parentId",
+          "childId"
+        ],
+        "title": "TemplateInstructionsCreateWorkspaceRelation",
+        "type": "object"
+      },
+      "TemplateInstructionsInstallApp": {
+        "properties": {
+          "conditions": {
+            "default": [],
+            "items": {
+              "$ref": "#/components/schemas/TemplateInstructionsInstructionCondition"
+            },
+            "type": "array"
+          },
+          "fields": {
+            "default": [],
+            "items": {
+              "$ref": "#/components/schemas/TemplateInstructionsInstallField"
+            },
+            "type": "array"
+          },
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "settings": {},
+          "typeId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "typeId",
+          "settings"
+        ],
+        "title": "TemplateInstructionsInstallApp",
+        "type": "object"
+      },
+      "TemplateInstructionsInstallField": {
+        "properties": {
+          "conditions": {
+            "default": [],
+            "items": {
+              "$ref": "#/components/schemas/TemplateInstructionsInstructionCondition"
+            },
+            "type": "array"
+          },
+          "description": {
+            "type": "string"
+          },
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "isTeamField": {
+            "type": "boolean"
+          },
+          "name": {
+            "type": "string"
+          },
+          "settings": {},
+          "typeId": {
+            "type": "string"
+          },
+          "workspaceIds": {
+            "items": {
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": "array",
+            "uniqueItems": true
+          }
+        },
+        "required": [
+          "id",
+          "workspaceIds",
+          "name",
+          "description",
+          "typeId",
+          "settings",
+          "isTeamField"
+        ],
+        "title": "TemplateInstructionsInstallField",
+        "type": "object"
+      },
+      "TemplateInstructionsInstallView": {
+        "properties": {
+          "conditions": {
+            "default": [],
+            "items": {
+              "$ref": "#/components/schemas/TemplateInstructionsInstructionCondition"
+            },
+            "type": "array"
+          },
+          "description": {
+            "type": "string"
+          },
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "itemFilter": {
+            "$ref": "#/components/schemas/ItemSearchQueryFilter",
+            "examples": [
+              {
+                "inner": [
+                  {
+                    "text": "foo",
+                    "caseSensitive": false,
+                    "mode": "contain",
+                    "type": "name"
+                  },
+                  {
+                    "mode": "defined",
+                    "type": "assignees"
+                  }
+                ],
+                "type": "and"
+              }
+            ]
+          },
+          "itemScopeLimit": {
+            "$ref": "#/components/schemas/ItemScopeLimit"
+          },
+          "itemSort": {
+            "default": [],
+            "items": {
+              "$ref": "#/components/schemas/ItemSearchQuerySort"
+            },
+            "type": "array"
+          },
+          "name": {
+            "type": "string"
+          },
+          "order": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "pinnedToPosition": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "settings": {},
+          "typeId": {
+            "type": "string"
+          },
+          "workspaceId": {
+            "format": "uuid",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "workspaceId",
+          "name",
+          "description",
+          "typeId",
+          "settings",
+          "order"
+        ],
+        "title": "TemplateInstructionsInstallView",
+        "type": "object"
+      },
+      "TemplateInstructionsInstructionCondition": {
+        "discriminator": {
+          "mapping": {
+            "mustHaveFeature": "#/components/schemas/TemplateInstructionsInstructionConditionMustHaveFeature",
+            "mustNotHaveFeature": "#/components/schemas/TemplateInstructionsInstructionConditionMustNotHaveFeature"
+          },
+          "propertyName": "type"
+        },
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/TemplateInstructionsInstructionConditionMustHaveFeature"
+          },
+          {
+            "$ref": "#/components/schemas/TemplateInstructionsInstructionConditionMustNotHaveFeature"
+          }
+        ],
+        "title": "TemplateInstructionsInstructionCondition"
+      },
+      "TemplateInstructionsInstructionConditionMustHaveFeature": {
+        "properties": {
+          "feature": {
+            "type": "string"
+          },
+          "type": {
+            "const": "mustHaveFeature",
+            "type": "string"
+          }
+        },
+        "required": [
+          "feature",
+          "type"
+        ],
+        "title": "TemplateInstructionsInstructionConditionMustHaveFeature",
+        "type": "object"
+      },
+      "TemplateInstructionsInstructionConditionMustNotHaveFeature": {
+        "properties": {
+          "feature": {
+            "type": "string"
+          },
+          "type": {
+            "const": "mustNotHaveFeature",
+            "type": "string"
+          }
+        },
+        "required": [
+          "feature",
+          "type"
+        ],
+        "title": "TemplateInstructionsInstructionConditionMustNotHaveFeature",
+        "type": "object"
+      },
       "TemplatePageWithEmbed": {
         "properties": {
           "_embedded": {
@@ -18952,7 +19961,8 @@
             "type": "string"
           },
           "metadata": {
-            "$ref": "#/components/schemas/WorkspaceWorkspaceMetadata"
+            "$ref": "#/components/schemas/WorkspaceWorkspaceMetadata",
+            "description": "Additional metadata about this workspace."
           },
           "name": {
             "description": "Name of this workspace.",
@@ -20297,7 +21307,8 @@
             "type": "string"
           },
           "metadata": {
-            "$ref": "#/components/schemas/WorkspaceWorkspaceMetadata"
+            "$ref": "#/components/schemas/WorkspaceWorkspaceMetadata",
+            "description": "Additional metadata about this workspace."
           },
           "name": {
             "description": "Name of this workspace.",
@@ -20402,7 +21413,8 @@
             "type": "string"
           },
           "metadata": {
-            "$ref": "#/components/schemas/WorkspaceWorkspaceMetadata"
+            "$ref": "#/components/schemas/WorkspaceWorkspaceMetadata",
+            "description": "Additional metadata about this workspace."
           },
           "name": {
             "description": "Name of this workspace.",
@@ -20516,7 +21528,8 @@
             "type": "string"
           },
           "metadata": {
-            "$ref": "#/components/schemas/WorkspaceWorkspaceMetadata"
+            "$ref": "#/components/schemas/WorkspaceWorkspaceMetadata",
+            "description": "Additional metadata about this workspace."
           },
           "name": {
             "description": "Name of this workspace.",
@@ -20617,7 +21630,8 @@
             "type": "string"
           },
           "metadata": {
-            "$ref": "#/components/schemas/WorkspaceWorkspaceMetadata"
+            "$ref": "#/components/schemas/WorkspaceWorkspaceMetadata",
+            "description": "Additional metadata about this workspace."
           },
           "name": {
             "description": "Name of this workspace.",
@@ -20683,7 +21697,6 @@
         "type": "object"
       },
       "WorkspaceWorkspaceMetadata": {
-        "description": "Additional metadata about this workspace.",
         "properties": {
           "duplicated": {
             "description": "Whether this workspace was duplicated from another workspace.",
@@ -20804,7 +21817,7 @@
   },
   "info": {
     "title": "airfocus API",
-    "version": "1.0.0-beta.46.187.0"
+    "version": "1.0.0-beta.46.192.0"
   },
   "openapi": "3.1.0",
   "paths": {
@@ -25239,7 +26252,7 @@
         ]
       }
     },
-    "/api/templates/{templateId}": {
+    "/api/templates/apply/{templateId}": {
       "post": {
         "description": "Installs the requested template with the given parameters.\nReturns a newly created workspace.\nIf the template creates multiple workspaces - then it still returns a single workspace which is considered by the template as \"main\".<br/>Requirements:<br/>- auth-client scopes: \"workspace\"",
         "operationId": "applyTemplate",
@@ -25321,6 +26334,85 @@
           }
         ],
         "summary": "Install template",
+        "tags": [
+          "Templates"
+        ]
+      }
+    },
+    "/api/templates/export": {
+      "post": {
+        "description": "Returns an object containing instructions, required for installing such a template.<br/>Requirements:<br/>- auth-client scopes: \"workspace:read\"<br/>- user permission: \"read\" or higher",
+        "operationId": "exportTemplateInstructions",
+        "parameters": [
+          {
+            "deprecated": true,
+            "description": "Enable sudo-mode for admins for a single request, which gives full permission to all workspaces in the team.",
+            "in": "query",
+            "name": "actAsAdmin",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ExportTemplateRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TemplateInstructions"
+                }
+              }
+            },
+            "description": ""
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "missing_token",
+                  "data": {},
+                  "message": "Access token is missing"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If missing authentication token."
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "forbidden",
+                  "data": {},
+                  "message": "Insufficient permission"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If user does not have the required permission, or authenticated client does not have the required access scopes."
+          }
+        },
+        "security": [
+          {
+            "httpAuth": []
+          }
+        ],
+        "summary": "Exports a template for given workspaces.",
         "tags": [
           "Templates"
         ]
@@ -30647,6 +31739,1299 @@
         ]
       }
     },
+    "/api/workspaces/{workspaceId}/comments": {
+      "post": {
+        "description": "Returns newly created comment with its sanitised data.<br/>Requirements:<br/>- auth-client scopes: \"workspace:comment\"<br/>- user permission: \"comment\" or higher",
+        "operationId": "createComment",
+        "parameters": [
+          {
+            "deprecated": true,
+            "description": "Enable sudo-mode for admins for a single request, which gives full permission to all workspaces in the team.",
+            "in": "query",
+            "name": "actAsAdmin",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "in": "path",
+            "name": "workspaceId",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ItemCommentCreateRequest"
+              }
+            },
+            "application/json+markdown": {
+              "schema": {
+                "$ref": "#/components/schemas/ItemCommentCreateRequest"
+              }
+            },
+            "application/vnd.airfocus.markdown+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ItemCommentCreateRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ItemCommentWithItemCommentEmbed"
+                }
+              },
+              "application/json+markdown": {
+                "schema": {
+                  "$ref": "#/components/schemas/ItemCommentWithItemCommentEmbed"
+                }
+              },
+              "application/vnd.airfocus.markdown+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ItemCommentWithItemCommentEmbed"
+                }
+              }
+            },
+            "description": ""
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "bad_request",
+                  "data": {},
+                  "message": "Request body is invalid"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If payload is invalid."
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "missing_token",
+                  "data": {},
+                  "message": "Access token is missing"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If missing authentication token."
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "forbidden",
+                  "data": {},
+                  "message": "Insufficient permission"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If user does not have the required permission, or authenticated client does not have the required access scopes."
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "unknown_error",
+                  "data": {},
+                  "message": "Server error"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If any other error happens."
+          }
+        },
+        "security": [
+          {
+            "httpAuth": []
+          }
+        ],
+        "summary": "Create a new comment",
+        "tags": [
+          "CRUD",
+          "Comments"
+        ]
+      }
+    },
+    "/api/workspaces/{workspaceId}/comments/bulk": {
+      "post": {
+        "description": "Accepts a list of create/update/patch/delete operations (see the request model for more details).<br/>\nEach operation can target a single or multiple comments.<br/>\nReturns a list of results for each input operation including errors.<br/>\nGuarantees that the size and order of the returned results matches the order of input operations.<br/>Requirements:<br/>- auth-client scopes: \"workspace:comment\"<br/>- user permission: \"comment\" or higher",
+        "operationId": "bulkComments",
+        "parameters": [
+          {
+            "deprecated": true,
+            "description": "Enable sudo-mode for admins for a single request, which gives full permission to all workspaces in the team.",
+            "in": "query",
+            "name": "actAsAdmin",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "in": "path",
+            "name": "workspaceId",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "items": {
+                  "$ref": "#/components/schemas/CommentBulkAction"
+                },
+                "type": "array"
+              }
+            },
+            "application/json+markdown": {
+              "schema": {
+                "items": {
+                  "$ref": "#/components/schemas/CommentBulkAction"
+                },
+                "type": "array"
+              }
+            },
+            "application/vnd.airfocus.markdown+json": {
+              "schema": {
+                "items": {
+                  "$ref": "#/components/schemas/CommentBulkAction"
+                },
+                "type": "array"
+              }
+            }
+          },
+          "required": false
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ItemCommentWithItemCommentEmbedOrNullList"
+                }
+              },
+              "application/json+markdown": {
+                "schema": {
+                  "$ref": "#/components/schemas/ItemCommentWithItemCommentEmbedOrNullList"
+                }
+              },
+              "application/vnd.airfocus.markdown+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ItemCommentWithItemCommentEmbedOrNullList"
+                }
+              }
+            },
+            "description": ""
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "bad_request",
+                  "data": {},
+                  "message": "Request body is invalid"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If payload is invalid."
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "missing_token",
+                  "data": {},
+                  "message": "Access token is missing"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If missing authentication token."
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "forbidden",
+                  "data": {},
+                  "message": "Insufficient permission"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If user does not have the required permission, or authenticated client does not have the required access scopes."
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "unknown_error",
+                  "data": {},
+                  "message": "Server error"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If any other error happens."
+          }
+        },
+        "security": [
+          {
+            "httpAuth": []
+          }
+        ],
+        "summary": "Perform multiple operations with comments",
+        "tags": [
+          "CRUD",
+          "Comments"
+        ]
+      }
+    },
+    "/api/workspaces/{workspaceId}/comments/list": {
+      "post": {
+        "description": "Returns a list of comments resolved for the provided IDs.<br/>\nGuarantees that the array-size and order of the returned comments matches the order of requested IDs.<br/>\nDoes not fail if any of the requested comments is not found or not accessible - instead it returns null as an array-element of the corresponding comment which could not be accessed.<br/>Requirements:<br/>- auth-client scopes: \"workspace:read\"<br/>- user permission: \"read\" or higher",
+        "operationId": "listComments",
+        "parameters": [
+          {
+            "deprecated": true,
+            "description": "Enable sudo-mode for admins for a single request, which gives full permission to all workspaces in the team.",
+            "in": "query",
+            "name": "actAsAdmin",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "in": "path",
+            "name": "workspaceId",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "items": {
+                  "format": "uuid",
+                  "type": "string"
+                },
+                "type": "array"
+              }
+            }
+          },
+          "required": false
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ItemCommentWithItemCommentEmbedOrNullList"
+                }
+              },
+              "application/json+markdown": {
+                "schema": {
+                  "$ref": "#/components/schemas/ItemCommentWithItemCommentEmbedOrNullList"
+                }
+              },
+              "application/vnd.airfocus.markdown+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ItemCommentWithItemCommentEmbedOrNullList"
+                }
+              }
+            },
+            "description": ""
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "bad_request",
+                  "data": {},
+                  "message": "Request body is invalid"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If payload is invalid."
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "missing_token",
+                  "data": {},
+                  "message": "Access token is missing"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If missing authentication token."
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "forbidden",
+                  "data": {},
+                  "message": "Insufficient permission"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If user does not have the required permission, or authenticated client does not have the required access scopes."
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "unknown_error",
+                  "data": {},
+                  "message": "Server error"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If any other error happens."
+          }
+        },
+        "security": [
+          {
+            "httpAuth": []
+          }
+        ],
+        "summary": "Retrieve multiple comments by their IDs",
+        "tags": [
+          "CRUD",
+          "Comments"
+        ]
+      }
+    },
+    "/api/workspaces/{workspaceId}/comments/search": {
+      "post": {
+        "description": "Returns all comments or searches comments by query. Always returns only comments which are accessible by the current user.<br/>Requirements:<br/>- auth-client scopes: \"workspace:read\"<br/>- user permission: \"read\" or higher",
+        "operationId": "searchComments",
+        "parameters": [
+          {
+            "deprecated": true,
+            "description": "Enable sudo-mode for admins for a single request, which gives full permission to all workspaces in the team.",
+            "in": "query",
+            "name": "actAsAdmin",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "in": "path",
+            "name": "workspaceId",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "description": "How many elements to skip.",
+            "in": "query",
+            "name": "offset",
+            "required": false,
+            "schema": {
+              "default": 0,
+              "format": "int32",
+              "minimum": 0,
+              "type": "integer"
+            }
+          },
+          {
+            "description": "How many elements to return.",
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "schema": {
+              "default": 1000,
+              "format": "int32",
+              "maximum": 1000,
+              "minimum": 0,
+              "type": "integer"
+            }
+          },
+          {
+            "deprecated": true,
+            "description": "From which element the page should start.",
+            "in": "query",
+            "name": "from",
+            "required": false,
+            "schema": {
+              "default": 0,
+              "deprecated": true,
+              "format": "int32",
+              "minimum": 0,
+              "type": "integer"
+            }
+          },
+          {
+            "deprecated": true,
+            "description": "At which element the page should end (excluding it).",
+            "in": "query",
+            "name": "to",
+            "required": false,
+            "schema": {
+              "deprecated": true,
+              "format": "int32",
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ItemCommentSearchQuery"
+              }
+            }
+          },
+          "required": false
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ItemCommentWithItemCommentEmbedPage"
+                }
+              },
+              "application/json+markdown": {
+                "schema": {
+                  "$ref": "#/components/schemas/ItemCommentWithItemCommentEmbedPage"
+                }
+              },
+              "application/vnd.airfocus.markdown+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ItemCommentWithItemCommentEmbedPage"
+                }
+              }
+            },
+            "description": ""
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "bad_request",
+                  "data": {},
+                  "message": "Request body is invalid"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If payload is invalid."
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "missing_token",
+                  "data": {},
+                  "message": "Access token is missing"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If missing authentication token."
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "forbidden",
+                  "data": {},
+                  "message": "Insufficient permission"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If user does not have the required permission, or authenticated client does not have the required access scopes."
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "unknown_error",
+                  "data": {},
+                  "message": "Server error"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If any other error happens."
+          }
+        },
+        "security": [
+          {
+            "httpAuth": []
+          }
+        ],
+        "summary": "Retrieve or search comments",
+        "tags": [
+          "CRUD",
+          "Comments"
+        ]
+      }
+    },
+    "/api/workspaces/{workspaceId}/comments/{commentId}": {
+      "delete": {
+        "description": "Returns empty result if the comment was successfully deleted.<br/>Requirements:<br/>- auth-client scopes: \"workspace:comment\"<br/>- user permission: \"comment\" or higher",
+        "operationId": "deleteComment",
+        "parameters": [
+          {
+            "deprecated": true,
+            "description": "Enable sudo-mode for admins for a single request, which gives full permission to all workspaces in the team.",
+            "in": "query",
+            "name": "actAsAdmin",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "in": "path",
+            "name": "workspaceId",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "commentId",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": ""
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "not_found",
+                  "data": {},
+                  "message": "Unknown entity 'fe4c0f30-aa35-3c41-99f9-a5f69c8c4192'"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If path parameters are invalid or resource does not exist."
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "missing_token",
+                  "data": {},
+                  "message": "Access token is missing"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If missing authentication token."
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "forbidden",
+                  "data": {},
+                  "message": "Insufficient permission"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If user does not have the required permission, or authenticated client does not have the required access scopes."
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "unknown_error",
+                  "data": {},
+                  "message": "Server error"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If any other error happens."
+          }
+        },
+        "security": [
+          {
+            "httpAuth": []
+          }
+        ],
+        "summary": "Delete an existing comment",
+        "tags": [
+          "CRUD",
+          "Comments"
+        ]
+      },
+      "get": {
+        "description": "Returns found comment.<br/>Requirements:<br/>- auth-client scopes: \"workspace:read\"<br/>- user permission: \"read\" or higher",
+        "operationId": "retrieveComment",
+        "parameters": [
+          {
+            "deprecated": true,
+            "description": "Enable sudo-mode for admins for a single request, which gives full permission to all workspaces in the team.",
+            "in": "query",
+            "name": "actAsAdmin",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "in": "path",
+            "name": "workspaceId",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "commentId",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ItemCommentWithItemCommentEmbed"
+                }
+              },
+              "application/json+markdown": {
+                "schema": {
+                  "$ref": "#/components/schemas/ItemCommentWithItemCommentEmbed"
+                }
+              },
+              "application/vnd.airfocus.markdown+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ItemCommentWithItemCommentEmbed"
+                }
+              }
+            },
+            "description": ""
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "not_found",
+                  "data": {},
+                  "message": "Unknown entity 'fe4c0f30-aa35-3c41-99f9-a5f69c8c4192'"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If path parameters are invalid or payload is invalid or resource does not exist."
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "missing_token",
+                  "data": {},
+                  "message": "Access token is missing"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If missing authentication token."
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "forbidden",
+                  "data": {},
+                  "message": "Insufficient permission"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If user does not have the required permission, or authenticated client does not have the required access scopes."
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "unknown_error",
+                  "data": {},
+                  "message": "Server error"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If any other error happens."
+          }
+        },
+        "security": [
+          {
+            "httpAuth": []
+          }
+        ],
+        "summary": "Retrieve a single comment by its ID",
+        "tags": [
+          "CRUD",
+          "Comments"
+        ]
+      },
+      "patch": {
+        "description": "Returns the whole updated comment with its sanitised data.<br/>Requirements:<br/>- auth-client scopes: \"workspace:comment\"<br/>- user permission: \"comment\" or higher",
+        "operationId": "patchComment",
+        "parameters": [
+          {
+            "deprecated": true,
+            "description": "Enable sudo-mode for admins for a single request, which gives full permission to all workspaces in the team.",
+            "in": "query",
+            "name": "actAsAdmin",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "in": "path",
+            "name": "workspaceId",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "commentId",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/JsonPatch"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ItemCommentWithItemCommentEmbed"
+                }
+              },
+              "application/json+markdown": {
+                "schema": {
+                  "$ref": "#/components/schemas/ItemCommentWithItemCommentEmbed"
+                }
+              },
+              "application/vnd.airfocus.markdown+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ItemCommentWithItemCommentEmbed"
+                }
+              }
+            },
+            "description": ""
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "not_found",
+                  "data": {},
+                  "message": "Unknown entity 'fe4c0f30-aa35-3c41-99f9-a5f69c8c4192'"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If path parameters are invalid or payload is invalid or resource does not exist."
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "missing_token",
+                  "data": {},
+                  "message": "Access token is missing"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If missing authentication token."
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "forbidden",
+                  "data": {},
+                  "message": "Insufficient permission"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If user does not have the required permission, or authenticated client does not have the required access scopes."
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "unknown_error",
+                  "data": {},
+                  "message": "Server error"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If any other error happens."
+          }
+        },
+        "security": [
+          {
+            "httpAuth": []
+          }
+        ],
+        "summary": "Patch an existing comment",
+        "tags": [
+          "CRUD",
+          "Comments"
+        ]
+      },
+      "put": {
+        "description": "Returns updated comment with its sanitised data.<br/>Requirements:<br/>- auth-client scopes: \"workspace:comment\"<br/>- user permission: \"comment\" or higher",
+        "operationId": "updateComment",
+        "parameters": [
+          {
+            "deprecated": true,
+            "description": "Enable sudo-mode for admins for a single request, which gives full permission to all workspaces in the team.",
+            "in": "query",
+            "name": "actAsAdmin",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "in": "path",
+            "name": "workspaceId",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "commentId",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ItemCommentUpdateRequest"
+              }
+            },
+            "application/json+markdown": {
+              "schema": {
+                "$ref": "#/components/schemas/ItemCommentUpdateRequest"
+              }
+            },
+            "application/vnd.airfocus.markdown+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ItemCommentUpdateRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ItemCommentWithItemCommentEmbed"
+                }
+              },
+              "application/json+markdown": {
+                "schema": {
+                  "$ref": "#/components/schemas/ItemCommentWithItemCommentEmbed"
+                }
+              },
+              "application/vnd.airfocus.markdown+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ItemCommentWithItemCommentEmbed"
+                }
+              }
+            },
+            "description": ""
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "not_found",
+                  "data": {},
+                  "message": "Unknown entity 'fe4c0f30-aa35-3c41-99f9-a5f69c8c4192'"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If path parameters are invalid or payload is invalid or resource does not exist."
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "missing_token",
+                  "data": {},
+                  "message": "Access token is missing"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If missing authentication token."
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "forbidden",
+                  "data": {},
+                  "message": "Insufficient permission"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If user does not have the required permission, or authenticated client does not have the required access scopes."
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "unknown_error",
+                  "data": {},
+                  "message": "Server error"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If any other error happens."
+          }
+        },
+        "security": [
+          {
+            "httpAuth": []
+          }
+        ],
+        "summary": "Update an existing comment",
+        "tags": [
+          "CRUD",
+          "Comments"
+        ]
+      }
+    },
+    "/api/workspaces/{workspaceId}/comments/{commentId}/reactions/{emojiCode}": {
+      "delete": {
+        "description": "Requirements:<br/>- auth-client scopes: \"workspace:comment\"<br/>- user permission: \"comment\" or higher",
+        "operationId": "removeCommentReaction",
+        "parameters": [
+          {
+            "deprecated": true,
+            "description": "Enable sudo-mode for admins for a single request, which gives full permission to all workspaces in the team.",
+            "in": "query",
+            "name": "actAsAdmin",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "in": "path",
+            "name": "workspaceId",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "commentId",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "emojiCode",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/Emoji"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": ""
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "missing_token",
+                  "data": {},
+                  "message": "Access token is missing"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If missing authentication token."
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "forbidden",
+                  "data": {},
+                  "message": "Insufficient permission"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If user does not have the required permission, or authenticated client does not have the required access scopes."
+          }
+        },
+        "security": [
+          {
+            "httpAuth": []
+          }
+        ],
+        "summary": "Remove a reaction from the specified comment.",
+        "tags": [
+          "Comments"
+        ]
+      },
+      "post": {
+        "description": "Requirements:<br/>- auth-client scopes: \"workspace:comment\"<br/>- user permission: \"comment\" or higher",
+        "operationId": "addCommentReaction",
+        "parameters": [
+          {
+            "deprecated": true,
+            "description": "Enable sudo-mode for admins for a single request, which gives full permission to all workspaces in the team.",
+            "in": "query",
+            "name": "actAsAdmin",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "in": "path",
+            "name": "workspaceId",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "commentId",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "emojiCode",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/Emoji"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": ""
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "missing_token",
+                  "data": {},
+                  "message": "Access token is missing"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If missing authentication token."
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "forbidden",
+                  "data": {},
+                  "message": "Insufficient permission"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If user does not have the required permission, or authenticated client does not have the required access scopes."
+          }
+        },
+        "security": [
+          {
+            "httpAuth": []
+          }
+        ],
+        "summary": "Add a reaction to the specified comment.",
+        "tags": [
+          "Comments"
+        ]
+      }
+    },
     "/api/workspaces/{workspaceId}/duplicate": {
       "post": {
         "description": "Returns the newly created workspace with embedded data.<br/>Requirements:<br/>- auth-client scopes: \"workspace\"<br/>- user permission: \"write\" or higher",
@@ -34817,6 +37202,10 @@
     {
       "description": "Endpoints for listing AI actors in a team.",
       "name": "AI Actors"
+    },
+    {
+      "description": "Manage comments on items.",
+      "name": "Comments"
     },
     {
       "description": "Endpoints for managing workspace fields.",
