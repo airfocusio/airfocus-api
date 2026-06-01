@@ -29,7 +29,7 @@ run_oasdiff() {
         docker run --rm \
             -v /tmp/oasdiff-from.json:/from.json \
             -v /tmp/oasdiff-to.json:/to.json \
-            oasdiff/oasdiff changelog /from.json /to.json --format markdown
+            tufin/oasdiff changelog /from.json /to.json --format markdown
     fi \
     | sed 's/:warning:/⚠️/g' \
     | awk '/^# API Changelog |^## API Changes$|^## Components$/{skip=1; next} skip && /^[[:space:]]*$/{skip=0; next} {skip=0; print}'
@@ -68,7 +68,7 @@ update_index() {
         echo "# Changelog"
         echo ""
         for bucket in "${SORTED[@]}"; do
-            oldest_tag=$(grep "^## [0-9]" "$CHANGELOG_DIR/v$bucket.md" | tail -1 | sed 's/^## //')
+            oldest_tag=$(grep "^## [0-9]" "$CHANGELOG_DIR/v$bucket.md" | tail -1 | sed 's/^## //; s/ (.*)//')
             created=$(git log -1 --format="%as" "$oldest_tag")
             echo "- [v$bucket](changelog/v$bucket) _(created: $created)_"
         done
@@ -84,7 +84,7 @@ if [ -z "$FROM" ]; then
     while IFS= read -r file; do
         while IFS= read -r tag; do
             DOCUMENTED_TAGS+=("$tag")
-        done < <(grep "^## [0-9]" "$file" | sed 's/^## //')
+        done < <(grep "^## [0-9]" "$file" | sed 's/^## //; s/ (.*)//')
     done < <(find "$CHANGELOG_DIR" -name "v*.md")
 
     ALL_TAGS=()
