@@ -15,7 +15,7 @@ jobs:
           token: ${{ secrets.AIRFOCUSBOT_GITHUB_TOKEN }}
       - name: Install oasdiff
         run: |
-          go install github.com/tufin/oasdiff@latest
+          go install github.com/oasdiff/oasdiff@latest
           echo "$HOME/go/bin" >> "$GITHUB_PATH"
       - name: Update openapi.json
         run: |
