@@ -29,7 +29,7 @@ run_oasdiff() {
         docker run --rm \
             -v /tmp/oasdiff-from.json:/from.json \
             -v /tmp/oasdiff-to.json:/to.json \
-            tufin/oasdiff changelog /from.json /to.json --format markdown
+            oasdiff/oasdiff changelog /from.json /to.json --format markdown
     fi \
     | sed 's/:warning:/⚠️/g' \
     | awk '/^# API Changelog |^## API Changes$|^## Components$/{skip=1; next} skip && /^[[:space:]]*$/{skip=0; next} {skip=0; print}'
@@ -182,7 +182,7 @@ else
     docker run --rm -t \
         -v /tmp/oasdiff-from.json:/from.json \
         -v /tmp/oasdiff-to.json:/to.json \
-        tufin/oasdiff changelog /from.json /to.json --format markdown
+        oasdiff/oasdiff changelog /from.json /to.json --format markdown
 fi
 
 rm -f /tmp/oasdiff-from.json /tmp/oasdiff-to.json
