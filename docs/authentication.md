@@ -3,7 +3,7 @@ layout: default
 title: Authentication
 nav_order: 10
 ---
-[Prev: Home](/){: .btn }
+[Prev: Details](/details){: .btn }
 
 # Authentication
 
