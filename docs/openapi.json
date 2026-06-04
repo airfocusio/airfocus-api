@@ -1982,6 +1982,7 @@
             "type": "boolean"
           },
           "assigneeUserGroupIds": {
+            "default": [],
             "description": "Ids of user groups that are assigned to this item.",
             "items": {
               "format": "uuid",
@@ -1990,6 +1991,7 @@
             "type": "array"
           },
           "assigneeUserIds": {
+            "default": [],
             "description": "Ids of users who are assigned to this item.",
             "items": {
               "format": "uuid",
@@ -1999,14 +2001,19 @@
           },
           "color": {
             "$ref": "#/components/schemas/ItemColor",
-            "description": "Color of this item."
+            "description": "Color of this item. If omitted, the server uses the workspace's default color."
           },
           "description": {
             "$ref": "#/components/schemas/RichText",
-            "description": "Rich text content as structured blocks. Different media types provide markdown support:\n• application/json - Default blocks format\n• application/vnd.airfocus.markdown+json - All RichText fields become markdown strings (recommended)\n• application/json+markdown - Legacy format, only top-level fields converted to markdown"
+            "default": {
+              "blocks": [],
+              "richText": true
+            },
+            "description": "Rich-text description of this item."
           },
           "fields": {
             "additionalProperties": {},
+            "default": {},
             "description": "Values of custom fields, where each key is a custom-field ID and each value is a JSON-formatted value of the corresponding field.",
             "examples": [
               {
@@ -2054,25 +2061,18 @@
             "type": "string"
           },
           "order": {
-            "description": "A order number of this item for sorting.",
+            "description": "Order number of this item for sorting. If omitted, the item is appended at the end.",
             "format": "int32",
             "type": "integer"
           },
           "statusId": {
-            "description": "Id of the status of this item.",
+            "description": "Id of the status of this item. If omitted, the server picks a default for the workspace.",
             "format": "uuid",
             "type": "string"
           }
         },
         "required": [
-          "statusId",
-          "color",
-          "name",
-          "description",
-          "assigneeUserIds",
-          "assigneeUserGroupIds",
-          "fields",
-          "order"
+          "name"
         ],
         "title": "CreateItemRequest",
         "type": "object"
@@ -2086,6 +2086,7 @@
             "type": "boolean"
           },
           "assigneeUserGroupIds": {
+            "default": [],
             "description": "Ids of user groups that are assigned to this item.",
             "items": {
               "format": "uuid",
@@ -2094,6 +2095,7 @@
             "type": "array"
           },
           "assigneeUserIds": {
+            "default": [],
             "description": "Ids of users who are assigned to this item.",
             "items": {
               "format": "uuid",
@@ -2103,7 +2105,7 @@
           },
           "color": {
             "$ref": "#/components/schemas/ItemColor",
-            "description": "Color of this item."
+            "description": "Color of this item. If omitted, the server uses the workspace's default color."
           },
           "description": {
             "description": "Rich text content as a markdown string (used with markdown media types)",
@@ -2114,6 +2116,7 @@
           },
           "fields": {
             "additionalProperties": {},
+            "default": {},
             "description": "Values of custom fields, where each key is a custom-field ID and each value is a JSON-formatted value of the corresponding field.",
             "examples": [
               {
@@ -2161,25 +2164,19 @@
             "type": "string"
           },
           "order": {
-            "description": "A order number of this item for sorting.",
+            "description": "Order number of this item for sorting. If omitted, the item is appended at the end.",
             "format": "int32",
             "type": "integer"
           },
           "statusId": {
-            "description": "Id of the status of this item.",
+            "description": "Id of the status of this item. If omitted, the server picks a default for the workspace.",
             "format": "uuid",
             "type": "string"
           }
         },
         "required": [
-          "statusId",
-          "color",
           "name",
-          "description",
-          "assigneeUserIds",
-          "assigneeUserGroupIds",
-          "fields",
-          "order"
+          "description"
         ],
         "title": "CreateItemRequestWithMD",
         "type": "object"
@@ -21111,7 +21108,7 @@
           },
           "description": {
             "$ref": "#/components/schemas/RichText",
-            "description": "Rich text content as structured blocks. Different media types provide markdown support:\n• application/json - Default blocks format\n• application/vnd.airfocus.markdown+json - All RichText fields become markdown strings (recommended)\n• application/json+markdown - Legacy format, only top-level fields converted to markdown"
+            "description": "Rich-text description of this item."
           },
           "fields": {
             "additionalProperties": {},
@@ -21162,7 +21159,6 @@
             "type": "string"
           },
           "order": {
-            "description": "A order number of this item for sorting.",
             "format": "int32",
             "type": "integer"
           },
@@ -21269,7 +21265,6 @@
             "type": "string"
           },
           "order": {
-            "description": "A order number of this item for sorting.",
             "format": "int32",
             "type": "integer"
           },
@@ -23379,7 +23374,25 @@
             "type": "boolean"
           },
           "filter": {
-            "$ref": "#/components/schemas/WorkspaceSearchQueryFilter"
+            "$ref": "#/components/schemas/WorkspaceSearchQueryFilter",
+            "examples": [
+              {
+                "inner": [
+                  {
+                    "text": "foo",
+                    "caseSensitive": false,
+                    "mode": "contain",
+                    "type": "name"
+                  },
+                  {
+                    "ids": [],
+                    "mode": "containAny",
+                    "type": "members"
+                  }
+                ],
+                "type": "and"
+              }
+            ]
           },
           "sort": {
             "$ref": "#/components/schemas/WorkspaceSearchQuerySort"
@@ -23396,12 +23409,13 @@
         "discriminator": {
           "mapping": {
             "and": "#/components/schemas/WorkspaceSearchQueryFilterAnd",
-            "appType": "#/components/schemas/WorkspaceSearchQueryFilterAppType",
-            "field": "#/components/schemas/WorkspaceSearchQueryFilterField",
-            "itemType": "#/components/schemas/WorkspaceSearchQueryFilterItemType",
-            "members": "#/components/schemas/WorkspaceSearchQueryFilterMembers",
-            "name": "#/components/schemas/WorkspaceSearchQueryFilterName",
-            "namespace": "#/components/schemas/WorkspaceSearchQueryFilterNamespace",
+            "appType:containAny": "#/components/schemas/WorkspaceSearchQueryFilterAppTypeContainAny",
+            "field:containAny": "#/components/schemas/WorkspaceSearchQueryFilterFieldContainAny",
+            "itemType:containAny": "#/components/schemas/WorkspaceSearchQueryFilterItemTypeContainAny",
+            "members:containAny": "#/components/schemas/WorkspaceSearchQueryFilterMembersContainAny",
+            "name:contain": "#/components/schemas/WorkspaceSearchQueryFilterNameContain",
+            "name:equal": "#/components/schemas/WorkspaceSearchQueryFilterNameEqual",
+            "namespace:containAny": "#/components/schemas/WorkspaceSearchQueryFilterNamespaceContainAny",
             "not": "#/components/schemas/WorkspaceSearchQueryFilterNot",
             "or": "#/components/schemas/WorkspaceSearchQueryFilterOr"
           },
@@ -23412,22 +23426,25 @@
             "$ref": "#/components/schemas/WorkspaceSearchQueryFilterAnd"
           },
           {
-            "$ref": "#/components/schemas/WorkspaceSearchQueryFilterAppType"
+            "$ref": "#/components/schemas/WorkspaceSearchQueryFilterAppTypeContainAny"
           },
           {
-            "$ref": "#/components/schemas/WorkspaceSearchQueryFilterField"
+            "$ref": "#/components/schemas/WorkspaceSearchQueryFilterFieldContainAny"
           },
           {
-            "$ref": "#/components/schemas/WorkspaceSearchQueryFilterItemType"
+            "$ref": "#/components/schemas/WorkspaceSearchQueryFilterItemTypeContainAny"
           },
           {
-            "$ref": "#/components/schemas/WorkspaceSearchQueryFilterMembers"
+            "$ref": "#/components/schemas/WorkspaceSearchQueryFilterMembersContainAny"
           },
           {
-            "$ref": "#/components/schemas/WorkspaceSearchQueryFilterName"
+            "$ref": "#/components/schemas/WorkspaceSearchQueryFilterNameContain"
           },
           {
-            "$ref": "#/components/schemas/WorkspaceSearchQueryFilterNamespace"
+            "$ref": "#/components/schemas/WorkspaceSearchQueryFilterNameEqual"
+          },
+          {
+            "$ref": "#/components/schemas/WorkspaceSearchQueryFilterNamespaceContainAny"
           },
           {
             "$ref": "#/components/schemas/WorkspaceSearchQueryFilterNot"
@@ -23458,24 +23475,10 @@
         "title": "WorkspaceSearchQueryFilterAnd",
         "type": "object"
       },
-      "WorkspaceSearchQueryFilterAppType": {
-        "discriminator": {
-          "mapping": {
-            "containAny": "#/components/schemas/WorkspaceSearchQueryFilterAppTypeContainAny"
-          },
-          "propertyName": "mode"
-        },
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/WorkspaceSearchQueryFilterAppTypeContainAny"
-          }
-        ],
-        "title": "WorkspaceSearchQueryFilterAppType"
-      },
       "WorkspaceSearchQueryFilterAppTypeContainAny": {
         "properties": {
-          "mode": {
-            "const": "containAny",
+          "type": {
+            "const": "appType:containAny",
             "type": "string"
           },
           "values": {
@@ -23488,29 +23491,15 @@
         },
         "required": [
           "values",
-          "mode"
+          "type"
         ],
         "title": "WorkspaceSearchQueryFilterAppTypeContainAny",
         "type": "object"
       },
-      "WorkspaceSearchQueryFilterField": {
-        "discriminator": {
-          "mapping": {
-            "containAny": "#/components/schemas/WorkspaceSearchQueryFilterFieldContainAny"
-          },
-          "propertyName": "mode"
-        },
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/WorkspaceSearchQueryFilterFieldContainAny"
-          }
-        ],
-        "title": "WorkspaceSearchQueryFilterField"
-      },
       "WorkspaceSearchQueryFilterFieldContainAny": {
         "properties": {
-          "mode": {
-            "const": "containAny",
+          "type": {
+            "const": "field:containAny",
             "type": "string"
           },
           "values": {
@@ -23524,29 +23513,15 @@
         },
         "required": [
           "values",
-          "mode"
+          "type"
         ],
         "title": "WorkspaceSearchQueryFilterFieldContainAny",
         "type": "object"
       },
-      "WorkspaceSearchQueryFilterItemType": {
-        "discriminator": {
-          "mapping": {
-            "containAny": "#/components/schemas/WorkspaceSearchQueryFilterItemTypeContainAny"
-          },
-          "propertyName": "mode"
-        },
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/WorkspaceSearchQueryFilterItemTypeContainAny"
-          }
-        ],
-        "title": "WorkspaceSearchQueryFilterItemType"
-      },
       "WorkspaceSearchQueryFilterItemTypeContainAny": {
         "properties": {
-          "mode": {
-            "const": "containAny",
+          "type": {
+            "const": "itemType:containAny",
             "type": "string"
           },
           "values": {
@@ -23559,24 +23534,10 @@
         },
         "required": [
           "values",
-          "mode"
+          "type"
         ],
         "title": "WorkspaceSearchQueryFilterItemTypeContainAny",
         "type": "object"
-      },
-      "WorkspaceSearchQueryFilterMembers": {
-        "discriminator": {
-          "mapping": {
-            "containAny": "#/components/schemas/WorkspaceSearchQueryFilterMembersContainAny"
-          },
-          "propertyName": "mode"
-        },
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/WorkspaceSearchQueryFilterMembersContainAny"
-          }
-        ],
-        "title": "WorkspaceSearchQueryFilterMembers"
       },
       "WorkspaceSearchQueryFilterMembersContainAny": {
         "properties": {
@@ -23588,53 +23549,35 @@
             "type": "array",
             "uniqueItems": true
           },
-          "mode": {
-            "const": "containAny",
+          "type": {
+            "const": "members:containAny",
             "type": "string"
           }
         },
         "required": [
           "ids",
-          "mode"
+          "type"
         ],
         "title": "WorkspaceSearchQueryFilterMembersContainAny",
         "type": "object"
-      },
-      "WorkspaceSearchQueryFilterName": {
-        "discriminator": {
-          "mapping": {
-            "contain": "#/components/schemas/WorkspaceSearchQueryFilterNameContain",
-            "equal": "#/components/schemas/WorkspaceSearchQueryFilterNameEqual"
-          },
-          "propertyName": "mode"
-        },
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/WorkspaceSearchQueryFilterNameContain"
-          },
-          {
-            "$ref": "#/components/schemas/WorkspaceSearchQueryFilterNameEqual"
-          }
-        ],
-        "title": "WorkspaceSearchQueryFilterName"
       },
       "WorkspaceSearchQueryFilterNameContain": {
         "properties": {
           "caseSensitive": {
             "type": "boolean"
           },
-          "mode": {
-            "const": "contain",
+          "text": {
             "type": "string"
           },
-          "text": {
+          "type": {
+            "const": "name:contain",
             "type": "string"
           }
         },
         "required": [
           "text",
           "caseSensitive",
-          "mode"
+          "type"
         ],
         "title": "WorkspaceSearchQueryFilterNameContain",
         "type": "object"
@@ -23644,40 +23587,26 @@
           "caseSensitive": {
             "type": "boolean"
           },
-          "mode": {
-            "const": "equal",
+          "text": {
             "type": "string"
           },
-          "text": {
+          "type": {
+            "const": "name:equal",
             "type": "string"
           }
         },
         "required": [
           "text",
           "caseSensitive",
-          "mode"
+          "type"
         ],
         "title": "WorkspaceSearchQueryFilterNameEqual",
         "type": "object"
       },
-      "WorkspaceSearchQueryFilterNamespace": {
-        "discriminator": {
-          "mapping": {
-            "containAny": "#/components/schemas/WorkspaceSearchQueryFilterNamespaceContainAny"
-          },
-          "propertyName": "mode"
-        },
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/WorkspaceSearchQueryFilterNamespaceContainAny"
-          }
-        ],
-        "title": "WorkspaceSearchQueryFilterNamespace"
-      },
       "WorkspaceSearchQueryFilterNamespaceContainAny": {
         "properties": {
-          "mode": {
-            "const": "containAny",
+          "type": {
+            "const": "namespace:containAny",
             "type": "string"
           },
           "values": {
@@ -23689,7 +23618,7 @@
         },
         "required": [
           "values",
-          "mode"
+          "type"
         ],
         "title": "WorkspaceSearchQueryFilterNamespaceContainAny",
         "type": "object"
@@ -23697,10 +23626,7 @@
       "WorkspaceSearchQueryFilterNot": {
         "properties": {
           "inner": {
-            "items": {
-              "$ref": "#/components/schemas/WorkspaceSearchQueryFilter"
-            },
-            "type": "array"
+            "$ref": "#/components/schemas/WorkspaceSearchQueryFilter"
           },
           "type": {
             "const": "not",
@@ -24399,7 +24325,7 @@
   },
   "info": {
     "title": "airfocus API",
-    "version": "1.0.0-beta.46.208.0"
+    "version": "1.0.0-beta.46.211.1"
   },
   "openapi": "3.1.0",
   "paths": {
