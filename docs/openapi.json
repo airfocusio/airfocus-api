@@ -241,16 +241,15 @@
             "$ref": "#/components/schemas/ItemSearchQueryFilter",
             "examples": [
               {
+                "_coproduct": "ItemSearchQueryFilter",
                 "inner": [
                   {
-                    "text": "foo",
                     "caseSensitive": false,
-                    "mode": "contain",
-                    "type": "name"
+                    "text": "foo",
+                    "type": "name:contain"
                   },
                   {
-                    "mode": "defined",
-                    "type": "assignees"
+                    "type": "assignees:defined"
                   }
                 ],
                 "type": "and"
@@ -740,16 +739,15 @@
             "$ref": "#/components/schemas/ItemSearchQueryFilter",
             "examples": [
               {
+                "_coproduct": "ItemSearchQueryFilter",
                 "inner": [
                   {
-                    "text": "foo",
                     "caseSensitive": false,
-                    "mode": "contain",
-                    "type": "name"
+                    "text": "foo",
+                    "type": "name:contain"
                   },
                   {
-                    "mode": "defined",
-                    "type": "assignees"
+                    "type": "assignees:defined"
                   }
                 ],
                 "type": "and"
@@ -1353,16 +1351,15 @@
             "$ref": "#/components/schemas/ItemSearchQueryFilter",
             "examples": [
               {
+                "_coproduct": "ItemSearchQueryFilter",
                 "inner": [
                   {
-                    "text": "foo",
                     "caseSensitive": false,
-                    "mode": "contain",
-                    "type": "name"
+                    "text": "foo",
+                    "type": "name:contain"
                   },
                   {
-                    "mode": "defined",
-                    "type": "assignees"
+                    "type": "assignees:defined"
                   }
                 ],
                 "type": "and"
@@ -1455,16 +1452,15 @@
             "$ref": "#/components/schemas/ItemSearchQueryFilter",
             "examples": [
               {
+                "_coproduct": "ItemSearchQueryFilter",
                 "inner": [
                   {
-                    "text": "foo",
                     "caseSensitive": false,
-                    "mode": "contain",
-                    "type": "name"
+                    "text": "foo",
+                    "type": "name:contain"
                   },
                   {
-                    "mode": "defined",
-                    "type": "assignees"
+                    "type": "assignees:defined"
                   }
                 ],
                 "type": "and"
@@ -2513,16 +2509,15 @@
             "$ref": "#/components/schemas/ItemSearchQueryFilter",
             "examples": [
               {
+                "_coproduct": "ItemSearchQueryFilter",
                 "inner": [
                   {
-                    "text": "foo",
                     "caseSensitive": false,
-                    "mode": "contain",
-                    "type": "name"
+                    "text": "foo",
+                    "type": "name:contain"
                   },
                   {
-                    "mode": "defined",
-                    "type": "assignees"
+                    "type": "assignees:defined"
                   }
                 ],
                 "type": "and"
@@ -3141,16 +3136,15 @@
             "$ref": "#/components/schemas/ItemSearchQueryFilter",
             "examples": [
               {
+                "_coproduct": "ItemSearchQueryFilter",
                 "inner": [
                   {
-                    "text": "foo",
                     "caseSensitive": false,
-                    "mode": "contain",
-                    "type": "name"
+                    "text": "foo",
+                    "type": "name:contain"
                   },
                   {
-                    "mode": "defined",
-                    "type": "assignees"
+                    "type": "assignees:defined"
                   }
                 ],
                 "type": "and"
@@ -3287,16 +3281,15 @@
             "$ref": "#/components/schemas/ItemSearchQueryFilter",
             "examples": [
               {
+                "_coproduct": "ItemSearchQueryFilter",
                 "inner": [
                   {
-                    "text": "foo",
                     "caseSensitive": false,
-                    "mode": "contain",
-                    "type": "name"
+                    "text": "foo",
+                    "type": "name:contain"
                   },
                   {
-                    "mode": "defined",
-                    "type": "assignees"
+                    "type": "assignees:defined"
                   }
                 ],
                 "type": "and"
@@ -4473,16 +4466,15 @@
             "$ref": "#/components/schemas/ItemSearchQueryFilter",
             "examples": [
               {
+                "_coproduct": "ItemSearchQueryFilter",
                 "inner": [
                   {
-                    "text": "foo",
                     "caseSensitive": false,
-                    "mode": "contain",
-                    "type": "name"
+                    "text": "foo",
+                    "type": "name:contain"
                   },
                   {
-                    "mode": "defined",
-                    "type": "assignees"
+                    "type": "assignees:defined"
                   }
                 ],
                 "type": "and"
@@ -4570,16 +4562,15 @@
             "description": "Filter applied on the items",
             "examples": [
               {
+                "_coproduct": "ItemSearchQueryFilter",
                 "inner": [
                   {
-                    "text": "foo",
                     "caseSensitive": false,
-                    "mode": "contain",
-                    "type": "name"
+                    "text": "foo",
+                    "type": "name:contain"
                   },
                   {
-                    "mode": "defined",
-                    "type": "assignees"
+                    "type": "assignees:defined"
                   }
                 ],
                 "type": "and"
@@ -4785,16 +4776,15 @@
             "description": "Filter applied on the items",
             "examples": [
               {
+                "_coproduct": "ItemSearchQueryFilter",
                 "inner": [
                   {
-                    "text": "foo",
                     "caseSensitive": false,
-                    "mode": "contain",
-                    "type": "name"
+                    "text": "foo",
+                    "type": "name:contain"
                   },
                   {
-                    "mode": "defined",
-                    "type": "assignees"
+                    "type": "assignees:defined"
                   }
                 ],
                 "type": "and"
@@ -5110,16 +5100,15 @@
             "$ref": "#/components/schemas/ItemSearchQueryFilter",
             "examples": [
               {
+                "_coproduct": "ItemSearchQueryFilter",
                 "inner": [
                   {
-                    "text": "foo",
                     "caseSensitive": false,
-                    "mode": "contain",
-                    "type": "name"
+                    "text": "foo",
+                    "type": "name:contain"
                   },
                   {
-                    "mode": "defined",
-                    "type": "assignees"
+                    "type": "assignees:defined"
                   }
                 ],
                 "type": "and"
@@ -5157,16 +5146,15 @@
             "$ref": "#/components/schemas/ItemSearchQueryFilter",
             "examples": [
               {
+                "_coproduct": "ItemSearchQueryFilter",
                 "inner": [
                   {
-                    "text": "foo",
                     "caseSensitive": false,
-                    "mode": "contain",
-                    "type": "name"
+                    "text": "foo",
+                    "type": "name:contain"
                   },
                   {
-                    "mode": "defined",
-                    "type": "assignees"
+                    "type": "assignees:defined"
                   }
                 ],
                 "type": "and"
@@ -5206,16 +5194,15 @@
             "$ref": "#/components/schemas/ItemSearchQueryFilter",
             "examples": [
               {
+                "_coproduct": "ItemSearchQueryFilter",
                 "inner": [
                   {
-                    "text": "foo",
                     "caseSensitive": false,
-                    "mode": "contain",
-                    "type": "name"
+                    "text": "foo",
+                    "type": "name:contain"
                   },
                   {
-                    "mode": "defined",
-                    "type": "assignees"
+                    "type": "assignees:defined"
                   }
                 ],
                 "type": "and"
@@ -5249,16 +5236,15 @@
             "$ref": "#/components/schemas/ItemSearchQueryFilter",
             "examples": [
               {
+                "_coproduct": "ItemSearchQueryFilter",
                 "inner": [
                   {
-                    "text": "foo",
                     "caseSensitive": false,
-                    "mode": "contain",
-                    "type": "name"
+                    "text": "foo",
+                    "type": "name:contain"
                   },
                   {
-                    "mode": "defined",
-                    "type": "assignees"
+                    "type": "assignees:defined"
                   }
                 ],
                 "type": "and"
@@ -5307,16 +5293,15 @@
             "$ref": "#/components/schemas/ItemSearchQueryFilter",
             "examples": [
               {
+                "_coproduct": "ItemSearchQueryFilter",
                 "inner": [
                   {
-                    "text": "foo",
                     "caseSensitive": false,
-                    "mode": "contain",
-                    "type": "name"
+                    "text": "foo",
+                    "type": "name:contain"
                   },
                   {
-                    "mode": "defined",
-                    "type": "assignees"
+                    "type": "assignees:defined"
                   }
                 ],
                 "type": "and"
@@ -5358,16 +5343,15 @@
             "$ref": "#/components/schemas/ItemSearchQueryFilter",
             "examples": [
               {
+                "_coproduct": "ItemSearchQueryFilter",
                 "inner": [
                   {
-                    "text": "foo",
                     "caseSensitive": false,
-                    "mode": "contain",
-                    "type": "name"
+                    "text": "foo",
+                    "type": "name:contain"
                   },
                   {
-                    "mode": "defined",
-                    "type": "assignees"
+                    "type": "assignees:defined"
                   }
                 ],
                 "type": "and"
@@ -5409,16 +5393,15 @@
             "$ref": "#/components/schemas/ItemSearchQueryFilter",
             "examples": [
               {
+                "_coproduct": "ItemSearchQueryFilter",
                 "inner": [
                   {
-                    "text": "foo",
                     "caseSensitive": false,
-                    "mode": "contain",
-                    "type": "name"
+                    "text": "foo",
+                    "type": "name:contain"
                   },
                   {
-                    "mode": "defined",
-                    "type": "assignees"
+                    "type": "assignees:defined"
                   }
                 ],
                 "type": "and"
@@ -5462,16 +5445,15 @@
             "$ref": "#/components/schemas/ItemSearchQueryFilter",
             "examples": [
               {
+                "_coproduct": "ItemSearchQueryFilter",
                 "inner": [
                   {
-                    "text": "foo",
                     "caseSensitive": false,
-                    "mode": "contain",
-                    "type": "name"
+                    "text": "foo",
+                    "type": "name:contain"
                   },
                   {
-                    "mode": "defined",
-                    "type": "assignees"
+                    "type": "assignees:defined"
                   }
                 ],
                 "type": "and"
@@ -5509,16 +5491,15 @@
             "$ref": "#/components/schemas/ItemSearchQueryFilter",
             "examples": [
               {
+                "_coproduct": "ItemSearchQueryFilter",
                 "inner": [
                   {
-                    "text": "foo",
                     "caseSensitive": false,
-                    "mode": "contain",
-                    "type": "name"
+                    "text": "foo",
+                    "type": "name:contain"
                   },
                   {
-                    "mode": "defined",
-                    "type": "assignees"
+                    "type": "assignees:defined"
                   }
                 ],
                 "type": "and"
@@ -5555,16 +5536,15 @@
             "$ref": "#/components/schemas/ItemSearchQueryFilter",
             "examples": [
               {
+                "_coproduct": "ItemSearchQueryFilter",
                 "inner": [
                   {
-                    "text": "foo",
                     "caseSensitive": false,
-                    "mode": "contain",
-                    "type": "name"
+                    "text": "foo",
+                    "type": "name:contain"
                   },
                   {
-                    "mode": "defined",
-                    "type": "assignees"
+                    "type": "assignees:defined"
                   }
                 ],
                 "type": "and"
@@ -5605,16 +5585,15 @@
             "$ref": "#/components/schemas/ItemSearchQueryFilter",
             "examples": [
               {
+                "_coproduct": "ItemSearchQueryFilter",
                 "inner": [
                   {
-                    "text": "foo",
                     "caseSensitive": false,
-                    "mode": "contain",
-                    "type": "name"
+                    "text": "foo",
+                    "type": "name:contain"
                   },
                   {
-                    "mode": "defined",
-                    "type": "assignees"
+                    "type": "assignees:defined"
                   }
                 ],
                 "type": "and"
@@ -5657,16 +5636,15 @@
             "$ref": "#/components/schemas/ItemSearchQueryFilter",
             "examples": [
               {
+                "_coproduct": "ItemSearchQueryFilter",
                 "inner": [
                   {
-                    "text": "foo",
                     "caseSensitive": false,
-                    "mode": "contain",
-                    "type": "name"
+                    "text": "foo",
+                    "type": "name:contain"
                   },
                   {
-                    "mode": "defined",
-                    "type": "assignees"
+                    "type": "assignees:defined"
                   }
                 ],
                 "type": "and"
@@ -5705,16 +5683,15 @@
             "$ref": "#/components/schemas/ItemSearchQueryFilter",
             "examples": [
               {
+                "_coproduct": "ItemSearchQueryFilter",
                 "inner": [
                   {
-                    "text": "foo",
                     "caseSensitive": false,
-                    "mode": "contain",
-                    "type": "name"
+                    "text": "foo",
+                    "type": "name:contain"
                   },
                   {
-                    "mode": "defined",
-                    "type": "assignees"
+                    "type": "assignees:defined"
                   }
                 ],
                 "type": "and"
@@ -5759,16 +5736,15 @@
             "$ref": "#/components/schemas/ItemSearchQueryFilter",
             "examples": [
               {
+                "_coproduct": "ItemSearchQueryFilter",
                 "inner": [
                   {
-                    "text": "foo",
                     "caseSensitive": false,
-                    "mode": "contain",
-                    "type": "name"
+                    "text": "foo",
+                    "type": "name:contain"
                   },
                   {
-                    "mode": "defined",
-                    "type": "assignees"
+                    "type": "assignees:defined"
                   }
                 ],
                 "type": "and"
@@ -6566,16 +6542,15 @@
             "description": "Custom filter to apply to the counted items. If not specified, then the default filter from the view settings is used.",
             "examples": [
               {
+                "_coproduct": "ItemSearchQueryFilter",
                 "inner": [
                   {
-                    "text": "foo",
                     "caseSensitive": false,
-                    "mode": "contain",
-                    "type": "name"
+                    "text": "foo",
+                    "type": "name:contain"
                   },
                   {
-                    "mode": "defined",
-                    "type": "assignees"
+                    "type": "assignees:defined"
                   }
                 ],
                 "type": "and"
@@ -6670,16 +6645,15 @@
             "$ref": "#/components/schemas/ItemSearchQueryFilter",
             "examples": [
               {
+                "_coproduct": "ItemSearchQueryFilter",
                 "inner": [
                   {
-                    "text": "foo",
                     "caseSensitive": false,
-                    "mode": "contain",
-                    "type": "name"
+                    "text": "foo",
+                    "type": "name:contain"
                   },
                   {
-                    "mode": "defined",
-                    "type": "assignees"
+                    "type": "assignees:defined"
                   }
                 ],
                 "type": "and"
@@ -9405,16 +9379,15 @@
             "$ref": "#/components/schemas/ItemSearchQueryFilter",
             "examples": [
               {
+                "_coproduct": "ItemSearchQueryFilter",
                 "inner": [
                   {
-                    "text": "foo",
                     "caseSensitive": false,
-                    "mode": "contain",
-                    "type": "name"
+                    "text": "foo",
+                    "type": "name:contain"
                   },
                   {
-                    "mode": "defined",
-                    "type": "assignees"
+                    "type": "assignees:defined"
                   }
                 ],
                 "type": "and"
@@ -10059,16 +10032,15 @@
             "$ref": "#/components/schemas/ItemSearchQueryFilter",
             "examples": [
               {
+                "_coproduct": "ItemSearchQueryFilter",
                 "inner": [
                   {
-                    "text": "foo",
                     "caseSensitive": false,
-                    "mode": "contain",
-                    "type": "name"
+                    "text": "foo",
+                    "type": "name:contain"
                   },
                   {
-                    "mode": "defined",
-                    "type": "assignees"
+                    "type": "assignees:defined"
                   }
                 ],
                 "type": "and"
@@ -12293,16 +12265,15 @@
             "$ref": "#/components/schemas/ItemSearchQueryFilter",
             "examples": [
               {
+                "_coproduct": "ItemSearchQueryFilter",
                 "inner": [
                   {
-                    "text": "foo",
                     "caseSensitive": false,
-                    "mode": "contain",
-                    "type": "name"
+                    "text": "foo",
+                    "type": "name:contain"
                   },
                   {
-                    "mode": "defined",
-                    "type": "assignees"
+                    "type": "assignees:defined"
                   }
                 ],
                 "type": "and"
@@ -13275,16 +13246,15 @@
             "$ref": "#/components/schemas/ItemSearchQueryFilter",
             "examples": [
               {
+                "_coproduct": "ItemSearchQueryFilter",
                 "inner": [
                   {
-                    "text": "foo",
                     "caseSensitive": false,
-                    "mode": "contain",
-                    "type": "name"
+                    "text": "foo",
+                    "type": "name:contain"
                   },
                   {
-                    "mode": "defined",
-                    "type": "assignees"
+                    "type": "assignees:defined"
                   }
                 ],
                 "type": "and"
@@ -14108,16 +14078,15 @@
             "$ref": "#/components/schemas/ItemSearchQueryFilter",
             "examples": [
               {
+                "_coproduct": "ItemSearchQueryFilter",
                 "inner": [
                   {
-                    "text": "foo",
                     "caseSensitive": false,
-                    "mode": "contain",
-                    "type": "name"
+                    "text": "foo",
+                    "type": "name:contain"
                   },
                   {
-                    "mode": "defined",
-                    "type": "assignees"
+                    "type": "assignees:defined"
                   }
                 ],
                 "type": "and"
@@ -16126,16 +16095,15 @@
             "description": "An item-search filter to pull only specific items into this portfolio. This filter will be applied to all source workspaces, in addition to the filters defined for each source.",
             "examples": [
               {
+                "_coproduct": "ItemSearchQueryFilter",
                 "inner": [
                   {
-                    "text": "foo",
                     "caseSensitive": false,
-                    "mode": "contain",
-                    "type": "name"
+                    "text": "foo",
+                    "type": "name:contain"
                   },
                   {
-                    "mode": "defined",
-                    "type": "assignees"
+                    "type": "assignees:defined"
                   }
                 ],
                 "type": "and"
@@ -16175,16 +16143,15 @@
             "description": "An item-search filter to pull only specific items into this portfolio.",
             "examples": [
               {
+                "_coproduct": "ItemSearchQueryFilter",
                 "inner": [
                   {
-                    "text": "foo",
                     "caseSensitive": false,
-                    "mode": "contain",
-                    "type": "name"
+                    "text": "foo",
+                    "type": "name:contain"
                   },
                   {
-                    "mode": "defined",
-                    "type": "assignees"
+                    "type": "assignees:defined"
                   }
                 ],
                 "type": "and"
@@ -18826,16 +18793,15 @@
             "$ref": "#/components/schemas/ItemSearchQueryFilter",
             "examples": [
               {
+                "_coproduct": "ItemSearchQueryFilter",
                 "inner": [
                   {
-                    "text": "foo",
                     "caseSensitive": false,
-                    "mode": "contain",
-                    "type": "name"
+                    "text": "foo",
+                    "type": "name:contain"
                   },
                   {
-                    "mode": "defined",
-                    "type": "assignees"
+                    "type": "assignees:defined"
                   }
                 ],
                 "type": "and"
@@ -19817,16 +19783,15 @@
             "$ref": "#/components/schemas/ItemSearchQueryFilter",
             "examples": [
               {
+                "_coproduct": "ItemSearchQueryFilter",
                 "inner": [
                   {
-                    "text": "foo",
                     "caseSensitive": false,
-                    "mode": "contain",
-                    "type": "name"
+                    "text": "foo",
+                    "type": "name:contain"
                   },
                   {
-                    "mode": "defined",
-                    "type": "assignees"
+                    "type": "assignees:defined"
                   }
                 ],
                 "type": "and"
@@ -20843,16 +20808,15 @@
             "$ref": "#/components/schemas/ItemSearchQueryFilter",
             "examples": [
               {
+                "_coproduct": "ItemSearchQueryFilter",
                 "inner": [
                   {
-                    "text": "foo",
                     "caseSensitive": false,
-                    "mode": "contain",
-                    "type": "name"
+                    "text": "foo",
+                    "type": "name:contain"
                   },
                   {
-                    "mode": "defined",
-                    "type": "assignees"
+                    "type": "assignees:defined"
                   }
                 ],
                 "type": "and"
@@ -23375,23 +23339,23 @@
       "WorkspaceSearchQuery": {
         "properties": {
           "archived": {
+            "default": false,
             "type": "boolean"
           },
           "filter": {
             "$ref": "#/components/schemas/WorkspaceSearchQueryFilter",
             "examples": [
               {
+                "_coproduct": "WorkspaceSearchQueryFilter",
                 "inner": [
                   {
-                    "text": "foo",
                     "caseSensitive": false,
-                    "mode": "contain",
-                    "type": "name"
+                    "text": "foo",
+                    "type": "name:contain"
                   },
                   {
                     "ids": [],
-                    "mode": "containAny",
-                    "type": "members"
+                    "type": "members:containAny"
                   }
                 ],
                 "type": "and"
@@ -23402,10 +23366,6 @@
             "$ref": "#/components/schemas/WorkspaceSearchQuerySort"
           }
         },
-        "required": [
-          "sort",
-          "archived"
-        ],
         "title": "WorkspaceSearchQuery",
         "type": "object"
       },
@@ -23665,6 +23625,10 @@
         "type": "object"
       },
       "WorkspaceSearchQuerySort": {
+        "default": {
+          "direction": "desc",
+          "type": "lastActivity"
+        },
         "discriminator": {
           "mapping": {
             "createdAt": "#/components/schemas/WorkspaceSearchQuerySortCreatedAt",
@@ -24329,7 +24293,7 @@
   },
   "info": {
     "title": "airfocus API",
-    "version": "1.0.0-beta.46.219.0"
+    "version": "1.0.0-beta.46.222.2"
   },
   "openapi": "3.1.0",
   "paths": {
