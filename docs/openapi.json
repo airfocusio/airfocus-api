@@ -8252,13 +8252,6 @@
         "title": "ItemAttachmentWithEmbed",
         "type": "object"
       },
-      "ItemAttachmentWithEmbedOrNullList": {
-        "items": {
-          "$ref": "#/components/schemas/ItemAttachmentWithEmbed"
-        },
-        "title": "ItemAttachmentWithEmbedOrNullList",
-        "type": "array"
-      },
       "ItemAttachmentWithEmbedPage": {
         "properties": {
           "items": {
@@ -8550,13 +8543,6 @@
         ],
         "title": "ItemCommentWithItemCommentEmbed",
         "type": "object"
-      },
-      "ItemCommentWithItemCommentEmbedOrNullList": {
-        "items": {
-          "$ref": "#/components/schemas/ItemCommentWithItemCommentEmbed"
-        },
-        "title": "ItemCommentWithItemCommentEmbedOrNullList",
-        "type": "array"
       },
       "ItemCommentWithItemCommentEmbedPage": {
         "properties": {
@@ -9208,13 +9194,6 @@
         "title": "ItemLinkTypeRecordWithItemLinkTypeRecordEmbed",
         "type": "object"
       },
-      "ItemLinkTypeRecordWithItemLinkTypeRecordEmbedOrNullList": {
-        "items": {
-          "$ref": "#/components/schemas/ItemLinkTypeRecordWithItemLinkTypeRecordEmbed"
-        },
-        "title": "ItemLinkTypeRecordWithItemLinkTypeRecordEmbedOrNullList",
-        "type": "array"
-      },
       "ItemLinkTypeRecordWithItemLinkTypeRecordEmbedPage": {
         "properties": {
           "items": {
@@ -9300,13 +9279,6 @@
         ],
         "title": "ItemLinkWithItemLinkEmbed",
         "type": "object"
-      },
-      "ItemLinkWithItemLinkEmbedOrNullList": {
-        "items": {
-          "$ref": "#/components/schemas/ItemLinkWithItemLinkEmbed"
-        },
-        "title": "ItemLinkWithItemLinkEmbedOrNullList",
-        "type": "array"
       },
       "ItemLinkWithItemLinkEmbedPage": {
         "properties": {
@@ -9901,13 +9873,6 @@
         ],
         "title": "ItemRelationWithItemRelationEmbed",
         "type": "object"
-      },
-      "ItemRelationWithItemRelationEmbedOrNullList": {
-        "items": {
-          "$ref": "#/components/schemas/ItemRelationWithItemRelationEmbed"
-        },
-        "title": "ItemRelationWithItemRelationEmbedOrNullList",
-        "type": "array"
       },
       "ItemRelationWithItemRelationEmbedPage": {
         "properties": {
@@ -11463,13 +11428,6 @@
         "title": "ItemWithItemEmbed",
         "type": "object"
       },
-      "ItemWithItemEmbedOrNullList": {
-        "items": {
-          "$ref": "#/components/schemas/ItemWithItemEmbed"
-        },
-        "title": "ItemWithItemEmbedOrNullList",
-        "type": "array"
-      },
       "ItemWithItemEmbedPage": {
         "properties": {
           "items": {
@@ -11639,13 +11597,6 @@
         ],
         "title": "ItemWithMDWithItemEmbed",
         "type": "object"
-      },
-      "ItemWithMDWithItemEmbedOrNullList": {
-        "items": {
-          "$ref": "#/components/schemas/ItemWithMDWithItemEmbed"
-        },
-        "title": "ItemWithMDWithItemEmbedOrNullList",
-        "type": "array"
       },
       "ItemWithMDWithItemEmbedPage": {
         "properties": {
@@ -13156,13 +13107,6 @@
         ],
         "title": "MilestoneWithEmbed",
         "type": "object"
-      },
-      "MilestoneWithEmbedOrNullList": {
-        "items": {
-          "$ref": "#/components/schemas/MilestoneWithEmbed"
-        },
-        "title": "MilestoneWithEmbedOrNullList",
-        "type": "array"
       },
       "MilestoneWithEmbedPage": {
         "properties": {
@@ -18548,13 +18492,6 @@
         "title": "StatusPresetWithStatusPresetEmbed",
         "type": "object"
       },
-      "StatusPresetWithStatusPresetEmbedOrNullList": {
-        "items": {
-          "$ref": "#/components/schemas/StatusPresetWithStatusPresetEmbed"
-        },
-        "title": "StatusPresetWithStatusPresetEmbedOrNullList",
-        "type": "array"
-      },
       "StatusPresetWithStatusPresetEmbedPage": {
         "properties": {
           "items": {
@@ -23170,13 +23107,6 @@
         "title": "WorkspaceGroupWithWorkspaceGroupEmbed",
         "type": "object"
       },
-      "WorkspaceGroupWithWorkspaceGroupEmbedOrNullList": {
-        "items": {
-          "$ref": "#/components/schemas/WorkspaceGroupWithWorkspaceGroupEmbed"
-        },
-        "title": "WorkspaceGroupWithWorkspaceGroupEmbedOrNullList",
-        "type": "array"
-      },
       "WorkspaceGroupWithWorkspaceGroupSearchEmbed": {
         "description": "An entity for grouping workspaces (like folders).",
         "properties": {
@@ -23829,13 +23759,6 @@
         "title": "WorkspaceWithMDWithWorkspaceEmbed",
         "type": "object"
       },
-      "WorkspaceWithMDWithWorkspaceEmbedOrNullList": {
-        "items": {
-          "$ref": "#/components/schemas/WorkspaceWithMDWithWorkspaceEmbed"
-        },
-        "title": "WorkspaceWithMDWithWorkspaceEmbedOrNullList",
-        "type": "array"
-      },
       "WorkspaceWithMDWithWorkspaceSearchEmbed": {
         "description": "Workspace with Markdown string description.",
         "properties": {
@@ -24049,13 +23972,6 @@
         ],
         "title": "WorkspaceWithWorkspaceEmbed",
         "type": "object"
-      },
-      "WorkspaceWithWorkspaceEmbedOrNullList": {
-        "items": {
-          "$ref": "#/components/schemas/WorkspaceWithWorkspaceEmbed"
-        },
-        "title": "WorkspaceWithWorkspaceEmbedOrNullList",
-        "type": "array"
       },
       "WorkspaceWithWorkspaceSearchEmbed": {
         "properties": {
@@ -24293,7 +24209,7 @@
   },
   "info": {
     "title": "airfocus API",
-    "version": "1.0.0-beta.46.222.7"
+    "version": "1.0.0-beta.46.232.0"
   },
   "openapi": "3.1.0",
   "paths": {
@@ -25276,7 +25192,17 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ItemLinkTypeRecordWithItemLinkTypeRecordEmbedOrNullList"
+                  "items": {
+                    "anyOf": [
+                      {
+                        "$ref": "#/components/schemas/ItemLinkTypeRecordWithItemLinkTypeRecordEmbed"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "type": "array"
                 }
               }
             },
@@ -25378,7 +25304,17 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ItemLinkTypeRecordWithItemLinkTypeRecordEmbedOrNullList"
+                  "items": {
+                    "anyOf": [
+                      {
+                        "$ref": "#/components/schemas/ItemLinkTypeRecordWithItemLinkTypeRecordEmbed"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "type": "array"
                 }
               }
             },
@@ -26735,7 +26671,17 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/StatusPresetWithStatusPresetEmbedOrNullList"
+                  "items": {
+                    "anyOf": [
+                      {
+                        "$ref": "#/components/schemas/StatusPresetWithStatusPresetEmbed"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "type": "array"
                 }
               }
             },
@@ -26849,7 +26795,17 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/StatusPresetWithStatusPresetEmbedOrNullList"
+                  "items": {
+                    "anyOf": [
+                      {
+                        "$ref": "#/components/schemas/StatusPresetWithStatusPresetEmbed"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "type": "array"
                 }
               }
             },
@@ -29192,17 +29148,47 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/WorkspaceWithWorkspaceEmbedOrNullList"
+                  "items": {
+                    "anyOf": [
+                      {
+                        "$ref": "#/components/schemas/WorkspaceWithWorkspaceEmbed"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "type": "array"
                 }
               },
               "application/json+markdown": {
                 "schema": {
-                  "$ref": "#/components/schemas/WorkspaceWithMDWithWorkspaceEmbedOrNullList"
+                  "items": {
+                    "anyOf": [
+                      {
+                        "$ref": "#/components/schemas/WorkspaceWithMDWithWorkspaceEmbed"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "type": "array"
                 }
               },
               "application/vnd.airfocus.markdown+json": {
                 "schema": {
-                  "$ref": "#/components/schemas/WorkspaceWithWorkspaceEmbedOrNullList"
+                  "items": {
+                    "anyOf": [
+                      {
+                        "$ref": "#/components/schemas/WorkspaceWithWorkspaceEmbed"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "type": "array"
                 }
               }
             },
@@ -29844,7 +29830,17 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/WorkspaceGroupWithWorkspaceGroupEmbedOrNullList"
+                  "items": {
+                    "anyOf": [
+                      {
+                        "$ref": "#/components/schemas/WorkspaceGroupWithWorkspaceGroupEmbed"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "type": "array"
                 }
               }
             },
@@ -29958,7 +29954,17 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/WorkspaceGroupWithWorkspaceGroupEmbedOrNullList"
+                  "items": {
+                    "anyOf": [
+                      {
+                        "$ref": "#/components/schemas/WorkspaceGroupWithWorkspaceGroupEmbed"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "type": "array"
                 }
               }
             },
@@ -30896,7 +30902,17 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ItemRelationWithItemRelationEmbedOrNullList"
+                  "items": {
+                    "anyOf": [
+                      {
+                        "$ref": "#/components/schemas/ItemRelationWithItemRelationEmbed"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "type": "array"
                 }
               }
             },
@@ -31010,7 +31026,17 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ItemRelationWithItemRelationEmbedOrNullList"
+                  "items": {
+                    "anyOf": [
+                      {
+                        "$ref": "#/components/schemas/ItemRelationWithItemRelationEmbed"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "type": "array"
                 }
               }
             },
@@ -31985,17 +32011,47 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ItemWithItemEmbedOrNullList"
+                  "items": {
+                    "anyOf": [
+                      {
+                        "$ref": "#/components/schemas/ItemWithItemEmbed"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "type": "array"
                 }
               },
               "application/json+markdown": {
                 "schema": {
-                  "$ref": "#/components/schemas/ItemWithMDWithItemEmbedOrNullList"
+                  "items": {
+                    "anyOf": [
+                      {
+                        "$ref": "#/components/schemas/ItemWithMDWithItemEmbed"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "type": "array"
                 }
               },
               "application/vnd.airfocus.markdown+json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ItemWithItemEmbedOrNullList"
+                  "items": {
+                    "anyOf": [
+                      {
+                        "$ref": "#/components/schemas/ItemWithItemEmbed"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "type": "array"
                 }
               }
             },
@@ -32246,17 +32302,47 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/WorkspaceWithWorkspaceEmbedOrNullList"
+                  "items": {
+                    "anyOf": [
+                      {
+                        "$ref": "#/components/schemas/WorkspaceWithWorkspaceEmbed"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "type": "array"
                 }
               },
               "application/json+markdown": {
                 "schema": {
-                  "$ref": "#/components/schemas/WorkspaceWithMDWithWorkspaceEmbedOrNullList"
+                  "items": {
+                    "anyOf": [
+                      {
+                        "$ref": "#/components/schemas/WorkspaceWithMDWithWorkspaceEmbed"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "type": "array"
                 }
               },
               "application/vnd.airfocus.markdown+json": {
                 "schema": {
-                  "$ref": "#/components/schemas/WorkspaceWithWorkspaceEmbedOrNullList"
+                  "items": {
+                    "anyOf": [
+                      {
+                        "$ref": "#/components/schemas/WorkspaceWithWorkspaceEmbed"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "type": "array"
                 }
               }
             },
@@ -33516,7 +33602,17 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ItemAttachmentWithEmbedOrNullList"
+                  "items": {
+                    "anyOf": [
+                      {
+                        "$ref": "#/components/schemas/ItemAttachmentWithEmbed"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "type": "array"
                 }
               }
             },
@@ -33639,7 +33735,17 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ItemAttachmentWithEmbedOrNullList"
+                  "items": {
+                    "anyOf": [
+                      {
+                        "$ref": "#/components/schemas/ItemAttachmentWithEmbed"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "type": "array"
                 }
               }
             },
@@ -34565,17 +34671,47 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ItemCommentWithItemCommentEmbedOrNullList"
+                  "items": {
+                    "anyOf": [
+                      {
+                        "$ref": "#/components/schemas/ItemCommentWithItemCommentEmbed"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "type": "array"
                 }
               },
               "application/json+markdown": {
                 "schema": {
-                  "$ref": "#/components/schemas/ItemCommentWithItemCommentEmbedOrNullList"
+                  "items": {
+                    "anyOf": [
+                      {
+                        "$ref": "#/components/schemas/ItemCommentWithItemCommentEmbed"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "type": "array"
                 }
               },
               "application/vnd.airfocus.markdown+json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ItemCommentWithItemCommentEmbedOrNullList"
+                  "items": {
+                    "anyOf": [
+                      {
+                        "$ref": "#/components/schemas/ItemCommentWithItemCommentEmbed"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "type": "array"
                 }
               }
             },
@@ -34698,17 +34834,47 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ItemCommentWithItemCommentEmbedOrNullList"
+                  "items": {
+                    "anyOf": [
+                      {
+                        "$ref": "#/components/schemas/ItemCommentWithItemCommentEmbed"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "type": "array"
                 }
               },
               "application/json+markdown": {
                 "schema": {
-                  "$ref": "#/components/schemas/ItemCommentWithItemCommentEmbedOrNullList"
+                  "items": {
+                    "anyOf": [
+                      {
+                        "$ref": "#/components/schemas/ItemCommentWithItemCommentEmbed"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "type": "array"
                 }
               },
               "application/vnd.airfocus.markdown+json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ItemCommentWithItemCommentEmbedOrNullList"
+                  "items": {
+                    "anyOf": [
+                      {
+                        "$ref": "#/components/schemas/ItemCommentWithItemCommentEmbed"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "type": "array"
                 }
               }
             },
@@ -36103,17 +36269,47 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ItemWithItemEmbedOrNullList"
+                  "items": {
+                    "anyOf": [
+                      {
+                        "$ref": "#/components/schemas/ItemWithItemEmbed"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "type": "array"
                 }
               },
               "application/json+markdown": {
                 "schema": {
-                  "$ref": "#/components/schemas/ItemWithMDWithItemEmbedOrNullList"
+                  "items": {
+                    "anyOf": [
+                      {
+                        "$ref": "#/components/schemas/ItemWithMDWithItemEmbed"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "type": "array"
                 }
               },
               "application/vnd.airfocus.markdown+json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ItemWithItemEmbedOrNullList"
+                  "items": {
+                    "anyOf": [
+                      {
+                        "$ref": "#/components/schemas/ItemWithItemEmbed"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "type": "array"
                 }
               }
             },
@@ -36237,17 +36433,47 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ItemWithItemEmbedOrNullList"
+                  "items": {
+                    "anyOf": [
+                      {
+                        "$ref": "#/components/schemas/ItemWithItemEmbed"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "type": "array"
                 }
               },
               "application/json+markdown": {
                 "schema": {
-                  "$ref": "#/components/schemas/ItemWithMDWithItemEmbedOrNullList"
+                  "items": {
+                    "anyOf": [
+                      {
+                        "$ref": "#/components/schemas/ItemWithMDWithItemEmbed"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "type": "array"
                 }
               },
               "application/vnd.airfocus.markdown+json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ItemWithItemEmbedOrNullList"
+                  "items": {
+                    "anyOf": [
+                      {
+                        "$ref": "#/components/schemas/ItemWithItemEmbed"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "type": "array"
                 }
               }
             },
@@ -37702,7 +37928,17 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ItemLinkWithItemLinkEmbedOrNullList"
+                  "items": {
+                    "anyOf": [
+                      {
+                        "$ref": "#/components/schemas/ItemLinkWithItemLinkEmbed"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "type": "array"
                 }
               }
             },
@@ -37826,7 +38062,17 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ItemLinkWithItemLinkEmbedOrNullList"
+                  "items": {
+                    "anyOf": [
+                      {
+                        "$ref": "#/components/schemas/ItemLinkWithItemLinkEmbed"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "type": "array"
                 }
               }
             },
@@ -38725,7 +38971,17 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/MilestoneWithEmbedOrNullList"
+                  "items": {
+                    "anyOf": [
+                      {
+                        "$ref": "#/components/schemas/MilestoneWithEmbed"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "type": "array"
                 }
               }
             },
@@ -38850,7 +39106,17 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/MilestoneWithEmbedOrNullList"
+                  "items": {
+                    "anyOf": [
+                      {
+                        "$ref": "#/components/schemas/MilestoneWithEmbed"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "type": "array"
                 }
               }
             },
