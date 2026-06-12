@@ -11012,6 +11012,7 @@
             "lastUpdatedAt": "#/components/schemas/ItemSearchQuerySortLastUpdatedAt",
             "name": "#/components/schemas/ItemSearchQuerySortName",
             "order": "#/components/schemas/ItemSearchQuerySortOrder",
+            "parent": "#/components/schemas/ItemSearchQuerySortParent",
             "status": "#/components/schemas/ItemSearchQuerySortStatus"
           },
           "propertyName": "type"
@@ -11034,6 +11035,9 @@
           },
           {
             "$ref": "#/components/schemas/ItemSearchQuerySortOrder"
+          },
+          {
+            "$ref": "#/components/schemas/ItemSearchQuerySortParent"
           },
           {
             "$ref": "#/components/schemas/ItemSearchQuerySortStatus"
@@ -11158,6 +11162,23 @@
           "type"
         ],
         "title": "ItemSearchQuerySortOrder",
+        "type": "object"
+      },
+      "ItemSearchQuerySortParent": {
+        "properties": {
+          "direction": {
+            "$ref": "#/components/schemas/ItemSearchQuerySortDirection"
+          },
+          "type": {
+            "const": "parent",
+            "type": "string"
+          }
+        },
+        "required": [
+          "direction",
+          "type"
+        ],
+        "title": "ItemSearchQuerySortParent",
         "type": "object"
       },
       "ItemSearchQuerySortStatus": {
@@ -24209,7 +24230,7 @@
   },
   "info": {
     "title": "airfocus API",
-    "version": "1.0.0-beta.46.232.0"
+    "version": "1.0.0-beta.46.237.0"
   },
   "openapi": "3.1.0",
   "paths": {
