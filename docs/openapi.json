@@ -1232,6 +1232,24 @@
         "title": "ChangeUserRoleRequest",
         "type": "object"
       },
+      "ChannelPreferences": {
+        "default": {
+          "email": true,
+          "inApp": true
+        },
+        "properties": {
+          "email": {
+            "default": true,
+            "type": "boolean"
+          },
+          "inApp": {
+            "default": true,
+            "type": "boolean"
+          }
+        },
+        "title": "ChannelPreferences",
+        "type": "object"
+      },
       "ChartViewTypeSettings": {
         "properties": {
           "colorMode": {
@@ -3063,6 +3081,84 @@
           "_embedded"
         ],
         "title": "DateRangeFieldWithFieldEmbed",
+        "type": "object"
+      },
+      "DeliveryPreferences": {
+        "default": {
+          "addedUserToPokerGame": {
+            "email": true,
+            "inApp": true
+          },
+          "appNotification": {
+            "email": true,
+            "inApp": true
+          },
+          "assignedUserToItem": {
+            "email": true,
+            "inApp": true
+          },
+          "commentedOnItem": {
+            "email": true,
+            "inApp": true
+          },
+          "healthCheckInCreated": {
+            "email": true,
+            "inApp": true
+          },
+          "mentions": {
+            "email": true,
+            "inApp": true
+          },
+          "reactedToComment": {
+            "email": true,
+            "inApp": true
+          },
+          "requestedWorkspacePermission": {
+            "email": true,
+            "inApp": true
+          },
+          "updatedItemStatus": {
+            "email": true,
+            "inApp": true
+          },
+          "workspaceMembership": {
+            "email": true,
+            "inApp": true
+          }
+        },
+        "properties": {
+          "addedUserToPokerGame": {
+            "$ref": "#/components/schemas/ChannelPreferences"
+          },
+          "appNotification": {
+            "$ref": "#/components/schemas/ChannelPreferences"
+          },
+          "assignedUserToItem": {
+            "$ref": "#/components/schemas/ChannelPreferences"
+          },
+          "commentedOnItem": {
+            "$ref": "#/components/schemas/ChannelPreferences"
+          },
+          "healthCheckInCreated": {
+            "$ref": "#/components/schemas/ChannelPreferences"
+          },
+          "mentions": {
+            "$ref": "#/components/schemas/ChannelPreferences"
+          },
+          "reactedToComment": {
+            "$ref": "#/components/schemas/ChannelPreferences"
+          },
+          "requestedWorkspacePermission": {
+            "$ref": "#/components/schemas/ChannelPreferences"
+          },
+          "updatedItemStatus": {
+            "$ref": "#/components/schemas/ChannelPreferences"
+          },
+          "workspaceMembership": {
+            "$ref": "#/components/schemas/ChannelPreferences"
+          }
+        },
+        "title": "DeliveryPreferences",
         "type": "object"
       },
       "Direction": {
@@ -5967,15 +6063,29 @@
         "title": "GithubIntegrationTypeSettingsLabelMappingPair",
         "type": "object"
       },
+      "GlobalSearchItemProperty": {
+        "oneOf": [
+          {
+            "enum": [
+              "alias",
+              "score"
+            ],
+            "type": "string"
+          },
+          {
+            "description": "A combination of 'fieldType:' prefix and a field type.",
+            "pattern": "^fieldType:.+$",
+            "type": "string"
+          },
+          {
+            "description": "A combination of 'value:' prefix and a Ref.Item.Property name.",
+            "pattern": "^value:.+$",
+            "type": "string"
+          }
+        ],
+        "title": "GlobalSearchItemProperty"
+      },
       "GlobalSearchQuery": {
-        "default": {
-          "archived": false,
-          "assigneeUserGroupIds": [],
-          "assigneeUserIds": [],
-          "searchTargets": [],
-          "statusCategories": [],
-          "workspaceIds": []
-        },
         "properties": {
           "archived": {
             "default": false,
@@ -9391,6 +9501,82 @@
         "title": "ItemListWidgetDisplaySettings",
         "type": "object"
       },
+      "ItemPartial": {
+        "properties": {
+          "archived": {
+            "type": "boolean"
+          },
+          "assigneeUserGroupIds": {
+            "items": {
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "assigneeUserIds": {
+            "items": {
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "color": {
+            "$ref": "#/components/schemas/ItemColor"
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "description": {
+            "$ref": "#/components/schemas/RichText",
+            "description": "Rich text content as structured blocks. Different media types provide markdown support:\n• application/json - Default blocks format\n• application/vnd.airfocus.markdown+json - All RichText fields become markdown strings (recommended)\n• application/json+markdown - Legacy format, only top-level fields converted to markdown"
+          },
+          "fields": {
+            "additionalProperties": {},
+            "type": "object"
+          },
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "lastUpdatedAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "number": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "order": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "statusCategoryUpdatedAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "statusId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "statusUpdatedAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "workspaceId": {
+            "format": "uuid",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id"
+        ],
+        "title": "ItemPartial",
+        "type": "object"
+      },
       "ItemPartialEmbed": {
         "properties": {
           "alias": {
@@ -10061,6 +10247,7 @@
             "description:defined": "#/components/schemas/ItemSearchQueryFilterDescriptionDefined",
             "field:type": "#/components/schemas/ItemSearchQueryFilterFieldType",
             "field:value": "#/components/schemas/ItemSearchQueryFilterFieldValue",
+            "id:any": "#/components/schemas/ItemSearchQueryFilterIdAny",
             "integration:defined": "#/components/schemas/ItemSearchQueryFilterIntegrationDefined",
             "integration:value": "#/components/schemas/ItemSearchQueryFilterIntegrationValue",
             "item:watchSelf": "#/components/schemas/ItemSearchQueryFilterItemWatchSelf",
@@ -10129,6 +10316,9 @@
           },
           {
             "$ref": "#/components/schemas/ItemSearchQueryFilterFieldValue"
+          },
+          {
+            "$ref": "#/components/schemas/ItemSearchQueryFilterIdAny"
           },
           {
             "$ref": "#/components/schemas/ItemSearchQueryFilterIntegrationDefined"
@@ -10610,6 +10800,28 @@
           "type"
         ],
         "title": "ItemSearchQueryFilterFieldValue",
+        "type": "object"
+      },
+      "ItemSearchQueryFilterIdAny": {
+        "properties": {
+          "type": {
+            "const": "id:any",
+            "type": "string"
+          },
+          "values": {
+            "items": {
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": "array",
+            "uniqueItems": true
+          }
+        },
+        "required": [
+          "values",
+          "type"
+        ],
+        "title": "ItemSearchQueryFilterIdAny",
         "type": "object"
       },
       "ItemSearchQueryFilterIntegrationDefined": {
@@ -13564,12 +13776,11 @@
       },
       "NotificationSettingsData": {
         "properties": {
+          "deliveryPreferences": {
+            "$ref": "#/components/schemas/DeliveryPreferences"
+          },
           "enableAgentNotifications": {
             "default": true,
-            "type": "boolean"
-          },
-          "sendEmailNotifications": {
-            "default": false,
             "type": "boolean"
           }
         },
@@ -15178,6 +15389,78 @@
         "title": "OkrTimePeriodFieldWithFieldEmbed",
         "type": "object"
       },
+      "PartialGlobalSearchQuery": {
+        "default": {
+          "properties": [],
+          "query": {
+            "archived": false,
+            "assigneeUserGroupIds": [],
+            "assigneeUserIds": [],
+            "searchTargets": [],
+            "statusCategories": [],
+            "workspaceIds": []
+          }
+        },
+        "properties": {
+          "properties": {
+            "description": "Properties to be returned. A blank set here will return only the ItemId.",
+            "items": {
+              "$ref": "#/components/schemas/GlobalSearchItemProperty"
+            },
+            "type": "array",
+            "uniqueItems": true
+          },
+          "query": {
+            "$ref": "#/components/schemas/GlobalSearchQuery",
+            "description": "Query for the global search."
+          }
+        },
+        "required": [
+          "query",
+          "properties"
+        ],
+        "title": "PartialGlobalSearchQuery",
+        "type": "object"
+      },
+      "PartialGlobalSearchResult": {
+        "properties": {
+          "alias": {
+            "type": "string"
+          },
+          "score": {
+            "format": "float",
+            "type": "number"
+          },
+          "value": {
+            "$ref": "#/components/schemas/ItemPartial"
+          }
+        },
+        "required": [
+          "value"
+        ],
+        "title": "PartialGlobalSearchResult",
+        "type": "object"
+      },
+      "PartialGlobalSearchResultPage": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/PartialGlobalSearchResult"
+            },
+            "type": "array"
+          },
+          "totalItems": {
+            "format": "int32",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "items",
+          "totalItems"
+        ],
+        "title": "PartialGlobalSearchResultPage",
+        "type": "object"
+      },
       "PeopleField": {
         "properties": {
           "createdAt": {
@@ -15946,16 +16229,33 @@
       "PortalFieldTypeFilter": {
         "discriminator": {
           "mapping": {
+            "defined": "#/components/schemas/PortalFieldTypeFilterDefined",
             "public": "#/components/schemas/PortalFieldTypeFilterPublic"
           },
           "propertyName": "type"
         },
         "oneOf": [
           {
+            "$ref": "#/components/schemas/PortalFieldTypeFilterDefined"
+          },
+          {
             "$ref": "#/components/schemas/PortalFieldTypeFilterPublic"
           }
         ],
         "title": "PortalFieldTypeFilter"
+      },
+      "PortalFieldTypeFilterDefined": {
+        "properties": {
+          "type": {
+            "const": "defined",
+            "type": "string"
+          }
+        },
+        "required": [
+          "type"
+        ],
+        "title": "PortalFieldTypeFilterDefined",
+        "type": "object"
       },
       "PortalFieldTypeFilterPublic": {
         "properties": {
@@ -24230,7 +24530,7 @@
   },
   "info": {
     "title": "airfocus API",
-    "version": "1.0.0-beta.46.237.0"
+    "version": "1.0.0-beta.47.7.2"
   },
   "openapi": "3.1.0",
   "paths": {
@@ -29547,7 +29847,15 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/GlobalSearchQuery"
+                "$ref": "#/components/schemas/GlobalSearchQuery",
+                "default": {
+                  "archived": false,
+                  "assigneeUserGroupIds": [],
+                  "assigneeUserIds": [],
+                  "searchTargets": [],
+                  "statusCategories": [],
+                  "workspaceIds": []
+                }
               }
             }
           },
@@ -29559,6 +29867,135 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/GlobalSearchResultPage"
+                }
+              }
+            },
+            "description": ""
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "missing_token",
+                  "data": {},
+                  "message": "Access token is missing"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If missing authentication token."
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "forbidden",
+                  "data": {},
+                  "message": "Missing required access scope"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If authenticated client does not have the required access scopes."
+          }
+        },
+        "security": [
+          {
+            "httpAuth": []
+          }
+        ],
+        "tags": [
+          "Global search"
+        ]
+      }
+    },
+    "/api/workspaces/global-search/partial": {
+      "post": {
+        "description": "Requirements:<br/>- auth-client scopes: \"workspace:read\"",
+        "operationId": "searchPartialGlobal",
+        "parameters": [
+          {
+            "deprecated": true,
+            "description": "Enable sudo-mode for admins for a single request, which gives full permission to all workspaces in the team.",
+            "in": "query",
+            "name": "actAsAdmin",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "description": "How many elements to skip.",
+            "in": "query",
+            "name": "offset",
+            "required": false,
+            "schema": {
+              "default": 0,
+              "format": "int32",
+              "minimum": 0,
+              "type": "integer"
+            }
+          },
+          {
+            "description": "How many elements to return.",
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "schema": {
+              "default": 25,
+              "format": "int32",
+              "maximum": 1000,
+              "minimum": 0,
+              "type": "integer"
+            }
+          },
+          {
+            "deprecated": true,
+            "description": "From which element the page should start.",
+            "in": "query",
+            "name": "from",
+            "required": false,
+            "schema": {
+              "default": 0,
+              "deprecated": true,
+              "format": "int32",
+              "minimum": 0,
+              "type": "integer"
+            }
+          },
+          {
+            "deprecated": true,
+            "description": "At which element the page should end (excluding it).",
+            "in": "query",
+            "name": "to",
+            "required": false,
+            "schema": {
+              "deprecated": true,
+              "format": "int32",
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PartialGlobalSearchQuery"
+              }
+            }
+          },
+          "required": false
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PartialGlobalSearchResultPage"
                 }
               }
             },
