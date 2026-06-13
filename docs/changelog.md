@@ -6,6 +6,7 @@ nav_order: 35
 
 # Changelog
 
+- [v47](changelog/v47) _(created: 2026-06-13)_
 - [v46](changelog/v46) _(created: 2026-03-27)_
 - [v45](changelog/v45) _(created: 2026-03-07)_
 - [v44](changelog/v44) _(created: 2026-02-04)_
