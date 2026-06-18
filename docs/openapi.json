@@ -21308,7 +21308,6 @@
       "UpdateItemRequest": {
         "properties": {
           "archived": {
-            "default": false,
             "description": "Whether this item is archived.",
             "type": "boolean"
           },
@@ -21338,7 +21337,8 @@
           },
           "fields": {
             "additionalProperties": {},
-            "description": "Values of custom fields, where each key is a custom-field ID and each value is a JSON-formatted value of the corresponding field.",
+            "default": {},
+            "description": "Values of custom fields, where each key is a custom-field ID and each value is a JSON-formatted value of the corresponding field. Entries present in the map replace the matching entry on the item; entries omitted from the map are left untouched.",
             "examples": [
               {
                 "0fc3cfbc-27e9-3ea6-8a78-7de13dae3e3c": {
@@ -21385,6 +21385,7 @@
             "type": "string"
           },
           "order": {
+            "description": "Order number of this item for sorting.",
             "format": "int32",
             "type": "integer"
           },
@@ -21394,16 +21395,6 @@
             "type": "string"
           }
         },
-        "required": [
-          "statusId",
-          "color",
-          "name",
-          "description",
-          "assigneeUserIds",
-          "assigneeUserGroupIds",
-          "fields",
-          "order"
-        ],
         "title": "UpdateItemRequest",
         "type": "object"
       },
@@ -21411,7 +21402,6 @@
         "description": "Item with Markdown string description.",
         "properties": {
           "archived": {
-            "default": false,
             "description": "Whether this item is archived.",
             "type": "boolean"
           },
@@ -21436,7 +21426,7 @@
             "description": "Color of this item."
           },
           "description": {
-            "description": "Rich text content as a markdown string (used with markdown media types)",
+            "description": "Rich-text description of this item.",
             "examples": [
               "hello **world**!"
             ],
@@ -21444,7 +21434,8 @@
           },
           "fields": {
             "additionalProperties": {},
-            "description": "Values of custom fields, where each key is a custom-field ID and each value is a JSON-formatted value of the corresponding field.",
+            "default": {},
+            "description": "Values of custom fields, where each key is a custom-field ID and each value is a JSON-formatted value of the corresponding field. Entries present in the map replace the matching entry on the item; entries omitted from the map are left untouched.",
             "examples": [
               {
                 "0fc3cfbc-27e9-3ea6-8a78-7de13dae3e3c": {
@@ -21491,6 +21482,7 @@
             "type": "string"
           },
           "order": {
+            "description": "Order number of this item for sorting.",
             "format": "int32",
             "type": "integer"
           },
@@ -21500,16 +21492,6 @@
             "type": "string"
           }
         },
-        "required": [
-          "statusId",
-          "color",
-          "name",
-          "description",
-          "assigneeUserIds",
-          "assigneeUserGroupIds",
-          "fields",
-          "order"
-        ],
         "title": "UpdateItemRequestWithMD",
         "type": "object"
       },
@@ -24530,7 +24512,7 @@
   },
   "info": {
     "title": "airfocus API",
-    "version": "1.0.0-beta.47.9.0"
+    "version": "1.0.0-beta.47.15.0"
   },
   "openapi": "3.1.0",
   "paths": {
