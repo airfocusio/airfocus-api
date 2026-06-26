@@ -6068,6 +6068,7 @@
           {
             "enum": [
               "alias",
+              "context",
               "score"
             ],
             "type": "string"
@@ -6167,6 +6168,9 @@
         "properties": {
           "alias": {
             "type": "string"
+          },
+          "context": {
+            "$ref": "#/components/schemas/RefItemProperty"
           },
           "score": {
             "format": "float",
@@ -15427,6 +15431,9 @@
           "alias": {
             "type": "string"
           },
+          "context": {
+            "$ref": "#/components/schemas/RefItemProperty"
+          },
           "score": {
             "format": "float",
             "type": "number"
@@ -24512,7 +24519,7 @@
   },
   "info": {
     "title": "airfocus API",
-    "version": "1.0.0-beta.47.30.1"
+    "version": "1.0.0-beta.47.33.0"
   },
   "openapi": "3.1.0",
   "paths": {
