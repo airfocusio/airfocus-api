@@ -458,7 +458,8 @@
             "items": {
               "type": "string"
             },
-            "type": "array"
+            "type": "array",
+            "x-optional-collection": true
           },
           "selectWorkspace": {
             "type": "string"
@@ -6005,7 +6006,8 @@
               "format": "int64",
               "type": "integer"
             },
-            "type": "array"
+            "type": "array",
+            "x-optional-collection": true
           },
           "selectRepository": {
             "format": "int64",
@@ -7988,7 +7990,8 @@
               "$ref": "#/components/schemas/IntercomIntegrationTypeSettingsMapping"
             },
             "type": "array",
-            "uniqueItems": true
+            "uniqueItems": true,
+            "x-optional-collection": true
           },
           "mappings": {
             "default": [],
@@ -8005,7 +8008,8 @@
               "type": "string"
             },
             "type": "array",
-            "uniqueItems": true
+            "uniqueItems": true,
+            "x-optional-collection": true
           },
           "summarizeTitle": {
             "type": "boolean"
@@ -9515,14 +9519,16 @@
               "format": "uuid",
               "type": "string"
             },
-            "type": "array"
+            "type": "array",
+            "x-optional-collection": true
           },
           "assigneeUserIds": {
             "items": {
               "format": "uuid",
               "type": "string"
             },
-            "type": "array"
+            "type": "array",
+            "x-optional-collection": true
           },
           "color": {
             "$ref": "#/components/schemas/ItemColor"
@@ -9600,7 +9606,8 @@
             "items": {
               "$ref": "#/components/schemas/RelativeItemInfo"
             },
-            "type": "array"
+            "type": "array",
+            "x-optional-collection": true
           },
           "commentCount": {
             "format": "int32",
@@ -9610,7 +9617,8 @@
             "items": {
               "$ref": "#/components/schemas/ItemConstraint"
             },
-            "type": "array"
+            "type": "array",
+            "x-optional-collection": true
           },
           "integration": {
             "$ref": "#/components/schemas/ItemEmbedIntegration"
@@ -9623,7 +9631,8 @@
             "items": {
               "$ref": "#/components/schemas/RelativeItemInfo"
             },
-            "type": "array"
+            "type": "array",
+            "x-optional-collection": true
           },
           "progress": {
             "$ref": "#/components/schemas/ItemEmbedProgress"
@@ -9651,14 +9660,16 @@
               "format": "uuid",
               "type": "string"
             },
-            "type": "array"
+            "type": "array",
+            "x-optional-collection": true
           },
           "assigneeUserIds": {
             "items": {
               "format": "uuid",
               "type": "string"
             },
-            "type": "array"
+            "type": "array",
+            "x-optional-collection": true
           },
           "color": {
             "$ref": "#/components/schemas/ItemColor"
@@ -12351,7 +12362,8 @@
             "items": {
               "type": "string"
             },
-            "type": "array"
+            "type": "array",
+            "x-optional-collection": true
           },
           "selectTeam": {
             "type": "string"
@@ -14334,7 +14346,8 @@
             "items": {
               "$ref": "#/components/schemas/Confidence"
             },
-            "type": "array"
+            "type": "array",
+            "x-optional-collection": true
           },
           "value": {
             "$ref": "#/components/schemas/ObjectiveWidgetDataSettingsValue"
@@ -15777,7 +15790,8 @@
             "items": {
               "type": "string"
             },
-            "type": "array"
+            "type": "array",
+            "x-optional-collection": true
           },
           "selectPlan": {
             "type": "string"
@@ -18507,14 +18521,16 @@
               "format": "int64",
               "type": "integer"
             },
-            "type": "array"
+            "type": "array",
+            "x-optional-collection": true
           },
           "selectProjects": {
             "items": {
               "format": "int64",
               "type": "integer"
             },
-            "type": "array"
+            "type": "array",
+            "x-optional-collection": true
           },
           "selectWorkflow": {
             "format": "int64",
@@ -21209,13 +21225,15 @@
             "items": {
               "type": "string"
             },
-            "type": "array"
+            "type": "array",
+            "x-optional-collection": true
           },
           "selectLists": {
             "items": {
               "type": "string"
             },
-            "type": "array"
+            "type": "array",
+            "x-optional-collection": true
           },
           "title": {
             "type": "string"
@@ -21324,7 +21342,8 @@
               "format": "uuid",
               "type": "string"
             },
-            "type": "array"
+            "type": "array",
+            "x-optional-collection": true
           },
           "assigneeUserIds": {
             "description": "Ids of users who are assigned to this item.",
@@ -21332,7 +21351,8 @@
               "format": "uuid",
               "type": "string"
             },
-            "type": "array"
+            "type": "array",
+            "x-optional-collection": true
           },
           "color": {
             "$ref": "#/components/schemas/ItemColor",
@@ -21418,7 +21438,8 @@
               "format": "uuid",
               "type": "string"
             },
-            "type": "array"
+            "type": "array",
+            "x-optional-collection": true
           },
           "assigneeUserIds": {
             "description": "Ids of users who are assigned to this item.",
@@ -21426,7 +21447,8 @@
               "format": "uuid",
               "type": "string"
             },
-            "type": "array"
+            "type": "array",
+            "x-optional-collection": true
           },
           "color": {
             "$ref": "#/components/schemas/ItemColor",
@@ -24519,7 +24541,7 @@
   },
   "info": {
     "title": "airfocus API",
-    "version": "1.0.0-beta.47.33.0"
+    "version": "1.0.0-beta.47.36.0"
   },
   "openapi": "3.1.0",
   "paths": {
