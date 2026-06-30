@@ -2065,6 +2065,48 @@
                 "c7824f3d-4d5f-3b2f-a2d0-34758c1e9454": {
                   "text": "A platform built for the new way of doing product management"
                 },
+                "c9c0d13b-a4e5-363b-a475-736cd0366142": {
+                  "richText": {
+                    "blocks": [
+                      {
+                        "content": [
+                          {
+                            "content": "This is a rich text field with ",
+                            "type": "text"
+                          },
+                          {
+                            "content": [
+                              {
+                                "content": "bold text",
+                                "type": "text"
+                              }
+                            ],
+                            "type": "bold"
+                          },
+                          {
+                            "content": " and ",
+                            "type": "text"
+                          },
+                          {
+                            "content": [
+                              {
+                                "content": "italic text",
+                                "type": "text"
+                              }
+                            ],
+                            "type": "italic"
+                          },
+                          {
+                            "content": ".",
+                            "type": "text"
+                          }
+                        ],
+                        "type": "paragraph"
+                      }
+                    ],
+                    "richText": true
+                  }
+                },
                 "e34d514f-7db5-38aa-872a-7c8191a09617": {
                   "date": {
                     "date": "2024-01-01",
@@ -2167,6 +2209,48 @@
                 },
                 "c7824f3d-4d5f-3b2f-a2d0-34758c1e9454": {
                   "text": "A platform built for the new way of doing product management"
+                },
+                "c9c0d13b-a4e5-363b-a475-736cd0366142": {
+                  "richText": {
+                    "blocks": [
+                      {
+                        "content": [
+                          {
+                            "content": "This is a rich text field with ",
+                            "type": "text"
+                          },
+                          {
+                            "content": [
+                              {
+                                "content": "bold text",
+                                "type": "text"
+                              }
+                            ],
+                            "type": "bold"
+                          },
+                          {
+                            "content": " and ",
+                            "type": "text"
+                          },
+                          {
+                            "content": [
+                              {
+                                "content": "italic text",
+                                "type": "text"
+                              }
+                            ],
+                            "type": "italic"
+                          },
+                          {
+                            "content": ".",
+                            "type": "text"
+                          }
+                        ],
+                        "type": "paragraph"
+                      }
+                    ],
+                    "richText": true
+                  }
                 },
                 "e34d514f-7db5-38aa-872a-7c8191a09617": {
                   "date": {
@@ -3631,6 +3715,7 @@
             "portal": "#/components/schemas/PortalField",
             "portfolio-source": "#/components/schemas/PortfolioSourceField",
             "prioritization": "#/components/schemas/PrioritizationField",
+            "rich-text": "#/components/schemas/RichTextField",
             "select": "#/components/schemas/SelectField",
             "text": "#/components/schemas/TextField",
             "time-period": "#/components/schemas/TimePeriodField",
@@ -3702,6 +3787,9 @@
           },
           {
             "$ref": "#/components/schemas/PrioritizationField"
+          },
+          {
+            "$ref": "#/components/schemas/RichTextField"
           },
           {
             "$ref": "#/components/schemas/SelectField"
@@ -3837,6 +3925,7 @@
             "portal": "#/components/schemas/PortalFieldWithFieldEmbed",
             "portfolio-source": "#/components/schemas/PortfolioSourceFieldWithFieldEmbed",
             "prioritization": "#/components/schemas/PrioritizationFieldWithFieldEmbed",
+            "rich-text": "#/components/schemas/RichTextFieldWithFieldEmbed",
             "select": "#/components/schemas/SelectFieldWithFieldEmbed",
             "text": "#/components/schemas/TextFieldWithFieldEmbed",
             "time-period": "#/components/schemas/TimePeriodFieldWithFieldEmbed",
@@ -3908,6 +3997,9 @@
           },
           {
             "$ref": "#/components/schemas/PrioritizationFieldWithFieldEmbed"
+          },
+          {
+            "$ref": "#/components/schemas/RichTextFieldWithFieldEmbed"
           },
           {
             "$ref": "#/components/schemas/SelectFieldWithFieldEmbed"
@@ -7417,6 +7509,7 @@
             "milestone": "#/components/schemas/InstallMilestoneFieldRequest",
             "number": "#/components/schemas/InstallNumberFieldRequest",
             "people": "#/components/schemas/InstallPeopleFieldRequest",
+            "rich-text": "#/components/schemas/InstallRichTextFieldRequest",
             "select": "#/components/schemas/InstallSelectFieldRequest",
             "text": "#/components/schemas/InstallTextFieldRequest",
             "time-period": "#/components/schemas/InstallTimePeriodFieldRequest"
@@ -7441,6 +7534,9 @@
           },
           {
             "$ref": "#/components/schemas/InstallPeopleFieldRequest"
+          },
+          {
+            "$ref": "#/components/schemas/InstallRichTextFieldRequest"
           },
           {
             "$ref": "#/components/schemas/InstallSelectFieldRequest"
@@ -7590,6 +7686,47 @@
           "required"
         ],
         "title": "InstallPeopleFieldRequest",
+        "type": "object"
+      },
+      "InstallRichTextFieldRequest": {
+        "properties": {
+          "description": {
+            "description": "User-readable field description.",
+            "type": "string"
+          },
+          "isTeamField": {
+            "default": false,
+            "description": "Whether the field should be installed as a team-field or a workspace-specific field.",
+            "type": "boolean"
+          },
+          "name": {
+            "description": "User-readable field name.",
+            "type": "string"
+          },
+          "required": {
+            "type": "boolean"
+          },
+          "typeId": {
+            "const": "rich-text",
+            "type": "string"
+          },
+          "workspaceIds": {
+            "default": [],
+            "description": "If isTeamField=false then exactly one workspace ID should be provided.\nIf isTeamField=true then any amount of workspace IDs can be provided to be linked to the newly installed field.",
+            "items": {
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": "array"
+          }
+        },
+        "required": [
+          "typeId",
+          "name",
+          "description",
+          "required"
+        ],
+        "title": "InstallRichTextFieldRequest",
         "type": "object"
       },
       "InstallSelectFieldRequest": {
@@ -8131,6 +8268,48 @@
                 },
                 "c7824f3d-4d5f-3b2f-a2d0-34758c1e9454": {
                   "text": "A platform built for the new way of doing product management"
+                },
+                "c9c0d13b-a4e5-363b-a475-736cd0366142": {
+                  "richText": {
+                    "blocks": [
+                      {
+                        "content": [
+                          {
+                            "content": "This is a rich text field with ",
+                            "type": "text"
+                          },
+                          {
+                            "content": [
+                              {
+                                "content": "bold text",
+                                "type": "text"
+                              }
+                            ],
+                            "type": "bold"
+                          },
+                          {
+                            "content": " and ",
+                            "type": "text"
+                          },
+                          {
+                            "content": [
+                              {
+                                "content": "italic text",
+                                "type": "text"
+                              }
+                            ],
+                            "type": "italic"
+                          },
+                          {
+                            "content": ".",
+                            "type": "text"
+                          }
+                        ],
+                        "type": "paragraph"
+                      }
+                    ],
+                    "richText": true
+                  }
                 },
                 "e34d514f-7db5-38aa-872a-7c8191a09617": {
                   "date": {
@@ -10705,6 +10884,9 @@
                 "$ref": "#/components/schemas/PortfolioSourceFieldFilter"
               },
               {
+                "$ref": "#/components/schemas/RichTextFieldTypeFilter"
+              },
+              {
                 "$ref": "#/components/schemas/SelectFieldTypeFilter"
               },
               {
@@ -10789,6 +10971,9 @@
               },
               {
                 "$ref": "#/components/schemas/PortfolioSourceFieldFilter"
+              },
+              {
+                "$ref": "#/components/schemas/RichTextFieldTypeFilter"
               },
               {
                 "$ref": "#/components/schemas/SelectFieldTypeFilter"
@@ -11602,6 +11787,48 @@
                 "c7824f3d-4d5f-3b2f-a2d0-34758c1e9454": {
                   "text": "A platform built for the new way of doing product management"
                 },
+                "c9c0d13b-a4e5-363b-a475-736cd0366142": {
+                  "richText": {
+                    "blocks": [
+                      {
+                        "content": [
+                          {
+                            "content": "This is a rich text field with ",
+                            "type": "text"
+                          },
+                          {
+                            "content": [
+                              {
+                                "content": "bold text",
+                                "type": "text"
+                              }
+                            ],
+                            "type": "bold"
+                          },
+                          {
+                            "content": " and ",
+                            "type": "text"
+                          },
+                          {
+                            "content": [
+                              {
+                                "content": "italic text",
+                                "type": "text"
+                              }
+                            ],
+                            "type": "italic"
+                          },
+                          {
+                            "content": ".",
+                            "type": "text"
+                          }
+                        ],
+                        "type": "paragraph"
+                      }
+                    ],
+                    "richText": true
+                  }
+                },
                 "e34d514f-7db5-38aa-872a-7c8191a09617": {
                   "date": {
                     "date": "2024-01-01",
@@ -11771,6 +11998,48 @@
                 },
                 "c7824f3d-4d5f-3b2f-a2d0-34758c1e9454": {
                   "text": "A platform built for the new way of doing product management"
+                },
+                "c9c0d13b-a4e5-363b-a475-736cd0366142": {
+                  "richText": {
+                    "blocks": [
+                      {
+                        "content": [
+                          {
+                            "content": "This is a rich text field with ",
+                            "type": "text"
+                          },
+                          {
+                            "content": [
+                              {
+                                "content": "bold text",
+                                "type": "text"
+                              }
+                            ],
+                            "type": "bold"
+                          },
+                          {
+                            "content": " and ",
+                            "type": "text"
+                          },
+                          {
+                            "content": [
+                              {
+                                "content": "italic text",
+                                "type": "text"
+                              }
+                            ],
+                            "type": "italic"
+                          },
+                          {
+                            "content": ".",
+                            "type": "text"
+                          }
+                        ],
+                        "type": "paragraph"
+                      }
+                    ],
+                    "richText": true
+                  }
                 },
                 "e34d514f-7db5-38aa-872a-7c8191a09617": {
                   "date": {
@@ -17299,6 +17568,166 @@
         "title": "RichTextBlockParagraph",
         "type": "object"
       },
+      "RichTextField": {
+        "properties": {
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "groupId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "isTeamField": {
+            "type": "boolean"
+          },
+          "name": {
+            "type": "string"
+          },
+          "required": {
+            "type": "boolean"
+          },
+          "teamFieldOrder": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "teamId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "typeId": {
+            "const": "rich-text",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "typeId",
+          "name",
+          "description",
+          "isTeamField",
+          "teamId",
+          "createdAt",
+          "required"
+        ],
+        "title": "RichTextField",
+        "type": "object"
+      },
+      "RichTextFieldTypeFilter": {
+        "discriminator": {
+          "mapping": {
+            "contain": "#/components/schemas/RichTextFieldTypeFilterContain",
+            "defined": "#/components/schemas/RichTextFieldTypeFilterDefined"
+          },
+          "propertyName": "type"
+        },
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/RichTextFieldTypeFilterContain"
+          },
+          {
+            "$ref": "#/components/schemas/RichTextFieldTypeFilterDefined"
+          }
+        ],
+        "title": "RichTextFieldTypeFilter"
+      },
+      "RichTextFieldTypeFilterContain": {
+        "properties": {
+          "caseSensitive": {
+            "default": false,
+            "type": "boolean"
+          },
+          "text": {
+            "type": "string"
+          },
+          "type": {
+            "const": "contain",
+            "type": "string"
+          }
+        },
+        "required": [
+          "text",
+          "type"
+        ],
+        "title": "RichTextFieldTypeFilterContain",
+        "type": "object"
+      },
+      "RichTextFieldTypeFilterDefined": {
+        "properties": {
+          "type": {
+            "const": "defined",
+            "type": "string"
+          }
+        },
+        "required": [
+          "type"
+        ],
+        "title": "RichTextFieldTypeFilterDefined",
+        "type": "object"
+      },
+      "RichTextFieldWithFieldEmbed": {
+        "properties": {
+          "_embedded": {
+            "$ref": "#/components/schemas/FieldEmbed"
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "groupId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "isTeamField": {
+            "type": "boolean"
+          },
+          "name": {
+            "type": "string"
+          },
+          "required": {
+            "type": "boolean"
+          },
+          "teamFieldOrder": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "teamId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "typeId": {
+            "const": "rich-text",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "typeId",
+          "name",
+          "description",
+          "isTeamField",
+          "teamId",
+          "createdAt",
+          "required",
+          "_embedded"
+        ],
+        "title": "RichTextFieldWithFieldEmbed",
+        "type": "object"
+      },
       "RichTextInline": {
         "discriminator": {
           "mapping": {
@@ -21397,6 +21826,48 @@
                 "c7824f3d-4d5f-3b2f-a2d0-34758c1e9454": {
                   "text": "A platform built for the new way of doing product management"
                 },
+                "c9c0d13b-a4e5-363b-a475-736cd0366142": {
+                  "richText": {
+                    "blocks": [
+                      {
+                        "content": [
+                          {
+                            "content": "This is a rich text field with ",
+                            "type": "text"
+                          },
+                          {
+                            "content": [
+                              {
+                                "content": "bold text",
+                                "type": "text"
+                              }
+                            ],
+                            "type": "bold"
+                          },
+                          {
+                            "content": " and ",
+                            "type": "text"
+                          },
+                          {
+                            "content": [
+                              {
+                                "content": "italic text",
+                                "type": "text"
+                              }
+                            ],
+                            "type": "italic"
+                          },
+                          {
+                            "content": ".",
+                            "type": "text"
+                          }
+                        ],
+                        "type": "paragraph"
+                      }
+                    ],
+                    "richText": true
+                  }
+                },
                 "e34d514f-7db5-38aa-872a-7c8191a09617": {
                   "date": {
                     "date": "2024-01-01",
@@ -21495,6 +21966,48 @@
                 },
                 "c7824f3d-4d5f-3b2f-a2d0-34758c1e9454": {
                   "text": "A platform built for the new way of doing product management"
+                },
+                "c9c0d13b-a4e5-363b-a475-736cd0366142": {
+                  "richText": {
+                    "blocks": [
+                      {
+                        "content": [
+                          {
+                            "content": "This is a rich text field with ",
+                            "type": "text"
+                          },
+                          {
+                            "content": [
+                              {
+                                "content": "bold text",
+                                "type": "text"
+                              }
+                            ],
+                            "type": "bold"
+                          },
+                          {
+                            "content": " and ",
+                            "type": "text"
+                          },
+                          {
+                            "content": [
+                              {
+                                "content": "italic text",
+                                "type": "text"
+                              }
+                            ],
+                            "type": "italic"
+                          },
+                          {
+                            "content": ".",
+                            "type": "text"
+                          }
+                        ],
+                        "type": "paragraph"
+                      }
+                    ],
+                    "richText": true
+                  }
                 },
                 "e34d514f-7db5-38aa-872a-7c8191a09617": {
                   "date": {
@@ -24541,7 +25054,7 @@
   },
   "info": {
     "title": "airfocus API",
-    "version": "1.0.0-beta.47.36.0"
+    "version": "1.0.0-beta.47.42.0"
   },
   "openapi": "3.1.0",
   "paths": {
