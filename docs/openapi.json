@@ -9783,7 +9783,7 @@
           },
           "children": {
             "items": {
-              "$ref": "#/components/schemas/RelativeItemInfo"
+              "$ref": "#/components/schemas/RelativeItemInfoPartial"
             },
             "type": "array",
             "x-optional-collection": true
@@ -9808,7 +9808,7 @@
           },
           "parents": {
             "items": {
-              "$ref": "#/components/schemas/RelativeItemInfo"
+              "$ref": "#/components/schemas/RelativeItemInfoPartial"
             },
             "type": "array",
             "x-optional-collection": true
@@ -17116,6 +17116,16 @@
             "description": "A combination of 'fieldtype:' prefix and a field type id.",
             "pattern": "^fieldtype:.+$",
             "type": "string"
+          },
+          {
+            "description": "Either 'embed:children' when all item fields are required or a combination of 'embed:children:' prefix and an ItemProperty",
+            "pattern": "^embed:children(:.*)?$",
+            "type": "string"
+          },
+          {
+            "description": "Either 'embed:parents' when all item fields are required or a combination of 'embed:parents:' prefix and an ItemProperty",
+            "pattern": "^embed:parents(:.*)?$",
+            "type": "string"
           }
         ],
         "title": "RefItemExtendedProperty"
@@ -17189,6 +17199,48 @@
           "childOrder"
         ],
         "title": "RelativeItemInfo",
+        "type": "object"
+      },
+      "RelativeItemInfoPartial": {
+        "properties": {
+          "alias": {
+            "type": "string"
+          },
+          "childOrder": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "item": {
+            "$ref": "#/components/schemas/ItemPartial"
+          },
+          "itemId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "itemType": {
+            "$ref": "#/components/schemas/ItemType"
+          },
+          "parentOrder": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "relationId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "workspaceId": {
+            "format": "uuid",
+            "type": "string"
+          }
+        },
+        "required": [
+          "relationId",
+          "workspaceId",
+          "itemId",
+          "parentOrder",
+          "childOrder"
+        ],
+        "title": "RelativeItemInfoPartial",
         "type": "object"
       },
       "ReorderFieldsRequest": {
@@ -25054,7 +25106,7 @@
   },
   "info": {
     "title": "airfocus API",
-    "version": "1.0.0-beta.47.42.0"
+    "version": "1.0.0-beta.47.43.2"
   },
   "openapi": "3.1.0",
   "paths": {
