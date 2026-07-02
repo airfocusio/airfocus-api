@@ -7793,6 +7793,10 @@
           "required": {
             "type": "boolean"
           },
+          "settings": {
+            "$ref": "#/components/schemas/TextFieldTypeSettings",
+            "description": "Field settings."
+          },
           "typeId": {
             "const": "text",
             "type": "string"
@@ -7811,6 +7815,7 @@
           "typeId",
           "name",
           "description",
+          "settings",
           "required"
         ],
         "title": "InstallTextFieldRequest",
@@ -17058,6 +17063,9 @@
                 "$ref": "#/components/schemas/SelectFieldTypeSettings"
               },
               {
+                "$ref": "#/components/schemas/TextFieldTypeSettings"
+              },
+              {
                 "$ref": "#/components/schemas/TimePeriodFieldSettings"
               },
               {
@@ -20751,6 +20759,9 @@
           "required": {
             "type": "boolean"
           },
+          "settings": {
+            "$ref": "#/components/schemas/TextFieldTypeSettings"
+          },
           "teamFieldOrder": {
             "format": "int32",
             "type": "integer"
@@ -20767,6 +20778,7 @@
         "required": [
           "id",
           "typeId",
+          "settings",
           "name",
           "description",
           "isTeamField",
@@ -20854,6 +20866,42 @@
         "title": "TextFieldTypeFilterEqual",
         "type": "object"
       },
+      "TextFieldTypeSettings": {
+        "properties": {
+          "format": {
+            "$ref": "#/components/schemas/TextFieldTypeSettingsFormat"
+          }
+        },
+        "title": "TextFieldTypeSettings",
+        "type": "object"
+      },
+      "TextFieldTypeSettingsFormat": {
+        "discriminator": {
+          "mapping": {
+            "email": "#/components/schemas/TextFieldTypeSettingsFormatEmail"
+          },
+          "propertyName": "type"
+        },
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/TextFieldTypeSettingsFormatEmail"
+          }
+        ],
+        "title": "TextFieldTypeSettingsFormat"
+      },
+      "TextFieldTypeSettingsFormatEmail": {
+        "properties": {
+          "type": {
+            "const": "email",
+            "type": "string"
+          }
+        },
+        "required": [
+          "type"
+        ],
+        "title": "TextFieldTypeSettingsFormatEmail",
+        "type": "object"
+      },
       "TextFieldWithFieldEmbed": {
         "properties": {
           "_embedded": {
@@ -20883,6 +20931,9 @@
           "required": {
             "type": "boolean"
           },
+          "settings": {
+            "$ref": "#/components/schemas/TextFieldTypeSettings"
+          },
           "teamFieldOrder": {
             "format": "int32",
             "type": "integer"
@@ -20899,6 +20950,7 @@
         "required": [
           "id",
           "typeId",
+          "settings",
           "name",
           "description",
           "isTeamField",
@@ -25106,7 +25158,7 @@
   },
   "info": {
     "title": "airfocus API",
-    "version": "1.0.0-beta.47.43.2"
+    "version": "1.0.0-beta.47.47.0"
   },
   "openapi": "3.1.0",
   "paths": {
