@@ -3524,20 +3524,6 @@
         "title": "EmbedViewWithViewEmbed",
         "type": "object"
       },
-      "Emoji": {
-        "enum": [
-          "blue_heart",
-          "clap",
-          "confused",
-          "eyes",
-          "+1",
-          "rocket",
-          "thinking_face",
-          "white_check_mark"
-        ],
-        "title": "Emoji",
-        "type": "string"
-      },
       "ErrorResponse": {
         "description": "A general error response which is returned by the server for all handled errors.",
         "properties": {
@@ -8758,7 +8744,7 @@
       "ItemCommentReaction": {
         "properties": {
           "emoji": {
-            "$ref": "#/components/schemas/Emoji"
+            "type": "string"
           },
           "userIds": {
             "items": {
@@ -25158,7 +25144,7 @@
   },
   "info": {
     "title": "airfocus API",
-    "version": "1.0.0-beta.47.47.0"
+    "version": "1.0.0-beta.47.49.0"
   },
   "openapi": "3.1.0",
   "paths": {
@@ -36776,7 +36762,7 @@
             "name": "emojiCode",
             "required": true,
             "schema": {
-              "$ref": "#/components/schemas/Emoji"
+              "type": "string"
             }
           }
         ],
@@ -36862,7 +36848,7 @@
             "name": "emojiCode",
             "required": true,
             "schema": {
-              "$ref": "#/components/schemas/Emoji"
+              "type": "string"
             }
           }
         ],
