@@ -3190,6 +3190,10 @@
             "email": true,
             "inApp": true
           },
+          "healthCheckInModification": {
+            "email": true,
+            "inApp": true
+          },
           "mentions": {
             "email": true,
             "inApp": true
@@ -3224,7 +3228,7 @@
           "commentedOnItem": {
             "$ref": "#/components/schemas/ChannelPreferences"
           },
-          "healthCheckInCreated": {
+          "healthCheckInModification": {
             "$ref": "#/components/schemas/ChannelPreferences"
           },
           "mentions": {
@@ -25144,7 +25148,7 @@
   },
   "info": {
     "title": "airfocus API",
-    "version": "1.0.0-beta.47.51.3"
+    "version": "1.0.0-beta.47.53.0"
   },
   "openapi": "3.1.0",
   "paths": {
