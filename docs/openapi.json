@@ -355,6 +355,27 @@
         ],
         "title": "App"
       },
+      "AppPartial": {
+        "properties": {
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "settings": {},
+          "teamId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "typeId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id"
+        ],
+        "title": "AppPartial",
+        "type": "object"
+      },
       "ApplyTemplateRequest": {
         "properties": {
           "defaultPermission": {
@@ -2362,7 +2383,11 @@
             "type": "string"
           },
           "assigneeSettings": {
-            "$ref": "#/components/schemas/WorkspaceAssigneeSettings"
+            "$ref": "#/components/schemas/WorkspaceAssigneeSettings",
+            "default": {
+              "required": false
+            },
+            "description": "Configuration settings for the assignees field in this workspace."
           },
           "defaultPermission": {
             "$ref": "#/components/schemas/Permission",
@@ -2421,7 +2446,11 @@
             "type": "string"
           },
           "assigneeSettings": {
-            "$ref": "#/components/schemas/WorkspaceAssigneeSettings"
+            "$ref": "#/components/schemas/WorkspaceAssigneeSettings",
+            "default": {
+              "required": false
+            },
+            "description": "Configuration settings for the assignees field in this workspace."
           },
           "defaultPermission": {
             "$ref": "#/components/schemas/Permission",
@@ -3799,6 +3828,25 @@
         ],
         "title": "Field"
       },
+      "FieldEditMetadata": {
+        "properties": {
+          "lastEditedAt": {
+            "description": "Timestamp of when this field was last edited",
+            "format": "date-time",
+            "type": "string"
+          },
+          "lastEditedBy": {
+            "$ref": "#/components/schemas/Actor",
+            "description": "The actor who last edited this field"
+          }
+        },
+        "required": [
+          "lastEditedBy",
+          "lastEditedAt"
+        ],
+        "title": "FieldEditMetadata",
+        "type": "object"
+      },
       "FieldEmbed": {
         "properties": {
           "workspaces": {
@@ -3835,6 +3883,76 @@
           "order"
         ],
         "title": "FieldFieldWorkspaceEmbed",
+        "type": "object"
+      },
+      "FieldPartialEmbed": {
+        "properties": {
+          "workspaces": {
+            "items": {
+              "$ref": "#/components/schemas/FieldFieldWorkspaceEmbed"
+            },
+            "type": "array",
+            "x-optional-collection": true
+          }
+        },
+        "title": "FieldPartialEmbed",
+        "type": "object"
+      },
+      "FieldPartialWithFieldPartialEmbed": {
+        "properties": {
+          "_embedded": {
+            "$ref": "#/components/schemas/FieldPartialEmbed"
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "groupId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "isTeamField": {
+            "type": "boolean"
+          },
+          "name": {
+            "type": "string"
+          },
+          "order": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "required": {
+            "type": "boolean"
+          },
+          "settings": {},
+          "teamFieldOrder": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "teamId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "typeId": {
+            "type": "string"
+          },
+          "workspaceId": {
+            "format": "uuid",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "_embedded"
+        ],
+        "title": "FieldPartialWithFieldPartialEmbed",
         "type": "object"
       },
       "FieldSearchQuery": {
@@ -8993,6 +9111,13 @@
             },
             "type": "array"
           },
+          "fieldEditMetadata": {
+            "additionalProperties": {
+              "$ref": "#/components/schemas/FieldEditMetadata"
+            },
+            "description": "Who last edited each field of this item, and when. Absent when not retrieved.",
+            "type": "object"
+          },
           "integration": {
             "$ref": "#/components/schemas/ItemEmbedIntegration"
           },
@@ -12651,6 +12776,30 @@
         ],
         "title": "LinearItemLinearItemType",
         "type": "string"
+      },
+      "ListPartialWorkspacesRequest": {
+        "properties": {
+          "ids": {
+            "items": {
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "properties": {
+            "items": {
+              "$ref": "#/components/schemas/RefWorkspaceExtendedProperty"
+            },
+            "type": "array",
+            "uniqueItems": true
+          }
+        },
+        "required": [
+          "ids",
+          "properties"
+        ],
+        "title": "ListPartialWorkspacesRequest",
+        "type": "object"
       },
       "ListViewTypeSettings": {
         "properties": {
@@ -17116,12 +17265,12 @@
             "type": "string"
           },
           {
-            "description": "Either 'embed:children' when all item fields are required or a combination of 'embed:children:' prefix and an ItemProperty",
+            "description": "Either 'embed:children' when all item fields are required or a combination of 'embed:children:' prefix and an ItemProperty or fieldType",
             "pattern": "^embed:children(:.*)?$",
             "type": "string"
           },
           {
-            "description": "Either 'embed:parents' when all item fields are required or a combination of 'embed:parents:' prefix and an ItemProperty",
+            "description": "Either 'embed:parents' when all item fields are required or a combination of 'embed:parents:' prefix and an ItemProperty or fieldType",
             "pattern": "^embed:parents(:.*)?$",
             "type": "string"
           }
@@ -17156,6 +17305,67 @@
           }
         ],
         "title": "RefItemProperty"
+      },
+      "RefWorkspaceExtendedProperty": {
+        "oneOf": [
+          {
+            "enum": [
+              "alias",
+              "archived",
+              "assigneeSettings",
+              "createdAt",
+              "defaultPermission",
+              "description",
+              "embed:apps",
+              "embed:children",
+              "embed:currentPermission",
+              "embed:fields",
+              "embed:integrations",
+              "embed:itemCount",
+              "embed:itemStatusCount",
+              "embed:itemStatusCountArchived",
+              "embed:parents",
+              "embed:permissions",
+              "embed:statuses",
+              "embed:userGroupPermissions",
+              "embed:views",
+              "embed:workspaceGroup",
+              "id",
+              "itemColor",
+              "itemType",
+              "lastActivity",
+              "lastUpdatedAt",
+              "metadata",
+              "name",
+              "namespace",
+              "order",
+              "progressMode",
+              "statusPresetId"
+            ],
+            "type": "string"
+          },
+          {
+            "description": "Either 'embed:apps' when all apps fields are required or a combination of 'embed:apps:' prefix and a AppProperty",
+            "pattern": "^embed:apps(:.*)?$",
+            "type": "string"
+          },
+          {
+            "description": "Either 'embed:fields' when all field fields are required or a combination of 'embed:fields:' prefix and a FieldExtendedProperty",
+            "pattern": "^embed:fields(:.*)?$",
+            "type": "string"
+          },
+          {
+            "description": "Either 'embed:statuses' when all status fields are required or a combination of 'embed:statuses:' prefix and a StatusProperty",
+            "pattern": "^embed:statuses(:.*)?$",
+            "type": "string"
+          },
+          {
+            "description": "Either 'embed:views' when all views fields are required or a combination of 'embed:views:' prefix and a ViewExtendedProperty",
+            "pattern": "^embed:views(:.*)?$",
+            "type": "string"
+          }
+        ],
+        "title": "RefWorkspaceExtendedProperty"
       },
       "RelativeItemInfo": {
         "properties": {
@@ -19108,6 +19318,43 @@
         ],
         "title": "StatusColor",
         "type": "string"
+      },
+      "StatusPartial": {
+        "properties": {
+          "category": {
+            "$ref": "#/components/schemas/StatusCategory"
+          },
+          "color": {
+            "$ref": "#/components/schemas/StatusColor"
+          },
+          "default": {
+            "type": "boolean"
+          },
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "order": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "presetId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "workspaceId": {
+            "format": "uuid",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id"
+        ],
+        "title": "StatusPartial",
+        "type": "object"
       },
       "StatusPreset": {
         "properties": {
@@ -22253,7 +22500,11 @@
             "type": "string"
           },
           "assigneeSettings": {
-            "$ref": "#/components/schemas/WorkspaceAssigneeSettings"
+            "$ref": "#/components/schemas/WorkspaceAssigneeSettings",
+            "default": {
+              "required": false
+            },
+            "description": "Configuration settings for the assignees field in this workspace."
           },
           "defaultPermission": {
             "$ref": "#/components/schemas/Permission",
@@ -22312,7 +22563,11 @@
             "type": "string"
           },
           "assigneeSettings": {
-            "$ref": "#/components/schemas/WorkspaceAssigneeSettings"
+            "$ref": "#/components/schemas/WorkspaceAssigneeSettings",
+            "default": {
+              "required": false
+            },
+            "description": "Configuration settings for the assignees field in this workspace."
           },
           "defaultPermission": {
             "$ref": "#/components/schemas/Permission",
@@ -22577,6 +22832,98 @@
           "type"
         ],
         "title": "ViewModeApp",
+        "type": "object"
+      },
+      "ViewPartialEmbed": {
+        "properties": {
+          "currentPermission": {
+            "$ref": "#/components/schemas/ViewPermission"
+          },
+          "userGroupPermissions": {
+            "additionalProperties": {
+              "$ref": "#/components/schemas/ViewPermission"
+            },
+            "type": "object"
+          },
+          "userPermissions": {
+            "additionalProperties": {
+              "$ref": "#/components/schemas/ViewPermission"
+            },
+            "type": "object"
+          }
+        },
+        "title": "ViewPartialEmbed",
+        "type": "object"
+      },
+      "ViewPartialWithViewPartialEmbed": {
+        "properties": {
+          "_embedded": {
+            "$ref": "#/components/schemas/ViewPartialEmbed"
+          },
+          "description": {
+            "type": "string"
+          },
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "isPrivate": {
+            "type": "boolean"
+          },
+          "itemFilter": {
+            "$ref": "#/components/schemas/ItemSearchQueryFilter",
+            "examples": [
+              {
+                "_coproduct": "ItemSearchQueryFilter",
+                "inner": [
+                  {
+                    "caseSensitive": false,
+                    "text": "foo",
+                    "type": "name:contain"
+                  },
+                  {
+                    "type": "assignees:defined"
+                  }
+                ],
+                "type": "and"
+              }
+            ]
+          },
+          "itemScopeLimit": {
+            "$ref": "#/components/schemas/ItemScopeLimit"
+          },
+          "itemSort": {
+            "items": {
+              "$ref": "#/components/schemas/ItemSearchQuerySort"
+            },
+            "type": "array",
+            "x-optional-collection": true
+          },
+          "name": {
+            "type": "string"
+          },
+          "order": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "pinnedToPosition": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "settings": {},
+          "typeId": {
+            "type": "string"
+          },
+          "workspaceId": {
+            "format": "uuid",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "_embedded"
+        ],
+        "title": "ViewPartialWithViewPartialEmbed",
         "type": "object"
       },
       "ViewPermission": {
@@ -23343,7 +23690,11 @@
             "type": "string"
           },
           "assigneeSettings": {
-            "$ref": "#/components/schemas/WorkspaceAssigneeSettings"
+            "$ref": "#/components/schemas/WorkspaceAssigneeSettings",
+            "default": {
+              "required": false
+            },
+            "description": "Configuration settings for the assignees field in this workspace."
           },
           "createdAt": {
             "description": "Timestamp of when this workspace was created.",
@@ -23428,10 +23779,6 @@
         "type": "object"
       },
       "WorkspaceAssigneeSettings": {
-        "default": {
-          "required": false
-        },
-        "description": "Configuration settings for the assignees field in this workspace.",
         "properties": {
           "required": {
             "description": "Whether the assignees field is required when creating or updating items.",
@@ -24132,6 +24479,167 @@
         "title": "WorkspaceNamespace",
         "type": "string"
       },
+      "WorkspacePartialEmbed": {
+        "properties": {
+          "apps": {
+            "additionalProperties": {
+              "$ref": "#/components/schemas/AppPartial"
+            },
+            "type": "object"
+          },
+          "children": {
+            "items": {
+              "$ref": "#/components/schemas/WorkspaceEmbedRelation"
+            },
+            "type": "array",
+            "x-optional-collection": true
+          },
+          "currentPermission": {
+            "$ref": "#/components/schemas/Permission"
+          },
+          "fields": {
+            "additionalProperties": {
+              "$ref": "#/components/schemas/FieldPartialWithFieldPartialEmbed"
+            },
+            "type": "object"
+          },
+          "integrations": {
+            "additionalProperties": {
+              "$ref": "#/components/schemas/IntegrationSummary"
+            },
+            "type": "object"
+          },
+          "itemCount": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "itemStatusCount": {
+            "additionalProperties": {
+              "format": "int32",
+              "type": "integer"
+            },
+            "type": "object"
+          },
+          "itemStatusCountArchived": {
+            "additionalProperties": {
+              "format": "int32",
+              "type": "integer"
+            },
+            "type": "object"
+          },
+          "parents": {
+            "items": {
+              "$ref": "#/components/schemas/WorkspaceEmbedRelation"
+            },
+            "type": "array",
+            "x-optional-collection": true
+          },
+          "permissions": {
+            "additionalProperties": {
+              "$ref": "#/components/schemas/Permission"
+            },
+            "type": "object"
+          },
+          "statuses": {
+            "additionalProperties": {
+              "$ref": "#/components/schemas/StatusPartial"
+            },
+            "type": "object"
+          },
+          "userGroupPermissions": {
+            "additionalProperties": {
+              "$ref": "#/components/schemas/Permission"
+            },
+            "type": "object"
+          },
+          "views": {
+            "additionalProperties": {
+              "$ref": "#/components/schemas/ViewPartialWithViewPartialEmbed"
+            },
+            "type": "object"
+          },
+          "workspaceGroup": {
+            "$ref": "#/components/schemas/WorkspaceEmbedWorkspaceGroup"
+          }
+        },
+        "title": "WorkspacePartialEmbed",
+        "type": "object"
+      },
+      "WorkspacePartialWithWorkspacePartialEmbed": {
+        "properties": {
+          "_embedded": {
+            "$ref": "#/components/schemas/WorkspacePartialEmbed"
+          },
+          "alias": {
+            "type": "string"
+          },
+          "archived": {
+            "type": "boolean"
+          },
+          "assigneeSettings": {
+            "$ref": "#/components/schemas/WorkspaceAssigneeSettings",
+            "description": "Configuration settings for the assignees field in a workspace."
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "defaultPermission": {
+            "$ref": "#/components/schemas/Permission"
+          },
+          "description": {
+            "$ref": "#/components/schemas/RichText",
+            "description": "Rich text content as structured blocks. Different media types provide markdown support:\n• application/json - Default blocks format\n• application/vnd.airfocus.markdown+json - All RichText fields become markdown strings (recommended)\n• application/json+markdown - Legacy format, only top-level fields converted to markdown"
+          },
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "itemColor": {
+            "$ref": "#/components/schemas/ItemColor"
+          },
+          "itemType": {
+            "$ref": "#/components/schemas/ItemType"
+          },
+          "lastActivity": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "lastUpdatedAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "metadata": {
+            "$ref": "#/components/schemas/WorkspaceWorkspaceMetadata"
+          },
+          "name": {
+            "type": "string"
+          },
+          "namespace": {
+            "$ref": "#/components/schemas/WorkspaceNamespace"
+          },
+          "order": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "progressMode": {
+            "$ref": "#/components/schemas/WorkspaceProgressMode"
+          },
+          "statusPresetId": {
+            "format": "uuid",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "_embedded"
+        ],
+        "title": "WorkspacePartialWithWorkspacePartialEmbed",
+        "type": [
+          "object",
+          "null"
+        ]
+      },
       "WorkspacePermissionsUpdateRequest": {
         "properties": {
           "defaultPermission": {
@@ -24610,7 +25118,11 @@
             "type": "string"
           },
           "assigneeSettings": {
-            "$ref": "#/components/schemas/WorkspaceAssigneeSettings"
+            "$ref": "#/components/schemas/WorkspaceAssigneeSettings",
+            "default": {
+              "required": false
+            },
+            "description": "Configuration settings for the assignees field in this workspace."
           },
           "createdAt": {
             "description": "Timestamp of when this workspace was created.",
@@ -24709,7 +25221,11 @@
             "type": "string"
           },
           "assigneeSettings": {
-            "$ref": "#/components/schemas/WorkspaceAssigneeSettings"
+            "$ref": "#/components/schemas/WorkspaceAssigneeSettings",
+            "default": {
+              "required": false
+            },
+            "description": "Configuration settings for the assignees field in this workspace."
           },
           "createdAt": {
             "description": "Timestamp of when this workspace was created.",
@@ -24827,7 +25343,11 @@
             "type": "string"
           },
           "assigneeSettings": {
-            "$ref": "#/components/schemas/WorkspaceAssigneeSettings"
+            "$ref": "#/components/schemas/WorkspaceAssigneeSettings",
+            "default": {
+              "required": false
+            },
+            "description": "Configuration settings for the assignees field in this workspace."
           },
           "createdAt": {
             "description": "Timestamp of when this workspace was created.",
@@ -24922,7 +25442,11 @@
             "type": "string"
           },
           "assigneeSettings": {
-            "$ref": "#/components/schemas/WorkspaceAssigneeSettings"
+            "$ref": "#/components/schemas/WorkspaceAssigneeSettings",
+            "default": {
+              "required": false
+            },
+            "description": "Configuration settings for the assignees field in this workspace."
           },
           "createdAt": {
             "description": "Timestamp of when this workspace was created.",
@@ -25148,7 +25672,7 @@
   },
   "info": {
     "title": "airfocus API",
-    "version": "1.0.0-beta.47.64.0"
+    "version": "1.0.0-beta.47.72.0"
   },
   "openapi": "3.1.0",
   "paths": {
@@ -33493,6 +34017,125 @@
         "summary": "Retrieve multiple workspaces by their IDs",
         "tags": [
           "CRUD",
+          "Workspaces"
+        ]
+      }
+    },
+    "/api/workspaces/list/partial": {
+      "post": {
+        "description": "Returns workspaces for the provided IDs. Use the `embed` field to select which embedded properties to include — only those are fetched, minimising DB round trips. Preserves order & returns null for IDs that are not found or inaccessible.<br/>Requirements:<br/>- auth-client scopes: \"workspace:read\"<br/>- user permission: \"read\" or higher",
+        "operationId": "listPartialWorkspaces",
+        "parameters": [
+          {
+            "deprecated": true,
+            "description": "Enable sudo-mode for admins for a single request, which gives full permission to all workspaces in the team.",
+            "in": "query",
+            "name": "actAsAdmin",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ListPartialWorkspacesRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "anyOf": [
+                      {
+                        "$ref": "#/components/schemas/WorkspacePartialWithWorkspacePartialEmbed"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "type": "array"
+                }
+              }
+            },
+            "description": ""
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "bad_request",
+                  "data": {},
+                  "message": "Request body is invalid"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If payload is invalid."
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "missing_token",
+                  "data": {},
+                  "message": "Access token is missing"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If missing authentication token."
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "forbidden",
+                  "data": {},
+                  "message": "Insufficient permission"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If user does not have the required permission, or authenticated client does not have the required access scopes."
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "unknown_error",
+                  "data": {},
+                  "message": "Server error"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If any other error happens."
+          }
+        },
+        "security": [
+          {
+            "httpAuth": []
+          }
+        ],
+        "summary": "Retrieve multiple workspaces by their IDs with optional partial embed.",
+        "tags": [
           "Workspaces"
         ]
       }
