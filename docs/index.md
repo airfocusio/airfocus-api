@@ -18,19 +18,35 @@ Our API schema is defined based on the OpenAPI 3.1 standard.<br>
 This website provides a Swagger UI interface (see [Endpoints](/endpoints)) where you can explore the API and try out the requests.
 Also, you can use another OpenAPI viewer (e.g. Postman or Intellij IDEA) to explore the API, by providing a URL to the JSON schema.
 
-The raw JSON schema can be found here: [https://developer.airfocus.com/openapi.json](https://developer.airfocus.com/openapi.json), and it always corresponds to the current server capabilities.
+The stable raw JSON schema can be found at
+[https://developer.airfocus.com/openapi.json](https://developer.airfocus.com/openapi.json).
+Version-specific schemas are available at `/openapi/vN.json`, where `N` is the API version.
 
 ### API Versioning
 
-Each published version of OpenAPI schema corresponds to a specific version of the server.
-The server version can be found by requesting the `GET /api/version` endpoint.
-The schema version can be found:
+The [Endpoints](/endpoints) page defaults to the stable API version. Use its API-version selector
+to view another supported version.
+
+Clients select a version through the `Accept` header:
+
+```
+Accept: application/vnd.airfocus+json; version=1
+```
+
+Requests without an airfocus vendor media type default to V1 for backwards compatibility.
+
+API versions are separate from server releases. The server release can be found by requesting
+the `GET /api/version` endpoint. The release that produced a schema can be found:
+
 - in the `info.version` field of the openapi.json
 - in the top-left corner of the Swagger UI interface
 
-It's also possible to access schema in its older versions via https://raw.githubusercontent.com/airfocusio/airfocus-api/refs/tags/{version}/docs/openapi.json by replacing `{version}` with the desired version number.
+Historical server-release snapshots remain available at
+`https://raw.githubusercontent.com/airfocusio/airfocus-api/refs/tags/{release}/docs/openapi.json`
+by replacing `{release}` with the desired server release.
 
-In the [Changelog](/changelog.html) section you can find the history of all schema versions with the list of changes and release dates.
+In the [Changelog](/changelog.html) section you can find the history of these server-release
+snapshots with the list of changes and release dates.
 
 ### Rate limits
 
