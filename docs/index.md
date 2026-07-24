@@ -27,13 +27,15 @@ Version-specific schemas are available at `/openapi/vN.json`, where `N` is the A
 The [Endpoints](/endpoints) page defaults to the stable API version. Use its API-version selector
 to view another supported version.
 
-Clients select a version through the `Accept` header:
+Clients select a version through the URL path:
 
 ```
-Accept: application/vnd.airfocus+json; version=1
+GET /api/v1/workspaces
+GET /api/v2/workspaces
 ```
 
-Requests without an airfocus vendor media type default to V1 for backwards compatibility.
+For backwards compatibility, existing `/api/...` paths continue to use V1. New integrations
+should use an explicit `/api/vN/...` path.
 
 API versions are separate from server releases. The server release can be found by requesting
 the `GET /api/version` endpoint. The release that produced a schema can be found:
