@@ -25650,6 +25650,9 @@
           "removeExtraneous": {
             "type": "boolean"
           },
+          "secrets": {
+            "$ref": "#/components/schemas/IntegrationSecrets"
+          },
           "title": {
             "type": "string"
           }
@@ -25672,7 +25675,7 @@
   },
   "info": {
     "title": "airfocus API",
-    "version": "1.0.0-beta.47.103.0"
+    "version": "1.0.0-beta.47.106.0"
   },
   "openapi": "3.1.0",
   "paths": {
