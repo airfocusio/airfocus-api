@@ -1,7 +1,15 @@
 services:
   jekyll:
-    image: "jekyll/jekyll:4.2.2"
-    platform: "linux/amd64"
-    volumes: [".:/srv/jekyll:Z"]
+    image: "jekyll/jekyll:4.4.1"
+    volumes:
+      - ".:/srv/jekyll:Z"
+      # Caches installed gems across container recreates. Run `docker compose
+      # down -v` after bumping the image, so it reseeds from the new one.
+      - "bundle:/usr/local/bundle"
     ports: ["4000:4000"]
-    command: ["jekyll", "serve", "-s", "docs"]
+    # The 4.4 image has no entrypoint, so gems must be installed explicitly and
+    # the server must be bound to 0.0.0.0 for the published port to reach it.
+    command: ["sh", "-c", "bundle install && bundle exec jekyll serve -s docs --host 0.0.0.0"]
+
+volumes:
+  bundle:
