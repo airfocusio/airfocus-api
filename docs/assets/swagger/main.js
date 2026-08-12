@@ -68,12 +68,13 @@ const schemaPropsSorter = bucketSorter([
     { match: v => v === "_embedded" },
 ]);
 
-const fetchSchema = fetch("/openapi.json")
-    .then(response => response.json())
-    .then(preprocessSchema)
+const fetchDocumentation = loadDocumentation();
 
 window.onload = () => {
-    fetchSchema.then(schema => {
+    fetchDocumentation.then(({schema, versionConfig, selectedVersion}) => {
+        if (versionConfig) {
+            initVersionSelector(versionConfig, selectedVersion);
+        }
         window.ui = initSwaggerUI(schema);
     })
     document.querySelectorAll(".side-bar .nav-list a.nav-list-link").forEach(function(elem){
@@ -83,6 +84,75 @@ window.onload = () => {
         }
     });
 };
+
+async function loadDocumentation() {
+    try {
+        const versionConfig = await fetchJson("/openapi/versions.json");
+        const selectedVersion = getSelectedVersion(versionConfig);
+        const schema = await fetchJson(`/openapi/v${selectedVersion}.json`);
+        return {
+            schema: preprocessSchema(schema),
+            versionConfig,
+            selectedVersion,
+        };
+    } catch (error) {
+        console.warn("Versioned OpenAPI schemas are unavailable; loading the stable schema.", error);
+        return {
+            schema: preprocessSchema(await fetchJson("/openapi.json")),
+            versionConfig: null,
+            selectedVersion: null,
+        };
+    }
+}
+
+async function fetchJson(url) {
+    const response = await fetch(url);
+    if (!response.ok) {
+        throw new Error(`Failed to fetch ${url}: ${response.status}`);
+    }
+    return response.json();
+}
+
+function getSelectedVersion(versionConfig) {
+    const requestedVersion = Number(new URLSearchParams(window.location.search).get("apiVersion"));
+    return versionConfig.versions.includes(requestedVersion)
+        ? requestedVersion
+        : versionConfig.stable;
+}
+
+function initVersionSelector(versionConfig, selectedVersion) {
+    const container = document.getElementById("api-version-selector");
+    const select = document.getElementById("api-version");
+    const versions = [
+        versionConfig.stable,
+        ...versionConfig.versions.filter(version => version !== versionConfig.stable).sort((a, b) => b - a),
+    ];
+
+    versions.forEach(version => {
+        const labels = [];
+        if (version === versionConfig.stable) labels.push("Stable");
+        if (version === versionConfig.latest) labels.push("Latest");
+
+        const option = document.createElement("option");
+        option.value = version;
+        option.textContent = `V${version}${labels.length ? ` — ${labels.join(", ")}` : ""}`;
+        option.selected = version === selectedVersion;
+        select.appendChild(option);
+    });
+
+    select.addEventListener("change", event => {
+        const url = new URL(window.location.href);
+        const version = Number(event.target.value);
+        if (version === versionConfig.stable) {
+            url.searchParams.delete("apiVersion");
+        } else {
+            url.searchParams.set("apiVersion", version);
+        }
+        window.location.assign(url);
+    });
+
+    container.hidden = false;
+}
 
 function preprocessSchema(input) {
     for (const schemasName in input.components.schemas) {
