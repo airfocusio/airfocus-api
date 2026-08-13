@@ -19983,6 +19983,9 @@
           "enableOkrApp": {
             "$ref": "#/components/schemas/TeamFlag"
           },
+          "enableSlackAiAssistant": {
+            "$ref": "#/components/schemas/TeamFlag"
+          },
           "forbidShareLinkCreation": {
             "$ref": "#/components/schemas/TeamFlag"
           },
@@ -20007,6 +20010,7 @@
         },
         "required": [
           "enableAi",
+          "enableSlackAiAssistant",
           "enableOkrApp",
           "removeBranding",
           "forbidShareLinkCreation",
@@ -22446,6 +22450,9 @@
             "type": "boolean"
           },
           "enableOkrApp": {
+            "type": "boolean"
+          },
+          "enableSlackAiAssistant": {
             "type": "boolean"
           },
           "forbidShareLinkCreation": {
@@ -25675,7 +25682,7 @@
   },
   "info": {
     "title": "airfocus API",
-    "version": "1.0.0-beta.47.120.0"
+    "version": "1.0.0-beta.47.123.2"
   },
   "openapi": "3.1.0",
   "paths": {
