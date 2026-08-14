@@ -7658,6 +7658,40 @@
         ],
         "title": "InstallFieldRequest"
       },
+      "InstallFieldRequestLegacy": {
+        "properties": {
+          "description": {
+            "default": "",
+            "type": "string"
+          },
+          "isTeamField": {
+            "type": "boolean"
+          },
+          "name": {
+            "type": "string"
+          },
+          "required": {
+            "default": false,
+            "type": "boolean"
+          },
+          "settings": {},
+          "typeId": {
+            "type": "string"
+          },
+          "workspaceId": {
+            "format": "uuid",
+            "type": "string"
+          }
+        },
+        "required": [
+          "typeId",
+          "name",
+          "settings",
+          "isTeamField"
+        ],
+        "title": "InstallFieldRequestLegacy",
+        "type": "object"
+      },
       "InstallMilestoneFieldRequest": {
         "properties": {
           "description": {
@@ -17221,6 +17255,36 @@
         "title": "ReconfigureFieldRequest",
         "type": "object"
       },
+      "ReconfigureFieldRequestLegacy": {
+        "properties": {
+          "description": {
+            "default": "",
+            "type": "string"
+          },
+          "fieldId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "isTeamField": {
+            "type": "boolean"
+          },
+          "name": {
+            "type": "string"
+          },
+          "required": {
+            "type": "boolean"
+          },
+          "settings": {}
+        },
+        "required": [
+          "fieldId",
+          "settings",
+          "name",
+          "isTeamField"
+        ],
+        "title": "ReconfigureFieldRequestLegacy",
+        "type": "object"
+      },
       "RefItemExtendedProperty": {
         "oneOf": [
           {
@@ -22027,6 +22091,19 @@
         "title": "TrelloIntegrationTypeSettings",
         "type": "object"
       },
+      "UninstallFieldRequest": {
+        "properties": {
+          "fieldId": {
+            "format": "uuid",
+            "type": "string"
+          }
+        },
+        "required": [
+          "fieldId"
+        ],
+        "title": "UninstallFieldRequest",
+        "type": "object"
+      },
       "UpdateItemAttachmentRequest": {
         "properties": {
           "contentType": {
@@ -25682,7 +25759,7 @@
   },
   "info": {
     "title": "airfocus API",
-    "version": "1.0.0-beta.47.123.2"
+    "version": "1.0.0-beta.47.132.0"
   },
   "openapi": "3.1.0",
   "paths": {
