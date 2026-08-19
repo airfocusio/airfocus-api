@@ -1886,6 +1886,26 @@
         "title": "CommentBulkUpdate",
         "type": "object"
       },
+      "CommentReaction": {
+        "properties": {
+          "emoji": {
+            "type": "string"
+          },
+          "userIds": {
+            "items": {
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": "array"
+          }
+        },
+        "required": [
+          "emoji",
+          "userIds"
+        ],
+        "title": "CommentReaction",
+        "type": "object"
+      },
       "Confidence": {
         "enum": [
           "high",
@@ -8897,26 +8917,6 @@
         "title": "ItemCommentEmbed",
         "type": "object"
       },
-      "ItemCommentReaction": {
-        "properties": {
-          "emoji": {
-            "type": "string"
-          },
-          "userIds": {
-            "items": {
-              "format": "uuid",
-              "type": "string"
-            },
-            "type": "array"
-          }
-        },
-        "required": [
-          "emoji",
-          "userIds"
-        ],
-        "title": "ItemCommentReaction",
-        "type": "object"
-      },
       "ItemCommentSearchQuery": {
         "properties": {
           "itemId": {
@@ -8970,7 +8970,7 @@
           },
           "reactions": {
             "items": {
-              "$ref": "#/components/schemas/ItemCommentReaction"
+              "$ref": "#/components/schemas/CommentReaction"
             },
             "type": "array"
           }
@@ -18302,6 +18302,13 @@
       },
       "RichTextInlineText": {
         "properties": {
+          "annotations": {
+            "items": {
+              "type": "object"
+            },
+            "type": "array",
+            "x-optional-collection": true
+          },
           "content": {
             "type": "string"
           },
@@ -25759,7 +25766,7 @@
   },
   "info": {
     "title": "airfocus API",
-    "version": "1.0.0-beta.47.132.0"
+    "version": "1.0.0-beta.47.140.0"
   },
   "openapi": "3.1.0",
   "paths": {
