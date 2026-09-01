@@ -8398,6 +8398,10 @@
             "format": "date-time",
             "type": "string"
           },
+          "creator": {
+            "$ref": "#/components/schemas/Actor",
+            "description": "The actor who created this item. Empty for legacy entries for which creator could not be determined."
+          },
           "description": {
             "$ref": "#/components/schemas/RichText",
             "description": "Rich text content as structured blocks. Different media types provide markdown support:\n• application/json - Default blocks format\n• application/vnd.airfocus.markdown+json - All RichText fields become markdown strings (recommended)\n• application/json+markdown - Legacy format, only top-level fields converted to markdown"
@@ -9870,6 +9874,9 @@
             "format": "date-time",
             "type": "string"
           },
+          "creator": {
+            "$ref": "#/components/schemas/Actor"
+          },
           "description": {
             "$ref": "#/components/schemas/RichText",
             "description": "Rich text content as structured blocks. Different media types provide markdown support:\n• application/json - Default blocks format\n• application/vnd.airfocus.markdown+json - All RichText fields become markdown strings (recommended)\n• application/json+markdown - Legacy format, only top-level fields converted to markdown"
@@ -10010,6 +10017,9 @@
           "createdAt": {
             "format": "date-time",
             "type": "string"
+          },
+          "creator": {
+            "$ref": "#/components/schemas/Actor"
           },
           "description": {
             "$ref": "#/components/schemas/RichText",
@@ -11903,6 +11913,10 @@
             "format": "date-time",
             "type": "string"
           },
+          "creator": {
+            "$ref": "#/components/schemas/Actor",
+            "description": "The actor who created this item. Empty for legacy entries for which creator could not be determined."
+          },
           "description": {
             "$ref": "#/components/schemas/RichText",
             "description": "Rich text content as structured blocks. Different media types provide markdown support:\n• application/json - Default blocks format\n• application/vnd.airfocus.markdown+json - All RichText fields become markdown strings (recommended)\n• application/json+markdown - Legacy format, only top-level fields converted to markdown"
@@ -12111,6 +12125,10 @@
             "description": "Timestamp of when this item was created.",
             "format": "date-time",
             "type": "string"
+          },
+          "creator": {
+            "$ref": "#/components/schemas/Actor",
+            "description": "The actor who created this item. Empty for legacy entries for which creator could not be determined."
           },
           "description": {
             "description": "Rich text content as a markdown string (used with markdown media types)",
@@ -17293,6 +17311,7 @@
               "assignees",
               "color",
               "createdAt",
+              "creator",
               "description",
               "embed:alias",
               "embed:apps",
@@ -17349,6 +17368,7 @@
               "assignees",
               "color",
               "createdAt",
+              "creator",
               "description",
               "id",
               "lastUpdatedAt",
@@ -25796,7 +25816,7 @@
   },
   "info": {
     "title": "airfocus API",
-    "version": "1.0.0-beta.47.151.0"
+    "version": "1.0.0-beta.47.155.0"
   },
   "openapi": "3.1.0",
   "paths": {
