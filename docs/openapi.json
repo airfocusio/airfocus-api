@@ -7,6 +7,8 @@
             "aiActor": "#/components/schemas/ActorAiActor",
             "app": "#/components/schemas/ActorApp",
             "integration": "#/components/schemas/ActorIntegration",
+            "shareLink": "#/components/schemas/ActorShareLink",
+            "system": "#/components/schemas/ActorSystem",
             "user": "#/components/schemas/ActorUser"
           },
           "propertyName": "type"
@@ -20,6 +22,12 @@
           },
           {
             "$ref": "#/components/schemas/ActorIntegration"
+          },
+          {
+            "$ref": "#/components/schemas/ActorShareLink"
+          },
+          {
+            "$ref": "#/components/schemas/ActorSystem"
           },
           {
             "$ref": "#/components/schemas/ActorUser"
@@ -95,6 +103,32 @@
           "type"
         ],
         "title": "ActorIntegration",
+        "type": "object"
+      },
+      "ActorShareLink": {
+        "properties": {
+          "type": {
+            "const": "shareLink",
+            "type": "string"
+          }
+        },
+        "required": [
+          "type"
+        ],
+        "title": "ActorShareLink",
+        "type": "object"
+      },
+      "ActorSystem": {
+        "properties": {
+          "type": {
+            "const": "system",
+            "type": "string"
+          }
+        },
+        "required": [
+          "type"
+        ],
+        "title": "ActorSystem",
         "type": "object"
       },
       "ActorUser": {
@@ -25816,7 +25850,7 @@
   },
   "info": {
     "title": "airfocus API",
-    "version": "1.0.0-beta.47.173.2"
+    "version": "1.0.0-beta.47.173.3"
   },
   "openapi": "3.1.0",
   "paths": {
