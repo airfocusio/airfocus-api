@@ -37,6 +37,9 @@
       },
       "ActorAiActor": {
         "properties": {
+          "actorType": {
+            "$ref": "#/components/schemas/AiActorType"
+          },
           "id": {
             "format": "uuid",
             "type": "string"
@@ -25850,7 +25853,7 @@
   },
   "info": {
     "title": "airfocus API",
-    "version": "1.0.0-beta.47.173.3"
+    "version": "1.0.0-beta.47.174.0"
   },
   "openapi": "3.1.0",
   "paths": {
