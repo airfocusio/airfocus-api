@@ -3347,13 +3347,17 @@
       "DocumentContent": {
         "discriminator": {
           "mapping": {
-            "custom": "#/components/schemas/DocumentContentCustom"
+            "custom": "#/components/schemas/DocumentContentCustom",
+            "document": "#/components/schemas/DocumentContentDocument"
           },
           "propertyName": "type"
         },
         "oneOf": [
           {
             "$ref": "#/components/schemas/DocumentContentCustom"
+          },
+          {
+            "$ref": "#/components/schemas/DocumentContentDocument"
           }
         ],
         "title": "DocumentContent"
@@ -3374,6 +3378,24 @@
           "type"
         ],
         "title": "DocumentContentCustom",
+        "type": "object"
+      },
+      "DocumentContentDocument": {
+        "properties": {
+          "documentId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "type": {
+            "const": "document",
+            "type": "string"
+          }
+        },
+        "required": [
+          "documentId",
+          "type"
+        ],
+        "title": "DocumentContentDocument",
         "type": "object"
       },
       "DocumentViewTypeSettings": {
@@ -25853,7 +25875,7 @@
   },
   "info": {
     "title": "airfocus API",
-    "version": "1.0.0-beta.47.174.0"
+    "version": "1.0.0-beta.47.175.1"
   },
   "openapi": "3.1.0",
   "paths": {
