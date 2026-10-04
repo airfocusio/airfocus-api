@@ -43,6 +43,30 @@
     background: none;
 }
 
+.api-version-selector {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: .5rem;
+    padding: 1rem 0;
+    color: #3b4151;
+    font-family: system-ui, -apple-system, blinkmacsystemfont, "Segoe UI", roboto, "Helvetica Neue", arial, sans-serif;
+    font-size: .875rem;
+    font-weight: 600;
+}
+.api-version-selector[hidden] {
+    display: none;
+}
+.api-version-selector select {
+    min-width: 9rem;
+    padding: .4rem .75rem;
+    border: 1px solid #d8dde7;
+    border-radius: 4px;
+    background: #fff;
+    color: #3b4151;
+    font: inherit;
+}
+
 * {
     box-sizing: border-box;
 }
