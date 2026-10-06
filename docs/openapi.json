@@ -543,6 +543,20 @@
         "title": "AttachmentSearchQuery",
         "type": "object"
       },
+      "Author": {
+        "properties": {
+          "appId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "userId": {
+            "format": "uuid",
+            "type": "string"
+          }
+        },
+        "title": "Author",
+        "type": "object"
+      },
       "AuthorFormatLevel": {
         "enum": [
           "email",
@@ -960,6 +974,15 @@
         "title": "BooleanFieldTypeFilterEqual",
         "type": "object"
       },
+      "BooleanFieldTypeValue": {
+        "properties": {
+          "boolean": {
+            "type": "boolean"
+          }
+        },
+        "title": "BooleanFieldTypeValue",
+        "type": "object"
+      },
       "BooleanFieldWithFieldEmbed": {
         "properties": {
           "_embedded": {
@@ -1049,6 +1072,15 @@
         ],
         "title": "BulkInviteUsersRequestUser",
         "type": "object"
+      },
+      "CalculationMode": {
+        "enum": [
+          "auto",
+          "manual",
+          "none"
+        ],
+        "title": "CalculationMode",
+        "type": "string"
       },
       "CapacityPlanningApp": {
         "properties": {
@@ -1664,6 +1696,45 @@
         "title": "ChartWidgetDisplaySettingsChartType",
         "type": "string"
       },
+      "Checkin": {
+        "properties": {
+          "author": {
+            "$ref": "#/components/schemas/Author"
+          },
+          "checkinAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "comment": {
+            "$ref": "#/components/schemas/RichText",
+            "description": "Rich text content as structured blocks. Different media types provide markdown support:\n• application/json - Default blocks format\n• application/vnd.airfocus.markdown+json - All RichText fields become markdown strings (recommended)\n• application/json+markdown - Legacy format, only top-level fields converted to markdown"
+          },
+          "confidence": {
+            "$ref": "#/components/schemas/OkrConfidenceFieldValue"
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "progress": {
+            "$ref": "#/components/schemas/OkrProgressFieldValue"
+          }
+        },
+        "required": [
+          "id",
+          "createdAt",
+          "checkinAt",
+          "author",
+          "progress",
+          "confidence"
+        ],
+        "title": "Checkin",
+        "type": "object"
+      },
       "ClubhouseIntegrationSummary": {
         "properties": {
           "capabilities": {
@@ -2109,7 +2180,88 @@
             "description": "Rich-text description of this item."
           },
           "fields": {
-            "additionalProperties": {},
+            "additionalProperties": {
+              "oneOf": [
+                {
+                  "$ref": "#/components/schemas/BooleanFieldTypeValue"
+                },
+                {
+                  "$ref": "#/components/schemas/DateFieldTypeValue"
+                },
+                {
+                  "$ref": "#/components/schemas/DateRangeFieldTypeValue"
+                },
+                {
+                  "$ref": "#/components/schemas/FormSourceFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/FormsTargetFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/HealthCheckInsFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/InsightsFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/MilestoneFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/MirrorSourceFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/MirrorTargetFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/NumberFieldTypeValue"
+                },
+                {
+                  "$ref": "#/components/schemas/OkrCheckinsFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/OkrConfidenceFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/OkrKeyResultReferenceFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/OkrKeyResultsFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/OkrProgressFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/PeopleFieldTypeValue"
+                },
+                {
+                  "$ref": "#/components/schemas/PortalFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/PortfolioSourceFieldTypeValue"
+                },
+                {
+                  "$ref": "#/components/schemas/PrioritizationFieldTypeValue"
+                },
+                {
+                  "$ref": "#/components/schemas/RichTextFieldTypeValue"
+                },
+                {
+                  "$ref": "#/components/schemas/SelectFieldTypeValue"
+                },
+                {
+                  "$ref": "#/components/schemas/TextFieldTypeValue"
+                },
+                {
+                  "$ref": "#/components/schemas/TimePeriodFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/VotingAppScoreFieldTypeValue"
+                },
+                {
+                  "$ref": "#/components/schemas/VotingAppVotesFieldTypeValue"
+                }
+              ]
+            },
             "default": {},
             "description": "Values of custom fields, where each key is a custom-field ID and each value is a JSON-formatted value of the corresponding field.",
             "examples": [
@@ -2254,7 +2406,88 @@
             "type": "string"
           },
           "fields": {
-            "additionalProperties": {},
+            "additionalProperties": {
+              "oneOf": [
+                {
+                  "$ref": "#/components/schemas/BooleanFieldTypeValue"
+                },
+                {
+                  "$ref": "#/components/schemas/DateFieldTypeValue"
+                },
+                {
+                  "$ref": "#/components/schemas/DateRangeFieldTypeValue"
+                },
+                {
+                  "$ref": "#/components/schemas/FormSourceFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/FormsTargetFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/HealthCheckInsFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/InsightsFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/MilestoneFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/MirrorSourceFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/MirrorTargetFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/NumberFieldTypeValue"
+                },
+                {
+                  "$ref": "#/components/schemas/OkrCheckinsFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/OkrConfidenceFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/OkrKeyResultReferenceFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/OkrKeyResultsFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/OkrProgressFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/PeopleFieldTypeValue"
+                },
+                {
+                  "$ref": "#/components/schemas/PortalFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/PortfolioSourceFieldTypeValue"
+                },
+                {
+                  "$ref": "#/components/schemas/PrioritizationFieldTypeValue"
+                },
+                {
+                  "$ref": "#/components/schemas/RichTextFieldTypeValue"
+                },
+                {
+                  "$ref": "#/components/schemas/SelectFieldTypeValue"
+                },
+                {
+                  "$ref": "#/components/schemas/TextFieldTypeValue"
+                },
+                {
+                  "$ref": "#/components/schemas/TimePeriodFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/VotingAppScoreFieldTypeValue"
+                },
+                {
+                  "$ref": "#/components/schemas/VotingAppVotesFieldTypeValue"
+                }
+              ]
+            },
             "default": {},
             "description": "Values of custom fields, where each key is a custom-field ID and each value is a JSON-formatted value of the corresponding field.",
             "examples": [
@@ -2760,6 +2993,22 @@
         "title": "DashboardViewWithViewEmbed",
         "type": "object"
       },
+      "Date": {
+        "properties": {
+          "date": {
+            "format": "date",
+            "type": "string"
+          },
+          "timezone": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "date"
+        ],
+        "title": "Date",
+        "type": "object"
+      },
       "DateField": {
         "properties": {
           "createdAt": {
@@ -2975,6 +3224,15 @@
         "title": "DateFieldTypeFilterRelative",
         "type": "object"
       },
+      "DateFieldTypeValue": {
+        "properties": {
+          "date": {
+            "$ref": "#/components/schemas/Date"
+          }
+        },
+        "title": "DateFieldTypeValue",
+        "type": "object"
+      },
       "DateFieldWithFieldEmbed": {
         "properties": {
           "_embedded": {
@@ -3029,6 +3287,27 @@
           "_embedded"
         ],
         "title": "DateFieldWithFieldEmbed",
+        "type": "object"
+      },
+      "DateRange": {
+        "properties": {
+          "endDate": {
+            "format": "date",
+            "type": "string"
+          },
+          "startDate": {
+            "format": "date",
+            "type": "string"
+          },
+          "timezone": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "startDate",
+          "endDate"
+        ],
+        "title": "DateRange",
         "type": "object"
       },
       "DateRangeField": {
@@ -3196,6 +3475,15 @@
           "type"
         ],
         "title": "DateRangeFieldTypeFilterStartAfterOrOn",
+        "type": "object"
+      },
+      "DateRangeFieldTypeValue": {
+        "properties": {
+          "dateRange": {
+            "$ref": "#/components/schemas/DateRange"
+          }
+        },
+        "title": "DateRangeFieldTypeValue",
         "type": "object"
       },
       "DateRangeFieldWithFieldEmbed": {
@@ -4385,6 +4673,19 @@
         "title": "FormSourceFieldTypeSettings",
         "type": "object"
       },
+      "FormSourceFieldValue": {
+        "properties": {
+          "targets": {
+            "default": [],
+            "items": {
+              "$ref": "#/components/schemas/FormsTargetItem"
+            },
+            "type": "array"
+          }
+        },
+        "title": "FormSourceFieldValue",
+        "type": "object"
+      },
       "FormSourceFieldWithFieldEmbed": {
         "properties": {
           "_embedded": {
@@ -4443,6 +4744,65 @@
           "_embedded"
         ],
         "title": "FormSourceFieldWithFieldEmbed",
+        "type": "object"
+      },
+      "FormSourceType": {
+        "discriminator": {
+          "mapping": {
+            "item": "#/components/schemas/FormSourceTypeItem",
+            "workspace": "#/components/schemas/FormSourceTypeWorkspace"
+          },
+          "propertyName": "type"
+        },
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/FormSourceTypeItem"
+          },
+          {
+            "$ref": "#/components/schemas/FormSourceTypeWorkspace"
+          }
+        ],
+        "title": "FormSourceType"
+      },
+      "FormSourceTypeItem": {
+        "properties": {
+          "itemId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "type": {
+            "const": "item",
+            "type": "string"
+          },
+          "workspaceId": {
+            "format": "uuid",
+            "type": "string"
+          }
+        },
+        "required": [
+          "workspaceId",
+          "itemId",
+          "type"
+        ],
+        "title": "FormSourceTypeItem",
+        "type": "object"
+      },
+      "FormSourceTypeWorkspace": {
+        "properties": {
+          "type": {
+            "const": "workspace",
+            "type": "string"
+          },
+          "workspaceId": {
+            "format": "uuid",
+            "type": "string"
+          }
+        },
+        "required": [
+          "workspaceId",
+          "type"
+        ],
+        "title": "FormSourceTypeWorkspace",
         "type": "object"
       },
       "FormTargetField": {
@@ -4735,6 +5095,33 @@
           "type"
         ],
         "title": "FormsTargetFieldTypeFilterDefined",
+        "type": "object"
+      },
+      "FormsTargetFieldValue": {
+        "properties": {
+          "source": {
+            "$ref": "#/components/schemas/FormSourceType"
+          }
+        },
+        "title": "FormsTargetFieldValue",
+        "type": "object"
+      },
+      "FormsTargetItem": {
+        "properties": {
+          "itemId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "workspaceId": {
+            "format": "uuid",
+            "type": "string"
+          }
+        },
+        "required": [
+          "workspaceId",
+          "itemId"
+        ],
+        "title": "FormsTargetItem",
         "type": "object"
       },
       "GanttViewTypeSettings": {
@@ -6684,6 +7071,36 @@
         "title": "GroupByStatusCategory",
         "type": "object"
       },
+      "HealthCheckIn": {
+        "properties": {
+          "author": {
+            "$ref": "#/components/schemas/HealthCheckinAuthor"
+          },
+          "comment": {
+            "$ref": "#/components/schemas/RichText",
+            "description": "Rich text content as structured blocks. Different media types provide markdown support:\n• application/json - Default blocks format\n• application/vnd.airfocus.markdown+json - All RichText fields become markdown strings (recommended)\n• application/json+markdown - Legacy format, only top-level fields converted to markdown"
+          },
+          "confidence": {
+            "$ref": "#/components/schemas/HealthCheckInHealthCheckInsConfidence"
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "createdAt",
+          "author",
+          "confidence"
+        ],
+        "title": "HealthCheckIn",
+        "type": "object"
+      },
       "HealthCheckInHealthCheckInsConfidence": {
         "enum": [
           "atRisk",
@@ -6896,6 +7313,33 @@
           "_embedded"
         ],
         "title": "HealthCheckInsFieldFieldWithFieldEmbed",
+        "type": "object"
+      },
+      "HealthCheckInsFieldValue": {
+        "properties": {
+          "healthCheckIns": {
+            "default": [],
+            "items": {
+              "$ref": "#/components/schemas/HealthCheckIn"
+            },
+            "type": "array"
+          }
+        },
+        "title": "HealthCheckInsFieldValue",
+        "type": "object"
+      },
+      "HealthCheckinAuthor": {
+        "properties": {
+          "appId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "userId": {
+            "format": "uuid",
+            "type": "string"
+          }
+        },
+        "title": "HealthCheckinAuthor",
         "type": "object"
       },
       "InboxViewCounter": {
@@ -7112,6 +7556,62 @@
         ],
         "title": "InputFormat",
         "type": "string"
+      },
+      "Insight": {
+        "properties": {
+          "aiMetadata": {
+            "$ref": "#/components/schemas/InsightAiMetadata"
+          },
+          "archived": {
+            "type": "boolean"
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "itemId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "text": {
+            "type": "string"
+          },
+          "updatedAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "workspaceId": {
+            "format": "uuid",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "workspaceId",
+          "itemId",
+          "text",
+          "aiMetadata",
+          "archived",
+          "createdAt"
+        ],
+        "title": "Insight",
+        "type": "object"
+      },
+      "InsightAiMetadata": {
+        "properties": {
+          "createdByAi": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "createdByAi"
+        ],
+        "title": "InsightAiMetadata",
+        "type": "object"
       },
       "InsightsAgentSettings": {
         "default": {
@@ -7454,6 +7954,29 @@
           }
         },
         "title": "InsightsFieldTypeSettings",
+        "type": "object"
+      },
+      "InsightsFieldValue": {
+        "properties": {
+          "insights": {
+            "default": [],
+            "items": {
+              "$ref": "#/components/schemas/Insight"
+            },
+            "type": "array"
+          },
+          "score": {
+            "format": "double",
+            "type": "number"
+          },
+          "summary": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "score"
+        ],
+        "title": "InsightsFieldValue",
         "type": "object"
       },
       "InsightsFieldWithFieldEmbed": {
@@ -8466,7 +8989,88 @@
             "description": "Rich text content as structured blocks. Different media types provide markdown support:\n• application/json - Default blocks format\n• application/vnd.airfocus.markdown+json - All RichText fields become markdown strings (recommended)\n• application/json+markdown - Legacy format, only top-level fields converted to markdown"
           },
           "fields": {
-            "additionalProperties": {},
+            "additionalProperties": {
+              "oneOf": [
+                {
+                  "$ref": "#/components/schemas/BooleanFieldTypeValue"
+                },
+                {
+                  "$ref": "#/components/schemas/DateFieldTypeValue"
+                },
+                {
+                  "$ref": "#/components/schemas/DateRangeFieldTypeValue"
+                },
+                {
+                  "$ref": "#/components/schemas/FormSourceFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/FormsTargetFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/HealthCheckInsFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/InsightsFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/MilestoneFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/MirrorSourceFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/MirrorTargetFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/NumberFieldTypeValue"
+                },
+                {
+                  "$ref": "#/components/schemas/OkrCheckinsFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/OkrConfidenceFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/OkrKeyResultReferenceFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/OkrKeyResultsFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/OkrProgressFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/PeopleFieldTypeValue"
+                },
+                {
+                  "$ref": "#/components/schemas/PortalFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/PortfolioSourceFieldTypeValue"
+                },
+                {
+                  "$ref": "#/components/schemas/PrioritizationFieldTypeValue"
+                },
+                {
+                  "$ref": "#/components/schemas/RichTextFieldTypeValue"
+                },
+                {
+                  "$ref": "#/components/schemas/SelectFieldTypeValue"
+                },
+                {
+                  "$ref": "#/components/schemas/TextFieldTypeValue"
+                },
+                {
+                  "$ref": "#/components/schemas/TimePeriodFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/VotingAppScoreFieldTypeValue"
+                },
+                {
+                  "$ref": "#/components/schemas/VotingAppVotesFieldTypeValue"
+                }
+              ]
+            },
             "description": "Values of custom fields, where each key is a custom-field ID and each value is a JSON-formatted value of the corresponding field.",
             "examples": [
               {
@@ -9941,7 +10545,88 @@
             "description": "Rich text content as structured blocks. Different media types provide markdown support:\n• application/json - Default blocks format\n• application/vnd.airfocus.markdown+json - All RichText fields become markdown strings (recommended)\n• application/json+markdown - Legacy format, only top-level fields converted to markdown"
           },
           "fields": {
-            "additionalProperties": {},
+            "additionalProperties": {
+              "oneOf": [
+                {
+                  "$ref": "#/components/schemas/BooleanFieldTypeValue"
+                },
+                {
+                  "$ref": "#/components/schemas/DateFieldTypeValue"
+                },
+                {
+                  "$ref": "#/components/schemas/DateRangeFieldTypeValue"
+                },
+                {
+                  "$ref": "#/components/schemas/FormSourceFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/FormsTargetFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/HealthCheckInsFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/InsightsFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/MilestoneFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/MirrorSourceFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/MirrorTargetFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/NumberFieldTypeValue"
+                },
+                {
+                  "$ref": "#/components/schemas/OkrCheckinsFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/OkrConfidenceFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/OkrKeyResultReferenceFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/OkrKeyResultsFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/OkrProgressFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/PeopleFieldTypeValue"
+                },
+                {
+                  "$ref": "#/components/schemas/PortalFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/PortfolioSourceFieldTypeValue"
+                },
+                {
+                  "$ref": "#/components/schemas/PrioritizationFieldTypeValue"
+                },
+                {
+                  "$ref": "#/components/schemas/RichTextFieldTypeValue"
+                },
+                {
+                  "$ref": "#/components/schemas/SelectFieldTypeValue"
+                },
+                {
+                  "$ref": "#/components/schemas/TextFieldTypeValue"
+                },
+                {
+                  "$ref": "#/components/schemas/TimePeriodFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/VotingAppScoreFieldTypeValue"
+                },
+                {
+                  "$ref": "#/components/schemas/VotingAppVotesFieldTypeValue"
+                }
+              ]
+            },
             "type": "object"
           },
           "id": {
@@ -10085,7 +10770,88 @@
             "description": "Rich text content as structured blocks. Different media types provide markdown support:\n• application/json - Default blocks format\n• application/vnd.airfocus.markdown+json - All RichText fields become markdown strings (recommended)\n• application/json+markdown - Legacy format, only top-level fields converted to markdown"
           },
           "fields": {
-            "additionalProperties": {},
+            "additionalProperties": {
+              "oneOf": [
+                {
+                  "$ref": "#/components/schemas/BooleanFieldTypeValue"
+                },
+                {
+                  "$ref": "#/components/schemas/DateFieldTypeValue"
+                },
+                {
+                  "$ref": "#/components/schemas/DateRangeFieldTypeValue"
+                },
+                {
+                  "$ref": "#/components/schemas/FormSourceFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/FormsTargetFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/HealthCheckInsFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/InsightsFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/MilestoneFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/MirrorSourceFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/MirrorTargetFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/NumberFieldTypeValue"
+                },
+                {
+                  "$ref": "#/components/schemas/OkrCheckinsFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/OkrConfidenceFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/OkrKeyResultReferenceFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/OkrKeyResultsFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/OkrProgressFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/PeopleFieldTypeValue"
+                },
+                {
+                  "$ref": "#/components/schemas/PortalFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/PortfolioSourceFieldTypeValue"
+                },
+                {
+                  "$ref": "#/components/schemas/PrioritizationFieldTypeValue"
+                },
+                {
+                  "$ref": "#/components/schemas/RichTextFieldTypeValue"
+                },
+                {
+                  "$ref": "#/components/schemas/SelectFieldTypeValue"
+                },
+                {
+                  "$ref": "#/components/schemas/TextFieldTypeValue"
+                },
+                {
+                  "$ref": "#/components/schemas/TimePeriodFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/VotingAppScoreFieldTypeValue"
+                },
+                {
+                  "$ref": "#/components/schemas/VotingAppVotesFieldTypeValue"
+                }
+              ]
+            },
             "type": "object"
           },
           "id": {
@@ -11981,7 +12747,88 @@
             "description": "Rich text content as structured blocks. Different media types provide markdown support:\n• application/json - Default blocks format\n• application/vnd.airfocus.markdown+json - All RichText fields become markdown strings (recommended)\n• application/json+markdown - Legacy format, only top-level fields converted to markdown"
           },
           "fields": {
-            "additionalProperties": {},
+            "additionalProperties": {
+              "oneOf": [
+                {
+                  "$ref": "#/components/schemas/BooleanFieldTypeValue"
+                },
+                {
+                  "$ref": "#/components/schemas/DateFieldTypeValue"
+                },
+                {
+                  "$ref": "#/components/schemas/DateRangeFieldTypeValue"
+                },
+                {
+                  "$ref": "#/components/schemas/FormSourceFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/FormsTargetFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/HealthCheckInsFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/InsightsFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/MilestoneFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/MirrorSourceFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/MirrorTargetFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/NumberFieldTypeValue"
+                },
+                {
+                  "$ref": "#/components/schemas/OkrCheckinsFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/OkrConfidenceFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/OkrKeyResultReferenceFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/OkrKeyResultsFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/OkrProgressFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/PeopleFieldTypeValue"
+                },
+                {
+                  "$ref": "#/components/schemas/PortalFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/PortfolioSourceFieldTypeValue"
+                },
+                {
+                  "$ref": "#/components/schemas/PrioritizationFieldTypeValue"
+                },
+                {
+                  "$ref": "#/components/schemas/RichTextFieldTypeValue"
+                },
+                {
+                  "$ref": "#/components/schemas/SelectFieldTypeValue"
+                },
+                {
+                  "$ref": "#/components/schemas/TextFieldTypeValue"
+                },
+                {
+                  "$ref": "#/components/schemas/TimePeriodFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/VotingAppScoreFieldTypeValue"
+                },
+                {
+                  "$ref": "#/components/schemas/VotingAppVotesFieldTypeValue"
+                }
+              ]
+            },
             "description": "Values of custom fields, where each key is a custom-field ID and each value is a JSON-formatted value of the corresponding field.",
             "examples": [
               {
@@ -12197,7 +13044,88 @@
             "type": "string"
           },
           "fields": {
-            "additionalProperties": {},
+            "additionalProperties": {
+              "oneOf": [
+                {
+                  "$ref": "#/components/schemas/BooleanFieldTypeValue"
+                },
+                {
+                  "$ref": "#/components/schemas/DateFieldTypeValue"
+                },
+                {
+                  "$ref": "#/components/schemas/DateRangeFieldTypeValue"
+                },
+                {
+                  "$ref": "#/components/schemas/FormSourceFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/FormsTargetFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/HealthCheckInsFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/InsightsFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/MilestoneFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/MirrorSourceFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/MirrorTargetFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/NumberFieldTypeValue"
+                },
+                {
+                  "$ref": "#/components/schemas/OkrCheckinsFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/OkrConfidenceFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/OkrKeyResultReferenceFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/OkrKeyResultsFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/OkrProgressFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/PeopleFieldTypeValue"
+                },
+                {
+                  "$ref": "#/components/schemas/PortalFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/PortfolioSourceFieldTypeValue"
+                },
+                {
+                  "$ref": "#/components/schemas/PrioritizationFieldTypeValue"
+                },
+                {
+                  "$ref": "#/components/schemas/RichTextFieldTypeValue"
+                },
+                {
+                  "$ref": "#/components/schemas/SelectFieldTypeValue"
+                },
+                {
+                  "$ref": "#/components/schemas/TextFieldTypeValue"
+                },
+                {
+                  "$ref": "#/components/schemas/TimePeriodFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/VotingAppScoreFieldTypeValue"
+                },
+                {
+                  "$ref": "#/components/schemas/VotingAppVotesFieldTypeValue"
+                }
+              ]
+            },
             "description": "Values of custom fields, where each key is a custom-field ID and each value is a JSON-formatted value of the corresponding field.",
             "examples": [
               {
@@ -12782,6 +13710,107 @@
         "title": "JsonPatchTest",
         "type": "object"
       },
+      "KeyResult": {
+        "properties": {
+          "archivedLinkedItems": {
+            "items": {
+              "$ref": "#/components/schemas/LinkedItemReference"
+            },
+            "type": "array"
+          },
+          "assigneeUserIds": {
+            "items": {
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "authorId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "checkins": {
+            "$ref": "#/components/schemas/OkrCheckinsFieldValue"
+          },
+          "confidence": {
+            "$ref": "#/components/schemas/OkrConfidenceFieldValue"
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "description": {
+            "$ref": "#/components/schemas/RichText",
+            "description": "Rich text content as structured blocks. Different media types provide markdown support:\n• application/json - Default blocks format\n• application/vnd.airfocus.markdown+json - All RichText fields become markdown strings (recommended)\n• application/json+markdown - Legacy format, only top-level fields converted to markdown"
+          },
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "linkedItems": {
+            "items": {
+              "$ref": "#/components/schemas/LinkedItemReference"
+            },
+            "type": "array"
+          },
+          "progress": {
+            "$ref": "#/components/schemas/OkrProgressFieldValue"
+          },
+          "timePeriod": {
+            "$ref": "#/components/schemas/TimePeriodFieldValue"
+          },
+          "title": {
+            "type": "string"
+          },
+          "updatedAt": {
+            "format": "date-time",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "linkedItems",
+          "archivedLinkedItems",
+          "title",
+          "description",
+          "assigneeUserIds",
+          "progress",
+          "checkins",
+          "confidence",
+          "timePeriod",
+          "createdAt",
+          "updatedAt"
+        ],
+        "title": "KeyResult",
+        "type": "object"
+      },
+      "KeyResultReference": {
+        "properties": {
+          "keyResultId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "objectiveItemId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "objectiveWorkspaceId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "objectiveWorkspaceId",
+          "objectiveItemId",
+          "keyResultId",
+          "title"
+        ],
+        "title": "KeyResultReference",
+        "type": "object"
+      },
       "KickUserRequest": {
         "properties": {
           "userId": {
@@ -12887,6 +13916,24 @@
         ],
         "title": "LinearItemLinearItemType",
         "type": "string"
+      },
+      "LinkedItemReference": {
+        "properties": {
+          "itemId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "workspaceId": {
+            "format": "uuid",
+            "type": "string"
+          }
+        },
+        "required": [
+          "workspaceId",
+          "itemId"
+        ],
+        "title": "LinkedItemReference",
+        "type": "object"
       },
       "ListPartialWorkspacesRequest": {
         "properties": {
@@ -14084,6 +15131,15 @@
         "title": "MirrorSourceFieldTypeFilterDefined",
         "type": "object"
       },
+      "MirrorSourceFieldValue": {
+        "properties": {
+          "target": {
+            "$ref": "#/components/schemas/MirrorTargetItem"
+          }
+        },
+        "title": "MirrorSourceFieldValue",
+        "type": "object"
+      },
       "MirrorSourceFieldWithFieldEmbed": {
         "properties": {
           "_embedded": {
@@ -14138,6 +15194,24 @@
           "_embedded"
         ],
         "title": "MirrorSourceFieldWithFieldEmbed",
+        "type": "object"
+      },
+      "MirrorSourceItem": {
+        "properties": {
+          "itemId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "workspaceId": {
+            "format": "uuid",
+            "type": "string"
+          }
+        },
+        "required": [
+          "workspaceId",
+          "itemId"
+        ],
+        "title": "MirrorSourceItem",
         "type": "object"
       },
       "MirrorTargetField": {
@@ -14219,6 +15293,15 @@
         "title": "MirrorTargetFieldTypeFilterDefined",
         "type": "object"
       },
+      "MirrorTargetFieldValue": {
+        "properties": {
+          "source": {
+            "$ref": "#/components/schemas/MirrorSourceItem"
+          }
+        },
+        "title": "MirrorTargetFieldValue",
+        "type": "object"
+      },
       "MirrorTargetFieldWithFieldEmbed": {
         "properties": {
           "_embedded": {
@@ -14273,6 +15356,24 @@
           "_embedded"
         ],
         "title": "MirrorTargetFieldWithFieldEmbed",
+        "type": "object"
+      },
+      "MirrorTargetItem": {
+        "properties": {
+          "itemId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "workspaceId": {
+            "format": "uuid",
+            "type": "string"
+          }
+        },
+        "required": [
+          "workspaceId",
+          "itemId"
+        ],
+        "title": "MirrorTargetItem",
         "type": "object"
       },
       "NotificationSettingUpdateRequest": {
@@ -14696,6 +15797,15 @@
           "type"
         ],
         "title": "NumberFieldTypeSettingsUnitStoryPoints",
+        "type": "object"
+      },
+      "NumberFieldTypeValue": {
+        "properties": {
+          "number": {
+            "type": "number"
+          }
+        },
+        "title": "NumberFieldTypeValue",
         "type": "object"
       },
       "NumberFieldWithFieldEmbed": {
@@ -15127,6 +16237,21 @@
         "title": "OkrCheckinsField",
         "type": "object"
       },
+      "OkrCheckinsFieldValue": {
+        "properties": {
+          "checkins": {
+            "items": {
+              "$ref": "#/components/schemas/Checkin"
+            },
+            "type": "array"
+          }
+        },
+        "required": [
+          "checkins"
+        ],
+        "title": "OkrCheckinsFieldValue",
+        "type": "object"
+      },
       "OkrCheckinsFieldWithFieldEmbed": {
         "properties": {
           "_embedded": {
@@ -15307,6 +16432,18 @@
           "medium"
         ],
         "title": "OkrConfidenceFieldSettings",
+        "type": "object"
+      },
+      "OkrConfidenceFieldValue": {
+        "properties": {
+          "confidence": {
+            "$ref": "#/components/schemas/Confidence"
+          }
+        },
+        "required": [
+          "confidence"
+        ],
+        "title": "OkrConfidenceFieldValue",
         "type": "object"
       },
       "OkrConfidenceFieldWithFieldEmbed": {
@@ -15500,6 +16637,19 @@
         "title": "OkrKeyResultReferenceFieldFilterDefined",
         "type": "object"
       },
+      "OkrKeyResultReferenceFieldValue": {
+        "properties": {
+          "references": {
+            "default": [],
+            "items": {
+              "$ref": "#/components/schemas/KeyResultReference"
+            },
+            "type": "array"
+          }
+        },
+        "title": "OkrKeyResultReferenceFieldValue",
+        "type": "object"
+      },
       "OkrKeyResultReferenceFieldWithFieldEmbed": {
         "properties": {
           "_embedded": {
@@ -15635,6 +16785,19 @@
         "title": "OkrKeyResultsFieldFilterDefined",
         "type": "object"
       },
+      "OkrKeyResultsFieldValue": {
+        "properties": {
+          "keyResults": {
+            "default": [],
+            "items": {
+              "$ref": "#/components/schemas/KeyResult"
+            },
+            "type": "array"
+          }
+        },
+        "title": "OkrKeyResultsFieldValue",
+        "type": "object"
+      },
       "OkrKeyResultsFieldWithFieldEmbed": {
         "properties": {
           "_embedded": {
@@ -15741,6 +16904,34 @@
           "required"
         ],
         "title": "OkrProgressField",
+        "type": "object"
+      },
+      "OkrProgressFieldValue": {
+        "properties": {
+          "mode": {
+            "$ref": "#/components/schemas/CalculationMode"
+          },
+          "start": {
+            "type": "number"
+          },
+          "target": {
+            "type": "number"
+          },
+          "unit": {
+            "$ref": "#/components/schemas/ProgressUnit"
+          },
+          "value": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "value",
+          "mode",
+          "unit",
+          "start",
+          "target"
+        ],
+        "title": "OkrProgressFieldValue",
         "type": "object"
       },
       "OkrProgressFieldWithFieldEmbed": {
@@ -16171,6 +17362,28 @@
         "title": "PeopleFieldTypeSettings",
         "type": "object"
       },
+      "PeopleFieldTypeValue": {
+        "properties": {
+          "userGroupIds": {
+            "default": [],
+            "items": {
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "userIds": {
+            "default": [],
+            "items": {
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": "array"
+          }
+        },
+        "title": "PeopleFieldTypeValue",
+        "type": "object"
+      },
       "PeopleFieldWithFieldEmbed": {
         "properties": {
           "_embedded": {
@@ -16452,6 +17665,28 @@
           "settings"
         ],
         "title": "PortalApp",
+        "type": "object"
+      },
+      "PortalAppItemData": {
+        "properties": {
+          "coverImageId": {
+            "type": "string"
+          },
+          "description": {
+            "$ref": "#/components/schemas/RichText",
+            "description": "Rich text content as structured blocks. Different media types provide markdown support:\n• application/json - Default blocks format\n• application/vnd.airfocus.markdown+json - All RichText fields become markdown strings (recommended)\n• application/json+markdown - Legacy format, only top-level fields converted to markdown"
+          },
+          "name": {
+            "type": "string"
+          },
+          "public": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "public"
+        ],
+        "title": "PortalAppItemData",
         "type": "object"
       },
       "PortalAppTypeSettings": {
@@ -16815,6 +18050,15 @@
         "title": "PortalFieldTypeFilterPublic",
         "type": "object"
       },
+      "PortalFieldValue": {
+        "properties": {
+          "value": {
+            "$ref": "#/components/schemas/PortalAppItemData"
+          }
+        },
+        "title": "PortalFieldValue",
+        "type": "object"
+      },
       "PortalFieldWithFieldEmbed": {
         "properties": {
           "_embedded": {
@@ -17059,6 +18303,28 @@
         "title": "PortfolioSourceFieldFilterDefined",
         "type": "object"
       },
+      "PortfolioSourceFieldTypeValue": {
+        "properties": {
+          "target": {
+            "$ref": "#/components/schemas/PortfolioSourceFieldTypeValuePortfolioTarget"
+          }
+        },
+        "title": "PortfolioSourceFieldTypeValue",
+        "type": "object"
+      },
+      "PortfolioSourceFieldTypeValuePortfolioTarget": {
+        "properties": {
+          "workspaceId": {
+            "format": "uuid",
+            "type": "string"
+          }
+        },
+        "required": [
+          "workspaceId"
+        ],
+        "title": "PortfolioSourceFieldTypeValuePortfolioTarget",
+        "type": "object"
+      },
       "PortfolioSourceFieldWithFieldEmbed": {
         "properties": {
           "_embedded": {
@@ -17215,6 +18481,34 @@
         "title": "PrioritizationField",
         "type": "object"
       },
+      "PrioritizationFieldTypeValue": {
+        "properties": {
+          "criterionScore": {
+            "additionalProperties": {
+              "format": "double",
+              "type": "number"
+            },
+            "type": "object"
+          },
+          "factorScore": {
+            "additionalProperties": {
+              "format": "double",
+              "type": "number"
+            },
+            "type": "object"
+          },
+          "itemScore": {
+            "format": "double",
+            "type": "number"
+          }
+        },
+        "required": [
+          "factorScore",
+          "criterionScore"
+        ],
+        "title": "PrioritizationFieldTypeValue",
+        "type": "object"
+      },
       "PrioritizationFieldWithFieldEmbed": {
         "properties": {
           "_embedded": {
@@ -17269,6 +18563,71 @@
           "_embedded"
         ],
         "title": "PrioritizationFieldWithFieldEmbed",
+        "type": "object"
+      },
+      "ProgressUnit": {
+        "discriminator": {
+          "mapping": {
+            "money": "#/components/schemas/ProgressUnitMoney",
+            "number": "#/components/schemas/ProgressUnitNumber",
+            "percent": "#/components/schemas/ProgressUnitPercent"
+          },
+          "propertyName": "type"
+        },
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/ProgressUnitMoney"
+          },
+          {
+            "$ref": "#/components/schemas/ProgressUnitNumber"
+          },
+          {
+            "$ref": "#/components/schemas/ProgressUnitPercent"
+          }
+        ],
+        "title": "ProgressUnit"
+      },
+      "ProgressUnitMoney": {
+        "properties": {
+          "currency": {
+            "type": "string"
+          },
+          "type": {
+            "const": "money",
+            "type": "string"
+          }
+        },
+        "required": [
+          "currency",
+          "type"
+        ],
+        "title": "ProgressUnitMoney",
+        "type": "object"
+      },
+      "ProgressUnitNumber": {
+        "properties": {
+          "type": {
+            "const": "number",
+            "type": "string"
+          }
+        },
+        "required": [
+          "type"
+        ],
+        "title": "ProgressUnitNumber",
+        "type": "object"
+      },
+      "ProgressUnitPercent": {
+        "properties": {
+          "type": {
+            "const": "percent",
+            "type": "string"
+          }
+        },
+        "required": [
+          "type"
+        ],
+        "title": "ProgressUnitPercent",
         "type": "object"
       },
       "ReconfigureFieldRequest": {
@@ -18073,6 +19432,19 @@
           "type"
         ],
         "title": "RichTextFieldTypeFilterDefined",
+        "type": "object"
+      },
+      "RichTextFieldTypeValue": {
+        "properties": {
+          "richText": {
+            "$ref": "#/components/schemas/RichText",
+            "description": "Rich text content as structured blocks. Different media types provide markdown support:\n• application/json - Default blocks format\n• application/vnd.airfocus.markdown+json - All RichText fields become markdown strings (recommended)\n• application/json+markdown - Legacy format, only top-level fields converted to markdown"
+          }
+        },
+        "required": [
+          "richText"
+        ],
+        "title": "RichTextFieldTypeValue",
         "type": "object"
       },
       "RichTextFieldWithFieldEmbed": {
@@ -19245,6 +20617,21 @@
           "multi"
         ],
         "title": "SelectFieldTypeSettings",
+        "type": "object"
+      },
+      "SelectFieldTypeValue": {
+        "properties": {
+          "selection": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          }
+        },
+        "required": [
+          "selection"
+        ],
+        "title": "SelectFieldTypeValue",
         "type": "object"
       },
       "SelectFieldWithFieldEmbed": {
@@ -20585,7 +21972,88 @@
             "description": "Rich text content as structured blocks. Different media types provide markdown support:\n• application/json - Default blocks format\n• application/vnd.airfocus.markdown+json - All RichText fields become markdown strings (recommended)\n• application/json+markdown - Legacy format, only top-level fields converted to markdown"
           },
           "fields": {
-            "additionalProperties": {},
+            "additionalProperties": {
+              "oneOf": [
+                {
+                  "$ref": "#/components/schemas/BooleanFieldTypeValue"
+                },
+                {
+                  "$ref": "#/components/schemas/DateFieldTypeValue"
+                },
+                {
+                  "$ref": "#/components/schemas/DateRangeFieldTypeValue"
+                },
+                {
+                  "$ref": "#/components/schemas/FormSourceFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/FormsTargetFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/HealthCheckInsFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/InsightsFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/MilestoneFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/MirrorSourceFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/MirrorTargetFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/NumberFieldTypeValue"
+                },
+                {
+                  "$ref": "#/components/schemas/OkrCheckinsFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/OkrConfidenceFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/OkrKeyResultReferenceFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/OkrKeyResultsFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/OkrProgressFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/PeopleFieldTypeValue"
+                },
+                {
+                  "$ref": "#/components/schemas/PortalFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/PortfolioSourceFieldTypeValue"
+                },
+                {
+                  "$ref": "#/components/schemas/PrioritizationFieldTypeValue"
+                },
+                {
+                  "$ref": "#/components/schemas/RichTextFieldTypeValue"
+                },
+                {
+                  "$ref": "#/components/schemas/SelectFieldTypeValue"
+                },
+                {
+                  "$ref": "#/components/schemas/TextFieldTypeValue"
+                },
+                {
+                  "$ref": "#/components/schemas/TimePeriodFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/VotingAppScoreFieldTypeValue"
+                },
+                {
+                  "$ref": "#/components/schemas/VotingAppVotesFieldTypeValue"
+                }
+              ]
+            },
             "type": "object"
           },
           "id": {
@@ -21323,6 +22791,18 @@
         "title": "TextFieldTypeSettingsFormatEmail",
         "type": "object"
       },
+      "TextFieldTypeValue": {
+        "properties": {
+          "text": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "text"
+        ],
+        "title": "TextFieldTypeValue",
+        "type": "object"
+      },
       "TextFieldWithFieldEmbed": {
         "properties": {
           "_embedded": {
@@ -21784,6 +23264,25 @@
           "type"
         ],
         "title": "TimePeriodFieldSettingsSimple",
+        "type": "object"
+      },
+      "TimePeriodFieldValue": {
+        "properties": {
+          "dateRange": {
+            "$ref": "#/components/schemas/DateRange"
+          },
+          "timePeriodIds": {
+            "items": {
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": "array"
+          }
+        },
+        "required": [
+          "timePeriodIds"
+        ],
+        "title": "TimePeriodFieldValue",
         "type": "object"
       },
       "TimePeriodFieldWithFieldEmbed": {
@@ -22330,7 +23829,88 @@
             "description": "Rich-text description of this item."
           },
           "fields": {
-            "additionalProperties": {},
+            "additionalProperties": {
+              "oneOf": [
+                {
+                  "$ref": "#/components/schemas/BooleanFieldTypeValue"
+                },
+                {
+                  "$ref": "#/components/schemas/DateFieldTypeValue"
+                },
+                {
+                  "$ref": "#/components/schemas/DateRangeFieldTypeValue"
+                },
+                {
+                  "$ref": "#/components/schemas/FormSourceFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/FormsTargetFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/HealthCheckInsFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/InsightsFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/MilestoneFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/MirrorSourceFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/MirrorTargetFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/NumberFieldTypeValue"
+                },
+                {
+                  "$ref": "#/components/schemas/OkrCheckinsFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/OkrConfidenceFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/OkrKeyResultReferenceFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/OkrKeyResultsFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/OkrProgressFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/PeopleFieldTypeValue"
+                },
+                {
+                  "$ref": "#/components/schemas/PortalFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/PortfolioSourceFieldTypeValue"
+                },
+                {
+                  "$ref": "#/components/schemas/PrioritizationFieldTypeValue"
+                },
+                {
+                  "$ref": "#/components/schemas/RichTextFieldTypeValue"
+                },
+                {
+                  "$ref": "#/components/schemas/SelectFieldTypeValue"
+                },
+                {
+                  "$ref": "#/components/schemas/TextFieldTypeValue"
+                },
+                {
+                  "$ref": "#/components/schemas/TimePeriodFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/VotingAppScoreFieldTypeValue"
+                },
+                {
+                  "$ref": "#/components/schemas/VotingAppVotesFieldTypeValue"
+                }
+              ]
+            },
             "default": {},
             "description": "Values of custom fields, where each key is a custom-field ID and each value is a JSON-formatted value of the corresponding field. Entries present in the map replace the matching entry on the item; entries omitted from the map are left untouched.",
             "examples": [
@@ -22471,7 +24051,88 @@
             "type": "string"
           },
           "fields": {
-            "additionalProperties": {},
+            "additionalProperties": {
+              "oneOf": [
+                {
+                  "$ref": "#/components/schemas/BooleanFieldTypeValue"
+                },
+                {
+                  "$ref": "#/components/schemas/DateFieldTypeValue"
+                },
+                {
+                  "$ref": "#/components/schemas/DateRangeFieldTypeValue"
+                },
+                {
+                  "$ref": "#/components/schemas/FormSourceFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/FormsTargetFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/HealthCheckInsFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/InsightsFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/MilestoneFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/MirrorSourceFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/MirrorTargetFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/NumberFieldTypeValue"
+                },
+                {
+                  "$ref": "#/components/schemas/OkrCheckinsFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/OkrConfidenceFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/OkrKeyResultReferenceFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/OkrKeyResultsFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/OkrProgressFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/PeopleFieldTypeValue"
+                },
+                {
+                  "$ref": "#/components/schemas/PortalFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/PortfolioSourceFieldTypeValue"
+                },
+                {
+                  "$ref": "#/components/schemas/PrioritizationFieldTypeValue"
+                },
+                {
+                  "$ref": "#/components/schemas/RichTextFieldTypeValue"
+                },
+                {
+                  "$ref": "#/components/schemas/SelectFieldTypeValue"
+                },
+                {
+                  "$ref": "#/components/schemas/TextFieldTypeValue"
+                },
+                {
+                  "$ref": "#/components/schemas/TimePeriodFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/VotingAppScoreFieldTypeValue"
+                },
+                {
+                  "$ref": "#/components/schemas/VotingAppVotesFieldTypeValue"
+                }
+              ]
+            },
             "default": {},
             "description": "Values of custom fields, where each key is a custom-field ID and each value is a JSON-formatted value of the corresponding field. Entries present in the map replace the matching entry on the item; entries omitted from the map are left untouched.",
             "examples": [
@@ -23429,6 +25090,101 @@
         "title": "VotingAppAudienceTeamMembers",
         "type": "object"
       },
+      "VotingAppPublicUserVote": {
+        "properties": {
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "publicUserId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "publicUserTokenId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "reactionId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "source": {
+            "$ref": "#/components/schemas/VotingAppPublicUserVoteSource"
+          },
+          "type": {
+            "const": "publicUser",
+            "type": "string"
+          }
+        },
+        "required": [
+          "reactionId",
+          "createdAt",
+          "publicUserTokenId",
+          "publicUserId",
+          "source",
+          "type"
+        ],
+        "title": "VotingAppPublicUserVote",
+        "type": "object"
+      },
+      "VotingAppPublicUserVoteSource": {
+        "discriminator": {
+          "mapping": {
+            "app": "#/components/schemas/VotingAppPublicUserVoteSourceVotingAppPublicUserVoteAppSource",
+            "shareLink": "#/components/schemas/VotingAppPublicUserVoteSourceVotingAppPublicUserVoteShareLinkSource"
+          },
+          "propertyName": "type"
+        },
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/VotingAppPublicUserVoteSourceVotingAppPublicUserVoteAppSource"
+          },
+          {
+            "$ref": "#/components/schemas/VotingAppPublicUserVoteSourceVotingAppPublicUserVoteShareLinkSource"
+          }
+        ],
+        "title": "VotingAppPublicUserVoteSource"
+      },
+      "VotingAppPublicUserVoteSourceVotingAppPublicUserVoteAppSource": {
+        "properties": {
+          "appId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "type": {
+            "const": "app",
+            "type": "string"
+          },
+          "typeId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "appId",
+          "typeId",
+          "type"
+        ],
+        "title": "VotingAppPublicUserVoteSourceVotingAppPublicUserVoteAppSource",
+        "type": "object"
+      },
+      "VotingAppPublicUserVoteSourceVotingAppPublicUserVoteShareLinkSource": {
+        "properties": {
+          "shareLinkId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "type": {
+            "const": "shareLink",
+            "type": "string"
+          }
+        },
+        "required": [
+          "shareLinkId",
+          "type"
+        ],
+        "title": "VotingAppPublicUserVoteSourceVotingAppPublicUserVoteShareLinkSource",
+        "type": "object"
+      },
       "VotingAppReactionType": {
         "properties": {
           "id": {
@@ -23460,6 +25216,26 @@
           }
         },
         "title": "VotingAppScoreFieldTypeSettings",
+        "type": "object"
+      },
+      "VotingAppScoreFieldTypeValue": {
+        "properties": {
+          "absoluteScore": {
+            "type": "number"
+          },
+          "reactionCounts": {
+            "additionalProperties": {
+              "format": "int32",
+              "type": "integer"
+            },
+            "type": "object"
+          }
+        },
+        "required": [
+          "reactionCounts",
+          "absoluteScore"
+        ],
+        "title": "VotingAppScoreFieldTypeValue",
         "type": "object"
       },
       "VotingAppTypeSettings": {
@@ -23502,6 +25278,52 @@
         ],
         "title": "VotingAppTypeSettings",
         "type": "object"
+      },
+      "VotingAppUserVote": {
+        "properties": {
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "reactionId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "type": {
+            "const": "user",
+            "type": "string"
+          },
+          "userId": {
+            "format": "uuid",
+            "type": "string"
+          }
+        },
+        "required": [
+          "reactionId",
+          "createdAt",
+          "userId",
+          "type"
+        ],
+        "title": "VotingAppUserVote",
+        "type": "object"
+      },
+      "VotingAppVote": {
+        "discriminator": {
+          "mapping": {
+            "publicUser": "#/components/schemas/VotingAppPublicUserVote",
+            "user": "#/components/schemas/VotingAppUserVote"
+          },
+          "propertyName": "type"
+        },
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/VotingAppPublicUserVote"
+          },
+          {
+            "$ref": "#/components/schemas/VotingAppUserVote"
+          }
+        ],
+        "title": "VotingAppVote"
       },
       "VotingAppVotesFieldTypeFilter": {
         "discriminator": {
@@ -23578,6 +25400,22 @@
           "type"
         ],
         "title": "VotingAppVotesFieldTypeFilterDefined",
+        "type": "object"
+      },
+      "VotingAppVotesFieldTypeValue": {
+        "properties": {
+          "votes": {
+            "items": {
+              "$ref": "#/components/schemas/VotingAppVote"
+            },
+            "type": "array",
+            "uniqueItems": true
+          }
+        },
+        "required": [
+          "votes"
+        ],
+        "title": "VotingAppVotesFieldTypeValue",
         "type": "object"
       },
       "VotingScoreField": {
@@ -25875,7 +27713,7 @@
   },
   "info": {
     "title": "airfocus API",
-    "version": "1.0.0-beta.47.183.0"
+    "version": "1.0.0-beta.47.185.1"
   },
   "openapi": "3.1.0",
   "paths": {
