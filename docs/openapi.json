@@ -533,6 +533,72 @@
         "title": "AsanaIntegrationTypeSettings",
         "type": "object"
       },
+      "Attachment": {
+        "properties": {
+          "contentType": {
+            "type": "string"
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "fileName": {
+            "type": "string"
+          },
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "isPublic": {
+            "type": "boolean"
+          },
+          "lastUsedAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "size": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "teamId": {
+            "format": "uuid",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "teamId",
+          "fileName",
+          "size",
+          "contentType",
+          "isPublic",
+          "lastUsedAt",
+          "createdAt"
+        ],
+        "title": "Attachment",
+        "type": "object"
+      },
+      "AttachmentMetadataResponse": {
+        "properties": {
+          "contentType": {
+            "type": "string"
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "fileName": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "fileName",
+          "contentType",
+          "createdAt"
+        ],
+        "title": "AttachmentMetadataResponse",
+        "type": "object"
+      },
       "AttachmentSearchQuery": {
         "properties": {
           "itemId": {
@@ -2369,6 +2435,7 @@
         "type": "object"
       },
       "CreateItemRequestWithMD": {
+        "deprecated": true,
         "description": "Item with Markdown string description.",
         "properties": {
           "archived": {
@@ -2399,7 +2466,8 @@
             "description": "Color of this item. If omitted, the server uses the workspace's default color."
           },
           "description": {
-            "description": "Rich text content as a markdown string (used with markdown media types)",
+            "default": "",
+            "description": "Rich-text description of this item.",
             "examples": [
               "hello **world**!"
             ],
@@ -2589,10 +2657,234 @@
           }
         },
         "required": [
-          "name",
-          "description"
+          "name"
         ],
         "title": "CreateItemRequestWithMD",
+        "type": "object"
+      },
+      "CreateItemRequestWithMarkdown": {
+        "properties": {
+          "archived": {
+            "default": false,
+            "description": "Whether this item is archived.",
+            "type": "boolean"
+          },
+          "assigneeUserGroupIds": {
+            "default": [],
+            "description": "Ids of user groups that are assigned to this item.",
+            "items": {
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "assigneeUserIds": {
+            "default": [],
+            "description": "Ids of users who are assigned to this item.",
+            "items": {
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "color": {
+            "$ref": "#/components/schemas/ItemColor",
+            "description": "Color of this item. If omitted, the server uses the workspace's default color."
+          },
+          "description": {
+            "$ref": "#/components/schemas/MarkdownRichText",
+            "default": {
+              "markdown": ""
+            },
+            "description": "Rich-text description of this item."
+          },
+          "fields": {
+            "additionalProperties": {
+              "oneOf": [
+                {
+                  "$ref": "#/components/schemas/BooleanFieldTypeValue"
+                },
+                {
+                  "$ref": "#/components/schemas/DateFieldTypeValue"
+                },
+                {
+                  "$ref": "#/components/schemas/DateRangeFieldTypeValue"
+                },
+                {
+                  "$ref": "#/components/schemas/FormSourceFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/FormsTargetFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/HealthCheckInsFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/InsightsFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/MilestoneFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/MirrorSourceFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/MirrorTargetFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/NumberFieldTypeValue"
+                },
+                {
+                  "$ref": "#/components/schemas/OkrCheckinsFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/OkrConfidenceFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/OkrKeyResultReferenceFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/OkrKeyResultsFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/OkrProgressFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/PeopleFieldTypeValue"
+                },
+                {
+                  "$ref": "#/components/schemas/PortalFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/PortfolioSourceFieldTypeValue"
+                },
+                {
+                  "$ref": "#/components/schemas/PrioritizationFieldTypeValue"
+                },
+                {
+                  "$ref": "#/components/schemas/RichTextFieldTypeValue"
+                },
+                {
+                  "$ref": "#/components/schemas/SelectFieldTypeValue"
+                },
+                {
+                  "$ref": "#/components/schemas/TextFieldTypeValue"
+                },
+                {
+                  "$ref": "#/components/schemas/TimePeriodFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/VotingAppScoreFieldTypeValue"
+                },
+                {
+                  "$ref": "#/components/schemas/VotingAppVotesFieldTypeValue"
+                }
+              ]
+            },
+            "default": {},
+            "description": "Values of custom fields, where each key is a custom-field ID and each value is a JSON-formatted value of the corresponding field.",
+            "examples": [
+              {
+                "0fc3cfbc-27e9-3ea6-8a78-7de13dae3e3c": {
+                  "number": 42
+                },
+                "34f05b62-dd43-3e1e-82bc-b0acabd0d004": {
+                  "boolean": true
+                },
+                "5396681e-ea50-3d63-9ae3-c9f8ca17b7d8": {
+                  "userGroupIds": [
+                    "70e2b87a-b774-3022-9ef0-e55031a1c4fb"
+                  ],
+                  "userIds": [
+                    "24c9e15e-52af-347c-a25b-757e7bee1f9d"
+                  ]
+                },
+                "75fe57ec-4a04-3a30-8cac-5f27223df81a": {
+                  "dateRange": {
+                    "endDate": "2024-02-14",
+                    "startDate": "2024-01-14",
+                    "timezone": "UTC"
+                  }
+                },
+                "8be74552-df93-331b-bdd6-b36ed74bdb6a": {
+                  "selection": [
+                    "2bb225ce-b5ee-3493-967c-fde0d72da242"
+                  ]
+                },
+                "c7824f3d-4d5f-3b2f-a2d0-34758c1e9454": {
+                  "text": "A platform built for the new way of doing product management"
+                },
+                "c9c0d13b-a4e5-363b-a475-736cd0366142": {
+                  "richText": {
+                    "blocks": [
+                      {
+                        "content": [
+                          {
+                            "content": "This is a rich text field with ",
+                            "type": "text"
+                          },
+                          {
+                            "content": [
+                              {
+                                "content": "bold text",
+                                "type": "text"
+                              }
+                            ],
+                            "type": "bold"
+                          },
+                          {
+                            "content": " and ",
+                            "type": "text"
+                          },
+                          {
+                            "content": [
+                              {
+                                "content": "italic text",
+                                "type": "text"
+                              }
+                            ],
+                            "type": "italic"
+                          },
+                          {
+                            "content": ".",
+                            "type": "text"
+                          }
+                        ],
+                        "type": "paragraph"
+                      }
+                    ],
+                    "richText": true
+                  }
+                },
+                "e34d514f-7db5-38aa-872a-7c8191a09617": {
+                  "date": {
+                    "date": "2024-01-01",
+                    "timezone": "UTC"
+                  }
+                }
+              }
+            ],
+            "type": "object"
+          },
+          "name": {
+            "description": "Name (title) of this item.",
+            "type": "string"
+          },
+          "order": {
+            "description": "Order number of this item for sorting. If omitted, the item is appended at the end.",
+            "format": "int32",
+            "type": "integer"
+          },
+          "statusId": {
+            "description": "Id of the status of this item. If omitted, the server picks a default for the workspace.",
+            "format": "uuid",
+            "type": "string"
+          }
+        },
+        "required": [
+          "name"
+        ],
+        "title": "CreateItemRequestWithMarkdown",
         "type": "object"
       },
       "CreateMilestoneRequest": {
@@ -3556,6 +3848,10 @@
             "email": true,
             "inApp": true
           },
+          "commentedOnDocument": {
+            "email": true,
+            "inApp": true
+          },
           "commentedOnItem": {
             "email": true,
             "inApp": true
@@ -3597,6 +3893,9 @@
             "$ref": "#/components/schemas/ChannelPreferences"
           },
           "assignedUserToItem": {
+            "$ref": "#/components/schemas/ChannelPreferences"
+          },
+          "commentedOnDocument": {
             "$ref": "#/components/schemas/ChannelPreferences"
           },
           "commentedOnItem": {
@@ -10917,6 +11216,192 @@
         "title": "ItemPartialWithItemPartialEmbedPage",
         "type": "object"
       },
+      "ItemPartialWithMarkdownWithItemPartialEmbed": {
+        "properties": {
+          "_embedded": {
+            "$ref": "#/components/schemas/ItemPartialEmbed"
+          },
+          "archived": {
+            "type": "boolean"
+          },
+          "assigneeUserGroupIds": {
+            "items": {
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": "array",
+            "x-optional-collection": true
+          },
+          "assigneeUserIds": {
+            "items": {
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": "array",
+            "x-optional-collection": true
+          },
+          "color": {
+            "$ref": "#/components/schemas/ItemColor"
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "creator": {
+            "$ref": "#/components/schemas/Actor"
+          },
+          "description": {
+            "$ref": "#/components/schemas/MarkdownRichText",
+            "description": "Rich text content with its blocks rendered to markdown (used with application/vnd.airfocus.markdown+json)"
+          },
+          "fields": {
+            "additionalProperties": {
+              "oneOf": [
+                {
+                  "$ref": "#/components/schemas/BooleanFieldTypeValue"
+                },
+                {
+                  "$ref": "#/components/schemas/DateFieldTypeValue"
+                },
+                {
+                  "$ref": "#/components/schemas/DateRangeFieldTypeValue"
+                },
+                {
+                  "$ref": "#/components/schemas/FormSourceFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/FormsTargetFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/HealthCheckInsFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/InsightsFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/MilestoneFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/MirrorSourceFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/MirrorTargetFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/NumberFieldTypeValue"
+                },
+                {
+                  "$ref": "#/components/schemas/OkrCheckinsFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/OkrConfidenceFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/OkrKeyResultReferenceFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/OkrKeyResultsFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/OkrProgressFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/PeopleFieldTypeValue"
+                },
+                {
+                  "$ref": "#/components/schemas/PortalFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/PortfolioSourceFieldTypeValue"
+                },
+                {
+                  "$ref": "#/components/schemas/PrioritizationFieldTypeValue"
+                },
+                {
+                  "$ref": "#/components/schemas/RichTextFieldTypeValue"
+                },
+                {
+                  "$ref": "#/components/schemas/SelectFieldTypeValue"
+                },
+                {
+                  "$ref": "#/components/schemas/TextFieldTypeValue"
+                },
+                {
+                  "$ref": "#/components/schemas/TimePeriodFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/VotingAppScoreFieldTypeValue"
+                },
+                {
+                  "$ref": "#/components/schemas/VotingAppVotesFieldTypeValue"
+                }
+              ]
+            },
+            "type": "object"
+          },
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "lastUpdatedAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "number": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "order": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "statusCategoryUpdatedAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "statusId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "statusUpdatedAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "workspaceId": {
+            "format": "uuid",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "_embedded"
+        ],
+        "title": "ItemPartialWithMarkdownWithItemPartialEmbed",
+        "type": "object"
+      },
+      "ItemPartialWithMarkdownWithItemPartialEmbedPage": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/ItemPartialWithMarkdownWithItemPartialEmbed"
+            },
+            "type": "array"
+          },
+          "totalItems": {
+            "format": "int32",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "items",
+          "totalItems"
+        ],
+        "title": "ItemPartialWithMarkdownWithItemPartialEmbedPage",
+        "type": "object"
+      },
       "ItemRelationBulkAction": {
         "discriminator": {
           "mapping": {
@@ -12997,7 +13482,123 @@
         "title": "ItemWithItemEmbedPage",
         "type": "object"
       },
+      "ItemWithMDBulkAction": {
+        "deprecated": true,
+        "description": "Item with Markdown string description.",
+        "discriminator": {
+          "mapping": {
+            "create": "#/components/schemas/ItemWithMDBulkCreate",
+            "delete": "#/components/schemas/ItemWithMDBulkDelete",
+            "patch": "#/components/schemas/ItemWithMDBulkPatch",
+            "update": "#/components/schemas/ItemWithMDBulkUpdate"
+          },
+          "propertyName": "type"
+        },
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/ItemWithMDBulkCreate"
+          },
+          {
+            "$ref": "#/components/schemas/ItemWithMDBulkDelete"
+          },
+          {
+            "$ref": "#/components/schemas/ItemWithMDBulkPatch"
+          },
+          {
+            "$ref": "#/components/schemas/ItemWithMDBulkUpdate"
+          }
+        ],
+        "title": "ItemWithMDBulkAction"
+      },
+      "ItemWithMDBulkCreate": {
+        "properties": {
+          "resource": {
+            "$ref": "#/components/schemas/CreateItemRequestWithMD"
+          },
+          "type": {
+            "enum": [
+              "create"
+            ],
+            "type": "string"
+          }
+        },
+        "required": [
+          "resource",
+          "type"
+        ],
+        "title": "ItemWithMDBulkCreate",
+        "type": "object"
+      },
+      "ItemWithMDBulkDelete": {
+        "properties": {
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "type": {
+            "enum": [
+              "delete"
+            ],
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "type"
+        ],
+        "title": "ItemWithMDBulkDelete",
+        "type": "object"
+      },
+      "ItemWithMDBulkPatch": {
+        "properties": {
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "transform": {
+            "$ref": "#/components/schemas/JsonPatch"
+          },
+          "type": {
+            "enum": [
+              "patch"
+            ],
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "transform",
+          "type"
+        ],
+        "title": "ItemWithMDBulkPatch",
+        "type": "object"
+      },
+      "ItemWithMDBulkUpdate": {
+        "properties": {
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "resource": {
+            "$ref": "#/components/schemas/UpdateItemRequestWithMD"
+          },
+          "type": {
+            "enum": [
+              "update"
+            ],
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "resource",
+          "type"
+        ],
+        "title": "ItemWithMDBulkUpdate",
+        "type": "object"
+      },
       "ItemWithMDWithItemEmbed": {
+        "deprecated": true,
         "description": "Item with Markdown string description.",
         "properties": {
           "_embedded": {
@@ -13277,6 +13878,7 @@
       "ItemWithMDWithItemEmbedPage": {
         "properties": {
           "items": {
+            "deprecated": true,
             "items": {
               "$ref": "#/components/schemas/ItemWithMDWithItemEmbed"
             },
@@ -13292,6 +13894,412 @@
           "totalItems"
         ],
         "title": "ItemWithMDWithItemEmbedPage",
+        "type": "object"
+      },
+      "ItemWithMarkdownBulkAction": {
+        "discriminator": {
+          "mapping": {
+            "create": "#/components/schemas/ItemWithMarkdownBulkCreate",
+            "delete": "#/components/schemas/ItemWithMarkdownBulkDelete",
+            "patch": "#/components/schemas/ItemWithMarkdownBulkPatch",
+            "update": "#/components/schemas/ItemWithMarkdownBulkUpdate"
+          },
+          "propertyName": "type"
+        },
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/ItemWithMarkdownBulkCreate"
+          },
+          {
+            "$ref": "#/components/schemas/ItemWithMarkdownBulkDelete"
+          },
+          {
+            "$ref": "#/components/schemas/ItemWithMarkdownBulkPatch"
+          },
+          {
+            "$ref": "#/components/schemas/ItemWithMarkdownBulkUpdate"
+          }
+        ],
+        "title": "ItemWithMarkdownBulkAction"
+      },
+      "ItemWithMarkdownBulkCreate": {
+        "properties": {
+          "resource": {
+            "$ref": "#/components/schemas/CreateItemRequestWithMarkdown"
+          },
+          "type": {
+            "enum": [
+              "create"
+            ],
+            "type": "string"
+          }
+        },
+        "required": [
+          "resource",
+          "type"
+        ],
+        "title": "ItemWithMarkdownBulkCreate",
+        "type": "object"
+      },
+      "ItemWithMarkdownBulkDelete": {
+        "properties": {
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "type": {
+            "enum": [
+              "delete"
+            ],
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "type"
+        ],
+        "title": "ItemWithMarkdownBulkDelete",
+        "type": "object"
+      },
+      "ItemWithMarkdownBulkPatch": {
+        "properties": {
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "transform": {
+            "$ref": "#/components/schemas/JsonPatch"
+          },
+          "type": {
+            "enum": [
+              "patch"
+            ],
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "transform",
+          "type"
+        ],
+        "title": "ItemWithMarkdownBulkPatch",
+        "type": "object"
+      },
+      "ItemWithMarkdownBulkUpdate": {
+        "properties": {
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "resource": {
+            "$ref": "#/components/schemas/UpdateItemRequestWithMarkdown"
+          },
+          "type": {
+            "enum": [
+              "update"
+            ],
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "resource",
+          "type"
+        ],
+        "title": "ItemWithMarkdownBulkUpdate",
+        "type": "object"
+      },
+      "ItemWithMarkdownWithItemEmbed": {
+        "properties": {
+          "_embedded": {
+            "$ref": "#/components/schemas/ItemEmbed"
+          },
+          "archived": {
+            "description": "Whether this item is archived.",
+            "type": "boolean"
+          },
+          "assigneeUserGroupIds": {
+            "description": "Ids of user groups that are assigned to this item.",
+            "items": {
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "assigneeUserIds": {
+            "description": "Ids of users who are assigned to this item.",
+            "items": {
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "color": {
+            "$ref": "#/components/schemas/ItemColor",
+            "description": "Color of this item."
+          },
+          "createdAt": {
+            "description": "Timestamp of when this item was created.",
+            "format": "date-time",
+            "type": "string"
+          },
+          "creator": {
+            "$ref": "#/components/schemas/Actor",
+            "description": "The actor who created this item. Empty for legacy entries for which creator could not be determined."
+          },
+          "description": {
+            "$ref": "#/components/schemas/MarkdownRichText",
+            "description": "Rich text content with its blocks rendered to markdown (used with application/vnd.airfocus.markdown+json)"
+          },
+          "fields": {
+            "additionalProperties": {
+              "oneOf": [
+                {
+                  "$ref": "#/components/schemas/BooleanFieldTypeValue"
+                },
+                {
+                  "$ref": "#/components/schemas/DateFieldTypeValue"
+                },
+                {
+                  "$ref": "#/components/schemas/DateRangeFieldTypeValue"
+                },
+                {
+                  "$ref": "#/components/schemas/FormSourceFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/FormsTargetFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/HealthCheckInsFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/InsightsFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/MilestoneFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/MirrorSourceFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/MirrorTargetFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/NumberFieldTypeValue"
+                },
+                {
+                  "$ref": "#/components/schemas/OkrCheckinsFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/OkrConfidenceFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/OkrKeyResultReferenceFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/OkrKeyResultsFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/OkrProgressFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/PeopleFieldTypeValue"
+                },
+                {
+                  "$ref": "#/components/schemas/PortalFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/PortfolioSourceFieldTypeValue"
+                },
+                {
+                  "$ref": "#/components/schemas/PrioritizationFieldTypeValue"
+                },
+                {
+                  "$ref": "#/components/schemas/RichTextFieldTypeValue"
+                },
+                {
+                  "$ref": "#/components/schemas/SelectFieldTypeValue"
+                },
+                {
+                  "$ref": "#/components/schemas/TextFieldTypeValue"
+                },
+                {
+                  "$ref": "#/components/schemas/TimePeriodFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/VotingAppScoreFieldTypeValue"
+                },
+                {
+                  "$ref": "#/components/schemas/VotingAppVotesFieldTypeValue"
+                }
+              ]
+            },
+            "description": "Values of custom fields, where each key is a custom-field ID and each value is a JSON-formatted value of the corresponding field.",
+            "examples": [
+              {
+                "0fc3cfbc-27e9-3ea6-8a78-7de13dae3e3c": {
+                  "number": 42
+                },
+                "34f05b62-dd43-3e1e-82bc-b0acabd0d004": {
+                  "boolean": true
+                },
+                "5396681e-ea50-3d63-9ae3-c9f8ca17b7d8": {
+                  "userGroupIds": [
+                    "70e2b87a-b774-3022-9ef0-e55031a1c4fb"
+                  ],
+                  "userIds": [
+                    "24c9e15e-52af-347c-a25b-757e7bee1f9d"
+                  ]
+                },
+                "75fe57ec-4a04-3a30-8cac-5f27223df81a": {
+                  "dateRange": {
+                    "endDate": "2024-02-14",
+                    "startDate": "2024-01-14",
+                    "timezone": "UTC"
+                  }
+                },
+                "8be74552-df93-331b-bdd6-b36ed74bdb6a": {
+                  "selection": [
+                    "2bb225ce-b5ee-3493-967c-fde0d72da242"
+                  ]
+                },
+                "c7824f3d-4d5f-3b2f-a2d0-34758c1e9454": {
+                  "text": "A platform built for the new way of doing product management"
+                },
+                "c9c0d13b-a4e5-363b-a475-736cd0366142": {
+                  "richText": {
+                    "blocks": [
+                      {
+                        "content": [
+                          {
+                            "content": "This is a rich text field with ",
+                            "type": "text"
+                          },
+                          {
+                            "content": [
+                              {
+                                "content": "bold text",
+                                "type": "text"
+                              }
+                            ],
+                            "type": "bold"
+                          },
+                          {
+                            "content": " and ",
+                            "type": "text"
+                          },
+                          {
+                            "content": [
+                              {
+                                "content": "italic text",
+                                "type": "text"
+                              }
+                            ],
+                            "type": "italic"
+                          },
+                          {
+                            "content": ".",
+                            "type": "text"
+                          }
+                        ],
+                        "type": "paragraph"
+                      }
+                    ],
+                    "richText": true
+                  }
+                },
+                "e34d514f-7db5-38aa-872a-7c8191a09617": {
+                  "date": {
+                    "date": "2024-01-01",
+                    "timezone": "UTC"
+                  }
+                }
+              }
+            ],
+            "type": "object"
+          },
+          "id": {
+            "description": "Unique identifier of this item.",
+            "format": "uuid",
+            "type": "string"
+          },
+          "lastUpdatedAt": {
+            "description": "Timestamp of when this item was last updated.",
+            "format": "date-time",
+            "type": "string"
+          },
+          "name": {
+            "description": "Name (title) of this item.",
+            "type": "string"
+          },
+          "number": {
+            "description": "A numeric id of this item, which is used to create an alias to this item like DEV-123. The number is unique within the workspace, and defined by server on item creation.",
+            "format": "int32",
+            "type": "integer"
+          },
+          "order": {
+            "description": "A order number of this item for sorting.",
+            "format": "int32",
+            "type": "integer"
+          },
+          "statusCategoryUpdatedAt": {
+            "description": "Timestamp of when the status of this item was last time switched from one category to another.",
+            "format": "date-time",
+            "type": "string"
+          },
+          "statusId": {
+            "description": "Id of the status of this item.",
+            "format": "uuid",
+            "type": "string"
+          },
+          "statusUpdatedAt": {
+            "description": "Timestamp of when the status of this item was last updated.",
+            "format": "date-time",
+            "type": "string"
+          },
+          "workspaceId": {
+            "description": "Id of the workspace this workspace belongs to.",
+            "format": "uuid",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "workspaceId",
+          "statusId",
+          "color",
+          "name",
+          "description",
+          "assigneeUserIds",
+          "assigneeUserGroupIds",
+          "fields",
+          "archived",
+          "createdAt",
+          "lastUpdatedAt",
+          "order",
+          "_embedded"
+        ],
+        "title": "ItemWithMarkdownWithItemEmbed",
+        "type": "object"
+      },
+      "ItemWithMarkdownWithItemEmbedPage": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/ItemWithMarkdownWithItemEmbed"
+            },
+            "type": "array"
+          },
+          "totalItems": {
+            "format": "int32",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "items",
+          "totalItems"
+        ],
+        "title": "ItemWithMarkdownWithItemEmbedPage",
         "type": "object"
       },
       "JiraAppLink": {
@@ -14339,6 +15347,24 @@
           "externalId"
         ],
         "title": "MappingSettingsIntegrationMappingSettingsWithOptionsOptionPair",
+        "type": "object"
+      },
+      "MarkdownRichText": {
+        "examples": [
+          {
+            "markdown": "hello **world**!",
+            "richText": true
+          }
+        ],
+        "properties": {
+          "markdown": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "markdown"
+        ],
+        "title": "MarkdownRichText",
         "type": "object"
       },
       "Milestone": {
@@ -24015,6 +25041,7 @@
         "type": "object"
       },
       "UpdateItemRequestWithMD": {
+        "deprecated": true,
         "description": "Item with Markdown string description.",
         "properties": {
           "archived": {
@@ -24234,6 +25261,224 @@
           }
         },
         "title": "UpdateItemRequestWithMD",
+        "type": "object"
+      },
+      "UpdateItemRequestWithMarkdown": {
+        "properties": {
+          "archived": {
+            "description": "Whether this item is archived.",
+            "type": "boolean"
+          },
+          "assigneeUserGroupIds": {
+            "description": "Ids of user groups that are assigned to this item.",
+            "items": {
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": "array",
+            "x-optional-collection": true
+          },
+          "assigneeUserIds": {
+            "description": "Ids of users who are assigned to this item.",
+            "items": {
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": "array",
+            "x-optional-collection": true
+          },
+          "color": {
+            "$ref": "#/components/schemas/ItemColor",
+            "description": "Color of this item."
+          },
+          "description": {
+            "$ref": "#/components/schemas/MarkdownRichText",
+            "description": "Rich-text description of this item."
+          },
+          "fields": {
+            "additionalProperties": {
+              "oneOf": [
+                {
+                  "$ref": "#/components/schemas/BooleanFieldTypeValue"
+                },
+                {
+                  "$ref": "#/components/schemas/DateFieldTypeValue"
+                },
+                {
+                  "$ref": "#/components/schemas/DateRangeFieldTypeValue"
+                },
+                {
+                  "$ref": "#/components/schemas/FormSourceFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/FormsTargetFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/HealthCheckInsFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/InsightsFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/MilestoneFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/MirrorSourceFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/MirrorTargetFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/NumberFieldTypeValue"
+                },
+                {
+                  "$ref": "#/components/schemas/OkrCheckinsFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/OkrConfidenceFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/OkrKeyResultReferenceFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/OkrKeyResultsFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/OkrProgressFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/PeopleFieldTypeValue"
+                },
+                {
+                  "$ref": "#/components/schemas/PortalFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/PortfolioSourceFieldTypeValue"
+                },
+                {
+                  "$ref": "#/components/schemas/PrioritizationFieldTypeValue"
+                },
+                {
+                  "$ref": "#/components/schemas/RichTextFieldTypeValue"
+                },
+                {
+                  "$ref": "#/components/schemas/SelectFieldTypeValue"
+                },
+                {
+                  "$ref": "#/components/schemas/TextFieldTypeValue"
+                },
+                {
+                  "$ref": "#/components/schemas/TimePeriodFieldValue"
+                },
+                {
+                  "$ref": "#/components/schemas/VotingAppScoreFieldTypeValue"
+                },
+                {
+                  "$ref": "#/components/schemas/VotingAppVotesFieldTypeValue"
+                }
+              ]
+            },
+            "default": {},
+            "description": "Values of custom fields, where each key is a custom-field ID and each value is a JSON-formatted value of the corresponding field. Entries present in the map replace the matching entry on the item; entries omitted from the map are left untouched.",
+            "examples": [
+              {
+                "0fc3cfbc-27e9-3ea6-8a78-7de13dae3e3c": {
+                  "number": 42
+                },
+                "34f05b62-dd43-3e1e-82bc-b0acabd0d004": {
+                  "boolean": true
+                },
+                "5396681e-ea50-3d63-9ae3-c9f8ca17b7d8": {
+                  "userGroupIds": [
+                    "70e2b87a-b774-3022-9ef0-e55031a1c4fb"
+                  ],
+                  "userIds": [
+                    "24c9e15e-52af-347c-a25b-757e7bee1f9d"
+                  ]
+                },
+                "75fe57ec-4a04-3a30-8cac-5f27223df81a": {
+                  "dateRange": {
+                    "endDate": "2024-02-14",
+                    "startDate": "2024-01-14",
+                    "timezone": "UTC"
+                  }
+                },
+                "8be74552-df93-331b-bdd6-b36ed74bdb6a": {
+                  "selection": [
+                    "2bb225ce-b5ee-3493-967c-fde0d72da242"
+                  ]
+                },
+                "c7824f3d-4d5f-3b2f-a2d0-34758c1e9454": {
+                  "text": "A platform built for the new way of doing product management"
+                },
+                "c9c0d13b-a4e5-363b-a475-736cd0366142": {
+                  "richText": {
+                    "blocks": [
+                      {
+                        "content": [
+                          {
+                            "content": "This is a rich text field with ",
+                            "type": "text"
+                          },
+                          {
+                            "content": [
+                              {
+                                "content": "bold text",
+                                "type": "text"
+                              }
+                            ],
+                            "type": "bold"
+                          },
+                          {
+                            "content": " and ",
+                            "type": "text"
+                          },
+                          {
+                            "content": [
+                              {
+                                "content": "italic text",
+                                "type": "text"
+                              }
+                            ],
+                            "type": "italic"
+                          },
+                          {
+                            "content": ".",
+                            "type": "text"
+                          }
+                        ],
+                        "type": "paragraph"
+                      }
+                    ],
+                    "richText": true
+                  }
+                },
+                "e34d514f-7db5-38aa-872a-7c8191a09617": {
+                  "date": {
+                    "date": "2024-01-01",
+                    "timezone": "UTC"
+                  }
+                }
+              }
+            ],
+            "type": "object"
+          },
+          "name": {
+            "description": "Name (title) of this item.",
+            "type": "string"
+          },
+          "order": {
+            "description": "Order number of this item for sorting.",
+            "format": "int32",
+            "type": "integer"
+          },
+          "statusId": {
+            "description": "Id of the status of this item.",
+            "format": "uuid",
+            "type": "string"
+          }
+        },
+        "title": "UpdateItemRequestWithMarkdown",
         "type": "object"
       },
       "UpdateMilestoneRequest": {
@@ -27713,7 +28958,7 @@
   },
   "info": {
     "title": "airfocus API",
-    "version": "1.0.0-beta.47.185.1"
+    "version": "1.0.0-beta.47.189.0"
   },
   "openapi": "3.1.0",
   "paths": {
@@ -27789,6 +29034,549 @@
         "summary": "List all AI actors for the caller's team.",
         "tags": [
           "AI Actors"
+        ]
+      }
+    },
+    "/api/attachments": {
+      "post": {
+        "description": "Stores a binary payload as a private attachment owned by the authenticated team. The file name is taken from the `fileName` query parameter and the media type from the request Content-Type. The ID can be used where an attachment URI is required (such as in /workspaces/{workspaceId}/attachments) by using the string \"attachment:{Response ID}\".",
+        "operationId": "uploadTeamAttachment",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "fileName",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "Content-Type",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/octet-stream": {
+              "schema": {
+                "format": "binary",
+                "type": "string"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Attachment"
+                }
+              }
+            },
+            "description": ""
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "unknown_error",
+                  "data": {},
+                  "message": "Server error"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If any other error happens."
+          }
+        },
+        "security": [
+          {
+            "httpAuth": []
+          }
+        ],
+        "summary": "Uploads a new team-scoped attachment.",
+        "tags": [
+          "Attachments"
+        ]
+      }
+    },
+    "/api/attachments/public": {
+      "post": {
+        "description": "Stores a binary payload as a publicly-accessible attachment owned by the authenticated team. Public attachments can later be retrieved without authentication via the public download endpoint.",
+        "operationId": "uploadPublicTeamAttachment",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "fileName",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "Content-Type",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/octet-stream": {
+              "schema": {
+                "format": "binary",
+                "type": "string"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Attachment"
+                }
+              }
+            },
+            "description": ""
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "unknown_error",
+                  "data": {},
+                  "message": "Server error"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If any other error happens."
+          }
+        },
+        "security": [
+          {
+            "httpAuth": []
+          }
+        ],
+        "summary": "Uploads a new team-scoped public attachment.",
+        "tags": [
+          "Attachments"
+        ]
+      }
+    },
+    "/api/attachments/public/{attachmentId}": {
+      "get": {
+        "description": "Streams the binary contents of a public attachment. Does not require authentication. Supports the same `width`/`height` derivation parameters as the authenticated retrieve endpoint.",
+        "operationId": "retrievePublicTeamAttachment",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "attachmentId",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "width",
+            "required": false,
+            "schema": {
+              "format": "int32",
+              "type": "integer"
+            }
+          },
+          {
+            "in": "query",
+            "name": "height",
+            "required": false,
+            "schema": {
+              "format": "int32",
+              "type": "integer"
+            }
+          },
+          {
+            "in": "query",
+            "name": "download",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/octet-stream": {
+                "schema": {
+                  "format": "binary",
+                  "type": "string"
+                }
+              }
+            },
+            "description": "",
+            "headers": {
+              "Cache-Control": {
+                "required": true,
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Content-Disposition": {
+                "required": true,
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Content-Security-Policy": {
+                "required": true,
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Content-Type": {
+                "required": true,
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "not_found",
+                  "data": {},
+                  "message": "Unknown entity 'fe4c0f30-aa35-3c41-99f9-a5f69c8c4192'"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If path parameters are invalid or resource does not exist."
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "unknown_error",
+                  "data": {},
+                  "message": "Server error"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If any other error happens."
+          }
+        },
+        "summary": "Downloads a publicly-accessible attachment, optionally as a resized image derivation.",
+        "tags": [
+          "Attachments"
+        ]
+      }
+    },
+    "/api/attachments/{attachmentId}": {
+      "delete": {
+        "description": "Permanently removes an attachment owned by the authenticated team. Returns 404 if the attachment does not exist or does not belong to the team.",
+        "operationId": "deleteTeamAttachment",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "attachmentId",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": ""
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "not_found",
+                  "data": {},
+                  "message": "Unknown entity 'fe4c0f30-aa35-3c41-99f9-a5f69c8c4192'"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If path parameters are invalid or resource does not exist."
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "unknown_error",
+                  "data": {},
+                  "message": "Server error"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If any other error happens."
+          }
+        },
+        "security": [
+          {
+            "httpAuth": []
+          }
+        ],
+        "summary": "Deletes a team-scoped attachment.",
+        "tags": [
+          "Attachments"
+        ]
+      },
+      "get": {
+        "description": "Streams the binary contents of a team-scoped attachment. When `width` and/or `height` are supplied and the source is an image, a derived (resized) variant is returned. If the request is unauthenticated, has a browser-style `Accept: text/html` header, and the server is configured with an unauthenticated-redirect URI, the response is a 302 redirect to that URI; otherwise unauthenticated requests fail with 401.",
+        "operationId": "retrieveTeamAttachment",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "attachmentId",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "width",
+            "required": false,
+            "schema": {
+              "format": "int32",
+              "type": "integer"
+            }
+          },
+          {
+            "in": "query",
+            "name": "height",
+            "required": false,
+            "schema": {
+              "format": "int32",
+              "type": "integer"
+            }
+          },
+          {
+            "in": "query",
+            "name": "download",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "in": "header",
+            "name": "Accept",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/octet-stream": {
+                "schema": {
+                  "format": "binary",
+                  "type": "string"
+                }
+              }
+            },
+            "description": "",
+            "headers": {
+              "Cache-Control": {
+                "required": true,
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Content-Disposition": {
+                "required": true,
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Content-Security-Policy": {
+                "required": true,
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Content-Type": {
+                "required": true,
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "302": {
+            "description": "",
+            "headers": {
+              "Location": {
+                "required": true,
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "not_found",
+                  "data": {},
+                  "message": "Unknown entity 'fe4c0f30-aa35-3c41-99f9-a5f69c8c4192'"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If path parameters are invalid or resource does not exist."
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "unknown_error",
+                  "data": {},
+                  "message": "Server error"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If any other error happens."
+          }
+        },
+        "security": [
+          {
+            "httpAuth": []
+          }
+        ],
+        "summary": "Downloads an attachment, optionally as a resized image derivation.",
+        "tags": [
+          "Attachments"
+        ]
+      }
+    },
+    "/api/attachments/{attachmentId}/metadata": {
+      "get": {
+        "description": "Returns the file name, content type, and creation timestamp of an attachment. Useful for clients that need to inspect an attachment (or one of its image derivations) without transferring the payload.",
+        "operationId": "retrieveTeamAttachmentMetadata",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "attachmentId",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "width",
+            "required": false,
+            "schema": {
+              "format": "int32",
+              "type": "integer"
+            }
+          },
+          {
+            "in": "query",
+            "name": "height",
+            "required": false,
+            "schema": {
+              "format": "int32",
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AttachmentMetadataResponse"
+                }
+              }
+            },
+            "description": ""
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "not_found",
+                  "data": {},
+                  "message": "Unknown entity 'fe4c0f30-aa35-3c41-99f9-a5f69c8c4192'"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If path parameters are invalid or resource does not exist."
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "unknown_error",
+                  "data": {},
+                  "message": "Server error"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If any other error happens."
+          }
+        },
+        "security": [
+          {
+            "httpAuth": []
+          }
+        ],
+        "summary": "Retrieves metadata about an attachment without downloading its content.",
+        "tags": [
+          "Attachments"
         ]
       }
     },
@@ -35400,7 +37188,7 @@
               },
               "application/vnd.airfocus.markdown+json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ItemWithItemEmbed"
+                  "$ref": "#/components/schemas/ItemWithMarkdownWithItemEmbed"
                 }
               }
             },
@@ -35667,6 +37455,7 @@
               },
               "application/json+markdown": {
                 "schema": {
+                  "deprecated": true,
                   "items": {
                     "anyOf": [
                       {
@@ -35675,7 +37464,8 @@
                       {
                         "type": "null"
                       }
-                    ]
+                    ],
+                    "deprecated": true
                   },
                   "type": "array"
                 }
@@ -35685,7 +37475,7 @@
                   "items": {
                     "anyOf": [
                       {
-                        "$ref": "#/components/schemas/ItemWithItemEmbed"
+                        "$ref": "#/components/schemas/ItemWithMarkdownWithItemEmbed"
                       },
                       {
                         "type": "null"
@@ -39744,7 +41534,7 @@
             },
             "application/vnd.airfocus.markdown+json": {
               "schema": {
-                "$ref": "#/components/schemas/CreateItemRequest"
+                "$ref": "#/components/schemas/CreateItemRequestWithMarkdown"
               }
             }
           },
@@ -39765,7 +41555,7 @@
               },
               "application/vnd.airfocus.markdown+json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ItemWithItemEmbed"
+                  "$ref": "#/components/schemas/ItemWithMarkdownWithItemEmbed"
                 }
               }
             },
@@ -40007,8 +41797,9 @@
             },
             "application/json+markdown": {
               "schema": {
+                "deprecated": true,
                 "items": {
-                  "$ref": "#/components/schemas/ItemBulkAction"
+                  "$ref": "#/components/schemas/ItemWithMDBulkAction"
                 },
                 "type": "array"
               }
@@ -40016,7 +41807,7 @@
             "application/vnd.airfocus.markdown+json": {
               "schema": {
                 "items": {
-                  "$ref": "#/components/schemas/ItemBulkAction"
+                  "$ref": "#/components/schemas/ItemWithMarkdownBulkAction"
                 },
                 "type": "array"
               }
@@ -40044,6 +41835,7 @@
               },
               "application/json+markdown": {
                 "schema": {
+                  "deprecated": true,
                   "items": {
                     "anyOf": [
                       {
@@ -40052,7 +41844,8 @@
                       {
                         "type": "null"
                       }
-                    ]
+                    ],
+                    "deprecated": true
                   },
                   "type": "array"
                 }
@@ -40062,7 +41855,7 @@
                   "items": {
                     "anyOf": [
                       {
-                        "$ref": "#/components/schemas/ItemWithItemEmbed"
+                        "$ref": "#/components/schemas/ItemWithMarkdownWithItemEmbed"
                       },
                       {
                         "type": "null"
@@ -40208,6 +42001,7 @@
               },
               "application/json+markdown": {
                 "schema": {
+                  "deprecated": true,
                   "items": {
                     "anyOf": [
                       {
@@ -40216,7 +42010,8 @@
                       {
                         "type": "null"
                       }
-                    ]
+                    ],
+                    "deprecated": true
                   },
                   "type": "array"
                 }
@@ -40226,7 +42021,7 @@
                   "items": {
                     "anyOf": [
                       {
-                        "$ref": "#/components/schemas/ItemWithItemEmbed"
+                        "$ref": "#/components/schemas/ItemWithMarkdownWithItemEmbed"
                       },
                       {
                         "type": "null"
@@ -40516,7 +42311,7 @@
               },
               "application/vnd.airfocus.markdown+json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ItemWithItemEmbedPage"
+                  "$ref": "#/components/schemas/ItemWithMarkdownWithItemEmbedPage"
                 }
               }
             },
@@ -40688,6 +42483,11 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ItemPartialWithItemPartialEmbedPage"
+                }
+              },
+              "application/vnd.airfocus.markdown+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ItemPartialWithMarkdownWithItemPartialEmbedPage"
                 }
               }
             },
@@ -41161,7 +42961,7 @@
               },
               "application/vnd.airfocus.markdown+json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ItemWithItemEmbed"
+                  "$ref": "#/components/schemas/ItemWithMarkdownWithItemEmbed"
                 }
               }
             },
@@ -41298,7 +43098,7 @@
               },
               "application/vnd.airfocus.markdown+json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ItemWithItemEmbed"
+                  "$ref": "#/components/schemas/ItemWithMarkdownWithItemEmbed"
                 }
               }
             },
@@ -41424,7 +43224,7 @@
             },
             "application/vnd.airfocus.markdown+json": {
               "schema": {
-                "$ref": "#/components/schemas/UpdateItemRequest"
+                "$ref": "#/components/schemas/UpdateItemRequestWithMarkdown"
               }
             }
           },
@@ -41445,7 +43245,7 @@
               },
               "application/vnd.airfocus.markdown+json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ItemWithItemEmbed"
+                  "$ref": "#/components/schemas/ItemWithMarkdownWithItemEmbed"
                 }
               }
             },
@@ -43858,6 +45658,10 @@
       "name": "AI Actors"
     },
     {
+      "description": "Endpoints for uploading, downloading and managing attachment-files. Note: this module is not responsible for managing the links between items and files, it only manages the files themselves.",
+      "name": "Attachments"
+    },
+    {
       "description": "Manage comments on items.",
       "name": "Comments"
     },
@@ -43870,7 +45674,7 @@
       "name": "Global search"
     },
     {
-      "description": "Connect items with uploaded attachment-files. Note: this module is not responsible for uploading files, it only manages the links between items and files.",
+      "description": "Connect items with uploaded attachment-files. Note: this module is not responsible for uploading files, it only manages the links between items and already-existing files.",
       "name": "ItemAttachments"
     },
     {
