@@ -2247,86 +2247,7 @@
           },
           "fields": {
             "additionalProperties": {
-              "oneOf": [
-                {
-                  "$ref": "#/components/schemas/BooleanFieldTypeValue"
-                },
-                {
-                  "$ref": "#/components/schemas/DateFieldTypeValue"
-                },
-                {
-                  "$ref": "#/components/schemas/DateRangeFieldTypeValue"
-                },
-                {
-                  "$ref": "#/components/schemas/FormSourceFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/FormsTargetFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/HealthCheckInsFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/InsightsFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/MilestoneFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/MirrorSourceFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/MirrorTargetFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/NumberFieldTypeValue"
-                },
-                {
-                  "$ref": "#/components/schemas/OkrCheckinsFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/OkrConfidenceFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/OkrKeyResultReferenceFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/OkrKeyResultsFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/OkrProgressFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/PeopleFieldTypeValue"
-                },
-                {
-                  "$ref": "#/components/schemas/PortalFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/PortfolioSourceFieldTypeValue"
-                },
-                {
-                  "$ref": "#/components/schemas/PrioritizationFieldTypeValue"
-                },
-                {
-                  "$ref": "#/components/schemas/RichTextFieldTypeValue"
-                },
-                {
-                  "$ref": "#/components/schemas/SelectFieldTypeValue"
-                },
-                {
-                  "$ref": "#/components/schemas/TextFieldTypeValue"
-                },
-                {
-                  "$ref": "#/components/schemas/TimePeriodFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/VotingAppScoreFieldTypeValue"
-                },
-                {
-                  "$ref": "#/components/schemas/VotingAppVotesFieldTypeValue"
-                }
-              ]
+              "$ref": "#/components/schemas/FieldValue"
             },
             "default": {},
             "description": "Values of custom fields, where each key is a custom-field ID and each value is a JSON-formatted value of the corresponding field.",
@@ -2475,86 +2396,7 @@
           },
           "fields": {
             "additionalProperties": {
-              "oneOf": [
-                {
-                  "$ref": "#/components/schemas/BooleanFieldTypeValue"
-                },
-                {
-                  "$ref": "#/components/schemas/DateFieldTypeValue"
-                },
-                {
-                  "$ref": "#/components/schemas/DateRangeFieldTypeValue"
-                },
-                {
-                  "$ref": "#/components/schemas/FormSourceFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/FormsTargetFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/HealthCheckInsFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/InsightsFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/MilestoneFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/MirrorSourceFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/MirrorTargetFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/NumberFieldTypeValue"
-                },
-                {
-                  "$ref": "#/components/schemas/OkrCheckinsFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/OkrConfidenceFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/OkrKeyResultReferenceFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/OkrKeyResultsFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/OkrProgressFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/PeopleFieldTypeValue"
-                },
-                {
-                  "$ref": "#/components/schemas/PortalFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/PortfolioSourceFieldTypeValue"
-                },
-                {
-                  "$ref": "#/components/schemas/PrioritizationFieldTypeValue"
-                },
-                {
-                  "$ref": "#/components/schemas/RichTextFieldTypeValue"
-                },
-                {
-                  "$ref": "#/components/schemas/SelectFieldTypeValue"
-                },
-                {
-                  "$ref": "#/components/schemas/TextFieldTypeValue"
-                },
-                {
-                  "$ref": "#/components/schemas/TimePeriodFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/VotingAppScoreFieldTypeValue"
-                },
-                {
-                  "$ref": "#/components/schemas/VotingAppVotesFieldTypeValue"
-                }
-              ]
+              "$ref": "#/components/schemas/FieldValue"
             },
             "default": {},
             "description": "Values of custom fields, where each key is a custom-field ID and each value is a JSON-formatted value of the corresponding field.",
@@ -2700,86 +2542,7 @@
           },
           "fields": {
             "additionalProperties": {
-              "oneOf": [
-                {
-                  "$ref": "#/components/schemas/BooleanFieldTypeValue"
-                },
-                {
-                  "$ref": "#/components/schemas/DateFieldTypeValue"
-                },
-                {
-                  "$ref": "#/components/schemas/DateRangeFieldTypeValue"
-                },
-                {
-                  "$ref": "#/components/schemas/FormSourceFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/FormsTargetFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/HealthCheckInsFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/InsightsFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/MilestoneFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/MirrorSourceFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/MirrorTargetFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/NumberFieldTypeValue"
-                },
-                {
-                  "$ref": "#/components/schemas/OkrCheckinsFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/OkrConfidenceFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/OkrKeyResultReferenceFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/OkrKeyResultsFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/OkrProgressFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/PeopleFieldTypeValue"
-                },
-                {
-                  "$ref": "#/components/schemas/PortalFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/PortfolioSourceFieldTypeValue"
-                },
-                {
-                  "$ref": "#/components/schemas/PrioritizationFieldTypeValue"
-                },
-                {
-                  "$ref": "#/components/schemas/RichTextFieldTypeValue"
-                },
-                {
-                  "$ref": "#/components/schemas/SelectFieldTypeValue"
-                },
-                {
-                  "$ref": "#/components/schemas/TextFieldTypeValue"
-                },
-                {
-                  "$ref": "#/components/schemas/TimePeriodFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/VotingAppScoreFieldTypeValue"
-                },
-                {
-                  "$ref": "#/components/schemas/VotingAppVotesFieldTypeValue"
-                }
-              ]
+              "$ref": "#/components/schemas/FieldValue"
             },
             "default": {},
             "description": "Values of custom fields, where each key is a custom-field ID and each value is a JSON-formatted value of the corresponding field.",
@@ -4674,6 +4437,90 @@
         ],
         "title": "FieldTypeInfo",
         "type": "object"
+      },
+      "FieldValue": {
+        "description": "The value of a custom field, in the shape defined by the type of the field it belongs to.",
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/BooleanFieldTypeValue"
+          },
+          {
+            "$ref": "#/components/schemas/DateFieldTypeValue"
+          },
+          {
+            "$ref": "#/components/schemas/DateRangeFieldTypeValue"
+          },
+          {
+            "$ref": "#/components/schemas/FormSourceFieldValue"
+          },
+          {
+            "$ref": "#/components/schemas/FormsTargetFieldValue"
+          },
+          {
+            "$ref": "#/components/schemas/HealthCheckInsFieldValue"
+          },
+          {
+            "$ref": "#/components/schemas/InsightsFieldValue"
+          },
+          {
+            "$ref": "#/components/schemas/MilestoneFieldValue"
+          },
+          {
+            "$ref": "#/components/schemas/MirrorSourceFieldValue"
+          },
+          {
+            "$ref": "#/components/schemas/MirrorTargetFieldValue"
+          },
+          {
+            "$ref": "#/components/schemas/NumberFieldTypeValue"
+          },
+          {
+            "$ref": "#/components/schemas/OkrCheckinsFieldValue"
+          },
+          {
+            "$ref": "#/components/schemas/OkrConfidenceFieldValue"
+          },
+          {
+            "$ref": "#/components/schemas/OkrKeyResultReferenceFieldValue"
+          },
+          {
+            "$ref": "#/components/schemas/OkrKeyResultsFieldValue"
+          },
+          {
+            "$ref": "#/components/schemas/OkrProgressFieldValue"
+          },
+          {
+            "$ref": "#/components/schemas/PeopleFieldTypeValue"
+          },
+          {
+            "$ref": "#/components/schemas/PortalFieldValue"
+          },
+          {
+            "$ref": "#/components/schemas/PortfolioSourceFieldTypeValue"
+          },
+          {
+            "$ref": "#/components/schemas/PrioritizationFieldTypeValue"
+          },
+          {
+            "$ref": "#/components/schemas/RichTextFieldTypeValue"
+          },
+          {
+            "$ref": "#/components/schemas/SelectFieldTypeValue"
+          },
+          {
+            "$ref": "#/components/schemas/TextFieldTypeValue"
+          },
+          {
+            "$ref": "#/components/schemas/TimePeriodFieldValue"
+          },
+          {
+            "$ref": "#/components/schemas/VotingAppScoreFieldTypeValue"
+          },
+          {
+            "$ref": "#/components/schemas/VotingAppVotesFieldTypeValue"
+          }
+        ],
+        "title": "FieldValue"
       },
       "FieldWithFieldEmbed": {
         "discriminator": {
@@ -9289,86 +9136,7 @@
           },
           "fields": {
             "additionalProperties": {
-              "oneOf": [
-                {
-                  "$ref": "#/components/schemas/BooleanFieldTypeValue"
-                },
-                {
-                  "$ref": "#/components/schemas/DateFieldTypeValue"
-                },
-                {
-                  "$ref": "#/components/schemas/DateRangeFieldTypeValue"
-                },
-                {
-                  "$ref": "#/components/schemas/FormSourceFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/FormsTargetFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/HealthCheckInsFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/InsightsFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/MilestoneFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/MirrorSourceFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/MirrorTargetFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/NumberFieldTypeValue"
-                },
-                {
-                  "$ref": "#/components/schemas/OkrCheckinsFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/OkrConfidenceFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/OkrKeyResultReferenceFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/OkrKeyResultsFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/OkrProgressFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/PeopleFieldTypeValue"
-                },
-                {
-                  "$ref": "#/components/schemas/PortalFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/PortfolioSourceFieldTypeValue"
-                },
-                {
-                  "$ref": "#/components/schemas/PrioritizationFieldTypeValue"
-                },
-                {
-                  "$ref": "#/components/schemas/RichTextFieldTypeValue"
-                },
-                {
-                  "$ref": "#/components/schemas/SelectFieldTypeValue"
-                },
-                {
-                  "$ref": "#/components/schemas/TextFieldTypeValue"
-                },
-                {
-                  "$ref": "#/components/schemas/TimePeriodFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/VotingAppScoreFieldTypeValue"
-                },
-                {
-                  "$ref": "#/components/schemas/VotingAppVotesFieldTypeValue"
-                }
-              ]
+              "$ref": "#/components/schemas/FieldValue"
             },
             "description": "Values of custom fields, where each key is a custom-field ID and each value is a JSON-formatted value of the corresponding field.",
             "examples": [
@@ -10845,86 +10613,7 @@
           },
           "fields": {
             "additionalProperties": {
-              "oneOf": [
-                {
-                  "$ref": "#/components/schemas/BooleanFieldTypeValue"
-                },
-                {
-                  "$ref": "#/components/schemas/DateFieldTypeValue"
-                },
-                {
-                  "$ref": "#/components/schemas/DateRangeFieldTypeValue"
-                },
-                {
-                  "$ref": "#/components/schemas/FormSourceFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/FormsTargetFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/HealthCheckInsFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/InsightsFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/MilestoneFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/MirrorSourceFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/MirrorTargetFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/NumberFieldTypeValue"
-                },
-                {
-                  "$ref": "#/components/schemas/OkrCheckinsFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/OkrConfidenceFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/OkrKeyResultReferenceFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/OkrKeyResultsFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/OkrProgressFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/PeopleFieldTypeValue"
-                },
-                {
-                  "$ref": "#/components/schemas/PortalFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/PortfolioSourceFieldTypeValue"
-                },
-                {
-                  "$ref": "#/components/schemas/PrioritizationFieldTypeValue"
-                },
-                {
-                  "$ref": "#/components/schemas/RichTextFieldTypeValue"
-                },
-                {
-                  "$ref": "#/components/schemas/SelectFieldTypeValue"
-                },
-                {
-                  "$ref": "#/components/schemas/TextFieldTypeValue"
-                },
-                {
-                  "$ref": "#/components/schemas/TimePeriodFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/VotingAppScoreFieldTypeValue"
-                },
-                {
-                  "$ref": "#/components/schemas/VotingAppVotesFieldTypeValue"
-                }
-              ]
+              "$ref": "#/components/schemas/FieldValue"
             },
             "type": "object"
           },
@@ -11070,86 +10759,7 @@
           },
           "fields": {
             "additionalProperties": {
-              "oneOf": [
-                {
-                  "$ref": "#/components/schemas/BooleanFieldTypeValue"
-                },
-                {
-                  "$ref": "#/components/schemas/DateFieldTypeValue"
-                },
-                {
-                  "$ref": "#/components/schemas/DateRangeFieldTypeValue"
-                },
-                {
-                  "$ref": "#/components/schemas/FormSourceFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/FormsTargetFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/HealthCheckInsFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/InsightsFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/MilestoneFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/MirrorSourceFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/MirrorTargetFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/NumberFieldTypeValue"
-                },
-                {
-                  "$ref": "#/components/schemas/OkrCheckinsFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/OkrConfidenceFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/OkrKeyResultReferenceFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/OkrKeyResultsFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/OkrProgressFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/PeopleFieldTypeValue"
-                },
-                {
-                  "$ref": "#/components/schemas/PortalFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/PortfolioSourceFieldTypeValue"
-                },
-                {
-                  "$ref": "#/components/schemas/PrioritizationFieldTypeValue"
-                },
-                {
-                  "$ref": "#/components/schemas/RichTextFieldTypeValue"
-                },
-                {
-                  "$ref": "#/components/schemas/SelectFieldTypeValue"
-                },
-                {
-                  "$ref": "#/components/schemas/TextFieldTypeValue"
-                },
-                {
-                  "$ref": "#/components/schemas/TimePeriodFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/VotingAppScoreFieldTypeValue"
-                },
-                {
-                  "$ref": "#/components/schemas/VotingAppVotesFieldTypeValue"
-                }
-              ]
+              "$ref": "#/components/schemas/FieldValue"
             },
             "type": "object"
           },
@@ -11256,86 +10866,7 @@
           },
           "fields": {
             "additionalProperties": {
-              "oneOf": [
-                {
-                  "$ref": "#/components/schemas/BooleanFieldTypeValue"
-                },
-                {
-                  "$ref": "#/components/schemas/DateFieldTypeValue"
-                },
-                {
-                  "$ref": "#/components/schemas/DateRangeFieldTypeValue"
-                },
-                {
-                  "$ref": "#/components/schemas/FormSourceFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/FormsTargetFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/HealthCheckInsFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/InsightsFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/MilestoneFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/MirrorSourceFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/MirrorTargetFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/NumberFieldTypeValue"
-                },
-                {
-                  "$ref": "#/components/schemas/OkrCheckinsFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/OkrConfidenceFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/OkrKeyResultReferenceFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/OkrKeyResultsFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/OkrProgressFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/PeopleFieldTypeValue"
-                },
-                {
-                  "$ref": "#/components/schemas/PortalFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/PortfolioSourceFieldTypeValue"
-                },
-                {
-                  "$ref": "#/components/schemas/PrioritizationFieldTypeValue"
-                },
-                {
-                  "$ref": "#/components/schemas/RichTextFieldTypeValue"
-                },
-                {
-                  "$ref": "#/components/schemas/SelectFieldTypeValue"
-                },
-                {
-                  "$ref": "#/components/schemas/TextFieldTypeValue"
-                },
-                {
-                  "$ref": "#/components/schemas/TimePeriodFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/VotingAppScoreFieldTypeValue"
-                },
-                {
-                  "$ref": "#/components/schemas/VotingAppVotesFieldTypeValue"
-                }
-              ]
+              "$ref": "#/components/schemas/FieldValue"
             },
             "type": "object"
           },
@@ -13233,86 +12764,7 @@
           },
           "fields": {
             "additionalProperties": {
-              "oneOf": [
-                {
-                  "$ref": "#/components/schemas/BooleanFieldTypeValue"
-                },
-                {
-                  "$ref": "#/components/schemas/DateFieldTypeValue"
-                },
-                {
-                  "$ref": "#/components/schemas/DateRangeFieldTypeValue"
-                },
-                {
-                  "$ref": "#/components/schemas/FormSourceFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/FormsTargetFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/HealthCheckInsFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/InsightsFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/MilestoneFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/MirrorSourceFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/MirrorTargetFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/NumberFieldTypeValue"
-                },
-                {
-                  "$ref": "#/components/schemas/OkrCheckinsFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/OkrConfidenceFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/OkrKeyResultReferenceFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/OkrKeyResultsFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/OkrProgressFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/PeopleFieldTypeValue"
-                },
-                {
-                  "$ref": "#/components/schemas/PortalFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/PortfolioSourceFieldTypeValue"
-                },
-                {
-                  "$ref": "#/components/schemas/PrioritizationFieldTypeValue"
-                },
-                {
-                  "$ref": "#/components/schemas/RichTextFieldTypeValue"
-                },
-                {
-                  "$ref": "#/components/schemas/SelectFieldTypeValue"
-                },
-                {
-                  "$ref": "#/components/schemas/TextFieldTypeValue"
-                },
-                {
-                  "$ref": "#/components/schemas/TimePeriodFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/VotingAppScoreFieldTypeValue"
-                },
-                {
-                  "$ref": "#/components/schemas/VotingAppVotesFieldTypeValue"
-                }
-              ]
+              "$ref": "#/components/schemas/FieldValue"
             },
             "description": "Values of custom fields, where each key is a custom-field ID and each value is a JSON-formatted value of the corresponding field.",
             "examples": [
@@ -13646,86 +13098,7 @@
           },
           "fields": {
             "additionalProperties": {
-              "oneOf": [
-                {
-                  "$ref": "#/components/schemas/BooleanFieldTypeValue"
-                },
-                {
-                  "$ref": "#/components/schemas/DateFieldTypeValue"
-                },
-                {
-                  "$ref": "#/components/schemas/DateRangeFieldTypeValue"
-                },
-                {
-                  "$ref": "#/components/schemas/FormSourceFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/FormsTargetFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/HealthCheckInsFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/InsightsFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/MilestoneFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/MirrorSourceFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/MirrorTargetFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/NumberFieldTypeValue"
-                },
-                {
-                  "$ref": "#/components/schemas/OkrCheckinsFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/OkrConfidenceFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/OkrKeyResultReferenceFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/OkrKeyResultsFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/OkrProgressFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/PeopleFieldTypeValue"
-                },
-                {
-                  "$ref": "#/components/schemas/PortalFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/PortfolioSourceFieldTypeValue"
-                },
-                {
-                  "$ref": "#/components/schemas/PrioritizationFieldTypeValue"
-                },
-                {
-                  "$ref": "#/components/schemas/RichTextFieldTypeValue"
-                },
-                {
-                  "$ref": "#/components/schemas/SelectFieldTypeValue"
-                },
-                {
-                  "$ref": "#/components/schemas/TextFieldTypeValue"
-                },
-                {
-                  "$ref": "#/components/schemas/TimePeriodFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/VotingAppScoreFieldTypeValue"
-                },
-                {
-                  "$ref": "#/components/schemas/VotingAppVotesFieldTypeValue"
-                }
-              ]
+              "$ref": "#/components/schemas/FieldValue"
             },
             "description": "Values of custom fields, where each key is a custom-field ID and each value is a JSON-formatted value of the corresponding field.",
             "examples": [
@@ -14053,86 +13426,7 @@
           },
           "fields": {
             "additionalProperties": {
-              "oneOf": [
-                {
-                  "$ref": "#/components/schemas/BooleanFieldTypeValue"
-                },
-                {
-                  "$ref": "#/components/schemas/DateFieldTypeValue"
-                },
-                {
-                  "$ref": "#/components/schemas/DateRangeFieldTypeValue"
-                },
-                {
-                  "$ref": "#/components/schemas/FormSourceFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/FormsTargetFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/HealthCheckInsFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/InsightsFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/MilestoneFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/MirrorSourceFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/MirrorTargetFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/NumberFieldTypeValue"
-                },
-                {
-                  "$ref": "#/components/schemas/OkrCheckinsFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/OkrConfidenceFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/OkrKeyResultReferenceFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/OkrKeyResultsFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/OkrProgressFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/PeopleFieldTypeValue"
-                },
-                {
-                  "$ref": "#/components/schemas/PortalFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/PortfolioSourceFieldTypeValue"
-                },
-                {
-                  "$ref": "#/components/schemas/PrioritizationFieldTypeValue"
-                },
-                {
-                  "$ref": "#/components/schemas/RichTextFieldTypeValue"
-                },
-                {
-                  "$ref": "#/components/schemas/SelectFieldTypeValue"
-                },
-                {
-                  "$ref": "#/components/schemas/TextFieldTypeValue"
-                },
-                {
-                  "$ref": "#/components/schemas/TimePeriodFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/VotingAppScoreFieldTypeValue"
-                },
-                {
-                  "$ref": "#/components/schemas/VotingAppVotesFieldTypeValue"
-                }
-              ]
+              "$ref": "#/components/schemas/FieldValue"
             },
             "description": "Values of custom fields, where each key is a custom-field ID and each value is a JSON-formatted value of the corresponding field.",
             "examples": [
@@ -22999,86 +22293,7 @@
           },
           "fields": {
             "additionalProperties": {
-              "oneOf": [
-                {
-                  "$ref": "#/components/schemas/BooleanFieldTypeValue"
-                },
-                {
-                  "$ref": "#/components/schemas/DateFieldTypeValue"
-                },
-                {
-                  "$ref": "#/components/schemas/DateRangeFieldTypeValue"
-                },
-                {
-                  "$ref": "#/components/schemas/FormSourceFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/FormsTargetFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/HealthCheckInsFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/InsightsFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/MilestoneFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/MirrorSourceFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/MirrorTargetFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/NumberFieldTypeValue"
-                },
-                {
-                  "$ref": "#/components/schemas/OkrCheckinsFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/OkrConfidenceFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/OkrKeyResultReferenceFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/OkrKeyResultsFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/OkrProgressFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/PeopleFieldTypeValue"
-                },
-                {
-                  "$ref": "#/components/schemas/PortalFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/PortfolioSourceFieldTypeValue"
-                },
-                {
-                  "$ref": "#/components/schemas/PrioritizationFieldTypeValue"
-                },
-                {
-                  "$ref": "#/components/schemas/RichTextFieldTypeValue"
-                },
-                {
-                  "$ref": "#/components/schemas/SelectFieldTypeValue"
-                },
-                {
-                  "$ref": "#/components/schemas/TextFieldTypeValue"
-                },
-                {
-                  "$ref": "#/components/schemas/TimePeriodFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/VotingAppScoreFieldTypeValue"
-                },
-                {
-                  "$ref": "#/components/schemas/VotingAppVotesFieldTypeValue"
-                }
-              ]
+              "$ref": "#/components/schemas/FieldValue"
             },
             "type": "object"
           },
@@ -24856,86 +24071,7 @@
           },
           "fields": {
             "additionalProperties": {
-              "oneOf": [
-                {
-                  "$ref": "#/components/schemas/BooleanFieldTypeValue"
-                },
-                {
-                  "$ref": "#/components/schemas/DateFieldTypeValue"
-                },
-                {
-                  "$ref": "#/components/schemas/DateRangeFieldTypeValue"
-                },
-                {
-                  "$ref": "#/components/schemas/FormSourceFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/FormsTargetFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/HealthCheckInsFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/InsightsFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/MilestoneFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/MirrorSourceFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/MirrorTargetFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/NumberFieldTypeValue"
-                },
-                {
-                  "$ref": "#/components/schemas/OkrCheckinsFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/OkrConfidenceFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/OkrKeyResultReferenceFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/OkrKeyResultsFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/OkrProgressFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/PeopleFieldTypeValue"
-                },
-                {
-                  "$ref": "#/components/schemas/PortalFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/PortfolioSourceFieldTypeValue"
-                },
-                {
-                  "$ref": "#/components/schemas/PrioritizationFieldTypeValue"
-                },
-                {
-                  "$ref": "#/components/schemas/RichTextFieldTypeValue"
-                },
-                {
-                  "$ref": "#/components/schemas/SelectFieldTypeValue"
-                },
-                {
-                  "$ref": "#/components/schemas/TextFieldTypeValue"
-                },
-                {
-                  "$ref": "#/components/schemas/TimePeriodFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/VotingAppScoreFieldTypeValue"
-                },
-                {
-                  "$ref": "#/components/schemas/VotingAppVotesFieldTypeValue"
-                }
-              ]
+              "$ref": "#/components/schemas/FieldValue"
             },
             "default": {},
             "description": "Values of custom fields, where each key is a custom-field ID and each value is a JSON-formatted value of the corresponding field. Entries present in the map replace the matching entry on the item; entries omitted from the map are left untouched.",
@@ -25079,86 +24215,7 @@
           },
           "fields": {
             "additionalProperties": {
-              "oneOf": [
-                {
-                  "$ref": "#/components/schemas/BooleanFieldTypeValue"
-                },
-                {
-                  "$ref": "#/components/schemas/DateFieldTypeValue"
-                },
-                {
-                  "$ref": "#/components/schemas/DateRangeFieldTypeValue"
-                },
-                {
-                  "$ref": "#/components/schemas/FormSourceFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/FormsTargetFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/HealthCheckInsFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/InsightsFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/MilestoneFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/MirrorSourceFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/MirrorTargetFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/NumberFieldTypeValue"
-                },
-                {
-                  "$ref": "#/components/schemas/OkrCheckinsFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/OkrConfidenceFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/OkrKeyResultReferenceFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/OkrKeyResultsFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/OkrProgressFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/PeopleFieldTypeValue"
-                },
-                {
-                  "$ref": "#/components/schemas/PortalFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/PortfolioSourceFieldTypeValue"
-                },
-                {
-                  "$ref": "#/components/schemas/PrioritizationFieldTypeValue"
-                },
-                {
-                  "$ref": "#/components/schemas/RichTextFieldTypeValue"
-                },
-                {
-                  "$ref": "#/components/schemas/SelectFieldTypeValue"
-                },
-                {
-                  "$ref": "#/components/schemas/TextFieldTypeValue"
-                },
-                {
-                  "$ref": "#/components/schemas/TimePeriodFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/VotingAppScoreFieldTypeValue"
-                },
-                {
-                  "$ref": "#/components/schemas/VotingAppVotesFieldTypeValue"
-                }
-              ]
+              "$ref": "#/components/schemas/FieldValue"
             },
             "default": {},
             "description": "Values of custom fields, where each key is a custom-field ID and each value is a JSON-formatted value of the corresponding field. Entries present in the map replace the matching entry on the item; entries omitted from the map are left untouched.",
@@ -25297,86 +24354,7 @@
           },
           "fields": {
             "additionalProperties": {
-              "oneOf": [
-                {
-                  "$ref": "#/components/schemas/BooleanFieldTypeValue"
-                },
-                {
-                  "$ref": "#/components/schemas/DateFieldTypeValue"
-                },
-                {
-                  "$ref": "#/components/schemas/DateRangeFieldTypeValue"
-                },
-                {
-                  "$ref": "#/components/schemas/FormSourceFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/FormsTargetFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/HealthCheckInsFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/InsightsFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/MilestoneFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/MirrorSourceFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/MirrorTargetFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/NumberFieldTypeValue"
-                },
-                {
-                  "$ref": "#/components/schemas/OkrCheckinsFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/OkrConfidenceFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/OkrKeyResultReferenceFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/OkrKeyResultsFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/OkrProgressFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/PeopleFieldTypeValue"
-                },
-                {
-                  "$ref": "#/components/schemas/PortalFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/PortfolioSourceFieldTypeValue"
-                },
-                {
-                  "$ref": "#/components/schemas/PrioritizationFieldTypeValue"
-                },
-                {
-                  "$ref": "#/components/schemas/RichTextFieldTypeValue"
-                },
-                {
-                  "$ref": "#/components/schemas/SelectFieldTypeValue"
-                },
-                {
-                  "$ref": "#/components/schemas/TextFieldTypeValue"
-                },
-                {
-                  "$ref": "#/components/schemas/TimePeriodFieldValue"
-                },
-                {
-                  "$ref": "#/components/schemas/VotingAppScoreFieldTypeValue"
-                },
-                {
-                  "$ref": "#/components/schemas/VotingAppVotesFieldTypeValue"
-                }
-              ]
+              "$ref": "#/components/schemas/FieldValue"
             },
             "default": {},
             "description": "Values of custom fields, where each key is a custom-field ID and each value is a JSON-formatted value of the corresponding field. Entries present in the map replace the matching entry on the item; entries omitted from the map are left untouched.",
@@ -28958,7 +27936,7 @@
   },
   "info": {
     "title": "airfocus API",
-    "version": "1.0.0-beta.47.189.0"
+    "version": "1.0.0-beta.47.189.3"
   },
   "openapi": "3.1.0",
   "paths": {
