@@ -30,7 +30,11 @@ The styles for the sidebar are copy-pasted from Just The Docs CSS into the "over
 <div class="main">
     <div class="main-content-wrap">
         <div class="main-content">
-            &nbsp;<div id="swagger-ui"></div>
+            <div id="api-version-selector" class="api-version-selector" hidden>
+                <label for="api-version">API version</label>
+                <select id="api-version"></select>
+            </div>
+            <div id="swagger-ui"></div>
         </div>
     </div>
 </div>
