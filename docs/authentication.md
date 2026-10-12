@@ -7,8 +7,15 @@ nav_order: 10
 
 # Authentication
 
-The API provides [OAuth 2.0](https://oauth.net/2/) authentication and expects clients to supply each request with an `Authorization: Bearer <token>` header
-with a valid access token.
+The API authenticates requests with personal access tokens (called "API keys" in the airfocus app).
+Clients are expected to supply each request with the token in an `Authorization` header using the Bearer scheme:
+
+```
+Authorization: Bearer <token>
+```
+
+{: .note }
+> OAuth 2.0 flows (authorization code, client credentials, etc.) are not supported at the moment.
 
 ## Personal access tokens
 
@@ -23,6 +30,12 @@ Creating personal access tokens:
 - in the bottom-left corner click on your name
 - go to "Account settings" > "API keys"
 - click on "Add API key", give it a name and select the required scopes, then click "Create"
+
+Example request using a personal access token:
+
+```shell
+curl -H "Authorization: Bearer $AIRFOCUS_TOKEN" https://app.airfocus.com/api/profile
+```
 
 [//]: # (## Impersonal access tokens)
 
