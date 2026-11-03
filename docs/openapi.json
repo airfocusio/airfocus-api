@@ -7,6 +7,7 @@
             "aiActor": "#/components/schemas/ActorAiActor",
             "app": "#/components/schemas/ActorApp",
             "integration": "#/components/schemas/ActorIntegration",
+            "publicUser": "#/components/schemas/ActorPublicUser",
             "shareLink": "#/components/schemas/ActorShareLink",
             "system": "#/components/schemas/ActorSystem",
             "user": "#/components/schemas/ActorUser"
@@ -22,6 +23,9 @@
           },
           {
             "$ref": "#/components/schemas/ActorIntegration"
+          },
+          {
+            "$ref": "#/components/schemas/ActorPublicUser"
           },
           {
             "$ref": "#/components/schemas/ActorShareLink"
@@ -106,6 +110,24 @@
           "type"
         ],
         "title": "ActorIntegration",
+        "type": "object"
+      },
+      "ActorPublicUser": {
+        "properties": {
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "type": {
+            "const": "publicUser",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "type"
+        ],
+        "title": "ActorPublicUser",
         "type": "object"
       },
       "ActorShareLink": {
@@ -27936,7 +27958,7 @@
   },
   "info": {
     "title": "airfocus API",
-    "version": "1.0.0-beta.47.199.3"
+    "version": "1.0.0-beta.48.0.1"
   },
   "openapi": "3.1.0",
   "paths": {
