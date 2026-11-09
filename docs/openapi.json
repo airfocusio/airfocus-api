@@ -1361,22 +1361,6 @@
         "title": "CapacityPlanningWidgetDataSettings",
         "type": "object"
       },
-      "ChangePasswordRequest": {
-        "properties": {
-          "newPassword": {
-            "type": "string"
-          },
-          "oldPassword": {
-            "type": "string"
-          }
-        },
-        "required": [
-          "oldPassword",
-          "newPassword"
-        ],
-        "title": "ChangePasswordRequest",
-        "type": "object"
-      },
       "ChangeUserDisabledRequest": {
         "properties": {
           "disabled": {
@@ -2145,6 +2129,33 @@
           "secret"
         ],
         "title": "CreateApiKeyResponse",
+        "type": "object"
+      },
+      "CreateDocumentRequest": {
+        "description": "Creates a document",
+        "properties": {
+          "content": {
+            "$ref": "#/components/schemas/DocumentRichText"
+          },
+          "itemId": {
+            "description": "Item to link the new document to. Required unless `workspaceId` is supplied; when both are given the item must belong to `workspaceId`.",
+            "format": "uuid",
+            "type": "string"
+          },
+          "title": {
+            "description": "Optional title of the document.",
+            "type": "string"
+          },
+          "workspaceId": {
+            "description": "Workspace the document belongs to. Required unless `itemId` is supplied.",
+            "format": "uuid",
+            "type": "string"
+          }
+        },
+        "required": [
+          "content"
+        ],
+        "title": "CreateDocumentRequest",
         "type": "object"
       },
       "CreateItemAttachmentRequest": {
@@ -3716,6 +3727,98 @@
         "title": "Direction",
         "type": "string"
       },
+      "Document": {
+        "description": "A collaborative document attached to items within a team.",
+        "properties": {
+          "content": {
+            "$ref": "#/components/schemas/DocumentRichText"
+          },
+          "contributors": {
+            "description": "Actors who have contributed to this document's content.",
+            "items": {
+              "$ref": "#/components/schemas/Actor"
+            },
+            "type": "array",
+            "uniqueItems": true
+          },
+          "createdAt": {
+            "description": "When this document was created.",
+            "format": "date-time",
+            "type": "string"
+          },
+          "creator": {
+            "$ref": "#/components/schemas/Actor",
+            "description": "The principal that created this document."
+          },
+          "id": {
+            "description": "Unique identifier of the document.",
+            "format": "uuid",
+            "type": "string"
+          },
+          "lastUpdatedAt": {
+            "description": "When this document was last updated.",
+            "format": "date-time",
+            "type": "string"
+          },
+          "linkedItemRefs": {
+            "additionalProperties": {
+              "items": {
+                "format": "uuid",
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "description": "Items the document is linked to, grouped by the workspace each item belongs to. Linked items may live in workspaces other than the document's own.",
+            "type": "object"
+          },
+          "teamId": {
+            "description": "ID of the team that owns this document.",
+            "format": "uuid",
+            "type": "string"
+          },
+          "title": {
+            "description": "Optional title of the document.",
+            "type": "string"
+          },
+          "watched": {
+            "description": "Whether the requesting user watches this document.",
+            "type": "boolean"
+          },
+          "workspaceId": {
+            "description": "Workspace the document belongs to.",
+            "format": "uuid",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "teamId",
+          "workspaceId",
+          "content",
+          "creator",
+          "createdAt",
+          "lastUpdatedAt",
+          "linkedItemRefs",
+          "contributors",
+          "watched"
+        ],
+        "title": "Document",
+        "type": "object"
+      },
+      "DocumentAnnotation": {
+        "discriminator": {
+          "mapping": {
+            "inlineComment": "#/components/schemas/DocumentInlineComment"
+          },
+          "propertyName": "type"
+        },
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/DocumentInlineComment"
+          }
+        ],
+        "title": "DocumentAnnotation"
+      },
       "DocumentContent": {
         "discriminator": {
           "mapping": {
@@ -3768,6 +3871,1051 @@
           "type"
         ],
         "title": "DocumentContentDocument",
+        "type": "object"
+      },
+      "DocumentInlineComment": {
+        "description": "An inline-comment annotation anchoring the annotated text to one or more comment threads.",
+        "properties": {
+          "threadIds": {
+            "description": "IDs of the comment threads anchored to the annotated text.",
+            "items": {
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "type": {
+            "const": "inlineComment",
+            "type": "string"
+          }
+        },
+        "required": [
+          "threadIds",
+          "type"
+        ],
+        "title": "DocumentInlineComment",
+        "type": "object"
+      },
+      "DocumentPage": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/Document"
+            },
+            "type": "array"
+          },
+          "totalItems": {
+            "format": "int32",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "items",
+          "totalItems"
+        ],
+        "title": "DocumentPage",
+        "type": "object"
+      },
+      "DocumentPartial": {
+        "description": "A document with only the properties requested by the caller. Properties that were not requested are absent from the response; `id` is always returned. A requested property whose value is unset is returned as null, so an absent key and a null value mean different things.",
+        "properties": {
+          "content": {
+            "$ref": "#/components/schemas/DocumentRichText"
+          },
+          "contributors": {
+            "description": "Actors who have contributed to this document's content.",
+            "items": {
+              "$ref": "#/components/schemas/Actor"
+            },
+            "type": "array",
+            "uniqueItems": true,
+            "x-optional-collection": true
+          },
+          "createdAt": {
+            "description": "When this document was created.",
+            "format": "date-time",
+            "type": "string"
+          },
+          "creator": {
+            "$ref": "#/components/schemas/Actor",
+            "description": "The principal that created this document."
+          },
+          "id": {
+            "description": "Unique identifier of the document. Always returned.",
+            "format": "uuid",
+            "type": "string"
+          },
+          "lastUpdatedAt": {
+            "description": "When this document was last updated.",
+            "format": "date-time",
+            "type": "string"
+          },
+          "linkedItemRefs": {
+            "additionalProperties": {
+              "items": {
+                "format": "uuid",
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "description": "Items the document is linked to, grouped by the workspace each item belongs to. Linked items may live in workspaces other than the document's own.",
+            "type": "object"
+          },
+          "teamId": {
+            "description": "ID of the team that owns this document.",
+            "format": "uuid",
+            "type": "string"
+          },
+          "title": {
+            "description": "Title of the document. Null when the document has no title.",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "workspaceId": {
+            "description": "Workspace the document belongs to.",
+            "format": "uuid",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id"
+        ],
+        "title": "DocumentPartial",
+        "type": "object"
+      },
+      "DocumentPartialPage": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/DocumentPartial"
+            },
+            "type": "array"
+          },
+          "totalItems": {
+            "format": "int32",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "items",
+          "totalItems"
+        ],
+        "title": "DocumentPartialPage",
+        "type": "object"
+      },
+      "DocumentRichText": {
+        "description": "Rich text content as structured blocks. Different media types provide markdown support:\n• application/json - Default blocks format\n• application/vnd.airfocus.markdown+json - All RichText fields become markdown strings (recommended)\n• application/json+markdown - Legacy format, only top-level fields converted to markdown",
+        "examples": [
+          {
+            "blocks": [
+              {
+                "content": [
+                  {
+                    "content": "hello world",
+                    "type": "text"
+                  }
+                ],
+                "type": "paragraph"
+              }
+            ],
+            "richText": true
+          }
+        ],
+        "properties": {
+          "blocks": {
+            "items": {
+              "$ref": "#/components/schemas/DocumentRichTextBlock"
+            },
+            "type": "array"
+          }
+        },
+        "required": [
+          "blocks"
+        ],
+        "title": "DocumentRichText",
+        "type": "object"
+      },
+      "DocumentRichTextBlock": {
+        "discriminator": {
+          "mapping": {
+            "attachment": "#/components/schemas/DocumentRichTextBlockAttachment",
+            "blockquote": "#/components/schemas/DocumentRichTextBlockBlockquote",
+            "code": "#/components/schemas/DocumentRichTextBlockCode",
+            "custom": "#/components/schemas/DocumentRichTextBlockCustom",
+            "embed": "#/components/schemas/DocumentRichTextBlockEmbed",
+            "headline": "#/components/schemas/DocumentRichTextBlockHeadline",
+            "indentation": "#/components/schemas/DocumentRichTextBlockIndentation",
+            "list": "#/components/schemas/DocumentRichTextBlockList",
+            "panel": "#/components/schemas/DocumentRichTextBlockPanel",
+            "paragraph": "#/components/schemas/DocumentRichTextBlockParagraph"
+          },
+          "propertyName": "type"
+        },
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/DocumentRichTextBlockAttachment"
+          },
+          {
+            "$ref": "#/components/schemas/DocumentRichTextBlockBlockquote"
+          },
+          {
+            "$ref": "#/components/schemas/DocumentRichTextBlockCode"
+          },
+          {
+            "$ref": "#/components/schemas/DocumentRichTextBlockCustom"
+          },
+          {
+            "$ref": "#/components/schemas/DocumentRichTextBlockEmbed"
+          },
+          {
+            "$ref": "#/components/schemas/DocumentRichTextBlockHeadline"
+          },
+          {
+            "$ref": "#/components/schemas/DocumentRichTextBlockIndentation"
+          },
+          {
+            "$ref": "#/components/schemas/DocumentRichTextBlockList"
+          },
+          {
+            "$ref": "#/components/schemas/DocumentRichTextBlockPanel"
+          },
+          {
+            "$ref": "#/components/schemas/DocumentRichTextBlockParagraph"
+          }
+        ],
+        "title": "DocumentRichTextBlock"
+      },
+      "DocumentRichTextBlockAttachment": {
+        "properties": {
+          "attachmentId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "caption": {
+            "type": "string"
+          },
+          "contentType": {
+            "type": "string"
+          },
+          "meta": {
+            "type": "object"
+          },
+          "type": {
+            "const": "attachment",
+            "type": "string"
+          },
+          "width": {
+            "format": "int32",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "attachmentId",
+          "contentType",
+          "type"
+        ],
+        "title": "DocumentRichTextBlockAttachment",
+        "type": "object"
+      },
+      "DocumentRichTextBlockBlockquote": {
+        "properties": {
+          "content": {
+            "items": {
+              "$ref": "#/components/schemas/DocumentRichTextInline"
+            },
+            "type": "array"
+          },
+          "meta": {
+            "type": "object"
+          },
+          "type": {
+            "const": "blockquote",
+            "type": "string"
+          }
+        },
+        "required": [
+          "content",
+          "type"
+        ],
+        "title": "DocumentRichTextBlockBlockquote",
+        "type": "object"
+      },
+      "DocumentRichTextBlockCode": {
+        "properties": {
+          "content": {
+            "type": "string"
+          },
+          "language": {
+            "type": "string"
+          },
+          "meta": {
+            "type": "object"
+          },
+          "type": {
+            "const": "code",
+            "type": "string"
+          }
+        },
+        "required": [
+          "content",
+          "type"
+        ],
+        "title": "DocumentRichTextBlockCode",
+        "type": "object"
+      },
+      "DocumentRichTextBlockCustom": {
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "meta": {
+            "type": "object"
+          },
+          "raw": {
+            "type": "string"
+          },
+          "type": {
+            "const": "custom",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "raw",
+          "type"
+        ],
+        "title": "DocumentRichTextBlockCustom",
+        "type": "object"
+      },
+      "DocumentRichTextBlockEmbed": {
+        "properties": {
+          "caption": {
+            "type": "string"
+          },
+          "height": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "meta": {
+            "type": "object"
+          },
+          "type": {
+            "const": "embed",
+            "type": "string"
+          },
+          "url": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "url",
+          "type"
+        ],
+        "title": "DocumentRichTextBlockEmbed",
+        "type": "object"
+      },
+      "DocumentRichTextBlockHeadline": {
+        "properties": {
+          "content": {
+            "items": {
+              "$ref": "#/components/schemas/DocumentRichTextInline"
+            },
+            "type": "array"
+          },
+          "level": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "meta": {
+            "type": "object"
+          },
+          "type": {
+            "const": "headline",
+            "type": "string"
+          }
+        },
+        "required": [
+          "level",
+          "content",
+          "type"
+        ],
+        "title": "DocumentRichTextBlockHeadline",
+        "type": "object"
+      },
+      "DocumentRichTextBlockIndentation": {
+        "properties": {
+          "content": {
+            "items": {
+              "$ref": "#/components/schemas/DocumentRichTextBlock"
+            },
+            "type": "array"
+          },
+          "type": {
+            "const": "indentation",
+            "type": "string"
+          }
+        },
+        "required": [
+          "content",
+          "type"
+        ],
+        "title": "DocumentRichTextBlockIndentation",
+        "type": "object"
+      },
+      "DocumentRichTextBlockList": {
+        "properties": {
+          "bulletListMarker": {
+            "type": "string"
+          },
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/DocumentRichTextListItem"
+            },
+            "type": "array"
+          },
+          "meta": {
+            "type": "object"
+          },
+          "ordered": {
+            "type": "boolean"
+          },
+          "orderedListDelimiter": {
+            "type": "string"
+          },
+          "orderedListStartsAt": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "type": {
+            "const": "list",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ordered",
+          "items",
+          "type"
+        ],
+        "title": "DocumentRichTextBlockList",
+        "type": "object"
+      },
+      "DocumentRichTextBlockPanel": {
+        "properties": {
+          "colorHex": {
+            "type": "string"
+          },
+          "content": {
+            "items": {
+              "$ref": "#/components/schemas/DocumentRichTextBlock"
+            },
+            "type": "array"
+          },
+          "title": {
+            "type": "string"
+          },
+          "type": {
+            "const": "panel",
+            "type": "string"
+          }
+        },
+        "required": [
+          "content",
+          "type"
+        ],
+        "title": "DocumentRichTextBlockPanel",
+        "type": "object"
+      },
+      "DocumentRichTextBlockParagraph": {
+        "properties": {
+          "content": {
+            "items": {
+              "$ref": "#/components/schemas/DocumentRichTextInline"
+            },
+            "type": "array"
+          },
+          "meta": {
+            "type": "object"
+          },
+          "type": {
+            "const": "paragraph",
+            "type": "string"
+          }
+        },
+        "required": [
+          "content",
+          "type"
+        ],
+        "title": "DocumentRichTextBlockParagraph",
+        "type": "object"
+      },
+      "DocumentRichTextInline": {
+        "discriminator": {
+          "mapping": {
+            "bold": "#/components/schemas/DocumentRichTextInlineBold",
+            "code": "#/components/schemas/DocumentRichTextInlineCode",
+            "custom": "#/components/schemas/DocumentRichTextInlineCustom",
+            "groupMention": "#/components/schemas/DocumentRichTextInlineGroupMention",
+            "image": "#/components/schemas/DocumentRichTextInlineImage",
+            "italic": "#/components/schemas/DocumentRichTextInlineItalic",
+            "link": "#/components/schemas/DocumentRichTextInlineLink",
+            "mention": "#/components/schemas/DocumentRichTextInlineMention",
+            "skillMention": "#/components/schemas/DocumentRichTextInlineSkillMention",
+            "strikeThrough": "#/components/schemas/DocumentRichTextInlineStrikeThrough",
+            "text": "#/components/schemas/DocumentRichTextInlineText",
+            "underline": "#/components/schemas/DocumentRichTextInlineUnderline"
+          },
+          "propertyName": "type"
+        },
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/DocumentRichTextInlineBold"
+          },
+          {
+            "$ref": "#/components/schemas/DocumentRichTextInlineCode"
+          },
+          {
+            "$ref": "#/components/schemas/DocumentRichTextInlineCustom"
+          },
+          {
+            "$ref": "#/components/schemas/DocumentRichTextInlineGroupMention"
+          },
+          {
+            "$ref": "#/components/schemas/DocumentRichTextInlineImage"
+          },
+          {
+            "$ref": "#/components/schemas/DocumentRichTextInlineItalic"
+          },
+          {
+            "$ref": "#/components/schemas/DocumentRichTextInlineLink"
+          },
+          {
+            "$ref": "#/components/schemas/DocumentRichTextInlineMention"
+          },
+          {
+            "$ref": "#/components/schemas/DocumentRichTextInlineSkillMention"
+          },
+          {
+            "$ref": "#/components/schemas/DocumentRichTextInlineStrikeThrough"
+          },
+          {
+            "$ref": "#/components/schemas/DocumentRichTextInlineText"
+          },
+          {
+            "$ref": "#/components/schemas/DocumentRichTextInlineUnderline"
+          }
+        ],
+        "title": "DocumentRichTextInline"
+      },
+      "DocumentRichTextInlineBold": {
+        "properties": {
+          "content": {
+            "items": {
+              "$ref": "#/components/schemas/DocumentRichTextInline"
+            },
+            "type": "array"
+          },
+          "type": {
+            "const": "bold",
+            "type": "string"
+          }
+        },
+        "required": [
+          "content",
+          "type"
+        ],
+        "title": "DocumentRichTextInlineBold",
+        "type": "object"
+      },
+      "DocumentRichTextInlineCode": {
+        "properties": {
+          "content": {
+            "type": "string"
+          },
+          "meta": {
+            "type": "object"
+          },
+          "type": {
+            "const": "code",
+            "type": "string"
+          }
+        },
+        "required": [
+          "content",
+          "type"
+        ],
+        "title": "DocumentRichTextInlineCode",
+        "type": "object"
+      },
+      "DocumentRichTextInlineCustom": {
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "meta": {
+            "type": "object"
+          },
+          "raw": {
+            "type": "string"
+          },
+          "type": {
+            "const": "custom",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "raw",
+          "type"
+        ],
+        "title": "DocumentRichTextInlineCustom",
+        "type": "object"
+      },
+      "DocumentRichTextInlineGroupMention": {
+        "properties": {
+          "meta": {
+            "type": "object"
+          },
+          "type": {
+            "const": "groupMention",
+            "type": "string"
+          },
+          "userGroupId": {
+            "format": "uuid",
+            "type": "string"
+          }
+        },
+        "required": [
+          "userGroupId",
+          "type"
+        ],
+        "title": "DocumentRichTextInlineGroupMention",
+        "type": "object"
+      },
+      "DocumentRichTextInlineImage": {
+        "properties": {
+          "content": {
+            "items": {
+              "$ref": "#/components/schemas/DocumentRichTextInline"
+            },
+            "type": "array"
+          },
+          "type": {
+            "const": "image",
+            "type": "string"
+          },
+          "url": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "content",
+          "url",
+          "type"
+        ],
+        "title": "DocumentRichTextInlineImage",
+        "type": "object"
+      },
+      "DocumentRichTextInlineItalic": {
+        "properties": {
+          "content": {
+            "items": {
+              "$ref": "#/components/schemas/DocumentRichTextInline"
+            },
+            "type": "array"
+          },
+          "type": {
+            "const": "italic",
+            "type": "string"
+          }
+        },
+        "required": [
+          "content",
+          "type"
+        ],
+        "title": "DocumentRichTextInlineItalic",
+        "type": "object"
+      },
+      "DocumentRichTextInlineLink": {
+        "properties": {
+          "content": {
+            "items": {
+              "$ref": "#/components/schemas/DocumentRichTextInline"
+            },
+            "type": "array"
+          },
+          "type": {
+            "const": "link",
+            "type": "string"
+          },
+          "url": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "content",
+          "url",
+          "type"
+        ],
+        "title": "DocumentRichTextInlineLink",
+        "type": "object"
+      },
+      "DocumentRichTextInlineMention": {
+        "properties": {
+          "meta": {
+            "type": "object"
+          },
+          "type": {
+            "const": "mention",
+            "type": "string"
+          },
+          "userId": {
+            "format": "uuid",
+            "type": "string"
+          }
+        },
+        "required": [
+          "userId",
+          "type"
+        ],
+        "title": "DocumentRichTextInlineMention",
+        "type": "object"
+      },
+      "DocumentRichTextInlineSkillMention": {
+        "properties": {
+          "meta": {
+            "type": "object"
+          },
+          "name": {
+            "description": "The skill's name at the time the mention was written. Shown as the label when \"skillRef\" no longer matches a skill the reader can access.",
+            "type": "string"
+          },
+          "skillRef": {
+            "description": "The skill being mentioned: a system skill's name (e.g. \"summarize\"), or \"skill:<uuid>\" for a custom one.",
+            "type": "string"
+          },
+          "type": {
+            "const": "skillMention",
+            "type": "string"
+          }
+        },
+        "required": [
+          "skillRef",
+          "name",
+          "type"
+        ],
+        "title": "DocumentRichTextInlineSkillMention",
+        "type": "object"
+      },
+      "DocumentRichTextInlineStrikeThrough": {
+        "properties": {
+          "content": {
+            "items": {
+              "$ref": "#/components/schemas/DocumentRichTextInline"
+            },
+            "type": "array"
+          },
+          "type": {
+            "const": "strikeThrough",
+            "type": "string"
+          }
+        },
+        "required": [
+          "content",
+          "type"
+        ],
+        "title": "DocumentRichTextInlineStrikeThrough",
+        "type": "object"
+      },
+      "DocumentRichTextInlineText": {
+        "properties": {
+          "annotations": {
+            "items": {
+              "$ref": "#/components/schemas/DocumentAnnotation"
+            },
+            "type": "array",
+            "x-optional-collection": true
+          },
+          "content": {
+            "type": "string"
+          },
+          "meta": {
+            "type": "object"
+          },
+          "type": {
+            "const": "text",
+            "type": "string"
+          }
+        },
+        "required": [
+          "content",
+          "type"
+        ],
+        "title": "DocumentRichTextInlineText",
+        "type": "object"
+      },
+      "DocumentRichTextInlineUnderline": {
+        "properties": {
+          "content": {
+            "items": {
+              "$ref": "#/components/schemas/DocumentRichTextInline"
+            },
+            "type": "array"
+          },
+          "type": {
+            "const": "underline",
+            "type": "string"
+          }
+        },
+        "required": [
+          "content",
+          "type"
+        ],
+        "title": "DocumentRichTextInlineUnderline",
+        "type": "object"
+      },
+      "DocumentRichTextListItem": {
+        "properties": {
+          "content": {
+            "items": {
+              "$ref": "#/components/schemas/DocumentRichTextBlock"
+            },
+            "type": "array"
+          }
+        },
+        "required": [
+          "content"
+        ],
+        "title": "DocumentRichTextListItem",
+        "type": "object"
+      },
+      "DocumentSearchQuery": {
+        "description": "Query for a document search. Omitting every filter returns every document the caller can read.",
+        "properties": {
+          "filter": {
+            "$ref": "#/components/schemas/DocumentSearchQueryFilter",
+            "examples": [
+              {
+                "_coproduct": "DocumentSearchQueryFilter",
+                "inner": [
+                  {
+                    "_coproduct": "DocumentSearchQueryFilter",
+                    "type": "workspace:containAny",
+                    "workspaceIds": []
+                  },
+                  {
+                    "_coproduct": "DocumentSearchQueryFilter",
+                    "caseSensitive": false,
+                    "text": "roadmap",
+                    "type": "title:contain"
+                  }
+                ],
+                "type": "and"
+              }
+            ]
+          },
+          "itemId": {
+            "deprecated": true,
+            "description": "Deprecated and will be removed. Use `filter` with `itemLink.containAny` instead.",
+            "format": "uuid",
+            "type": "string"
+          },
+          "searchText": {
+            "deprecated": true,
+            "description": "Deprecated and will be removed. Use `filter` with `title.contain` instead.",
+            "type": "string"
+          },
+          "workspaceId": {
+            "deprecated": true,
+            "description": "Deprecated and will be removed. Use `filter` with `workspace.containAny` instead.",
+            "format": "uuid",
+            "type": "string"
+          }
+        },
+        "title": "DocumentSearchQuery",
+        "type": "object"
+      },
+      "DocumentSearchQueryFilter": {
+        "discriminator": {
+          "mapping": {
+            "and": "#/components/schemas/DocumentSearchQueryFilterAnd",
+            "id:any": "#/components/schemas/DocumentSearchQueryFilterIdAny",
+            "itemLink:containAny": "#/components/schemas/DocumentSearchQueryFilterItemLinkContainAny",
+            "not": "#/components/schemas/DocumentSearchQueryFilterNot",
+            "or": "#/components/schemas/DocumentSearchQueryFilterOr",
+            "title:contain": "#/components/schemas/DocumentSearchQueryFilterTitleContain",
+            "workspace:containAny": "#/components/schemas/DocumentSearchQueryFilterWorkspaceContainAny"
+          },
+          "propertyName": "type"
+        },
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/DocumentSearchQueryFilterAnd"
+          },
+          {
+            "$ref": "#/components/schemas/DocumentSearchQueryFilterIdAny"
+          },
+          {
+            "$ref": "#/components/schemas/DocumentSearchQueryFilterItemLinkContainAny"
+          },
+          {
+            "$ref": "#/components/schemas/DocumentSearchQueryFilterNot"
+          },
+          {
+            "$ref": "#/components/schemas/DocumentSearchQueryFilterOr"
+          },
+          {
+            "$ref": "#/components/schemas/DocumentSearchQueryFilterTitleContain"
+          },
+          {
+            "$ref": "#/components/schemas/DocumentSearchQueryFilterWorkspaceContainAny"
+          }
+        ],
+        "title": "DocumentSearchQueryFilter"
+      },
+      "DocumentSearchQueryFilterAnd": {
+        "properties": {
+          "inner": {
+            "items": {
+              "$ref": "#/components/schemas/DocumentSearchQueryFilter"
+            },
+            "type": "array"
+          },
+          "type": {
+            "const": "and",
+            "type": "string"
+          }
+        },
+        "required": [
+          "inner",
+          "type"
+        ],
+        "title": "DocumentSearchQueryFilterAnd",
+        "type": "object"
+      },
+      "DocumentSearchQueryFilterIdAny": {
+        "properties": {
+          "type": {
+            "const": "id:any",
+            "type": "string"
+          },
+          "values": {
+            "items": {
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": "array",
+            "uniqueItems": true
+          }
+        },
+        "required": [
+          "values",
+          "type"
+        ],
+        "title": "DocumentSearchQueryFilterIdAny",
+        "type": "object"
+      },
+      "DocumentSearchQueryFilterItemLinkContainAny": {
+        "properties": {
+          "itemIds": {
+            "items": {
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": "array",
+            "uniqueItems": true
+          },
+          "type": {
+            "const": "itemLink:containAny",
+            "type": "string"
+          }
+        },
+        "required": [
+          "itemIds",
+          "type"
+        ],
+        "title": "DocumentSearchQueryFilterItemLinkContainAny",
+        "type": "object"
+      },
+      "DocumentSearchQueryFilterNot": {
+        "properties": {
+          "inner": {
+            "$ref": "#/components/schemas/DocumentSearchQueryFilter"
+          },
+          "type": {
+            "const": "not",
+            "type": "string"
+          }
+        },
+        "required": [
+          "inner",
+          "type"
+        ],
+        "title": "DocumentSearchQueryFilterNot",
+        "type": "object"
+      },
+      "DocumentSearchQueryFilterOr": {
+        "properties": {
+          "inner": {
+            "items": {
+              "$ref": "#/components/schemas/DocumentSearchQueryFilter"
+            },
+            "type": "array"
+          },
+          "type": {
+            "const": "or",
+            "type": "string"
+          }
+        },
+        "required": [
+          "inner",
+          "type"
+        ],
+        "title": "DocumentSearchQueryFilterOr",
+        "type": "object"
+      },
+      "DocumentSearchQueryFilterTitleContain": {
+        "properties": {
+          "caseSensitive": {
+            "type": "boolean"
+          },
+          "text": {
+            "type": "string"
+          },
+          "type": {
+            "const": "title:contain",
+            "type": "string"
+          }
+        },
+        "required": [
+          "text",
+          "caseSensitive",
+          "type"
+        ],
+        "title": "DocumentSearchQueryFilterTitleContain",
+        "type": "object"
+      },
+      "DocumentSearchQueryFilterWorkspaceContainAny": {
+        "properties": {
+          "type": {
+            "const": "workspace:containAny",
+            "type": "string"
+          },
+          "workspaceIds": {
+            "items": {
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": "array",
+            "uniqueItems": true
+          }
+        },
+        "required": [
+          "workspaceIds",
+          "type"
+        ],
+        "title": "DocumentSearchQueryFilterWorkspaceContainAny",
         "type": "object"
       },
       "DocumentViewTypeSettings": {
@@ -5267,10 +6415,16 @@
       },
       "FormsTargetFieldValue": {
         "properties": {
+          "hasSubmissionDetails": {
+            "type": "boolean"
+          },
           "source": {
             "$ref": "#/components/schemas/FormSourceType"
           }
         },
+        "required": [
+          "hasSubmissionDetails"
+        ],
         "title": "FormsTargetFieldValue",
         "type": "object"
       },
@@ -11464,6 +12618,14 @@
             "createdAt:absolute": "#/components/schemas/ItemSearchQueryFilterCreatedAtAbsolute",
             "createdAt:range": "#/components/schemas/ItemSearchQueryFilterCreatedAtRange",
             "createdAt:relative": "#/components/schemas/ItemSearchQueryFilterCreatedAtRelative",
+            "creator:aiActorContainsAny": "#/components/schemas/ItemSearchQueryFilterCreatorAiActorContainsAny",
+            "creator:appContainsAny": "#/components/schemas/ItemSearchQueryFilterCreatorAppContainsAny",
+            "creator:appTypeContainsAny": "#/components/schemas/ItemSearchQueryFilterCreatorAppTypeContainsAny",
+            "creator:defined": "#/components/schemas/ItemSearchQueryFilterCreatorDefined",
+            "creator:fromAnyUserGroup": "#/components/schemas/ItemSearchQueryFilterCreatorFromAnyUserGroup",
+            "creator:integrationContainsAny": "#/components/schemas/ItemSearchQueryFilterCreatorIntegrationContainsAny",
+            "creator:integrationTypeContainsAny": "#/components/schemas/ItemSearchQueryFilterCreatorIntegrationTypeContainsAny",
+            "creator:userContainsAny": "#/components/schemas/ItemSearchQueryFilterCreatorUserContainsAny",
             "description:contain": "#/components/schemas/ItemSearchQueryFilterDescriptionContain",
             "description:defined": "#/components/schemas/ItemSearchQueryFilterDescriptionDefined",
             "field:type": "#/components/schemas/ItemSearchQueryFilterFieldType",
@@ -11525,6 +12687,30 @@
           },
           {
             "$ref": "#/components/schemas/ItemSearchQueryFilterCreatedAtRelative"
+          },
+          {
+            "$ref": "#/components/schemas/ItemSearchQueryFilterCreatorAiActorContainsAny"
+          },
+          {
+            "$ref": "#/components/schemas/ItemSearchQueryFilterCreatorAppContainsAny"
+          },
+          {
+            "$ref": "#/components/schemas/ItemSearchQueryFilterCreatorAppTypeContainsAny"
+          },
+          {
+            "$ref": "#/components/schemas/ItemSearchQueryFilterCreatorDefined"
+          },
+          {
+            "$ref": "#/components/schemas/ItemSearchQueryFilterCreatorFromAnyUserGroup"
+          },
+          {
+            "$ref": "#/components/schemas/ItemSearchQueryFilterCreatorIntegrationContainsAny"
+          },
+          {
+            "$ref": "#/components/schemas/ItemSearchQueryFilterCreatorIntegrationTypeContainsAny"
+          },
+          {
+            "$ref": "#/components/schemas/ItemSearchQueryFilterCreatorUserContainsAny"
           },
           {
             "$ref": "#/components/schemas/ItemSearchQueryFilterDescriptionContain"
@@ -11816,6 +13002,196 @@
           "type"
         ],
         "title": "ItemSearchQueryFilterCreatedAtRelative",
+        "type": "object"
+      },
+      "ItemSearchQueryFilterCreatorAiActorContainsAny": {
+        "properties": {
+          "aiActorIds": {
+            "items": {
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": "array",
+            "uniqueItems": true
+          },
+          "type": {
+            "const": "creator:aiActorContainsAny",
+            "type": "string"
+          }
+        },
+        "required": [
+          "aiActorIds",
+          "type"
+        ],
+        "title": "ItemSearchQueryFilterCreatorAiActorContainsAny",
+        "type": "object"
+      },
+      "ItemSearchQueryFilterCreatorAppContainsAny": {
+        "properties": {
+          "appIds": {
+            "items": {
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": "array",
+            "uniqueItems": true
+          },
+          "type": {
+            "const": "creator:appContainsAny",
+            "type": "string"
+          }
+        },
+        "required": [
+          "appIds",
+          "type"
+        ],
+        "title": "ItemSearchQueryFilterCreatorAppContainsAny",
+        "type": "object"
+      },
+      "ItemSearchQueryFilterCreatorAppTypeContainsAny": {
+        "properties": {
+          "appTypeIds": {
+            "items": {
+              "enum": [
+                "health-check-ins",
+                "forms",
+                "insights",
+                "mirror",
+                "okr",
+                "portal",
+                "portfolio",
+                "prioritization",
+                "voting",
+                "capacity-planning"
+              ],
+              "type": "string"
+            },
+            "type": "array",
+            "uniqueItems": true
+          },
+          "type": {
+            "const": "creator:appTypeContainsAny",
+            "type": "string"
+          }
+        },
+        "required": [
+          "appTypeIds",
+          "type"
+        ],
+        "title": "ItemSearchQueryFilterCreatorAppTypeContainsAny",
+        "type": "object"
+      },
+      "ItemSearchQueryFilterCreatorDefined": {
+        "properties": {
+          "type": {
+            "const": "creator:defined",
+            "type": "string"
+          }
+        },
+        "required": [
+          "type"
+        ],
+        "title": "ItemSearchQueryFilterCreatorDefined",
+        "type": "object"
+      },
+      "ItemSearchQueryFilterCreatorFromAnyUserGroup": {
+        "properties": {
+          "groupIds": {
+            "items": {
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": "array",
+            "uniqueItems": true
+          },
+          "type": {
+            "const": "creator:fromAnyUserGroup",
+            "type": "string"
+          }
+        },
+        "required": [
+          "groupIds",
+          "type"
+        ],
+        "title": "ItemSearchQueryFilterCreatorFromAnyUserGroup",
+        "type": "object"
+      },
+      "ItemSearchQueryFilterCreatorIntegrationContainsAny": {
+        "properties": {
+          "integrationIds": {
+            "items": {
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": "array",
+            "uniqueItems": true
+          },
+          "type": {
+            "const": "creator:integrationContainsAny",
+            "type": "string"
+          }
+        },
+        "required": [
+          "integrationIds",
+          "type"
+        ],
+        "title": "ItemSearchQueryFilterCreatorIntegrationContainsAny",
+        "type": "object"
+      },
+      "ItemSearchQueryFilterCreatorIntegrationTypeContainsAny": {
+        "properties": {
+          "integrationTypeIds": {
+            "items": {
+              "enum": [
+                "asana",
+                "azure-devops",
+                "clubhouse",
+                "github",
+                "intercom",
+                "jira",
+                "linear",
+                "planner",
+                "salesforce",
+                "trello",
+                "webhook",
+                "zendesk"
+              ],
+              "type": "string"
+            },
+            "type": "array",
+            "uniqueItems": true
+          },
+          "type": {
+            "const": "creator:integrationTypeContainsAny",
+            "type": "string"
+          }
+        },
+        "required": [
+          "integrationTypeIds",
+          "type"
+        ],
+        "title": "ItemSearchQueryFilterCreatorIntegrationTypeContainsAny",
+        "type": "object"
+      },
+      "ItemSearchQueryFilterCreatorUserContainsAny": {
+        "properties": {
+          "type": {
+            "const": "creator:userContainsAny",
+            "type": "string"
+          },
+          "users": {
+            "items": {
+              "$ref": "#/components/schemas/UserOnlyRef"
+            },
+            "type": "array",
+            "uniqueItems": true
+          }
+        },
+        "required": [
+          "users",
+          "type"
+        ],
+        "title": "ItemSearchQueryFilterCreatorUserContainsAny",
         "type": "object"
       },
       "ItemSearchQueryFilterDescriptionContain": {
@@ -14241,6 +15617,19 @@
         "title": "LinearItemLinearItemType",
         "type": "string"
       },
+      "LinkDocumentToItemRequest": {
+        "properties": {
+          "itemId": {
+            "format": "uuid",
+            "type": "string"
+          }
+        },
+        "required": [
+          "itemId"
+        ],
+        "title": "LinkDocumentToItemRequest",
+        "type": "object"
+      },
       "LinkedItemReference": {
         "properties": {
           "itemId": {
@@ -15716,6 +17105,21 @@
           "itemId"
         ],
         "title": "MirrorTargetItem",
+        "type": "object"
+      },
+      "MoveDocumentToWorkspaceRequest": {
+        "description": "Moves a document to a different workspace, replacing the workspace it currently belongs to.",
+        "properties": {
+          "workspaceId": {
+            "description": "Workspace the document should belong to after the move.",
+            "format": "uuid",
+            "type": "string"
+          }
+        },
+        "required": [
+          "workspaceId"
+        ],
+        "title": "MoveDocumentToWorkspaceRequest",
         "type": "object"
       },
       "NotificationSettingUpdateRequest": {
@@ -18730,7 +20134,7 @@
             "type": "string"
           },
           "settings": {
-            "$ref": "#/components/schemas/PrioritizationAppTypeConfiguration"
+            "$ref": "#/components/schemas/PrioritizationAppTypeSettings"
           },
           "teamId": {
             "format": "uuid",
@@ -18750,10 +20154,14 @@
         "title": "PrioritizationApp",
         "type": "object"
       },
-      "PrioritizationAppTypeConfiguration": {
+      "PrioritizationAppTypeSettings": {
         "properties": {
           "factors": {
             "$ref": "#/components/schemas/Factors"
+          },
+          "fieldId": {
+            "format": "uuid",
+            "type": "string"
           },
           "mode": {
             "$ref": "#/components/schemas/ScoringMode"
@@ -18765,10 +20173,11 @@
         },
         "required": [
           "workspaceId",
+          "fieldId",
           "factors",
           "mode"
         ],
-        "title": "PrioritizationAppTypeConfiguration",
+        "title": "PrioritizationAppTypeSettings",
         "type": "object"
       },
       "PrioritizationField": {
@@ -19062,6 +20471,22 @@
         ],
         "title": "ReconfigureFieldRequestLegacy",
         "type": "object"
+      },
+      "RefDocumentProperty": {
+        "enum": [
+          "content",
+          "contributors",
+          "createdAt",
+          "creator",
+          "id",
+          "lastUpdatedAt",
+          "linkedItemRefs",
+          "teamId",
+          "title",
+          "workspaceId"
+        ],
+        "title": "RefDocumentProperty",
+        "type": "string"
       },
       "RefItemExtendedProperty": {
         "oneOf": [
@@ -20709,6 +22134,26 @@
           "type"
         ],
         "title": "ScoringModeCustomWeighting",
+        "type": "object"
+      },
+      "SearchPartialDocumentRequest": {
+        "properties": {
+          "properties": {
+            "items": {
+              "$ref": "#/components/schemas/RefDocumentProperty"
+            },
+            "type": "array",
+            "uniqueItems": true
+          },
+          "query": {
+            "$ref": "#/components/schemas/DocumentSearchQuery",
+            "default": {}
+          }
+        },
+        "required": [
+          "properties"
+        ],
+        "title": "SearchPartialDocumentRequest",
         "type": "object"
       },
       "SearchPartialItemRequest": {
@@ -23982,6 +25427,22 @@
         "title": "UninstallFieldRequest",
         "type": "object"
       },
+      "UpdateDocumentRequest": {
+        "properties": {
+          "baseLastUpdatedAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "content": {
+            "$ref": "#/components/schemas/DocumentRichText"
+          },
+          "title": {
+            "type": "string"
+          }
+        },
+        "title": "UpdateDocumentRequest",
+        "type": "object"
+      },
       "UpdateItemAttachmentRequest": {
         "properties": {
           "contentType": {
@@ -24795,6 +26256,24 @@
         ],
         "title": "User",
         "type": "object"
+      },
+      "UserOnlyRef": {
+        "discriminator": {
+          "mapping": {
+            "current": "#/components/schemas/UserRefUserRefCurrent",
+            "id": "#/components/schemas/UserRefUserRefId"
+          },
+          "propertyName": "type"
+        },
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/UserRefUserRefCurrent"
+          },
+          {
+            "$ref": "#/components/schemas/UserRefUserRefId"
+          }
+        ],
+        "title": "UserOnlyRef"
       },
       "UserRef": {
         "discriminator": {
@@ -27958,7 +29437,7 @@
   },
   "info": {
     "title": "airfocus API",
-    "version": "1.0.0-beta.48.2.0"
+    "version": "1.0.0-beta.48.12.3"
   },
   "openapi": "3.1.0",
   "paths": {
@@ -28577,6 +30056,676 @@
         "summary": "Retrieves metadata about an attachment without downloading its content.",
         "tags": [
           "Attachments"
+        ]
+      }
+    },
+    "/api/documents": {
+      "post": {
+        "description": "Creates a document scoped to one workspace. Supply `workspaceId`, or `itemId` to scope it to that item's workspace and link the item in one call; when both are given the item must belong to `workspaceId`.<br/>Requirements:<br/>- auth-client scopes: \"team\"<br/>- user permission: \"write\" or higher",
+        "operationId": "createDocument",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateDocumentRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Document"
+                }
+              }
+            },
+            "description": ""
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "missing_token",
+                  "data": {},
+                  "message": "Access token is missing"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If missing authentication token."
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "forbidden",
+                  "data": {},
+                  "message": "Insufficient permission"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If user does not have the required permission, or authenticated client does not have the required access scopes."
+          }
+        },
+        "security": [
+          {
+            "httpAuth": []
+          }
+        ],
+        "summary": "Create a document.",
+        "tags": [
+          "Documents"
+        ]
+      }
+    },
+    "/api/documents/search": {
+      "post": {
+        "description": "Returns whole documents matching the filter, restricted to the workspaces the caller can read.<br/>Requirements:<br/>- auth-client scopes: \"team:read\"<br/>- user permission: \"read\" or higher",
+        "operationId": "searchDocuments",
+        "parameters": [
+          {
+            "description": "How many elements to skip.",
+            "in": "query",
+            "name": "offset",
+            "required": false,
+            "schema": {
+              "default": 0,
+              "format": "int32",
+              "minimum": 0,
+              "type": "integer"
+            }
+          },
+          {
+            "description": "How many elements to return.",
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "schema": {
+              "default": 25,
+              "format": "int32",
+              "maximum": 100,
+              "minimum": 0,
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DocumentSearchQuery"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DocumentPage"
+                }
+              }
+            },
+            "description": ""
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "missing_token",
+                  "data": {},
+                  "message": "Access token is missing"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If missing authentication token."
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "forbidden",
+                  "data": {},
+                  "message": "Insufficient permission"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If user does not have the required permission, or authenticated client does not have the required access scopes."
+          }
+        },
+        "security": [
+          {
+            "httpAuth": []
+          }
+        ],
+        "summary": "Search documents.",
+        "tags": [
+          "Documents"
+        ]
+      }
+    },
+    "/api/documents/search/partial": {
+      "post": {
+        "description": "Same matching as `/documents/search`, but each result carries only the properties listed in `properties`. A property that was not requested is absent from the response, while a requested one whose value is unset is returned as null.<br/>Requirements:<br/>- auth-client scopes: \"team:read\"<br/>- user permission: \"read\" or higher",
+        "operationId": "searchPartialDocuments",
+        "parameters": [
+          {
+            "description": "How many elements to skip.",
+            "in": "query",
+            "name": "offset",
+            "required": false,
+            "schema": {
+              "default": 0,
+              "format": "int32",
+              "minimum": 0,
+              "type": "integer"
+            }
+          },
+          {
+            "description": "How many elements to return.",
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "schema": {
+              "default": 25,
+              "format": "int32",
+              "maximum": 100,
+              "minimum": 0,
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SearchPartialDocumentRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DocumentPartialPage"
+                }
+              }
+            },
+            "description": ""
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "missing_token",
+                  "data": {},
+                  "message": "Access token is missing"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If missing authentication token."
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "forbidden",
+                  "data": {},
+                  "message": "Insufficient permission"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If user does not have the required permission, or authenticated client does not have the required access scopes."
+          }
+        },
+        "security": [
+          {
+            "httpAuth": []
+          }
+        ],
+        "summary": "Search documents, returning only the requested properties.",
+        "tags": [
+          "Documents"
+        ]
+      }
+    },
+    "/api/documents/{documentId}": {
+      "delete": {
+        "description": "Deletes the document along with its workspace link, item links and comments.<br/>Requirements:<br/>- auth-client scopes: \"team\"<br/>- user permission: \"write\" or higher",
+        "operationId": "deleteDocument",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "documentId",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": ""
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "missing_token",
+                  "data": {},
+                  "message": "Access token is missing"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If missing authentication token."
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "forbidden",
+                  "data": {},
+                  "message": "Insufficient permission"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If user does not have the required permission, or authenticated client does not have the required access scopes."
+          }
+        },
+        "security": [
+          {
+            "httpAuth": []
+          }
+        ],
+        "summary": "Delete a document.",
+        "tags": [
+          "Documents"
+        ]
+      },
+      "get": {
+        "description": "Returns the document with its workspace and linked items. Requires read access to the workspace the document belongs to.<br/>Requirements:<br/>- auth-client scopes: \"team:read\"<br/>- user permission: \"read\" or higher",
+        "operationId": "getDocument",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "documentId",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Document"
+                }
+              }
+            },
+            "description": ""
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "missing_token",
+                  "data": {},
+                  "message": "Access token is missing"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If missing authentication token."
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "forbidden",
+                  "data": {},
+                  "message": "Insufficient permission"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If user does not have the required permission, or authenticated client does not have the required access scopes."
+          }
+        },
+        "security": [
+          {
+            "httpAuth": []
+          }
+        ],
+        "summary": "Retrieve a document by ID.",
+        "tags": [
+          "Documents"
+        ]
+      },
+      "put": {
+        "description": "Updates the fields present in the request and leaves the rest untouched. Pass `baseLastUpdatedAt` to make the write conditional: it is rejected if the document changed since that timestamp.<br/>Requirements:<br/>- auth-client scopes: \"team\"<br/>- user permission: \"write\" or higher",
+        "operationId": "updateDocument",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "documentId",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateDocumentRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Document"
+                }
+              }
+            },
+            "description": ""
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "missing_token",
+                  "data": {},
+                  "message": "Access token is missing"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If missing authentication token."
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "forbidden",
+                  "data": {},
+                  "message": "Insufficient permission"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If user does not have the required permission, or authenticated client does not have the required access scopes."
+          }
+        },
+        "security": [
+          {
+            "httpAuth": []
+          }
+        ],
+        "summary": "Update a document's title or content.",
+        "tags": [
+          "Documents"
+        ]
+      }
+    },
+    "/api/documents/{documentId}/items": {
+      "put": {
+        "description": "Links the document to an item, which may live in a workspace other than the document's own.<br/>Requirements:<br/>- auth-client scopes: \"team\"<br/>- user permission: \"write\" or higher",
+        "operationId": "linkItem",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "documentId",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LinkDocumentToItemRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "204": {
+            "description": ""
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "missing_token",
+                  "data": {},
+                  "message": "Access token is missing"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If missing authentication token."
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "forbidden",
+                  "data": {},
+                  "message": "Insufficient permission"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If user does not have the required permission, or authenticated client does not have the required access scopes."
+          }
+        },
+        "security": [
+          {
+            "httpAuth": []
+          }
+        ],
+        "summary": "Link a document to an item.",
+        "tags": [
+          "Documents"
+        ]
+      }
+    },
+    "/api/documents/{documentId}/items/{itemId}": {
+      "delete": {
+        "description": "Removes the link to that item.<br/>Requirements:<br/>- auth-client scopes: \"team\"<br/>- user permission: \"write\" or higher",
+        "operationId": "unlinkItem",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "documentId",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "itemId",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": ""
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "missing_token",
+                  "data": {},
+                  "message": "Access token is missing"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If missing authentication token."
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "forbidden",
+                  "data": {},
+                  "message": "Insufficient permission"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If user does not have the required permission, or authenticated client does not have the required access scopes."
+          }
+        },
+        "security": [
+          {
+            "httpAuth": []
+          }
+        ],
+        "summary": "Unlink a document from an item.",
+        "tags": [
+          "Documents"
+        ]
+      }
+    },
+    "/api/documents/{documentId}/workspace": {
+      "put": {
+        "description": "Replaces the document's workspace, which is what scopes its permissions. Requires write access to both the current and the target workspace. Item links are left as they are, so a linked item may afterwards live in a different workspace than the document.<br/>Requirements:<br/>- auth-client scopes: \"team\"<br/>- user permission: \"write\" or higher",
+        "operationId": "moveDocumentToWorkspace",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "documentId",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MoveDocumentToWorkspaceRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "204": {
+            "description": ""
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "missing_token",
+                  "data": {},
+                  "message": "Access token is missing"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If missing authentication token."
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "forbidden",
+                  "data": {},
+                  "message": "Insufficient permission"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "If user does not have the required permission, or authenticated client does not have the required access scopes."
+          }
+        },
+        "security": [
+          {
+            "httpAuth": []
+          }
+        ],
+        "summary": "Move a document to another workspace.",
+        "tags": [
+          "Documents"
         ]
       }
     },
@@ -30627,65 +32776,6 @@
               }
             },
             "description": "If user's team does not have access to the required features, or authenticated client does not have the required access scopes."
-          }
-        },
-        "security": [
-          {
-            "httpAuth": []
-          }
-        ],
-        "tags": [
-          "Profile"
-        ]
-      }
-    },
-    "/api/profile/change-password": {
-      "post": {
-        "description": "Requirements:<br/>- auth-client scopes: \"profile\"",
-        "operationId": "changePassword",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/ChangePasswordRequest"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "description": ""
-          },
-          "401": {
-            "content": {
-              "application/json": {
-                "example": {
-                  "code": "missing_token",
-                  "data": {},
-                  "message": "Access token is missing"
-                },
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            },
-            "description": "If missing authentication token."
-          },
-          "403": {
-            "content": {
-              "application/json": {
-                "example": {
-                  "code": "forbidden",
-                  "data": {},
-                  "message": "Missing required access scope"
-                },
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            },
-            "description": "If authenticated client does not have the required access scopes."
           }
         },
         "security": [
@@ -44664,6 +46754,10 @@
     {
       "description": "Manage comments on items.",
       "name": "Comments"
+    },
+    {
+      "description": "Endpoints for managing collaborative documents.",
+      "name": "Documents"
     },
     {
       "description": "Endpoints for managing workspace fields.",
