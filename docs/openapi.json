@@ -5252,6 +5252,41 @@
         "title": "ExtensionShareLink",
         "type": "object"
       },
+      "ExternalStatus": {
+        "properties": {
+          "notifySubmitter": {
+            "type": "boolean"
+          },
+          "publicLabel": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "publicLabel",
+          "notifySubmitter"
+        ],
+        "title": "ExternalStatus",
+        "type": "object"
+      },
+      "ExternalSubmitterUpdates": {
+        "properties": {
+          "enabled": {
+            "type": "boolean"
+          },
+          "externalStatuses": {
+            "additionalProperties": {
+              "$ref": "#/components/schemas/ExternalStatus"
+            },
+            "type": "object"
+          }
+        },
+        "required": [
+          "enabled",
+          "externalStatuses"
+        ],
+        "title": "ExternalSubmitterUpdates",
+        "type": "object"
+      },
       "Factor": {
         "properties": {
           "criteria": {
@@ -6296,6 +6331,9 @@
             "format": "int32",
             "type": "integer"
           },
+          "externalSubmitterUpdates": {
+            "$ref": "#/components/schemas/ExternalSubmitterUpdates"
+          },
           "fields": {
             "items": {
               "$ref": "#/components/schemas/FormsAppTypeFieldSettings"
@@ -6349,7 +6387,8 @@
           "formType",
           "audience",
           "requireLogin",
-          "shareLinks"
+          "shareLinks",
+          "externalSubmitterUpdates"
         ],
         "title": "FormsAppTypeSettings",
         "type": "object"
@@ -29437,7 +29476,7 @@
   },
   "info": {
     "title": "airfocus API",
-    "version": "1.0.0-beta.48.17.3"
+    "version": "1.0.0-beta.48.21.0"
   },
   "openapi": "3.1.0",
   "paths": {
